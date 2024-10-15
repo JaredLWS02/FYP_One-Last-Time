@@ -1,0 +1,291 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5820533726461378231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1687878970428232938}
+  - component: {fileID: 8732842379191974522}
+  m_Layer: 0
+  m_Name: SFX Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1687878970428232938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820533726461378231}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8732842379191974522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820533726461378231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfa233c07461a146a0c5081da0df70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxFireIgnite:
+  - {fileID: 8300000, guid: f4e3ee3039fdcd349bac8bf2fff4a5d9, type: 3}
+  - {fileID: 8300000, guid: ab284e147206c7e4e9679ee39b0fd145, type: 3}
+  - {fileID: 8300000, guid: 215a7d40d2712a84eb0aebc181cc168c, type: 3}
+  sfxFireLoop:
+  - {fileID: 8300000, guid: 439509861b147814585b70f30f5259eb, type: 3}
+  sfxHitStone:
+  - {fileID: 8300000, guid: 0a7728f333eec79469466f23901f26c6, type: 3}
+  - {fileID: 8300000, guid: 958abf8d1e3cea146b0a9a09d8001c21, type: 3}
+  - {fileID: 8300000, guid: 977422973e5facc4782ac622a279fc6a, type: 3}
+  - {fileID: 8300000, guid: 230d69099d421e147846175a3f381a84, type: 3}
+  sfxHitWood:
+  - {fileID: 8300000, guid: 978e0e8872a6ada48a9c50214022bd2f, type: 3}
+  - {fileID: 8300000, guid: 3ff76bc7cd22e7a46b9e947b64abde5c, type: 3}
+  - {fileID: 8300000, guid: 89a94f072abee2447ad908563d517a82, type: 3}
+  - {fileID: 8300000, guid: 81ba967a31a2d0949bf04180be7c86fb, type: 3}
+  - {fileID: 8300000, guid: 1e20747342975bc45ab0d8eff3669074, type: 3}
+  - {fileID: 8300000, guid: 03e35e6b67ab34642b3df6e33b8ec3ac, type: 3}
+  - {fileID: 8300000, guid: 29becfdcf1838784d8e0b659362937f6, type: 3}
+  - {fileID: 8300000, guid: 725099e55c758954ca9396101301cef9, type: 3}
+  - {fileID: 8300000, guid: 6864f37b2dd731d4c8b97dd65d527751, type: 3}
+  - {fileID: 8300000, guid: 0d84a271360f55a4c85318d8b726499e, type: 3}
+  sfxCraftFinish:
+  - {fileID: 8300000, guid: da51489b9b00ed146913e16d4d40754b, type: 3}
+  sfxCraftLoop:
+  - {fileID: 8300000, guid: a4899c64e5e01df4fa0bd8b5e4e37947, type: 3}
+  - {fileID: 8300000, guid: e9138cae35423c94e88602a94ef2660f, type: 3}
+  - {fileID: 8300000, guid: a2af8e3fbabe8fd4eb72147ed15e9241, type: 3}
+  - {fileID: 8300000, guid: 8c4209b17525dfd46b2eb01f4e23d353, type: 3}
+  - {fileID: 8300000, guid: 353e072df9947c449acc58b236c79ef3, type: 3}
+  - {fileID: 8300000, guid: 57cff6330fe53ec44bf89e6f7ab6787e, type: 3}
+  - {fileID: 8300000, guid: 98aea3c53a1deb74cacbd61a8a89a93b, type: 3}
+  - {fileID: 8300000, guid: b992cdb2128b8f344a0d621cfc1378c5, type: 3}
+  - {fileID: 8300000, guid: 8c90e499146eefb4fb262b712d9f2a20, type: 3}
+  - {fileID: 8300000, guid: 10a7ddf1688015244ae48755e06b9998, type: 3}
+  - {fileID: 8300000, guid: 26c844d24da16e64d838754f537da0be, type: 3}
+  - {fileID: 8300000, guid: 2dceeb4f97047d0489e8fc206ebd5fbc, type: 3}
+  - {fileID: 8300000, guid: e93f4d2ebf7274b4db4081ed70bce9ea, type: 3}
+  sfxMaceCharge:
+  - {fileID: 8300000, guid: 8c970d5880276ee4eb3d03ec87e89679, type: 3}
+  - {fileID: 8300000, guid: ecd24129cda883843b23eec19dce4ef1, type: 3}
+  - {fileID: 8300000, guid: fa13d399eac240843a8cd08be969bb3c, type: 3}
+  - {fileID: 8300000, guid: efb3ede57cb7d664490533722fa351a4, type: 3}
+  sfxUIBook:
+  - {fileID: 8300000, guid: 1cb58c53f8705a747bde86d36426d5c7, type: 3}
+  sfxBreakDiamond:
+  - {fileID: 8300000, guid: 4e37f69533d2ae244a5fdaae0456eaf8, type: 3}
+  sfxBowDraw:
+  - {fileID: 8300000, guid: b2186cc6de3c6c14eaca3dce5b7b3d90, type: 3}
+  - {fileID: 8300000, guid: e68cce1df4bb7664482c7a34a849767a, type: 3}
+  - {fileID: 8300000, guid: dc816b99ed0c40e47b5f8a33da3c9f08, type: 3}
+  - {fileID: 8300000, guid: cb490dcb0ab694e4a8e81e3b4d3937bd, type: 3}
+  - {fileID: 8300000, guid: f96327ad68a2b8345b478d7fdfd248d6, type: 3}
+  sfxBowShoot:
+  - {fileID: 8300000, guid: 3b1de79dffbddfb41a2e652e7557e828, type: 3}
+  - {fileID: 8300000, guid: 1640b4b488334d1438d8f59615b34002, type: 3}
+  - {fileID: 8300000, guid: 8aed877be9872864e8ea9d8b9876c8af, type: 3}
+  - {fileID: 8300000, guid: 7b808489016c6804ca8ae4d5679af59b, type: 3}
+  sfxFireIgnite2:
+  - {fileID: 8300000, guid: a2ca657aad6febb458dd21b3eaa72195, type: 3}
+  sfxFstNpc:
+  - {fileID: 8300000, guid: 75cef90f8855577459ff04f470b0de82, type: 3}
+  - {fileID: 8300000, guid: 49529fdba544ca14786246cfb4940e67, type: 3}
+  - {fileID: 8300000, guid: b7145fc11d124a540a93b8de99554890, type: 3}
+  - {fileID: 8300000, guid: ac3ee80b52225494690803da80420a89, type: 3}
+  - {fileID: 8300000, guid: a5b6d9b8feabe314890d78a39d54f840, type: 3}
+  - {fileID: 8300000, guid: 26652b01d66cada4a8e1a2ade19d370c, type: 3}
+  sfxFstSkeleton:
+  - {fileID: 8300000, guid: abafefbcc9b28664ea2e04b52edb6e6d, type: 3}
+  - {fileID: 8300000, guid: dba142ff2e30fc2418f05d5e6ade6b91, type: 3}
+  - {fileID: 8300000, guid: 2b503a27e83aa7943a872d40f96583e6, type: 3}
+  - {fileID: 8300000, guid: bd59832d3e98d6547ad0eb36c81b6552, type: 3}
+  sfxFstSpider:
+  - {fileID: 8300000, guid: fbe55f1ae6063a54e97c1e59c035a045, type: 3}
+  - {fileID: 8300000, guid: 5133f4ce8272c9942942b17f33734939, type: 3}
+  - {fileID: 8300000, guid: 62e7fa90559b4f14e95792d887b8fa78, type: 3}
+  - {fileID: 8300000, guid: 8b174753b04d44f448e5d702196d44f6, type: 3}
+  sfxFstZombie:
+  - {fileID: 8300000, guid: 1c46be75286c4ba4bb93207611746bf7, type: 3}
+  - {fileID: 8300000, guid: ec9b0196494923943a74a5a45bfd8c49, type: 3}
+  - {fileID: 8300000, guid: 94a7452ac345e4047807e13e3f401e9d, type: 3}
+  - {fileID: 8300000, guid: b65ddeafd49915245af2f6f47eae2288, type: 3}
+  - {fileID: 8300000, guid: 8d37b49d3f7d30f41b33ab499442fac7, type: 3}
+  sfxHitArrow:
+  - {fileID: 8300000, guid: e227e9947c56f9e4497b6378b9337831, type: 3}
+  - {fileID: 8300000, guid: f7a32dda41a390c4e9a14095f1c0a950, type: 3}
+  - {fileID: 8300000, guid: 5213c1f64ae7dcf46b37052cd348fb78, type: 3}
+  - {fileID: 8300000, guid: 9570e879295a9bc4bbbf74cd6ef39b98, type: 3}
+  sfxHitFire:
+  - {fileID: 8300000, guid: c70da56d3fbe2864980cd01d5c7d50f4, type: 3}
+  - {fileID: 8300000, guid: d46027d90384cef46ad1a93f77716280, type: 3}
+  - {fileID: 8300000, guid: 803aea2d2c5f9c0429ad57fdada7c754, type: 3}
+  sfxHitFist:
+  - {fileID: 8300000, guid: 34a2d9f81d5aacd40a82e226cdcb7a3f, type: 3}
+  - {fileID: 8300000, guid: 09b41591559e9324a8af3567d30b3d25, type: 3}
+  - {fileID: 8300000, guid: 50f6fe35f02fe7b489da5616c7565fa3, type: 3}
+  - {fileID: 8300000, guid: 994078a6bb29cb7438db12b40fd8f326, type: 3}
+  sfxHitNpc:
+  - {fileID: 8300000, guid: 42af8f1d5f2b9704b8ae28cf5c02d337, type: 3}
+  - {fileID: 8300000, guid: 793a07112abc7bb409afa93342474e03, type: 3}
+  - {fileID: 8300000, guid: 6d24a8d0e39b8cd49877cf5915d5112e, type: 3}
+  sfxHitStone2:
+  - {fileID: 8300000, guid: 2776bba1705797f499a941b0b90e7fea, type: 3}
+  - {fileID: 8300000, guid: 35d5031589c878f42bd195603c5e9f00, type: 3}
+  - {fileID: 8300000, guid: 45ece04c48ce489428d86b8e243885ec, type: 3}
+  - {fileID: 8300000, guid: 4587ee50f28fd7e48bfb81958a398c24, type: 3}
+  sfxHitSword:
+  - {fileID: 8300000, guid: f127e5b3e371c8142b57826cb4b2a7f8, type: 3}
+  - {fileID: 8300000, guid: 26a282da43041364db3289e7bbcf1734, type: 3}
+  - {fileID: 8300000, guid: 103f25f1f047bd341a67f4ca128d2b91, type: 3}
+  - {fileID: 8300000, guid: 762bfcafdc0aaf340af30e6533b0cb9c, type: 3}
+  - {fileID: 8300000, guid: c66634b3502c3aa449a0d1a36e880fe9, type: 3}
+  - {fileID: 8300000, guid: 7200e5fce1f57f546b6d5518e5e25a2d, type: 3}
+  - {fileID: 8300000, guid: 07a124111f06dc543852034c2202b688, type: 3}
+  sfxHitTool:
+  - {fileID: 8300000, guid: f01db966b3ecb1241b32c022eeef1496, type: 3}
+  - {fileID: 8300000, guid: 3e60b83e3ccd0f34abf1c6c753b55a47, type: 3}
+  - {fileID: 8300000, guid: dcecb4252cd68f54ba774d9b4b0abdb0, type: 3}
+  sfxHitWood2:
+  - {fileID: 8300000, guid: 435c13ec81899bf4b99f060273290649, type: 3}
+  - {fileID: 8300000, guid: 09f3e8f11cd8a6f4ab93dc7eed36e0d4, type: 3}
+  - {fileID: 8300000, guid: 28a6f93134fede14294a79e998804cc7, type: 3}
+  - {fileID: 8300000, guid: b8733be7a32af47409562b0323d4eb65, type: 3}
+  sfxLoot:
+  - {fileID: 8300000, guid: 774e0d628ac8e704e8d458b20d5fc49c, type: 3}
+  sfxLootDrink:
+  - {fileID: 8300000, guid: bb0b5ce67235b594a8b847a3a26c9042, type: 3}
+  sfxLootFood:
+  - {fileID: 8300000, guid: b7ccdcd0cdf5e23418f8d5aa4509abfd, type: 3}
+  - {fileID: 8300000, guid: 069ca1c6abec457409d5d68b9be2396a, type: 3}
+  - {fileID: 8300000, guid: 0ef33f659a7b5ed41ac0df111e2bac8a, type: 3}
+  - {fileID: 8300000, guid: c99c8163472dbcf44b19df223118f6f9, type: 3}
+  sfxPearl:
+  - {fileID: 8300000, guid: 130d9c294138664438b965bb55e8d094, type: 3}
+  - {fileID: 8300000, guid: 0eb2fbd4b4bf8e542989233eea3e64e2, type: 3}
+  sfxSpawnEnemy:
+  - {fileID: 8300000, guid: be1cc858d162dda4c8ab1d901bb74f05, type: 3}
+  - {fileID: 8300000, guid: eaa641ea8e00af145be56c256e2923c7, type: 3}
+  - {fileID: 8300000, guid: b803ac5490a9ef94aa6d25c790374a10, type: 3}
+  - {fileID: 8300000, guid: 7fb97c7810bbac143a6bc3c813151988, type: 3}
+  - {fileID: 8300000, guid: 60349b31cfd58e5439f4031fcb7aed94, type: 3}
+  - {fileID: 8300000, guid: 4c314a251edb67844b7e3b2bd52c1a51, type: 3}
+  - {fileID: 8300000, guid: c5685742d5395cd41badf6cb083d8209, type: 3}
+  - {fileID: 8300000, guid: fa1190e55bdc2c545a088bd859862861, type: 3}
+  - {fileID: 8300000, guid: d6475d8b1a42356459327fe38f2a9a41, type: 3}
+  - {fileID: 8300000, guid: 93fd6e3ef77d34f4f836c0cc9456401a, type: 3}
+  - {fileID: 8300000, guid: e78ed2577bc2b484fb40c9146a05389b, type: 3}
+  - {fileID: 8300000, guid: 16bb98c4ad7fd994187e1ab26a24130d, type: 3}
+  - {fileID: 8300000, guid: 0c9af60bc343a6b4c9321ac7cdda2847, type: 3}
+  - {fileID: 8300000, guid: 349be4330112590488aa518940e570ea, type: 3}
+  - {fileID: 8300000, guid: 02e91cc3f08551f4dabf63e9bf1a7ed6, type: 3}
+  - {fileID: 8300000, guid: a600bc3d1f94dbb4f985ee4932e2ef59, type: 3}
+  - {fileID: 8300000, guid: 213bb06d6f4e037438e771b5c669d01d, type: 3}
+  - {fileID: 8300000, guid: 35c8ab4034cd53348886534c0b4e5f65, type: 3}
+  - {fileID: 8300000, guid: 8f6bf9d69d3960b4eae1666f6fbb5af2, type: 3}
+  sfxSwingFist:
+  - {fileID: 8300000, guid: 2e5ee7daa280d03478012e12ceeba387, type: 3}
+  - {fileID: 8300000, guid: ed99baf7376138648bae2e10a91920c9, type: 3}
+  - {fileID: 8300000, guid: 18f9c08cbf4a0cf449d38de58fde776f, type: 3}
+  - {fileID: 8300000, guid: 9ce53bc24418cb94a9b2104ef2b3de01, type: 3}
+  sfxSwingTool:
+  - {fileID: 8300000, guid: 265bd934948a4024191f1d9bfe8a286e, type: 3}
+  - {fileID: 8300000, guid: b56e3558a747f8e43a56cfbf54cd3558, type: 3}
+  - {fileID: 8300000, guid: b7519e615497dee44a2fb136fe5a7820, type: 3}
+  - {fileID: 8300000, guid: 09cf0e9648c2e5d4798d0556d9c7f912, type: 3}
+  - {fileID: 8300000, guid: 25946447a0403c747a9024a0d4ee1567, type: 3}
+  - {fileID: 8300000, guid: c3d6a319bd7dd484da1bfb21383cf6fa, type: 3}
+  sfxThrow:
+  - {fileID: 8300000, guid: 1d3ae1b0a64ca824ab044e372c6bbf3d, type: 3}
+  sfxUIBtnClick:
+  - {fileID: 8300000, guid: 23e60bc59ff92604aae80bc27b5651be, type: 3}
+  sfxUIBtnHover:
+  - {fileID: 8300000, guid: a7ea17eb46b0c0f4bad77da63119ae9b, type: 3}
+  - {fileID: 8300000, guid: 28fb828164eaa8e4ca56ab53bc7b7511, type: 3}
+  - {fileID: 8300000, guid: a865fe44b179df2428aa0caa984fba43, type: 3}
+  - {fileID: 8300000, guid: e737e89e07d2a6041bdcc4064718970f, type: 3}
+  - {fileID: 8300000, guid: da93b9c9261ab6a459b10194b5b53ab0, type: 3}
+  - {fileID: 8300000, guid: c43502157f1b0d845b8a9804cd30b63b, type: 3}
+  sfxUIInvClose:
+  - {fileID: 8300000, guid: 0acff5b6ecb79b34da07324c1e78fb31, type: 3}
+  sfxUIInvOpen:
+  - {fileID: 8300000, guid: a52661e6263094e428ba50dc227cd441, type: 3}
+  sfxUITween:
+  - {fileID: 8300000, guid: bb1776ab9956cc6478eeaa99a6a8bb2a, type: 3}
+  voiceSkeletonDeath:
+  - {fileID: 8300000, guid: 89373b030ea8c26409165e899ba2124a, type: 3}
+  voiceSkeletonHurt:
+  - {fileID: 8300000, guid: 37e57721199a95542893838403ae3f90, type: 3}
+  - {fileID: 8300000, guid: 57056da8166b01f4a953775b9eccc0dd, type: 3}
+  - {fileID: 8300000, guid: b9d3b427d8bf8c3468eeb69cd791fff1, type: 3}
+  - {fileID: 8300000, guid: 7d2fc9321d535e444b8a01536b4985a1, type: 3}
+  voiceSkeletonIdle:
+  - {fileID: 8300000, guid: df99849b9cb0f5f43914dd1ca67c6c56, type: 3}
+  - {fileID: 8300000, guid: 6571bcc706e61f742adb0fad74d8d4c8, type: 3}
+  - {fileID: 8300000, guid: 35b441f0b6d64ce4f955d0bd95d32c2b, type: 3}
+  voiceSpiderDeath:
+  - {fileID: 8300000, guid: 9b43f98373fa8874585e7ec4cbafa7a3, type: 3}
+  voiceSpiderSay:
+  - {fileID: 8300000, guid: af5076535b24376418af20ca0b960bbf, type: 3}
+  - {fileID: 8300000, guid: d5dec15ab66cd43438cba1cba992bf24, type: 3}
+  - {fileID: 8300000, guid: 567bd444166169546afc53cd905264ea, type: 3}
+  - {fileID: 8300000, guid: c08cde2f35115ac46872bb3906562c80, type: 3}
+  voiceSteveHurt:
+  - {fileID: 8300000, guid: 36cd66efdd117d44cb1c7bc602351e38, type: 3}
+  voiceZombieDeath:
+  - {fileID: 8300000, guid: 32390e2c034a9824c9e6e5d09ad16813, type: 3}
+  voiceZombieHurt:
+  - {fileID: 8300000, guid: 267a292b60426ae49a063a126587f5b5, type: 3}
+  - {fileID: 8300000, guid: f531955e9dcaf48468c08eef2c0d9f80, type: 3}
+  voiceZombieIdle:
+  - {fileID: 8300000, guid: 7df70dbee9d83ef4eba8820714d295e8, type: 3}
+  - {fileID: 8300000, guid: e3ca4db09d0c30f4f8ef7f4bb88d7383, type: 3}
+  - {fileID: 8300000, guid: d627fbc45bb27304ea05fcbd9c11bb24, type: 3}
+  sfxLootDiamondBlock:
+  - {fileID: 8300000, guid: 77a068598dec4084e8ee2483cae412d6, type: 3}
+  sfxLootSpeed:
+  - {fileID: 8300000, guid: bc982131e63cfc742b5aa4a921be061d, type: 3}
+  sfxMaceSlam:
+  - {fileID: 8300000, guid: 0d91b6dab7b31064aa5b37f0f02db8d0, type: 3}
+  - {fileID: 8300000, guid: 32796e3315e70184aaa0b3e8ba1f0de2, type: 3}
+  sfxMaceSlam2:
+  - {fileID: 8300000, guid: e91059b068f916d44b56badaca4ab871, type: 3}
+  - {fileID: 8300000, guid: 1f45c6794d9e91347bd90a1e6662862a, type: 3}
+  - {fileID: 8300000, guid: 8fbc06c20651bc64d8c6f3204ca5202e, type: 3}
+  sfxUICraft:
+  - {fileID: 8300000, guid: a1c9103981a5e1d44ad174baa7d1daa2, type: 3}
+  - {fileID: 8300000, guid: abcfef4fed5376f498f2b0872f07cc84, type: 3}
+  - {fileID: 8300000, guid: edbe503f91a6eda44bba16f2a30f418a, type: 3}
+  - {fileID: 8300000, guid: a0c0a512cf5de24488ec3db38392c343, type: 3}
+  - {fileID: 8300000, guid: 285fda488a960b845969a6b2760a44cd, type: 3}
+  - {fileID: 8300000, guid: 99303abd2686cd842b307f64fc6771c5, type: 3}
+  sfxBreakStone:
+  - {fileID: 8300000, guid: c916902a64f7326499a72f4a5c1c896c, type: 3}
+  sfxBreakWood:
+  - {fileID: 8300000, guid: 7c025f70ee36a294a9db1eb7e4483922, type: 3}
+  sfxFurnace:
+  - {fileID: 8300000, guid: 18e5d5fd89ab1cf4e9f363705e88e4f9, type: 3}
+  sfxDeathEnemy:
+  - {fileID: 8300000, guid: b1515cca688d4f744825a7ca8c14c5ab, type: 3}
+  sfxDeathNpc:
+  - {fileID: 8300000, guid: 2c96a2f58c825d6448f2bd477ad30528, type: 3}
+  sfxHitFlesh:
+  - {fileID: 8300000, guid: fa890fa3c084e0146b93bd6f5020921f, type: 3}
+  voiceAlexHurt:
+  - {fileID: 8300000, guid: 2ced7f98067d7504d908c6fecf3289b8, type: 3}
