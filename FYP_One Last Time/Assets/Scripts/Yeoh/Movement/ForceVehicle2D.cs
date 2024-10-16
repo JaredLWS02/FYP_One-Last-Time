@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -70,19 +71,12 @@ public class ForceVehicle2D : MonoBehaviour
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    int tweenSpeedLt=0;
+    Tween speedTween;
+
     public void TweenSpeed(float to, float time=.25f)
     {
-        LeanTween.cancel(tweenSpeedLt);
-
-        if(time>0)
-        {
-            tweenSpeedLt = LeanTween.value(maxSpeed, to, time)
-                .setEaseInOutSine()
-                .setOnUpdate( (float value)=>{maxSpeed=value;} )
-                .id;
-        }
-        else maxSpeed=to;
+        speedTween.Stop();
+        speedTween = Tween.Custom(maxSpeed, to, time, onValueChange: newVal => maxSpeed=newVal, Ease.InOutSine);
     }
 
     public void Push(float force, Vector3 direction)
