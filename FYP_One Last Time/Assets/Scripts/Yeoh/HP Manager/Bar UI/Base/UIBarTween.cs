@@ -19,11 +19,11 @@ public class UIBarTween : MonoBehaviour
 
     void OnEnable()
     {
-        //EventManager.Current.UIBarUpdateEvent += OnUIBarUpdate;
+        EventManager.Current.UIBarUpdateEvent += OnUIBarUpdate;
     }
     void OnDisable()
     {
-        //EventManager.Current.UIBarUpdateEvent -= OnUIBarUpdate;
+        EventManager.Current.UIBarUpdateEvent -= OnUIBarUpdate;
 
         barTween.Stop();
     }
