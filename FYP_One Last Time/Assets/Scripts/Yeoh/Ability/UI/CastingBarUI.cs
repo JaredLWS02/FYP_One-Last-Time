@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 
 public class CastingBarUI : MonoBehaviour
@@ -25,6 +26,9 @@ public class CastingBarUI : MonoBehaviour
         EventManager.Current.CastingEvent -= OnCasting;
         EventManager.Current.CastCancelEvent -= OnCastCancel;
         EventManager.Current.CastWindUpEvent -= OnCastingWindUp;
+
+        progressTween.Stop();
+        progress=0;
     }
 
     // Events ============================================================================
@@ -35,7 +39,7 @@ public class CastingBarUI : MonoBehaviour
 
         progress=0;
         barUI.SetActive(true);
-        TweenFloat(1, ability.ability.castingTime);
+        TweenProgress(1, ability.ability.castingTime);
     }
 
     void OnCastCancel(GameObject caster)
@@ -56,30 +60,21 @@ public class CastingBarUI : MonoBehaviour
 
     // ============================================================================
 
-    void Update()
+    Tween progressTween;
+
+    public void TweenProgress(float to, float time)
     {
-        EventManager.Current.OnUIBarUpdate(gameObject, progress, 1);
+        progressTween.Stop();
+        progressTween = Tween.Custom(progress, to, time, onValueChange: newVal => progress=newVal, Ease.InOutSine, useUnscaledTime: true);
     }
 
-    // Tween Float ============================================================================
+    // ============================================================================
 
     float progress;
 
-    int tweenFloatId=0;
-
-    public void TweenFloat(float to, float time)
+    void Update()
     {
-        LeanTween.cancel(tweenFloatId);
-
-        if(time>0)
-        {
-            tweenFloatId = LeanTween.value(progress, to, time)
-                .setEaseInOutSine()
-                .setIgnoreTimeScale(true)
-                .setOnUpdate( (float value)=>{progress=value;} )
-                .id;
-        }
-        else progress=to;
+        EventManager.Current.OnUIBarUpdate(gameObject, progress, 1);
     }
     
 }
