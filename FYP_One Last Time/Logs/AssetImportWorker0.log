@@ -790,3 +790,331 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
   custom:scripting/monoscript/fileName/TweenAnimSequence.cs: 1ade0349b0b72446877141b53ffdc3d6 -> 
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.506 seconds
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.974 seconds
+Domain Reload Profiling: 2477ms
+	BeginReloadAssembly (150ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (38ms)
+	RebuildCommonClasses (31ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (27ms)
+	LoadAllAssembliesAndSetupDomain (281ms)
+		LoadAssemblies (287ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (61ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (1ms)
+			ScanForSourceGeneratedMonoScriptInfo (37ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1974ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (709ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (4ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (111ms)
+			ProcessInitializeOnLoadAttributes (546ms)
+			ProcessInitializeOnLoadMethodAttributes (34ms)
+			AfterProcessingInitializeOnLoad (4ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (71ms)
+Refreshing native plugins compatible for Editor in 5.64 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6375 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 40 unused Assets / (3.6 MB). Loaded Objects now: 7234.
+Memory consumption went from 254.4 MB to 250.8 MB.
+Total: 4.580700 ms (FindLiveObjects: 0.613400 ms CreateObjectMapping: 0.183600 ms MarkObjects: 2.789300 ms  DeleteObjects: 0.993300 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/UIBarHider.cs: 6135948083c76dfd5aaeaf0c09794c11 -> 
+  custom:scripting/monoscript/fileName/TweenAnim.cs: a2c31f82b34a91f7b3633439934d4e79 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/HPManager.cs: 4816043fb002db903395cb49560f4b3a -> 
+  custom:scripting/monoscript/fileName/Singleton.cs: e499c92ecc22d4e621988e7de8662f52 -> 90647cc400823b41df847a6cbfc29026
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 1da5d81f04cb07aff13c1a0c853f0d29 -> 289d1dd27bf768d11e5154c71e639266
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:scripting/monoscript/fileName/UIBarTween.cs: 9e259b80e64bff37e5bfdb1bb7b964aa -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/TweenAnimSequence.cs: 1ade0349b0b72446877141b53ffdc3d6 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 4289.538064 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Event System.prefab
+  artifactKey: Guid(218a60c806c95684b85be635800b6a50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Event System.prefab using Guid(218a60c806c95684b85be635800b6a50) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'c73a63ae3023fda2f83930cadab65f79') in 0.042375 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 15.386850 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '71cc3de9b8afdc4c25508e3d3c27c800') in 0.000717 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 11.718836 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Event System.prefab
+  artifactKey: Guid(218a60c806c95684b85be635800b6a50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Event System.prefab using Guid(218a60c806c95684b85be635800b6a50) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '96777d77254285b0159f6fd70a5b16f2') in 0.002987 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 4.873157 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Event System.prefab
+  artifactKey: Guid(218a60c806c95684b85be635800b6a50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Event System.prefab using Guid(218a60c806c95684b85be635800b6a50) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '0290afb4bd30602ff53864d42af8264f') in 0.002230 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 0.098243 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.000594 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 22.426359 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.cs
+  artifactKey: Guid(7be5066075f3ad7439e1e034c5e72206) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.cs using Guid(7be5066075f3ad7439e1e034c5e72206) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '22ceeb893cd457c92c70d8576f6d245e') in 0.000582 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.494 seconds
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.566 seconds
+Domain Reload Profiling: 2056ms
+	BeginReloadAssembly (143ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (4ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (37ms)
+	RebuildCommonClasses (30ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (25ms)
+	LoadAllAssembliesAndSetupDomain (280ms)
+		LoadAssemblies (282ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (64ms)
+			TypeCache.Refresh (11ms)
+				TypeCache.ScanAssembly (1ms)
+			ScanForSourceGeneratedMonoScriptInfo (38ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1566ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (522ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (87ms)
+			ProcessInitializeOnLoadAttributes (398ms)
+			ProcessInitializeOnLoadMethodAttributes (24ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (51ms)
+Refreshing native plugins compatible for Editor in 6.80 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6375 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 40 unused Assets / (3.6 MB). Loaded Objects now: 7237.
+Memory consumption went from 254.4 MB to 250.8 MB.
+Total: 5.000000 ms (FindLiveObjects: 0.682500 ms CreateObjectMapping: 0.179300 ms MarkObjects: 3.263100 ms  DeleteObjects: 0.873700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/UIBarHider.cs: 6135948083c76dfd5aaeaf0c09794c11 -> 
+  custom:scripting/monoscript/fileName/TweenAnim.cs: a2c31f82b34a91f7b3633439934d4e79 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/HPManager.cs: 4816043fb002db903395cb49560f4b3a -> 
+  custom:scripting/monoscript/fileName/Singleton.cs: e499c92ecc22d4e621988e7de8662f52 -> 90647cc400823b41df847a6cbfc29026
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: 1da5d81f04cb07aff13c1a0c853f0d29 -> 289d1dd27bf768d11e5154c71e639266
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:scripting/monoscript/fileName/UIBarTween.cs: 9e259b80e64bff37e5bfdb1bb7b964aa -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/TweenAnimSequence.cs: 1ade0349b0b72446877141b53ffdc3d6 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 55.107706 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.005795 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.cs
+  artifactKey: Guid(7be5066075f3ad7439e1e034c5e72206) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.cs using Guid(7be5066075f3ad7439e1e034c5e72206) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '9c8a4db1f5f0f192e7bba6b6a1d609e3') in 0.000563 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 124.918467 seconds.
+  path: Assets/Scripts/Yeoh/Event Manager
+  artifactKey: Guid(c626264db26ab8a47b79ac873c0cdaf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Event Manager using Guid(c626264db26ab8a47b79ac873c0cdaf3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '33789d2e49a06c9069cee9b9cd72f85d') in 0.000548 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.092076 seconds.
+  path: Assets/Scripts/Yeoh/Event Manager/Event Manager.prefab
+  artifactKey: Guid(0e0c93a4bbdd34e489e6be74579458fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Event Manager/Event Manager.prefab using Guid(0e0c93a4bbdd34e489e6be74579458fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'cc09e52a820d6f8c954db88ef97261dd') in 0.026856 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 6
+========================================================================
+Received Import Request.
+  Time since last request: 1.036490 seconds.
+  path: Assets/Scripts/Yeoh/Event Manager/EventManager.cs
+  artifactKey: Guid(b6bef7316b434834bacee8b1485aef4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Event Manager/EventManager.cs using Guid(b6bef7316b434834bacee8b1485aef4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '9e81c1bdf1da9aa1787ac154aa5ba000') in 0.000587 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 61.484854 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.000656 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 77.241246 seconds.
+  path: Assets/Scripts/Yeoh/Ability
+  artifactKey: Guid(bfa667dbab7a5bf47aa1f5be858f9689) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Ability using Guid(bfa667dbab7a5bf47aa1f5be858f9689) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '082e52c76e2dbe1bbe5f15c523c13f63') in 0.000674 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.801566 seconds.
+  path: Assets/Scripts/Yeoh/Ability/UI
+  artifactKey: Guid(ab6696687d3946540abb566715c6c18e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Ability/UI using Guid(ab6696687d3946540abb566715c6c18e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '13c37bd5b153a1e93ee17eb8daaecec5') in 0.000547 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 21.430808 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.000639 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 13.463410 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.000688 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 11.794553 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.000806 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 9.241997 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.000892 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 8.688433 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.000660 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 19.902390 seconds.
+  path: Assets/Scripts/Yeoh/Singleton/Singleton.prefab
+  artifactKey: Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Yeoh/Singleton/Singleton.prefab using Guid(89e0eba8bf5102c4f91f2d212c8e612b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '718350297e07e8d41ab83fc94711e6f7') in 0.000768 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0

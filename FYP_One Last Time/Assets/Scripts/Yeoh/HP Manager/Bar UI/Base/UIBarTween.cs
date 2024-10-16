@@ -60,7 +60,7 @@ public class UIBarTween : MonoBehaviour
         if(!slider) return;
 
         barTween.Stop();
-        barTween = Tween.UISliderValue(slider, to, time, Ease.InOutSine, 1, CycleMode.Restart, 0, 0, true);
+        barTween = Tween.UISliderValue(slider, to, time, Ease.InOutSine, useUnscaledTime: true);
     }
 
     // ============================================================================
@@ -73,7 +73,7 @@ public class UIBarTween : MonoBehaviour
         if(!filledImage) return;
 
         barTween.Stop();
-        barTween = Tween.UIFillAmount(filledImage, to, time, Ease.InOutSine, 1, CycleMode.Restart, 0, 0, true);
+        barTween = Tween.UIFillAmount(filledImage, to, time, Ease.InOutSine, useUnscaledTime: true);
     }
 
 }

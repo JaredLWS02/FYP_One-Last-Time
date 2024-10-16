@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +13,7 @@ public class TimescaleManager : MonoBehaviour
         if(!Current) Current=this;
     }
         
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     void OnEnable()
     {
@@ -25,41 +26,32 @@ public class TimescaleManager : MonoBehaviour
     
     void OnSceneUnloaded(Scene scene)
     {
-        Time.timeScale=1;
+        TweenTime(1, 0);
     }
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
-    int tweenTimeLt=0;
+    Tween timeTween;
     
     public void TweenTime(float to, float time=.01f)
     {
         if(to<0) to=0;
 
-        LeanTween.cancel(tweenTimeLt);
-
-        if(time>0)
-        {
-            tweenTimeLt = LeanTween.value(Time.timeScale, to, time)
-                .setEaseInOutSine()
-                .setIgnoreTimeScale(true)
-                .setOnUpdate( (float value)=>{Time.timeScale=value;} )
-                .id;
-        }
-        else Time.timeScale = to;
+        timeTween.Stop();
+        timeTween = Tween.GlobalTimeScale(to, time, Ease.InOutSine);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     public void HitStop(float fadeIn=.01f, float wait=.005f, float fadeOut=.25f)
     {
         if(Time.timeScale<1) return;
 
-        if(hitStoppingRt!=null) StopCoroutine(hitStoppingRt);
-        hitStoppingRt = StartCoroutine(HitStopping(fadeIn, wait, fadeOut));
+        if(hitStopping_crt!=null) StopCoroutine(hitStopping_crt);
+        hitStopping_crt = StartCoroutine(HitStopping(fadeIn, wait, fadeOut));
     }
 
-    Coroutine hitStoppingRt;
+    Coroutine hitStopping_crt;
 
     IEnumerator HitStopping(float fadeIn, float wait, float fadeOut)
     {
