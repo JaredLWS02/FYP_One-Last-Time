@@ -1,47 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(ForceVehicle2D))]
+[RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(MoveScript))]
 
 public class SideMove : MonoBehaviour
 {
-    ForceVehicle2D vehicle;
+    MoveScript move;
+    SideTurn turn; // optional
 
     void Awake()
     {
-        vehicle = GetComponent<ForceVehicle2D>();
-    }
-
-    // Event Manager ============================================================================
-
-    void OnEnable()
-    {
-        EventManager.Current.MoveXEvent += OnMoveX;
-    }
-    void OnDisable()
-    {
-        EventManager.Current.MoveXEvent -= OnMoveX;
-    }    
-
-    // Events ============================================================================
-
-    public bool canMove=true;
-
-    void OnMoveX(GameObject mover, float input_x)
-    {
-        if(mover!=gameObject) return;
-        if(!canMove) return;
-
-        dirX = input_x;
-
-        isMoving=true;
+        move = GetComponent<MoveScript>();
+        turn = GetComponent<SideTurn>();
     }
 
     // ============================================================================
 
-    bool isMoving;
     public float dirX;
+
+    public bool canMove=true;
+    bool isMoving;
+
+    void Update()
+    {
+        if(!canMove) return;
+
+        if(moveInput==Vector2.zero) return;
+
+        dirX = moveInput.x;
+
+        isMoving=true;
+    }
 
     void FixedUpdate()
     {
@@ -54,41 +46,23 @@ public class SideMove : MonoBehaviour
 
     void Move()
     {
-        dirX = vehicle.Round(dirX, 1);
+        dirX = move.Round(dirX, 1);
         dirX = Mathf.Clamp(dirX, -1, 1);
 
-        vehicle.Move(vehicle.maxSpeed * dirX, Vector2.right);
+        move.UpdateMove(move.maxSpeed * dirX, Vector3.right);
 
-        TryFlip();
+        if(turn)
+        turn.TryTurn(dirX);
     }
 
     // ============================================================================
 
-    [Header("Flip")]
-    public bool faceR=true;
-    public bool reverse;
+    Vector2 moveInput;
 
-    void TryFlip()
+    // temp
+    void OnInputMove(InputValue value)
     {
-        if(reverse)
-        {
-            if((dirX>0 && faceR) || (dirX<0 && !faceR))
-            {
-                Flip();
-            }
-        }
-        else
-        {
-            if((dirX<0 && faceR) || (dirX>0 && !faceR))
-            {
-                Flip();
-            }
-        }
+        moveInput = value.Get<Vector2>();        
     }
-
-    public void Flip()
-    {
-        transform.Rotate(0, 180, 0);
-        faceR=!faceR;
-    }
+    
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Pilot))]
 [RequireComponent(typeof(SideMove))]
+[RequireComponent(typeof(SideTurn))]
 //[RequireComponent(typeof(AISideSeek))]
 //[RequireComponent(typeof(AISidePathseeker))]
 //[RequireComponent(typeof(AISideWander))]
@@ -15,6 +16,7 @@ public class EnemyAI : MonoBehaviour
     [HideInInspector]
     public Pilot pilot;
     SideMove move;
+    SideTurn turn;
     //AISideSeek seek;
     //AISidePathseeker pathseeker;
     //AISideWander wander;
@@ -25,6 +27,7 @@ public class EnemyAI : MonoBehaviour
     {
         pilot = GetComponent<Pilot>();
         move = GetComponent<SideMove>();
+        turn = GetComponent<SideTurn>();
         // seek = GetComponent<AISideSeek>();
         // pathseeker = GetComponent<AISidePathseeker>();
         // wander = GetComponent<AISideWander>();
@@ -179,8 +182,8 @@ public class EnemyAI : MonoBehaviour
     {
         if(!target) return false;
 
-        return (target.transform.position.x >= transform.position.x && move.faceR)
-            || (target.transform.position.x < transform.position.x && !move.faceR);
+        return (target.transform.position.x >= transform.position.x && turn.faceR)
+            || (target.transform.position.x < transform.position.x && !turn.faceR);
     }
 
     public void FaceEnemy()
@@ -193,7 +196,7 @@ public class EnemyAI : MonoBehaviour
         
         if(IsFacingTarget(enemy)) return;
 
-        float x_dir = move.faceR ? -1 : 1;
+        float x_dir = turn.faceR ? -1 : 1;
 
         EventManager.Current.OnTryMoveX(gameObject, x_dir);
     }

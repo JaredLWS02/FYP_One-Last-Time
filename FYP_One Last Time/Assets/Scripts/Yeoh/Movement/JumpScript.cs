@@ -1,34 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(Rigidbody))]
 
-public class Jump2D : MonoBehaviour
+public class JumpScript : MonoBehaviour
 {
-    Rigidbody2D rb;
+    Rigidbody rb;
 
     void Awake()
     {
-        rb=GetComponent<Rigidbody2D>();
+        rb=GetComponent<Rigidbody>();
     }
 
-    // Event Manager ============================================================================
-
-    void OnEnable()
+    // Input ============================================================================
+    
+    void OnInputJump(InputValue value)
     {
-        EventManager.Current.JumpEvent += OnJump;
-    }
-    void OnDisable()
-    {
-        EventManager.Current.JumpEvent -= OnJump;
-    }
-
-    // Events ============================================================================
-
-    void OnJump(GameObject jumper, float input)
-    {
-        if(jumper!=gameObject) return;
+        float input = value.Get<float>();
 
         if(input>0) //press
         {
@@ -59,7 +50,7 @@ public class Jump2D : MonoBehaviour
     // Jump ============================================================================
     
     public bool canJump=true;
-    public float jumpForce=8;
+    public float jumpForce=10;
 
     void TryJump()
     {
@@ -82,9 +73,10 @@ public class Jump2D : MonoBehaviour
         if(isJumpCooling) return;
         StartCoroutine(JumpCooling());
 
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-
-        rb.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+        if(!rb.isKinematic)
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        
+        rb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
 
         jumpBufferLeft = -1;
         coyoteTimeLeft = -1;
@@ -175,8 +167,7 @@ public class Jump2D : MonoBehaviour
         // only if going up
         if(rb.velocity.y>0)
         {
-            //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpCutMult);
-            rb.AddForce(Vector2.down * rb.velocity.y * (1-jumpCutMult), ForceMode2D.Impulse);
+            rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
         }
     }
 
@@ -185,7 +176,7 @@ public class Jump2D : MonoBehaviour
     [Header("Falling")]
     public float minVelocityBeforeFastFall = -.1f;
     public float fastFallForce=15f;
-    public float maxFallVelocity = -20f;
+    public float maxFallVelocity = -30f;
 
     void CheckFallVelocity()
     {
@@ -196,26 +187,26 @@ public class Jump2D : MonoBehaviour
 
         if(rb.velocity.y < maxFallVelocity)
         {
-            rb.velocity = new Vector2(rb.velocity.x, maxFallVelocity);
+            rb.velocity = new Vector3(rb.velocity.x, maxFallVelocity, rb.velocity.z);
             return;
         }
         
         if(rb.velocity.y < minVelocityBeforeFastFall)
         {
-            rb.AddForce(Vector2.down * fastFallForce);
+            rb.AddForce(Vector3.down * fastFallForce);
         }
     }
 
     // Ground Check ============================================================================
 
     [Header("Ground Check")]
-    public Vector2 boxSize = new Vector2(.2f, .05f);
-    public Vector2 boxCenterOffset = Vector2.zero;
+    public Vector3 boxSize = new(.5f, .05f, .5f);
+    public Vector3 boxCenterOffset = Vector3.zero;
     public LayerMask groundLayer;
 
     public bool IsGrounded()
     {
-        Collider2D[] colliders =  Physics2D.OverlapBoxAll((Vector2)transform.position + boxCenterOffset, boxSize, 0f, groundLayer);
+        Collider[] colliders = Physics.OverlapBox(transform.position + boxCenterOffset, boxSize, transform.rotation, groundLayer);
 
         foreach(var coll in colliders)
         {
@@ -227,6 +218,14 @@ public class Jump2D : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube((Vector2)transform.position + boxCenterOffset, boxSize);
+
+        Vector3 boxCenter = transform.position + boxCenterOffset;
+
+        Gizmos.matrix = Matrix4x4.TRS(boxCenter, transform.rotation, Vector3.one);
+
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+
+        // Reset the Gizmos matrix to default
+        Gizmos.matrix = Matrix4x4.identity;
     }
 }
