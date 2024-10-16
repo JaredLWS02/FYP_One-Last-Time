@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using PrimeTween;
 
 public class CameraManager : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class CameraManager : MonoBehaviour
         SetDefaultCamera();
     }
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public List<CinemachineVirtualCamera> allCameras = new List<CinemachineVirtualCamera>();
 
@@ -52,7 +53,7 @@ public class CameraManager : MonoBehaviour
         return camerasList;
     }
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
     
     public CinemachineVirtualCamera defaultCamera = null;
 
@@ -89,7 +90,7 @@ public class CameraManager : MonoBehaviour
         return defaultCamera==camera;
     }
                 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
     
     public CinemachineFreeLook IsCameraFreeLook(CinemachineVirtualCamera camera)
     {
@@ -98,7 +99,7 @@ public class CameraManager : MonoBehaviour
         return freeLookParent;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
     
     public CinemachineVirtualCamera currentCamera;
 
@@ -137,7 +138,7 @@ public class CameraManager : MonoBehaviour
         return currentCamera==camera;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public List<CinemachineBasicMultiChannelPerlin> allNoises = new();
 
@@ -166,7 +167,7 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     Vector3 currentShake;
 
@@ -212,37 +213,33 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
-    int tweenFovId=0;
-    public void TweenFOV(float newFov, float time)
+    Tween fovTween;
+
+    public void TweenFOV(float to, float time)
     {
-        LeanTween.cancel(tweenFovId);
-        tweenFovId = LeanTween.value(currentCamera.m_Lens.FieldOfView, newFov, time)
-            .setEaseInOutSine()
-            .setOnUpdate( (float value)=>{currentCamera.m_Lens.FieldOfView=value;} )
-            .id;
+        fovTween.Stop();
+        fovTween = Tween.Custom(currentCamera.m_Lens.FieldOfView, to, time, onValueChange: newVal => currentCamera.m_Lens.FieldOfView=newVal, Ease.InOutSine);
 
         // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
         // else Invoke("EnableCamPanSfx", 1);
     }
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
-    int tweenOrthoId=0;
-    public void TweenOrthoSize(float newCamSize, float time)
+    Tween orthoTween;
+
+    public void TweenOrthoSize(float to, float time)
     {
-        LeanTween.cancel(tweenOrthoId);
-        tweenOrthoId = LeanTween.value(currentCamera.m_Lens.OrthographicSize, newCamSize, time)
-            .setEaseInOutSine()
-            .setOnUpdate( (float value)=>{currentCamera.m_Lens.OrthographicSize=value;} )
-            .id;
+        orthoTween.Stop();
+        orthoTween = Tween.Custom(currentCamera.m_Lens.OrthographicSize, to, time, onValueChange: newVal => currentCamera.m_Lens.OrthographicSize=newVal, Ease.InOutSine);
 
         // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
         // else Invoke("EnableCamPanSfx", 1);
     }
         
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public bool haptics=true;
 
