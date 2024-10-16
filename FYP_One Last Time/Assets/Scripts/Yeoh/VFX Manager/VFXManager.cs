@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using PrimeTween;
 
 public class VFXManager : MonoBehaviour
 {
@@ -426,10 +427,8 @@ public class VFXManager : MonoBehaviour
     void ExpandAnim(GameObject obj, float time=.15f)
     {
         Vector3 defscale = obj.transform.localScale;
-
         obj.transform.localScale=Vector3.zero;
-
-        LeanTween.scale(obj, defscale, time).setEaseInOutSine();
+        Tween.Scale(obj.transform, defscale, time, Ease.InOutSine, 1, CycleMode.Restart, 0, 0, true);
     }
 
     float Round(float num, int decimalPlaces=0)
@@ -441,6 +440,6 @@ public class VFXManager : MonoBehaviour
             factor *= 10;
         }
 
-        return Mathf.Round(num * factor) / (float)factor;
+        return Mathf.Round(num * factor) / factor;
     }
 }
