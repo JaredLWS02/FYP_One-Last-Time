@@ -2677,3 +2677,557 @@ AssetImportParameters requested are different than current active one (requested
   custom:scripting/monoscript/fileName/State_Enemy_Control_AI_Idle.cs: 345260ae3cc7946e930cd2c4783a30e0 -> 
   custom:scripting/monoscript/fileName/VolumeSettings.cs: cdcb261cf790e595b173a0fe27b5e1a2 -> 
   custom:scripting/monoscript/fileName/SaveDuringPlay.cs: de39f1962b337699845d3d8a2e8f5bde -> 
+========================================================================
+Received Prepare
+Caller must complete domain reload
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.534 seconds
+Native extension for UWP target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.635 seconds
+Domain Reload Profiling: 2164ms
+	BeginReloadAssembly (149ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (37ms)
+	RebuildCommonClasses (31ms)
+	RebuildNativeTypeToScriptingClass (12ms)
+	initialDomainReloadingComplete (32ms)
+	LoadAllAssembliesAndSetupDomain (305ms)
+		LoadAssemblies (309ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (66ms)
+			TypeCache.Refresh (13ms)
+				TypeCache.ScanAssembly (2ms)
+			ScanForSourceGeneratedMonoScriptInfo (38ms)
+			ResolveRequiredComponents (13ms)
+	FinalizeReload (1635ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (548ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (8ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (81ms)
+			ProcessInitializeOnLoadAttributes (427ms)
+			ProcessInitializeOnLoadMethodAttributes (27ms)
+			AfterProcessingInitializeOnLoad (3ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (45ms)
+Refreshing native plugins compatible for Editor in 6.07 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6620 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 42 unused Assets / (3.6 MB). Loaded Objects now: 7570.
+Memory consumption went from 259.8 MB to 256.2 MB.
+Total: 4.927100 ms (FindLiveObjects: 0.673300 ms CreateObjectMapping: 0.198700 ms MarkObjects: 3.104100 ms  DeleteObjects: 0.949800 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:scripting/monoscript/fileName/UIBarHider.cs: 6135948083c76dfd5aaeaf0c09794c11 -> 
+  custom:scripting/monoscript/fileName/CinemachineTrackedDollyEditor.cs: b4d6784c58752cea58aafd9a76ca4459 -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseManager.cs: c34be3577a810e26fd0110c580799b88 -> 
+  custom:scripting/monoscript/fileName/TweenAnim.cs: a2c31f82b34a91f7b3633439934d4e79 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:scripting/monoscript/fileName/AbilityListSO.cs: c69383d480f022de671954780a8a5422 -> 
+  custom:scripting/monoscript/fileName/AxisState.cs: 1a494a66d8b9a58f4a6873f89bf5b094 -> 
+  custom:scripting/monoscript/fileName/ScenesManager.cs: a532eedb00581aef1ca83d10bb309011 -> 
+  custom:scripting/monoscript/fileName/CinemachineClearShot.cs: 1da15f5c7903497ce3ae982ee4ee4779 -> 
+  custom:scripting/monoscript/fileName/StateMachine_Enemy.cs: 839c7441a28851006e00c04e833c5252 -> 
+  custom:scripting/monoscript/fileName/SceneMusic.cs: c8f888dd289e9a6738206b2150e9d8f6 -> 
+  custom:scripting/monoscript/fileName/CinemachinePOVEditor.cs: 71db5a9242a182995b4ca15db516f628 -> 
+  custom:scripting/monoscript/fileName/AudioManager.cs: e8310be4479956b7ccf5d41d9f0f6e53 -> 
+  custom:scripting/monoscript/fileName/CinemachineLensPresets.cs: 014747fb0ab87178c677520d0bf20bf7 -> 
+  custom:scripting/monoscript/fileName/CinemachineTagFieldPropertyDrawer.cs: e78491a12decd558a49d01cc583bfcfb -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:scripting/monoscript/fileName/CinemachineVolumeSettings.cs: 48d7865a989ec634d93ae8dcee459cea -> 
+  custom:scripting/monoscript/fileName/CinemachineTargetGroupEditor.cs: f70ac85df8c1c9bd0b83a35534bafd1f -> 
+  custom:scripting/monoscript/fileName/CinemachineRecomposer.cs: 07354cca81f7d0775b027b5906330569 -> 
+  custom:scripting/monoscript/fileName/TargetPositionCache.cs: 49ce97e6930a536b43825141e0c2d3a4 -> 
+  custom:scripting/monoscript/fileName/State_PakYa_Dashing.cs: 284d19ddc3a7b18d677b65ba441f413c -> 
+  custom:scripting/monoscript/fileName/HealAbility.cs: 8baeaaa3d6fa5878507df689754f8719 -> 
+  custom:scripting/monoscript/fileName/CinemachineExternalCamera.cs: d76122377115c288d881064c3f07a3f1 -> 
+  custom:scripting/monoscript/fileName/Pilot.cs: ee8304139bb00dffdfcfe27354a7f636 -> 
+  custom:scripting/monoscript/fileName/Predictor.cs: d51584936cb5b31b30ee7b444e03385b -> 
+  custom:scripting/monoscript/fileName/CinemachineScreenComposerGuides.cs: cdc7ea02ccc4c8d1561d98d16760d1ca -> 
+  custom:scripting/monoscript/fileName/CinemachineVirtualCameraEditor.cs: 2e051d0c474634e907fe4123d6e2656e -> 
+  custom:scripting/monoscript/fileName/CinemachineSettings.cs: 197f6d5ad32e253546b5afa056a5bba4 -> 
+  custom:scripting/monoscript/fileName/State_Enemy_Grounded.cs: 2433c45201a980fe7968bcc1a2ee1643 -> 
+  custom:scripting/monoscript/fileName/ScaleWithLoudness.cs: acec80358853f75e06b3173136674e82 -> 
+  custom:scripting/monoscript/fileName/CinemachineTriggerAction.cs: cab9c5d02c28af05797c2c3743539bdb -> 
+  custom:scripting/monoscript/fileName/InspectorUtility.cs: d2444697ecf5f370ee1ff9969e9d66f8 -> 1cf92e4af45cb9e9886ec49564b001a9
+  custom:scripting/precompiled-assembly-types:Cinemachine: 8d575da37eed053df74794f59481e021 -> 
+  custom:scripting/monoscript/fileName/HPManager.cs: 4816043fb002db903395cb49560f4b3a -> 
+  custom:scripting/monoscript/fileName/EmbeddedAssetPropertyDrawer.cs: fd7ebc18093de04c88d0cfc86fb060f5 -> 
+  custom:scripting/monoscript/fileName/Inventory.cs: d078795b7125c8d5b747e156a3e12651 -> 
+  custom:scripting/monoscript/fileName/ConfinerOven.cs: ff23c03e90b61beb34474fc6e4ff668c -> 
+  custom:scripting/monoscript/fileName/VcamStageEditor.cs: 84b0eaf932b448975a99972628e556d8 -> 
+  custom:scripting/monoscript/fileName/OrbitalTransposerHeadingPropertyDrawer.cs: 22496b76ce84f35f630c90badc4babd8 -> 
+  custom:scripting/monoscript/fileName/CinemachineCollider.cs: 8fa92f525b1c31cd81812685d7f8c288 -> 
+  custom:scripting/monoscript/fileName/ItemManager.cs: 1b76008a5c24d6f014835c0b38a112ff -> 
+  custom:scripting/monoscript/fileName/CinemachineInputProvider.cs: ecb845de690695f08b3b3bb647cc7006 -> 
+  custom:scripting/monoscript/fileName/CinemachineColliderEditor.cs: 859d1abbd669ee84cb713f6d4d0e1c5f -> 
+  custom:scripting/monoscript/fileName/CinemachineExtension.cs: 6968db4afcdc301f6acb1ef4fbadb2f4 -> 
+  custom:scripting/monoscript/fileName/State_PakYa_Control_None.cs: d5dfdf64e3e5cb7d7743a26f9b78be1d -> 
+  custom:scripting/monoscript/fileName/StateMachine.cs: 73bd756ab4192d99fbc2795b1c52022d -> 4752e958e06e35ed9c1224cc3c2fc022
+  custom:scripting/monoscript/fileName/Singleton.cs: e499c92ecc22d4e621988e7de8662f52 -> 90647cc400823b41df847a6cbfc29026
+  custom:scripting/monoscript/fileName/CinemachineComponentBase.cs: 5293f153c13e9bd2fc262ec31ff69206 -> 
+  custom:scripting/monoscript/fileName/BaseEditor.cs: 90647cc400823b41df847a6cbfc29026 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:scripting/monoscript/fileName/TransformAnimation.cs: da9fad2ff7f930cbd6eff9530cfe6c11 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:scripting/monoscript/fileName/CinemachineHardLookAt.cs: 792580aec23d39bcecd7ceea4c27a0ce -> 
+  custom:scripting/monoscript/fileName/CinemachineInputAxisDriver.cs: 7e424e54660fed310c58dc98ea41042e -> 
+  custom:scripting/monoscript/fileName/CinemachineStoryboardEditor.cs: 2e7ec8bfb72013eaaff4873a27da019c -> 
+  custom:scripting/monoscript/fileName/LockTransform.cs: 15aaee0f9108c72917a707734e244ee7 -> 
+  custom:scripting/monoscript/fileName/CinemachineVolumeSettingsEditor.cs: 7c8fb727adcc2db0614f3f0f2f35cb54 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:scripting/monoscript/fileName/CinemachineMixingCamera.cs: 739c5ceb76c01023f431794ec46a0177 -> 
+  custom:scripting/monoscript/fileName/CinemachinePath.cs: b443d3c8837a65ddc3c78741cd58ec71 -> 
+  custom:scripting/monoscript/fileName/CinemachineStoryboard.cs: 59a2099f76be9b47af1e12ed7d40f553 -> 
+  custom:scripting/monoscript/fileName/CinemachineTrackedDolly.cs: f6a9c21b27ad86d45f62f6b444ccbb49 -> 
+  custom:scripting/monoscript/fileName/CinemachineHardLookAtEditor.cs: 15b8f2af6a6d786898ce5dd6b0db26dc -> 
+  custom:scripting/monoscript/fileName/CinemachineComposer.cs: e399dfd36807c341da7cd182ce299d1e -> 
+  custom:scripting/monoscript/fileName/CinemachineTrack.cs: 4b50d47d507c57dc81b82253ec075194 -> 
+  custom:scripting/monoscript/fileName/Parallax.cs: e735c387427a6ced1119878d24815454 -> 
+  custom:scripting/monoscript/fileName/AbilitySO.cs: 4e601967bde8df6919edcd696894ea6a -> 
+  custom:scripting/monoscript/fileName/CinemachineOrbitalTransposer.cs: 71c52878ba6d43827473a480056a99da -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseSource.cs: ac073b8453e26c5dd422d5f1a90a7ff2 -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseEnvelopePropertyDrawer.cs: 07e00c9c84964a5c7e4f3f19e4263ec1 -> 
+  custom:scripting/monoscript/fileName/CinemachineSameAsFollowTargetEditor.cs: 6def40fc1e39b3242347b6630fb5127e -> 
+  custom:scripting/monoscript/fileName/StateMachine_Enemy_Control.cs: 1849322044126e37c25d7302404a8e4a -> 
+  custom:scripting/monoscript/fileName/CinemachineBlendListCameraEditor.cs: dbc12d2a9f3e2999a067290c411b2aca -> 
+  custom:scripting/monoscript/fileName/UnityVectorExtensions.cs: 052777772edecdffe26d41a6a989641e -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseChannels.cs: a9a39cc5ecea1f083db0fce154eec19c -> 
+  custom:scripting/monoscript/fileName/LensSettings.cs: 4335e899502c57ee4480b8c9aa915366 -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseListener.cs: 6aac146243d38e7a67346170caa40ea1 -> 
+  custom:scripting/monoscript/fileName/CinemachineMenu.cs: 7b932811d9fa1e44d0d8b2b9ed75adf3 -> 
+  custom:scripting/monoscript/fileName/RuntimeUtility.cs: 8c92a9f673836e5d2084dbeb0f10159f -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/CinemachineGroupComposer.cs: 173a689a80ef321c302f9c045419668f -> 
+  custom:scripting/monoscript/fileName/CinemachineShotClipEditor.cs: 123a48531bf1d1b4f3c8398556caec62 -> 
+  custom:scripting/monoscript/fileName/CastingBarUI.cs: a4021532026f682924f0ec2b187d5ea1 -> 
+  custom:scripting/monoscript/fileName/CinemachineBlend.cs: f33659d50c4d86144d649aa7e8196529 -> 
+  custom:scripting/monoscript/fileName/SineTransform.cs: 82bcf9335af212da3addc55a1ff54be7 -> 
+  custom:scripting/monoscript/fileName/clipper.cs: 2a50e35a835148907b3c1fa8e187ab2b -> 
+  custom:scripting/monoscript/fileName/GaussianFilter.cs: 0a3672ebe80edf7c5daca82445c15683 -> 
+  custom:scripting/monoscript/fileName/CinemachineCollisionImpulseSource.cs: 9aae5e368cb7786be199f98f2122f96d -> 
+  custom:scripting/monoscript/fileName/CinemachineClearShotEditor.cs: ca8875b47e775cd361c78158d7923690 -> 
+  custom:scripting/monoscript/fileName/NoiseSettingsPropertyDrawer.cs: 8d3f69ba7eeec63914970bd3136b6ace -> 
+  custom:scripting/monoscript/fileName/HurtboxFlicker.cs: eeafbf4b2f9e97ef8eb403f16b06d0d0 -> 
+  custom:scripting/monoscript/fileName/CinemachineShotEditor.cs: 2ba28b209a4ad7f0a791994d2360a9af -> 
+  custom:scripting/monoscript/fileName/State_Enemy_MidAir.cs: 1d02051d09028addef18d9b2a0d6f43d -> 
+  custom:scripting/monoscript/fileName/Hurt2D.cs: 684739d1845fe5029f89c085d2218759 -> 
+  custom:scripting/monoscript/fileName/CinemachineHardLockToTargetEditor.cs: c65eaafd47115974a2a9379aae467b0e -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:scripting/monoscript/fileName/State_PakYa_Casting.cs: 45a3a51ae67f34bcfdcbb5cec58d5c4a -> 
+  custom:scripting/monoscript/fileName/ItemSO.cs: 0a5463a9d577238728a7d85d33a5f74c -> 
+  custom:scripting/monoscript/fileName/CinemachineMixingCameraEditor.cs: 1c122a21d710512fec62cdc7bd351681 -> 
+  custom:scripting/monoscript/fileName/CinemachinePostProcessing.cs: bf9b100a1b61fd5383288bc96487c194 -> 
+  custom:scripting/monoscript/fileName/MusicManager.cs: 1f7d0f3015795540ecee058a7a3ae174 -> 
+  custom:scripting/monoscript/fileName/CinemachineVirtualCameraBaseEditor.cs: 13ee4931cd85df4b22852d0547b5e690 -> 
+  custom:scripting/monoscript/fileName/MouseManager.cs: 6ac4e4e03984271fd1f80dcdcecc1ff0 -> 
+  custom:scripting/monoscript/fileName/Cinemachine3rdPersonFollow.cs: 4600bac2bdf6b37d80e86f9aa5a413c3 -> 
+  custom:scripting/monoscript/fileName/Loot2D.cs: f61d6983d59368c6d141a2ae9fb7daae -> 
+  custom:scripting/precompiled-assembly-types:Assembly-CSharp: e17a952c2209ea8d6a71f54bafc318a8 -> 289d1dd27bf768d11e5154c71e639266
+  custom:scripting/monoscript/fileName/Jump2D.cs: b5ed667bad422ef0f1c4bfe8a7c1c70a -> 
+  custom:scripting/monoscript/fileName/State_PakYa_Grounded.cs: 810a54811153318b28c9da77c28159e5 -> 
+  custom:scripting/monoscript/fileName/SFXManager.cs: 418f8a18779df8c091cc220dc164089e -> 
+  custom:scripting/monoscript/fileName/AmbientManager.cs: 37fb90161558c2ac2928d108c1da3584 -> 
+  custom:scripting/monoscript/fileName/CinemachineGroupComposerEditor.cs: 54a07f36704e77a685a5e7e8c8b2c216 -> 
+  custom:scripting/monoscript/fileName/CinemachineConfinerEditor.cs: cc6c898a3390647ab91613c8a96de4b4 -> 
+  custom:scripting/monoscript/fileName/CinemachineBlendDefinitionPropertyDrawer.cs: 7ae344d19d646b738f3c65294becf216 -> 
+  custom:scripting/monoscript/fileName/SoundEvents.cs: 0d410c81090cd2ec8929ed511f1635ca -> 
+  custom:scripting/monoscript/fileName/CinemachineSmoothPath.cs: c28db2688f35d70587b5f943431a010a -> 
+  custom:scripting/monoscript/fileName/AbilityCaster.cs: 0bfbd7cd0e925d39243e44a4076f012f -> 
+  custom:scripting/monoscript/fileName/CinemachineStateDrivenCamera.cs: aea2468a7384be4ba6d1b043ccec135d -> 
+  custom:scripting/monoscript/fileName/EnemyAI.cs: b23c04a72171da1bfba3c740e359e309 -> 
+  custom:scripting/monoscript/fileName/CinemachineBlenderSettings.cs: 9adcb80668a56be4cd8e31c1d3dc60ae -> 
+  custom:scripting/monoscript/fileName/SignalSourceAsset.cs: f7ffd463dece56bad278f5a8d3ed7fc6 -> 
+  custom:scripting/monoscript/fileName/CinemachineCore.cs: fe6c3be993819098833de1628bfd76b2 -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseChannelPropertyDrawer.cs: 4b6390a17916751618e2a45cb8d47a80 -> 
+  custom:scripting/monoscript/fileName/SerializedPropertyHelper.cs: b04ac165255e34bc2935ca9bf180e209 -> 
+  custom:scripting/monoscript/fileName/CinemachineFramingTransposer.cs: 7943c9d436748359882d8f978cf86c91 -> 
+  custom:scripting/monoscript/fileName/SliderUI.cs: 6f3f360ce26313d36313bd387d81c621 -> 
+  custom:scripting/monoscript/fileName/ForceVehicle2D.cs: b6e4ee3c51b319291e177acf3ffb8470 -> 
+  custom:scripting/monoscript/fileName/RandomSprite.cs: f071caa41044d42d19bb8d6617f6bb79 -> 
+  custom:scripting/monoscript/fileName/SkinRandomizer.cs: 6218883ab3c772a1f7199f20ec172833 -> 
+  custom:scripting/monoscript/fileName/StateMachine_PakYa_Control.cs: cc56be7443e008dd6b76a310f83f5873 -> 
+  custom:scripting/monoscript/fileName/CinemachineMixer.cs: 2e36eb9e732dd7c8a32e8f83daebd6f4 -> 
+  custom:scripting/monoscript/fileName/CinemachineConfiner.cs: 3813336c17662a5cb6b59ce5f1954254 -> 
+  custom:scripting/monoscript/fileName/CinemachineBrain.cs: 365b4e0b6319f064062e97b8f8e32c8e -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseDefinitionPropertyDrawer.cs: 1b2fc77b0a80a7e0e9045e0d44fb761c -> 
+  custom:scripting/monoscript/fileName/InventorySO.cs: dd5a9625922801b5c7487c0cb1ab2167 -> 
+  custom:scripting/monoscript/fileName/CinemachineColliderPrefs.cs: 47106451d4685409820905badf49b71f -> 
+  custom:scripting/monoscript/fileName/CinemachineFollowZoom.cs: eb74e2e98d3dc4647324e113f34710ca -> 
+  custom:scripting/monoscript/fileName/CinemachineDebug.cs: 3077ed3b64725184c652d4c07ac732fd -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:scripting/monoscript/fileName/CinemachineCameraOffset.cs: a6887f67d3eb83cc6393b822d4e65121 -> 
+  custom:scripting/monoscript/fileName/ICinemachineCamera.cs: 2faad4f04eaf5d98c2870adbfb06184e -> 
+  custom:scripting/monoscript/fileName/CinemachineShotPlayable.cs: e346ad1ecb4af45da55274cb9abd9ec0 -> 
+  custom:scripting/monoscript/fileName/DropTable.cs: 40369ffa1b218f94922f9de2a50f5fe8 -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseSourceEditor.cs: 0ef7804c69c18838aa65e6d5bae5b055 -> 
+  custom:scripting/monoscript/fileName/CinemachineExternalCameraEditor.cs: d74df442250b898c9b40669a19100e9d -> 
+  custom:scripting/monoscript/fileName/CinemachineTransposer.cs: aa226dd144b3a977b86ea888b85df5fa -> 
+  custom:scripting/monoscript/fileName/BaseState.cs: 4a0e109604d2d79dcd369a23d390cebd -> 
+  custom:scripting/monoscript/fileName/ReflectionHelpers.cs: 60a5d38af3e775d0a421a7ff630d61cc -> 
+  custom:scripting/monoscript/fileName/InventoryUI.cs: a51eed18ec49e69d87a737edf5ea607f -> 
+  custom:scripting/monoscript/fileName/CinemachineVirtualCamera.cs: f16f2dc5bc1261579875c19605c45301 -> 
+  custom:scripting/monoscript/fileName/CinemachineOrbitalTransposerEditor.cs: 5ea2e4bec7ee6c24917bd86647f4bffa -> 
+  custom:scripting/monoscript/fileName/CinemachineConfiner2DEditor.cs: 3f4b3d9b17ff5cd560135aa24f822994 -> 
+  custom:scripting/monoscript/fileName/GroupWeightManipulator.cs: 588749cf3436a8199e762a8e09bc8de7 -> 
+  custom:scripting/monoscript/fileName/AxisStatePropertyDrawer.cs: 2d807695a513641e771c78e6c342ff04 -> 
+  custom:scripting/monoscript/fileName/PopUpAnim.cs: c9504465a49d7cf2a6fa68dc582b438f -> 
+  custom:scripting/monoscript/fileName/PakYa.cs: 5adf7453a7c66c5339a473229bf966d8 -> 
+  custom:scripting/monoscript/fileName/CinemachinePropertyAttribute.cs: e8158d9725ac3a9129a08e46a4ff7519 -> 
+  custom:scripting/monoscript/fileName/OneWayPlatform.cs: b343cda49de3fe422dee6ae2f3b631ad -> 
+  custom:scripting/monoscript/fileName/VFXManager.cs: ee3a5f153671013f343656790c6f6640 -> 
+  custom:scripting/monoscript/fileName/CinemachineNoiseSettingsEditor.cs: 9056e69d9c759ba2504535054fff31c9 -> 
+  custom:scripting/monoscript/fileName/ReliableOnTriggerExit.cs: cf0516a071f5fe118e531b4ac9783538 -> 
+  custom:scripting/monoscript/fileName/State_Enemy_Control_AI_Attacking.cs: a30c3833fae87b7216dcde970d7aea62 -> 
+  custom:CustomObjectIndexerAttribute: 9a22284fe3817be447336de3de66b15e -> 
+  custom:scripting/monoscript/fileName/CinemachineBlenderSettingsEditor.cs: c57aa7de12bc3e7367ca091f4902c67b -> 
+  custom:scripting/monoscript/fileName/State_PakYa_MidAir.cs: c73e43a8178da8867eea54e3409a6fe4 -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseDefinition.cs: 3d434086a2bdaf715abf85e79e9f14b4 -> 
+  custom:scripting/precompiled-assembly-types:com.unity.cinemachine.editor: 1f055bd45c76785b23209ab6ee180f29 -> 
+  custom:scripting/monoscript/fileName/PlayerManager.cs: fa278fc629bee650391d87d1007e9d4f -> 
+  custom:scripting/monoscript/fileName/UIBarTween.cs: 9e259b80e64bff37e5bfdb1bb7b964aa -> 
+  custom:scripting/monoscript/fileName/Cinemachine3rdPersonFollowEditor.cs: f79aa162534f81c680877e6274b5d6ec -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:scripting/monoscript/fileName/WaveformWindow.cs: 01bbc4fc017d41a2bab7fb57c988e8da -> 
+  custom:scripting/monoscript/fileName/CinemachinePipeline.cs: 6ca7a5979a0a73ea1d450a8fc9b437ef -> 
+  custom:scripting/monoscript/fileName/CinemachineFramingTransposerEditor.cs: 1653e1c00b2ca68b1d40f01e5bfb8445 -> 
+  custom:scripting/monoscript/fileName/GenericHurt.cs: b154f08a9232d456d8f42abd1124c51f -> 
+  custom:scripting/monoscript/fileName/CinemachineStateDrivenCameraEditor.cs: 77d9f0a97385f936d9b4ffaa686bce39 -> 
+  custom:scripting/monoscript/fileName/CinemachinePathEditor.cs: ce10985fbf0e018e2dea63fedae131ba -> 
+  custom:scripting/monoscript/fileName/TimescaleManager.cs: 5b406bf00884a1c1ccd6d74ecc79587e -> 
+  custom:scripting/monoscript/fileName/DeathDrop.cs: ec88b64db4bb50bad3e748a7af689398 -> 
+  custom:scripting/monoscript/fileName/CinemachineCollisionImpulseSourceEditor.cs: 29f9a522ec6b23375849ba08fd597c8d -> 
+  custom:scripting/monoscript/fileName/CinemachineTargetGroup.cs: 10a09aa736b3a25da6dd9fc3c4dd9d36 -> 
+  custom:scripting/monoscript/fileName/StateMachine_PakYa.cs: 0aeac9584d2f786d328e9007e143d585 -> 
+  custom:scripting/monoscript/fileName/SpriteManager.cs: c8104a47c6cde414921113bb6ff09bae -> 
+  custom:scripting/monoscript/fileName/EmbeddedAssetHelpers.cs: 90647cc400823b41df847a6cbfc29026 -> 
+  custom:scripting/monoscript/fileName/CinemachineBlendListCamera.cs: 66104ac24fef171d9f5d5b93a8cb2f83 -> 
+  custom:scripting/monoscript/fileName/Explosion2D.cs: 77ff49fd121aa15966a32db6cbfeb6b2 -> 
+  custom:scripting/monoscript/fileName/CinemachineBasicMultiChannelPerlin.cs: bd5416e75860cd63657371207eb79058 -> 
+  custom:scripting/monoscript/fileName/InventoryUISlot.cs: 264ca35331cb0a76707995ae4cc17e0b -> 
+  custom:scripting/monoscript/fileName/TweenAnimSequence.cs: 1ade0349b0b72446877141b53ffdc3d6 -> 
+  custom:scripting/monoscript/fileName/State_Enemy_Control_AI_Seeking.cs: 6dc4424fa585d6d577e070ddf8bc4ab2 -> 
+  custom:scripting/monoscript/fileName/CinemachineImpulseListenerEditor.cs: d5d28e418f87c111bce1c1b98f1f70ba -> 
+  custom:scripting/monoscript/fileName/CinemachineDollyCart.cs: bbe9d07f4a2f7ee5ab002e66cb05f922 -> 
+  custom:scripting/monoscript/fileName/RandomTransform.cs: 5c5a1acdac1d2aa6a69165b98c782f7e -> 
+  custom:scripting/monoscript/fileName/CameraManager.cs: efa49515d521c118282ca7f85f908717 -> 
+  custom:scripting/monoscript/fileName/CinemachinePixelPerfect.cs: 2f42bea4517739481ed2553d1616050e -> 
+  custom:scripting/monoscript/fileName/Radar2D.cs: 792ffdff231e9df3d72cb378cdd30394 -> 
+  custom:scripting/monoscript/fileName/SpinVelocity2D.cs: 3a14ed674a8ab7cf3042c753db45af26 -> 
+  custom:scripting/monoscript/fileName/CinemachineSmoothPathEditor.cs: 7555bcba4eb760e012dd21c6730ae562 -> 
+  custom:scripting/monoscript/fileName/ScriptableObjectUtility.cs: c529d074f6f57a07e3f410d488963bbc -> 
+  custom:scripting/monoscript/fileName/State_Enemy_Control_None.cs: dd2061c11c41249bae4627692d93af9b -> 
+  custom:scripting/monoscript/fileName/CinemachinePathBase.cs: debb99764287c54cae06313e2d6a1fe1 -> 
+  custom:scripting/monoscript/fileName/TransformConstraint.cs: 59021009b99659aaf892869b6b28a25f -> 
+  custom:scripting/monoscript/fileName/SplineHelpers.cs: 9e5bf4293b3828088291b7871e233a27 -> 
+  custom:scripting/monoscript/fileName/EventManager.cs: a58d83cf5a85012ab7e794f0792fc151 -> 
+  custom:scripting/monoscript/fileName/DestroyAfter.cs: dbcb1ab65436d564a8bbef07be0aebbe -> 
+  custom:scripting/monoscript/fileName/CinemachineShot.cs: 3d4d9d05534db20e82d871d98ea52716 -> 
+  custom:scripting/monoscript/fileName/SprintVFX.cs: 4d917c06d9c9866929f8414d8fd5914c -> 
+  custom:scripting/monoscript/fileName/CinemachineBasicMultiChannelPerlinEditor.cs: d6749cd6c482efa27bdd41f60394f1b9 -> 
+  custom:scripting/monoscript/fileName/CinemachineHardLockToTarget.cs: d349308c5b4f600a345055c394206f52 -> 
+  custom:scripting/monoscript/fileName/CinemachineConfiner2D.cs: beb10be0db8ff9d3a94bd0a150963b9b -> 
+  custom:scripting/monoscript/fileName/Cinemachine3rdPersonAim.cs: 4bd230d915f070bb3cae23bef6f7ab70 -> 
+  custom:scripting/monoscript/fileName/Hurtbox2D.cs: aa39ab44d88998b90036962d69ff9864 -> 
+  custom:scripting/monoscript/fileName/Vibrator.cs: 8a178f850d694ffec12346a4514f60b7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:scripting/monoscript/fileName/State_Hub.cs: 480d1915d13692802785c82ed012c743 -> 
+  custom:scripting/monoscript/fileName/CinemachineFreeLook.cs: bebc32b18bc4beddc113bad68624e557 -> 
+  custom:scripting/monoscript/fileName/CinemachineVirtualCameraBase.cs: c7e60cccdcb14ee2a33da9fd46c1c54f -> 
+  custom:scripting/monoscript/fileName/CinemachineFixedSignal.cs: aedcdca7a861da6e456e0ae105b24c41 -> 
+  custom:scripting/monoscript/fileName/CinemachineTouchInputMapper.cs: b9698729a07a7d31c864247e0582b566 -> 
+  custom:scripting/monoscript/fileName/WiggleTransform.cs: 03740737c37c5dfe0792f8475d23844b -> 
+  custom:scripting/monoscript/fileName/CinemachinePOV.cs: e4df06d1994174afa286b103eb06ee7f -> 
+  custom:scripting/monoscript/fileName/State_Enemy_Control_AI.cs: f1e7b26780b9b29cf63f00af242ec0fd -> 
+  custom:scripting/monoscript/fileName/SideMove.cs: a23b7613b23af8c2f55a6920c79235b1 -> 
+  custom:scripting/monoscript/fileName/CinemachineFreeLookEditor.cs: 9641291977c1891a004ac4c4c259e1c8 -> 
+  custom:scripting/monoscript/fileName/CinemachineTransposerEditor.cs: 85841a774ddea4fb7232a7a585f716b4 -> 
+  custom:scripting/monoscript/fileName/NoiseSettings.cs: 443d576e0c72ab62870476103c9384ec -> 
+  custom:scripting/monoscript/fileName/CinemachineSceneTools.cs: d63880a6073ab3335301b115db235b5b -> 
+  custom:scripting/monoscript/fileName/State_PakYa_Control_Player.cs: 67d989830a40653b911d07778af1cf53 -> 
+  custom:scripting/monoscript/fileName/CinemachineTriggerActionEditor.cs: 2309a2ec6192ace4cae8bab5a535978e -> 
+  custom:scripting/monoscript/fileName/VcamTargetPropertyDrawer.cs: 9208050b1312b118a226fef2d63e8fa1 -> 
+  custom:scripting/monoscript/fileName/CinemachineEditorAnalytics.cs: de76cc292d7ecedcf47af6616498c9f9 -> 
+  custom:scripting/monoscript/fileName/CinemachineBrainEditor.cs: 49621d8b7679c0b5d128fef53d55becd -> 
+  custom:scripting/monoscript/fileName/CameraState.cs: 3ec03858e4f5bd5578e14e2ade4f1591 -> 784b031cde26e82771e0f45b6a811817
+  custom:scripting/monoscript/fileName/CinemachineToolbarOverlay.cs: 371b6fc494252d6fda34e207e170cb66 -> 
+  custom:scripting/monoscript/fileName/CinemachineIndependentImpulseListener.cs: 91ae8748b9c36955c333e57505ff90fb -> 
+  custom:scripting/monoscript/fileName/CinemachineSameAsFollowTarget.cs: bcfa2d394e1e5460b4ef3dc039214a16 -> 
+  custom:scripting/monoscript/fileName/UpdateTracker.cs: 3dac8a24a32a32e4bbfeb38ed26ef250 -> 
+  custom:scripting/monoscript/fileName/CinemachineComposerEditor.cs: dda533b9c6cb2b366292f584704bd904 -> 
+  custom:scripting/monoscript/fileName/TransitionAnim.cs: f8828e1ca04a32475c00211cfc64236d -> 
+  custom:scripting/monoscript/fileName/State_Enemy_Control_AI_Idle.cs: 345260ae3cc7946e930cd2c4783a30e0 -> 
+  custom:scripting/monoscript/fileName/VolumeSettings.cs: cdcb261cf790e595b173a0fe27b5e1a2 -> 
+  custom:scripting/monoscript/fileName/SaveDuringPlay.cs: de39f1962b337699845d3d8a2e8f5bde -> 
+========================================================================
+Received Import Request.
+  Time since last request: 176.577156 seconds.
+  path: Assets/Scriptable Objects/Ablitity
+  artifactKey: Guid(eb317e8d9ee43af4bb5f7c897d922522) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Ablitity using Guid(eb317e8d9ee43af4bb5f7c897d922522) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'a1c6aa0017f91525693f907368fa1caa') in 0.005285 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.695650 seconds.
+  path: Assets/Scriptable Objects/Item
+  artifactKey: Guid(13a784e1065e7334eab5f811c23310d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item using Guid(13a784e1065e7334eab5f811c23310d2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '67587356ca549951ad2db9e19d6e2c76') in 0.000506 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.817596 seconds.
+  path: Assets/Scriptable Objects/Item/Items
+  artifactKey: Guid(82c062231a5abf2488a16969734c8c0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item/Items using Guid(82c062231a5abf2488a16969734c8c0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '036c27cac323d13cb6984829b8fede49') in 0.000504 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.289443 seconds.
+  path: Assets/Scriptable Objects/Item/Inventories
+  artifactKey: Guid(285274b68198064458a358bece909c1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item/Inventories using Guid(285274b68198064458a358bece909c1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '1d07c004e2c57b0d408e7d2dc8f49063') in 0.000522 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.387896 seconds.
+  path: Assets/Scriptable Objects/Item/Inventories/PakYa
+  artifactKey: Guid(c50b803ef0874384eb7ab67d0c109968) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item/Inventories/PakYa using Guid(c50b803ef0874384eb7ab67d0c109968) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '18a1c47585c784faee4a0b45c35a70a6') in 0.000524 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.512392 seconds.
+  path: Assets/Scriptable Objects/Item/Inventories/PakYa/PakYa Inventory.asset
+  artifactKey: Guid(97874b5f7b402dd42b0d261e43d370ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item/Inventories/PakYa/PakYa Inventory.asset using Guid(97874b5f7b402dd42b0d261e43d370ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'ace431013cb866cf32a4142d210f66c3') in 0.013898 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 11
+========================================================================
+Received Import Request.
+  Time since last request: 12.077261 seconds.
+  path: Assets/Scriptable Objects/Item/Items/_test
+  artifactKey: Guid(31aec63d586e02540b45ff3ba46a2137) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item/Items/_test using Guid(31aec63d586e02540b45ff3ba46a2137) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '48b3cd8b1a973e831606f3e271f424d5') in 0.000590 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.733443 seconds.
+  path: Assets/Scriptable Objects/Item/Items/_test/JellyRabbitHat
+  artifactKey: Guid(996bf760c8365cb4bb62c70e91f60d17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item/Items/_test/JellyRabbitHat using Guid(996bf760c8365cb4bb62c70e91f60d17) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '7e5253bc1b5184475ff3b635b9b8ceba') in 0.000517 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.045788 seconds.
+  path: Assets/Scriptable Objects/Item/Items/_test/JellyRabbitHat/jelly_rabbit_hat.png
+  artifactKey: Guid(1ef484cce528210449abc2a2c097b52f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item/Items/_test/JellyRabbitHat/jelly_rabbit_hat.png using Guid(1ef484cce528210449abc2a2c097b52f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'd866f724c68151b6b9a22e4286556f9f') in 0.066596 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Scriptable Objects/Item/Items/_test/JellyRabbitHat/JellyRabbitHat.asset
+  artifactKey: Guid(0c14f9b1bf495b34ba7ff0f8db781d78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scriptable Objects/Item/Items/_test/JellyRabbitHat/JellyRabbitHat.asset using Guid(0c14f9b1bf495b34ba7ff0f8db781d78) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '3a593faf861d9249d0dc4947cff82eb9') in 0.001910 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 152.660535 seconds.
+  path: Assets/Prefabs/Player
+  artifactKey: Guid(7234f1de6b088954b934c4f0acf88e13) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player using Guid(7234f1de6b088954b934c4f0acf88e13) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'b6a0b8f8a6baac169019ebce2327715e') in 0.000544 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.040305 seconds.
+  path: Assets/Prefabs/Player/PakYa.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'c1ae412a9f5899a173b96cd980364bf7') in 0.000680 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 1.048173 seconds.
+  path: Assets/Prefabs/Player/PakYa.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '26605a8080ce4c6b181130ecde671f0d') in 0.000817 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 2.341615 seconds.
+  path: Assets/Prefabs/Player/UI
+  artifactKey: Guid(e0032dfec7c44e544930eb960c325962) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/UI using Guid(e0032dfec7c44e544930eb960c325962) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '062f61c07249e90fdba7aa4facb6d9b8') in 0.000557 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.020349 seconds.
+  path: Assets/Prefabs/Player/UI/PakYa Casting Bar UI.prefab
+  artifactKey: Guid(943654332d8a64c449dad116eccb0470) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/UI/PakYa Casting Bar UI.prefab using Guid(943654332d8a64c449dad116eccb0470) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: 'f5d956272d597b9c88158dc1f5c2a801') in 0.000619 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 222.772681 seconds.
+  path: Assets/Prefabs/Player/PakYa.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '26605a8080ce4c6b181130ecde671f0d') in 0.000712 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 5.329301 seconds.
+  path: Assets/Prefabs/Player/PakYa_old.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa_old.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '1dd5042a26c8ad89e24e8534883c2a75') in 0.000714 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 6.358321 seconds.
+  path: Assets/Prefabs/Player/PakYa_2D.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa_2D.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '82798d502ff45c1cd0e038df6fb5b311') in 0.000621 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 7.272101 seconds.
+  path: Assets/Prefabs/Player/PakYa.prefab
+  artifactKey: Guid(2b7ee016883403344815e89e42a00748) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa.prefab using Guid(2b7ee016883403344815e89e42a00748) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
+ -> (artifact id: '0641a6bf304eacff33356889e9c5680d') in 1.011467 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 75
+========================================================================
+Received Import Request.
+  Time since last request: 8.472722 seconds.
+  path: Assets/Prefabs/Player/PakYa_2D.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa_2D.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '82798d502ff45c1cd0e038df6fb5b311') in 0.000670 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 4.444084 seconds.
+  path: Assets/Prefabs/Player/PakYa_2D.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa_2D.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '82798d502ff45c1cd0e038df6fb5b311') in 0.000720 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 5.704035 seconds.
+  path: Assets/Prefabs/Player/PakYa_2D.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa_2D.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '82798d502ff45c1cd0e038df6fb5b311') in 0.000739 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 32.614641 seconds.
+  path: Assets/Prefabs/Player/PakYa_2D.prefab
+  artifactKey: Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Player/PakYa_2D.prefab using Guid(8917b9a64e664a945a765b3a46e90699) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '82798d502ff45c1cd0e038df6fb5b311') in 0.000763 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 35.479473 seconds.
+  path: Assets/Polybrush Data/Brush Settings/BrushSettings-Default.asset
+  artifactKey: Guid(e5e91b92e1f59084db7e823a0307072f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Polybrush Data/Brush Settings/BrushSettings-Default.asset using Guid(e5e91b92e1f59084db7e823a0307072f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '4f133efc576fa5aad4fcc7c9eec79827') in 0.001115 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 22.154503 seconds.
+  path: Assets/Polybrush Data/Color Palette/ColorPalette-Default.asset
+  artifactKey: Guid(6a80e0bb4b122244586186c048d394aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Polybrush Data/Color Palette/ColorPalette-Default.asset using Guid(6a80e0bb4b122244586186c048d394aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '2c01329f267850745c8d24289c7d7b9d') in 0.001309 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 2.538905 seconds.
+  path: Assets/Polybrush Data/Prefab Palette/New Prefab Palette.asset
+  artifactKey: Guid(37064649804a38c4c8602cb2f9f383ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Polybrush Data/Prefab Palette/New Prefab Palette.asset using Guid(37064649804a38c4c8602cb2f9f383ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '51876bee6b817f386de613dc21b1ab40') in 0.001158 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1
+========================================================================
+Received Import Request.
+  Time since last request: 77.676925 seconds.
+  path: Assets/Textures/TJ/PakYa/PakYa.png
+  artifactKey: Guid(30ed3c25cb1ff1e4284bec75b45a97c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/TJ/PakYa/PakYa.png using Guid(30ed3c25cb1ff1e4284bec75b45a97c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '3e07d55902aac3e96b3495fb3eea0e1e') in 0.024986 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 2.459241 seconds.
+  path: Assets/Textures/TJ/Test/PakYa.png
+  artifactKey: Guid(69ad4a7a69ef11746a73b201b8d20483) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/TJ/Test/PakYa.png using Guid(69ad4a7a69ef11746a73b201b8d20483) Importer(815301076,1909f56bfc062723c751e8b465ee728b) [PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+[PhysX] Initialized MultithreadedTaskDispatcher with 12 workers.
+ -> (artifact id: '892172089b6e254d85171727d8b90d75') in 0.013179 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
