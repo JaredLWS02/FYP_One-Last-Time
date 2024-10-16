@@ -15,7 +15,7 @@ public class TurnScript : MonoBehaviour
     [HideInInspector]
     public float baseTurnSpeed;
 
-    public Vector3 turnAxis = new(0, 1, 0);
+    public Vector3Int turnAxis = new(0, 1, 0);
 
     public bool linearTurn;
 
