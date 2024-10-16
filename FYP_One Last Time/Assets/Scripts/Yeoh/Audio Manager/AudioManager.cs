@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -12,7 +13,7 @@ public class AudioManager : MonoBehaviour
         if(!Current) Current=this;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public AudioMixer mixer;
     public const string MASTER_KEY = "masterVolume";
@@ -45,29 +46,21 @@ public class AudioManager : MonoBehaviour
         return Mathf.Log10(value)*20;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
-    Dictionary<AudioSource, int> tweenVolumeIds = new Dictionary<AudioSource, int>();
+    Dictionary<AudioSource, Tween> volumeTweens = new();
     
     public void TweenVolume(AudioSource source, float to, float time=3)
     {
-        if(tweenVolumeIds.ContainsKey(source))
+        if(volumeTweens.ContainsKey(source))
         {
-            LeanTween.cancel(tweenVolumeIds[source]);
+            volumeTweens[source].Stop();
         }
         
-        if(time>0)
-        {
-            tweenVolumeIds[source] = LeanTween.value(source.volume, to, time)
-                .setEaseInOutSine()
-                .setIgnoreTimeScale(true)
-                .setOnUpdate( (float value)=>{source.volume=value;} )
-                .id;
-        }
-        else source.volume=to;
+        volumeTweens[source] = Tween.AudioVolume(source, to, time, Ease.InOutSine, useUnscaledTime: true);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     [Header("SFX")]
     public GameObject SFXObjectPrefab;
@@ -83,7 +76,7 @@ public class AudioManager : MonoBehaviour
         source.minDistance = minRadius;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public void PlaySFX(AudioClip[] clips, Vector3 pos, bool spatialBlend=true, bool randPitch=true, float panStereo=0, float volume=1, float minRadius=15)
     {   
@@ -108,7 +101,7 @@ public class AudioManager : MonoBehaviour
         PlaySFX(clips, pos, spatialBlend, randPitch, panStereo, volume, minRadius);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public void PlayVoice(AudioSource voiceSource, AudioClip[] clips, bool randPitch=true, float volume=1, bool spatialBlend=true, float minRadius=15, float panStereo=0)
     {   
@@ -119,7 +112,7 @@ public class AudioManager : MonoBehaviour
         voiceSource.Play();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public AudioSource LoopSFX(GameObject owner, AudioClip[] loopClip, bool spatialBlend=true, bool randPitch=true, float panStereo=0, float volume=1, float minRadius=15)
     {
@@ -172,7 +165,7 @@ public class AudioManager : MonoBehaviour
         loopSource.Play();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public void StopLoop(AudioSource loopSource, AudioClip[] outClips)
     {
@@ -193,7 +186,7 @@ public class AudioManager : MonoBehaviour
         StopLoop(loopSource, null);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ==================================================================================================================
 
     public bool HasClips(AudioClip[] clips)
     {

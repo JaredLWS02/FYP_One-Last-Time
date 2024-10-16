@@ -1,42 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 
 public class DestroyAfter : MonoBehaviour
 {
-    public bool destroyOnEnabled;
-    public Vector2 destroyAfter = new Vector2(3, 4);
+    public bool startDestroyDelayOnEnable=true;
+    public Vector2 destroyDelay = new Vector2(3, 4);
 
     [Header("Shrink Anim")]
     public List<GameObject> shrinkObjects = new();
+    public Vector3 shrinkTo = Vector3.zero;
     public float shrinkTime=.5f;
+    public bool ignoreTime;
+
+    // ==================================================================================================================
 
     void OnEnable()
     {
-        if(destroyOnEnabled) Destroying();
+        if(startDestroyDelayOnEnable) StartDestroyDelay();
     }
 
-    public void Destroying()
+    // ==================================================================================================================
+
+    public void StartDestroyDelay()
     {
-        float waitTime = Random.Range(destroyAfter.x, destroyAfter.y);
+        float delay = Random.Range(destroyDelay.x, destroyDelay.y);
 
-        ShrinkAnim(waitTime);
+        ShrinkAnim(shrinkTo, shrinkTime, delay);
 
-        Destroy(gameObject, waitTime+shrinkTime);
+        Destroy(gameObject, delay+shrinkTime);
     }
 
-    void ShrinkAnim(float waitTime)
+    void ShrinkAnim(Vector3 to, float time, float delay=0)
     {
         List<GameObject> objectsToShrink = new();
 
-        if(shrinkObjects.Count>0) objectsToShrink = shrinkObjects;
-        else objectsToShrink.Add(gameObject);
-
+        if(shrinkObjects.Count>0)
+        {
+            objectsToShrink = shrinkObjects;
+        }
+        else
+        {
+            objectsToShrink.Add(gameObject);
+        }
+        
         foreach(GameObject obj in objectsToShrink)
         {
-            if(waitTime>0) LeanTween.scale(obj, Vector3.zero, shrinkTime).setDelay(waitTime).setEaseInOutSine();
-
-            else LeanTween.scale(obj, Vector3.zero, shrinkTime).setEaseInOutSine();
+            Tween.Scale(obj.transform, to, time, Ease.InOutSine, startDelay: delay, useUnscaledTime: ignoreTime);
         }
     }
 
