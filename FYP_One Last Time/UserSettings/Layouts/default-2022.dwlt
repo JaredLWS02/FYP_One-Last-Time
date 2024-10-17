@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Project
   m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -39,17 +39,17 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 641.6
+    x: 636
     y: 0
-    width: 531.2001
+    width: 489.59998
     height: 295.59998
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 18}
   m_Panes:
-  - {fileID: 17}
   - {fileID: 18}
-  - {fileID: 16}
+  - {fileID: 19}
+  - {fileID: 17}
   m_Selected: 0
   m_LastSelected: 2
 --- !u!114 &3
@@ -71,12 +71,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 435.2
-    width: 1172.8
+    width: 1125.6
     height: 295.59998
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 102
+  controlID: 112
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 150
+  controlID: 162
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -119,20 +119,20 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1172.8
+    x: 1125.6
     y: 0
-    width: 363.19995
+    width: 410.40002
     height: 730.8
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 23}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 24}
   m_Panes:
-  - {fileID: 23}
-  - {fileID: 20}
+  - {fileID: 24}
+  - {fileID: 21}
+  - {fileID: 16}
   - {fileID: 15}
-  - {fileID: 14}
   m_Selected: 0
-  m_LastSelected: 3
+  m_LastSelected: 2
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,20 +143,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
+  m_Name: SceneHierarchyWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 290.4
+    width: 253.6
     height: 435.2
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 24}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 25}
   m_Panes:
-  - {fileID: 24}
+  - {fileID: 25}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &7
@@ -176,15 +176,15 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 641.6
+    width: 636
     height: 295.59998
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 22}
+  m_ActualView: {fileID: 23}
   m_Panes:
-  - {fileID: 22}
-  - {fileID: 27}
-  - {fileID: 19}
+  - {fileID: 23}
+  - {fileID: 28}
+  - {fileID: 20}
   m_Selected: 0
   m_LastSelected: 1
 --- !u!114 &8
@@ -277,12 +277,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1172.8
+    width: 1125.6
     height: 730.8
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 20
+  controlID: 41
   draggingID: 0
 --- !u!114 &12
 MonoBehaviour:
@@ -303,12 +303,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1172.8
+    width: 1125.6
     height: 435.2
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 21
+  controlID: 42
   draggingID: 0
 --- !u!114 &13
 MonoBehaviour:
@@ -325,20 +325,452 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 290.4
+    x: 253.6
     y: 0
-    width: 882.4
+    width: 872
     height: 435.2
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 25}
+  m_ActualView: {fileID: 26}
   m_Panes:
-  - {fileID: 25}
   - {fileID: 26}
-  - {fileID: 21}
+  - {fileID: 27}
+  - {fileID: 22}
+  - {fileID: 14}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 3
 --- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11202834b4942ec4fa9242f65d9e0f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 650, y: 400}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Render Pipeline Converter
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 253.6
+    y: 73.6
+    width: 870
+    height: 414.2
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  converterEditorAsset: {fileID: 9197481963319205126, guid: c700399f2adb2504dac99f1139d658f3,
+    type: 3}
+  converterItem: {fileID: 9197481963319205126, guid: c04b8c76151329e42929df320c5901fe,
+    type: 3}
+  converterWidgetMainAsset: {fileID: 9197481963319205126, guid: 9b40f22c604c94f438696f75a42873eb,
+    type: 3}
+  m_ConverterStates:
+  - isEnabled: 1
+    isActive: 1
+    isLoading: 0
+    isInitialized: 1
+    items:
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    pending: 0
+    warnings: 0
+    errors: 0
+    success: 3
+  - isEnabled: 1
+    isActive: 1
+    isLoading: 0
+    isInitialized: 1
+    items:
+    - isActive: 1
+      message: Ambient material was not upgraded. There's no upgrader to convert
+        Legacy Shaders/Particles/Alpha Blended shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Anime Skybox material was not upgraded. There's no upgrader to convert
+        Skybox/Cubemap shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Cast Trail Material material was not upgraded. There's no upgrader
+        to convert Hidden/InternalErrorShader shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Cast Trail Material dark material was not upgraded. There's no upgrader
+        to convert Hidden/InternalErrorShader shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: color_table material was not upgraded. There's no upgrader to convert
+        Hidden/InternalErrorShader shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Cross material was not upgraded. There's no upgrader to convert Legacy
+        Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: dark interior skybox material was not upgraded. There's no upgrader
+        to convert Skybox/Cubemap shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Decals material was not upgraded. There's no upgrader to convert Hidden/InternalErrorShader
+        shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Explosion Smoke Material material was not upgraded. There's no upgrader
+        to convert Legacy Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Exterior material was not upgraded. There's no upgrader to convert
+        Hidden/InternalErrorShader shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Footprint material was not upgraded. There's no upgrader to convert
+        Legacy Shaders/Particles/Alpha Blended shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Footstep Dust material was not upgraded. There's no upgrader to convert
+        Legacy Shaders/Particles/Alpha Blended shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Footsteps material was not upgraded. There's no upgrader to convert
+        Hidden/InternalErrorShader shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Footsteps_red material was not upgraded. There's no upgrader to convert
+        Hidden/InternalErrorShader shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Glass material was not upgraded. There's no upgrader to convert Hidden/InternalErrorShader
+        shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Ground Beam Material material was not upgraded. There's no upgrader
+        to convert Legacy Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Ground Crack Material material was not upgraded. There's no upgrader
+        to convert Legacy Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Heal Smoke material was not upgraded. There's no upgrader to convert
+        Legacy Shaders/Particles/Alpha Blended shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Impact Material material was not upgraded. There's no upgrader to
+        convert Legacy Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: interior material was not upgraded. There's no upgrader to convert
+        Hidden/InternalErrorShader shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: LiberationSans SDF - Drop Shadow material was not upgraded. There's
+        no upgrader to convert TextMeshPro/Mobile/Distance Field shader to selected
+        pipeline
+      status: 2
+    - isActive: 1
+      message: LiberationSans SDF - Outline material was not upgraded. There's no
+        upgrader to convert TextMeshPro/Mobile/Distance Field shader to selected
+        pipeline
+      status: 2
+    - isActive: 1
+      message: mc-buff material was not upgraded. There's no upgrader to convert
+        Universal Render Pipeline/2D/Sprite-Unlit-Default shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: mc-smoke-unlit material was not upgraded. There's no upgrader to convert
+        Universal Render Pipeline/2D/Sprite-Unlit-Default shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Mossy Forest material was not upgraded. There's no upgrader to convert
+        Skybox/Cubemap shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Muzzle material was not upgraded. There's no upgrader to convert Legacy
+        Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Orb material was not upgraded. There's no upgrader to convert Legacy
+        Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Particles material was not upgraded. There's no upgrader to convert
+        Legacy Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Red material was not upgraded. There's no upgrader to convert Hidden/InternalErrorShader
+        shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Stylized_Sand_001_basecolor material was not upgraded. There's no
+        upgrader to convert Hidden/InternalErrorShader shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Vertical Impact Material material was not upgraded. There's no upgrader
+        to convert Legacy Shaders/Particles/Additive shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Water material was not upgraded. There's no upgrader to convert Hidden/InternalErrorShader
+        shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Wheel material was not upgraded. There's no upgrader to convert Hidden/InternalErrorShader
+        shader to selected pipeline
+      status: 2
+    - isActive: 1
+      message: Window material was not upgraded. There's no upgrader to convert Hidden/InternalErrorShader
+        shader to selected pipeline
+      status: 2
+    pending: 0
+    warnings: 0
+    errors: 34
+    success: 0
+  - isEnabled: 1
+    isActive: 0
+    isLoading: 0
+    isInitialized: 0
+    items: []
+    pending: 0
+    warnings: 0
+    errors: 0
+    success: 0
+  - isEnabled: 1
+    isActive: 0
+    isLoading: 0
+    isInitialized: 0
+    items: []
+    pending: 0
+    warnings: 0
+    errors: 0
+    success: 0
+  - isEnabled: 1
+    isActive: 1
+    isLoading: 0
+    isInitialized: 1
+    items: []
+    pending: 0
+    warnings: 0
+    errors: 0
+    success: 0
+  - isEnabled: 1
+    isActive: 1
+    isLoading: 0
+    isInitialized: 1
+    items:
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    - isActive: 1
+      message: 
+      status: 3
+    pending: 0
+    warnings: 0
+    errors: 0
+    success: 63
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 61
   m_CorrespondingSourceObject: {fileID: 0}
@@ -372,7 +804,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &15
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -393,10 +825,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1466
-    y: 73
-    width: 453
-    height: 926
+    x: 1125.6
+    y: 73.6
+    width: 409.40002
+    height: 709.8
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -407,7 +839,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &16
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -445,7 +877,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_LastSelectedObjectID: -191698
---- !u!114 &17
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -466,9 +898,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 641.60004
+    x: 636
     y: 508.80002
-    width: 529.2001
+    width: 487.59998
     height: 274.59998
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -491,7 +923,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Level
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -499,16 +931,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 56
   m_LastFolders:
-  - Assets/Prefabs/Level
+  - Assets
   m_LastFoldersGridSize: 56
   m_LastProjectPath: D:\UOW\sem7\FYP_One-Last-Time\FYP_One Last Time
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 0e080000
-    m_LastClickedID: 2062
-    m_ExpandedIDs: 000000001c060000660600002e07000000ca9a3bffffff7f
+    m_SelectedIDs: 1a980000
+    m_LastClickedID: 38938
+    m_ExpandedIDs: 000000001a980000369800003e9800007898000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -536,7 +968,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 000000001a980000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -592,7 +1024,7 @@ MonoBehaviour:
     m_GridSize: 56
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 200
---- !u!114 &18
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -644,7 +1076,7 @@ MonoBehaviour:
   m_CurrentEditor: 0
   m_LayerEditor:
     m_SelectedLayerIndex: 0
---- !u!114 &19
+--- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -895,7 +1327,7 @@ MonoBehaviour:
     m_Text: PlayerControls (Input Actions)
     m_Image: {fileID: 0}
     m_Tooltip: 
---- !u!114 &20
+--- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -916,10 +1348,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1466
-    y: 73
-    width: 453
-    height: 926
+    x: 1125.6
+    y: 73.6
+    width: 409.40002
+    height: 709.8
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -931,14 +1363,14 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_PosLeft: {x: 0, y: 0}
-  m_PosRight: {x: 0, y: 145}
+  m_PosRight: {x: 0, y: 0}
   m_Scope: 1
   m_SplitterFlex: 0.2
   m_SearchText: 
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e594f01a
-    m_LastClickedID: 451974373
+    m_SelectedIDs: 53336be2
+    m_LastClickedID: -496290989
     m_ExpandedIDs: d7dddea253336be200000000c53aba5a
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -957,7 +1389,7 @@ MonoBehaviour:
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 0}
     m_SearchString: 
---- !u!114 &21
+--- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -978,9 +1410,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 290.4
+    x: 253.6
     y: 73.6
-    width: 880.4
+    width: 870
     height: 414.2
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -992,7 +1424,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
---- !u!114 &22
+--- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1015,7 +1447,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 508.80002
-    width: 640.6
+    width: 635
     height: 274.59998
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1038,7 +1470,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Yeoh/Platform
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1046,16 +1478,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 56
   m_LastFolders:
-  - Assets/Scripts/Yeoh/Platform
+  - Assets
   m_LastFoldersGridSize: 56
   m_LastProjectPath: D:\UOW\sem7\FYP_One-Last-Time\FYP_One Last Time
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 257.40002}
-    m_SelectedIDs: 560d0000
-    m_LastClickedID: 3414
-    m_ExpandedIDs: 000000001c060000960600001a0700001208000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: 1a980000
+    m_LastClickedID: 38938
+    m_ExpandedIDs: 000000001a980000369800003a9800003e9800007898000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1083,7 +1515,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 000000001a980000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1135,11 +1567,11 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 133.40002}
     m_GridSize: 56
   m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 207
---- !u!114 &23
+  m_DirectoriesAreaWidth: 208.59999
+--- !u!114 &24
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1160,9 +1592,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1172.8
+    x: 1125.6
     y: 73.6
-    width: 362.19995
+    width: 409.40002
     height: 709.8
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1187,7 +1619,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
---- !u!114 &24
+--- !u!114 &25
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1210,7 +1642,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73.6
-    width: 289.4
+    width: 252.6
     height: 414.2
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1227,7 +1659,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 1cd3fdff7ed7fdff
+      m_ExpandedIDs: 60b2feff52b9fefffcbafeffe0c1feffc8c3feffd838ffff5c3bffff943dffffe64effff0888ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1251,7 +1683,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &25
+--- !u!114 &26
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1272,9 +1704,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 290.4
+    x: 253.6
     y: 73.6
-    width: 880.4
+    width: 870
     height: 414.2
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1291,7 +1723,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 1
       snapOffset: {x: -174, y: -26}
-      snapOffsetDelta: {x: -0.39996338, y: -0.3999939}
+      snapOffsetDelta: {x: -0.4000244, y: -0.3999939}
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -1684,7 +2116,7 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: AINavigationOverlay
-      index: 13
+      index: 9
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
@@ -1699,7 +2131,7 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.6113781, y: -1.3823586, z: 0.57078946}
+    m_Target: {x: 0, y: 0, z: 0}
     speed: 2
     m_Value: {x: 1.3329628, y: -0.3533974, z: 1.4290981}
   m_RenderMode: 0
@@ -1747,11 +2179,11 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.21900271, y: -0.100772634, z: 0.022746388, w: 0.9702388}
+    m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
     speed: 2
     m_Value: {x: 0.17748463, y: -0.20297483, z: 0.037439518, w: 0.9622363}
   m_Size:
-    m_Target: 12.02311
+    m_Target: 10
     speed: 2
     m_Value: 3.3144376
   m_Ortho:
@@ -1778,7 +2210,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &26
+--- !u!114 &27
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1877,7 +2309,7 @@ MonoBehaviour:
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
---- !u!114 &27
+--- !u!114 &28
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1899,9 +2331,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 637
-    width: 817
-    height: 362
+    y: 508.80002
+    width: 640.6
+    height: 274.59998
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
