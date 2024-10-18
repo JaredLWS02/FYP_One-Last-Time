@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(GroundCheck2D))]
 
 public class Jump2D : MonoBehaviour
 {
     Rigidbody2D rb;
+    GroundCheck2D ground;
 
     void Awake()
     {
-        rb=GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        ground = GetComponent<GroundCheck2D>();
     }
 
     // ============================================================================
 
-    void OnJump(GameObject jumper, float input)
+    public void OnJump(GameObject jumper, float input)
     {
         if(jumper!=gameObject) return;
 
@@ -40,12 +43,7 @@ public class Jump2D : MonoBehaviour
         TryJump();
     }    
 
-    void FixedUpdate()
-    {
-        CheckFallVelocity();
-    }
-
-    // Jump ============================================================================
+    // ============================================================================
     
     public bool canJump=true;
     public float jumpForce=10;
@@ -100,7 +98,7 @@ public class Jump2D : MonoBehaviour
     void UpdateExtraJumps()
     {
         // Only replenish extra jumps if grounded and jump not cooling
-        if(IsGrounded() && !isJumpCooling)
+        if(ground.IsGrounded() && !isJumpCooling)
         {
             extraJumpsLeft = extraJumps;
         }
@@ -145,7 +143,7 @@ public class Jump2D : MonoBehaviour
         coyoteTimeLeft -= Time.deltaTime;
 
         // Only replenish coyote time if grounded and jump not cooling
-        if(IsGrounded() && !isJumpCooling)
+        if(ground.IsGrounded() && !isJumpCooling)
         {
             coyoteTimeLeft = coyoteTime;
         }
@@ -167,63 +165,5 @@ public class Jump2D : MonoBehaviour
         {
             rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode2D.Impulse);
         }
-    }
-
-    // Falling ============================================================================
-
-    [Header("Falling")]
-    public float minVelocityBeforeFastFall = -.1f;
-    public float fastFallForce=15f;
-    public float maxFallVelocity = -30f;
-
-    void CheckFallVelocity()
-    {
-        // only if going down
-        if(rb.velocity.y>=0) return;
-        
-        if(maxFallVelocity>=0) return;
-
-        if(rb.velocity.y < maxFallVelocity)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, maxFallVelocity);
-            return;
-        }
-        
-        if(rb.velocity.y < minVelocityBeforeFastFall)
-        {
-            rb.AddForce(Vector3.down * fastFallForce);
-        }
-    }
-
-    // Ground Check ============================================================================
-
-    [Header("Ground Check")]
-    public Vector3 boxSize = new(.5f, .05f, .5f);
-    public Vector3 boxCenterOffset = Vector3.zero;
-    public LayerMask groundLayer;
-
-    public bool IsGrounded()
-    {
-        Collider[] colliders = Physics.OverlapBox(transform.position + boxCenterOffset, boxSize, transform.rotation, groundLayer);
-
-        foreach(var coll in colliders)
-        {
-            if(!coll.isTrigger) return true;
-        }
-        return false;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-
-        Vector3 boxCenter = transform.position + boxCenterOffset;
-
-        Gizmos.matrix = Matrix4x4.TRS(boxCenter, transform.rotation, Vector3.one);
-
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
-
-        // Reset the Gizmos matrix to default
-        Gizmos.matrix = Matrix4x4.identity;
     }
 }

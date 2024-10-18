@@ -166,5 +166,4 @@ public class JumpScript : MonoBehaviour
             rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
         }
     }    
-    
 }
