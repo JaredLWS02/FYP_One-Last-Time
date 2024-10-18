@@ -6,17 +6,21 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class LockTransform : MonoBehaviour
 {
-    public bool enableLock=true;
+    public bool enableAllLocks=true;
     public bool fixedUpdate=true;
 
-    [Header("Axis")]
-    public Transform constrainPos;
-    public Vector3 lockPosition;
-    public Vector3 lockRotation;
+    [Header("Position Lock")]
+    public Vector3Int lockPosAxis;
+    public Transform lockPosTo;
+    public Vector3 localPos;
 
-    [Header("Offsets")]
-    public Vector3 positionOffset;
-    public Vector3 rotationOffset;
+    [Header("Rotation Lock")]
+    public Vector3Int lockAngleAxis;
+    public Vector3 lockAngleTo;
+
+    // cant work because only got localScale, not worldScale
+    //public Vector3Int lockScale;
+    //public Vector3 scaleOffset = Vector3.one;
 
 #if UNITY_EDITOR
     void OnEnable()
@@ -47,27 +51,44 @@ public class LockTransform : MonoBehaviour
 
     void Lock()
     {
-        if(!enableLock) return;
+        if(!enableAllLocks) return;
 
-        if(constrainPos)
-        transform.position =  new Vector3
+        if(lockPosTo)
+        transform.position = new
         (
-            lockPosition.x==0 ? transform.position.x : constrainPos.position.x + positionOffset.x,
-            lockPosition.y==0 ? transform.position.y : constrainPos.position.y + positionOffset.y,
-            lockPosition.z==0 ? transform.position.z : constrainPos.position.z + positionOffset.z
+            lockPosAxis.x==0 ? transform.position.x : lockPosTo.position.x + localPos.x,
+            lockPosAxis.y==0 ? transform.position.y : lockPosTo.position.y + localPos.y,
+            lockPosAxis.z==0 ? transform.position.z : lockPosTo.position.z + localPos.z
         );
         
         transform.rotation = Quaternion.Euler
         (
-            lockRotation.x==0 ? transform.eulerAngles.x : 0 + rotationOffset.x,
-            lockRotation.y==0 ? transform.eulerAngles.y : 0 + rotationOffset.y,
-            lockRotation.z==0 ? transform.eulerAngles.z : 0 + rotationOffset.z
+            lockAngleAxis.x==0 ? transform.eulerAngles.x : lockAngleTo.x,
+            lockAngleAxis.y==0 ? transform.eulerAngles.y : lockAngleTo.y,
+            lockAngleAxis.z==0 ? transform.eulerAngles.z : lockAngleTo.z
         );
+        
+        // transform.localScale = new
+        // (
+        //     lockScale.x==0 ? transform.localScale.x : scaleOffset.x,
+        //     lockScale.y==0 ? transform.localScale.y : scaleOffset.y,
+        //     lockScale.z==0 ? transform.localScale.z : scaleOffset.z
+        // );
     }
 
-    [ContextMenu("Record Position Offset")]
-    void RecordPosOffset()
+    [ContextMenu("Record Local Position")]
+    void RecordLocalPos()
     {
-        positionOffset = transform.localPosition;
+        localPos = transform.localPosition;
     }
+    [ContextMenu("Record Current Rotation")]
+    void RecordRCurrentRotation()
+    {
+        lockAngleTo = transform.localRotation.eulerAngles;
+    }
+    // [ContextMenu("Record Scale Offset")]
+    // void RecordScaleOffset()
+    // {
+    //     scaleOffset = transform.localScale;
+    // }
 }
