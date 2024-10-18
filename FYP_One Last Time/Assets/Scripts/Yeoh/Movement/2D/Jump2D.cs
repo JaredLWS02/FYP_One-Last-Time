@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -14,17 +13,6 @@ public class Jump2D : MonoBehaviour
         rb=GetComponent<Rigidbody2D>();
     }
 
-    // ============================================================================
-
-    void OnEnable()
-    {
-        EventManager.Current.JumpEvent += OnJump;
-    }
-    void OnDisable()
-    {
-        EventManager.Current.JumpEvent -= OnJump;
-    }
-    
     // ============================================================================
 
     void OnJump(GameObject jumper, float input)

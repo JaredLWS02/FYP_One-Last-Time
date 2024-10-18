@@ -18,6 +18,22 @@ public class JumpScript : MonoBehaviour
     
     // ============================================================================
 
+    public void OnJump(GameObject jumper, float input)
+    {
+        if(jumper!=gameObject) return;
+
+        if(input>0) //press
+        {
+            JumpBuffer();
+        }
+        else //release
+        {
+            JumpCut();
+        }
+    }
+
+    // ============================================================================
+    
     void Update()
     {
         UpdateExtraJumps();

@@ -90,7 +90,33 @@ public class EventManager : MonoBehaviour
     {
         JumpEvent?.Invoke(jumper, input);
     }    
+
+    public event Action<GameObject, string> TryStartCastEvent;
+    public event Action<GameObject, string> StartCastEvent;
     
+    public void OnTryStartCast(GameObject caster, string ability_name)
+    {
+        TryStartCastEvent?.Invoke(caster, ability_name);
+    }
+    public void OnStartCast(GameObject caster, string ability_name)
+    {
+        StartCastEvent?.Invoke(caster, ability_name);
+    }
+    
+    // Ground ==================================================================================================================
+
+    public event Action<GameObject> LandGroundEvent;
+    public event Action<GameObject> LeaveGroundEvent;
+
+    public void OnLandGround(GameObject who)
+    {
+        LandGroundEvent?.Invoke(who);
+    }
+    public void OnLeaveGround(GameObject who)
+    {
+        LeaveGroundEvent?.Invoke(who);
+    }
+
     // Combat ==================================================================================================================
 
     public event Action<GameObject, GameObject, AttackSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
@@ -126,18 +152,6 @@ public class EventManager : MonoBehaviour
 
 
     // Ability ==================================================================================================================
-    
-    public event Action<GameObject, string> TryStartCastEvent;
-    public event Action<GameObject, string> StartCastEvent;
-    
-    public void OnTryStartCast(GameObject caster, string ability_name)
-    {
-        TryStartCastEvent?.Invoke(caster, ability_name);
-    }
-    public void OnStartCast(GameObject caster, string ability_name)
-    {
-        StartCastEvent?.Invoke(caster, ability_name);
-    }
 
     public event Action<GameObject, AbilitySlot> CastingEvent;
     public event Action<GameObject, AbilitySlot> CastWindUpEvent;

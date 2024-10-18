@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GroundCheck : MonoBehaviour
+public class GroundCheck2D : MonoBehaviour
 {
     public Vector3 boxSize = new(.5f, .05f, .5f);
     public Vector3 boxOffset = Vector3.zero;
 
     public LayerMask groundLayer;
 
-    Collider[] GetOverlap()
+    Collider2D[] GetOverlap()
     {
-        return Physics.OverlapBox(transform.position + boxOffset, boxSize, transform.rotation, groundLayer);
+        return Physics2D.OverlapBoxAll(transform.position + boxOffset, boxSize, transform.eulerAngles.z, groundLayer);
     }
 
     // ============================================================================
 
-    List<Collider> previous_colliders = new();
-    List<Collider> current_colliders = new();
+    List<Collider2D> previous_colliders = new();
+    List<Collider2D> current_colliders = new();
 
     void FixedUpdate()
     {
@@ -29,7 +29,7 @@ public class GroundCheck : MonoBehaviour
     {
         current_colliders.Clear();
 
-        Collider[] colliders = GetOverlap();
+        Collider2D[] colliders = GetOverlap();
 
         // Check OnEnter
         foreach(var coll in colliders)
@@ -62,7 +62,7 @@ public class GroundCheck : MonoBehaviour
 
     // ============================================================================
 
-    void OnBoxEnter(Collider other)
+    void OnBoxEnter(Collider2D other)
     {
         if(previous_colliders.Count==0 && current_colliders.Count > 0)
         {
@@ -72,7 +72,7 @@ public class GroundCheck : MonoBehaviour
         }
     }
     
-    void OnBoxExit(Collider other)
+    void OnBoxExit(Collider2D other)
     {
         if(previous_colliders.Count > 0 && current_colliders.Count==0)
         {
