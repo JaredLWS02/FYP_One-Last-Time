@@ -91,18 +91,12 @@ public class EventManager : MonoBehaviour
         JumpEvent?.Invoke(jumper, input);
     }    
     
-    
     // Combat ==================================================================================================================
 
-    public event Action<GameObject> AttackEvent;
     public event Action<GameObject, GameObject, HurtInfo> HitEvent; // ignores iframe
     public event Action<GameObject, GameObject, HurtInfo> HurtEvent; // respects iframe
     public event Action<GameObject, GameObject, HurtInfo> DeathEvent;
-   
-    public void OnAttack(GameObject attacker)
-    {
-        AttackEvent?.Invoke(attacker);
-    }    
+
     public void OnHit(GameObject attacker, GameObject victim, HurtInfo hurtInfo)
     {
         HitEvent?.Invoke(attacker, victim, hurtInfo);
@@ -116,7 +110,24 @@ public class EventManager : MonoBehaviour
         DeathEvent?.Invoke(victim, killer, hurtInfo);
     }
 
-    
+    // 2D Overloads
+    public event Action<GameObject, GameObject, HurtInfo2D> Hit2DEvent;
+    public event Action<GameObject, GameObject, HurtInfo2D> Hurt2DEvent;
+    public event Action<GameObject, GameObject, HurtInfo2D> Death2DEvent;
+   
+    public void OnHit(GameObject attacker, GameObject victim, HurtInfo2D hurtInfo)
+    {
+        Hit2DEvent?.Invoke(attacker, victim, hurtInfo);
+    }    
+    public void OnHurt(GameObject victim, GameObject attacker, HurtInfo2D hurtInfo)
+    {
+        Hurt2DEvent?.Invoke(victim, attacker, hurtInfo);
+    }
+    public void OnDeath(GameObject victim, GameObject killer, HurtInfo2D hurtInfo)
+    {
+        Death2DEvent?.Invoke(victim, killer, hurtInfo);
+    }
+
     // Item ==================================================================================================================
     
     public event Action<GameObject, GameObject, LootInfo> LootEvent;

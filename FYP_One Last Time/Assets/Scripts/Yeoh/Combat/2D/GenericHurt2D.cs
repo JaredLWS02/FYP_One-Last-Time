@@ -2,31 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(HurtScript))]
+[RequireComponent(typeof(Hurt2D))]
 
-public class GenericHurt : MonoBehaviour
+public class GenericHurt2D : MonoBehaviour
 {
-    HurtScript hurt;
+    Hurt2D hurt;
 
     void Awake()
     {
-        hurt = GetComponent<HurtScript>();
+        hurt = GetComponent<Hurt2D>();
     }
 
     // ============================================================================
 
     void OnEnable()
     {
-        EventManager.Current.HitEvent += OnHit;
+        EventManager.Current.Hit2DEvent += OnHit;
     }
     void OnDisable()
     {
-        EventManager.Current.HitEvent -= OnHit;
+        EventManager.Current.Hit2DEvent -= OnHit;
     }
 
     // ============================================================================
     
-    public void OnHit(GameObject attacker, GameObject victim, HurtInfo hurtInfo)
+    public void OnHit(GameObject attacker, GameObject victim, HurtInfo2D hurtInfo)
     {
         if(victim!=gameObject) return;
 

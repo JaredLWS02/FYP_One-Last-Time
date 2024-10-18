@@ -1,38 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 
-public class Hurt2D : MonoBehaviour
+public class HurtScript : MonoBehaviour
 {
-    Rigidbody2D rb;
+    Rigidbody rb;
 
     void Awake()
     {
-        rb=GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
 
         maxPoise=poise;
-    }
-
-    void Update()
-    {
-        CheckPoiseRegen();
     }
 
     // ============================================================================
 
     public HPManager hp;
 
+    // check block/parry first before hurting
+
     public void Hurt(GameObject attacker, HurtInfo hurtInfo)
     {
         if(iframe) return;
 
-        hurtInfo.victimName = gameObject.name;
-
         EventManager.Current.OnHurt(gameObject, attacker, hurtInfo);
         
-        hp.Hurt(hurtInfo.dmg);
+        hp.Hurt(hurtInfo.damage);
+
+        OnHurt.Invoke();
 
         if(hp.hp>0) // if still alive
         {
@@ -42,7 +40,7 @@ public class Hurt2D : MonoBehaviour
         }
         else
         {
-            Knockback(hurtInfo.kbForce, hurtInfo.contactPoint);
+            Knockback(hurtInfo.knockback, hurtInfo.contactPoint);
             
             Die(attacker, hurtInfo);
         }
@@ -53,35 +51,39 @@ public class Hurt2D : MonoBehaviour
     [Header("iFrame")]
     public bool iframe;
     public float iframeTime=.5f;
-    public bool colorFlicker=true;
 
     public void DoIFraming(float t, float r, float g, float b)
     {
-        if(iFramingRt!=null) StopCoroutine(iFramingRt);
-        iFramingRt = StartCoroutine(IFraming(t, r, g, b));
+        if(iframing_crt!=null) StopCoroutine(iframing_crt);
+        iframing_crt = StartCoroutine(IFraming(t, r, g, b));
     }
 
-    Coroutine iFramingRt;
+    Coroutine iframing_crt;
     
     IEnumerator IFraming(float t, float r, float g, float b)
     {
         iframe=true;
-        if(colorFlicker) ToggleColorFlicker(true, r, g, b);
+
+        if(colorFlicker)
+        ToggleColorFlicker(true, r, g, b);
 
         yield return new WaitForSeconds(t);
 
         iframe=false;
-        if(colorFlicker) ToggleColorFlicker(false);
+        ToggleColorFlicker(false);
+
+        OnIFrameEnd.Invoke();
     }
+
+    public bool colorFlicker=true;
+    public float colorFlickerInterval=.05f;
 
     void ToggleColorFlicker(bool toggle, float r=0, float g=0, float b=0)
     {
         if(colorFlickeringRt!=null) StopCoroutine(colorFlickeringRt);
 
-        if(toggle)
-        {
-            colorFlickeringRt = StartCoroutine(ColorFlickering(r, g, b));
-        }
+        if(toggle) colorFlickeringRt = StartCoroutine(ColorFlickering(r, g, b));
+
         else SpriteManager.Current.RevertColor(gameObject);
     }
 
@@ -92,9 +94,9 @@ public class Hurt2D : MonoBehaviour
         while(true)
         {
             SpriteManager.Current.OffsetColor(gameObject, r, g, b);
-            yield return new WaitForSecondsRealtime(.05f);
+            yield return new WaitForSecondsRealtime(colorFlickerInterval);
             SpriteManager.Current.RevertColor(gameObject);
-            yield return new WaitForSecondsRealtime(.05f);
+            yield return new WaitForSecondsRealtime(colorFlickerInterval);
         }
     }
 
@@ -106,31 +108,37 @@ public class Hurt2D : MonoBehaviour
 
     public void HurtPoise(GameObject attacker, HurtInfo hurtInfo)
     {
-        poise-=hurtInfo.dmg;
+        poise -= hurtInfo.damage;
 
-        lastPoiseDmgTime=Time.time;
+        lastPoiseDmgTime = Time.time;
 
         if(poise<=0)
         {
-            poise=maxPoise;
+            // restart poise
+            poise = maxPoise;
+
+            Knockback(hurtInfo.knockback, hurtInfo.contactPoint);
+
+            OnPoiseBreak.Invoke();
 
             //EventManager.Current.OnStun(gameObject, attacker, hurtInfo);
-
-            Knockback(hurtInfo.kbForce, hurtInfo.contactPoint);
         }
     }
 
     float lastPoiseDmgTime;
     public float poiseRegenDelay=3;
     
+    void Update()
+    {
+        CheckPoiseRegen();
+    }
+
     void CheckPoiseRegen()
     {
         if(Time.time-lastPoiseDmgTime > poiseRegenDelay)
         {
-            if(poise<maxPoise)
-            {
-                poise=maxPoise; // instant fill instead of slowly regen
-            }
+            // instant fill instead of slowly regen
+            poise = maxPoise;
         }
     }
 
@@ -138,21 +146,35 @@ public class Hurt2D : MonoBehaviour
 
     public void Knockback(float force, Vector3 contactPoint)
     {
-        Vector3 kbVector = rb.transform.position - contactPoint;
-        kbVector.z=0; // no z axis in 2D
+        Vector3 kb_dir = (rb.transform.position - contactPoint).normalized;
 
         rb.velocity = Vector3.zero;
-        rb.AddForce(kbVector.normalized * force, ForceMode2D.Impulse);
+        rb.AddForce(kb_dir * force, ForceMode.Impulse);
     }
 
     // ============================================================================
 
+    [Header("Die")]
+    public bool iframeOnDeath=true;
+
     void Die(GameObject killer, HurtInfo hurtInfo)
     {
+        StopAllCoroutines();
+
+        iframe = iframeOnDeath;
+
         SpriteManager.Current.RevertColor(gameObject);
         
-        hurtInfo.victimName = gameObject.name;
+        OnDeath.Invoke();
 
         EventManager.Current.OnDeath(gameObject, killer, hurtInfo);
     }
+
+    // ============================================================================
+
+    [Header("Events")]
+    public UnityEvent OnHurt;
+    public UnityEvent OnPoiseBreak;
+    public UnityEvent OnIFrameEnd;
+    public UnityEvent OnDeath;
 }
