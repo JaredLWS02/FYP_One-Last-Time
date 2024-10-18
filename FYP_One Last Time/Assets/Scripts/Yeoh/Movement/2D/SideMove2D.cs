@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MoveScript))]
+[RequireComponent(typeof(Move2D))]
 
-public class SideMove : MonoBehaviour
+public class SideMove2D : MonoBehaviour
 {
-    MoveScript move;
-    SideTurn turn; // optional
+    Move2D move;
+    SideTurn2D turn; // optional
 
     void Awake()
     {
-        move = GetComponent<MoveScript>();
-        turn = GetComponent<SideTurn>();
+        move = GetComponent<Move2D>();
+        turn = GetComponent<SideTurn2D>();
     }
 
     // ============================================================================

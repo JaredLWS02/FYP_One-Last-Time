@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MoveScript))]
-[RequireComponent(typeof(TurnScript))]
+[RequireComponent(typeof(Move2D))]
+[RequireComponent(typeof(Turn2D))]
 
-public class SteerScript : MonoBehaviour
+public class Steer2D : MonoBehaviour
 {
-    MoveScript move;
-    TurnScript turn;
+    Move2D move;
+    Turn2D turn;
 
     void Awake()
     {
-        move = GetComponent<MoveScript>();
-        turn = GetComponent<TurnScript>();
+        move = GetComponent<Move2D>();
+        turn = GetComponent<Turn2D>();
     }
 
     // ============================================================================

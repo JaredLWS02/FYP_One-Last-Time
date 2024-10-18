@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomTransform3D : MonoBehaviour
+public class RandomTransform : MonoBehaviour
 {
     [Header("Translate")]
     public bool randomTranslateX=false;

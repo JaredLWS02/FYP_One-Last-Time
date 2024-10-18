@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using PrimeTween;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody2D))]
 
-public class MoveScript : MonoBehaviour
+public class Move2D : MonoBehaviour
 {
-    Rigidbody rb;
+    Rigidbody2D rb;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         baseSpeed = clamp = speed;
     }
 
@@ -49,7 +49,7 @@ public class MoveScript : MonoBehaviour
 
     Tween speedTween;
 
-    void TweenSpeed(float to, float time=.25f)
+    public void TweenSpeed(float to, float time=.25f)
     {
         speedTween.Stop();
         speedTween = Tween.Custom(speed, to, time, onValueChange: newVal => speed=newVal, Ease.InOutSine);
@@ -91,7 +91,7 @@ public class MoveScript : MonoBehaviour
     public void Push(Vector3 vector)
     {
         rb.velocity = Vector3.zero;
-        rb.AddForce(vector, ForceMode.Impulse);
+        rb.AddForce(vector, ForceMode2D.Impulse);
     }
 
     // ============================================================================

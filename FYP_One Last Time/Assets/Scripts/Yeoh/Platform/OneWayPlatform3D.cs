@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(PlatformEffector3D))]
@@ -17,27 +16,18 @@ public class OneWayPlatform3D : MonoBehaviour
         effector = GetComponent<PlatformEffector3D>();
     }
 
-    // Event Manager ============================================================================
+    // ============================================================================
 
-    // void OnEnable()
-    // {
-    //     EventManager.Current.MoveYEvent += OnMoveY;
-    // }
-    // void OnDisable()
-    // {
-    //     EventManager.Current.MoveYEvent -= OnMoveY;
-    // }
-
-    public GameObject tempPakYa;
-
-    void OnInputMove(InputValue value)
+    void OnEnable()
     {
-        Vector2 moveInput = value.Get<Vector2>();
-
-        OnMoveY(tempPakYa, moveInput.y);
+        EventManager.Current.MoveYEvent += OnMoveY;
+    }
+    void OnDisable()
+    {
+        EventManager.Current.MoveYEvent -= OnMoveY;
     }
 
-    // Events ============================================================================
+    // ============================================================================
 
     void OnMoveY(GameObject mover, float input_y)
     {
@@ -53,7 +43,7 @@ public class OneWayPlatform3D : MonoBehaviour
         }
     }
 
-    // Collision ============================================================================
+    // ============================================================================
 
     void OnCollisionEnter(Collision other)
     {

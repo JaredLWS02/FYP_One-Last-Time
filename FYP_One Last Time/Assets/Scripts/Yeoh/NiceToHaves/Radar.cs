@@ -2,39 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Radar2D : MonoBehaviour
+public class Radar : MonoBehaviour
 {
+    public float range=5;
+    public LayerMask layers;
+    public List<GameObject> targets = new();
+
     void Update()
     {
         RemoveNulls(targets);
         Scan();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public float range=5;
-    public LayerMask layers;
-
-    public List<GameObject> targets = new();
-    public GameObject closest;
-
     public void Scan()
     {
         targets.Clear();
 
-        Collider2D[] others = Physics2D.OverlapCircleAll(transform.position, range, layers);
+        Collider[] others = Physics.OverlapSphere(transform.position, range, layers);
         
-        foreach(Collider2D other in others)
+        foreach(var other in others)
         {
-            if(other.attachedRigidbody) //if collider has rigidbody
-            {
-                targets.Add(other.attachedRigidbody.gameObject);
-            }
-            //else targets.Add(other.gameObject); 
-        }
+            if(other.isTrigger) continue;
+            Rigidbody rb = other.attachedRigidbody;
+            if(!rb) continue;
 
-        closest = GetClosest(targets);
+            targets.Add(rb.gameObject);
+        }
     }
+
+    // ============================================================================
 
     public GameObject GetClosest(List<GameObject> objects)
     {
@@ -43,7 +39,7 @@ public class Radar2D : MonoBehaviour
         GameObject closest = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach(GameObject obj in objects) // go through all detected colliders
+        foreach(var obj in objects) // go through all detected colliders
         {
             float distance = Vector3.Distance(obj.transform.position, transform.position);
 
@@ -53,7 +49,6 @@ public class Radar2D : MonoBehaviour
                 closest = obj;
             }
         }
-
         return closest;
     }
 
@@ -61,27 +56,40 @@ public class Radar2D : MonoBehaviour
     {
         List<GameObject> matches = new();
 
-        foreach(GameObject target in targets)
+        foreach(var target in targets)
         {
             if(target && target.tag==tag)
             {
                 matches.Add(target);
             }
         }
-
         return matches;
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public GameObject GetClosestTargetWithTag(string tag)
+    {
+        List<GameObject> targets = GetTargetsWithTag(tag);
+        return GetClosest(targets);
+    }
+
+    // ============================================================================
 
     void RemoveNulls(List<GameObject> list)
     {
         list.RemoveAll(item => item == null);
     }
 
+    // ============================================================================
+
+    [Header("Debug")]
+    public bool showGizmos = true;
+    public Color gizmoColor = new(0, 1, 1, .5f);
+
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(0, 1, 1, .5f);
+        if(!showGizmos) return;
+        
+        Gizmos.color = gizmoColor;
         Gizmos.DrawWireSphere(transform.position, range);
     }
 }

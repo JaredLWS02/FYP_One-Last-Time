@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OneWayPlatform : MonoBehaviour
+[RequireComponent(typeof(Collider2D))]
+
+public class OneWayPlatform2D : MonoBehaviour
 {
     Collider2D coll;
 
     void Awake()
     {
-        coll=GetComponent<Collider2D>();
+        coll = GetComponent<Collider2D>();
     }
 
-    // Event Manager ============================================================================
+    // ============================================================================
 
     void OnEnable()
     {
@@ -22,7 +24,7 @@ public class OneWayPlatform : MonoBehaviour
         EventManager.Current.MoveYEvent -= OnMoveY;
     }
 
-    // Events ============================================================================
+    // ============================================================================
 
     void OnMoveY(GameObject mover, float input_y)
     {
