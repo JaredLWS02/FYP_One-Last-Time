@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(DropTable))]
+[RequireComponent(typeof(HurtScript))]
 
 public class DeathDrop : MonoBehaviour
 {
@@ -10,26 +11,27 @@ public class DeathDrop : MonoBehaviour
 
     void Awake()
     {
-        table=GetComponent<DropTable>();
+        table = GetComponent<DropTable>();
     }
 
-    // Event Manager ============================================================================
+    // ============================================================================
     
     void OnEnable()
     {
-        EventManager.Current.Death2DEvent += OnDeath;
+        EventManager.Current.DeathEvent += OnDeath;
     }
     void OnDisable()
     {
-        EventManager.Current.Death2DEvent -= OnDeath;
+        EventManager.Current.DeathEvent -= OnDeath;
     }
     
-    void OnDeath(GameObject victim, GameObject killer, HurtInfo2D hurtInfo)
+    // ============================================================================
+
+    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 
         table.Drop();
     }
 
-    // ============================================================================
 }
