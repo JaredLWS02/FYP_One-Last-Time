@@ -1,37 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(GroundCheck))]
 
 public class JumpScript : MonoBehaviour
 {
     Rigidbody rb;
+    GroundCheck ground;
 
     void Awake()
     {
-        rb=GetComponent<Rigidbody>();
-    }
-
-    // Input ============================================================================
-    
-    void OnInputJump(InputValue value)
-    {
-        float input = value.Get<float>();
-
-        if(input>0) //press
-        {
-            JumpBuffer();
-        }
-        else //release
-        {
-            JumpCut();
-        }
+        rb = GetComponent<Rigidbody>();
+        ground = GetComponent<GroundCheck>();
     }
     
-    // Updates ============================================================================
+    // ============================================================================
 
     void Update()
     {
@@ -42,12 +27,7 @@ public class JumpScript : MonoBehaviour
         TryJump();
     }    
 
-    void FixedUpdate()
-    {
-        CheckFallVelocity();
-    }
-
-    // Jump ============================================================================
+    // ============================================================================
     
     public bool canJump=true;
     public float jumpForce=10;
@@ -102,7 +82,7 @@ public class JumpScript : MonoBehaviour
     void UpdateExtraJumps()
     {
         // Only replenish extra jumps if grounded and jump not cooling
-        if(IsGrounded() && !isJumpCooling)
+        if(ground.IsGrounded() && !isJumpCooling)
         {
             extraJumpsLeft = extraJumps;
         }
@@ -147,7 +127,7 @@ public class JumpScript : MonoBehaviour
         coyoteTimeLeft -= Time.deltaTime;
 
         // Only replenish coyote time if grounded and jump not cooling
-        if(IsGrounded() && !isJumpCooling)
+        if(ground.IsGrounded() && !isJumpCooling)
         {
             coyoteTimeLeft = coyoteTime;
         }
@@ -169,63 +149,6 @@ public class JumpScript : MonoBehaviour
         {
             rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
         }
-    }
-
-    // Falling ============================================================================
-
-    [Header("Falling")]
-    public float minVelocityBeforeFastFall = -.1f;
-    public float fastFallForce=15f;
-    public float maxFallVelocity = -30f;
-
-    void CheckFallVelocity()
-    {
-        // only if going down
-        if(rb.velocity.y>=0) return;
-        
-        if(maxFallVelocity>=0) return;
-
-        if(rb.velocity.y < maxFallVelocity)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, maxFallVelocity, rb.velocity.z);
-            return;
-        }
-        
-        if(rb.velocity.y < minVelocityBeforeFastFall)
-        {
-            rb.AddForce(Vector3.down * fastFallForce);
-        }
-    }
-
-    // Ground Check ============================================================================
-
-    [Header("Ground Check")]
-    public Vector3 boxSize = new(.5f, .05f, .5f);
-    public Vector3 boxCenterOffset = Vector3.zero;
-    public LayerMask groundLayer;
-
-    public bool IsGrounded()
-    {
-        Collider[] colliders = Physics.OverlapBox(transform.position + boxCenterOffset, boxSize, transform.rotation, groundLayer);
-
-        foreach(var coll in colliders)
-        {
-            if(!coll.isTrigger) return true;
-        }
-        return false;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-
-        Vector3 boxCenter = transform.position + boxCenterOffset;
-
-        Gizmos.matrix = Matrix4x4.TRS(boxCenter, transform.rotation, Vector3.one);
-
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
-
-        // Reset the Gizmos matrix to default
-        Gizmos.matrix = Matrix4x4.identity;
-    }
+    }    
+    
 }
