@@ -226,7 +226,8 @@ public class CameraManager : MonoBehaviour
     public void TweenFOV(float to, float time)
     {
         fovTween.Stop();
-        fovTween = Tween.Custom(currentCamera.m_Lens.FieldOfView, to, time, onValueChange: newVal => currentCamera.m_Lens.FieldOfView=newVal, Ease.InOutSine);
+        if(time>0) fovTween = Tween.Custom(currentCamera.m_Lens.FieldOfView, to, time, onValueChange: newVal => currentCamera.m_Lens.FieldOfView=newVal, Ease.InOutSine);
+        else currentCamera.m_Lens.FieldOfView = to;
 
         // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
         // else Invoke("EnableCamPanSfx", 1);
@@ -242,7 +243,8 @@ public class CameraManager : MonoBehaviour
     public void TweenOrthoSize(float to, float time)
     {
         orthoTween.Stop();
-        orthoTween = Tween.Custom(currentCamera.m_Lens.OrthographicSize, to, time, onValueChange: newVal => currentCamera.m_Lens.OrthographicSize=newVal, Ease.InOutSine);
+        if(time>0) orthoTween = Tween.Custom(currentCamera.m_Lens.OrthographicSize, to, time, onValueChange: newVal => currentCamera.m_Lens.OrthographicSize=newVal, Ease.InOutSine);
+        else currentCamera.m_Lens.OrthographicSize = to;
 
         // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
         // else Invoke("EnableCamPanSfx", 1);
@@ -260,7 +262,8 @@ public class CameraManager : MonoBehaviour
     public void TweenDutch(float angle, float time)
     {
         dutchTween.Stop();
-        dutchTween = Tween.Custom(currentCamera.m_Lens.Dutch, angle, time, onValueChange: newVal => currentCamera.m_Lens.Dutch=newVal, Ease.InOutSine);
+        if(time>0) dutchTween = Tween.Custom(currentCamera.m_Lens.Dutch, angle, time, onValueChange: newVal => currentCamera.m_Lens.Dutch=newVal, Ease.InOutSine);
+        else currentCamera.m_Lens.Dutch = angle;
     }
 
     public void ValveDutch(float angle=10, float tweenIn=.1f, float tweenOut=.5f)
@@ -285,6 +288,8 @@ public class CameraManager : MonoBehaviour
 
     public void CancelValveDutch()
     {
+        if(!currentCamera) return;
+
         if(valveDutching_crt!=null) StopCoroutine(valveDutching_crt);
         dutchTween.Stop();
         currentCamera.m_Lens.Dutch=0;

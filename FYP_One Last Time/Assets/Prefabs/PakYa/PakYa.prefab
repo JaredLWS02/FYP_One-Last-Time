@@ -246,8 +246,8 @@ GameObject:
   - component: {fileID: 3611210669050738406}
   - component: {fileID: 5012553719974128323}
   - component: {fileID: 4368493988338249805}
-  - component: {fileID: 1353104093430078228}
   - component: {fileID: 2535672027372677568}
+  - component: {fileID: 1353104093430078228}
   - component: {fileID: 8003095357430364833}
   - component: {fileID: 6639294003576150908}
   - component: {fileID: 9071989056172940844}
@@ -452,6 +452,25 @@ MonoBehaviour:
   faceR: 1
   reverse: 0
   sprite: {fileID: 4466723156777370603}
+--- !u!114 &2535672027372677568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a4314937b99f24d9b0358b4b6c7222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canJump: 1
+  jumpForce: 15
+  jumpCooldown: 0.2
+  extraJumps: 1
+  jumpBufferTime: 0.2
+  coyoteTime: 0.2
+  jumpCutMult: 0.5
 --- !u!114 &1353104093430078228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,25 +496,6 @@ MonoBehaviour:
   OnLeaveGround:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2535672027372677568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64a4314937b99f24d9b0358b4b6c7222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canJump: 1
-  jumpForce: 15
-  jumpCooldown: 0.2
-  extraJumps: 1
-  jumpBufferTime: 0.2
-  coyoteTime: 0.2
-  jumpCutMult: 0.5
 --- !u!114 &8003095357430364833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,12 +570,12 @@ PrefabInstance:
     - target: {fileID: 3321281332539638724, guid: 3be13b654dc63584d88befb44e243220,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3321281332539638724, guid: 3be13b654dc63584d88befb44e243220,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4413041802059224417, guid: 3be13b654dc63584d88befb44e243220,
         type: 3}

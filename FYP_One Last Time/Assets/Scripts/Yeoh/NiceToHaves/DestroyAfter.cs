@@ -47,7 +47,8 @@ public class DestroyAfter : MonoBehaviour
         
         foreach(GameObject obj in objectsToShrink)
         {
-            Tween.Scale(obj.transform, to, time, Ease.InOutSine, startDelay: delay, useUnscaledTime: ignoreTime);
+            if(time>0) Tween.Scale(obj.transform, to, time, Ease.InOutSine, startDelay: delay, useUnscaledTime: ignoreTime);
+            else obj.transform.localScale = to;
         }
     }
 

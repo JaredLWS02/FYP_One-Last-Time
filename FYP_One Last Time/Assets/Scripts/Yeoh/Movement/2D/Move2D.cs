@@ -52,7 +52,8 @@ public class Move2D : MonoBehaviour
     public void TweenSpeed(float to, float time=.25f)
     {
         speedTween.Stop();
-        speedTween = Tween.Custom(speed, to, time, onValueChange: newVal => speed=newVal, Ease.InOutSine);
+        if(time>0) speedTween = Tween.Custom(speed, to, time, onValueChange: newVal => speed=newVal, Ease.InOutSine);
+        else speed = to;
     }
 
     Tween clampTween;
@@ -60,7 +61,8 @@ public class Move2D : MonoBehaviour
     void TweenClamp(float to, float time=.25f)
     {
         clampTween.Stop();
-        clampTween = Tween.Custom(clamp, to, time, onValueChange: newVal => clamp=newVal, Ease.InOutSine);
+        if(time>0) clampTween = Tween.Custom(clamp, to, time, onValueChange: newVal => clamp=newVal, Ease.InOutSine);
+        else clamp = to;
     }
 
     // ============================================================================

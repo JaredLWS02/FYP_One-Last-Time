@@ -8,8 +8,9 @@ using UnityEngine;
 //[RequireComponent(typeof(AISideSeek))]
 //[RequireComponent(typeof(AISidePathseeker))]
 //[RequireComponent(typeof(AISideWander))]
-[RequireComponent(typeof(Jump2D))]
-[RequireComponent(typeof(Radar2D))]
+[RequireComponent(typeof(JumpScript))]
+[RequireComponent(typeof(GroundCheck))]
+[RequireComponent(typeof(Radar))]
 
 public class EnemyAI : MonoBehaviour
 {
@@ -20,8 +21,9 @@ public class EnemyAI : MonoBehaviour
     //AISideSeek seek;
     //AISidePathseeker pathseeker;
     //AISideWander wander;
-    Radar2D radar;
-    Jump2D jump;
+    JumpScript jump;
+    GroundCheck ground;
+    Radar radar;
 
     void Awake()
     {
@@ -31,8 +33,9 @@ public class EnemyAI : MonoBehaviour
         // seek = GetComponent<AISideSeek>();
         // pathseeker = GetComponent<AISidePathseeker>();
         // wander = GetComponent<AISideWander>();
-        radar = GetComponent<Radar2D>();
-        jump = GetComponent<Jump2D>();
+        jump = GetComponent<JumpScript>();
+        ground = GetComponent<GroundCheck>();
+        radar = GetComponent<Radar>();
     }
 
     void Start()
@@ -97,7 +100,7 @@ public class EnemyAI : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return jump.IsGrounded();
+        return ground.IsGrounded();
     }
 
     // ============================================================================

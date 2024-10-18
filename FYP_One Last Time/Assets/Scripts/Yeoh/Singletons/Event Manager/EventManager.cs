@@ -32,7 +32,6 @@ public class EventManager : MonoBehaviour
         if(Current!=this) Destroy(gameObject);
     }
     
-
     // Actors ==================================================================================================================
 
     public event Action<GameObject> SpawnEvent;
@@ -42,7 +41,6 @@ public class EventManager : MonoBehaviour
         SpawnEvent?.Invoke(spawned);
     }
 
-
     // Control ==================================================================================================================
 
     public event Action<GameObject, Pilot.Type> SwitchPilotEvent;
@@ -51,7 +49,6 @@ public class EventManager : MonoBehaviour
     {
         SwitchPilotEvent?.Invoke(who, to);
     }   
-
 
     // Actions ==================================================================================================================
 
@@ -150,7 +147,6 @@ public class EventManager : MonoBehaviour
         LootEvent?.Invoke(looter, loot, lootInfo);
     }
 
-
     // Ability ==================================================================================================================
 
     public event Action<GameObject, AbilitySlot> CastingEvent;
@@ -180,16 +176,14 @@ public class EventManager : MonoBehaviour
         CastCancelEvent?.Invoke(caster);
     }
 
-
     // UI ==================================================================================================================
 
     public event Action<GameObject, float, float> UIBarUpdateEvent;
 
-    public void OnUIBarUpdate(GameObject owner, float value, float valueMax)
+    public void OnUIBarUpdate(GameObject owner, float value, float maxValue)
     {
-        UIBarUpdateEvent?.Invoke(owner, value, valueMax);
+        UIBarUpdateEvent?.Invoke(owner, value, maxValue);
     }
-
 
     // Mouse/Touch ==================================================================================================================
 
@@ -212,7 +206,6 @@ public class EventManager : MonoBehaviour
         ClickObjectEvent?.Invoke(clicked);
     }
     
-
     // Sound ==================================================================================================================
 
     public event Action<GameObject> IdleVoiceEvent;
@@ -222,7 +215,6 @@ public class EventManager : MonoBehaviour
         IdleVoiceEvent?.Invoke(subject);
     }
 
-    
     // Old ==================================================================================================================
 
     public event Action<GameObject> TrySwitchEvent;

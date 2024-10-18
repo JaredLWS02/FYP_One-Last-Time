@@ -428,7 +428,8 @@ public class VFXManager : MonoBehaviour
     {
         Vector3 defscale = obj.transform.localScale;
         obj.transform.localScale=Vector3.zero;
-        Tween.Scale(obj.transform, defscale, time, Ease.InOutSine);
+        if(time>0) Tween.Scale(obj.transform, defscale, time, Ease.InOutSine);
+        else obj.transform.localScale = defscale;
     }
 
     float Round(float num, int decimalPlaces=0)

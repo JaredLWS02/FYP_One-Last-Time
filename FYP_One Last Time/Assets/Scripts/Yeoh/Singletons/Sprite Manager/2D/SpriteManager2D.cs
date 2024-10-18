@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpriteManager : MonoBehaviour
+public class SpriteManager2D : MonoBehaviour
 {
-    public static SpriteManager Current;
+    public static SpriteManager2D Current;
 
     void Awake()
     {
@@ -127,18 +127,18 @@ public class SpriteManager : MonoBehaviour
     // COLLIDER BOUNDS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<Collider> GetColliders(GameObject target)
+    public List<Collider2D> GetColliders(GameObject target)
     {
-        List<Collider> colliders = new();
+        List<Collider2D> colliders = new();
 
-        Collider[] colls = target.GetComponents<Collider>();
-        Collider[] childColls = target.GetComponentsInChildren<Collider>();
+        Collider2D[] colls = target.GetComponents<Collider2D>();
+        Collider2D[] childColls = target.GetComponentsInChildren<Collider2D>();
 
-        foreach(Collider coll in colls)
+        foreach(Collider2D coll in colls)
         {
             if(!coll.isTrigger) colliders.Add(coll);
         }
-        foreach(Collider coll in childColls)
+        foreach(Collider2D coll in childColls)
         {
             if(!coll.isTrigger) colliders.Add(coll);
         }
@@ -148,7 +148,7 @@ public class SpriteManager : MonoBehaviour
 
     public Vector3 GetColliderTop(GameObject target)
     {
-        List<Collider> colliders = GetColliders(target);
+        List<Collider2D> colliders = GetColliders(target);
         
         if(colliders.Count==0)
         {
@@ -158,7 +158,7 @@ public class SpriteManager : MonoBehaviour
 
         float highestPoint = float.MinValue;
 
-        foreach(Collider coll in colliders)
+        foreach(Collider2D coll in colliders)
         {
             Vector3 topPoint = coll.bounds.max;
 
@@ -170,12 +170,12 @@ public class SpriteManager : MonoBehaviour
 
     public Vector3 GetColliderCenter(GameObject target)
     {
-        List<Collider> colliders = GetColliders(target);
+        List<Collider2D> colliders = GetColliders(target);
 
         Vector3 center = Vector3.zero;
 
         // Calculate the average position of all colliders' centers
-        foreach(Collider col in colliders)
+        foreach(Collider2D col in colliders)
         {
             center += col.bounds.center;
         }

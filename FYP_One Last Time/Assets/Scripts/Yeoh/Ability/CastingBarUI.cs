@@ -6,75 +6,60 @@ using UnityEngine;
 public class CastingBarUI : MonoBehaviour
 {
     public GameObject owner;
-    public GameObject barUI;
+    public UIBarTween tween;
+
+    public bool enableBarOnAwake = true;
 
     void Awake()
     {
-        barUI.SetActive(false);
+        if(enableBarOnAwake)
+        tween.gameObject.SetActive(true);
     }
 
-    // Event Manager ============================================================================
+    // ============================================================================
 
     void OnEnable()
     {
         EventManager.Current.CastingEvent += OnCasting;
         EventManager.Current.CastCancelEvent += OnCastCancel;
-        EventManager.Current.CastWindUpEvent += OnCastingWindUp;
+
+        ResetBar(0);
     }
     void OnDisable()
     {
         EventManager.Current.CastingEvent -= OnCasting;
         EventManager.Current.CastCancelEvent -= OnCastCancel;
-        EventManager.Current.CastWindUpEvent -= OnCastingWindUp;
 
-        progressTween.Stop();
-        progress=0;
+        ResetBar(0);
     }
 
-    // Events ============================================================================
+    // ============================================================================
 
-    void OnCasting(GameObject caster, AbilitySlot ability)
+    void OnCasting(GameObject caster, AbilitySlot slot)
     {
         if(caster!=owner) return;
 
-        progress=0;
-        barUI.SetActive(true);
-        TweenProgress(1, ability.ability.castingTime);
+        ResetBar(0);
+        FillBar(slot.ability.castingTime);
     }
 
     void OnCastCancel(GameObject caster)
     {
         if(caster!=owner) return;
 
-        progress=0;
-        barUI.SetActive(false);
-    }
-
-    void OnCastingWindUp(GameObject caster, AbilitySlot ability)
-    {
-        if(caster!=owner) return;
-
-        progress=0;
-        barUI.SetActive(false);
-    }
-
-    // ============================================================================
-
-    Tween progressTween;
-
-    public void TweenProgress(float to, float time)
-    {
-        progressTween.Stop();
-        progressTween = Tween.Custom(progress, to, time, onValueChange: newVal => progress=newVal, Ease.InOutSine, useUnscaledTime: true);
-    }
-
-    // ============================================================================
-
-    float progress;
-
-    void Update()
-    {
-        EventManager.Current.OnUIBarUpdate(gameObject, progress, 1);
+        ResetBar(.1f);
     }
     
+    // ============================================================================
+
+    void ResetBar(float time)
+    {
+        tween.tweenTime = time;
+        EventManager.Current.OnUIBarUpdate(gameObject, 0, 1);
+    }
+    void FillBar(float time)
+    {
+        tween.tweenTime = time;
+        EventManager.Current.OnUIBarUpdate(gameObject, 1, 1);
+    }
 }

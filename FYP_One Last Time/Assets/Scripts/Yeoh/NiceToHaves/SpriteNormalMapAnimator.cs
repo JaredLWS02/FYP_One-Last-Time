@@ -11,7 +11,7 @@ public class SpriteNormalMapAnimator : MonoBehaviour
 
     void Awake()
     {
-        sr=GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // ============================================================================
@@ -73,78 +73,54 @@ public class SpriteNormalMapAnimator : MonoBehaviour
         }
     }
 
+    // ============================================================================
+
     void UpdateNormal()
     {
         if(!normalSprite) return;
 
-        Texture2D normal_tex = ConvertSpriteToTexture2D(normalSprite);
+        Texture2D normal_tex = ConvertSpriteToTexture(normalSprite);
 
-        // Destroy the previous texture to prevent memory leaks
-        TryCleanUp(currentNormalTex);
-
-        currentNormalTex = normal_tex;
-
-        SetNormalTex(currentNormalTex);
+        SetNormalTex(normal_tex);
     }
+
 
     void SetNormalTex(Texture2D normal_tex)
     {
         // create material instances only in play mode
         // cant do that in edit mode because "memory leak"
-
         if(Application.isPlaying)
-        {
             sr.material.SetTexture("_MainNormal", normal_tex);
-        }
         else
-        {
             sr.sharedMaterial.SetTexture("_MainNormal", normal_tex);
-        }
     }
 
     // ============================================================================
 
-    Texture2D ConvertSpriteToTexture2D(Sprite sprite)
+    Texture2D ConvertSpriteToTexture(Sprite sprite)
     {
-        // Create a new Texture2D with the same dimensions as the sprite's rect
-        Texture2D texture = new((int)sprite.rect.width, (int)sprite.rect.height, TextureFormat.RGBA32, false);
-
-        // Get the pixels from the sprite's texture
-        Color[] pixels = sprite.texture.GetPixels(
-            (int)sprite.textureRect.x,
-            (int)sprite.textureRect.y,
-            (int)sprite.textureRect.width,
-            (int)sprite.textureRect.height);
-
-        // Set the pixels to the new texture
-        texture.SetPixels(pixels);
-        texture.Apply(); // Apply changes to the texture
-
-        return texture;
-    }
-
-    // ============================================================================
-
-    // Store the current normal texture
-    Texture2D currentNormalTex; 
-
-    // Cleanup on destroy
-    void OnDestroy()
-    {
-        TryCleanUp(currentNormalTex);
-    }
-
-    void TryCleanUp(Texture2D tex)
-    {
-        if(!tex) return;
-
-        if(Application.isEditor)
+        try
         {
-            DestroyImmediate(tex); // Use DestroyImmediate in edit mode
-        }
-        else
+            if (sprite.rect.width != sprite.texture.width)
+            {
+                Texture2D newText = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
+                Color[] colors = newText.GetPixels();
+                Color[] newColors = sprite.texture.GetPixels((int)System.Math.Ceiling(sprite.textureRect.x),
+                                                                (int)System.Math.Ceiling(sprite.textureRect.y),
+                                                                (int)System.Math.Ceiling(sprite.textureRect.width),
+                                                                (int)System.Math.Ceiling(sprite.textureRect.height));
+                Debug.Log(colors.Length+"_"+ newColors.Length);
+                newText.SetPixels(newColors);
+                newText.Apply();
+                return newText;
+            }
+            else
+                return sprite.texture;
+        }catch
         {
-            Destroy(tex); // Use Destroy in play mode
+            return sprite.texture;
         }
     }
+
+    // https://discussions.unity.com/t/convert-sprite-image-to-texture/97618/6
 }

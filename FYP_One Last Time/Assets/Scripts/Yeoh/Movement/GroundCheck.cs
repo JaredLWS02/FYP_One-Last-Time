@@ -68,7 +68,6 @@ public class GroundCheck : MonoBehaviour
         {
             EventManager.Current.OnLandGround(gameObject);
             OnLandGround.Invoke();
-            Debug.Log("Landed");
         }
     }
     
@@ -78,7 +77,6 @@ public class GroundCheck : MonoBehaviour
         {
             EventManager.Current.OnLeaveGround(gameObject);
             OnLeaveGround.Invoke();
-            Debug.Log("LeaveGround");
         }
     }
 

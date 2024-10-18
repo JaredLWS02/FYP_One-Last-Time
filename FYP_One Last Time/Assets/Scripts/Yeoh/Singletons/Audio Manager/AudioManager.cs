@@ -57,7 +57,8 @@ public class AudioManager : MonoBehaviour
             volumeTweens[source].Stop();
         }
         
-        volumeTweens[source] = Tween.AudioVolume(source, to, time, Ease.InOutSine, useUnscaledTime: true);
+        if(time>0) volumeTweens[source] = Tween.AudioVolume(source, to, time, Ease.InOutSine, useUnscaledTime: true);
+        else source.volume = to;
     }
 
     // ==================================================================================================================

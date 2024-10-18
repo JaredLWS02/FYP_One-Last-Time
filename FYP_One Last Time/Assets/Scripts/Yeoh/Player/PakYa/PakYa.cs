@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(Pilot))]
 
-[RequireComponent(typeof(Jump2D))]
+[RequireComponent(typeof(SideMove))]
+[RequireComponent(typeof(JumpScript))]
+[RequireComponent(typeof(GroundCheck))]
 [RequireComponent(typeof(AbilityCaster))]
 
 public class PakYa : MonoBehaviour
@@ -14,14 +16,18 @@ public class PakYa : MonoBehaviour
     [HideInInspector]
     public Pilot pilot;
 
-    Jump2D jump;
+    SideMove move;
+    JumpScript jump;
+    GroundCheck ground;
     AbilityCaster caster;
 
     void Awake()
     {
         pilot = GetComponent<Pilot>();
 
-        jump = GetComponent<Jump2D>();
+        move = GetComponent<SideMove>();
+        jump = GetComponent<JumpScript>();
+        ground = GetComponent<GroundCheck>();
         caster = GetComponent<AbilityCaster>();
     }
 
@@ -30,7 +36,34 @@ public class PakYa : MonoBehaviour
         EventManager.Current.OnSpawn(gameObject);
     }
 
-    // Actions ============================================================================
+    // ============================================================================
+
+    void OnEnable()
+    {
+        EventManager.Current.TryMoveXEvent += OnTryMoveX;
+        EventManager.Current.MoveXEvent += OnMoveX;
+        EventManager.Current.TryMoveYEvent += OnTryMoveY;
+        EventManager.Current.MoveYEvent += OnMoveY;
+        EventManager.Current.TryJumpEvent += OnTryJump;
+        EventManager.Current.JumpEvent += OnJump;
+        EventManager.Current.TryStartCastEvent += OnTryStartCast;
+
+        PlayerManager.Current.Register(gameObject);
+    }
+    void OnDisable()
+    {
+        EventManager.Current.TryMoveXEvent -= OnTryMoveX;
+        EventManager.Current.MoveXEvent -= OnMoveX;
+        EventManager.Current.TryMoveYEvent -= OnTryMoveY;
+        EventManager.Current.MoveYEvent -= OnMoveY;
+        EventManager.Current.TryJumpEvent -= OnTryJump;
+        EventManager.Current.JumpEvent -= OnJump;
+        EventManager.Current.TryStartCastEvent -= OnTryStartCast;
+
+        PlayerManager.Current.Unregister(gameObject);
+    }
+
+    // ============================================================================
 
     [Header("Hold Toggles")]
     public bool AllowMoveX;
@@ -41,28 +74,7 @@ public class PakYa : MonoBehaviour
     public bool AllowDash;
     public bool AllowCast;
 
-    // Event Manager ============================================================================
-
-    void OnEnable()
-    {
-        EventManager.Current.TryMoveXEvent += OnTryMoveX;
-        EventManager.Current.TryMoveYEvent += OnTryMoveY;
-        EventManager.Current.TryJumpEvent += OnTryJump;
-        EventManager.Current.TryStartCastEvent += OnTryStartCast;
-
-        PlayerManager.Current.Register(gameObject);
-    }
-    void OnDisable()
-    {
-        EventManager.Current.TryMoveXEvent -= OnTryMoveX;
-        EventManager.Current.TryMoveYEvent -= OnTryMoveY;
-        EventManager.Current.TryJumpEvent -= OnTryJump;
-        EventManager.Current.TryStartCastEvent -= OnTryStartCast;
-
-        PlayerManager.Current.Unregister(gameObject);
-    }
-
-    // Move ============================================================================
+    // ============================================================================
 
     Vector2 moveInput;
 
@@ -97,6 +109,13 @@ public class PakYa : MonoBehaviour
         EventManager.Current.OnMoveX(gameObject, input_x);
     }
 
+    void OnMoveX(GameObject mover, float input_x)
+    {
+        if(mover!=gameObject) return;
+
+        move.OnMoveX(gameObject, input_x);
+    }
+
     void OnTryMoveY(GameObject mover, float input_y)
     {
         if(mover!=gameObject) return;
@@ -106,7 +125,14 @@ public class PakYa : MonoBehaviour
         EventManager.Current.OnMoveY(gameObject, input_y);
     }
 
-    // Jump ============================================================================
+    void OnMoveY(GameObject mover, float input_y)
+    {
+        if(mover!=gameObject) return;
+
+        //climb.OnMoveY(gameObject, input_y);
+    }
+
+    // ============================================================================
     
     void OnInputJump(InputValue value)
     {
@@ -126,7 +152,14 @@ public class PakYa : MonoBehaviour
         EventManager.Current.OnJump(gameObject, input);
     }
 
-    // Cast ============================================================================
+    void OnJump(GameObject jumper, float input)
+    {
+        if(jumper!=gameObject) return;
+
+        jump.OnJump(gameObject, input);
+    }
+
+    // ============================================================================
 
     void OnInputHeal()
     {
@@ -148,7 +181,7 @@ public class PakYa : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return jump.IsGrounded();
+        return ground.IsGrounded();
     }    
 
     public bool IsDashing()
@@ -161,18 +194,5 @@ public class PakYa : MonoBehaviour
         return caster.isCasting;
     }    
     
-    // ============================================================================
 
-
-
-
-
-    //  Old ============================================================================
-
-    void OnInputSwitch()
-    {
-        if(!pilot.IsPlayer()) return;
-
-        EventManager.Current.OnTrySwitch(gameObject);
-    }
 }

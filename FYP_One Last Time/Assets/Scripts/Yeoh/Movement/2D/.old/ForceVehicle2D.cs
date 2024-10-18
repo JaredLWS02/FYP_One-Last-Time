@@ -76,7 +76,8 @@ public class ForceVehicle2D : MonoBehaviour
     public void TweenSpeed(float to, float time=.25f)
     {
         speedTween.Stop();
-        speedTween = Tween.Custom(maxSpeed, to, time, onValueChange: newVal => maxSpeed=newVal, Ease.InOutSine);
+        if(time>0) speedTween = Tween.Custom(maxSpeed, to, time, onValueChange: newVal => maxSpeed=newVal, Ease.InOutSine);
+        else maxSpeed = to;
     }
 
     public void Push(float force, Vector3 direction)

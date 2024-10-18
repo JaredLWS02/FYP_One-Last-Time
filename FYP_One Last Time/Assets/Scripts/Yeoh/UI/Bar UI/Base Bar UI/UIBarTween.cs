@@ -12,7 +12,7 @@ public class UIBarTween : MonoBehaviour
 
     void Awake()
     {
-        hider=GetComponent<UIBarHider>();
+        hider = GetComponent<UIBarHider>();
     }
 
     // Event Manager ============================================================================
@@ -33,21 +33,20 @@ public class UIBarTween : MonoBehaviour
     public GameObject owner;
 
     public float tweenTime=.2f;
+    public bool ignoreTime=true;
+
     Tween barTween;
 
-    void OnUIBarUpdate(GameObject who, float value, float valueMax)
+    void OnUIBarUpdate(GameObject who, float value, float maxValue)
     {
         if(!who || who!=owner) return;
 
-        if(valueMax==0) { Debug.LogError($"{gameObject.name}: valueMax can't be 0!!!"); return; }
+        if(maxValue==0) { Debug.LogError($"{gameObject.name}: maxValue can't be 0!!!"); return; }
 
-        float value01 = Mathf.Clamp01(value/valueMax);
+        float value01 = Mathf.Clamp01(value/maxValue);
 
-        TweenFilledImage(value01, tweenTime);
+        TweenFill(value01, tweenTime);
         TweenSlider(value01, tweenTime);
-
-        hider.currentValue = value;
-        hider.maxValue = valueMax;
     }
 
     // ============================================================================
@@ -60,7 +59,8 @@ public class UIBarTween : MonoBehaviour
         if(!slider) return;
 
         barTween.Stop();
-        barTween = Tween.UISliderValue(slider, to, time, Ease.InOutSine, useUnscaledTime: true);
+        if(time>0) barTween = Tween.UISliderValue(slider, to, time, Ease.InOutSine, useUnscaledTime: ignoreTime);
+        else slider.value = to;
     }
 
     // ============================================================================
@@ -68,12 +68,21 @@ public class UIBarTween : MonoBehaviour
     [Header("Radial Bar Version")]
     public Image filledImage; 
 
-    public void TweenFilledImage(float to, float time)
+    public void TweenFill(float to, float time)
     {
         if(!filledImage) return;
 
         barTween.Stop();
-        barTween = Tween.UIFillAmount(filledImage, to, time, Ease.InOutSine, useUnscaledTime: true);
+        if(time>0) barTween = Tween.UIFillAmount(filledImage, to, time, Ease.InOutSine, useUnscaledTime: ignoreTime);
+        else filledImage.fillAmount = to;
     }
 
+    // ============================================================================
+
+    void Update()
+    {
+        if(slider) hider.value = slider.value;
+        if(filledImage) hider.value = filledImage.fillAmount;
+        hider.maxValue = 1;
+    }
 }

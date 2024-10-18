@@ -122,17 +122,20 @@ public class TweenAnim : MonoBehaviour
         if(animPos)
         {
             posTween.Stop();
-            posTween = Tween.LocalPosition(transform, defPos, time, Ease.InOutSine, useUnscaledTime: true);
+            if(time>0) posTween = Tween.LocalPosition(transform, defPos, time, Ease.InOutSine, useUnscaledTime: true);
+            else transform.localPosition = defPos;
         }
         if(animRot)
         {
             rotTween.Stop();
-            rotTween = Tween.Rotation(transform, Quaternion.Euler(defRot), time, Ease.InOutSine, useUnscaledTime: true);
+            if(time>0) rotTween = Tween.Rotation(transform, Quaternion.Euler(defRot), time, Ease.InOutSine, useUnscaledTime: true);
+            else transform.rotation = Quaternion.Euler(defRot);
         }
         if(animScale)
         {
             scaleTween.Stop();
-            scaleTween = Tween.Scale(transform, defScale, time, Ease.OutCubic, useUnscaledTime: true);
+            if(time>0) scaleTween = Tween.Scale(transform, defScale, time, Ease.OutCubic, useUnscaledTime: true);
+            else transform.localScale = defScale;
         }
         if(animAlpha)
         {
@@ -149,17 +152,20 @@ public class TweenAnim : MonoBehaviour
         if(animPos)
         {
             posTween.Stop();
-            posTween = Tween.LocalPosition(transform, outPos, time, Ease.InExpo, useUnscaledTime: true).OnComplete(Reset);
+            if(time>0) posTween = Tween.LocalPosition(transform, outPos, time, Ease.InExpo, useUnscaledTime: true).OnComplete(Reset);
+            else transform.localPosition = outPos;
         }
         if(animRot)
         {
             rotTween.Stop();
-            rotTween = Tween.Rotation(transform, Quaternion.Euler(outRot), time, Ease.InOutSine, useUnscaledTime: true).OnComplete(Reset);
+            if(time>0) rotTween = Tween.Rotation(transform, Quaternion.Euler(outRot), time, Ease.InOutSine, useUnscaledTime: true).OnComplete(Reset);
+            else transform.rotation = Quaternion.Euler(outRot);
         }
         if(animScale)
         {
             scaleTween.Stop();
-            scaleTween = Tween.Scale(transform, outScale, time, Ease.InCubic, useUnscaledTime: true).OnComplete(Reset);
+            if(time>0) scaleTween = Tween.Scale(transform, outScale, time, Ease.InCubic, useUnscaledTime: true).OnComplete(Reset);
+            else transform.localScale = outScale;
         }
         if(animAlpha)
         {
@@ -174,8 +180,27 @@ public class TweenAnim : MonoBehaviour
     void TweenAlpha(float to, float time)
     {
         alphaTween.Stop();
-        if(sr) alphaTween = Tween.Alpha(sr, to, time, Ease.InOutSine, useUnscaledTime: true);
-        if(img) alphaTween = Tween.Alpha(img, to, time, Ease.InOutSine, useUnscaledTime: true);
+
+        if(sr)
+        {
+            if(time>0) alphaTween = Tween.Alpha(sr, to, time, Ease.InOutSine, useUnscaledTime: true);
+            else
+            {
+                Color color = sr.color;
+                color.a = to;
+                sr.color = color;
+            }
+        }
+        if(img)
+        {
+            if(time>0) alphaTween = Tween.Alpha(img, to, time, Ease.InOutSine, useUnscaledTime: true);
+            else
+            {
+                Color color = img.color;
+                color.a = to;
+                img.color = color;
+            }
+        }
     }
 
     // ============================================================================

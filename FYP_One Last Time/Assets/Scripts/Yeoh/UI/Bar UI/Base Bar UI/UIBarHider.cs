@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class UIBarHider : MonoBehaviour
 {
-    public float currentValue;
-    public float maxValue=100;
+    public float value;
+    public float maxValue=1;
 
     public bool hideWhenFull=true;
     public bool hideWhenEmpty;
 
     // ============================================================================
-
+    
+    void Awake()
+    {
+        Reset();
+    }
+    
     void OnEnable()
     {
         Reset();
@@ -24,29 +29,29 @@ public class UIBarHider : MonoBehaviour
 
     void CheckUIVisibility()
     {
-        if(hideWhenFull && currentValue>=maxValue)
+        if(hideWhenFull && value>=maxValue)
         {
             HideUI();
         }
 
-        if(hideWhenEmpty && currentValue<=0)
+        if(hideWhenEmpty && value<=0)
         {
             HideUI();
         }
 
-        if(currentValue>0 && currentValue<maxValue)
+        if(value>0 && value<maxValue)
         {
             ShowUI();
         }
     }
 
-    // Tween Show/Hide ============================================================================
+    // ============================================================================
 
     public TweenAnim targetUI;
     public float animTime=.5f;
 
     bool canShow=true;
-    bool canHide;
+    bool canHide=false;
 
     void Reset()
     {
@@ -56,29 +61,38 @@ public class UIBarHider : MonoBehaviour
 
     void HideUI()
     {
-        if(canHide)
-        {
-            canHide=false;
-            targetUI.TweenOut(animTime);
-            Invoke(nameof(ToggleShow), animTime);  
-        }
+        if(!canHide) return;
+        canHide=false;
+
+        if(hidingUI_crt!=null) StopCoroutine(hidingUI_crt);
+        hidingUI_crt = StartCoroutine(HidingUI());
     }
     void ShowUI()
     {
-        if(canShow)
-        {   
-            canShow=false;
-            targetUI.TweenIn(animTime);
-            Invoke(nameof(ToggleHide), animTime);
-        }
+        if(!canShow) return;
+        canShow=false;
+
+        if(showingUI_crt!=null) StopCoroutine(showingUI_crt);
+        showingUI_crt = StartCoroutine(ShowingUI());
     }
 
-    void ToggleHide()
+    //  ============================================================================
+
+    Coroutine hidingUI_crt;
+
+    IEnumerator HidingUI()
     {
-        canHide=!canHide;
+        targetUI.TweenOut(animTime);
+        yield return new WaitForSecondsRealtime(animTime);
+        canShow=true;
     }
-    void ToggleShow()
+
+    Coroutine showingUI_crt;
+
+    IEnumerator ShowingUI()
     {
-        canShow=!canShow;
+        targetUI.TweenIn(animTime);
+        yield return new WaitForSecondsRealtime(animTime);
+        canHide=true;
     }
 }

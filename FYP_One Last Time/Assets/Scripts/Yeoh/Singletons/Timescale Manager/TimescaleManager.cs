@@ -38,7 +38,8 @@ public class TimescaleManager : MonoBehaviour
         if(to<0) to=0;
 
         timeTween.Stop();
-        timeTween = Tween.GlobalTimeScale(to, time, Ease.InOutSine);
+        if(time>0) timeTween = Tween.GlobalTimeScale(to, time, Ease.InOutSine);
+        else Time.timeScale = to;
     }
 
     // ============================================================================

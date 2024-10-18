@@ -48,12 +48,14 @@ public class PopUpAnim : MonoBehaviour
         transform.localScale = Vector3.zero;
 
         animTween.Stop();
-        animTween = Tween.Scale(transform, defScale, inTime, Ease.OutElastic, useUnscaledTime: ignoreTime);
+        if(inTime>0) animTween = Tween.Scale(transform, defScale, inTime, Ease.OutElastic, useUnscaledTime: ignoreTime);
+        else transform.localScale = defScale;
 
         yield return new WaitForSeconds(inTime + waitTime);
 
         animTween.Stop();
-        animTween = Tween.Scale(transform, Vector3.zero, outTime, Ease.InOutSine, useUnscaledTime: ignoreTime);
+        if(outTime>0) animTween = Tween.Scale(transform, Vector3.zero, outTime, Ease.InOutSine, useUnscaledTime: ignoreTime);
+        else transform.localScale = Vector3.zero;
 
         yield return new WaitForSeconds(outTime);
 
