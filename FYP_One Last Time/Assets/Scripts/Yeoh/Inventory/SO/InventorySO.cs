@@ -16,7 +16,8 @@ public class InventorySlot
 
 // ============================================================================
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName="New Inventory", menuName="SO/Inventory/InventorySO")]
+
 public class InventorySO : ScriptableObject
 {
     public List<InventorySlot> slots;

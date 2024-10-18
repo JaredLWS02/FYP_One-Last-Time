@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ExplosionHurtbox2D : MonoBehaviour
 {
+    public AttackSO attackSO;
+
     bool explodeOnAwake=true;
 
     void Enable()
@@ -14,12 +16,10 @@ public class ExplosionHurtbox2D : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Explode")]
-    public float maxDamage=5;
-    public LayerMask layerMask;
+    [Header("Range")]
     public float outerRange=5;
-    public float force=10;
-    public float forceRangeMult=1.5f;
+    public float pushRangeMult=1.75f;
+    public LayerMask layerMask;
 
     // ============================================================================
 
@@ -32,11 +32,16 @@ public class ExplosionHurtbox2D : MonoBehaviour
 
     // ============================================================================
 
+    Collider2D[] GetOverlap(float range)
+    {
+        return Physics2D.OverlapCircleAll(transform.position, range, layerMask);
+    }
+
     List<Rigidbody2D> GetRigidbodies(float range)
     {
         List<Rigidbody2D> rbs = new();
 
-        Collider2D[] others = Physics2D.OverlapCircleAll(transform.position, range, layerMask);
+        Collider2D[] others = GetOverlap(range);
 
         foreach(Collider2D other in others)
         {
@@ -49,7 +54,6 @@ public class ExplosionHurtbox2D : MonoBehaviour
 
     // ============================================================================
 
-    float fallOffDamage;
     Vector3 contactPoint;
 
     void Damage()
@@ -60,30 +64,24 @@ public class ExplosionHurtbox2D : MonoBehaviour
         {
             float falloffMult = GetFallOffMult(transform.position, rb.transform.position, outerRange);
 
-            fallOffDamage = maxDamage * falloffMult;
+            AttackSO attack = new(attackSO);
+            
+            attack.damage *= falloffMult;
+            attack.damageBlock *= falloffMult;
+            attack.stunSeconds *= falloffMult;
+            attack.knockback=0; // handled by Push()
 
             contactPoint = rb.ClosestPoint(transform.position);
 
-            EventManager.Current.OnHit(gameObject, rb.gameObject, CopyHurtInfo());
+            EventManager.Current.OnTryHurt(gameObject, rb.gameObject, attack, contactPoint);
         }
-    }
-
-    // ============================================================================
-
-    HurtInfo2D CopyHurtInfo()
-    {
-        return new()
-        {
-            damage = fallOffDamage,
-            contactPoint = contactPoint,
-        };
     }
 
     // ============================================================================
 
     void Push()
     {
-        List<Rigidbody2D> rbs = GetRigidbodies(outerRange * forceRangeMult);
+        List<Rigidbody2D> rbs = GetRigidbodies(outerRange * pushRangeMult);
 
         foreach(var rb in rbs)
         {
@@ -91,8 +89,10 @@ public class ExplosionHurtbox2D : MonoBehaviour
 
             float falloffMult = GetFallOffMult(transform.position, rb.transform.position, outerRange);
 
+            float knockback = attackSO.knockback * falloffMult;
+
             rb.velocity=Vector3.zero;
-            rb.AddForce(force * push_dir * falloffMult, ForceMode2D.Impulse);
+            rb.AddForce(knockback * push_dir * falloffMult, ForceMode2D.Impulse);
         }
     }
 
@@ -119,6 +119,6 @@ public class ExplosionHurtbox2D : MonoBehaviour
         Gizmos.color = gizmoColorOuter;
         Gizmos.DrawWireSphere(transform.position, outerRange);
         Gizmos.color = gizmoColorPush;
-        Gizmos.DrawWireSphere(transform.position, outerRange * forceRangeMult);
+        Gizmos.DrawWireSphere(transform.position, outerRange * pushRangeMult);
     }
 }

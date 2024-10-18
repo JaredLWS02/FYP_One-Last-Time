@@ -3,62 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class HurtInfo
-{
-    [HideInInspector]
-    public Collider coll;
-    public GameObject owner;
-
-    [Header("On Hit")]
-    public float damage=10;
-    public float damageBlock=5;
-    public float knockback=5;
-    public float stunSeconds=1;
-    public float stunSpeedMult=.3f;
-    [HideInInspector]
-    public Vector3 contactPoint;
-    public bool hasSweepingEdge=true;
-    public bool unparryable;
-
-    [Header("Optional")]
-    public Transform hurtboxOrigin;
-
-    // ctor
-    public HurtInfo(HurtInfo hurtInfo)
-    {
-        coll = hurtInfo.coll;
-        owner = hurtInfo.owner;
-
-        damage = hurtInfo.damage;
-        damageBlock = hurtInfo.damageBlock;
-        knockback = hurtInfo.knockback;
-        stunSeconds = hurtInfo.stunSeconds;
-        stunSpeedMult = hurtInfo.stunSpeedMult;
-        contactPoint = hurtInfo.contactPoint;
-        hasSweepingEdge = hurtInfo.hasSweepingEdge;
-        unparryable = hurtInfo.unparryable;
-
-        hurtboxOrigin = hurtInfo.hurtboxOrigin;
-    }
-}
-
-// ============================================================================
-
 [RequireComponent(typeof(Collider))]
 
 public class Hurtbox : MonoBehaviour
 {
-    [Header("Edit This")]
-    public HurtInfo myHurtInfo;
-
-    [Space][Space][Space]
-
+    public GameObject owner;
+    public AttackSO attackSO;
+    
+    Collider coll;
+    Collider2D coll2D;
     public bool enabledOnAwake=true;
 
     void Awake()
     {
-        myHurtInfo.coll = GetComponent<Collider>();
+        coll = GetComponent<Collider>();
 
         ToggleColl(enabledOnAwake);
     }
@@ -76,40 +34,51 @@ public class Hurtbox : MonoBehaviour
 
     // ============================================================================
 
-    void OnHurt(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
+    // on successful hit
+    void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contantPoint)
     {
-        // ignore if not this hurtbox
-        if(hurtInfo.coll != myHurtInfo.coll) return;
+        if(owner != attacker) return;
+        if(attackSO != attack) return;
 
-        // if can swipe through multiple
-        ToggleColl(myHurtInfo.hasSweepingEdge); 
+        OnHurtt.Invoke();
 
-        OnHit.Invoke();
-        if(destroyOnHit) Destroy(gameObject);
+        if(destroyOnHurt)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // decrease first, then check
+        if(--attack.pierceCount <= 0)
+        ToggleColl(false); 
+    }   
+
+    public void ToggleColl(bool toggle)
+    {
+        coll.enabled = toggle;
     }
     
     // ============================================================================
 
-    void OnTriggerEnter(Collider other)
+    [Header("Optional")]
+    public Transform hurtboxOrigin;
+    Vector3 contactPoint;
+
+    void OnTriggerStay(Collider other)
     {
         if(other.isTrigger) return;
         Rigidbody otherRb = other.attachedRigidbody;
         if(!otherRb) return;
         
-        Hit(other, otherRb);
-    }
-
-    // ============================================================================
-
-    void Hit(Collider other, Rigidbody otherRb)
-    {
-        Transform origin = myHurtInfo.hurtboxOrigin;
-
-        HurtInfo hurtInfo = new(myHurtInfo);
-
-        hurtInfo.contactPoint = other.ClosestPoint(origin ? origin.position : transform.position);
+        contactPoint = other.ClosestPoint(hurtboxOrigin ? hurtboxOrigin.position : transform.position);
         
-        EventManager.Current.OnHit(myHurtInfo.owner, otherRb.gameObject, hurtInfo);
+        AttackSO attack = new(attackSO);
+
+        EventManager.Current.OnTryHurt(owner, otherRb.gameObject, attack, contactPoint);
+
+        OnHit.Invoke();
+
+        if(destroyOnHit) Destroy(gameObject);
     }
     
     // ============================================================================
@@ -132,14 +101,11 @@ public class Hurtbox : MonoBehaviour
         ToggleColl(false);
     }
 
-    public void ToggleColl(bool toggle)
-    {
-        myHurtInfo.coll.enabled=toggle;
-    }
-
     // ============================================================================
 
     [Space]
     public UnityEvent OnHit;
     public bool destroyOnHit;
+    public UnityEvent OnHurtt;
+    public bool destroyOnHurt;
 }

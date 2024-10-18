@@ -6,32 +6,23 @@ using UnityEngine;
 
 public class GenericHurt : MonoBehaviour
 {
-    HurtScript hurt;
-
-    void Awake()
-    {
-        hurt = GetComponent<HurtScript>();
-    }
-
-    // ============================================================================
-
     void OnEnable()
     {
-        EventManager.Current.HitEvent += OnHit;
+        EventManager.Current.TryHurtEvent += OnTryHurt;
     }
     void OnDisable()
     {
-        EventManager.Current.HitEvent -= OnHit;
+        EventManager.Current.TryHurtEvent -= OnTryHurt;
     }
 
     // ============================================================================
     
-    public void OnHit(GameObject attacker, GameObject victim, HurtInfo hurtInfo)
+    public void OnTryHurt(GameObject attacker, GameObject victim, AttackSO attack, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 
         // check block/parry first before hurting
 
-        hurt.Hurt(attacker, hurtInfo);
+        EventManager.Current.OnHurt(attacker, victim, attack, contactPoint);
     }
 }

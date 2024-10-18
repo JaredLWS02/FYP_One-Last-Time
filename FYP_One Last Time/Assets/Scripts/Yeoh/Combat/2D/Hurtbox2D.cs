@@ -3,40 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class HurtInfo2D
-{
-    [HideInInspector]
-    public Collider2D coll;
-    public GameObject owner;
-
-    [Header("On Hit")]
-    public float damage;
-    public float knockback;
-    public Vector3 contactPoint;
-    [HideInInspector]
-    public bool hasSweepingEdge;
-
-    [Header("Optional")]
-    public Transform hurtboxOrigin;
-}
-
-// ============================================================================
-
 [RequireComponent(typeof(Collider2D))]
 
 public class Hurtbox2D : MonoBehaviour
 {
-    [Header("Edit This")]
-    public HurtInfo2D myHurtInfo;
-
-    [Space][Space][Space]
-
+    public GameObject owner;
+    public AttackSO attackSO;
+    
+    Collider2D coll;
     public bool enabledOnAwake=true;
 
     void Awake()
     {
-        myHurtInfo.coll = GetComponent<Collider2D>();
+        coll = GetComponent<Collider2D>();
 
         ToggleColl(enabledOnAwake);
     }
@@ -45,49 +24,60 @@ public class Hurtbox2D : MonoBehaviour
 
     void OnEnable()
     {
-        EventManager.Current.Hurt2DEvent += OnHurt;
+        EventManager.Current.HurtEvent += OnHurt;
     }
     void OnDisable()
     {
-        EventManager.Current.Hurt2DEvent -= OnHurt;
+        EventManager.Current.HurtEvent -= OnHurt;
     }
 
     // ============================================================================
 
-    void OnHurt(GameObject victim, GameObject attacker, HurtInfo2D hurtInfo)
+    void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contantPoint)
     {
-        // ignore if not this hurtbox
-        if(hurtInfo.coll != myHurtInfo.coll) return;
+        if(owner != attacker) return;
+        if(attackSO != attack) return;
 
-        // if can swipe through multiple
-        ToggleColl(myHurtInfo.hasSweepingEdge); 
+        OnHurtt.Invoke();
 
-        OnHit.Invoke();
-        if(destroyOnHit) Destroy(gameObject);
+        if(destroyOnHurt)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        // decrease first, then check
+        if(--attack.pierceCount <= 0)
+        ToggleColl(false);
     }
     
+    public void ToggleColl(bool toggle)
+    {
+        coll.enabled = toggle;
+    }
+
     // ============================================================================
 
-    void OnTriggerEnter2D(Collider2D other)
+    [Header("Optional")]
+    public Transform hurtboxOrigin;
+    Vector3 contactPoint;
+
+    void OnTriggerStay2D(Collider2D other)
     {
         if(other.isTrigger) return;
         Rigidbody2D otherRb = other.attachedRigidbody;
         if(!otherRb) return;
         
-        Hit(other, otherRb);
-    }
+        contactPoint = other.ClosestPoint(hurtboxOrigin ? hurtboxOrigin.position : transform.position);
+        contactPoint.z=0;  // for 2D
 
-    // ============================================================================
+        AttackSO attack = new(attackSO);
 
-    void Hit(Collider2D other, Rigidbody2D otherRb)
-    {
-        Transform origin = myHurtInfo.hurtboxOrigin;
+        EventManager.Current.OnTryHurt(owner, otherRb.gameObject, attack, contactPoint);
 
-        myHurtInfo.contactPoint = other.ClosestPoint(origin ? origin.position : transform.position);
+        OnHit.Invoke();
 
-        myHurtInfo.contactPoint.z=0; // for 2D
-        
-        EventManager.Current.OnHit(myHurtInfo.owner, otherRb.gameObject, myHurtInfo);
+        if(destroyOnHit) Destroy(gameObject);
     }
     
     // ============================================================================
@@ -110,14 +100,11 @@ public class Hurtbox2D : MonoBehaviour
         ToggleColl(false);
     }
 
-    public void ToggleColl(bool toggle)
-    {
-        myHurtInfo.coll.enabled=toggle;
-    }
-
     // ============================================================================
 
     [Space]
     public UnityEvent OnHit;
     public bool destroyOnHit;
+    public UnityEvent OnHurtt;
+    public bool destroyOnHurt;
 }

@@ -12,8 +12,33 @@ public class HurtScript : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-
         maxPoise=poise;
+    }
+
+    // ============================================================================
+
+    void OnEnable()
+    {
+        EventManager.Current.HurtEvent += OnHurt;
+        EventManager.Current.KnockbackEvent += OnKnockback;
+        EventManager.Current.DeathEvent += OnDeath;
+    }
+    void OnDisable()
+    {
+        EventManager.Current.HurtEvent -= OnHurt;
+        EventManager.Current.KnockbackEvent -= OnKnockback;
+        EventManager.Current.DeathEvent -= OnDeath;
+    }
+
+    // ============================================================================
+    
+    ModelManager ModelM;
+    SpriteManager SpriteM;
+
+    void Start()
+    {
+        ModelM = ModelManager.Current;
+        SpriteM = SpriteManager.Current;
     }
 
     // ============================================================================
@@ -22,50 +47,52 @@ public class HurtScript : MonoBehaviour
 
     // check block/parry first before hurting
 
-    public void Hurt(GameObject attacker, HurtInfo hurtInfo)
+    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
     {
+        if(victim!=gameObject) return;
         if(iframe) return;
 
-        EventManager.Current.OnHurt(gameObject, attacker, hurtInfo);
-        
-        hp.Hurt(hurtInfo.damage);
+        hp.Hurt(attack.damage);
 
-        OnHurt.Invoke();
+        EventManager.Current.OnHurt(gameObject, attacker, attack, contactPoint);
+
+        OnHurtt.Invoke();
 
         if(hp.hp>0) // if still alive
         {
-            DoIFraming(iframeTime, .75f, -.75f, -.75f); // flicker red
+            DoIFraming(iframeSeconds);
 
-            HurtPoise(attacker, hurtInfo);
+            HurtPoise(attacker, attack, contactPoint);
         }
         else
         {
-            Knockback(hurtInfo.knockback, hurtInfo.contactPoint);
+            EventManager.Current.OnKnockback(gameObject, attacker, attack, contactPoint);
             
-            Die(attacker, hurtInfo);
+            EventManager.Current.OnDeath(gameObject, attacker, attack, contactPoint);
         }
     }
 
     // ============================================================================
 
     [Header("iFrame")]
+    public float iframeSeconds=.5f;
+    [HideInInspector]
     public bool iframe;
-    public float iframeTime=.5f;
 
-    public void DoIFraming(float t, float r, float g, float b)
+    public void DoIFraming(float t)
     {
         if(iframing_crt!=null) StopCoroutine(iframing_crt);
-        iframing_crt = StartCoroutine(IFraming(t, r, g, b));
+        iframing_crt = StartCoroutine(IFraming(t));
     }
 
     Coroutine iframing_crt;
     
-    IEnumerator IFraming(float t, float r, float g, float b)
+    IEnumerator IFraming(float t)
     {
         iframe=true;
 
         if(colorFlicker)
-        ToggleColorFlicker(true, r, g, b);
+        ToggleColorFlicker(true);
 
         yield return new WaitForSeconds(t);
 
@@ -75,49 +102,62 @@ public class HurtScript : MonoBehaviour
         OnIFrameEnd.Invoke();
     }
 
+    // ============================================================================
+    
     public bool colorFlicker=true;
+    public Vector3 rgbOffset = new(.75f, -.75f, -.75f); // red
     public float colorFlickerInterval=.05f;
 
-    void ToggleColorFlicker(bool toggle, float r=0, float g=0, float b=0)
+    void ToggleColorFlicker(bool toggle)
     {
         if(colorFlickeringRt!=null) StopCoroutine(colorFlickeringRt);
 
-        if(toggle) colorFlickeringRt = StartCoroutine(ColorFlickering(r, g, b));
+        if(toggle) colorFlickeringRt = StartCoroutine(ColorFlickering());
 
-        else SpriteManager.Current.RevertColor(gameObject);
+        else RevertColor(gameObject);
     }
 
     Coroutine colorFlickeringRt;
 
-    IEnumerator ColorFlickering(float r, float g, float b)
+    IEnumerator ColorFlickering()
     {
         while(true)
         {
-            SpriteManager.Current.OffsetColor(gameObject, r, g, b);
+            OffsetColor(gameObject, rgbOffset.x, rgbOffset.y, rgbOffset.z);
             yield return new WaitForSecondsRealtime(colorFlickerInterval);
-            SpriteManager.Current.RevertColor(gameObject);
+            RevertColor(gameObject);
             yield return new WaitForSecondsRealtime(colorFlickerInterval);
         }
     }
 
+    void OffsetColor(GameObject target, float r, float g, float b)
+    {
+        if(ModelM) ModelM.OffsetColor(target, r, g, b);
+        if(SpriteM) SpriteM.OffsetColor(target, r, g, b);
+    }
+    void RevertColor(GameObject target)
+    {
+        if(ModelM) ModelM.RevertColor(target);
+        if(SpriteM) SpriteM.RevertColor(target);
+    }
+    
     // ============================================================================
 
     [Header("Poise")]
     public float poise;
     float maxPoise;
 
-    public void HurtPoise(GameObject attacker, HurtInfo hurtInfo)
+    public void HurtPoise(GameObject attacker, AttackSO attack, Vector3 contactPoint)
     {
-        poise -= hurtInfo.damage;
+        poise -= attack.damage;
 
         lastPoiseDmgTime = Time.time;
 
         if(poise<=0)
         {
-            // restart poise
-            poise = maxPoise;
+            poise = maxPoise; // reset poise
 
-            Knockback(hurtInfo.knockback, hurtInfo.contactPoint);
+            EventManager.Current.OnKnockback(gameObject, attacker, attack, contactPoint);
 
             OnPoiseBreak.Invoke();
 
@@ -144,12 +184,14 @@ public class HurtScript : MonoBehaviour
 
     // ============================================================================
 
-    public void Knockback(float force, Vector3 contactPoint)
+    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
     {
+        if(victim!=gameObject) return;
+
         Vector3 kb_dir = (rb.transform.position - contactPoint).normalized;
 
         rb.velocity = Vector3.zero;
-        rb.AddForce(kb_dir * force, ForceMode.Impulse);
+        rb.AddForce(kb_dir * attack.knockback, ForceMode.Impulse);
     }
 
     // ============================================================================
@@ -157,24 +199,24 @@ public class HurtScript : MonoBehaviour
     [Header("Die")]
     public bool iframeOnDeath=true;
 
-    void Die(GameObject killer, HurtInfo hurtInfo)
+    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
     {
+        if(victim!=gameObject) return;
+
         StopAllCoroutines();
 
         iframe = iframeOnDeath;
 
-        SpriteManager.Current.RevertColor(gameObject);
+        RevertColor(gameObject);
         
-        OnDeath.Invoke();
-
-        EventManager.Current.OnDeath(gameObject, killer, hurtInfo);
+        OnDeathh.Invoke();
     }
 
     // ============================================================================
 
     [Header("Events")]
-    public UnityEvent OnHurt;
+    public UnityEvent OnHurtt;
     public UnityEvent OnPoiseBreak;
     public UnityEvent OnIFrameEnd;
-    public UnityEvent OnDeath;
+    public UnityEvent OnDeathh;
 }

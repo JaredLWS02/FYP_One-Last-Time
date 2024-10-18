@@ -93,39 +93,26 @@ public class EventManager : MonoBehaviour
     
     // Combat ==================================================================================================================
 
-    public event Action<GameObject, GameObject, HurtInfo> HitEvent; // ignores iframe
-    public event Action<GameObject, GameObject, HurtInfo> HurtEvent; // respects iframe
-    public event Action<GameObject, GameObject, HurtInfo> DeathEvent;
+    public event Action<GameObject, GameObject, AttackSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
+    public event Action<GameObject, GameObject, AttackSO, Vector3> HurtEvent; // respects iframe/block/parry
+    public event Action<GameObject, GameObject, AttackSO, Vector3> KnockbackEvent;
+    public event Action<GameObject, GameObject, AttackSO, Vector3> DeathEvent;
 
-    public void OnHit(GameObject attacker, GameObject victim, HurtInfo hurtInfo)
+    public void OnTryHurt(GameObject attacker, GameObject victim, AttackSO attack, Vector3 contactPoint)
     {
-        HitEvent?.Invoke(attacker, victim, hurtInfo);
+        TryHurtEvent?.Invoke(attacker, victim, attack, contactPoint);
     }    
-    public void OnHurt(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
+    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
     {
-        HurtEvent?.Invoke(victim, attacker, hurtInfo);
+        HurtEvent?.Invoke(victim, attacker, attack, contactPoint);
     }
-    public void OnDeath(GameObject victim, GameObject killer, HurtInfo hurtInfo)
+    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
     {
-        DeathEvent?.Invoke(victim, killer, hurtInfo);
+        KnockbackEvent?.Invoke(victim, attacker, attack, contactPoint);
     }
-
-    // 2D Overloads
-    public event Action<GameObject, GameObject, HurtInfo2D> Hit2DEvent;
-    public event Action<GameObject, GameObject, HurtInfo2D> Hurt2DEvent;
-    public event Action<GameObject, GameObject, HurtInfo2D> Death2DEvent;
-   
-    public void OnHit(GameObject attacker, GameObject victim, HurtInfo2D hurtInfo)
+    public void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
     {
-        Hit2DEvent?.Invoke(attacker, victim, hurtInfo);
-    }    
-    public void OnHurt(GameObject victim, GameObject attacker, HurtInfo2D hurtInfo)
-    {
-        Hurt2DEvent?.Invoke(victim, attacker, hurtInfo);
-    }
-    public void OnDeath(GameObject victim, GameObject killer, HurtInfo2D hurtInfo)
-    {
-        Death2DEvent?.Invoke(victim, killer, hurtInfo);
+        DeathEvent?.Invoke(victim, killer, attack, contactPoint);
     }
 
     // Item ==================================================================================================================

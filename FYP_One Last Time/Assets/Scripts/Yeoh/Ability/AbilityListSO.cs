@@ -30,7 +30,8 @@ public class AbilitySlot
 
 // ============================================================================
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName="New Ability List", menuName="SO/Ability/AbilityListSO")]
+
 public class AbilityListSO : ScriptableObject
 {
     public List<AbilitySlot> abilitySlots;

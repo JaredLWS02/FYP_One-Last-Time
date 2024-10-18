@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class ExplosionHurtbox : MonoBehaviour
 {
-    [Header("Edit This")]
-    public HurtInfo myHurtInfo;
+    public AttackSO attackSO;
 
-    [Space][Space][Space]
+    public bool explodeOnAwake=true;
 
-    bool explodeOnAwake=true;
-
-    void Enable()
+    void OnEnable()
     {
         if(explodeOnAwake)
         Explode();
@@ -72,6 +69,8 @@ public class ExplosionHurtbox : MonoBehaviour
 
     // ============================================================================
 
+    Vector3 contactPoint;
+
     void Damage()
     {
         List<Collider> others = GetColliders(outerRange);
@@ -82,17 +81,16 @@ public class ExplosionHurtbox : MonoBehaviour
 
             float falloffMult = GetFallOffMult(transform.position, otherRb.transform.position, outerRange);
 
-            HurtInfo hurtInfo = new(myHurtInfo);
+            AttackSO attack = new(attackSO);
 
-            hurtInfo.damage *= falloffMult;
-            hurtInfo.damageBlock *= falloffMult;
-            hurtInfo.stunSeconds *= falloffMult;
+            attack.damage *= falloffMult;
+            attack.damageBlock *= falloffMult;
+            attack.stunSeconds *= falloffMult;
+            attack.knockback=0; // handled by Push()
 
-            hurtInfo.contactPoint = other.ClosestPoint(transform.position);
-
-            hurtInfo.knockback=0; // handled by Push()
+            contactPoint = other.ClosestPoint(transform.position);
             
-            EventManager.Current.OnHit(gameObject, otherRb.gameObject, hurtInfo);
+            EventManager.Current.OnTryHurt(gameObject, otherRb.gameObject, attack, contactPoint);
         }
     }
 
@@ -108,12 +106,10 @@ public class ExplosionHurtbox : MonoBehaviour
 
             float falloffMult = GetFallOffMult(transform.position, rb.transform.position, outerRange);
 
-            HurtInfo hurtInfo = new(myHurtInfo);
-
-            hurtInfo.knockback *= falloffMult;
+            float knockback = attackSO.knockback * falloffMult;
 
             rb.velocity=Vector3.zero;
-            rb.AddForce(hurtInfo.knockback * push_dir, ForceMode.Impulse);
+            rb.AddForce(knockback * push_dir, ForceMode.Impulse);
         }
     }
 
