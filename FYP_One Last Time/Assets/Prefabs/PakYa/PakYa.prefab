@@ -457,6 +457,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  showGizmos: 1
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &2535672027372677568
 MonoBehaviour:
@@ -492,7 +493,8 @@ MonoBehaviour:
   maxFallVelocity: -30
   fastFall: 1
   minVelocityBeforeFastFall: -0.1
-  fastFallForce: 15
+  fastFallForce: -15
+  y_velocity: 0
 --- !u!114 &6639294003576150908
 MonoBehaviour:
   m_ObjectHideFlags: 0

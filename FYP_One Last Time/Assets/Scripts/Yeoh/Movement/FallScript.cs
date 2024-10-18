@@ -17,11 +17,12 @@ public class FallScript : MonoBehaviour
     {
         UpdateFastFalling();
         UpdateMaxFall();
+
+        UpdateDebug();
     }
 
     // ============================================================================
 
-    [Min(0)]
     public float maxFallVelocity = -30;
 
     void UpdateMaxFall()
@@ -37,10 +38,8 @@ public class FallScript : MonoBehaviour
 
     [Header("Fast Falling")]
     public bool fastFall = true;
-    [Min(0)]
     public float minVelocityBeforeFastFall = -.1f;
-    [Min(0)]
-    public float fastFallForce = 15;
+    public float fastFallForce = -15;
 
     void UpdateFastFalling()
     {
@@ -50,7 +49,29 @@ public class FallScript : MonoBehaviour
         
         if(rb.velocity.y < minVelocityBeforeFastFall)
         {
-            rb.AddForce(Vector3.down * fastFallForce);
+            rb.AddForce(Vector3.up * fastFallForce);
         }
+    }
+
+    // ============================================================================
+
+    [Header("Debug")]
+    public float y_velocity;
+
+    void UpdateDebug()
+    {
+        y_velocity = Round(rb.velocity.y, 2);
+    }
+
+    public float Round(float num, int decimalPlaces)
+    {
+        int factor=1;
+
+        for(int i=0; i<decimalPlaces; i++)
+        {
+            factor *= 10;
+        }
+
+        return Mathf.Round(num * factor) / factor;
     }
 }

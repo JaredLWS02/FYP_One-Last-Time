@@ -23,10 +23,13 @@ public class GroundCheck : MonoBehaviour
     // ============================================================================
 
     [Header("Debug")]
+    public bool showGizmos = true;
     public Color gizmoColor = Color.blue;
 
     void OnDrawGizmosSelected()
     {
+        if(!showGizmos) return;
+        
         Gizmos.color = gizmoColor;
 
         Vector3 boxCenter = transform.position + boxOffset;
