@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBillboard: 1
   fixedUpdate: 0
-  rotateAxis: {x: 1, y: 1, z: 1}
+  rotateAxis: {x: 1, y: 1, z: 0}
 --- !u!114 &6876849668752172755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 1642459170912960868}
   - component: {fileID: 8412114488542826597}
   - component: {fileID: 4572757513184181502}
+  - component: {fileID: 856482911234998920}
   - component: {fileID: 1170332012420382783}
   - component: {fileID: 6504059022795382390}
   - component: {fileID: 1511195835895261633}
@@ -347,6 +348,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+--- !u!114 &856482911234998920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9780877ebd15a4f964a29a47fd7277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pakya: {fileID: 0}
 --- !u!114 &1170332012420382783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,8 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1023a964ada16ab4a91da203d9101324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
-  baseMaxSpeed: 0
+  speed: 10
+  baseSpeed: 0
   acceleration: 10
   deceleration: 10
   velocity: 0
@@ -407,8 +421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a010c1a4d7df435429b5810874b7b556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dirX: 0
-  canMove: 1
 --- !u!114 &5012553719974128323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -459,6 +471,12 @@ MonoBehaviour:
     m_Bits: 1
   showGizmos: 1
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
+  OnLandGround:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLeaveGround:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2535672027372677568
 MonoBehaviour:
   m_ObjectHideFlags: 0

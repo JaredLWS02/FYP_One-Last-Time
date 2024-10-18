@@ -38,7 +38,7 @@ public class CameraManager : MonoBehaviour
     
     // ==================================================================================================================
 
-    public List<CinemachineVirtualCamera> allCameras = new List<CinemachineVirtualCamera>();
+    public List<CinemachineVirtualCamera> allCameras = new();
 
     public void RefreshAllCameras()
     {
@@ -48,7 +48,7 @@ public class CameraManager : MonoBehaviour
 
     public List<CinemachineVirtualCamera> GetAllCameras()
     {
-        List<CinemachineVirtualCamera> camerasList = new List<CinemachineVirtualCamera>(FindObjectsOfType<CinemachineVirtualCamera>());
+        List<CinemachineVirtualCamera> camerasList = new(FindObjectsOfType<CinemachineVirtualCamera>());
 
         return camerasList;
     }
@@ -89,15 +89,6 @@ public class CameraManager : MonoBehaviour
     {
         return defaultCamera==camera;
     }
-                
-    // ==================================================================================================================
-    
-    public CinemachineFreeLook IsCameraFreeLook(CinemachineVirtualCamera camera)
-    {
-        CinemachineFreeLook freeLookParent = camera.ParentCamera as CinemachineFreeLook;
-
-        return freeLookParent;
-    }
 
     // ==================================================================================================================
     
@@ -107,23 +98,28 @@ public class CameraManager : MonoBehaviour
     {
         camera.Priority = 10;
 
-        if(IsCameraFreeLook(camera))
-        {
-            IsCameraFreeLook(camera).Priority = 10;
-        }
+        CinemachineFreeLook freelook = GetFreeLookCamera(camera);
+        if(freelook) freelook.Priority = 10;
+
+        StopAllAnimations();
         
         currentCamera = camera;
 
-        foreach(CinemachineVirtualCamera c in allCameras)
+        foreach(var cam in allCameras)
         {
-            if(c!=camera)
+            if(cam != camera)
             {
-                c.Priority = 0;
+                cam.Priority = 0;
             }
         }
 
         // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
         // else Invoke("EnableCamPanSfx", 1);
+    }
+
+    public bool IsCurrentCamera(CinemachineVirtualCamera camera)
+    {
+        return currentCamera==camera;
     }
 
     // bool CamPanSfx;
@@ -133,9 +129,12 @@ public class CameraManager : MonoBehaviour
     //     CamPanSfx=true;
     // }
 
-    public bool IsCurrentCamera(CinemachineVirtualCamera camera)
+    // ==================================================================================================================
+    
+    public CinemachineFreeLook GetFreeLookCamera(CinemachineVirtualCamera camera)
     {
-        return currentCamera==camera;
+        CinemachineFreeLook freeLookParent = camera.ParentCamera as CinemachineFreeLook;
+        return freeLookParent;
     }
 
     // ==================================================================================================================
@@ -154,14 +153,13 @@ public class CameraManager : MonoBehaviour
 
     public List<CinemachineBasicMultiChannelPerlin> GetAllNoises()
     {
-        List<CinemachineBasicMultiChannelPerlin> noisesList = new List<CinemachineBasicMultiChannelPerlin>(FindObjectsOfType<CinemachineBasicMultiChannelPerlin>());
-
+        List<CinemachineBasicMultiChannelPerlin> noisesList = new(FindObjectsOfType<CinemachineBasicMultiChannelPerlin>());
         return noisesList;
     }
 
     public void RecordDefaultNoises()
     {
-        foreach(CinemachineBasicMultiChannelPerlin noise in allNoises)
+        foreach(var noise in allNoises)
         {
             defaultAmpFreqDict[noise] = new Vector2(noise.m_AmplitudeGain, noise.m_FrequencyGain);
         }
@@ -177,11 +175,12 @@ public class CameraManager : MonoBehaviour
 
         if(haptics) Vibrator.Vibrate();
 
-        if(shakingRt!=null) StopCoroutine(shakingRt);
-        shakingRt = StartCoroutine(Shaking(time, amp, freq));
+        if(shaking_crt!=null) StopCoroutine(shaking_crt);
+        shaking_crt = StartCoroutine(Shaking(time, amp, freq));
     }
 
-    Coroutine shakingRt;
+    Coroutine shaking_crt;
+
     IEnumerator Shaking(float t, float amp, float freq)
     {
         currentShake = new Vector3(t, amp, freq);
@@ -195,7 +194,7 @@ public class CameraManager : MonoBehaviour
 
     public void EnableShake(float amp=0, float freq=0)
     {
-        foreach(CinemachineBasicMultiChannelPerlin noise in allNoises)
+        foreach(var noise in allNoises)
         {
             noise.m_AmplitudeGain = amp;
             noise.m_FrequencyGain = freq;
@@ -203,7 +202,7 @@ public class CameraManager : MonoBehaviour
     }
     public void DisableShake()
     {
-        foreach(CinemachineBasicMultiChannelPerlin noise in allNoises)
+        foreach(var noise in allNoises)
         {
             if(defaultAmpFreqDict.ContainsKey(noise))
             {
@@ -211,6 +210,13 @@ public class CameraManager : MonoBehaviour
                 noise.m_FrequencyGain = defaultAmpFreqDict[noise].y;
             }
         }
+    }
+
+    public void CancelShake()
+    {
+        if(shaking_crt!=null) StopCoroutine(shaking_crt);
+        DisableShake();
+        currentShake = Vector3.zero;
     }
 
     // ==================================================================================================================
@@ -225,9 +231,12 @@ public class CameraManager : MonoBehaviour
         // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
         // else Invoke("EnableCamPanSfx", 1);
     }
-    
-    // ==================================================================================================================
 
+    public void CancelFOVTween()
+    {
+        fovTween.Complete();
+    }
+    
     Tween orthoTween;
 
     public void TweenOrthoSize(float to, float time)
@@ -238,7 +247,60 @@ public class CameraManager : MonoBehaviour
         // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
         // else Invoke("EnableCamPanSfx", 1);
     }
+
+    public void CancelOrthoTween()
+    {
+        orthoTween.Complete();
+    }
         
+    // ==================================================================================================================
+
+    Tween dutchTween;
+
+    public void TweenDutch(float angle, float time)
+    {
+        dutchTween.Stop();
+        dutchTween = Tween.Custom(currentCamera.m_Lens.Dutch, angle, time, onValueChange: newVal => currentCamera.m_Lens.Dutch=newVal, Ease.InOutSine);
+    }
+
+    public void ValveDutch(float angle=10, float tweenIn=.1f, float tweenOut=.5f)
+    {
+        if(valveDutching_crt!=null) StopCoroutine(valveDutching_crt);
+        valveDutching_crt = StartCoroutine(ValveDutching(angle, tweenIn, tweenOut));
+    }
+
+    public void CancelDutchTween()
+    {
+        dutchTween.Complete();
+    }
+
+    Coroutine valveDutching_crt;
+
+    IEnumerator ValveDutching(float angle, float tweenIn, float tweenOut)
+    {
+        TweenDutch(angle, tweenIn);
+        yield return new WaitForSeconds(tweenIn);
+        TweenDutch(0, tweenOut);
+    }
+
+    public void CancelValveDutch()
+    {
+        if(valveDutching_crt!=null) StopCoroutine(valveDutching_crt);
+        dutchTween.Stop();
+        currentCamera.m_Lens.Dutch=0;
+    }    
+
+    // ==================================================================================================================
+
+    public void StopAllAnimations()
+    {
+        CancelShake();
+        CancelFOVTween();
+        CancelOrthoTween();
+        CancelDutchTween();
+        CancelValveDutch();
+    }
+
     // ==================================================================================================================
 
     public bool haptics=true;
