@@ -21,6 +21,7 @@ public class State_Enemy_Control_AI : BaseState
         State_Enemy_Control_AI_Idle idle = new(sm);
         State_Enemy_Control_AI_Attacking attacking = new(sm);
         State_Enemy_Control_AI_Fleeing fleeing = new(sm);
+        State_Enemy_Control_AI_Returning returning = new(sm);
 
         // HUB TRANSITIONS ================================================================================
 
@@ -28,7 +29,8 @@ public class State_Enemy_Control_AI : BaseState
         {
             if(
                 ai.GetEnemy() &&
-                ai.IsHealthy() //&&
+                ai.IsHealthy() &&
+                !ai.ShouldReturn() //&&
             ){
                 return true;
             }
@@ -46,6 +48,16 @@ public class State_Enemy_Control_AI : BaseState
             return false;
         });
 
+        idle.AddTransition(returning, (timeInState) =>
+        {
+            if(
+                ai.ShouldReturn() // &&
+            ){
+                return true;
+            }
+            return false;
+        });
+
         
         // RETURN TRANSITIONS ================================================================================
 
@@ -53,7 +65,8 @@ public class State_Enemy_Control_AI : BaseState
         {
             if(
                 !ai.GetEnemy() ||
-                !ai.IsHealthy() //||
+                !ai.IsHealthy() ||
+                ai.ShouldReturn() //||
             ){
                 return true;
             }
@@ -65,6 +78,16 @@ public class State_Enemy_Control_AI : BaseState
             if(
                 !ai.GetEnemy() ||
                 ai.IsHealthy() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        returning.AddTransition(idle, (timeInState) =>
+        {
+            if(
+                ai.IsAtSpawnpoint() //||
             ){
                 return true;
             }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Pilot))]
 
@@ -9,6 +10,7 @@ using UnityEngine;
 [RequireComponent(typeof(JumpScript))]
 [RequireComponent(typeof(GroundCheck))]
 
+[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Radar))]
 [RequireComponent(typeof(AgentVelocity))]
 [RequireComponent(typeof(AgentSideMove))]
@@ -26,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     JumpScript jump;
     GroundCheck ground;
 
+    NavMeshAgent agent;
     Radar radar;
     AgentVelocity agentV;
     AgentSideMove agentMove;
@@ -42,6 +45,7 @@ public class EnemyAI : MonoBehaviour
         jump = GetComponent<JumpScript>();
         ground = GetComponent<GroundCheck>();
 
+        agent = GetComponent<NavMeshAgent>();
         radar = GetComponent<Radar>();
         agentV = GetComponent<AgentVelocity>();
         agentMove = GetComponent<AgentSideMove>();
@@ -50,9 +54,13 @@ public class EnemyAI : MonoBehaviour
         flee = GetComponent<AgentFlee>();
     }
 
+    public Transform spawnpoint;
+
     void Start()
     {
         EventManager.Current.OnSpawn(gameObject);
+
+        spawnpoint.parent = null;
     }
 
     // ============================================================================
@@ -148,11 +156,11 @@ public class EnemyAI : MonoBehaviour
 
         EventManager.Current.OnAutoJump(gameObject, jump_dir);
 
+        autoJump.StartJump();
+
         float dot_x = Vector3.Dot(jump_dir, Vector3.right);
 
         turn.TryFlip(dot_x);
-
-        autoJump.StartJump();
     }
 
     // ============================================================================
@@ -167,7 +175,7 @@ public class EnemyAI : MonoBehaviour
         return autoJump.isJumping;
     }
 
-    [Header("HP")]
+    [Header("HP Check")]
     public HPManager hp;
     public float healthyMinPercent=50;
 
@@ -202,9 +210,8 @@ public class EnemyAI : MonoBehaviour
     // ============================================================================
 
     [Header("Ranges")]
-    public float shortRange=1;
-    public float mediumRange=3;
-    public float longRange=5;
+    public float arrivalRange=1;
+    public float meleeRange=3;
 
     public float GetCurrentRange()
     {
@@ -216,10 +223,15 @@ public class EnemyAI : MonoBehaviour
         agentV.stoppingRange = to;
     }
 
+    public bool IsInRange(Vector3 from, Vector3 target, float range)
+    {
+        return Vector2.Distance(from, target) <= range;
+    }
+
     public bool IsInRange(GameObject target, float range)
     {
         if(!target) return false;
-        return Vector2.Distance(transform.position, target.transform.position) <= range;
+        return IsInRange(transform.position, target.transform.position, range);
     }
 
     public bool IsInRange(GameObject target)
@@ -234,12 +246,39 @@ public class EnemyAI : MonoBehaviour
     
     // ============================================================================
     
-    [Header("Maintain Distance")]
-    public float tooCloseRange=2;
+    public float maintainDistance=2;
 
     public bool IsEnemyTooClose()
     {
-        return IsInRange(GetEnemy(), tooCloseRange);
+        return IsInRange(GetEnemy(), maintainDistance);
+    }
+
+    // ============================================================================
+    
+    public float maxChaseDownRange=7;
+    public float returnRange=20;
+
+    public bool ShouldReturn()
+    {
+        // ignore if cant find a way back
+        if(!IsPathable(spawnpoint.position)) return false;
+
+        // ignore if still close to enemy
+        if(IsInRange(GetEnemy(), maxChaseDownRange)) return false;
+
+        return !IsInRange(spawnpoint.position, transform.position, returnRange);
+    }
+
+    bool IsPathable(Vector3 pos)
+    {
+        NavMeshPath path = new();
+        agent.CalculatePath(pos, path);
+        return path.status == NavMeshPathStatus.PathComplete;
+    }
+
+    public bool IsAtSpawnpoint()
+    {
+        return IsInRange(spawnpoint.position, transform.position, arrivalRange);
     }
 
     // ============================================================================
@@ -269,25 +308,31 @@ public class EnemyAI : MonoBehaviour
 
     public void SetGoalWander()
     {
-        SetRange(shortRange);
+        SetRange(arrivalRange);
         SetGoal(wander.goal);
     }
 
     public void SetGoalEnemy()
     {
-        SetRange(mediumRange);
+        SetRange(meleeRange);
         SetGoal(GetEnemy());
     }
 
     public void SetGoalFlee()
     {
-        SetRange(shortRange);
+        SetRange(arrivalRange);
         SetGoal(flee.goal);
     }
 
     public bool IsFleeing()
     {
         return GetCurrentGoal()==flee.goal.gameObject;
+    }
+
+    public void SetGoalSpawnpoint()
+    {
+        SetRange(arrivalRange);
+        SetGoal(spawnpoint);
     }
 
     // ============================================================================
@@ -301,7 +346,7 @@ public class EnemyAI : MonoBehaviour
     public void FaceTarget(GameObject target)
     {
         if(!target) return;
-        
+
         if(IsFacingTarget(target.transform)) return;
 
         float x_dir = turn.faceR ? -1 : 1;
@@ -357,8 +402,10 @@ public class EnemyAI : MonoBehaviour
         if(!showGizmos) return;
 
         Gizmos.color = gizmoColor;
-        Gizmos.DrawWireSphere(transform.position, shortRange);
-        Gizmos.DrawWireSphere(transform.position, mediumRange);
-        Gizmos.DrawWireSphere(transform.position, longRange);
+        Gizmos.DrawWireSphere(transform.position, arrivalRange);
+        Gizmos.DrawWireSphere(transform.position, meleeRange);
+        Gizmos.DrawWireSphere(transform.position, maintainDistance);
+        Gizmos.DrawWireSphere(transform.position, maxChaseDownRange);
+        Gizmos.DrawWireSphere(transform.position, returnRange);
     }
 }

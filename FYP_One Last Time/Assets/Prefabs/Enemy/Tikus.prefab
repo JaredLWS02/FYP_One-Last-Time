@@ -60,6 +60,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6462888529248085389}
   - {fileID: 8596504045178056058}
   - {fileID: 7743744775743428774}
   m_Father: {fileID: 6415192565362938597}
@@ -401,6 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pilot: {fileID: 0}
+  spawnpoint: {fileID: 6462888529248085389}
   AllowMoveX: 0
   AllowMoveY: 0
   AllowJump: 0
@@ -409,10 +411,11 @@ MonoBehaviour:
   healthyMinPercent: 50
   enemyTag: Player
   lootTag: Loot
-  shortRange: 1
-  mediumRange: 3
-  longRange: 5
-  tooCloseMult: 0.5
+  arrivalRange: 1
+  meleeRange: 3
+  maintainDistance: 2
+  maxChaseDownRange: 7
+  returnRange: 20
   showGizmos: 1
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!114 &7053281653195745219
@@ -733,3 +736,34 @@ CapsuleCollider:
   m_Height: 2.1329799
   m_Direction: 2
   m_Center: {x: -8.077936e-28, y: -0.7586425, z: -0.00000023841858}
+--- !u!1 &7244821877251971682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6462888529248085389}
+  m_Layer: 6
+  m_Name: Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6462888529248085389
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7244821877251971682}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7959029595139826251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
