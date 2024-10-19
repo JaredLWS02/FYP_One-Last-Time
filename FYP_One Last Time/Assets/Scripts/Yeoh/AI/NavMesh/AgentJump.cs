@@ -29,8 +29,7 @@ public class AgentJump : MonoBehaviour
     void FixedUpdate()
     {
         CheckJump();
-        UpdateJump();
-        UpdateFaceJumpDir();
+        UpdateJumpSpline();
 
         if(rb && isJumping)
         rb.isKinematic = true;
@@ -41,7 +40,14 @@ public class AgentJump : MonoBehaviour
         if(!agent.isOnOffMeshLink) return;
         if(isJumping) return;
 
-        EventManager.Current.OnTryAutoJump(gameObject);
+        EventManager.Current.OnTryAutoJump(gameObject, GetJumpDir());
+    }
+
+    Vector3 GetJumpDir()
+    {
+        Vector3 end_pos = agent.currentOffMeshLinkData.endPos;
+
+        return (end_pos - agent.transform.position).normalized;
     }
 
     // ============================================================================
@@ -94,7 +100,7 @@ public class AgentJump : MonoBehaviour
     [Min(.01f)]
     public float jumpSeconds=.8f;
 
-    void UpdateJump()
+    void UpdateJumpSpline()
     {
         if(!isJumping) return;
 
@@ -114,19 +120,6 @@ public class AgentJump : MonoBehaviour
         {
             FinishJump();
         }
-    }
-
-    void UpdateFaceJumpDir()
-    {
-        if(!isJumping) return;
-
-        Vector3 end_pos = agent.currentOffMeshLinkData.endPos;
-
-        Vector3 dir = (end_pos - agent.transform.position).normalized;
-
-        float dot_x = Vector3.Dot(Vector3.right, dir);
-
-        EventManager.Current.OnTryFaceX(gameObject, dot_x);
     }
     
     // ============================================================================

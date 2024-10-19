@@ -412,6 +412,7 @@ MonoBehaviour:
   shortRange: 1
   mediumRange: 3
   longRange: 5
+  tooCloseMult: 0.5
   showGizmos: 1
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!114 &7053281653195745219
@@ -673,9 +674,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goal: {fileID: 7743744775743428774}
   threat: {fileID: 0}
-  fleeRange: 10
+  range: 10
   axisMult: {x: 1, y: 1, z: 0}
-  checkInterval: 0.1
   showGizmos: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.5176471}
 --- !u!1 &5701653159739410106

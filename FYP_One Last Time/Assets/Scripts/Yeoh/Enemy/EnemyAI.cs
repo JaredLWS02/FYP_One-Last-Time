@@ -48,11 +48,6 @@ public class EnemyAI : MonoBehaviour
         autoJump = GetComponent<AgentJump>();
         wander = GetComponent<AgentWander>();
         flee = GetComponent<AgentFlee>();
-
-        if(agentV == null)
-        {
-            Debug.LogError("AgentVelocity component missing.");
-        }
     }
 
     void Start()
@@ -143,7 +138,7 @@ public class EnemyAI : MonoBehaviour
         jump.OnJump(input);
     }
 
-    void OnTryAutoJump(GameObject who)
+    void OnTryAutoJump(GameObject who, Vector3 jump_dir)
     {
         if(!pilot.IsAI()) return;
 
@@ -151,7 +146,11 @@ public class EnemyAI : MonoBehaviour
 
         if(!AllowAutoJump) return;
 
-        EventManager.Current.OnAutoJump(gameObject);
+        EventManager.Current.OnAutoJump(gameObject, jump_dir);
+
+        float dot_x = Vector3.Dot(jump_dir, Vector3.right);
+
+        turn.TryFlip(dot_x);
 
         autoJump.StartJump();
     }
@@ -213,13 +212,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     public void SetRange(float to)
-    {
-        if(agentV == null)
-        {
-            Debug.LogError("AgentVelocity is null. Cannot set range.");
-            return;
-        }
-        
+    {        
         agentV.stoppingRange = to;
     }
 
@@ -238,6 +231,16 @@ public class EnemyAI : MonoBehaviour
     {
         return IsInRange(GetCurrentGoal(), GetCurrentRange());
     }
+    
+    // ============================================================================
+    
+    [Header("Maintain Distance")]
+    public float tooCloseRange=2;
+
+    public bool IsEnemyTooClose()
+    {
+        return IsInRange(GetEnemy(), tooCloseRange);
+    }
 
     // ============================================================================
 
@@ -253,6 +256,8 @@ public class EnemyAI : MonoBehaviour
 
     public void SetGoal(GameObject target)
     {
+        if(!target) return;
+
         SetGoal(target.transform);
     }
 
@@ -280,6 +285,11 @@ public class EnemyAI : MonoBehaviour
         SetGoal(flee.goal);
     }
 
+    public bool IsFleeing()
+    {
+        return GetCurrentGoal()==flee.goal.gameObject;
+    }
+
     // ============================================================================
 
     public bool IsFacingTarget(Transform target)
@@ -290,6 +300,8 @@ public class EnemyAI : MonoBehaviour
 
     public void FaceTarget(GameObject target)
     {
+        if(!target) return;
+        
         if(IsFacingTarget(target.transform)) return;
 
         float x_dir = turn.faceR ? -1 : 1;
@@ -302,6 +314,11 @@ public class EnemyAI : MonoBehaviour
         FaceTarget(GetCurrentGoal());
     }
 
+    public void FaceEnemy()
+    {
+        FaceTarget(GetEnemy());
+    }
+
     // ============================================================================
 
     public GameObject GetThreat()
@@ -311,12 +328,16 @@ public class EnemyAI : MonoBehaviour
 
     public void SetThreat(Transform target)
     {
+        if(!target) return;
+
         flee.threat = target;
         SetGoalFlee();
     }
 
     public void SetThreat(GameObject target)
     {
+        if(!target) return;
+        
         SetThreat(target.transform);
     }
 

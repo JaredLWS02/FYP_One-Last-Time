@@ -90,8 +90,8 @@ public class EventManager : MonoBehaviour
 
     public event Action<GameObject, float> TryJumpEvent;
     public event Action<GameObject, float> JumpEvent;
-    public event Action<GameObject> TryAutoJumpEvent;
-    public event Action<GameObject> AutoJumpEvent;
+    public event Action<GameObject, Vector3> TryAutoJumpEvent;
+    public event Action<GameObject, Vector3> AutoJumpEvent;
 
     public void OnTryJump(GameObject jumper, float input)
     {
@@ -101,13 +101,13 @@ public class EventManager : MonoBehaviour
     {
         JumpEvent?.Invoke(jumper, input);
     }    
-    public void OnTryAutoJump(GameObject jumper)
+    public void OnTryAutoJump(GameObject jumper, Vector3 jump_dir)
     {
-        TryAutoJumpEvent?.Invoke(jumper);
+        TryAutoJumpEvent?.Invoke(jumper, jump_dir);
     }    
-    public void OnAutoJump(GameObject jumper)
+    public void OnAutoJump(GameObject jumper, Vector3 jump_dir)
     {
-        AutoJumpEvent?.Invoke(jumper);
+        AutoJumpEvent?.Invoke(jumper, jump_dir);
     }    
     
     public event Action<GameObject, string> TryStartCastEvent;

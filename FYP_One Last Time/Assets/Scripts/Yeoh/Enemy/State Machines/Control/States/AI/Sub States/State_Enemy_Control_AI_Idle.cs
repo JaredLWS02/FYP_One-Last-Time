@@ -16,13 +16,11 @@ public class State_Enemy_Control_AI_Idle : BaseState
         Debug.Log($"{ai.gameObject.name} SubState: {Name}");
 
         ToggleAllow(true);
-
-        ai.SetGoalWander();
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-
+        ai.SetGoalWander();
     }
 
     protected override void OnExit()

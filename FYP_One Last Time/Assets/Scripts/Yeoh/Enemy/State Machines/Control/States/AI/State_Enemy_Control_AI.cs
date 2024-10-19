@@ -28,7 +28,7 @@ public class State_Enemy_Control_AI : BaseState
         {
             if(
                 ai.GetEnemy() &&
-                ai.IsHealthy()
+                ai.IsHealthy() //&&
             ){
                 return true;
             }
@@ -39,7 +39,7 @@ public class State_Enemy_Control_AI : BaseState
         {
             if(
                 ai.GetEnemy() &&
-                !ai.IsHealthy()
+                !ai.IsHealthy() //&&
             ){
                 return true;
             }
@@ -53,7 +53,7 @@ public class State_Enemy_Control_AI : BaseState
         {
             if(
                 !ai.GetEnemy() ||
-                !ai.IsHealthy()
+                !ai.IsHealthy() //||
             ){
                 return true;
             }
@@ -64,7 +64,7 @@ public class State_Enemy_Control_AI : BaseState
         {
             if(
                 !ai.GetEnemy() ||
-                ai.IsHealthy()
+                ai.IsHealthy() //||
             ){
                 return true;
             }

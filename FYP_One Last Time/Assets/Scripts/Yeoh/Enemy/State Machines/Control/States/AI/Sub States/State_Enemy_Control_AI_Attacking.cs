@@ -16,13 +16,20 @@ public class State_Enemy_Control_AI_Attacking : BaseState
         Debug.Log($"{ai.gameObject.name} SubState: {Name}");
 
         ToggleAllow(true);
-
-        ai.SetGoalEnemy();
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        ai.FaceGoal();
+        if(ai.IsEnemyTooClose())
+        {
+            ai.SetThreatEnemy();
+        }
+        else
+        {
+            ai.SetGoalEnemy();
+        }
+
+        ai.FaceEnemy();
     }
 
     protected override void OnExit()

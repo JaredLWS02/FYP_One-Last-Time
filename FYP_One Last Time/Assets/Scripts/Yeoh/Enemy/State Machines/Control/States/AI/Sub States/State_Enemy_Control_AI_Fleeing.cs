@@ -16,13 +16,11 @@ public class State_Enemy_Control_AI_Fleeing : BaseState
         Debug.Log($"{ai.gameObject.name} SubState: {Name}");
 
         ToggleAllow(true);
-
-        ai.SetThreatEnemy();
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-
+        ai.SetThreatEnemy();
     }
 
     protected override void OnExit()

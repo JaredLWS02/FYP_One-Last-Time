@@ -22,38 +22,31 @@ public class AgentFlee : MonoBehaviour
         goalPos = agent.transform.position;
     }
 
-    void OnEnable()
-    {
-        InvokeRepeating(nameof(CheckFlee), 0, checkInterval);
-    }
-
     void FixedUpdate()
     {
         goal.position = goalPos;
+
+        CheckFlee();
     }
 
     // ============================================================================
 
     public Transform threat;
-    public float fleeRange=10;
+    public float range=10;
 
     public Vector3 axisMult = Vector3.one;
-
-    public float checkInterval=.1f;
 
     void CheckFlee()
     {
         if(!threat) return;
 
-        if(!IsInRange(threat, fleeRange)) return;
+        if(!IsInRange(threat, range)) return;
 
         Vector3 threat_to_agent_dir = (agent.transform.position - threat.position).normalized;
         
-        Vector3 offset_pos = threat_to_agent_dir * fleeRange;
+        Vector3 offset_pos = threat_to_agent_dir * range;
 
         Vector3 flee_spot = agent.transform.position + offset_pos;
-
-        flee_spot = SnapToNavMesh(flee_spot);
 
         flee_spot.Scale(axisMult); // same as multiply xyz
 
@@ -67,17 +60,6 @@ public class AgentFlee : MonoBehaviour
         float distance = Vector3.Distance(agent.transform.position, target.position);
         return distance <= range;
     }
-
-    // ============================================================================
-
-    Vector3 SnapToNavMesh(Vector3 pos)
-    {
-        if(NavMesh.SamplePosition(pos, out NavMeshHit hit, 9999, NavMesh.AllAreas))
-        {
-            return hit.position;
-        }
-        return agent.transform.position;
-    }
     
     // ============================================================================
     
@@ -90,6 +72,6 @@ public class AgentFlee : MonoBehaviour
         if(!showGizmos) return;
         
         Gizmos.color = gizmoColor;
-        Gizmos.DrawWireSphere(transform.position, fleeRange);
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

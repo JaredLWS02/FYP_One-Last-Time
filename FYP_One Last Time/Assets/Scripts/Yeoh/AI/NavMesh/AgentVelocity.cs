@@ -43,8 +43,6 @@ public class AgentVelocity : MonoBehaviour
     {
         agent.destination = goal ? goal.position : agent.transform.position;
 
-        if(!goal) return;
-
         velocity = GetArrivalVelocity(agent.desiredVelocity);
 
         // set agent virtual pos to rigidbody pos
