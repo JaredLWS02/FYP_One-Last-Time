@@ -22,7 +22,7 @@ public class State_Enemy_Control_AI_Fleeing : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        ai.FaceGoal();
+
     }
 
     protected override void OnExit()
