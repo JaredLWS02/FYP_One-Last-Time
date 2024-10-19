@@ -42,10 +42,11 @@ public class HealAbility : MonoBehaviour
 
     void TempFeedback(AbilitySlot abilitySlot)
     {
-        // flash sprite green
+        // flash green
         SpriteManager.Current.FlashColor(gameObject, -1, 1, -1);
+        ModelManager.Current.FlashColor(gameObject, -1, 1, -1);
 
-        Vector3 top = SpriteManager.Current.GetColliderTop(gameObject);
+        Vector3 top = ColliderManager.Current.GetTop(gameObject);
 
         // pop up text
         VFXManager.Current.SpawnPopUpText(top, $"+{abilitySlot.ability.magnitude}", Color.green);

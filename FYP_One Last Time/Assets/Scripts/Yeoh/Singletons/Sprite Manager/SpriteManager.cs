@@ -11,8 +11,7 @@ public class SpriteManager : MonoBehaviour
         if(!Current) Current=this;
     }
 
-    // GETTER
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Getters ============================================================================
     
     public List<SpriteRenderer> GetSpriteRenderers(GameObject target)
     {
@@ -26,18 +25,17 @@ public class SpriteManager : MonoBehaviour
         return renderers;
     }
 
-    // CHANGE COLOR
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Change Colour ============================================================================
 
-    Dictionary<SpriteRenderer, Color> defColors = new();
+    Dictionary<SpriteRenderer, Color> originalColors = new();
 
     public void RecordColor(GameObject target)
     {
         if(!target) return;
 
-        foreach(SpriteRenderer sr in GetSpriteRenderers(target))
+        foreach(var sr in GetSpriteRenderers(target))
         {
-            defColors[sr] = sr.color;
+            originalColors[sr] = sr.color;
         }
     }
 
@@ -47,9 +45,9 @@ public class SpriteManager : MonoBehaviour
 
         RecordColor(target);
 
-        Color colorOffset = new Color(rOffset, gOffset, bOffset);
+        Color colorOffset = new(rOffset, gOffset, bOffset);
 
-        foreach(SpriteRenderer sr in GetSpriteRenderers(target))
+        foreach(var sr in GetSpriteRenderers(target))
         {
             sr.color += colorOffset;
         }
@@ -59,13 +57,13 @@ public class SpriteManager : MonoBehaviour
     {
         if(!target) return;
 
-        foreach(SpriteRenderer sr in GetSpriteRenderers(target))
+        foreach(var sr in GetSpriteRenderers(target))
         {
-            if(defColors.ContainsKey(sr))
+            if(originalColors.ContainsKey(sr))
             {
-                sr.color = defColors[sr];
+                sr.color = originalColors[sr];
 
-                defColors.Remove(sr); // clean up
+                originalColors.Remove(sr); // clean up
             }
         }
     }
@@ -78,7 +76,6 @@ public class SpriteManager : MonoBehaviour
         {
             if(flashingColorRts[target]!=null) StopCoroutine(flashingColorRts[target]);
         }
-
         flashingColorRts[target] = StartCoroutine(FlashingColor(target, time, rOffset, gOffset, bOffset));
     }
 
@@ -91,16 +88,15 @@ public class SpriteManager : MonoBehaviour
         RevertColor(target);
     }
 
-    // RANDOM COLOR
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Random Colour ============================================================================
 
     public void RandomOffsetColor(GameObject target, float rOffset=.15f, float gOffset=.15f, float bOffset=.15f, float aOffset=0)
     {
         if(!target) return;
 
-        foreach(SpriteRenderer sr in GetSpriteRenderers(target))
+        foreach(var sr in GetSpriteRenderers(target))
         {
-            sr.color = new Color
+            sr.color = new
             (
                 sr.color.r + Random.Range(-rOffset, rOffset),
                 sr.color.g + Random.Range(-gOffset, gOffset),
@@ -110,78 +106,17 @@ public class SpriteManager : MonoBehaviour
         }
     }
 
-    // RANDOM FLIP
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Random FLip ============================================================================
 
     public void RandomFlip(GameObject target, bool flipY=false, bool flipX=true)
     {
         if(!target) return;
 
-        foreach(SpriteRenderer sr in GetSpriteRenderers(target))
+        foreach(var sr in GetSpriteRenderers(target))
         {
             if(flipX) sr.flipX = Random.Range(0, 2)==0 ? true : false;
             if(flipY) sr.flipY = Random.Range(0, 2)==0 ? true : false;
         }
     }
-
-    // COLLIDER BOUNDS
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public List<Collider> GetColliders(GameObject target)
-    {
-        List<Collider> colliders = new();
-
-        Collider[] colls = target.GetComponents<Collider>();
-        Collider[] childColls = target.GetComponentsInChildren<Collider>();
-
-        foreach(Collider coll in colls)
-        {
-            if(!coll.isTrigger) colliders.Add(coll);
-        }
-        foreach(Collider coll in childColls)
-        {
-            if(!coll.isTrigger) colliders.Add(coll);
-        }
-
-        return colliders;
-    }
-
-    public Vector3 GetColliderTop(GameObject target)
-    {
-        List<Collider> colliders = GetColliders(target);
-        
-        if(colliders.Count==0)
-        {
-            Debug.LogError($"{name}: Couldn't find any Collider on {target.name}");
-            return Vector3.zero;
-        }
-
-        float highestPoint = float.MinValue;
-
-        foreach(Collider coll in colliders)
-        {
-            Vector3 topPoint = coll.bounds.max;
-
-            if(highestPoint < topPoint.y) highestPoint = topPoint.y;
-        }
-
-        return new Vector3(target.transform.position.x, highestPoint, target.transform.position.z);
-    }
-
-    public Vector3 GetColliderCenter(GameObject target)
-    {
-        List<Collider> colliders = GetColliders(target);
-
-        Vector3 center = Vector3.zero;
-
-        // Calculate the average position of all colliders' centers
-        foreach(Collider col in colliders)
-        {
-            center += col.bounds.center;
-        }
-
-        center /= colliders.Count;
-
-        return center;
-    }
+    
 }
