@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class TurnScript : MonoBehaviour
 {
+    public float turnSpeed=10;
+    [HideInInspector]
+    public float baseTurnSpeed;
+
     void Awake()
     {
         baseTurnSpeed = turnSpeed;
     }
 
     // ============================================================================
-
-    public float turnSpeed=10;
-    [HideInInspector]
-    public float baseTurnSpeed;
 
     public Vector3Int turnAxis = new(0, 1, 0);
 
@@ -33,7 +33,7 @@ public class TurnScript : MonoBehaviour
             turnAxis.z>0 ? lookRotation.eulerAngles.z : 0);
 
         transform.rotation = linearTurn ?
-            Quaternion.Lerp(transform.rotation, lookRotation, turnSpeed * Time.deltaTime): // linearly face the direction
+            Quaternion.Lerp(transform.rotation, lookRotation, turnSpeed * Time.deltaTime) : // linearly face the direction
             Quaternion.Slerp(transform.rotation, lookRotation, turnSpeed * Time.deltaTime); // smoothly face the direction
     }
 }

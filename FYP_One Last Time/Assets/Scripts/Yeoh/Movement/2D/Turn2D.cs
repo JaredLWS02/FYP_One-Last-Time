@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Turn2D : MonoBehaviour
 {
+    public float turnSpeed=10;
+    [HideInInspector]
+    public float baseTurnSpeed;
+
     void Awake()
     {
         baseTurnSpeed = turnSpeed;
@@ -11,11 +15,8 @@ public class Turn2D : MonoBehaviour
 
     // ============================================================================
 
-    public float turnSpeed=10;
-    [HideInInspector]
-    public float baseTurnSpeed;
-
-    public Vector3Int turnAxis = new(0, 1, 0);
+    public Vector3Int turnAxis = new(0, 0, 1);
+    public Vector3 angleOffsets = new(0, 0, -90);
 
     public bool linearTurn;
 
@@ -25,15 +26,15 @@ public class Turn2D : MonoBehaviour
     {
         if(dir==Vector3.zero) return;
 
-        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-        lookRotation = Quaternion.Euler(
-            turnAxis.x>0 ? lookRotation.eulerAngles.x : 0,
-            turnAxis.y>0 ? lookRotation.eulerAngles.y : 0,
-            turnAxis.z>0 ? lookRotation.eulerAngles.z : 0);
+        Quaternion lookRotation = Quaternion.Euler(
+            turnAxis.x>0 ? angle + angleOffsets.x : 0,
+            turnAxis.y>0 ? angle + angleOffsets.y : 0,
+            turnAxis.z>0 ? angle + angleOffsets.z : 0);
 
         transform.rotation = linearTurn ?
-            Quaternion.Lerp(transform.rotation, lookRotation, turnSpeed * Time.deltaTime): // linearly face the direction
+            Quaternion.Lerp(transform.rotation, lookRotation, turnSpeed * Time.deltaTime) : // linearly face the direction
             Quaternion.Slerp(transform.rotation, lookRotation, turnSpeed * Time.deltaTime); // smoothly face the direction
     }
 }
