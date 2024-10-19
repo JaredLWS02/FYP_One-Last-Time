@@ -395,6 +395,13 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Debug")]
     public bool showGizmos = true;
+    
+    public bool showArrivalRangeGizmo = true;
+    public bool showMeleeRangeGizmo = true;
+    public bool showMaintainDistanceGizmo = true;
+    public bool showMaxChaseDownRangeGizmo = true;
+    public bool showReturnRangeGizmo = true;
+
     public Color gizmoColor = new(1, 1, 1, .25f);
 
     void OnDrawGizmosSelected()
@@ -402,10 +409,23 @@ public class EnemyAI : MonoBehaviour
         if(!showGizmos) return;
 
         Gizmos.color = gizmoColor;
+
+        if(showArrivalRangeGizmo)
         Gizmos.DrawWireSphere(transform.position, arrivalRange);
+
+        if(showMeleeRangeGizmo)
         Gizmos.DrawWireSphere(transform.position, meleeRange);
+
+        if(showMaintainDistanceGizmo)
         Gizmos.DrawWireSphere(transform.position, maintainDistance);
+
+        if(showMaxChaseDownRangeGizmo)
         Gizmos.DrawWireSphere(transform.position, maxChaseDownRange);
-        Gizmos.DrawWireSphere(transform.position, returnRange);
+
+        if(showReturnRangeGizmo)
+        {
+            Vector3 spawn_pos = Application.isPlaying ? spawnpoint.position : transform.position;
+            Gizmos.DrawWireSphere(spawn_pos, returnRange);
+        }
     }
 }
