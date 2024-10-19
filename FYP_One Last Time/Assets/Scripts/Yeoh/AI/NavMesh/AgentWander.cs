@@ -10,14 +10,16 @@ public class AgentWander : MonoBehaviour
     NavMeshAgent agent;
     public RandomDoughnut wanderDoughnut;
 
+    public Transform goal;
+
     Vector3 startPos;
     Vector3 goalPos;
     
-    public Transform goal;
-
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        goal.parent=null;
 
         startPos = agent.transform.position;
         goalPos = agent.transform.position;

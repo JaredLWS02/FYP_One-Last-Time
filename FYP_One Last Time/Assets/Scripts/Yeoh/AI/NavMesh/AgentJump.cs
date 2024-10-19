@@ -6,18 +6,15 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(TurnScript))]
 
 public class AgentJump : MonoBehaviour
 {
     NavMeshAgent agent;
-    TurnScript turn;
     Rigidbody rb; // optional
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        turn = GetComponent<TurnScript>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -127,7 +124,9 @@ public class AgentJump : MonoBehaviour
 
         Vector3 dir = (end_pos - agent.transform.position).normalized;
 
-        turn.UpdateTurn(dir);
+        float dot_x = Vector3.Dot(Vector3.right, dir);
+
+        EventManager.Current.OnTryFaceX(gameObject, dot_x);
     }
     
     // ============================================================================

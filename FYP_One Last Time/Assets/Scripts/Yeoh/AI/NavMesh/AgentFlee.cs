@@ -9,9 +9,15 @@ public class AgentFlee : MonoBehaviour
 {
     NavMeshAgent agent;
 
+    public Transform goal;
+
+    Vector3 goalPos;
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        goal.parent=null;
 
         goalPos = agent.transform.position;
     }
@@ -20,11 +26,6 @@ public class AgentFlee : MonoBehaviour
     {
         InvokeRepeating(nameof(CheckFlee), 0, checkInterval);
     }
-    
-    // ============================================================================
-
-    public Transform goal;
-    Vector3 goalPos;
 
     void FixedUpdate()
     {
