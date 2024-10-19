@@ -17,7 +17,6 @@ public class AbilityCaster : MonoBehaviour
     {
         abilityList.ResetCooldowns();
 
-        EventManager.Current.StartCastEvent += OnStartCast;
         EventManager.Current.CastingEvent += OnCasting;
         EventManager.Current.CastWindUpEvent += OnCastWindUp;
         EventManager.Current.CastReleaseEvent += OnCastRelease;
@@ -28,7 +27,6 @@ public class AbilityCaster : MonoBehaviour
     {
         abilityList.ResetCooldowns();
 
-        EventManager.Current.StartCastEvent -= OnStartCast;
         EventManager.Current.CastingEvent -= OnCasting;
         EventManager.Current.CastWindUpEvent -= OnCastWindUp;
         EventManager.Current.CastReleaseEvent -= OnCastRelease;
@@ -36,12 +34,10 @@ public class AbilityCaster : MonoBehaviour
         EventManager.Current.CastCancelEvent -= OnCastCancel;
     }
 
-    // Start ============================================================================
+    // Start Here ============================================================================
     
-    void OnStartCast(GameObject caster, string ability_name)
+    public void StartCast(string ability_name)
     {
-        if(caster!=gameObject) return;
-
         if(isCasting) return;
 
         AbilitySlot abilitySlot = abilityList.GetAbility(ability_name);

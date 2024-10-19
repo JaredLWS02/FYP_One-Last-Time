@@ -7,11 +7,11 @@ using UnityEngine;
 public class StateMachine_Enemy_Control : MonoBehaviour
 {
     [HideInInspector]
-    public EnemyAI enemy;
+    public EnemyAI ai;
 
     void Awake()
     {
-        enemy = GetComponent<EnemyAI>();
+        ai = GetComponent<EnemyAI>();
 
         Initialize();
     }
@@ -35,7 +35,7 @@ public class StateMachine_Enemy_Control : MonoBehaviour
         none.AddTransition(ai, (timeInState) =>
         {
             if(
-                enemy.pilot.type == Pilot.Type.AI //&&
+                this.ai.pilot.IsAI() //&&
             ){
                 return true;
             }
@@ -49,7 +49,7 @@ public class StateMachine_Enemy_Control : MonoBehaviour
         ai.AddTransition(none, (timeInState) =>
         {
             if(
-                enemy.pilot.type != Pilot.Type.AI //||
+                !this.ai.pilot.IsAI() //||
             ){
                 return true;
             }

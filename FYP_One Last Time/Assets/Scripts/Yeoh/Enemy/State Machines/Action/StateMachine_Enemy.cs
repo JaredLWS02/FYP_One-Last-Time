@@ -7,11 +7,11 @@ using UnityEngine;
 public class StateMachine_Enemy : MonoBehaviour
 {
     [HideInInspector]
-    public EnemyAI enemy;
+    public EnemyAI ai;
 
     void Awake()
     {
-        enemy = GetComponent<EnemyAI>();
+        ai = GetComponent<EnemyAI>();
 
         Initialize();
     }
@@ -30,13 +30,15 @@ public class StateMachine_Enemy : MonoBehaviour
         State_Hub hub = new();
         State_Enemy_Grounded grounded = new(this);
         State_Enemy_MidAir midair = new(this);
+        State_Enemy_AutoJumping autojumping = new(this);
 
         // HUB TRANSITIONS ================================================================================
 
         hub.AddTransition(grounded, (timeInState) =>
         {
             if(
-                enemy.IsGrounded() //&&
+                ai.IsGrounded() &&
+                !ai.IsAutoJumping() //&&
             ){
                 return true;
             }
@@ -46,13 +48,23 @@ public class StateMachine_Enemy : MonoBehaviour
         hub.AddTransition(midair, (timeInState) =>
         {
             if(
-                !enemy.IsGrounded() //&&
+                !ai.IsGrounded() &&
+                !ai.IsAutoJumping() //&&
             ){
                 return true;
             }
             return false;
         });                
 
+        hub.AddTransition(autojumping, (timeInState) =>
+        {
+            if(
+                ai.IsAutoJumping() //&&
+            ){
+                return true;
+            }
+            return false;
+        });                
 
         
         // RETURN TRANSITIONS ================================================================================
@@ -60,7 +72,8 @@ public class StateMachine_Enemy : MonoBehaviour
         grounded.AddTransition(hub, (timeInState) =>
         {
             if(
-                !enemy.IsGrounded() //||
+                !ai.IsGrounded() ||
+                ai.IsAutoJumping() //||
             ){
                 return true;
             }
@@ -70,7 +83,18 @@ public class StateMachine_Enemy : MonoBehaviour
         midair.AddTransition(hub, (timeInState) =>
         {
             if(
-                enemy.IsGrounded() //||
+                ai.IsGrounded() ||
+                ai.IsAutoJumping() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        autojumping.AddTransition(hub, (timeInState) =>
+        {
+            if(
+                !ai.IsAutoJumping() //||
             ){
                 return true;
             }
@@ -78,7 +102,6 @@ public class StateMachine_Enemy : MonoBehaviour
         });
 
         
-
         // DEFAULT ================================================================================
         
         defaultState = hub;

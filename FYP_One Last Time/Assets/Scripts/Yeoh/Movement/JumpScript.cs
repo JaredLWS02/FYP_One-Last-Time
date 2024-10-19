@@ -18,10 +18,8 @@ public class JumpScript : MonoBehaviour
     
     // ============================================================================
 
-    public void OnJump(GameObject jumper, float input)
+    public void OnJump(float input)
     {
-        if(jumper!=gameObject) return;
-
         if(input>0) //press
         {
             JumpBuffer();

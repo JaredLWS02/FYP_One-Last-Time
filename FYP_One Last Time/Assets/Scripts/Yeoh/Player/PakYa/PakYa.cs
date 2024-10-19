@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Pilot))]
 
 [RequireComponent(typeof(SideMove))]
+[RequireComponent(typeof(SideTurn))]
 [RequireComponent(typeof(JumpScript))]
 [RequireComponent(typeof(GroundCheck))]
 [RequireComponent(typeof(AbilityCaster))]
@@ -17,6 +18,7 @@ public class PakYa : MonoBehaviour
     public Pilot pilot;
 
     SideMove move;
+    SideTurn turn;
     JumpScript jump;
     GroundCheck ground;
     AbilityCaster caster;
@@ -26,6 +28,7 @@ public class PakYa : MonoBehaviour
         pilot = GetComponent<Pilot>();
 
         move = GetComponent<SideMove>();
+        turn = GetComponent<SideTurn>();
         jump = GetComponent<JumpScript>();
         ground = GetComponent<GroundCheck>();
         caster = GetComponent<AbilityCaster>();
@@ -41,11 +44,9 @@ public class PakYa : MonoBehaviour
     void OnEnable()
     {
         EventManager.Current.TryMoveXEvent += OnTryMoveX;
-        EventManager.Current.MoveXEvent += OnMoveX;
+        EventManager.Current.TryFaceXEvent += OnTryFaceX;
         EventManager.Current.TryMoveYEvent += OnTryMoveY;
-        EventManager.Current.MoveYEvent += OnMoveY;
         EventManager.Current.TryJumpEvent += OnTryJump;
-        EventManager.Current.JumpEvent += OnJump;
         EventManager.Current.TryStartCastEvent += OnTryStartCast;
 
         PlayerManager.Current.Register(gameObject);
@@ -53,11 +54,9 @@ public class PakYa : MonoBehaviour
     void OnDisable()
     {
         EventManager.Current.TryMoveXEvent -= OnTryMoveX;
-        EventManager.Current.MoveXEvent -= OnMoveX;
+        EventManager.Current.TryFaceXEvent -= OnTryFaceX;
         EventManager.Current.TryMoveYEvent -= OnTryMoveY;
-        EventManager.Current.MoveYEvent -= OnMoveY;
         EventManager.Current.TryJumpEvent -= OnTryJump;
-        EventManager.Current.JumpEvent -= OnJump;
         EventManager.Current.TryStartCastEvent -= OnTryStartCast;
 
         PlayerManager.Current.Unregister(gameObject);
@@ -76,58 +75,46 @@ public class PakYa : MonoBehaviour
 
     // ============================================================================
 
-    Vector2 moveInput;
-
     void OnInputMove(InputValue value)
     {
         if(!pilot.IsPlayer()) return;
 
-        moveInput = value.Get<Vector2>();
-    }
-
-    void Update()
-    {
-        UpdateMoveInput();
-    } 
-
-    void UpdateMoveInput()
-    {
-        if(!pilot.IsPlayer()) moveInput=Vector2.zero;
-
-        if(moveInput==Vector2.zero) return;
+        Vector2 moveInput = value.Get<Vector2>();
 
         EventManager.Current.OnTryMoveX(gameObject, moveInput.x);
+        EventManager.Current.OnTryFaceX(gameObject, moveInput.x);
         EventManager.Current.OnTryMoveY(gameObject, moveInput.y);
     }
 
-    void OnTryMoveX(GameObject mover, float input_x)
+    void OnTryMoveX(GameObject who, float input_x)
     {
-        if(mover!=gameObject) return;
+        if(who!=gameObject) return;
+
+        if(!AllowMoveX) input_x=0;
+
+        EventManager.Current.OnMoveX(gameObject, input_x);
+
+        move.OnMove(input_x);
+    }
+
+    void OnTryFaceX(GameObject who, float input_x)
+    {
+        if(who!=gameObject) return;
 
         if(!AllowMoveX) return;
 
-        EventManager.Current.OnMoveX(gameObject, input_x);
+        EventManager.Current.OnFaceX(gameObject, input_x);
+
+        turn.TryFlip(input_x);
     }
 
-    void OnMoveX(GameObject mover, float input_x)
+    void OnTryMoveY(GameObject who, float input_y)
     {
-        if(mover!=gameObject) return;
+        if(who!=gameObject) return;
 
-        move.OnMoveX(gameObject, input_x);
-    }
+        if(!AllowMoveY) input_y=0;
 
-    void OnTryMoveY(GameObject mover, float input_y)
-    {
-        if(mover!=gameObject) return;
-
-        if(!AllowMoveY) return;
-
-        EventManager.Current.OnMoveY(gameObject, input_y);
-    }
-
-    void OnMoveY(GameObject mover, float input_y)
-    {
-        if(mover!=gameObject) return;
+        EventManager.Current.OnMoveY(gameObject, input_y); // send to one way platform
 
         //climb.OnMoveY(gameObject, input_y);
     }
@@ -143,20 +130,15 @@ public class PakYa : MonoBehaviour
         EventManager.Current.OnTryJump(gameObject, input);
     }
 
-    void OnTryJump(GameObject jumper, float input)
+    void OnTryJump(GameObject who, float input)
     {
-        if(jumper!=gameObject) return;
+        if(who!=gameObject) return;
 
         if(!AllowJump) return;
 
         EventManager.Current.OnJump(gameObject, input);
-    }
 
-    void OnJump(GameObject jumper, float input)
-    {
-        if(jumper!=gameObject) return;
-
-        jump.OnJump(gameObject, input);
+        jump.OnJump(input);
     }
 
     // ============================================================================
@@ -168,13 +150,15 @@ public class PakYa : MonoBehaviour
         EventManager.Current.OnTryStartCast(gameObject, "Heal");
     }
 
-    void OnTryStartCast(GameObject caster, string ability_name)
+    void OnTryStartCast(GameObject who, string ability_name)
     {
-        if(caster!=gameObject) return;
+        if(who!=gameObject) return;
 
         if(!AllowCast) return;
 
         EventManager.Current.OnStartCast(gameObject, ability_name);
+
+        caster.StartCast(ability_name);
     }
 
     // ============================================================================
@@ -194,5 +178,4 @@ public class PakYa : MonoBehaviour
         return caster.isCasting;
     }    
     
-
 }

@@ -34,7 +34,7 @@ public class AgentFlee : MonoBehaviour
     // ============================================================================
 
     public Transform threat;
-    public float fleeRange=5;
+    public float fleeRange=10;
 
     public Vector3 axisMult = Vector3.one;
 

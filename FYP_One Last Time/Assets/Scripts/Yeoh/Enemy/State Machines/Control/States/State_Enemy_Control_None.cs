@@ -4,16 +4,16 @@ public class State_Enemy_Control_None : BaseState
 {
     public override string Name => "No Control";
 
-    EnemyAI enemy;
+    EnemyAI ai;
 
     public State_Enemy_Control_None(StateMachine_Enemy_Control sm)
     {
-        enemy = sm.enemy;
+        ai = sm.ai;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{enemy.gameObject.name} State: {Name}");
+        Debug.Log($"{ai.gameObject.name} State: {Name}");
 
         ToggleAllow(true);
     }

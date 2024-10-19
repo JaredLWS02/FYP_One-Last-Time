@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(SteerScript))]
+[RequireComponent(typeof(MoveScript))]
+[RequireComponent(typeof(TurnScript))]
 
-public class AgentSeek : MonoBehaviour
+public class AgentVelocity : MonoBehaviour
 {
     NavMeshAgent agent;
-    SteerScript steer;
+    MoveScript move;
+    TurnScript turn;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        steer = GetComponent<SteerScript>();
+        move = GetComponent<MoveScript>();
+        turn = GetComponent<TurnScript>();
     }
 
     // ============================================================================
@@ -24,27 +27,31 @@ public class AgentSeek : MonoBehaviour
         agent.updatePosition = false;
         agent.updateRotation = false;
 
-        agent.speed = steer.GetMoveSpeed();
-        agent.acceleration = steer.GetMoveAcceleration();
-        agent.angularSpeed = steer.GetTurnSpeed();
+        agent.speed = move.speed;
+        agent.acceleration = move.acceleration;
+        agent.angularSpeed = turn.turnSpeed;
         agent.stoppingDistance = stoppingRange;        
     }
+
+    // ============================================================================
+
+    public Transform goal;
+    
+    public Vector3 velocity {get; private set;} = Vector3.zero;
 
     void FixedUpdate()
     {
         agent.destination = goal ? goal.position : agent.transform.position;
 
-        Vector3 velocity = GetArrivalVelocity(agent.desiredVelocity);
+        if(!goal) return;
 
-        steer.UpdateSteer(velocity);
+        velocity = GetArrivalVelocity(agent.desiredVelocity);
 
         // set agent virtual pos to rigidbody pos
         agent.nextPosition = transform.position;
     }
 
     // ============================================================================
-
-    public Transform goal;
 
     [Header("Arrival")]
     public bool arrival=true;

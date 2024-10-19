@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AgentSeek))]
+[RequireComponent(typeof(AgentVelocity))]
 
 public class JumpAI : MonoBehaviour
 {
-    AgentSeek seek;
+    AgentVelocity seek;
 
     void Awake()
     {
-        seek = GetComponent<AgentSeek>();
+        seek = GetComponent<AgentVelocity>();
     }
     
     // ============================================================================
 
-    public Vector3 minRange = new(10, 15, 10);
+    public Vector3 range = new(10, 15, 10);
 
     void FixedUpdate()
     {
@@ -34,9 +34,9 @@ public class JumpAI : MonoBehaviour
         float y_distance = Mathf.Abs(pos.y - transform.position.y);
         float z_distance = Mathf.Abs(pos.z - transform.position.z);
 
-        return x_distance <= minRange.x &&
-            y_distance <= minRange.y &&
-            z_distance <= minRange.z;
+        return x_distance <= range.x &&
+            y_distance <= range.y &&
+            z_distance <= range.z;
     }
 
     void CheckHeight(Vector3 target)
@@ -63,6 +63,6 @@ public class JumpAI : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new(1,1,1,.5f);
-        Gizmos.DrawWireCube(transform.position, minRange);
+        Gizmos.DrawWireCube(transform.position, range);
     }
 }

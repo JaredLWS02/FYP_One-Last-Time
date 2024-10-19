@@ -7,48 +7,35 @@ using UnityEngine;
 public class SideMove : MonoBehaviour
 {
     MoveScript move;
-    SideTurn turn; // optional
 
     void Awake()
     {
         move = GetComponent<MoveScript>();
-        turn = GetComponent<SideTurn>();
+    }
+    
+    // ============================================================================
+
+    void FixedUpdate()
+    {
+        UpdateMove();
     }
 
     // ============================================================================
 
     float dirX;
 
-    public void OnMoveX(GameObject mover, float input_x)
+    public void OnMove(float input_x)
     {
-        if(mover!=gameObject) return;
-
         dirX = input_x;
-
-        isMoving=true;
     }
 
-    // ============================================================================
-    
-    bool isMoving;
-
-    void FixedUpdate()
-    {
-        if(!isMoving) dirX=0;
-
-        Move();
-
-        isMoving=false;
-    }
-
-    void Move()
+    void UpdateMove()
     {
         dirX = move.Round(dirX, 1);
         dirX = Mathf.Clamp(dirX, -1, 1);
 
         move.UpdateMove(move.speed * dirX, Vector3.right);
 
-        if(turn)
-        turn.TryTurn(dirX);
+        EventManager.Current.OnTryFaceX(gameObject, dirX);
     }    
 }

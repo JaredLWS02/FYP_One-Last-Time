@@ -4,23 +4,25 @@ public class State_Enemy_Control_AI_Attacking : BaseState
 {
     public override string Name => "AI Attacking";
 
-    EnemyAI enemy;
+    EnemyAI ai;
 
     public State_Enemy_Control_AI_Attacking(StateMachine_Enemy_Control sm)
     {
-        enemy = sm.enemy;
+        ai = sm.ai;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{enemy.gameObject.name} SubState: {Name}");
+        Debug.Log($"{ai.gameObject.name} SubState: {Name}");
 
         ToggleAllow(true);
+
+        ai.SetGoalEnemy();
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        enemy.FaceEnemy();
+        ai.FaceGoal();
     }
 
     protected override void OnExit()

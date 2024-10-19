@@ -64,6 +64,18 @@ public class EventManager : MonoBehaviour
         MoveXEvent?.Invoke(mover, input_x);
     } 
 
+    public event Action<GameObject, float> TryFaceXEvent;
+    public event Action<GameObject, float> FaceXEvent;
+
+    public void OnTryFaceX(GameObject who, float input_x)
+    {
+        TryFaceXEvent?.Invoke(who, input_x);
+    }  
+    public void OnFaceX(GameObject who, float input_x)
+    {
+        FaceXEvent?.Invoke(who, input_x);
+    } 
+    
     public event Action<GameObject, float> TryMoveYEvent;
     public event Action<GameObject, float> MoveYEvent;
 
@@ -78,6 +90,8 @@ public class EventManager : MonoBehaviour
 
     public event Action<GameObject, float> TryJumpEvent;
     public event Action<GameObject, float> JumpEvent;
+    public event Action<GameObject> TryAutoJumpEvent;
+    public event Action<GameObject> AutoJumpEvent;
 
     public void OnTryJump(GameObject jumper, float input)
     {
@@ -87,7 +101,15 @@ public class EventManager : MonoBehaviour
     {
         JumpEvent?.Invoke(jumper, input);
     }    
-
+    public void OnTryAutoJump(GameObject jumper)
+    {
+        TryAutoJumpEvent?.Invoke(jumper);
+    }    
+    public void OnAutoJump(GameObject jumper)
+    {
+        AutoJumpEvent?.Invoke(jumper);
+    }    
+    
     public event Action<GameObject, string> TryStartCastEvent;
     public event Action<GameObject, string> StartCastEvent;
     

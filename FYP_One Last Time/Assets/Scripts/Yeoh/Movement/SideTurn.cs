@@ -23,25 +23,25 @@ public class SideTurn : MonoBehaviour
     public bool faceR=true;
     public bool reverse;
 
-    public void TryTurn(float dir_x)
+    public void TryFlip(float dir_x)
     {
         if(reverse)
         {
             if((dir_x>0 && faceR) || (dir_x<0 && !faceR))
             {
-                Turn();
+                Flip();
             }
         }
         else
         {
             if((dir_x<0 && faceR) || (dir_x>0 && !faceR))
             {
-                Turn();
+                Flip();
             }
         }
     }
 
-    void Turn()
+    void Flip()
     {
         faceR=!faceR;
         //transform.Rotate(0, 180, 0);

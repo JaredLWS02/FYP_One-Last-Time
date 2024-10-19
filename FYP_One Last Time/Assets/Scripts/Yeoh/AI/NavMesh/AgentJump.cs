@@ -31,7 +31,7 @@ public class AgentJump : MonoBehaviour
 
     void FixedUpdate()
     {
-        StartJump();
+        CheckJump();
         UpdateJump();
         UpdateFaceJumpDir();
 
@@ -39,19 +39,27 @@ public class AgentJump : MonoBehaviour
         rb.isKinematic = true;
     }
 
+    void CheckJump()
+    {
+        if(!agent.isOnOffMeshLink) return;
+        if(isJumping) return;
+
+        EventManager.Current.OnTryAutoJump(gameObject);
+    }
+
     // ============================================================================
 
-    bool isJumping;
+    [HideInInspector]
+    public bool isJumping;
     float jumpProgress=0;
 
     Vector3 agentStartPos;
     Spline spline;
     bool isReversed;
 
-    void StartJump()
+    public void StartJump()
     {
         if(isJumping) return;
-        if(!agent.isOnOffMeshLink) return;
 
         isJumping=true;
         jumpProgress=0;

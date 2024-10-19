@@ -4,24 +4,24 @@ public class State_Enemy_Grounded : BaseState
 {
     public override string Name => "Grounded";
 
-    EnemyAI enemy;
+    EnemyAI ai;
 
     public State_Enemy_Grounded(StateMachine_Enemy sm)
     {
-        enemy = sm.enemy;
+        ai = sm.ai;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{enemy.gameObject.name} State: {Name}");
+        Debug.Log($"{ai.gameObject.name} State: {Name}");
 
         ToggleAllow(true);
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        enemy.AllowMoveX = true;
-        enemy.AllowMoveY = true;
+        ai.AllowMoveX = true;
+        ai.AllowMoveY = true;
     }
 
     protected override void OnExit()
@@ -31,6 +31,7 @@ public class State_Enemy_Grounded : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        enemy.AllowJump = toggle;
+        ai.AllowJump = toggle;
+        ai.AllowAutoJump = toggle;
     }
 }

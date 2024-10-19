@@ -35,9 +35,19 @@ public class Pilot : MonoBehaviour
 
     //  ============================================================================
 
+    public bool IsNone()
+    {
+        return type==Type.None;
+    }    
+
     public bool IsPlayer()
     {
         return type==Type.Player;
     }    
 
+    public bool IsAI()
+    {
+        return type==Type.AI;
+    }    
+    
 }

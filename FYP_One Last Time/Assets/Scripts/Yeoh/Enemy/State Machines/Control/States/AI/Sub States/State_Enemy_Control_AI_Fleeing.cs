@@ -1,26 +1,28 @@
 using UnityEngine;
 
-public class State_Enemy_Control_AI_Seeking : BaseState
+public class State_Enemy_Control_AI_Fleeing : BaseState
 {
-    public override string Name => "AI Seeking";
+    public override string Name => "AI Fleeing";
 
-    EnemyAI enemy;
+    EnemyAI ai;
 
-    public State_Enemy_Control_AI_Seeking(StateMachine_Enemy_Control sm)
+    public State_Enemy_Control_AI_Fleeing(StateMachine_Enemy_Control sm)
     {
-        enemy = sm.enemy;
+        ai = sm.ai;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{enemy.gameObject.name} SubState: {Name}");
+        Debug.Log($"{ai.gameObject.name} SubState: {Name}");
 
         ToggleAllow(true);
+
+        ai.SetThreatEnemy();
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        enemy.SeekEnemy();
+        ai.FaceGoal();
     }
 
     protected override void OnExit()
