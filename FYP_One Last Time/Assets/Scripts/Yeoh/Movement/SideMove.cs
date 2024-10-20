@@ -15,27 +15,21 @@ public class SideMove : MonoBehaviour
     
     // ============================================================================
 
+    public Vector3 sideAxis = Vector3.right;
+
     void FixedUpdate()
     {
-        UpdateMove();
+        dirX = move.Round(dirX, 1);
+
+        move.UpdateMoveMult(dirX, sideAxis);
     }
 
     // ============================================================================
 
     float dirX;
 
-    public void OnMove(float input_x)
+    public void UpdateMove(float input_x)
     {
         dirX = input_x;
     }
-
-    void UpdateMove()
-    {
-        dirX = move.Round(dirX, 1);
-        dirX = Mathf.Clamp(dirX, -1, 1);
-
-        move.UpdateMove(move.speed * dirX, Vector3.right);
-
-        EventManager.Current.OnTryFaceX(gameObject, dirX);
-    }    
 }

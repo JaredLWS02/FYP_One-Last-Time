@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turn2D : MonoBehaviour
+public class Rotate2D : MonoBehaviour
 {
     public float turnSpeed=10;
     [HideInInspector]
@@ -17,7 +17,6 @@ public class Turn2D : MonoBehaviour
 
     public Vector3Int turnAxis = new(0, 0, 1);
     public Vector3 angleOffsets = new(0, 0, -90);
-
     public bool linearTurn;
 
     // ============================================================================

@@ -75,11 +75,18 @@ public class PakYa : MonoBehaviour
 
     // ============================================================================
 
+    Vector2 moveInput;
+
     void OnInputMove(InputValue value)
     {
         if(!pilot.IsPlayer()) return;
 
-        Vector2 moveInput = value.Get<Vector2>();
+        moveInput = value.Get<Vector2>();
+    }
+
+    void Update()
+    {
+        if(!pilot.IsPlayer()) moveInput = Vector2.zero;
 
         EventManager.Current.OnTryMoveX(gameObject, moveInput.x);
         EventManager.Current.OnTryFaceX(gameObject, moveInput.x);
@@ -94,18 +101,18 @@ public class PakYa : MonoBehaviour
 
         EventManager.Current.OnMoveX(gameObject, input_x);
 
-        move.OnMove(input_x);
+        move.UpdateMove(input_x);
     }
 
     void OnTryFaceX(GameObject who, float input_x)
     {
         if(who!=gameObject) return;
 
-        if(!AllowMoveX) return;
+        if(!AllowMoveX) input_x=0;
 
         EventManager.Current.OnFaceX(gameObject, input_x);
 
-        turn.TryFlip(input_x);
+        turn.UpdateFlip(input_x);
     }
 
     void OnTryMoveY(GameObject who, float input_y)

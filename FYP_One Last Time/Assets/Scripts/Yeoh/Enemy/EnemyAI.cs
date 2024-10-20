@@ -104,7 +104,7 @@ public class EnemyAI : MonoBehaviour
 
         EventManager.Current.OnMoveX(gameObject, input_x);
 
-        move.OnMove(input_x);
+        move.UpdateMove(input_x);
     }
 
     void OnTryFaceX(GameObject who, float input_x)
@@ -117,7 +117,7 @@ public class EnemyAI : MonoBehaviour
 
         EventManager.Current.OnFaceX(gameObject, input_x);
 
-        turn.TryFlip(input_x);
+        turn.UpdateFlip(input_x);
     }
 
     void OnTryMoveY(GameObject who, float input_y)
@@ -160,7 +160,7 @@ public class EnemyAI : MonoBehaviour
 
         float dot_x = Vector3.Dot(jump_dir, Vector3.right);
 
-        turn.TryFlip(dot_x);
+        turn.UpdateFlip(dot_x);
     }
 
     // ============================================================================
@@ -337,21 +337,22 @@ public class EnemyAI : MonoBehaviour
 
     // ============================================================================
 
-    public bool IsFacingTarget(Transform target)
+    public void FaceMoveDir()
     {
-        return (target.position.x >= transform.position.x && turn.faceR)
-            || (target.position.x < transform.position.x && !turn.faceR);
+        float dot_x = Vector3.Dot(Vector3.right, agentV.velocity);
+
+        EventManager.Current.OnTryFaceX(gameObject, dot_x);
     }
 
     public void FaceTarget(GameObject target)
     {
         if(!target) return;
 
-        if(IsFacingTarget(target.transform)) return;
+        Vector3 agent_to_target = (target.transform.position - agent.transform.position).normalized;
 
-        float x_dir = turn.faceR ? -1 : 1;
+        float dot_x = Vector3.Dot(Vector3.right, agent_to_target);
 
-        EventManager.Current.OnTryFaceX(gameObject, x_dir);
+        EventManager.Current.OnTryFaceX(gameObject, dot_x);
     }
 
     public void FaceGoal()

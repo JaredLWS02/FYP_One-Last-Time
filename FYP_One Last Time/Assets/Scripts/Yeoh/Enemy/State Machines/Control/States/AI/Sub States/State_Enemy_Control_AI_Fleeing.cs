@@ -21,6 +21,8 @@ public class State_Enemy_Control_AI_Fleeing : BaseState
     protected override void OnUpdate(float deltaTime)
     {
         ai.SetThreatEnemy();
+
+        ai.FaceMoveDir();
     }
 
     protected override void OnExit()

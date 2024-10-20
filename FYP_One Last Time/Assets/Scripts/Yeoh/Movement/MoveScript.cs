@@ -28,8 +28,41 @@ public class MoveScript : MonoBehaviour
 
     // ============================================================================
 
-    public void UpdateMove(float speed, Vector3 direction)
+    public void UpdateMove(float speed_, Vector3 direction)
     {
+        float min_speed = -Mathf.Min(speed, clamp);
+        float max_speed = Mathf.Min(speed, clamp);
+
+        // never go past speed nor clamp
+        // also in the negatives
+        speed_ = Mathf.Clamp(speed_, min_speed, max_speed);
+
+        Move(speed_, direction);
+    }
+
+    public void UpdateMoveMult(float speed_mult, Vector3 direction)
+    {
+        // normalized between -1 and 1
+        speed_mult = Mathf.Clamp(speed_mult, -1, 1);
+
+        // choose speed or clamp
+        float speed_ = Mathf.Min(speed, clamp);
+        speed_ *= speed_mult;
+
+        UpdateMove(speed_, direction);
+    }
+
+    public void UpdateMove(Vector3 velocity)
+    {
+        UpdateMove(velocity.magnitude, velocity.normalized);
+    }
+
+    // ============================================================================
+    
+    void Move(float speed, Vector3 direction)
+    {
+        direction.Normalize();
+
         float accelRate = Mathf.Abs(speed)>0 ? acceleration : deceleration; // use decelerate value if no input, and vice versa
     
         float speedDif = speed - Vector3.Dot(direction, rb.velocity); // difference between current and target speed
@@ -38,13 +71,7 @@ public class MoveScript : MonoBehaviour
 
         rb.AddForce(direction * movement);
     }
-
-    public void UpdateMove(Vector3 direction)
-    {
-        float speed_ = Mathf.Min(speed, clamp);
-        UpdateMove(speed_, direction);
-    }
-
+    
     // ============================================================================
 
     Tween speedTween;
@@ -90,10 +117,10 @@ public class MoveScript : MonoBehaviour
 
     // ============================================================================
 
-    public void Push(Vector3 vector)
+    public void Push(Vector3 velocity)
     {
         rb.velocity = Vector3.zero;
-        rb.AddForce(vector, ForceMode.Impulse);
+        rb.AddForce(velocity, ForceMode.Impulse);
     }
 
     // ============================================================================

@@ -16,7 +16,6 @@ public class TurnScript : MonoBehaviour
     // ============================================================================
 
     public Vector3Int turnAxis = new(0, 1, 0);
-
     public bool linearTurn;
 
     // ============================================================================
@@ -24,6 +23,8 @@ public class TurnScript : MonoBehaviour
     public void UpdateTurn(Vector3 dir)
     {
         if(dir==Vector3.zero) return;
+
+        dir.Normalize();
 
         Quaternion lookRotation = Quaternion.LookRotation(dir);
 

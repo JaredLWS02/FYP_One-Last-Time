@@ -13,33 +13,65 @@ public class SideTurn : MonoBehaviour
         turn = GetComponent<TurnScript>();
     }
 
-    void FixedUpdate()
-    {
-        turn.UpdateTurn(faceR ? Vector3.right : Vector3.left);
-    }
-
     // ============================================================================
 
     public bool faceR=true;
     public bool reverse;
 
-    public void TryFlip(float dir_x)
+    void FixedUpdate()
     {
+        turn.UpdateTurn(faceR ? Vector3.right : Vector3.left);
+    }    
+
+    // ============================================================================
+
+    public void UpdateFlip(float dir_x)
+    {
+        if(isFlipDelaying) return;
+
         if(reverse)
         {
             if((dir_x>0 && faceR) || (dir_x<0 && !faceR))
             {
-                Flip();
+                StartFlipDelay();
             }
         }
         else
         {
             if((dir_x<0 && faceR) || (dir_x>0 && !faceR))
             {
-                Flip();
+                StartFlipDelay();
             }
         }
     }
+
+    // ============================================================================
+
+    [Header("Delay")]
+    public Vector2 flipDelay = new(0,.2f);
+
+    void StartFlipDelay()
+    {
+        if(FlipDelaying_crt!=null) StopCoroutine(FlipDelaying_crt);
+        FlipDelaying_crt = StartCoroutine(FlipDelaying());
+    }
+
+    bool isFlipDelaying;
+
+    Coroutine FlipDelaying_crt;
+
+    IEnumerator FlipDelaying()
+    {
+        isFlipDelaying=true;
+
+        float t = Random.Range(flipDelay.x, flipDelay.y);
+        yield return new WaitForSeconds(t);
+        Flip();
+
+        isFlipDelaying=false;
+    }
+
+    // ============================================================================
 
     void Flip()
     {

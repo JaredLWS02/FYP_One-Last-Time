@@ -21,6 +21,8 @@ public class State_Enemy_Control_AI_Idle : BaseState
     protected override void OnUpdate(float deltaTime)
     {
         ai.SetGoalWander();
+
+        ai.FaceMoveDir();
     }
 
     protected override void OnExit()

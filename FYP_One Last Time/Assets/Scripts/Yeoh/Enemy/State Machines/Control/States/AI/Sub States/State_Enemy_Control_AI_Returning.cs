@@ -21,6 +21,8 @@ public class State_Enemy_Control_AI_Returning : BaseState
     protected override void OnUpdate(float deltaTime)
     {
         ai.SetGoalSpawnpoint();
+        
+        ai.FaceMoveDir();
     }
 
     protected override void OnExit()

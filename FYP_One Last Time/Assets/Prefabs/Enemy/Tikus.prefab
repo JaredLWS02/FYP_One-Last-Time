@@ -417,6 +417,11 @@ MonoBehaviour:
   maxChaseDownRange: 7
   returnRange: 20
   showGizmos: 1
+  showArrivalRangeGizmo: 1
+  showMeleeRangeGizmo: 1
+  showMaintainDistanceGizmo: 1
+  showMaxChaseDownRangeGizmo: 1
+  showReturnRangeGizmo: 1
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!114 &7053281653195745219
 MonoBehaviour:
@@ -460,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a010c1a4d7df435429b5810874b7b556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sideAxis: {x: 1, y: 0, z: 0}
 --- !u!114 &1514896727660394715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceR: 1
   reverse: 0
+  flipDelay: {x: 0, y: 0.2}
   sprite: {fileID: 3716319433280079349}
 --- !u!114 &8893670741154941565
 MonoBehaviour:
