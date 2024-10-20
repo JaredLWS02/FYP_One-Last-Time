@@ -4,16 +4,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(PlatformEffector3D))]
+[RequireComponent(typeof(PassengerCarrier))]
 
 public class OneWayPlatform3D : MonoBehaviour
 {
     Collider coll;
     PlatformEffector3D effector;
+    PassengerCarrier carrier;
 
     void Awake()
     {
         coll = GetComponent<Collider>();
         effector = GetComponent<PlatformEffector3D>();
+        carrier = GetComponent<PassengerCarrier>();
     }
 
     // ============================================================================
@@ -29,70 +32,22 @@ public class OneWayPlatform3D : MonoBehaviour
 
     // ============================================================================
 
+    Dictionary<Collider, Coroutine> ignoringColl_crts = new();
+
     void OnMoveY(GameObject mover, float input_y)
     {
         if(input_y > -0.7f) return;
+        // ignore if mover is not any passenger
+        if(!carrier.IsPassenger(mover, out var passenger)) return;
 
-        foreach(var passenger in passengers)
+        Collider coll = passenger.coll;
+
+        if(ignoringColl_crts.TryGetValue(coll, out var crt))
         {
-            if(mover == passenger.gameObject)
-            {
-                if(passenger.timer!=null) StopCoroutine(passenger.timer);
-                passenger.timer = StartCoroutine(IgnoringColl(passenger.coll));
-            }
+            if(crt!=null) StopCoroutine(crt);
         }
-    }
 
-    // ============================================================================
-
-    void OnCollisionEnter(Collision other)
-    {
-        Rigidbody rb = other.rigidbody;
-        if(!rb) return;
-
-        Passenger new_passenger = NewPassenger(other);
-    
-        passengers.Add(new_passenger);
-    }
-
-    void OnCollisionExit(Collision other)
-    {
-        Rigidbody rb = other.rigidbody;
-        if(!rb) return;
-
-        // reversed forloop
-        for(int i=passengers.Count-1; i>=0; i--)
-        {
-            if(passengers[i].rb==rb)
-            {
-                passengers.RemoveAt(i);
-            }
-        }
-    }
-
-    // ============================================================================
-
-    class Passenger
-    {
-        public GameObject gameObject;
-        public Rigidbody rb;
-        public Collider coll;
-        public Coroutine timer;
-    }
-
-    List<Passenger> passengers = new();
-
-    Passenger NewPassenger(Collision other)
-    {
-        Rigidbody rb = other.rigidbody;
-
-        Passenger new_passenger = new();
-
-        new_passenger.gameObject = rb.gameObject;
-        new_passenger.rb = rb;
-        new_passenger.coll = other.collider;
-
-        return new_passenger;
+        ignoringColl_crts[coll] = StartCoroutine(IgnoringColl(coll));
     }
 
     // ============================================================================
@@ -101,8 +56,7 @@ public class OneWayPlatform3D : MonoBehaviour
     {
         if(coll)
         {
-            if(!effector.collidersToIgnore.Contains(coll))
-            effector.collidersToIgnore.Add(coll);
+            effector.TryAddColliderToIgnore(coll);
             
             IgnoreColl(coll, true);
         }
@@ -113,8 +67,7 @@ public class OneWayPlatform3D : MonoBehaviour
         {
             IgnoreColl(coll, false);
 
-            if(effector.collidersToIgnore.Contains(coll))
-            effector.collidersToIgnore.Remove(coll);
+            effector.TryRemoveColliderToIgnore(coll);
         }
     }
 

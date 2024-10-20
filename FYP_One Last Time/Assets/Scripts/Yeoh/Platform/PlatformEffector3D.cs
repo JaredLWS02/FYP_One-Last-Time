@@ -129,14 +129,33 @@ public class PlatformEffector3D : MonoBehaviour
     [HideInInspector]
     public List<Collider> collidersToIgnore = new();
 
+    public void TryAddColliderToIgnore(Collider coll)
+    {
+        if(!collidersToIgnore.Contains(coll))
+            collidersToIgnore.Add(coll);
+    }
+
+    public void TryRemoveColliderToIgnore(Collider coll)
+    {
+        if(collidersToIgnore.Contains(coll))
+            collidersToIgnore.Remove(coll);
+    }
+
+    bool ShouldIgnoreCollider(Collider coll)
+    {
+        return collidersToIgnore.Contains(coll);
+    }
+
     void RemoveNulls()
     {
         collidersToIgnore.RemoveAll(item => !item);
     }
 
+    // ============================================================================
+
     void OnTriggerStay(Collider other)
     {
-        if(collidersToIgnore.Contains(other)) return;
+        if(ShouldIgnoreCollider(other)) return;
 
         Rigidbody rb = other.attachedRigidbody;
         if(!rb) return;

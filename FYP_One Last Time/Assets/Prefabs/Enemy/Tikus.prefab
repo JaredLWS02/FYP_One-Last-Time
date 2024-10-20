@@ -553,7 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a4314937b99f24d9b0358b4b6c7222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canJump: 1
   jumpForce: 20
   jumpCooldown: 0.2
   extraJumps: 0
@@ -577,6 +576,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+  minLandVelocity: -1
   showGizmos: 1
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
   OnLandGround:
@@ -597,11 +597,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4494d85d82a9a7247bb6feb8f059a21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFallVelocity: -30
   fastFall: 1
   minVelocityBeforeFastFall: -0.1
   fastFallForce: -30
+  maxFallVelocity: -50
   y_velocity: 0
+  OnFallStart:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8405979632522786602
 MonoBehaviour:
   m_ObjectHideFlags: 0
