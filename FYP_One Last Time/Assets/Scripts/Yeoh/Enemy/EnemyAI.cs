@@ -61,6 +61,7 @@ public class EnemyAI : MonoBehaviour
         EventManager.Current.OnSpawn(gameObject);
 
         spawnpoint.parent = null;
+        spawnpoint.position = SnapToNavMesh(spawnpoint.position);
     }
 
     // ============================================================================
@@ -170,6 +171,8 @@ public class EnemyAI : MonoBehaviour
     {
         return autoJump.isJumping;
     }
+    
+    // ============================================================================
 
     [Header("HP Check")]
     public HPManager hp;
@@ -265,16 +268,27 @@ public class EnemyAI : MonoBehaviour
         return !IsInRange(spawnpoint.position, transform.position, returnRange);
     }
 
+    public bool IsAtSpawnpoint()
+    {
+        return IsInRange(spawnpoint.position, transform.position, arrivalRange);
+    }
+
+    // ============================================================================
+
+    Vector3 SnapToNavMesh(Vector3 pos)
+    {
+        if(NavMesh.SamplePosition(pos, out NavMeshHit hit, 9999, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+        return agent.transform.position;
+    }
+
     bool IsPathable(Vector3 pos)
     {
         NavMeshPath path = new();
         agent.CalculatePath(pos, path);
         return path.status == NavMeshPathStatus.PathComplete;
-    }
-
-    public bool IsAtSpawnpoint()
-    {
-        return IsInRange(spawnpoint.position, transform.position, arrivalRange);
     }
 
     // ============================================================================
