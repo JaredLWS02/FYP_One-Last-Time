@@ -40,6 +40,8 @@ public class AbilityCaster : MonoBehaviour
     {
         if(isCasting) return;
 
+        EventManager.Current.OnStartCast(gameObject, ability_name);
+
         AbilitySlot abilitySlot = abilityList.GetAbility(ability_name);
 
         // if dont have that ability

@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(AgentVelocity))]
 
-public class AI_VerticalityCheck : MonoBehaviour
+public class AgentVerticalityCheck : MonoBehaviour
 {
     AgentVelocity agentV;
 

@@ -79,6 +79,7 @@ public class AgentJump : MonoBehaviour
         isReversed = IsJumpReversed(link);
 
         OnJump?.Invoke();
+        EventManager.Current.OnAutoJump(gameObject, GetJumpDir());
     }
 
     bool IsJumpReversed(NavMeshLink link)
@@ -135,6 +136,7 @@ public class AgentJump : MonoBehaviour
         agent.CompleteOffMeshLink();
 
         OnLand?.Invoke();
+        EventManager.Current.OnLandGround(gameObject);
     }
 
     // ============================================================================

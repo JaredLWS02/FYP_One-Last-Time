@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 7786861728038490430}
   - component: {fileID: 418708997891478844}
   - component: {fileID: 1477388138496825184}
+  - component: {fileID: 412968695723508853}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -234,6 +235,47 @@ MonoBehaviour:
   normalSprite: {fileID: 0}
   updateInterval: 0.1
   enable: 1
+--- !u!114 &412968695723508853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719329177920231827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945b0772a9d4aec4c9a7de297abf2b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  target: {fileID: 5197452418422829730}
+  jumpScaleAnims:
+  - scaleTo: {x: 1.2, y: 0.8, z: 1.2}
+    seconds: 0.05
+    ease: 2
+  - scaleTo: {x: 0.8, y: 1.2, z: 0.8}
+    seconds: 0.05
+    ease: 2
+  - scaleTo: {x: 1, y: 1, z: 1}
+    seconds: 0.2
+    ease: 3
+  landScaleAnims:
+  - scaleTo: {x: 1.2, y: 0.8, z: 1.2}
+    seconds: 0.05
+    ease: 3
+  - scaleTo: {x: 1, y: 1, z: 1}
+    seconds: 0.15
+    ease: 4
+  dashScaleAnims:
+  - scaleTo: {x: 0.7, y: 1.3, z: 0.7}
+    seconds: 0.05
+    ease: 2
+  - scaleTo: {x: 1.3, y: 0.7, z: 1.3}
+    seconds: 0.05
+    ease: 3
+  - scaleTo: {x: 1, y: 1, z: 1}
+    seconds: 0.1
+    ease: 3
 --- !u!1 &3430685766635650827
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,7 +600,7 @@ MonoBehaviour:
   maxFallVelocity: -30
   fastFall: 1
   minVelocityBeforeFastFall: -0.1
-  fastFallForce: -15
+  fastFallForce: -30
   y_velocity: 0
 --- !u!114 &8405979632522786602
 MonoBehaviour:
