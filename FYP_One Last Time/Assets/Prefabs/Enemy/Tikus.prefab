@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 5609296010924524344}
   - component: {fileID: 4228785471254801634}
   - component: {fileID: 2982932667220849315}
+  - component: {fileID: 5059005152113843592}
   m_Layer: 6
   m_Name: Tikus
   m_TagString: Enemy
@@ -511,7 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canJump: 1
-  jumpForce: 15
+  jumpForce: 20
   jumpCooldown: 0.2
   extraJumps: 0
   jumpBufferTime: 0.2
@@ -628,8 +629,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1faf628c0046454684eda5109feaaa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldXAxis: {x: 1, y: 0, z: 0}
-  worldYAxis: {x: 0, y: 1, z: 0}
 --- !u!114 &5609296010924524344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,6 +687,23 @@ MonoBehaviour:
   axisMult: {x: 1, y: 1, z: 0}
   showGizmos: 1
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.5176471}
+--- !u!114 &5059005152113843592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3522842e4e1187244a9c40ad6ed6121a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkHeightInterval: 0.25
+  checkingRange: 6
+  verticalCheckHeight: 2.5
+  showGizmos: 1
+  gizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0
