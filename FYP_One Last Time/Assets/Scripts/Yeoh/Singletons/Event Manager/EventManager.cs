@@ -50,7 +50,7 @@ public class EventManager : MonoBehaviour
         SwitchPilotEvent?.Invoke(who, to);
     }   
 
-    // Actions ==================================================================================================================
+    // Movement ==================================================================================================================
 
     public event Action<GameObject, float> TryMoveXEvent;
     public event Action<GameObject, float> MoveXEvent;
@@ -110,19 +110,17 @@ public class EventManager : MonoBehaviour
         AutoJumpEvent?.Invoke(jumper, jump_dir);
     }    
     
-    public event Action<GameObject, string> TryStartCastEvent;
-    public event Action<GameObject, string> StartCastEvent;
-    
-    public void OnTryStartCast(GameObject caster, string ability_name)
+    public event Action<GameObject> FastFallStartEvent;
+    public event Action<GameObject> FastFallEndEvent;
+
+    public void OnFastFallStart(GameObject who)
     {
-        TryStartCastEvent?.Invoke(caster, ability_name);
+        FastFallStartEvent?.Invoke(who);
     }
-    public void OnStartCast(GameObject caster, string ability_name)
+    public void OnFastFallEnd(GameObject who)
     {
-        StartCastEvent?.Invoke(caster, ability_name);
-    }
-    
-    // Ground ==================================================================================================================
+        FastFallEndEvent?.Invoke(who);
+    }    
 
     public event Action<GameObject> LandGroundEvent;
     public event Action<GameObject> LeaveGroundEvent;
@@ -134,7 +132,7 @@ public class EventManager : MonoBehaviour
     public void OnLeaveGround(GameObject who)
     {
         LeaveGroundEvent?.Invoke(who);
-    }
+    }    
 
     // Combat ==================================================================================================================
 
@@ -160,7 +158,7 @@ public class EventManager : MonoBehaviour
         DeathEvent?.Invoke(victim, killer, attack, contactPoint);
     }
 
-    // Item ==================================================================================================================
+    // Inventory ==================================================================================================================
     
     public event Action<GameObject, GameObject, LootInfo> LootEvent;
 
@@ -170,6 +168,18 @@ public class EventManager : MonoBehaviour
     }
 
     // Ability ==================================================================================================================
+
+    public event Action<GameObject, string> TryStartCastEvent;
+    public event Action<GameObject, string> StartCastEvent;
+    
+    public void OnTryStartCast(GameObject caster, string ability_name)
+    {
+        TryStartCastEvent?.Invoke(caster, ability_name);
+    }
+    public void OnStartCast(GameObject caster, string ability_name)
+    {
+        StartCastEvent?.Invoke(caster, ability_name);
+    }
 
     public event Action<GameObject, AbilitySlot> CastingEvent;
     public event Action<GameObject, AbilitySlot> CastWindUpEvent;

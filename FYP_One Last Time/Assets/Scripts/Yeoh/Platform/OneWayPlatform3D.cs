@@ -32,8 +32,6 @@ public class OneWayPlatform3D : MonoBehaviour
 
     // ============================================================================
 
-    Dictionary<Collider, Coroutine> ignoringColl_crts = new();
-
     void OnMoveY(GameObject mover, float input_y)
     {
         if(input_y > -0.7f) return;
@@ -42,15 +40,22 @@ public class OneWayPlatform3D : MonoBehaviour
 
         Collider coll = passenger.coll;
 
-        if(ignoringColl_crts.TryGetValue(coll, out var crt))
-        {
-            if(crt!=null) StopCoroutine(crt);
-        }
+        TryStopCoroutine(coll);
 
         ignoringColl_crts[coll] = StartCoroutine(IgnoringColl(coll));
     }
 
     // ============================================================================
+
+    Dictionary<Collider, Coroutine> ignoringColl_crts = new();
+
+    void TryStopCoroutine(Collider coll)
+    {
+        if(ignoringColl_crts.TryGetValue(coll, out var crt))
+        {
+            if(crt!=null) StopCoroutine(crt);
+        }
+    }
 
     IEnumerator IgnoringColl(Collider coll)
     {

@@ -17,19 +17,20 @@ public class FallScript : MonoBehaviour
     void FixedUpdate()
     {
         UpdateFastFalling();
+        UpdateFastFallCheck();
         UpdateMaxFall();
 
         UpdateDebug();
 
-        UpdateFallStartCheck();
     }
 
     // ============================================================================
 
     [Header("Fast Falling")]
     public bool fastFall = true;
-    public float minVelocityBeforeFastFall = -.1f;
+    public float minFastFallVelocity = -1;
     public float fastFallForce = -30;
+    bool fastFallStarted;
 
     bool IsFalling()
     {
@@ -40,7 +41,7 @@ public class FallScript : MonoBehaviour
     {
         if(!IsFalling()) return false;
 
-        return rb.velocity.y < minVelocityBeforeFastFall;
+        return rb.velocity.y < minFastFallVelocity;
     }
 
     void UpdateFastFalling()
@@ -50,6 +51,22 @@ public class FallScript : MonoBehaviour
         if(IsFastFalling())
         {
             rb.AddForce(Vector3.up * fastFallForce);
+        }
+    }
+
+    void UpdateFastFallCheck()
+    {
+        if(!fastFallStarted && IsFastFalling())
+        {
+            fastFallStarted=true;
+            OnFastFallStart.Invoke();
+            EventManager.Current.OnFastFallStart(gameObject);
+        }
+        else if(fastFallStarted && !IsFalling())
+        {
+            fastFallStarted=false;
+            OnFastFallEnd.Invoke();
+            EventManager.Current.OnFastFallEnd(gameObject);
         }
     }
 
@@ -65,7 +82,6 @@ public class FallScript : MonoBehaviour
         if(rb.velocity.y < maxFallVelocity)
         {
             rb.velocity = new(rb.velocity.x, maxFallVelocity, rb.velocity.z);
-            return;
         }
     }
 
@@ -91,21 +107,8 @@ public class FallScript : MonoBehaviour
     }
 
     // ============================================================================
-
+    
     [Header("Events")]
-    public UnityEvent OnFallStart;
-    bool fallStarted;
-
-    void UpdateFallStartCheck()
-    {
-        if(!fallStarted && IsFastFalling())
-        {
-            fallStarted=true;
-            OnFallStart.Invoke();
-        }
-        else if(fallStarted && !IsFastFalling())
-        {
-            fallStarted=false;
-        }
-    }
+    public UnityEvent OnFastFallStart;
+    public UnityEvent OnFastFallEnd;
 }

@@ -28,6 +28,7 @@ public class SquashStretchAnim : MonoBehaviour
     // ============================================================================
 
     public List<ScaleAnim> jumpScaleAnims;
+    public List<ScaleAnim> fallScaleAnims;
     public List<ScaleAnim> landScaleAnims;
     public List<ScaleAnim> dashScaleAnims;
 
@@ -44,21 +45,31 @@ public class SquashStretchAnim : MonoBehaviour
         {
             new ScaleAnim
             {
-                scaleTo = new(1.2f, .8f, 1.2f),
-                seconds = .05f,
+                scaleTo = new(1.2f, 0.8f, 1.2f),
+                seconds = 0.05f,
                 ease = Ease.InSine,
             },
             new ScaleAnim
             {
-                scaleTo = new(.8f, 1.2f, .8f),
-                seconds = .05f,
+                scaleTo = new(0.8f, 1.2f, 0.8f),
+                seconds = 0.05f,
                 ease = Ease.InSine,
             },
             new ScaleAnim
             {
                 scaleTo = defaultScale,
-                seconds = .2f,
+                seconds = 0.2f,
                 ease = Ease.OutSine,
+            },
+        };
+
+        fallScaleAnims = new List<ScaleAnim>
+        {
+            new ScaleAnim
+            {
+                scaleTo = new(0.8f, 1.2f, 0.8f),
+                seconds = 1,
+                ease = Ease.InSine,
             },
         };
 
@@ -66,14 +77,14 @@ public class SquashStretchAnim : MonoBehaviour
         {
             new ScaleAnim
             {
-                scaleTo = new(1.2f, .8f, 1.2f),
-                seconds = .05f,
+                scaleTo = new(1.2f, 0.8f, 1.2f),
+                seconds = 0.05f,
                 ease = Ease.OutSine,
             },
             new ScaleAnim
             {
                 scaleTo = defaultScale,
-                seconds = .15f,
+                seconds = 0.15f,
                 ease = Ease.InOutSine,
             },
         };
@@ -82,20 +93,20 @@ public class SquashStretchAnim : MonoBehaviour
         {
             new ScaleAnim
             {
-                scaleTo = new(.7f, 1.3f, .7f),
-                seconds = .05f,
+                scaleTo = new(0.7f, 1.3f, 0.7f),
+                seconds = 0.05f,
                 ease = Ease.InSine,
             },
             new ScaleAnim
             {
-                scaleTo = new(1.3f, .7f, 1.3f),
-                seconds = .05f,
+                scaleTo = new(1.3f, 0.7f, 1.3f),
+                seconds = 0.05f,
                 ease = Ease.OutSine,
             },
             new ScaleAnim
             {
                 scaleTo = defaultScale,
-                seconds = .1f,
+                seconds = 0.1f,
                 ease = Ease.OutSine,
             },
         };
@@ -116,29 +127,34 @@ public class SquashStretchAnim : MonoBehaviour
 
     void PlayScaleAnims(List<ScaleAnim> scaleAnims)
     {
-        if(PlayingScaleAnims_crt!=null) StopCoroutine(PlayingScaleAnims_crt);
+        TryStopCoroutine(PlayingScaleAnims_crt);
         PlayingScaleAnims_crt = StartCoroutine(PlayingScaleAnims(scaleAnims));
     }
 
     Coroutine PlayingScaleAnims_crt;
 
+    void TryStopCoroutine(Coroutine crt)
+    {
+        if(crt!=null) StopCoroutine(crt);
+    }
+
     IEnumerator PlayingScaleAnims(List<ScaleAnim> scaleAnims)
     {
         for(int i=0; i<scaleAnims.Count; i++)
         {
-            // if not first, wait for previous tween to finish
-            if(i>0) yield return new WaitForSeconds(scaleAnims[i-1].seconds);
-
             TweenScale(scaleAnims[i].scaleTo, scaleAnims[i].seconds, scaleAnims[i].ease);
+
+            yield return new WaitForSeconds(scaleAnims[i].seconds);
         }
     }
 
     // ============================================================================
 
-    public void Cancel()
+    public void CancelAnims()
     {
-        if(PlayingScaleAnims_crt!=null) StopCoroutine(PlayingScaleAnims_crt);
+        TryStopCoroutine(PlayingScaleAnims_crt);
         scaleTween.Stop();
+        target.localScale = defaultScale;
     }
 
     // ============================================================================
@@ -147,6 +163,8 @@ public class SquashStretchAnim : MonoBehaviour
     {
         EventManager.Current.JumpEvent += OnJump;
         EventManager.Current.AutoJumpEvent += OnAutoJump;
+        //EventManager.Current.FastFallStartEvent += OnFallStart;
+        //EventManager.Current.FastFallEndEvent += OnFallEnd;
         EventManager.Current.LandGroundEvent += OnLand;
         //EventManager.Current.DashEvent += OnDash;
     }
@@ -154,6 +172,8 @@ public class SquashStretchAnim : MonoBehaviour
     {
         EventManager.Current.JumpEvent -= OnJump;
         EventManager.Current.AutoJumpEvent -= OnAutoJump;
+        //EventManager.Current.FastFallStartEvent -= OnFallStart;
+        //EventManager.Current.FastFallEndEvent -= OnFallEnd;
         EventManager.Current.LandGroundEvent -= OnLand;
         //EventManager.Current.DashEvent -= OnDash;
     }
@@ -164,20 +184,48 @@ public class SquashStretchAnim : MonoBehaviour
     {
         if(jumper!=owner) return;
 
-        if(input>0) PlayScaleAnims(jumpScaleAnims);
+        if(input>0)
+        // wait for OnFallEnd to cancel all first
+        Invoke(nameof(Jump), 0.01f);
     }
 
     public void OnAutoJump(GameObject jumper, Vector3 jump_dir)
     {
         if(jumper!=owner) return;
 
+        // wait for OnFallEnd to cancel all first
+        Invoke(nameof(Jump), 0.01f);
+    }
+
+    public void Jump()
+    {
         PlayScaleAnims(jumpScaleAnims);
     }
+
+    // public void OnFallStart(GameObject who)
+    // {
+    //     if(who!=owner) return;
+
+    //     PlayScaleAnims(fallScaleAnims);
+    // }
+
+    // public void OnFallEnd(GameObject who)
+    // {
+    //     if(who!=owner) return;
+
+    //     print($"{owner.name}: fall ended");
+    //     //CancelAnims();
+    // }
 
     public void OnLand(GameObject who)
     {
         if(who!=owner) return;
+        // wait for OnFallEnd to cancel all first
+        Invoke(nameof(Land), 0.01f);
+    }
 
+    public void Land()
+    {
         PlayScaleAnims(landScaleAnims);
     }
 
@@ -185,6 +233,12 @@ public class SquashStretchAnim : MonoBehaviour
     {
         if(who!=owner) return;
 
+        // wait for OnFallEnd to cancel all first
+        Invoke(nameof(Dash), 0.01f);
+    }
+
+    public void Dash()
+    {
         PlayScaleAnims(dashScaleAnims);
     }
 

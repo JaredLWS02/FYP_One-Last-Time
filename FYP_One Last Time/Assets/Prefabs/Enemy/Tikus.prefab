@@ -259,6 +259,10 @@ MonoBehaviour:
   - scaleTo: {x: 1, y: 1, z: 1}
     seconds: 0.2
     ease: 3
+  fallScaleAnims:
+  - scaleTo: {x: 0.8, y: 1.2, z: 0.8}
+    seconds: 1
+    ease: 2
   landScaleAnims:
   - scaleTo: {x: 1.2, y: 0.8, z: 1.2}
     seconds: 0.05
@@ -598,11 +602,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fastFall: 1
-  minVelocityBeforeFastFall: -0.1
+  minFastFallVelocity: -1
   fastFallForce: -30
   maxFallVelocity: -50
   y_velocity: 0
-  OnFallStart:
+  OnFastFallStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFastFallEnd:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &8405979632522786602

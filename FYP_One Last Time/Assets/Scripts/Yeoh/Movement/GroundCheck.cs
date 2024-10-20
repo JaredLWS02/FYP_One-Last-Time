@@ -82,8 +82,8 @@ public class GroundCheck : MonoBehaviour
             // going down only
             if(rb.velocity.y < minLandVelocity)
             {
-                EventManager.Current.OnLandGround(gameObject);
                 OnLandGround.Invoke();
+                EventManager.Current.OnLandGround(gameObject);
             }
         }
     }
@@ -92,8 +92,8 @@ public class GroundCheck : MonoBehaviour
     {
         if(previous_colliders.Count > 0 && current_colliders.Count==0)
         {
-            EventManager.Current.OnLeaveGround(gameObject);
             OnLeaveGround.Invoke();
+            EventManager.Current.OnLeaveGround(gameObject);
         }
     }
 
