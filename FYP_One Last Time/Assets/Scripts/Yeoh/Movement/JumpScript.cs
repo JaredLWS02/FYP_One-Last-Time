@@ -39,17 +39,25 @@ public class JumpScript : MonoBehaviour
         UpdateCoyoteTime();
         
         TryJump();
-    }    
+    }
+
+    // ============================================================================
+
+    public bool CanJump()
+    {
+        if(isJumpCooling) return false;
+
+        if(extraJumpsLeft<=0) return false;
+
+        return true;
+    }
 
     // ============================================================================
     
-    public bool canJump=true;
     public float jumpForce=10;
 
     void TryJump()
     {
-        if(!canJump) return;
-
         if(!HasJumpBuffer()) return;
 
         if(HasCoyoteTime())
@@ -74,6 +82,8 @@ public class JumpScript : MonoBehaviour
 
         jumpBufferLeft = -1;
         coyoteTimeLeft = -1;
+
+        EventManager.Current.OnJump(gameObject, 1);
     }
 
     // Cooldown ============================================================================
@@ -162,6 +172,9 @@ public class JumpScript : MonoBehaviour
         if(rb.velocity.y>0)
         {
             rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
+
+            EventManager.Current.OnJump(gameObject, 0);
         }
-    }    
+    }
+    
 }

@@ -3,8 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Rigidbody))]
+
 public class GroundCheck : MonoBehaviour
 {
+    Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+    
+    // ============================================================================
+
     public Vector3 boxSize = new(.5f, .05f, .5f);
     public Vector3 boxOffset = Vector3.zero;
 
@@ -62,12 +73,18 @@ public class GroundCheck : MonoBehaviour
 
     // ============================================================================
 
+    public float minLandVelocity = -1;
+
     void OnBoxEnter(Collider other)
     {
         if(previous_colliders.Count==0 && current_colliders.Count > 0)
         {
-            EventManager.Current.OnLandGround(gameObject);
-            OnLandGround.Invoke();
+            // going down only
+            if(rb.velocity.y < minLandVelocity)
+            {
+                EventManager.Current.OnLandGround(gameObject);
+                OnLandGround.Invoke();
+            }
         }
     }
     

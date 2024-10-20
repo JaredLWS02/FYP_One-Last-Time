@@ -143,9 +143,7 @@ public class PakYa : MonoBehaviour
 
         if(!AllowJump) return;
 
-        EventManager.Current.OnJump(gameObject, input);
-
-        jump.OnJump(input);
+        jump.OnJump(input);        
     }
 
     // ============================================================================
@@ -162,9 +160,7 @@ public class PakYa : MonoBehaviour
         if(who!=gameObject) return;
 
         if(!AllowCast) return;
-
-        EventManager.Current.OnStartCast(gameObject, ability_name);
-
+        
         caster.StartCast(ability_name);
     }
 

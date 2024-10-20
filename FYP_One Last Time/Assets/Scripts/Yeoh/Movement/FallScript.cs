@@ -39,7 +39,7 @@ public class FallScript : MonoBehaviour
     [Header("Fast Falling")]
     public bool fastFall = true;
     public float minVelocityBeforeFastFall = -.1f;
-    public float fastFallForce = -15;
+    public float fastFallForce = -30;
 
     void UpdateFastFalling()
     {

@@ -141,8 +141,6 @@ public class EnemyAI : MonoBehaviour
 
         if(!AllowJump) return;
 
-        EventManager.Current.OnJump(gameObject, input);
-
         jump.OnJump(input);
     }
 
@@ -153,8 +151,6 @@ public class EnemyAI : MonoBehaviour
         if(who!=gameObject) return;
 
         if(!AllowAutoJump) return;
-
-        EventManager.Current.OnAutoJump(gameObject, jump_dir);
 
         autoJump.StartJump();
 
