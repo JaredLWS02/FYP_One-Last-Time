@@ -10,15 +10,16 @@ using UnityEngine.AI;
 [RequireComponent(typeof(JumpScript))]
 [RequireComponent(typeof(GroundCheck))]
 
-[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Radar))]
+[RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(AgentVelocity))]
 [RequireComponent(typeof(AgentSideMove))]
 [RequireComponent(typeof(AgentJump))]
 [RequireComponent(typeof(AgentWander))]
 [RequireComponent(typeof(AgentFlee))]
+[RequireComponent(typeof(AgentReturn))]
 
-public class EnemyAI : MonoBehaviour
+public class AgentAI : MonoBehaviour
 {
     [HideInInspector]
     public Pilot pilot;
@@ -28,13 +29,14 @@ public class EnemyAI : MonoBehaviour
     JumpScript jump;
     GroundCheck ground;
 
-    NavMeshAgent agent;
     Radar radar;
+    NavMeshAgent agent;
     AgentVelocity agentV;
     AgentSideMove agentMove;
     AgentJump autoJump;
     AgentWander wander;
     AgentFlee flee;
+    AgentReturn returner;
 
     void Awake()
     {
@@ -45,23 +47,19 @@ public class EnemyAI : MonoBehaviour
         jump = GetComponent<JumpScript>();
         ground = GetComponent<GroundCheck>();
 
-        agent = GetComponent<NavMeshAgent>();
         radar = GetComponent<Radar>();
+        agent = GetComponent<NavMeshAgent>();
         agentV = GetComponent<AgentVelocity>();
         agentMove = GetComponent<AgentSideMove>();
         autoJump = GetComponent<AgentJump>();
         wander = GetComponent<AgentWander>();
         flee = GetComponent<AgentFlee>();
+        returner = GetComponent<AgentReturn>();
     }
-
-    public Transform spawnpoint;
 
     void Start()
     {
         EventManager.Current.OnSpawn(gameObject);
-
-        spawnpoint.parent = null;
-        spawnpoint.position = SnapToNavMesh(spawnpoint.position);
     }
 
     // ============================================================================
@@ -171,18 +169,29 @@ public class EnemyAI : MonoBehaviour
     {
         return autoJump.isJumping;
     }
+
+    public bool ShouldReturn()
+    {
+        Vector3 enemy_pos = GetEnemy().transform.position;
+        return returner.ShouldReturn(enemy_pos);
+    }
+
+    public bool IsAtSpawnpoint()
+    {
+        return returner.IsAtSpawnpoint(agentV.stoppingRange);
+    }
     
     // ============================================================================
 
     [Header("HP Check")]
-    public HPManager hp;
+    public HPManager hpM;
     public float healthyMinPercent=50;
 
     public bool IsHealthy()
     {
-        if(!hp) return true;
+        if(!hpM) return true;
 
-        return hp.GetHPPercent() >= healthyMinPercent;
+        return hpM.GetHPPercent() >= healthyMinPercent;
     }
 
     // ============================================================================
@@ -210,7 +219,7 @@ public class EnemyAI : MonoBehaviour
 
     [Header("Ranges")]
     public float arrivalRange=1;
-    public float meleeRange=3;
+    public float attackRange=3;
 
     public float GetCurrentRange()
     {
@@ -254,45 +263,6 @@ public class EnemyAI : MonoBehaviour
 
     // ============================================================================
     
-    public float maxChaseDownRange=7;
-    public float returnRange=20;
-
-    public bool ShouldReturn()
-    {
-        // ignore if cant find a way back
-        if(!IsPathable(spawnpoint.position)) return false;
-
-        // ignore if still close to enemy
-        if(IsInRange(GetEnemy(), maxChaseDownRange)) return false;
-
-        return !IsInRange(spawnpoint.position, transform.position, returnRange);
-    }
-
-    public bool IsAtSpawnpoint()
-    {
-        return IsInRange(spawnpoint.position, transform.position, arrivalRange);
-    }
-
-    // ============================================================================
-
-    Vector3 SnapToNavMesh(Vector3 pos)
-    {
-        if(NavMesh.SamplePosition(pos, out NavMeshHit hit, 9999, NavMesh.AllAreas))
-        {
-            return hit.position;
-        }
-        return agent.transform.position;
-    }
-
-    bool IsPathable(Vector3 pos)
-    {
-        NavMeshPath path = new();
-        agent.CalculatePath(pos, path);
-        return path.status == NavMeshPathStatus.PathComplete;
-    }
-
-    // ============================================================================
-
     public GameObject GetCurrentGoal()
     {
         return agentV.goal.gameObject;
@@ -324,7 +294,7 @@ public class EnemyAI : MonoBehaviour
 
     public void SetGoalEnemy()
     {
-        SetRange(meleeRange);
+        SetRange(attackRange);
         SetGoal(GetEnemy());
     }
 
@@ -342,7 +312,7 @@ public class EnemyAI : MonoBehaviour
     public void SetGoalSpawnpoint()
     {
         SetRange(arrivalRange);
-        SetGoal(spawnpoint);
+        SetGoal(returner.spawnpoint);
     }
 
     // ============================================================================
@@ -410,8 +380,6 @@ public class EnemyAI : MonoBehaviour
     public bool showArrivalRangeGizmo = true;
     public bool showMeleeRangeGizmo = true;
     public bool showMaintainDistanceGizmo = true;
-    public bool showMaxChaseDownRangeGizmo = true;
-    public bool showReturnRangeGizmo = true;
 
     public Color gizmoColor = new(1, 1, 1, .25f);
 
@@ -425,18 +393,9 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, arrivalRange);
 
         if(showMeleeRangeGizmo)
-        Gizmos.DrawWireSphere(transform.position, meleeRange);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
 
         if(showMaintainDistanceGizmo)
         Gizmos.DrawWireSphere(transform.position, maintainDistance);
-
-        if(showMaxChaseDownRangeGizmo)
-        Gizmos.DrawWireSphere(transform.position, maxChaseDownRange);
-
-        if(showReturnRangeGizmo)
-        {
-            Vector3 spawn_pos = Application.isPlaying ? spawnpoint.position : transform.position;
-            Gizmos.DrawWireSphere(spawn_pos, returnRange);
-        }
     }
 }

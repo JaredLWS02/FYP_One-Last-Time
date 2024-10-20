@@ -1,27 +1,27 @@
 using UnityEngine;
 
-public class State_Enemy_Grounded : BaseState
+public class State_Agent_Grounded : BaseState
 {
     public override string Name => "Grounded";
 
-    EnemyAI ai;
+    AgentAI agent;
 
-    public State_Enemy_Grounded(StateMachine_Enemy sm)
+    public State_Agent_Grounded(StateMachine_Agent sm)
     {
-        ai = sm.ai;
+        agent = sm.agent;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{ai.gameObject.name} State: {Name}");
+        Debug.Log($"{agent.gameObject.name} State: {Name}");
 
         ToggleAllow(true);
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        ai.AllowMoveX = true;
-        ai.AllowMoveY = true;
+        agent.AllowMoveX = true;
+        agent.AllowMoveY = true;
     }
 
     protected override void OnExit()
@@ -31,7 +31,7 @@ public class State_Enemy_Grounded : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        ai.AllowJump = toggle;
-        ai.AllowAutoJump = toggle;
+        agent.AllowJump = toggle;
+        agent.AllowAutoJump = toggle;
     }
 }

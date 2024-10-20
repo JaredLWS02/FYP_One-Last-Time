@@ -1,27 +1,27 @@
 using UnityEngine;
 
-public class State_Enemy_AutoJumping : BaseState
+public class State_Agent_AutoJumping : BaseState
 {
     public override string Name => "AutoJumping";
 
-    EnemyAI ai;
+    AgentAI agent;
 
-    public State_Enemy_AutoJumping(StateMachine_Enemy sm)
+    public State_Agent_AutoJumping(StateMachine_Agent sm)
     {
-        ai = sm.ai;
+        agent = sm.agent;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{ai.gameObject.name} State: {Name}");
+        Debug.Log($"{agent.gameObject.name} State: {Name}");
 
         ToggleAllow(true);
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        ai.AllowMoveX = false;
-        ai.AllowMoveY = false;
+        agent.AllowMoveX = false;
+        agent.AllowMoveY = false;
     }
 
     protected override void OnExit()

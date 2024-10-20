@@ -338,10 +338,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6415192565362938597}
   - component: {fileID: 8915720888079556032}
-  - component: {fileID: 7015130824575028965}
-  - component: {fileID: 1202456919539228410}
   - component: {fileID: 4411169975042275805}
   - component: {fileID: 7053281653195745219}
+  - component: {fileID: 7015130824575028965}
+  - component: {fileID: 1202456919539228410}
   - component: {fileID: 3371146443251301953}
   - component: {fileID: 5193524905132986524}
   - component: {fileID: 1514896727660394715}
@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 4228785471254801634}
   - component: {fileID: 2982932667220849315}
   - component: {fileID: 5059005152113843592}
+  - component: {fileID: 1052805118213280258}
   m_Layer: 6
   m_Name: Tikus
   m_TagString: Enemy
@@ -410,6 +411,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
+--- !u!114 &4411169975042275805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73da3e4b6aafe624bbecb82ec7f72923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pilot: {fileID: 0}
+  AllowMoveX: 0
+  AllowMoveY: 0
+  AllowJump: 0
+  AllowAutoJump: 0
+  hp: {fileID: 0}
+  healthyMinPercent: 50
+  enemyTag: Player
+  lootTag: Loot
+  arrivalRange: 1
+  attackRange: 3
+  maintainDistance: 2
+  showGizmos: 1
+  showArrivalRangeGizmo: 1
+  showMeleeRangeGizmo: 1
+  showMaintainDistanceGizmo: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
+--- !u!114 &7053281653195745219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8295c98bc64c543948f2e70d08f856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
 --- !u!114 &7015130824575028965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,54 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ed8bb89c688f54db46642aab12c211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ai: {fileID: 0}
---- !u!114 &4411169975042275805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73da3e4b6aafe624bbecb82ec7f72923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pilot: {fileID: 0}
-  spawnpoint: {fileID: 6462888529248085389}
-  AllowMoveX: 0
-  AllowMoveY: 0
-  AllowJump: 0
-  AllowAutoJump: 0
-  hp: {fileID: 0}
-  healthyMinPercent: 50
-  enemyTag: Player
-  lootTag: Loot
-  arrivalRange: 1
-  meleeRange: 3
-  maintainDistance: 2
-  maxChaseDownRange: 7
-  returnRange: 20
-  showGizmos: 1
-  showArrivalRangeGizmo: 1
-  showMeleeRangeGizmo: 1
-  showMaintainDistanceGizmo: 1
-  showMaxChaseDownRangeGizmo: 1
-  showReturnRangeGizmo: 1
-  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
---- !u!114 &7053281653195745219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f8295c98bc64c543948f2e70d08f856, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ai: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!114 &3371146443251301953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,6 +752,25 @@ MonoBehaviour:
   verticalCheckHeight: 2.5
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
+--- !u!114 &1052805118213280258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f575e457a871c41996a48186071cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnpoint: {fileID: 6462888529248085389}
+  maxChaseDownRange: 7
+  returnRange: 20
+  showGizmos: 1
+  showMaxChaseDownRangeGizmo: 1
+  showReturnRangeGizmo: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0

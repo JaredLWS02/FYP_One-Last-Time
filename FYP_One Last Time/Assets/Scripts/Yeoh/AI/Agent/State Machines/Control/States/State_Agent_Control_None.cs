@@ -1,28 +1,25 @@
 using UnityEngine;
 
-public class State_Enemy_Control_AI_Idle : BaseState
+public class State_Agent_Control_None : BaseState
 {
-    public override string Name => "AI Idle";
+    public override string Name => "No Control";
 
-    EnemyAI ai;
+    AgentAI agent;
 
-    public State_Enemy_Control_AI_Idle(StateMachine_Enemy_Control sm)
+    public State_Agent_Control_None(StateMachine_Agent_Control sm)
     {
-        ai = sm.ai;
+        agent = sm.agent;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{ai.gameObject.name} SubState: {Name}");
+        Debug.Log($"{agent.gameObject.name} State: {Name}");
 
         ToggleAllow(true);
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        ai.SetGoalWander();
-
-        ai.FaceMoveDir();
     }
 
     protected override void OnExit()

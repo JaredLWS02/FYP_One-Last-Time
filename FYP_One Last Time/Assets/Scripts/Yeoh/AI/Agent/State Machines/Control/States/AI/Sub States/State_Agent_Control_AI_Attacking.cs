@@ -1,35 +1,35 @@
 using UnityEngine;
 
-public class State_Enemy_Control_AI_Attacking : BaseState
+public class State_Agent_Control_AI_Attacking : BaseState
 {
     public override string Name => "AI Attacking";
 
-    EnemyAI ai;
+    AgentAI agent;
 
-    public State_Enemy_Control_AI_Attacking(StateMachine_Enemy_Control sm)
+    public State_Agent_Control_AI_Attacking(StateMachine_Agent_Control sm)
     {
-        ai = sm.ai;
+        agent = sm.agent;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{ai.gameObject.name} SubState: {Name}");
+        Debug.Log($"{agent.gameObject.name} SubState: {Name}");
 
         ToggleAllow(true);
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        if(ai.IsEnemyTooClose())
+        if(agent.IsEnemyTooClose())
         {
-            ai.SetThreatEnemy();
+            agent.SetThreatEnemy();
         }
         else
         {
-            ai.SetGoalEnemy();
+            agent.SetGoalEnemy();
         }
 
-        ai.FaceEnemy();
+        agent.FaceEnemy();
     }
 
     protected override void OnExit()

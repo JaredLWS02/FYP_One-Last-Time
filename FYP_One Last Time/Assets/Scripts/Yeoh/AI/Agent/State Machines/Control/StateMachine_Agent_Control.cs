@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAI))]
+[RequireComponent(typeof(AgentAI))]
 
-public class StateMachine_Enemy_Control : MonoBehaviour
+public class StateMachine_Agent_Control : MonoBehaviour
 {
     [HideInInspector]
-    public EnemyAI ai;
+    public AgentAI agent;
 
     void Awake()
     {
-        ai = GetComponent<EnemyAI>();
+        agent = GetComponent<AgentAI>();
 
         Initialize();
     }
@@ -27,15 +27,15 @@ public class StateMachine_Enemy_Control : MonoBehaviour
         
         // STATES ================================================================================
 
-        State_Enemy_Control_None none = new(this);
-        State_Enemy_Control_AI ai = new(this);
+        State_Agent_Control_None none = new(this);
+        State_Agent_Control_AI ai = new(this);
 
         // HUB TRANSITIONS ================================================================================
 
         none.AddTransition(ai, (timeInState) =>
         {
             if(
-                this.ai.pilot.IsAI() //&&
+                this.agent.pilot.IsAI() //&&
             ){
                 return true;
             }
@@ -49,7 +49,7 @@ public class StateMachine_Enemy_Control : MonoBehaviour
         ai.AddTransition(none, (timeInState) =>
         {
             if(
-                !this.ai.pilot.IsAI() //||
+                !this.agent.pilot.IsAI() //||
             ){
                 return true;
             }

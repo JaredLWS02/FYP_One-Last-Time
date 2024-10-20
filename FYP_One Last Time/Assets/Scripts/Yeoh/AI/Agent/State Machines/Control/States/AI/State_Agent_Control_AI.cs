@@ -1,36 +1,36 @@
 using UnityEngine;
 
-public class State_Enemy_Control_AI : BaseState
+public class State_Agent_Control_AI : BaseState
 {
     public override string Name => "AI Control";
 
-    EnemyAI ai;
+    AgentAI agent;
 
     // SUB STATE MACHINE ================================================================================
 
     BaseState defaultSubState;
 
-    public State_Enemy_Control_AI(StateMachine_Enemy_Control sm)
+    public State_Agent_Control_AI(StateMachine_Agent_Control sm)
     {
-        ai = sm.ai;
+        agent = sm.agent;
 
         subsm = new StateMachine();
         
         // SUB STATES ================================================================================
 
-        State_Enemy_Control_AI_Idle idle = new(sm);
-        State_Enemy_Control_AI_Attacking attacking = new(sm);
-        State_Enemy_Control_AI_Fleeing fleeing = new(sm);
-        State_Enemy_Control_AI_Returning returning = new(sm);
+        State_Agent_Control_AI_Idle idle = new(sm);
+        State_Agent_Control_AI_Attacking attacking = new(sm);
+        State_Agent_Control_AI_Fleeing fleeing = new(sm);
+        State_Agent_Control_AI_Returning returning = new(sm);
 
         // HUB TRANSITIONS ================================================================================
 
         idle.AddTransition(attacking, (timeInState) =>
         {
             if(
-                ai.GetEnemy() &&
-                ai.IsHealthy() &&
-                !ai.ShouldReturn() //&&
+                agent.GetEnemy() &&
+                agent.IsHealthy() &&
+                !agent.ShouldReturn() //&&
             ){
                 return true;
             }
@@ -40,8 +40,8 @@ public class State_Enemy_Control_AI : BaseState
         idle.AddTransition(fleeing, (timeInState) =>
         {
             if(
-                ai.GetEnemy() &&
-                !ai.IsHealthy() //&&
+                agent.GetEnemy() &&
+                !agent.IsHealthy() //&&
             ){
                 return true;
             }
@@ -51,7 +51,7 @@ public class State_Enemy_Control_AI : BaseState
         idle.AddTransition(returning, (timeInState) =>
         {
             if(
-                ai.ShouldReturn() // &&
+                agent.ShouldReturn() // &&
             ){
                 return true;
             }
@@ -64,9 +64,9 @@ public class State_Enemy_Control_AI : BaseState
         attacking.AddTransition(idle, (timeInState) =>
         {
             if(
-                !ai.GetEnemy() ||
-                !ai.IsHealthy() ||
-                ai.ShouldReturn() //||
+                !agent.GetEnemy() ||
+                !agent.IsHealthy() ||
+                agent.ShouldReturn() //||
             ){
                 return true;
             }
@@ -76,8 +76,8 @@ public class State_Enemy_Control_AI : BaseState
         fleeing.AddTransition(idle, (timeInState) =>
         {
             if(
-                !ai.GetEnemy() ||
-                ai.IsHealthy() //||
+                !agent.GetEnemy() ||
+                agent.IsHealthy() //||
             ){
                 return true;
             }
@@ -87,7 +87,7 @@ public class State_Enemy_Control_AI : BaseState
         returning.AddTransition(idle, (timeInState) =>
         {
             if(
-                ai.IsAtSpawnpoint() //||
+                agent.IsAtSpawnpoint() //||
             ){
                 return true;
             }
@@ -103,7 +103,7 @@ public class State_Enemy_Control_AI : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{ai.gameObject.name} State: {Name}");
+        Debug.Log($"{agent.gameObject.name} State: {Name}");
 
         ToggleAllow(true);
     }

@@ -284,10 +284,10 @@ GameObject:
   - component: {fileID: 4032536735459076646}
   - component: {fileID: 1642459170912960868}
   - component: {fileID: 8412114488542826597}
-  - component: {fileID: 4572757513184181502}
-  - component: {fileID: 856482911234998920}
   - component: {fileID: 1170332012420382783}
   - component: {fileID: 6504059022795382390}
+  - component: {fileID: 4572757513184181502}
+  - component: {fileID: 856482911234998920}
   - component: {fileID: 1511195835895261633}
   - component: {fileID: 3611210669050738406}
   - component: {fileID: 5012553719974128323}
@@ -381,32 +381,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4572757513184181502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c243ce33fa331c3459fce6a85560b2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 1
---- !u!114 &856482911234998920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca9780877ebd15a4f964a29a47fd7277, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pakya: {fileID: 0}
 --- !u!114 &1170332012420382783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +409,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7eae3d1185337f409c9a23132fdd2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pakya: {fileID: 0}
+--- !u!114 &4572757513184181502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c243ce33fa331c3459fce6a85560b2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+--- !u!114 &856482911234998920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9780877ebd15a4f964a29a47fd7277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pakya: {fileID: 0}

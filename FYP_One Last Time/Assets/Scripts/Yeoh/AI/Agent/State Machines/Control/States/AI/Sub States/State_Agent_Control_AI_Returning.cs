@@ -1,28 +1,28 @@
 using UnityEngine;
 
-public class State_Enemy_Control_AI_Returning : BaseState
+public class State_Agent_Control_AI_Returning : BaseState
 {
     public override string Name => "AI Returning";
 
-    EnemyAI ai;
+    AgentAI agent;
 
-    public State_Enemy_Control_AI_Returning(StateMachine_Enemy_Control sm)
+    public State_Agent_Control_AI_Returning(StateMachine_Agent_Control sm)
     {
-        ai = sm.ai;
+        agent = sm.agent;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{ai.gameObject.name} SubState: {Name}");
+        Debug.Log($"{agent.gameObject.name} SubState: {Name}");
 
         ToggleAllow(true);
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        ai.SetGoalSpawnpoint();
+        agent.SetGoalSpawnpoint();
         
-        ai.FaceMoveDir();
+        agent.FaceMoveDir();
     }
 
     protected override void OnExit()
