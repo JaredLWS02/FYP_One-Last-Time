@@ -30,7 +30,7 @@ public class AttackScript : MonoBehaviour
 
     // ============================================================================
 
-    // these are triggered by attack anim events
+    // triggered by attack anim events
 
     public bool isAttacking {get; private set;}
 
@@ -60,13 +60,14 @@ public class AttackScript : MonoBehaviour
 
     // ============================================================================
     
-    // these are triggered by other scripts
+    // triggered by other scripts
 
     public AttackSO attackSO;
     public PrefabSpawn attackSpawn;
     
     public void PlayAttackAnim()
     {
+        isAttacking=true;
         EventManager.Current.OnPlayAnim(gameObject, attackSO.animName);
     }
 
