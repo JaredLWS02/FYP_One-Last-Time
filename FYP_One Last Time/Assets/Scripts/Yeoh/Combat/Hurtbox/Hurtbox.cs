@@ -8,10 +8,10 @@ using UnityEngine.Events;
 public class Hurtbox : MonoBehaviour
 {
     public GameObject owner;
-    public HurtboxSO attackSO;
+    public HurtboxSO hurtboxSO;
     
     Collider coll;
-    Collider2D coll2D;
+    
     public bool enabledOnAwake=true;
 
     void Awake()
@@ -35,10 +35,10 @@ public class Hurtbox : MonoBehaviour
     // ============================================================================
 
     // on successful hit
-    void OnHurt(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contantPoint)
+    void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contantPoint)
     {
         if(owner != attacker) return;
-        if(attackSO != attack) return;
+        if(hurtboxSO != hurtbox) return;
 
         OnHurtt.Invoke();
 
@@ -49,7 +49,7 @@ public class Hurtbox : MonoBehaviour
         }
 
         // decrease first, then check
-        if(--attack.pierceCount <= 0)
+        if(--hurtbox.pierceCount <= 0)
         ToggleColl(false); 
     }   
 
@@ -72,9 +72,9 @@ public class Hurtbox : MonoBehaviour
         
         contactPoint = other.ClosestPoint(hurtboxOrigin ? hurtboxOrigin.position : transform.position);
         
-        HurtboxSO attack = new(attackSO);
+        HurtboxSO hurtbox = new(hurtboxSO);
 
-        EventManager.Current.OnTryHurt(owner, otherRb.gameObject, attack, contactPoint);
+        EventManager.Current.OnTryHurt(owner, otherRb.gameObject, hurtbox, contactPoint);
 
         OnHit.Invoke();
 

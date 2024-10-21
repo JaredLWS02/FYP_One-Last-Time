@@ -17,12 +17,12 @@ public class GenericHurt : MonoBehaviour
 
     // ============================================================================
     
-    public void OnTryHurt(GameObject attacker, GameObject victim, HurtboxSO attack, Vector3 contactPoint)
+    public void OnTryHurt(GameObject attacker, GameObject victim, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 
         // check block/parry first before hurting
 
-        EventManager.Current.OnHurt(attacker, victim, attack, contactPoint);
+        EventManager.Current.OnHurt(attacker, victim, hurtbox, contactPoint);
     }
 }

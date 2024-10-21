@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplosionHurtbox : MonoBehaviour
 {
-    public HurtboxSO attackSO;
+    public HurtboxSO hurtboxSO;
 
     public bool explodeOnAwake=true;
 
@@ -81,16 +81,16 @@ public class ExplosionHurtbox : MonoBehaviour
 
             float falloffMult = GetFallOffMult(transform.position, otherRb.transform.position, outerRange);
 
-            HurtboxSO attack = new(attackSO);
+            HurtboxSO hurtbox = new(hurtboxSO);
 
-            attack.damage *= falloffMult;
-            attack.damageBlock *= falloffMult;
-            attack.stunSeconds *= falloffMult;
-            attack.knockback=0; // handled by Push()
+            hurtbox.damage *= falloffMult;
+            hurtbox.damageBlock *= falloffMult;
+            hurtbox.stunSeconds *= falloffMult;
+            hurtbox.knockback=0; // handled by Push()
 
             contactPoint = other.ClosestPoint(transform.position);
             
-            EventManager.Current.OnTryHurt(gameObject, otherRb.gameObject, attack, contactPoint);
+            EventManager.Current.OnTryHurt(gameObject, otherRb.gameObject, hurtbox, contactPoint);
         }
     }
 
@@ -106,7 +106,7 @@ public class ExplosionHurtbox : MonoBehaviour
 
             float falloffMult = GetFallOffMult(transform.position, rb.transform.position, outerRange);
 
-            float knockback = attackSO.knockback * falloffMult;
+            float knockback = hurtboxSO.knockback * falloffMult;
 
             rb.velocity=Vector3.zero;
             rb.AddForce(knockback * push_dir, ForceMode.Impulse);

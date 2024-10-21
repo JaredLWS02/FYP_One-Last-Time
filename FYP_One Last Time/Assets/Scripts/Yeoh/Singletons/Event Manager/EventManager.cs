@@ -134,28 +134,47 @@ public class EventManager : MonoBehaviour
         LeaveGroundEvent?.Invoke(who);
     }    
 
-    // Combat ==================================================================================================================
+    // Attack Anim Events ==================================================================================================================
 
+    public event Action<GameObject> AttackWindUpEvent;
+    public event Action<GameObject> AttackReleaseEvent;
+    public event Action<GameObject> AttackRecoverEvent;
+
+    public void OnAttackWindUp(GameObject attacker)
+    {
+        AttackWindUpEvent?.Invoke(attacker);
+    }  
+    public void OnAttackRelease(GameObject attacker)
+    {
+        AttackReleaseEvent?.Invoke(attacker);
+    }  
+    public void OnAttackRecover(GameObject attacker)
+    {
+        AttackRecoverEvent?.Invoke(attacker);
+    }  
+    
+    // Hurtbox ==================================================================================================================
+    
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent; // respects iframe/block/parry
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> KnockbackEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
 
-    public void OnTryHurt(GameObject attacker, GameObject victim, HurtboxSO attack, Vector3 contactPoint)
+    public void OnTryHurt(GameObject attacker, GameObject victim, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        TryHurtEvent?.Invoke(attacker, victim, attack, contactPoint);
+        TryHurtEvent?.Invoke(attacker, victim, hurtbox, contactPoint);
     }    
-    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
+    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        HurtEvent?.Invoke(victim, attacker, attack, contactPoint);
+        HurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }
-    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
+    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        KnockbackEvent?.Invoke(victim, attacker, attack, contactPoint);
+        KnockbackEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }
-    public void OnDeath(GameObject victim, GameObject killer, HurtboxSO attack, Vector3 contactPoint)
+    public void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        DeathEvent?.Invoke(victim, killer, attack, contactPoint);
+        DeathEvent?.Invoke(victim, killer, hurtbox, contactPoint);
     }
 
     // Inventory ==================================================================================================================
@@ -206,6 +225,15 @@ public class EventManager : MonoBehaviour
     public void OnCastCancel(GameObject caster)
     {
         CastCancelEvent?.Invoke(caster);
+    }
+
+    // Animator ==================================================================================================================
+
+    public event Action<GameObject, string> PlayAnimEvent;
+
+    public void OnPlayAnim(GameObject who, string animName)
+    {
+        PlayAnimEvent?.Invoke(who, animName);
     }
 
     // UI ==================================================================================================================

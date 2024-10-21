@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="New Attack", menuName="SO/Combat/HurtboxSO")]
+[CreateAssetMenu(fileName="New Hurtbox", menuName="SO/Combat/HurtboxSO")]
 
 public class HurtboxSO : ScriptableObject
 {
