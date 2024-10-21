@@ -17,7 +17,7 @@ public class GenericHurt : MonoBehaviour
 
     // ============================================================================
     
-    public void OnTryHurt(GameObject attacker, GameObject victim, AttackSO attack, Vector3 contactPoint)
+    public void OnTryHurt(GameObject attacker, GameObject victim, HurtboxSO attack, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 

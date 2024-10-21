@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider))]
 
-public class Hurtbox2D : MonoBehaviour
+public class Hurtbox : MonoBehaviour
 {
     public GameObject owner;
-    public AttackSO attackSO;
+    public HurtboxSO attackSO;
     
-    Collider2D coll;
+    Collider coll;
+    Collider2D coll2D;
     public bool enabledOnAwake=true;
 
     void Awake()
     {
-        coll = GetComponent<Collider2D>();
+        coll = GetComponent<Collider>();
 
         ToggleColl(enabledOnAwake);
     }
@@ -33,7 +34,8 @@ public class Hurtbox2D : MonoBehaviour
 
     // ============================================================================
 
-    void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contantPoint)
+    // on successful hit
+    void OnHurt(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contantPoint)
     {
         if(owner != attacker) return;
         if(attackSO != attack) return;
@@ -48,30 +50,29 @@ public class Hurtbox2D : MonoBehaviour
 
         // decrease first, then check
         if(--attack.pierceCount <= 0)
-        ToggleColl(false);
-    }
-    
+        ToggleColl(false); 
+    }   
+
     public void ToggleColl(bool toggle)
     {
         coll.enabled = toggle;
     }
-
+    
     // ============================================================================
 
     [Header("Optional")]
     public Transform hurtboxOrigin;
     Vector3 contactPoint;
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerStay(Collider other)
     {
         if(other.isTrigger) return;
-        Rigidbody2D otherRb = other.attachedRigidbody;
+        Rigidbody otherRb = other.attachedRigidbody;
         if(!otherRb) return;
         
         contactPoint = other.ClosestPoint(hurtboxOrigin ? hurtboxOrigin.position : transform.position);
-        contactPoint.z=0;  // for 2D
-
-        AttackSO attack = new(attackSO);
+        
+        HurtboxSO attack = new(attackSO);
 
         EventManager.Current.OnTryHurt(owner, otherRb.gameObject, attack, contactPoint);
 

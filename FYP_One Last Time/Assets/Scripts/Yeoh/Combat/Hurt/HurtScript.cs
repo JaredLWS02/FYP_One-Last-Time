@@ -47,7 +47,7 @@ public class HurtScript : MonoBehaviour
 
     // check block/parry first before hurting
 
-    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
         if(iframe) return;
@@ -147,7 +147,7 @@ public class HurtScript : MonoBehaviour
     public float poise;
     float maxPoise;
 
-    public void HurtPoise(GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void HurtPoise(GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
     {
         poise -= attack.damage;
 
@@ -184,7 +184,7 @@ public class HurtScript : MonoBehaviour
 
     // ============================================================================
 
-    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 
@@ -199,7 +199,7 @@ public class HurtScript : MonoBehaviour
     [Header("Die")]
     public bool iframeOnDeath=true;
 
-    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    void OnDeath(GameObject victim, GameObject killer, HurtboxSO attack, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 

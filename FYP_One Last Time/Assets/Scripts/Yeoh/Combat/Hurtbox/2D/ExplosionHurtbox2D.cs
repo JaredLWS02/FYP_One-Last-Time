@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionHurtbox : MonoBehaviour
+public class ExplosionHurtbox2D : MonoBehaviour
 {
-    public AttackSO attackSO;
+    public HurtboxSO attackSO;
 
-    public bool explodeOnAwake=true;
+    bool explodeOnAwake=true;
 
-    void OnEnable()
+    void Enable()
     {
         if(explodeOnAwake)
         Explode();
@@ -32,39 +32,24 @@ public class ExplosionHurtbox : MonoBehaviour
 
     // ============================================================================
 
-    Collider[] GetOverlap(float range)
+    Collider2D[] GetOverlap(float range)
     {
-        return Physics.OverlapSphere(transform.position, range, layerMask);
+        return Physics2D.OverlapCircleAll(transform.position, range, layerMask);
     }
 
-    List<Rigidbody> GetRigidbodies(float range)
+    List<Rigidbody2D> GetRigidbodies(float range)
     {
-        List<Rigidbody> rbs = new();
+        List<Rigidbody2D> rbs = new();
 
-        Collider[] others = GetOverlap(range);
+        Collider2D[] others = GetOverlap(range);
 
-        foreach(Collider other in others)
+        foreach(Collider2D other in others)
         {
             if(other.isTrigger) continue;
-            Rigidbody otherRb = other.attachedRigidbody;
+            Rigidbody2D otherRb = other.attachedRigidbody;
             if(otherRb) rbs.Add(otherRb);
         }
         return rbs;
-    }
-
-    List<Collider> GetColliders(float range)
-    {
-        List<Collider> colls = new();
-
-        Collider[] others = GetOverlap(range);
-
-        foreach(Collider other in others)
-        {
-            if(other.isTrigger) continue;
-            Rigidbody otherRb = other.attachedRigidbody;
-            if(otherRb) colls.Add(other);
-        }
-        return colls;
     }
 
     // ============================================================================
@@ -73,24 +58,22 @@ public class ExplosionHurtbox : MonoBehaviour
 
     void Damage()
     {
-        List<Collider> others = GetColliders(outerRange);
+        List<Rigidbody2D> rbs = GetRigidbodies(outerRange);
 
-        foreach(var other in others)
+        foreach(var rb in rbs)
         {
-            Rigidbody otherRb = other.attachedRigidbody;
+            float falloffMult = GetFallOffMult(transform.position, rb.transform.position, outerRange);
 
-            float falloffMult = GetFallOffMult(transform.position, otherRb.transform.position, outerRange);
-
-            AttackSO attack = new(attackSO);
-
+            HurtboxSO attack = new(attackSO);
+            
             attack.damage *= falloffMult;
             attack.damageBlock *= falloffMult;
             attack.stunSeconds *= falloffMult;
             attack.knockback=0; // handled by Push()
 
-            contactPoint = other.ClosestPoint(transform.position);
-            
-            EventManager.Current.OnTryHurt(gameObject, otherRb.gameObject, attack, contactPoint);
+            contactPoint = rb.ClosestPoint(transform.position);
+
+            EventManager.Current.OnTryHurt(gameObject, rb.gameObject, attack, contactPoint);
         }
     }
 
@@ -98,7 +81,7 @@ public class ExplosionHurtbox : MonoBehaviour
 
     void Push()
     {
-        List<Rigidbody> rbs = GetRigidbodies(outerRange * pushRangeMult);
+        List<Rigidbody2D> rbs = GetRigidbodies(outerRange * pushRangeMult);
 
         foreach(var rb in rbs)
         {
@@ -109,7 +92,7 @@ public class ExplosionHurtbox : MonoBehaviour
             float knockback = attackSO.knockback * falloffMult;
 
             rb.velocity=Vector3.zero;
-            rb.AddForce(knockback * push_dir, ForceMode.Impulse);
+            rb.AddForce(knockback * push_dir * falloffMult, ForceMode2D.Impulse);
         }
     }
 

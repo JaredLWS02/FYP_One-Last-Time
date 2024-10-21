@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="New Attack", menuName="SO/Combat/AttackSO")]
+[CreateAssetMenu(fileName="New Attack", menuName="SO/Combat/HurtboxSO")]
 
-public class AttackSO : ScriptableObject
+public class HurtboxSO : ScriptableObject
 {
     public string Name;
     [TextArea]
@@ -25,7 +25,7 @@ public class AttackSO : ScriptableObject
     public float stunSpeedMult=.3f;      
 
     // ctor
-    public AttackSO(AttackSO so)
+    public HurtboxSO(HurtboxSO so)
     {
         Name = so.Name;
         description = so.description;

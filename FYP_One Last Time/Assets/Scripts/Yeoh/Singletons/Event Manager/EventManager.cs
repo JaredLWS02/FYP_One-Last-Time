@@ -136,24 +136,24 @@ public class EventManager : MonoBehaviour
 
     // Combat ==================================================================================================================
 
-    public event Action<GameObject, GameObject, AttackSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
-    public event Action<GameObject, GameObject, AttackSO, Vector3> HurtEvent; // respects iframe/block/parry
-    public event Action<GameObject, GameObject, AttackSO, Vector3> KnockbackEvent;
-    public event Action<GameObject, GameObject, AttackSO, Vector3> DeathEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent; // respects iframe/block/parry
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> KnockbackEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
 
-    public void OnTryHurt(GameObject attacker, GameObject victim, AttackSO attack, Vector3 contactPoint)
+    public void OnTryHurt(GameObject attacker, GameObject victim, HurtboxSO attack, Vector3 contactPoint)
     {
         TryHurtEvent?.Invoke(attacker, victim, attack, contactPoint);
     }    
-    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
     {
         HurtEvent?.Invoke(victim, attacker, attack, contactPoint);
     }
-    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
     {
         KnockbackEvent?.Invoke(victim, attacker, attack, contactPoint);
     }
-    public void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    public void OnDeath(GameObject victim, GameObject killer, HurtboxSO attack, Vector3 contactPoint)
     {
         DeathEvent?.Invoke(victim, killer, attack, contactPoint);
     }

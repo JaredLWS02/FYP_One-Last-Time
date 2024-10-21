@@ -45,7 +45,7 @@ public class Hurt2D : MonoBehaviour
 
     // check block/parry first before hurting
 
-    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
     {
         if(iframe) return;
 
@@ -142,7 +142,7 @@ public class Hurt2D : MonoBehaviour
     public float poise;
     float maxPoise;
 
-    public void HurtPoise(GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void HurtPoise(GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
     {
         poise -= attack.damage;
 
@@ -179,7 +179,7 @@ public class Hurt2D : MonoBehaviour
 
     // ============================================================================
 
-    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO attack, Vector3 contactPoint)
     {
         Vector3 kb_dir = rb.transform.position - contactPoint;
         kb_dir.z=0; // no z axis in 2D
@@ -194,7 +194,7 @@ public class Hurt2D : MonoBehaviour
     [Header("Die")]
     public bool iframeOnDeath=true;
 
-    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    void OnDeath(GameObject victim, GameObject killer, HurtboxSO attack, Vector3 contactPoint)
     {
         if(victim != gameObject) return;
 

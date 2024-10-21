@@ -27,7 +27,7 @@ public class DeathDrop : MonoBehaviour
     
     // ============================================================================
 
-    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    void OnDeath(GameObject victim, GameObject killer, HurtboxSO attack, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 
