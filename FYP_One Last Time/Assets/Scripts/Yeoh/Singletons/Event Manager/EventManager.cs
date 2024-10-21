@@ -230,12 +230,17 @@ public class EventManager : MonoBehaviour
     // Animator ==================================================================================================================
 
     public event Action<GameObject, string> PlayAnimEvent;
+    public event Action<GameObject> CancelAnimEvent;
 
     public void OnPlayAnim(GameObject who, string animName)
     {
         PlayAnimEvent?.Invoke(who, animName);
     }
-
+    public void OnCancelAnim(GameObject who)
+    {
+        CancelAnimEvent?.Invoke(who);
+    }
+    
     // UI ==================================================================================================================
 
     public event Action<GameObject, float, float> UIBarUpdateEvent;

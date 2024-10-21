@@ -66,7 +66,7 @@ public class AttackCombo : MonoBehaviour
     void Attack()
     {
         ResetAttackBuffer();
-        
+
         RefillResetTimer();
 
         DoCombo(comboIndex++);
@@ -131,5 +131,12 @@ public class AttackCombo : MonoBehaviour
     void ResetAttackBuffer()
     {
         attackBufferLeft = -1;
+    }
+
+    // ============================================================================
+
+    public void CancelAttackAnim()
+    {
+        attack.CancelAttackAnim();
     }
 }

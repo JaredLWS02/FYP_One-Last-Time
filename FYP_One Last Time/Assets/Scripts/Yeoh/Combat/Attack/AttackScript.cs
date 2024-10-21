@@ -40,13 +40,15 @@ public class AttackScript : MonoBehaviour
 
         isAttacking=true;
 
-        if(attackSO.dashBeforeAttack)
-        Dash();
+        if(attackSO.dashOnWindUp)
+            Dash();
     }  
 
     void OnAttackRelease(GameObject attacker)
     {
         if(attacker!=gameObject) return;
+
+        isAttacking=true;
 
         SpawnAttack();
     }
@@ -81,8 +83,8 @@ public class AttackScript : MonoBehaviour
 
         if(attackSpawn.parented) spawned.transform.parent = attackSpawn.spawnpoint;
 
-        if(attackSO.dashOnAttack)
-        Dash();
+        if(attackSO.dashOnRelease)
+            Dash();
     }
 
     void Dash()
@@ -95,4 +97,14 @@ public class AttackScript : MonoBehaviour
         rb.AddForce(attackSO.dashForce * direction, ForceMode.Impulse);
     }
 
+    // ============================================================================
+
+    public void CancelAttackAnim()
+    {
+        if(!isAttacking) return;
+
+        EventManager.Current.OnCancelAnim(gameObject);
+
+        EventManager.Current.OnAttackRecover(gameObject);
+    }
 }
