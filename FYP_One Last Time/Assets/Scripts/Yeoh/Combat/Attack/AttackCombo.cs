@@ -45,16 +45,28 @@ public class AttackCombo : MonoBehaviour
     void Update()
     {
         UpdateResetTimer();
+        UpdateAttackBuffer();
+
+        TryAttack();
     }
 
     // ============================================================================
 
     int comboIndex=0;
 
-    public void Attack()
+    void TryAttack()
     {
         if(IsAttacking()) return;
 
+        if(!HasAttackBuffer()) return;
+
+        Attack();
+    }
+
+    void Attack()
+    {
+        ResetAttackBuffer();
+        
         RefillResetTimer();
 
         DoCombo(comboIndex++);
@@ -93,5 +105,31 @@ public class AttackCombo : MonoBehaviour
     void ResetCombo()
     {
         comboIndex=0;
+    }
+
+    // ============================================================================
+
+    [Header("Assist")]
+    public float attackBufferTime=.2f;
+    float attackBufferLeft;
+
+    public void AttackBuffer()
+    {
+        attackBufferLeft = attackBufferTime;
+    }
+
+    void UpdateAttackBuffer()
+    {
+        attackBufferLeft -= Time.deltaTime;
+    }
+
+    bool HasAttackBuffer()
+    {
+        return attackBufferLeft>0;
+    }
+
+    void ResetAttackBuffer()
+    {
+        attackBufferLeft = -1;
     }
 }
