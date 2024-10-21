@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class AttackSO : ScriptableObject
 {
+    public string Name;
+    [TextArea]
+    public string description;
+
+    [Header("Animator")]
     public string animName;
 
     [Header("Dash")]

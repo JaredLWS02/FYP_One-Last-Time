@@ -131,7 +131,7 @@ PrefabInstance:
     - target: {fileID: 3816229249412317877, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6571787855699799648, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
@@ -234,3 +234,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   tween: {fileID: 1807341550775021564}
+  enableBarOnAwake: 1
