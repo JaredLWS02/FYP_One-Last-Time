@@ -10,6 +10,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(SideTurn))]
 [RequireComponent(typeof(JumpScript))]
 [RequireComponent(typeof(GroundCheck))]
+
+[RequireComponent(typeof(AttackScript))]
 [RequireComponent(typeof(AbilityCaster))]
 
 public class PakYa : MonoBehaviour
@@ -21,6 +23,8 @@ public class PakYa : MonoBehaviour
     SideTurn turn;
     JumpScript jump;
     GroundCheck ground;
+
+    AttackScript attack;
     AbilityCaster caster;
 
     void Awake()
@@ -31,6 +35,8 @@ public class PakYa : MonoBehaviour
         turn = GetComponent<SideTurn>();
         jump = GetComponent<JumpScript>();
         ground = GetComponent<GroundCheck>();
+
+        attack = GetComponent<AttackScript>();
         caster = GetComponent<AbilityCaster>();
     }
 
@@ -47,6 +53,9 @@ public class PakYa : MonoBehaviour
         EventManager.Current.TryFaceXEvent += OnTryFaceX;
         EventManager.Current.TryMoveYEvent += OnTryMoveY;
         EventManager.Current.TryJumpEvent += OnTryJump;
+
+        EventManager.Current.TryLightAttackEvent += OnTryLightAttack;
+        EventManager.Current.TryHeavyAttackEvent += OnTryHeavyAttack;
         EventManager.Current.TryStartCastEvent += OnTryStartCast;
 
         PlayerManager.Current.Register(gameObject);
@@ -57,6 +66,9 @@ public class PakYa : MonoBehaviour
         EventManager.Current.TryFaceXEvent -= OnTryFaceX;
         EventManager.Current.TryMoveYEvent -= OnTryMoveY;
         EventManager.Current.TryJumpEvent -= OnTryJump;
+
+        EventManager.Current.TryLightAttackEvent += OnTryLightAttack;
+        EventManager.Current.TryHeavyAttackEvent += OnTryHeavyAttack;
         EventManager.Current.TryStartCastEvent -= OnTryStartCast;
 
         PlayerManager.Current.Unregister(gameObject);
@@ -71,6 +83,7 @@ public class PakYa : MonoBehaviour
     [Header("Toggles")]
     public bool AllowJump;
     public bool AllowDash;
+    public bool AllowAttack;
     public bool AllowCast;
 
     // ============================================================================
@@ -125,8 +138,6 @@ public class PakYa : MonoBehaviour
 
         //climb.OnMoveY(gameObject, input_y);
     }
-
-    // ============================================================================
     
     void OnInputJump(InputValue value)
     {
@@ -147,7 +158,45 @@ public class PakYa : MonoBehaviour
     }
 
     // ============================================================================
+    
+    [Header("Attacks")]
+    public AttackCombo lightCombo;
+    public AttackCombo heavyCombo;
 
+    void OnInputLightAttack()
+    {
+        if(!pilot.IsPlayer()) return;
+
+        EventManager.Current.OnTryLightAttack(gameObject);
+    }
+
+    void OnTryLightAttack(GameObject who)
+    {
+        if(who!=gameObject) return;
+
+        if(!AllowAttack) return;
+
+        lightCombo.AttackBuffer();      
+    }
+
+    void OnInputHeavyAttack()
+    {
+        if(!pilot.IsPlayer()) return;
+
+        EventManager.Current.OnTryHeavyAttack(gameObject);
+    }
+
+    void OnTryHeavyAttack(GameObject who)
+    {
+        if(who!=gameObject) return;
+
+        if(!AllowAttack) return;
+
+        heavyCombo.AttackBuffer();      
+    }
+
+    // ============================================================================
+    
     void OnInputHeal()
     {
         if(!pilot.IsPlayer()) return;
@@ -174,6 +223,11 @@ public class PakYa : MonoBehaviour
     public bool IsDashing()
     {
         return false;
+    }
+    
+    public bool IsAttacking()
+    {
+        return attack.isAttacking;
     }
     
     public bool IsCasting()

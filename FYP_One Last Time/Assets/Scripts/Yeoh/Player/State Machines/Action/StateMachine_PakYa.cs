@@ -31,6 +31,7 @@ public class StateMachine_PakYa : MonoBehaviour
         State_PakYa_Grounded grounded = new(this);
         State_PakYa_MidAir midair = new(this);
         State_PakYa_Dashing dashing = new(this);
+        State_PakYa_Attacking attacking = new(this);
         State_PakYa_Casting casting = new(this);
 
         // HUB TRANSITIONS ================================================================================
@@ -40,7 +41,8 @@ public class StateMachine_PakYa : MonoBehaviour
             if(
                 pakya.IsGrounded() &&
                 !pakya.IsDashing() &&
-                !pakya.IsCasting()
+                !pakya.IsAttacking() &&
+                !pakya.IsCasting() //&&
             ){
                 return true;
             }
@@ -52,7 +54,8 @@ public class StateMachine_PakYa : MonoBehaviour
             if(
                 !pakya.IsGrounded() &&
                 !pakya.IsDashing() &&
-                !pakya.IsCasting()
+                !pakya.IsAttacking() &&
+                !pakya.IsCasting() //&&
             ){
                 return true;
             }
@@ -63,7 +66,20 @@ public class StateMachine_PakYa : MonoBehaviour
         {
             if(
                 pakya.IsDashing() &&
-                !pakya.IsCasting()
+                !pakya.IsAttacking() &&
+                !pakya.IsCasting() //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+                
+        hub.AddTransition(attacking, (timeInState) =>
+        {
+            if(
+                !pakya.IsDashing() &&
+                pakya.IsAttacking() &&
+                !pakya.IsCasting() //&&
             ){
                 return true;
             }
@@ -73,9 +89,9 @@ public class StateMachine_PakYa : MonoBehaviour
         hub.AddTransition(casting, (timeInState) =>
         {
             if(
-                pakya.IsGrounded() &&
                 !pakya.IsDashing() &&
-                pakya.IsCasting()
+                !pakya.IsAttacking() &&
+                pakya.IsCasting() //&&
             ){
                 return true;
             }
@@ -91,7 +107,8 @@ public class StateMachine_PakYa : MonoBehaviour
             if(
                 !pakya.IsGrounded() ||
                 pakya.IsDashing() ||
-                pakya.IsCasting()
+                pakya.IsAttacking() ||
+                pakya.IsCasting() //||
             ){
                 return true;
             }
@@ -103,7 +120,8 @@ public class StateMachine_PakYa : MonoBehaviour
             if(
                 pakya.IsGrounded() ||
                 pakya.IsDashing() ||
-                pakya.IsCasting()
+                pakya.IsAttacking() ||
+                pakya.IsCasting() //||
             ){
                 return true;
             }
@@ -114,7 +132,20 @@ public class StateMachine_PakYa : MonoBehaviour
         {
             if(
                 !pakya.IsDashing() ||
-                pakya.IsCasting()
+                pakya.IsAttacking() ||
+                pakya.IsCasting() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        attacking.AddTransition(hub, (timeInState) =>
+        {
+            if(
+                pakya.IsDashing() ||
+                !pakya.IsAttacking() ||
+                pakya.IsCasting() //||
             ){
                 return true;
             }
@@ -124,9 +155,9 @@ public class StateMachine_PakYa : MonoBehaviour
         casting.AddTransition(hub, (timeInState) =>
         {
             if(
-                !pakya.IsGrounded() ||
                 pakya.IsDashing() ||
-                !pakya.IsCasting()
+                pakya.IsAttacking() ||
+                !pakya.IsCasting() //||
             ){
                 return true;
             }

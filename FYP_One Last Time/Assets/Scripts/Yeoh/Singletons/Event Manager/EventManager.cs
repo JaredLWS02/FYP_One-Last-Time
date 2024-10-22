@@ -134,6 +134,44 @@ public class EventManager : MonoBehaviour
         LeaveGroundEvent?.Invoke(who);
     }    
 
+    // Attacks ==================================================================================================================
+
+    public event Action<GameObject> TryAttackEvent;
+    public event Action<GameObject> AttackEvent;
+
+    public void OnTryAttack(GameObject attacker)
+    {
+        TryAttackEvent?.Invoke(attacker);
+    }
+    public void OnAttack(GameObject attacker)
+    {
+        AttackEvent?.Invoke(attacker);
+    }  
+
+    public event Action<GameObject> TryLightAttackEvent;
+    public event Action<GameObject> LightAttackEvent;
+
+    public void OnTryLightAttack(GameObject attacker)
+    {
+        TryLightAttackEvent?.Invoke(attacker);
+    }
+    public void OnLightAttack(GameObject attacker)
+    {
+        LightAttackEvent?.Invoke(attacker);
+    }  
+
+    public event Action<GameObject> TryHeavyAttackEvent;
+    public event Action<GameObject> HeavyAttackEvent;
+
+    public void OnTryHeavyAttack(GameObject attacker)
+    {
+        TryHeavyAttackEvent?.Invoke(attacker);
+    }
+    public void OnHeavyAttack(GameObject attacker)
+    {
+        HeavyAttackEvent?.Invoke(attacker);
+    }  
+
     // Attack Anim Events ==================================================================================================================
 
     public event Action<GameObject> AttackWindUpEvent;

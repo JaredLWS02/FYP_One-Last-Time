@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Agent_Grounded : BaseState
+public class State_Agent_Attacking : BaseState
 {
-    public override string Name => "Grounded";
+    public override string Name => "Attacking";
 
     AgentAI agent;
 
-    public State_Agent_Grounded(StateMachine_Agent sm)
+    public State_Agent_Attacking(StateMachine_Agent sm)
     {
         agent = sm.agent;
     }
@@ -20,8 +20,8 @@ public class State_Agent_Grounded : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        agent.AllowMoveX = true;
-        agent.AllowMoveY = true;
+        agent.AllowMoveX = false;
+        agent.AllowMoveY = false;
     }
 
     protected override void OnExit()
@@ -31,8 +31,6 @@ public class State_Agent_Grounded : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        agent.AllowJump = toggle;
-        agent.AllowAutoJump = toggle;
         agent.AllowAttack = toggle;
     }
 }

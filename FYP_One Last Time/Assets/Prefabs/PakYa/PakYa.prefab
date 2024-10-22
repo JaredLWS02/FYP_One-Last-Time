@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2941172494308309934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2968421400926582619}
+  m_Layer: 3
+  m_Name: Attacks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2968421400926582619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941172494308309934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3988350149641666891}
+  - {fileID: 6705404227923167189}
+  m_Father: {fileID: 4032536735459076646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2948484968028016200
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 205841275096087312}
   m_Layer: 3
-  m_Name: UI
+  m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,6 +67,118 @@ Transform:
   - {fileID: 8639081987611996167}
   m_Father: {fileID: 4032536735459076646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5202724025315521356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3988350149641666891}
+  - component: {fileID: 2589080218004393375}
+  m_Layer: 3
+  m_Name: Light Combo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3988350149641666891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202724025315521356}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2968421400926582619}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2589080218004393375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202724025315521356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: {fileID: 6505367827229283128}
+  comboName: Light Combo
+  comboSteps:
+  - attackSO: {fileID: 0}
+    attackSpawn:
+      prefab: {fileID: 0}
+      spawnpoint: {fileID: 0}
+      followRotation: 1
+      parented: 1
+  resetTimer: 1
+  comboCooldownTime: 1
+  attackBufferTime: 0.2
+--- !u!1 &6718153725386699021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6705404227923167189}
+  - component: {fileID: 6345980450733858254}
+  m_Layer: 3
+  m_Name: Heavy Combo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6705404227923167189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718153725386699021}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2968421400926582619}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6345980450733858254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718153725386699021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: {fileID: 6505367827229283128}
+  comboName: Heavy Combo
+  comboSteps:
+  - attackSO: {fileID: 0}
+    attackSpawn:
+      prefab: {fileID: 0}
+      spawnpoint: {fileID: 0}
+      followRotation: 1
+      parented: 1
+  resetTimer: 1
+  comboCooldownTime: 1
+  attackBufferTime: 0.2
 --- !u!1 &7274980459159228368
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,6 +190,8 @@ GameObject:
   - component: {fileID: 5128954705973869421}
   - component: {fileID: 4466723156777370603}
   - component: {fileID: 4004871874835498188}
+  - component: {fileID: 4728252470638691548}
+  - component: {fileID: 9206634663529618913}
   - component: {fileID: 345509100620316827}
   - component: {fileID: 6876849668752172755}
   - component: {fileID: 8393169458917718466}
@@ -143,6 +290,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4728252470638691548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274980459159228368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb858dce4efd1c43be4eba1267783fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  anim: {fileID: 4004871874835498188}
+--- !u!114 &9206634663529618913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274980459159228368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6941ca0d6d61d264eb9d8d0ce361ca7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
 --- !u!114 &345509100620316827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +469,7 @@ GameObject:
   - component: {fileID: 2535672027372677568}
   - component: {fileID: 1353104093430078228}
   - component: {fileID: 8003095357430364833}
+  - component: {fileID: 6505367827229283128}
   - component: {fileID: 6639294003576150908}
   - component: {fileID: 9071989056172940844}
   - component: {fileID: 7128361844597336669}
@@ -320,6 +495,7 @@ Transform:
   m_Children:
   - {fileID: 5128954705973869421}
   - {fileID: 123463650881099154}
+  - {fileID: 2968421400926582619}
   - {fileID: 205841275096087312}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -398,7 +574,10 @@ MonoBehaviour:
   AllowMoveY: 0
   AllowJump: 0
   AllowDash: 0
+  AllowAttack: 0
   AllowCast: 0
+  lightCombo: {fileID: 2589080218004393375}
+  heavyCombo: {fileID: 6345980450733858254}
 --- !u!114 &6504059022795382390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,6 +746,25 @@ MonoBehaviour:
   OnFastFallEnd:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6505367827229283128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSO: {fileID: 0}
+  attackSpawn:
+    prefab: {fileID: 0}
+    spawnpoint: {fileID: 0}
+    followRotation: 1
+    parented: 1
+  cancelAnimName: Cancel
 --- !u!114 &6639294003576150908
 MonoBehaviour:
   m_ObjectHideFlags: 0

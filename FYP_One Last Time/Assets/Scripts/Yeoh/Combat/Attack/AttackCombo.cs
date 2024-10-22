@@ -126,6 +126,9 @@ public class AttackCombo : MonoBehaviour
 
     void UpdateComboCooldown()
     {
+        // only tick down if not busy
+        if(IsAttacking()) return;
+        
         comboCooldownLeft -= Time.deltaTime;
     }
 

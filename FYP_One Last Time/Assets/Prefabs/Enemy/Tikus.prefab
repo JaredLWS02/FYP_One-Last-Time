@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &507965927288791515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3071236275463930265}
+  - component: {fileID: 3962663419828832351}
+  m_Layer: 6
+  m_Name: Normal Combo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3071236275463930265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507965927288791515}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8449358400114368154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3962663419828832351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507965927288791515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: {fileID: 3574276676473959355}
+  comboName: Normal Combo
+  comboSteps:
+  - attackSO: {fileID: 0}
+    attackSpawn:
+      prefab: {fileID: 0}
+      spawnpoint: {fileID: 0}
+      followRotation: 1
+      parented: 1
+  resetTimer: 1
+  comboCooldownTime: 1
+  attackBufferTime: 0.2
 --- !u!1 &1611157070665987421
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7959029595139826251}
   m_Layer: 6
-  m_Name: AI
+  m_Name: Goals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168791646275403679}
   m_Layer: 6
-  m_Name: UI
+  m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,6 +163,8 @@ GameObject:
   - component: {fileID: 5197452418422829730}
   - component: {fileID: 3716319433280079349}
   - component: {fileID: 7786861728038490430}
+  - component: {fileID: 7114433548222468432}
+  - component: {fileID: 2385068764117251220}
   - component: {fileID: 418708997891478844}
   - component: {fileID: 1477388138496825184}
   - component: {fileID: 412968695723508853}
@@ -205,6 +263,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7114433548222468432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719329177920231827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb858dce4efd1c43be4eba1267783fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  anim: {fileID: 7786861728038490430}
+--- !u!114 &2385068764117251220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719329177920231827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6941ca0d6d61d264eb9d8d0ce361ca7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
 --- !u!114 &418708997891478844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +413,38 @@ MonoBehaviour:
   rangeMinMax: {x: 5, y: 10}
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 0.13333334}
+--- !u!1 &4345753957651105915
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8449358400114368154}
+  m_Layer: 6
+  m_Name: Attacks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8449358400114368154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345753957651105915}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3071236275463930265}
+  m_Father: {fileID: 6415192565362938597}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5261146206814944013
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +475,7 @@ GameObject:
   - component: {fileID: 2982932667220849315}
   - component: {fileID: 5059005152113843592}
   - component: {fileID: 1052805118213280258}
+  - component: {fileID: 3574276676473959355}
   m_Layer: 6
   m_Name: Tikus
   m_TagString: Enemy
@@ -381,6 +499,7 @@ Transform:
   - {fileID: 5197452418422829730}
   - {fileID: 231061859104957208}
   - {fileID: 7959029595139826251}
+  - {fileID: 8449358400114368154}
   - {fileID: 168791646275403679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -428,7 +547,9 @@ MonoBehaviour:
   AllowMoveY: 0
   AllowJump: 0
   AllowAutoJump: 0
-  hp: {fileID: 0}
+  AllowAttack: 0
+  normalCombo: {fileID: 3962663419828832351}
+  hpM: {fileID: 0}
   healthyMinPercent: 50
   enemyTag: Player
   lootTag: Loot
@@ -771,6 +892,25 @@ MonoBehaviour:
   showMaxChaseDownRangeGizmo: 1
   showReturnRangeGizmo: 1
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
+--- !u!114 &3574276676473959355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSO: {fileID: 0}
+  attackSpawn:
+    prefab: {fileID: 0}
+    spawnpoint: {fileID: 0}
+    followRotation: 1
+    parented: 1
+  cancelAnimName: Cancel
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0

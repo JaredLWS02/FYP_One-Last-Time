@@ -31,6 +31,7 @@ public class StateMachine_Agent : MonoBehaviour
         State_Agent_Grounded grounded = new(this);
         State_Agent_MidAir midair = new(this);
         State_Agent_AutoJumping autojumping = new(this);
+        State_Agent_Attacking attacking = new(this);
 
         // HUB TRANSITIONS ================================================================================
 
@@ -38,7 +39,8 @@ public class StateMachine_Agent : MonoBehaviour
         {
             if(
                 agent.IsGrounded() &&
-                !agent.IsAutoJumping() //&&
+                !agent.IsAutoJumping() &&
+                !agent.IsAttacking() //&&
             ){
                 return true;
             }
@@ -49,7 +51,8 @@ public class StateMachine_Agent : MonoBehaviour
         {
             if(
                 !agent.IsGrounded() &&
-                !agent.IsAutoJumping() //&&
+                !agent.IsAutoJumping() &&
+                !agent.IsAttacking() //&&
             ){
                 return true;
             }
@@ -59,13 +62,25 @@ public class StateMachine_Agent : MonoBehaviour
         hub.AddTransition(autojumping, (timeInState) =>
         {
             if(
-                agent.IsAutoJumping() //&&
+                agent.IsAutoJumping() &&
+                !agent.IsAttacking() //&&
             ){
                 return true;
             }
             return false;
-        });                
+        });   
 
+        hub.AddTransition(attacking, (timeInState) =>
+        {
+            if(
+                !agent.IsAutoJumping() &&
+                agent.IsAttacking() //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+                
         
         // RETURN TRANSITIONS ================================================================================
 
@@ -73,7 +88,8 @@ public class StateMachine_Agent : MonoBehaviour
         {
             if(
                 !agent.IsGrounded() ||
-                agent.IsAutoJumping() //||
+                agent.IsAutoJumping() ||
+                agent.IsAttacking() //||
             ){
                 return true;
             }
@@ -84,7 +100,8 @@ public class StateMachine_Agent : MonoBehaviour
         {
             if(
                 agent.IsGrounded() ||
-                agent.IsAutoJumping() //||
+                agent.IsAutoJumping() ||
+                agent.IsAttacking() //||
             ){
                 return true;
             }
@@ -94,14 +111,26 @@ public class StateMachine_Agent : MonoBehaviour
         autojumping.AddTransition(hub, (timeInState) =>
         {
             if(
-                !agent.IsAutoJumping() //||
+                !agent.IsAutoJumping() ||
+                agent.IsAttacking() //||
             ){
                 return true;
             }
             return false;
         });
-
         
+        attacking.AddTransition(hub, (timeInState) =>
+        {
+            if(
+                agent.IsAutoJumping() ||
+                !agent.IsAttacking() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+                
+    
         // DEFAULT ================================================================================
         
         defaultState = hub;

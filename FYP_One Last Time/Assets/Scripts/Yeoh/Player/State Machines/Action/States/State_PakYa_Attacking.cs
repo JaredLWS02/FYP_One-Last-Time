@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_PakYa_Grounded : BaseState
+public class State_PakYa_Attacking : BaseState
 {
-    public override string Name => "Grounded";
+    public override string Name => "Attacking";
 
     PakYa pakya;
 
-    public State_PakYa_Grounded(StateMachine_PakYa sm)
+    public State_PakYa_Attacking(StateMachine_PakYa sm)
     {
         pakya = sm.pakya;
     }
@@ -20,8 +20,8 @@ public class State_PakYa_Grounded : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        pakya.AllowMoveX = true;
-        pakya.AllowMoveY = true;
+        pakya.AllowMoveX = false;
+        pakya.AllowMoveY = false;
     }
 
     protected override void OnExit()
@@ -31,9 +31,6 @@ public class State_PakYa_Grounded : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        pakya.AllowJump = toggle;
-        pakya.AllowDash = toggle;
         pakya.AllowAttack = toggle;
-        pakya.AllowCast = toggle;
     }
 }

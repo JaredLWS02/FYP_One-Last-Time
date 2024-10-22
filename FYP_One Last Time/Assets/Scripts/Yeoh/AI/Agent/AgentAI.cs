@@ -19,6 +19,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(AgentFlee))]
 [RequireComponent(typeof(AgentReturn))]
 
+[RequireComponent(typeof(AttackScript))]
+
 public class AgentAI : MonoBehaviour
 {
     [HideInInspector]
@@ -38,6 +40,8 @@ public class AgentAI : MonoBehaviour
     AgentFlee flee;
     AgentReturn returner;
 
+    AttackScript attack;
+
     void Awake()
     {
         pilot = GetComponent<Pilot>();
@@ -55,6 +59,8 @@ public class AgentAI : MonoBehaviour
         wander = GetComponent<AgentWander>();
         flee = GetComponent<AgentFlee>();
         returner = GetComponent<AgentReturn>();
+
+        attack = GetComponent<AttackScript>();
     }
 
     void Start()
@@ -71,6 +77,8 @@ public class AgentAI : MonoBehaviour
         EventManager.Current.TryMoveYEvent += OnTryMoveY;
         EventManager.Current.TryJumpEvent += OnTryJump;
         EventManager.Current.TryAutoJumpEvent += OnTryAutoJump;
+
+        EventManager.Current.TryAttackEvent += OnTryAttack;
     }
     void OnDisable()
     {
@@ -79,6 +87,8 @@ public class AgentAI : MonoBehaviour
         EventManager.Current.TryMoveYEvent -= OnTryMoveY;
         EventManager.Current.TryJumpEvent -= OnTryJump;
         EventManager.Current.TryAutoJumpEvent -= OnTryAutoJump;
+
+        EventManager.Current.TryAttackEvent -= OnTryAttack;
     }
 
     // ============================================================================
@@ -90,6 +100,7 @@ public class AgentAI : MonoBehaviour
     [Header("Toggles")]
     public bool AllowJump;
     public bool AllowAutoJump;
+    public bool AllowAttack;
 
     // ============================================================================
 
@@ -129,8 +140,6 @@ public class AgentAI : MonoBehaviour
 
         EventManager.Current.OnMoveY(gameObject, input_y); // send to one way platform
     }
-
-    // ============================================================================
     
     void OnTryJump(GameObject who, float input)
     {
@@ -160,6 +169,20 @@ public class AgentAI : MonoBehaviour
 
     // ============================================================================
     
+    [Header("Attacks")]
+    public AttackCombo normalCombo;
+    
+    void OnTryAttack(GameObject who)
+    {
+        if(who!=gameObject) return;
+
+        if(!AllowAttack) return;
+
+        normalCombo.AttackBuffer();      
+    }
+
+    // ============================================================================
+    
     public bool IsGrounded()
     {
         return ground.IsGrounded();
@@ -179,6 +202,11 @@ public class AgentAI : MonoBehaviour
     public bool IsAtSpawnpoint()
     {
         return returner.IsAtSpawnpoint(agentV.stoppingRange);
+    }
+
+    public bool IsAttacking()
+    {
+        return attack.isAttacking;
     }
     
     // ============================================================================
