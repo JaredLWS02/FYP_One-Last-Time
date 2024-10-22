@@ -11,14 +11,16 @@ public class AttackSO : ScriptableObject
     public string description;
 
     [Header("Animator")]
-    public string animName;
+    public string animName = "Melee1";
+    public int animLayer = 0;
+    public float animBlendTime = 0;
 
     [Header("Dash")]
-    public bool dashOnWindUp=false;
-    public bool dashOnRelease=true;
-    public float dashForce=5;    
-    public Vector3 dashDirection=Vector3.forward;
-    public bool localDirection=true;
+    public bool dashOnWindUp = false;
+    public bool dashOnRelease = true;
+    public float dashForce = 5;    
+    public Vector3 dashDirection = Vector3.forward;
+    public bool localDirection = true;
 
     // ============================================================================
     

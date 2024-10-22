@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3cbd62398e00b46a8bf50f5797d997, type: 3}
   m_Name: New Attack
   m_EditorClassIdentifier: 
-  animName: 
-  dashLocalDir: {x: 0, y: 0, z: 1}
+  Name: 
+  description: 
+  animName: Melee1
+  animLayer: 0
+  animBlendTime: 0
+  dashOnWindUp: 0
+  dashOnRelease: 1
   dashForce: 5
+  dashDirection: {x: 0, y: 0, z: 1}
+  localDirection: 1

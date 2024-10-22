@@ -45,6 +45,7 @@ public class AttackCombo : MonoBehaviour
     void Update()
     {
         UpdateResetTimer();
+        UpdateComboCooldown();
         UpdateAttackBuffer();
 
         TryAttack();
@@ -57,6 +58,8 @@ public class AttackCombo : MonoBehaviour
     void TryAttack()
     {
         if(IsAttacking()) return;
+
+        if(IsComboCooling()) return;
 
         if(!HasAttackBuffer()) return;
 
@@ -72,12 +75,15 @@ public class AttackCombo : MonoBehaviour
         DoCombo(comboIndex++);
 
         if(comboIndex >= comboSteps.Count)
+        {
             ResetCombo();
+            DoComboCooldown();
+        }
     }
     
     // ============================================================================
     
-    [Header("Combo Reset")]
+    [Header("During Combo")]
     public float resetTimer=1;
     float resetTimerLeft;
     
@@ -105,6 +111,32 @@ public class AttackCombo : MonoBehaviour
     void ResetCombo()
     {
         comboIndex=0;
+    }
+    
+    // ============================================================================
+    
+    [Header("After Combo")]
+    public float comboCooldownTime=1;
+    float comboCooldownLeft;
+    
+    void DoComboCooldown()
+    {
+        comboCooldownLeft = comboCooldownTime;
+    }
+
+    void UpdateComboCooldown()
+    {
+        comboCooldownLeft -= Time.deltaTime;
+    }
+
+    bool IsComboCooling()
+    {
+        return comboCooldownLeft>0;
+    }
+
+    void CancelComboCooldown()
+    {
+        comboCooldownLeft=0;
     }
 
     // ============================================================================

@@ -70,7 +70,7 @@ public class AttackScript : MonoBehaviour
     public void PlayAttackAnim()
     {
         isAttacking=true;
-        EventManager.Current.OnPlayAnim(gameObject, attackSO.animName);
+        EventManager.Current.OnPlayAnim(gameObject, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
     }
 
     public void SpawnAttack()
@@ -98,12 +98,15 @@ public class AttackScript : MonoBehaviour
     }
 
     // ============================================================================
+    
+    [Header("Cancel")]
+    public string cancelAnimName = "Cancel";
 
     public void CancelAttackAnim()
     {
         if(!isAttacking) return;
 
-        EventManager.Current.OnCancelAnim(gameObject);
+        EventManager.Current.OnPlayAnim(gameObject, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
 
         EventManager.Current.OnAttackRecover(gameObject);
     }
