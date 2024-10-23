@@ -136,40 +136,16 @@ public class EventManager : MonoBehaviour
 
     // Attacks ==================================================================================================================
 
-    public event Action<GameObject> TryAttackEvent;
-    public event Action<GameObject> AttackEvent;
+    public event Action<GameObject, string> TryAttackEvent;
+    public event Action<GameObject, AttackSO> AttackEvent;
 
-    public void OnTryAttack(GameObject attacker)
+    public void OnTryAttack(GameObject attacker, string type)
     {
-        TryAttackEvent?.Invoke(attacker);
+        TryAttackEvent?.Invoke(attacker, type);
     }
-    public void OnAttack(GameObject attacker)
+    public void OnAttack(GameObject attacker, AttackSO attackSO)
     {
-        AttackEvent?.Invoke(attacker);
-    }  
-
-    public event Action<GameObject> TryLightAttackEvent;
-    public event Action<GameObject> LightAttackEvent;
-
-    public void OnTryLightAttack(GameObject attacker)
-    {
-        TryLightAttackEvent?.Invoke(attacker);
-    }
-    public void OnLightAttack(GameObject attacker)
-    {
-        LightAttackEvent?.Invoke(attacker);
-    }  
-
-    public event Action<GameObject> TryHeavyAttackEvent;
-    public event Action<GameObject> HeavyAttackEvent;
-
-    public void OnTryHeavyAttack(GameObject attacker)
-    {
-        TryHeavyAttackEvent?.Invoke(attacker);
-    }
-    public void OnHeavyAttack(GameObject attacker)
-    {
-        HeavyAttackEvent?.Invoke(attacker);
+        AttackEvent?.Invoke(attacker, attackSO);
     }  
 
     // Attack Anim Events ==================================================================================================================

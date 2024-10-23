@@ -15,6 +15,89 @@ public class AttackScript : MonoBehaviour
 
     // ============================================================================
 
+    void Update()
+    {
+        UpdateBuffer();
+        TryAttack();
+
+        UpdateCooldown();
+    }
+
+    // ============================================================================
+
+    [Header("Before Attack")]
+    public float bufferTime=.2f;
+    float bufferLeft;
+
+    public void DoBuffer()
+    {
+        bufferLeft = bufferTime;
+    }
+
+    void UpdateBuffer()
+    {
+        bufferLeft -= Time.deltaTime;
+
+        if(bufferLeft<0) bufferLeft=0;
+    }
+
+    bool HasBuffer()
+    {
+        return bufferLeft>0;
+    }
+
+    void ResetBuffer()
+    {
+        bufferLeft=0;
+    }
+
+    // ============================================================================
+    
+    [Header("On Attack")]
+    public AttackSO attackSO;
+    public PrefabSpawn attackSpawn;
+    
+    void TryAttack()
+    {
+        if(isAttacking) return;
+
+        if(!HasBuffer()) return;
+
+        if(IsCooling()) return;
+
+        Attack();
+    }
+
+    // During Attack ============================================================================
+
+    void Attack()
+    {
+        ResetBuffer();
+
+        DoCooldown();
+
+        if(attackSO.hasAttackAnim)
+        {
+            StartAttackAnim();
+        }
+        else
+        {
+            DoInstantAttack();
+        }
+    }
+
+    void StartAttackAnim()
+    {
+        EventManager.Current.OnPlayAnim(gameObject, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
+    }
+
+    void DoInstantAttack()
+    {
+        EventManager.Current.OnAttackRelease(gameObject);
+    }
+
+    // ============================================================================
+
     void OnEnable()
     {
         EventManager.Current.AttackWindUpEvent += OnAttackWindUp;
@@ -48,9 +131,9 @@ public class AttackScript : MonoBehaviour
     {
         if(attacker!=gameObject) return;
 
-        isAttacking=true;
-
         SpawnAttack();
+
+        EventManager.Current.OnAttack(gameObject, attackSO);
     }
 
     void OnAttackRecover(GameObject attacker)
@@ -61,25 +144,12 @@ public class AttackScript : MonoBehaviour
     }  
 
     // ============================================================================
-    
-    // triggered by other scripts
-
-    public AttackSO attackSO;
-    public PrefabSpawn attackSpawn;
-    
-    public void PlayAttackAnim()
-    {
-        isAttacking=true;
-        EventManager.Current.OnPlayAnim(gameObject, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
-    }
 
     public void SpawnAttack()
     {
-        Vector3 position = attackSpawn.spawnpoint.position;
-
         Quaternion rotation = attackSpawn.followRotation ? attackSpawn.spawnpoint.rotation : Quaternion.identity;
 
-        GameObject spawned = Instantiate(attackSpawn.prefab, position, rotation);
+        GameObject spawned = Instantiate(attackSpawn.prefab, attackSpawn.spawnpoint.position, rotation);
 
         if(attackSpawn.parented) spawned.transform.parent = attackSpawn.spawnpoint;
 
@@ -89,12 +159,44 @@ public class AttackScript : MonoBehaviour
 
     void Dash()
     {
+        if(attackSO.dashForce==0) return;
+        if(attackSO.dashDirection==Vector3.zero) return;
+
         Vector3 direction = attackSO.dashDirection.normalized;
 
         if(attackSO.localDirection)
         direction = transform.TransformDirection(direction);
 
         rb.AddForce(attackSO.dashForce * direction, ForceMode.Impulse);
+    }
+
+    // After Attack ============================================================================
+
+    float cooldownLeft;
+    
+    void DoCooldown()
+    {
+        cooldownLeft = attackSO.cooldownTime;
+    }
+
+    void UpdateCooldown()
+    {
+        // only tick down if not busy
+        if(isAttacking) return;
+        
+        cooldownLeft -= Time.deltaTime;
+
+        if(cooldownLeft<0) cooldownLeft=0;
+    }
+
+    bool IsCooling()
+    {
+        return cooldownLeft>0;
+    }
+
+    void CancelCooldown()
+    {
+        cooldownLeft=0;
     }
 
     // ============================================================================

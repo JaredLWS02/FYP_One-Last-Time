@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
   attack: {fileID: 6505367827229283128}
   comboName: Light Combo
   comboSteps:
@@ -203,11 +204,11 @@ MonoBehaviour:
     attackSpawn:
       prefab: {fileID: 0}
       spawnpoint: {fileID: 0}
-      followRotation: 1
       parented: 1
-  resetTimer: 1
-  comboCooldownTime: 1
-  attackBufferTime: 0.2
+      followRotation: 1
+  bufferTime: 0.2
+  randomCombo: 0
+  comboResetTime: 1
 --- !u!1 &6718153725386699021
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
   attack: {fileID: 6505367827229283128}
   comboName: Heavy Combo
   comboSteps:
@@ -259,11 +261,11 @@ MonoBehaviour:
     attackSpawn:
       prefab: {fileID: 0}
       spawnpoint: {fileID: 0}
-      followRotation: 1
       parented: 1
-  resetTimer: 1
-  comboCooldownTime: 1
-  attackBufferTime: 0.2
+      followRotation: 1
+  bufferTime: 0.2
+  randomCombo: 0
+  comboResetTime: 1
 --- !u!1 &7274980459159228368
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,12 +898,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bufferTime: 0.2
   attackSO: {fileID: 0}
   attackSpawn:
     prefab: {fileID: 0}
     spawnpoint: {fileID: 0}
-    followRotation: 1
     parented: 1
+    followRotation: 1
   cancelAnimName: Cancel
 --- !u!114 &6639294003576150908
 MonoBehaviour:

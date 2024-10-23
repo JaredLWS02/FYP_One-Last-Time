@@ -4,7 +4,167 @@ using UnityEngine;
 
 public class AttackCombo : MonoBehaviour
 {
+    public GameObject owner;
+
     public AttackScript attack;
+
+    public string comboName = "Normal Combo";
+
+    // ============================================================================
+
+    [System.Serializable]
+    public class ComboStep
+    {
+        public AttackSO attackSO;
+        public PrefabSpawn attackSpawn;
+    }
+    
+    [Space]
+    public List<ComboStep> comboSteps = new();
+    
+    // ============================================================================
+
+    void Update()
+    {
+        UpdateBuffer();
+        TryCombo();
+
+        UpdateResetTime();
+        UpdateComboCooldown();
+    }
+
+    // ============================================================================
+
+    [Header("Before Combo")]
+    public float bufferTime=.2f;
+    float bufferLeft;
+
+    public void DoBuffer()
+    {
+        bufferLeft = bufferTime;
+    }
+
+    void UpdateBuffer()
+    {
+        bufferLeft -= Time.deltaTime;
+
+        if(bufferLeft<0) bufferLeft=0;
+    }
+
+    bool HasBuffer()
+    {
+        return bufferLeft>0;
+    }
+
+    void ResetBuffer()
+    {
+        bufferLeft=0;
+    }
+
+    // ============================================================================
+
+    public bool randomCombo;
+
+    int comboIndex=0;
+
+    void TryCombo()
+    {
+        if(IsAttacking()) return;
+
+        if(!HasBuffer()) return;
+
+        if(IsComboCooling()) return;
+        
+        DoCombo();
+    }
+
+    void DoCombo()
+    {
+        ResetBuffer();
+
+        RefillResetTime();
+
+        if(randomCombo)
+        comboIndex = Random.Range(0, comboSteps.Count);
+
+        ChooseCombo(comboIndex);
+    }
+
+    void ChooseCombo(int i)
+    {
+        ComboStep step = comboSteps[i];
+
+        attack.attackSO = step.attackSO;
+        attack.attackSpawn = step.attackSpawn;
+
+        attack.DoBuffer();
+    }
+
+    // During Combo ============================================================================
+
+    void OnEnable()
+    {
+        EventManager.Current.AttackEvent += OnAttack;
+    }
+    void OnDisable()
+    {
+        EventManager.Current.AttackEvent -= OnAttack;
+    }
+
+    // ============================================================================
+
+    void OnAttack(GameObject attacker, AttackSO attackSO)
+    {
+        if(attacker!=owner) return;
+
+        AttackSO currentAttackSO = comboSteps[comboIndex].attackSO;
+
+        if(attackSO!=currentAttackSO) return;
+
+        StepComboUp();
+    }
+
+    void StepComboUp()
+    {
+        comboIndex++;
+
+        if(comboIndex >= comboSteps.Count)
+        {
+            ResetCombo();
+            // cooldown before next combo
+            DoComboCooldown();
+        }
+    }    
+    
+    // ============================================================================
+    
+    [Header("During Combo")]
+    public float comboResetTime=1;
+    float comboResetTimeLeft;
+    
+    void RefillResetTime()
+    {
+        comboResetTimeLeft = comboResetTime;
+    }
+
+    void UpdateResetTime()
+    {
+        // only tick down if not busy
+        if(IsAttacking()) return;
+
+        comboResetTimeLeft -= Time.deltaTime;
+
+        if(comboResetTimeLeft<=0)
+        {
+            comboResetTimeLeft=0;
+            ResetCombo();
+        }
+    }
+
+    void ResetCombo()
+    {
+        comboIndex=0;
+    }
 
     // ============================================================================
 
@@ -14,109 +174,9 @@ public class AttackCombo : MonoBehaviour
     }
 
     // ============================================================================
-    
-    [Header("Combo")]
-    public string comboName = "Light Combo";
-    
-    [System.Serializable]
-    public class ComboStep
-    {
-        public AttackSO attackSO;
-        public PrefabSpawn attackSpawn;
-    }
-    
-    public List<ComboStep> comboSteps = new();
 
-    void DoCombo(int i)
-    {
-        ComboStep chosenStep = comboSteps[i];
-
-        AttackSO chosenSO = chosenStep.attackSO;
-        PrefabSpawn chosenSpawn = chosenStep.attackSpawn;
-
-        attack.attackSO = chosenSO;
-        attack.attackSpawn = chosenSpawn;
-
-        attack.PlayAttackAnim();
-    }
-
-    // ============================================================================
-    
-    void Update()
-    {
-        UpdateResetTimer();
-        UpdateComboCooldown();
-        UpdateAttackBuffer();
-
-        TryAttack();
-    }
-
-    // ============================================================================
-
-    int comboIndex=0;
-
-    void TryAttack()
-    {
-        if(IsAttacking()) return;
-
-        if(IsComboCooling()) return;
-
-        if(!HasAttackBuffer()) return;
-
-        Attack();
-    }
-
-    void Attack()
-    {
-        ResetAttackBuffer();
-
-        RefillResetTimer();
-
-        DoCombo(comboIndex++);
-
-        if(comboIndex >= comboSteps.Count)
-        {
-            ResetCombo();
-            DoComboCooldown();
-        }
-    }
-    
-    // ============================================================================
-    
-    [Header("During Combo")]
-    public float resetTimer=1;
-    float resetTimerLeft;
-    
-    void RefillResetTimer()
-    {
-        resetTimerLeft = resetTimer;
-    }
-
-    void UpdateResetTimer()
-    {
-        // only tick down if not busy
-        if(IsAttacking()) return;
-
-        resetTimerLeft -= Time.deltaTime;
-
-        if(ShouldResetCombo())
-            ResetCombo();
-    }
-
-    bool ShouldResetCombo()
-    {
-        return resetTimerLeft<=0;
-    }
-
-    void ResetCombo()
-    {
-        comboIndex=0;
-    }
-    
-    // ============================================================================
-    
     [Header("After Combo")]
-    public float comboCooldownTime=1;
+    float comboCooldownTime = 1;
     float comboCooldownLeft;
     
     void DoComboCooldown()
@@ -130,6 +190,8 @@ public class AttackCombo : MonoBehaviour
         if(IsAttacking()) return;
         
         comboCooldownLeft -= Time.deltaTime;
+
+        if(comboCooldownLeft<0) comboCooldownLeft=0;
     }
 
     bool IsComboCooling()
@@ -141,34 +203,8 @@ public class AttackCombo : MonoBehaviour
     {
         comboCooldownLeft=0;
     }
-
-    // ============================================================================
-
-    [Header("Assist")]
-    public float attackBufferTime=.2f;
-    float attackBufferLeft;
-
-    public void AttackBuffer()
-    {
-        attackBufferLeft = attackBufferTime;
-    }
-
-    void UpdateAttackBuffer()
-    {
-        attackBufferLeft -= Time.deltaTime;
-    }
-
-    bool HasAttackBuffer()
-    {
-        return attackBufferLeft>0;
-    }
-
-    void ResetAttackBuffer()
-    {
-        attackBufferLeft = -1;
-    }
-
-    // ============================================================================
+    
+    // Cancel ============================================================================
 
     public void CancelAttackAnim()
     {

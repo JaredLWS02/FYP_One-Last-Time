@@ -54,8 +54,7 @@ public class PakYa : MonoBehaviour
         EventManager.Current.TryMoveYEvent += OnTryMoveY;
         EventManager.Current.TryJumpEvent += OnTryJump;
 
-        EventManager.Current.TryLightAttackEvent += OnTryLightAttack;
-        EventManager.Current.TryHeavyAttackEvent += OnTryHeavyAttack;
+        EventManager.Current.TryAttackEvent += OnTryAttack;
         EventManager.Current.TryStartCastEvent += OnTryStartCast;
 
         PlayerManager.Current.Register(gameObject);
@@ -67,8 +66,7 @@ public class PakYa : MonoBehaviour
         EventManager.Current.TryMoveYEvent -= OnTryMoveY;
         EventManager.Current.TryJumpEvent -= OnTryJump;
 
-        EventManager.Current.TryLightAttackEvent += OnTryLightAttack;
-        EventManager.Current.TryHeavyAttackEvent += OnTryHeavyAttack;
+        EventManager.Current.TryAttackEvent -= OnTryAttack;
         EventManager.Current.TryStartCastEvent -= OnTryStartCast;
 
         PlayerManager.Current.Unregister(gameObject);
@@ -167,33 +165,28 @@ public class PakYa : MonoBehaviour
     {
         if(!pilot.IsPlayer()) return;
 
-        EventManager.Current.OnTryLightAttack(gameObject);
-    }
-
-    void OnTryLightAttack(GameObject who)
-    {
-        if(who!=gameObject) return;
-
-        if(!AllowAttack) return;
-
-        lightCombo.AttackBuffer();      
+        EventManager.Current.OnTryAttack(gameObject, "Light");
     }
 
     void OnInputHeavyAttack()
     {
         if(!pilot.IsPlayer()) return;
 
-        EventManager.Current.OnTryHeavyAttack(gameObject);
+        EventManager.Current.OnTryAttack(gameObject, "Heavy");
     }
 
-    void OnTryHeavyAttack(GameObject who)
+    void OnTryAttack(GameObject who, string type)
     {
         if(who!=gameObject) return;
 
         if(!AllowAttack) return;
 
-        heavyCombo.AttackBuffer();      
-    }
+        switch(type)
+        {
+            case "Light": lightCombo.DoBuffer(); break;
+            case "Heavy": heavyCombo.DoBuffer(); break;
+        }
+    }    
 
     // ============================================================================
     

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
   attack: {fileID: 3574276676473959355}
   comboName: Normal Combo
   comboSteps:
@@ -51,11 +52,11 @@ MonoBehaviour:
     attackSpawn:
       prefab: {fileID: 0}
       spawnpoint: {fileID: 0}
-      followRotation: 1
       parented: 1
-  resetTimer: 1
-  comboCooldownTime: 1
-  attackBufferTime: 0.2
+      followRotation: 1
+  bufferTime: 0.2
+  randomCombo: 0
+  comboResetTime: 1
 --- !u!1 &1611157070665987421
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,12 +959,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bufferTime: 0.2
   attackSO: {fileID: 0}
   attackSpawn:
     prefab: {fileID: 0}
     spawnpoint: {fileID: 0}
-    followRotation: 1
     parented: 1
+    followRotation: 1
   cancelAnimName: Cancel
 --- !u!1 &5701653159739410106
 GameObject:

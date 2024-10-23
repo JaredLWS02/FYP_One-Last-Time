@@ -11,6 +11,7 @@ public class AttackSO : ScriptableObject
     public string description;
 
     [Header("Animator")]
+    public bool hasAttackAnim = true;
     public string animName = "Melee1";
     public int animLayer = 0;
     public float animBlendTime = 0;
@@ -21,6 +22,9 @@ public class AttackSO : ScriptableObject
     public float dashForce = 5;    
     public Vector3 dashDirection = Vector3.forward;
     public bool localDirection = true;
+
+    [Header("Misc")]
+    public float cooldownTime = 0;
 
     // ============================================================================
     

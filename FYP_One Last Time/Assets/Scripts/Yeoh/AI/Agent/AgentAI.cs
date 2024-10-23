@@ -172,13 +172,16 @@ public class AgentAI : MonoBehaviour
     [Header("Attacks")]
     public AttackCombo normalCombo;
     
-    void OnTryAttack(GameObject who)
+    void OnTryAttack(GameObject who, string type)
     {
         if(who!=gameObject) return;
 
         if(!AllowAttack) return;
 
-        normalCombo.AttackBuffer();      
+        switch(type)
+        {
+            default: normalCombo.DoBuffer(); break;
+        }
     }
 
     // ============================================================================
