@@ -34,12 +34,13 @@ public class StateMachine_PakYa_Control : MonoBehaviour
 
         none.AddTransition(player, (timeInState) =>
         {
-            if(
-                pakya.pilot.type == Pilot.Type.Player //&&
-            ){
-                return true;
-            }
-            return false;
+            // if(
+            //     pakya.pilot.IsPlayer() //&&
+            // ){
+            //     return true;
+            // }
+            // return false;
+            return true;
         });
         
         
@@ -48,11 +49,11 @@ public class StateMachine_PakYa_Control : MonoBehaviour
 
         player.AddTransition(none, (timeInState) =>
         {
-            if(
-                pakya.pilot.type != Pilot.Type.Player //||
-            ){
-                return true;
-            }
+            // if(
+            //     !pakya.pilot.IsPlayer() //||
+            // ){
+            //     return true;
+            // }
             return false;
         });
 

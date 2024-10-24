@@ -8,18 +8,27 @@ public class AttackAnimEvents : MonoBehaviour
     
     // ============================================================================
 
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+    
+    // ============================================================================
+
     public void WindUp()
     {
-        EventManager.Current.OnAttackWindUp(owner);
+        EventM.OnAttackWindUp(owner);
     }
 
     public void Release()
     {
-        EventManager.Current.OnAttackRelease(owner);
+        EventM.OnAttackRelease(owner);
     }
 
     public void Recover()
     {
-        EventManager.Current.OnAttackRecover(owner);
+        EventM.OnAttackRecover(owner);
     }
 }

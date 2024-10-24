@@ -16,6 +16,15 @@ public class GroundCheck : MonoBehaviour
     
     // ============================================================================
 
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+
+    // ============================================================================
+
     public Vector3 boxSize = new(.5f, .05f, .5f);
     public Vector3 boxOffset = Vector3.zero;
 
@@ -83,7 +92,7 @@ public class GroundCheck : MonoBehaviour
             if(rb.velocity.y < minLandVelocity)
             {
                 OnLandGround.Invoke();
-                EventManager.Current.OnLandGround(gameObject);
+                EventM.OnLandGround(gameObject);
             }
         }
     }
@@ -93,7 +102,7 @@ public class GroundCheck : MonoBehaviour
         if(previous_colliders.Count > 0 && current_colliders.Count==0)
         {
             OnLeaveGround.Invoke();
-            EventManager.Current.OnLeaveGround(gameObject);
+            EventM.OnLeaveGround(gameObject);
         }
     }
 

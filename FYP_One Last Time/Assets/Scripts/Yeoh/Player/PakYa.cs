@@ -1,10 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
-[RequireComponent(typeof(PlayerInput))]
-[RequireComponent(typeof(Pilot))]
 
 [RequireComponent(typeof(SideMove))]
 [RequireComponent(typeof(SideTurn))]
@@ -16,9 +12,6 @@ using UnityEngine.InputSystem;
 
 public class PakYa : MonoBehaviour
 {
-    [HideInInspector]
-    public Pilot pilot;
-
     SideMove move;
     SideTurn turn;
     JumpScript jump;
@@ -29,8 +22,6 @@ public class PakYa : MonoBehaviour
 
     void Awake()
     {
-        pilot = GetComponent<Pilot>();
-
         move = GetComponent<SideMove>();
         turn = GetComponent<SideTurn>();
         jump = GetComponent<JumpScript>();
@@ -40,40 +31,44 @@ public class PakYa : MonoBehaviour
         caster = GetComponent<AbilityCaster>();
     }
 
-    void Start()
-    {
-        EventManager.Current.OnSpawn(gameObject);
-    }
-
     // ============================================================================
+
+    EventManager EventM;
 
     void OnEnable()
     {
-        EventManager.Current.TryMoveXEvent += OnTryMoveX;
-        EventManager.Current.TryFaceXEvent += OnTryFaceX;
-        EventManager.Current.TryMoveYEvent += OnTryMoveY;
-        EventManager.Current.TryJumpEvent += OnTryJump;
+        EventM = EventManager.Current;
+        
+        EventM.TryMoveEvent += OnTryMove;
+        EventM.TryFaceXEvent += OnTryFaceX;
+        EventM.TryJumpEvent += OnTryJump;
 
-        EventManager.Current.TryAttackEvent += OnTryAttack;
-        EventManager.Current.TryStartCastEvent += OnTryStartCast;
+        EventM.TryAttackEvent += OnTryAttack;
+        EventM.TryStartCastEvent += OnTryStartCast;
 
         PlayerManager.Current.Register(gameObject);
     }
     void OnDisable()
     {
-        EventManager.Current.TryMoveXEvent -= OnTryMoveX;
-        EventManager.Current.TryFaceXEvent -= OnTryFaceX;
-        EventManager.Current.TryMoveYEvent -= OnTryMoveY;
-        EventManager.Current.TryJumpEvent -= OnTryJump;
+        EventM.TryMoveEvent -= OnTryMove;
+        EventM.TryFaceXEvent -= OnTryFaceX;
+        EventM.TryJumpEvent -= OnTryJump;
 
-        EventManager.Current.TryAttackEvent -= OnTryAttack;
-        EventManager.Current.TryStartCastEvent -= OnTryStartCast;
+        EventM.TryAttackEvent -= OnTryAttack;
+        EventM.TryStartCastEvent -= OnTryStartCast;
 
         PlayerManager.Current.Unregister(gameObject);
     }
 
     // ============================================================================
 
+    void Start()
+    {
+        EventM.OnSpawn(gameObject);
+    }
+
+    // ============================================================================
+    
     [Header("Hold Toggles")]
     public bool AllowMoveX;
     public bool AllowMoveY;
@@ -86,33 +81,18 @@ public class PakYa : MonoBehaviour
 
     // ============================================================================
 
-    Vector2 moveInput;
-
-    void OnInputMove(InputValue value)
-    {
-        if(!pilot.IsPlayer()) return;
-
-        moveInput = value.Get<Vector2>();
-    }
-
-    void Update()
-    {
-        if(!pilot.IsPlayer()) moveInput = Vector2.zero;
-
-        EventManager.Current.OnTryMoveX(gameObject, moveInput.x);
-        EventManager.Current.OnTryFaceX(gameObject, moveInput.x);
-        EventManager.Current.OnTryMoveY(gameObject, moveInput.y);
-    }
-
-    void OnTryMoveX(GameObject who, float input_x)
+    void OnTryMove(GameObject who, Vector2 input)
     {
         if(who!=gameObject) return;
 
-        if(!AllowMoveX) input_x=0;
+        if(!AllowMoveX) input.x=0;
+        if(!AllowMoveY) input.y=0;
 
-        EventManager.Current.OnMoveX(gameObject, input_x);
+        move.UpdateMove(input.x);
+        //climb.OnMoveY(gameObject, input.y);
 
-        move.UpdateMove(input_x);
+        EventM.OnMove(gameObject, input);
+        EventM.OnTryFaceX(gameObject, input.x);
     }
 
     void OnTryFaceX(GameObject who, float input_x)
@@ -121,30 +101,12 @@ public class PakYa : MonoBehaviour
 
         if(!AllowMoveX) input_x=0;
 
-        EventManager.Current.OnFaceX(gameObject, input_x);
+        EventM.OnFaceX(gameObject, input_x);
 
         turn.UpdateFlip(input_x);
     }
-
-    void OnTryMoveY(GameObject who, float input_y)
-    {
-        if(who!=gameObject) return;
-
-        if(!AllowMoveY) input_y=0;
-
-        EventManager.Current.OnMoveY(gameObject, input_y); // send to one way platform
-
-        //climb.OnMoveY(gameObject, input_y);
-    }
     
-    void OnInputJump(InputValue value)
-    {
-        if(!pilot.IsPlayer()) return;
-
-        float input = value.Get<float>();
-
-        EventManager.Current.OnTryJump(gameObject, input);
-    }
+    // ============================================================================
 
     void OnTryJump(GameObject who, float input)
     {
@@ -161,20 +123,6 @@ public class PakYa : MonoBehaviour
     public AttackCombo lightCombo;
     public AttackCombo heavyCombo;
 
-    void OnInputLightAttack()
-    {
-        if(!pilot.IsPlayer()) return;
-
-        EventManager.Current.OnTryAttack(gameObject, "Light");
-    }
-
-    void OnInputHeavyAttack()
-    {
-        if(!pilot.IsPlayer()) return;
-
-        EventManager.Current.OnTryAttack(gameObject, "Heavy");
-    }
-
     void OnTryAttack(GameObject who, string type)
     {
         if(who!=gameObject) return;
@@ -189,13 +137,6 @@ public class PakYa : MonoBehaviour
     }    
 
     // ============================================================================
-    
-    void OnInputHeal()
-    {
-        if(!pilot.IsPlayer()) return;
-
-        EventManager.Current.OnTryStartCast(gameObject, "Heal");
-    }
 
     void OnTryStartCast(GameObject who, string ability_name)
     {

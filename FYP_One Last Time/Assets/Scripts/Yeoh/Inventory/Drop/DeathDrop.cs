@@ -16,13 +16,17 @@ public class DeathDrop : MonoBehaviour
 
     // ============================================================================
     
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.DeathEvent += OnDeath;
+        EventM = EventManager.Current;
+        
+        EventM.DeathEvent += OnDeath;
     }
     void OnDisable()
     {
-        EventManager.Current.DeathEvent -= OnDeath;
+        EventM.DeathEvent -= OnDeath;
     }
     
     // ============================================================================

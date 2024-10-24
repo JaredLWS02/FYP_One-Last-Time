@@ -597,6 +597,7 @@ GameObject:
   - component: {fileID: 4032536735459076646}
   - component: {fileID: 1642459170912960868}
   - component: {fileID: 8412114488542826597}
+  - component: {fileID: 2149238698398928101}
   - component: {fileID: 1170332012420382783}
   - component: {fileID: 6504059022795382390}
   - component: {fileID: 4572757513184181502}
@@ -697,6 +698,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2149238698398928101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b9aac1ad003b64bbc0555282a343ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pilot: {fileID: 0}
 --- !u!114 &1170332012420382783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,7 +723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7985ce309578108458a14ed0761ff51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pilot: {fileID: 0}
   AllowMoveX: 0
   AllowMoveY: 0
   AllowJump: 0
@@ -743,7 +756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c243ce33fa331c3459fce6a85560b2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  currentPilot: 1
 --- !u!114 &856482911234998920
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -41,27 +41,49 @@ public class EventManager : MonoBehaviour
         SpawnEvent?.Invoke(spawned);
     }
 
-    // Control ==================================================================================================================
+    // Controls ==================================================================================================================
 
-    public event Action<GameObject, Pilot.Type> SwitchPilotEvent;
+    public event Action<GameObject, PilotType> SwitchPilotEvent;
 
-    public void OnSwitchPilot(GameObject who, Pilot.Type to)
+    public void OnSwitchPilot(GameObject who, PilotType to)
     {
         SwitchPilotEvent?.Invoke(who, to);
-    }   
+    }
 
+    public event Action<GameObject, Vector2> TryInputMoveEvent;
+    public event Action<GameObject, float> TryInputJumpEvent;
+    public event Action<GameObject, string> TryInputAttackEvent;
+    public event Action<GameObject, string> TryInputCastEvent;
+
+    public void OnTryInputMove(GameObject mover, Vector2 input)
+    {
+        TryInputMoveEvent?.Invoke(mover, input);
+    }
+    public void OnTryInputJump(GameObject jumper, float input)
+    {
+        TryInputJumpEvent?.Invoke(jumper, input);
+    }
+    public void OnTryInputAttack(GameObject attacker, string type)
+    {
+        TryInputAttackEvent?.Invoke(attacker, type);
+    }
+    public void OnTryInputCast(GameObject caster, string type)
+    {
+        TryInputCastEvent?.Invoke(caster, type);
+    }
+    
     // Movement ==================================================================================================================
 
-    public event Action<GameObject, float> TryMoveXEvent;
-    public event Action<GameObject, float> MoveXEvent;
+    public event Action<GameObject, Vector2> TryMoveEvent;
+    public event Action<GameObject, Vector2> MoveEvent;
 
-    public void OnTryMoveX(GameObject mover, float input_x)
+    public void OnTryMove(GameObject mover, Vector2 input)
     {
-        TryMoveXEvent?.Invoke(mover, input_x);
+        TryMoveEvent?.Invoke(mover, input);
     }  
-    public void OnMoveX(GameObject mover, float input_x)
+    public void OnMove(GameObject mover, Vector2 input)
     {
-        MoveXEvent?.Invoke(mover, input_x);
+        MoveEvent?.Invoke(mover, input);
     } 
 
     public event Action<GameObject, float> TryFaceXEvent;
@@ -75,18 +97,6 @@ public class EventManager : MonoBehaviour
     {
         FaceXEvent?.Invoke(who, input_x);
     } 
-    
-    public event Action<GameObject, float> TryMoveYEvent;
-    public event Action<GameObject, float> MoveYEvent;
-
-    public void OnTryMoveY(GameObject mover, float input_y)
-    {
-        TryMoveYEvent?.Invoke(mover, input_y);
-    } 
-    public void OnMoveY(GameObject mover, float input_y)
-    {
-        MoveYEvent?.Invoke(mover, input_y);
-    }
 
     public event Action<GameObject, float> TryJumpEvent;
     public event Action<GameObject, float> JumpEvent;

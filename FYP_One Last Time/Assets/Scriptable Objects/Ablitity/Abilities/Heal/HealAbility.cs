@@ -6,22 +6,26 @@ public class HealAbility : MonoBehaviour
 {
     public HPManager hp;
 
-    // Event Manager ============================================================================
+    // ============================================================================
+
+    EventManager EventM;
 
     void OnEnable()
     {
-        //EventManager.Current.CastReleaseEvent += OnCastRelease;
+        EventM = EventManager.Current;
+        
+        //EventM.CastReleaseEvent += OnCastRelease;
         //temp, no anim event yet
-        EventManager.Current.CastWindUpEvent += OnCastRelease;
+        EventM.CastWindUpEvent += OnCastRelease;
     }
     void OnDisable()
     {
-        //EventManager.Current.CastReleaseEvent -= OnCastRelease;
+        //EventM.CastReleaseEvent -= OnCastRelease;
         //temp, no anim event yet
-        EventManager.Current.CastWindUpEvent -= OnCastRelease;
+        EventM.CastWindUpEvent -= OnCastRelease;
     }
 
-    // Events ============================================================================
+    // ============================================================================
 
     void OnCastRelease(GameObject caster, AbilitySlot abilitySlot)
     {
@@ -32,8 +36,8 @@ public class HealAbility : MonoBehaviour
         hp.Add(abilitySlot.ability.magnitude);
 
         //temp, no anim event yet
-        EventManager.Current.OnCastRelease(gameObject, abilitySlot);
-        EventManager.Current.OnCastFinish(gameObject);
+        EventM.OnCastRelease(gameObject, abilitySlot);
+        EventM.OnCastFinish(gameObject);
 
         TempFeedback(abilitySlot);
     }

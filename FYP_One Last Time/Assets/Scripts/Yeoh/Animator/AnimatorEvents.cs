@@ -9,13 +9,17 @@ public class AnimatorEvents : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.PlayAnimEvent += OnPlayAnim;
+        EventM = EventManager.Current;
+        
+        EventM.PlayAnimEvent += OnPlayAnim;
     }
     void OnDisable()
     {
-        EventManager.Current.PlayAnimEvent -= OnPlayAnim;
+        EventM.PlayAnimEvent -= OnPlayAnim;
     }
     
     // ============================================================================

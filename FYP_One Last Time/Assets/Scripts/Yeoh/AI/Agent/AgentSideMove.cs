@@ -15,12 +15,20 @@ public class AgentSideMove : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+
+    // ============================================================================
+
     void FixedUpdate()
     {
         float dot_x = Vector3.Dot(Vector3.right, agentV.velocity);
         float dot_y = Vector3.Dot(Vector3.up, agentV.velocity);
 
-        EventManager.Current.OnTryMoveX(gameObject, dot_x);
-        EventManager.Current.OnTryMoveY(gameObject, dot_y);
+        EventM.OnTryInputMove(gameObject, new Vector2(dot_x, dot_y));
     }
 }

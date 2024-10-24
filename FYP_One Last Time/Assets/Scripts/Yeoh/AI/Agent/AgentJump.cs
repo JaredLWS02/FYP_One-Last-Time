@@ -26,6 +26,15 @@ public class AgentJump : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+
+    // ============================================================================
+
     void FixedUpdate()
     {
         CheckJump();
@@ -40,7 +49,7 @@ public class AgentJump : MonoBehaviour
         if(!agent.isOnOffMeshLink) return;
         if(isJumping) return;
 
-        EventManager.Current.OnTryAutoJump(gameObject, GetJumpDir());
+        EventM.OnTryAutoJump(gameObject, GetJumpDir());
     }
 
     Vector3 GetJumpDir()
@@ -79,7 +88,7 @@ public class AgentJump : MonoBehaviour
         isReversed = IsJumpReversed(link);
 
         OnJump?.Invoke();
-        EventManager.Current.OnAutoJump(gameObject, GetJumpDir());
+        EventM.OnAutoJump(gameObject, GetJumpDir());
     }
 
     bool IsJumpReversed(NavMeshLink link)
@@ -136,7 +145,7 @@ public class AgentJump : MonoBehaviour
         agent.CompleteOffMeshLink();
 
         OnLand?.Invoke();
-        EventManager.Current.OnLandGround(gameObject);
+        EventM.OnLandGround(gameObject);
     }
 
     // ============================================================================

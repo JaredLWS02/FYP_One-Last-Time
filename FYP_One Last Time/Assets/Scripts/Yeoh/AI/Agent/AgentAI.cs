@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Pilot))]
-
 [RequireComponent(typeof(SideMove))]
 [RequireComponent(typeof(SideTurn))]
 [RequireComponent(typeof(JumpScript))]
@@ -23,9 +21,6 @@ using UnityEngine.AI;
 
 public class AgentAI : MonoBehaviour
 {
-    [HideInInspector]
-    public Pilot pilot;
-
     SideMove move;
     SideTurn turn;
     JumpScript jump;
@@ -44,8 +39,6 @@ public class AgentAI : MonoBehaviour
 
     void Awake()
     {
-        pilot = GetComponent<Pilot>();
-
         move = GetComponent<SideMove>();
         turn = GetComponent<SideTurn>();
         jump = GetComponent<JumpScript>();
@@ -65,30 +58,32 @@ public class AgentAI : MonoBehaviour
 
     void Start()
     {
-        EventManager.Current.OnSpawn(gameObject);
+        EventM.OnSpawn(gameObject);
     }
 
     // ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.TryMoveXEvent += OnTryMoveX;
-        EventManager.Current.TryFaceXEvent += OnTryFaceX;
-        EventManager.Current.TryMoveYEvent += OnTryMoveY;
-        EventManager.Current.TryJumpEvent += OnTryJump;
-        EventManager.Current.TryAutoJumpEvent += OnTryAutoJump;
+        EventM = EventManager.Current;
+        
+        EventM.TryMoveEvent += OnTryMove;
+        EventM.TryFaceXEvent += OnTryFaceX;
+        EventM.TryJumpEvent += OnTryJump;
+        EventM.TryAutoJumpEvent += OnTryAutoJump;
 
-        EventManager.Current.TryAttackEvent += OnTryAttack;
+        EventM.TryAttackEvent += OnTryAttack;
     }
     void OnDisable()
     {
-        EventManager.Current.TryMoveXEvent -= OnTryMoveX;
-        EventManager.Current.TryFaceXEvent -= OnTryFaceX;
-        EventManager.Current.TryMoveYEvent -= OnTryMoveY;
-        EventManager.Current.TryJumpEvent -= OnTryJump;
-        EventManager.Current.TryAutoJumpEvent -= OnTryAutoJump;
+        EventM.TryMoveEvent -= OnTryMove;
+        EventM.TryFaceXEvent -= OnTryFaceX;
+        EventM.TryJumpEvent -= OnTryJump;
+        EventM.TryAutoJumpEvent -= OnTryAutoJump;
 
-        EventManager.Current.TryAttackEvent -= OnTryAttack;
+        EventM.TryAttackEvent -= OnTryAttack;
     }
 
     // ============================================================================
@@ -104,47 +99,33 @@ public class AgentAI : MonoBehaviour
 
     // ============================================================================
 
-    void OnTryMoveX(GameObject who, float input_x)
+    void OnTryMove(GameObject who, Vector2 input)
     {
-        if(!pilot.IsAI()) return;
-
         if(who!=gameObject) return;
 
-        if(!AllowMoveX) return;
+        if(!AllowMoveX) input.x=0;
+        if(!AllowMoveY) input.y=0;
 
-        EventManager.Current.OnMoveX(gameObject, input_x);
+        move.UpdateMove(input.x);
 
-        move.UpdateMove(input_x);
+        EventM.OnMove(gameObject, input);
     }
 
     void OnTryFaceX(GameObject who, float input_x)
     {
-        if(!pilot.IsAI()) return;
-
         if(who!=gameObject) return;
 
-        if(!AllowMoveX) return;
+        if(!AllowMoveX) input_x=0;
 
-        EventManager.Current.OnFaceX(gameObject, input_x);
+        EventM.OnFaceX(gameObject, input_x);
 
         turn.UpdateFlip(input_x);
     }
-
-    void OnTryMoveY(GameObject who, float input_y)
-    {
-        if(!pilot.IsAI()) return;
-
-        if(who!=gameObject) return;
-
-        if(!AllowMoveY) return;
-
-        EventManager.Current.OnMoveY(gameObject, input_y); // send to one way platform
-    }
+    
+    // ============================================================================
     
     void OnTryJump(GameObject who, float input)
     {
-        if(!pilot.IsAI()) return;
-
         if(who!=gameObject) return;
 
         if(!AllowJump) return;
@@ -154,8 +135,6 @@ public class AgentAI : MonoBehaviour
 
     void OnTryAutoJump(GameObject who, Vector3 jump_dir)
     {
-        if(!pilot.IsAI()) return;
-
         if(who!=gameObject) return;
 
         if(!AllowAutoJump) return;
@@ -352,7 +331,7 @@ public class AgentAI : MonoBehaviour
     {
         float dot_x = Vector3.Dot(Vector3.right, agentV.velocity);
 
-        EventManager.Current.OnTryFaceX(gameObject, dot_x);
+        EventM.OnTryFaceX(gameObject, dot_x);
     }
 
     public void FaceTarget(GameObject target)
@@ -363,7 +342,7 @@ public class AgentAI : MonoBehaviour
 
         float dot_x = Vector3.Dot(Vector3.right, agent_to_target);
 
-        EventManager.Current.OnTryFaceX(gameObject, dot_x);
+        EventM.OnTryFaceX(gameObject, dot_x);
     }
 
     public void FaceGoal()

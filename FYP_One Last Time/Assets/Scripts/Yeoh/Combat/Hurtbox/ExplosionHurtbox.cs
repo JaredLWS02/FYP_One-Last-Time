@@ -5,11 +5,17 @@ using UnityEngine;
 public class ExplosionHurtbox : MonoBehaviour
 {
     public HurtboxSO hurtboxSO;
+    
+    // ============================================================================
 
     public bool explodeOnAwake=true;
 
+    EventManager EventM;
+
     void OnEnable()
     {
+        EventM = EventManager.Current;
+        
         if(explodeOnAwake)
         Explode();
     }
@@ -90,7 +96,7 @@ public class ExplosionHurtbox : MonoBehaviour
 
             contactPoint = other.ClosestPoint(transform.position);
             
-            EventManager.Current.OnTryHurt(gameObject, otherRb.gameObject, hurtbox, contactPoint);
+            EventM.OnTryHurt(gameObject, otherRb.gameObject, hurtbox, contactPoint);
         }
     }
 

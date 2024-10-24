@@ -34,12 +34,13 @@ public class StateMachine_Agent_Control : MonoBehaviour
 
         none.AddTransition(ai, (timeInState) =>
         {
-            if(
-                this.agent.pilot.IsAI() //&&
-            ){
-                return true;
-            }
-            return false;
+            // if(
+            //     this.agent.pilot.IsAI() //&&
+            // ){
+            //     return true;
+            // }
+            // return false;
+            return true;
         });
         
         
@@ -48,11 +49,11 @@ public class StateMachine_Agent_Control : MonoBehaviour
 
         ai.AddTransition(none, (timeInState) =>
         {
-            if(
-                !this.agent.pilot.IsAI() //||
-            ){
-                return true;
-            }
+            // if(
+            //     !this.agent.pilot.IsAI() //||
+            // ){
+            //     return true;
+            // }
             return false;
         });
 

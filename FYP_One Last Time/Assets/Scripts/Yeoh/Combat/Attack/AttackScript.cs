@@ -70,6 +70,8 @@ public class AttackScript : MonoBehaviour
 
     // During Attack ============================================================================
 
+    public bool isAttacking {get; private set;}
+
     void Attack()
     {
         ResetBuffer();
@@ -88,34 +90,34 @@ public class AttackScript : MonoBehaviour
 
     void StartAttackAnim()
     {
-        EventManager.Current.OnPlayAnim(gameObject, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
+        EventM.OnPlayAnim(gameObject, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
     }
 
     void DoInstantAttack()
     {
-        EventManager.Current.OnAttackRelease(gameObject);
+        EventM.OnAttackRelease(gameObject);
     }
 
     // ============================================================================
+
+    EventManager EventM;
 
     void OnEnable()
     {
-        EventManager.Current.AttackWindUpEvent += OnAttackWindUp;
-        EventManager.Current.AttackReleaseEvent += OnAttackRelease;
-        EventManager.Current.AttackRecoverEvent += OnAttackRecover;
+        EventM = EventManager.Current;
+        
+        EventM.AttackWindUpEvent += OnAttackWindUp;
+        EventM.AttackReleaseEvent += OnAttackRelease;
+        EventM.AttackRecoverEvent += OnAttackRecover;
     }
     void OnDisable()
     {
-        EventManager.Current.AttackWindUpEvent -= OnAttackWindUp;
-        EventManager.Current.AttackReleaseEvent -= OnAttackRelease;
-        EventManager.Current.AttackRecoverEvent -= OnAttackRecover;
+        EventM.AttackWindUpEvent -= OnAttackWindUp;
+        EventM.AttackReleaseEvent -= OnAttackRelease;
+        EventM.AttackRecoverEvent -= OnAttackRecover;
     }
 
-    // ============================================================================
-
-    // triggered by attack anim events
-
-    public bool isAttacking {get; private set;}
+    // attack anim events ============================================================================
 
     void OnAttackWindUp(GameObject attacker)
     {
@@ -133,7 +135,7 @@ public class AttackScript : MonoBehaviour
 
         SpawnAttack();
 
-        EventManager.Current.OnAttack(gameObject, attackSO);
+        EventM.OnAttack(gameObject, attackSO);
     }
 
     void OnAttackRecover(GameObject attacker)
@@ -208,8 +210,8 @@ public class AttackScript : MonoBehaviour
     {
         if(!isAttacking) return;
 
-        EventManager.Current.OnPlayAnim(gameObject, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
+        EventM.OnPlayAnim(gameObject, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
 
-        EventManager.Current.OnAttackRecover(gameObject);
+        EventM.OnAttackRecover(gameObject);
     }
 }

@@ -18,17 +18,21 @@ public class CastingBarUI : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.CastingEvent += OnCasting;
-        EventManager.Current.CastCancelEvent += OnCastCancel;
+        EventM = EventManager.Current;
+        
+        EventM.CastingEvent += OnCasting;
+        EventM.CastCancelEvent += OnCastCancel;
 
         ResetBar(0);
     }
     void OnDisable()
     {
-        EventManager.Current.CastingEvent -= OnCasting;
-        EventManager.Current.CastCancelEvent -= OnCastCancel;
+        EventM.CastingEvent -= OnCasting;
+        EventM.CastCancelEvent -= OnCastCancel;
 
         ResetBar(0);
     }
@@ -55,11 +59,11 @@ public class CastingBarUI : MonoBehaviour
     void ResetBar(float time)
     {
         tween.tweenTime = time;
-        EventManager.Current.OnUIBarUpdate(gameObject, 0, 1);
+        EventM.OnUIBarUpdate(gameObject, 0, 1);
     }
     void FillBar(float time)
     {
         tween.tweenTime = time;
-        EventManager.Current.OnUIBarUpdate(gameObject, 1, 1);
+        EventM.OnUIBarUpdate(gameObject, 1, 1);
     }
 }

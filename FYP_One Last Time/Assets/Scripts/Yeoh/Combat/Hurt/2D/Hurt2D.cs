@@ -17,17 +17,21 @@ public class Hurt2D : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.HurtEvent += OnHurt;
-        EventManager.Current.KnockbackEvent += OnKnockback;
-        EventManager.Current.DeathEvent += OnDeath;
+        EventM = EventManager.Current;
+        
+        EventM.HurtEvent += OnHurt;
+        EventM.KnockbackEvent += OnKnockback;
+        EventM.DeathEvent += OnDeath;
     }
     void OnDisable()
     {
-        EventManager.Current.HurtEvent -= OnHurt;
-        EventManager.Current.KnockbackEvent -= OnKnockback;
-        EventManager.Current.DeathEvent -= OnDeath;
+        EventM.HurtEvent -= OnHurt;
+        EventM.KnockbackEvent -= OnKnockback;
+        EventM.DeathEvent -= OnDeath;
     }
 
     // ============================================================================
@@ -51,7 +55,7 @@ public class Hurt2D : MonoBehaviour
 
         hp.Hurt(hurtbox.damage);
 
-        EventManager.Current.OnHurt(gameObject, attacker, hurtbox, contactPoint);
+        EventM.OnHurt(gameObject, attacker, hurtbox, contactPoint);
 
         OnHurtt.Invoke();
 
@@ -63,9 +67,9 @@ public class Hurt2D : MonoBehaviour
         }
         else
         {
-            EventManager.Current.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
+            EventM.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
             
-            EventManager.Current.OnDeath(gameObject, attacker, hurtbox, contactPoint);
+            EventM.OnDeath(gameObject, attacker, hurtbox, contactPoint);
         }
     }
 
@@ -152,11 +156,11 @@ public class Hurt2D : MonoBehaviour
         {
             poise = maxPoise; // reset poise
 
-            EventManager.Current.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
+            EventM.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
 
             OnPoiseBreak.Invoke();
 
-            //EventManager.Current.OnStun(gameObject, attacker, hurtInfo);
+            //EventM.OnStun(gameObject, attacker, hurtInfo);
         }
     }
 

@@ -102,13 +102,17 @@ public class AttackCombo : MonoBehaviour
 
     // During Combo ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.AttackEvent += OnAttack;
+        EventM = EventManager.Current;
+        
+        EventM.AttackEvent += OnAttack;
     }
     void OnDisable()
     {
-        EventManager.Current.AttackEvent -= OnAttack;
+        EventM.AttackEvent -= OnAttack;
     }
 
     // ============================================================================

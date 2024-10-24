@@ -13,33 +13,37 @@ public class SFXManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////////////////
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        // EventManager.Current.SpawnEvent += OnSpawn;
-        // EventManager.Current.IdleVoiceEvent += OnIdleVoice;
-        // EventManager.Current.HurtEvent += OnHurt;
-        // EventManager.Current.DeathEvent += OnDeath;
-        // EventManager.Current.LootEvent += OnLoot;
-        // EventManager.Current.AddBuffEvent += OnAddBuff;
-        // EventManager.Current.EnderPearlEvent += OnEnderPearl;
-        // EventManager.Current.MaceSlamEvent += OnMaceSlam;
-        // EventManager.Current.UpdateCraftEvent += OnUpdateCraft;
-        // EventManager.Current.UpdateNotCraftEvent += OnUpdateNotCraft;
-        // EventManager.Current.CraftedEvent += OnCrafted;
+        EventM = EventManager.Current;
+        
+        // EventM.SpawnEvent += OnSpawn;
+        // EventM.IdleVoiceEvent += OnIdleVoice;
+        // EventM.HurtEvent += OnHurt;
+        // EventM.DeathEvent += OnDeath;
+        // EventM.LootEvent += OnLoot;
+        // EventM.AddBuffEvent += OnAddBuff;
+        // EventM.EnderPearlEvent += OnEnderPearl;
+        // EventM.MaceSlamEvent += OnMaceSlam;
+        // EventM.UpdateCraftEvent += OnUpdateCraft;
+        // EventM.UpdateNotCraftEvent += OnUpdateNotCraft;
+        // EventM.CraftedEvent += OnCrafted;
     }
     void OnDisable()
     {
-        // EventManager.Current.SpawnEvent -= OnSpawn;
-        // EventManager.Current.IdleVoiceEvent -= OnIdleVoice;
-        // EventManager.Current.HurtEvent -= OnHurt;
-        // EventManager.Current.DeathEvent -= OnDeath;
-        // EventManager.Current.LootEvent -= OnLoot;
-        // EventManager.Current.AddBuffEvent -= OnAddBuff;
-        // EventManager.Current.EnderPearlEvent -= OnEnderPearl;
-        // EventManager.Current.MaceSlamEvent -= OnMaceSlam;
-        // EventManager.Current.UpdateCraftEvent -= OnUpdateCraft;
-        // EventManager.Current.UpdateNotCraftEvent -= OnUpdateNotCraft;
-        // EventManager.Current.CraftedEvent -= OnCrafted;
+        // EventM.SpawnEvent -= OnSpawn;
+        // EventM.IdleVoiceEvent -= OnIdleVoice;
+        // EventM.HurtEvent -= OnHurt;
+        // EventM.DeathEvent -= OnDeath;
+        // EventM.LootEvent -= OnLoot;
+        // EventM.AddBuffEvent -= OnAddBuff;
+        // EventM.EnderPearlEvent -= OnEnderPearl;
+        // EventM.MaceSlamEvent -= OnMaceSlam;
+        // EventM.UpdateCraftEvent -= OnUpdateCraft;
+        // EventM.UpdateNotCraftEvent -= OnUpdateNotCraft;
+        // EventM.CraftedEvent -= OnCrafted;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////

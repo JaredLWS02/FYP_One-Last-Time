@@ -15,8 +15,12 @@ public class AgentVerticalityCheck : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
+        EventM = EventManager.Current;
+        
         StartCoroutine(CheckingHeight());
     }
 
@@ -58,14 +62,14 @@ public class AgentVerticalityCheck : MonoBehaviour
         // is above
         if(target_height > verticalCheckHeight)
         {
-            EventManager.Current.OnTryJump(gameObject, 1); // jump duh
-            EventManager.Current.OnTryMoveY(gameObject, 1); // press up
+            EventM.OnTryInputJump(gameObject, 1); // jump duh
+            EventM.OnTryInputMove(gameObject, Vector2.up); // press up
         }
         // is below
         else if(target_height < -verticalCheckHeight)
         {
-            EventManager.Current.OnTryJump(gameObject, 0); // jumpcut
-            EventManager.Current.OnTryMoveY(gameObject, -1); // press down
+            EventM.OnTryInputJump(gameObject, 0); // jumpcut
+            EventM.OnTryInputMove(gameObject, Vector2.down); // press down
         }
     }    
 

@@ -8,23 +8,29 @@ public class HPManager : MonoBehaviour
     public float hp=100;
     public float hpMax=100;
 
-    // ============================================================================
-
     void Awake()
     {
         RecordDefaults();
     }
+
+    // ============================================================================
     
+    EventManager EventM;
+
     void OnEnable()
     {
+        EventM = EventManager.Current;
+        
         StartHpRegen();
 
         StartUpdatingUIBar();
     }
 
+    // ============================================================================
+    
     void Start()
     {
-        EventManager.Current.OnUIBarUpdate(gameObject, hp, hpMax);
+        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
     }
 
     void Update()
@@ -93,7 +99,7 @@ public class HPManager : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(.2f);
-            EventManager.Current.OnUIBarUpdate(gameObject, hp, hpMax);
+            EventM.OnUIBarUpdate(gameObject, hp, hpMax);
         }
     }
 
@@ -107,7 +113,7 @@ public class HPManager : MonoBehaviour
             else hp=0;
         }
         
-        EventManager.Current.OnUIBarUpdate(gameObject, hp, hpMax);
+        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
     }
 
     public void Add(float amount)
@@ -115,7 +121,7 @@ public class HPManager : MonoBehaviour
         hp+=amount;
         if(hp>hpMax) hp=hpMax;
 
-        EventManager.Current.OnUIBarUpdate(gameObject, hp, hpMax);
+        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
     }
 
     public void SetHPPercent(float percent)
@@ -124,7 +130,7 @@ public class HPManager : MonoBehaviour
 
         hp = hpMax * percent/100;
 
-        EventManager.Current.OnUIBarUpdate(gameObject, hp, hpMax);
+        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
     }
 
     // Getters ============================================================================
