@@ -45,13 +45,13 @@ public class Hurt2D : MonoBehaviour
 
     // check block/parry first before hurting
 
-    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(iframe) return;
 
-        hp.Hurt(attack.damage);
+        hp.Hurt(hurtbox.damage);
 
-        EventManager.Current.OnHurt(gameObject, attacker, attack, contactPoint);
+        EventManager.Current.OnHurt(gameObject, attacker, hurtbox, contactPoint);
 
         OnHurtt.Invoke();
 
@@ -59,13 +59,13 @@ public class Hurt2D : MonoBehaviour
         {
             DoIFraming(iframeSeconds);
 
-            HurtPoise(attacker, attack, contactPoint);
+            HurtPoise(attacker, hurtbox, contactPoint);
         }
         else
         {
-            EventManager.Current.OnKnockback(gameObject, attacker, attack, contactPoint);
+            EventManager.Current.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
             
-            EventManager.Current.OnDeath(gameObject, attacker, attack, contactPoint);
+            EventManager.Current.OnDeath(gameObject, attacker, hurtbox, contactPoint);
         }
     }
 
@@ -142,9 +142,9 @@ public class Hurt2D : MonoBehaviour
     public float poise;
     float maxPoise;
 
-    public void HurtPoise(GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void HurtPoise(GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        poise -= attack.damage;
+        poise -= hurtbox.damage;
 
         lastPoiseDmgTime = Time.time;
 
@@ -152,7 +152,7 @@ public class Hurt2D : MonoBehaviour
         {
             poise = maxPoise; // reset poise
 
-            EventManager.Current.OnKnockback(gameObject, attacker, attack, contactPoint);
+            EventManager.Current.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
 
             OnPoiseBreak.Invoke();
 
@@ -179,14 +179,14 @@ public class Hurt2D : MonoBehaviour
 
     // ============================================================================
 
-    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         Vector3 kb_dir = rb.transform.position - contactPoint;
         kb_dir.z=0; // no z axis in 2D
         kb_dir.Normalize();
 
         rb.velocity = Vector3.zero;
-        rb.AddForce(kb_dir * attack.knockback, ForceMode2D.Impulse);
+        rb.AddForce(kb_dir * hurtbox.knockback, ForceMode2D.Impulse);
     }
 
     // ============================================================================
@@ -194,7 +194,7 @@ public class Hurt2D : MonoBehaviour
     [Header("Die")]
     public bool iframeOnDeath=true;
 
-    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim != gameObject) return;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 
@@ -16,40 +17,71 @@ public class FallScript : MonoBehaviour
     void FixedUpdate()
     {
         UpdateFastFalling();
+        UpdateFastFallCheck();
         UpdateMaxFall();
 
         UpdateDebug();
-    }
 
-    // ============================================================================
-
-    public float maxFallVelocity = -30;
-
-    void UpdateMaxFall()
-    {
-        if(rb.velocity.y < maxFallVelocity)
-        {
-            rb.velocity = new(rb.velocity.x, maxFallVelocity, rb.velocity.z);
-            return;
-        }
     }
 
     // ============================================================================
 
     [Header("Fast Falling")]
     public bool fastFall = true;
-    public float minVelocityBeforeFastFall = -.1f;
+    public float minFastFallVelocity = -1;
     public float fastFallForce = -30;
+    bool fastFallStarted;
+
+    bool IsFalling()
+    {
+        return rb.velocity.y<0;
+    }
+
+    bool IsFastFalling()
+    {
+        if(!IsFalling()) return false;
+
+        return rb.velocity.y < minFastFallVelocity;
+    }
 
     void UpdateFastFalling()
     {
         if(!fastFall) return;
-        // ignore if going up
-        if(rb.velocity.y>=0) return;
         
-        if(rb.velocity.y < minVelocityBeforeFastFall)
+        if(IsFastFalling())
         {
             rb.AddForce(Vector3.up * fastFallForce);
+        }
+    }
+
+    void UpdateFastFallCheck()
+    {
+        if(!fastFallStarted && IsFastFalling())
+        {
+            fastFallStarted=true;
+            OnFastFallStart.Invoke();
+            EventManager.Current.OnFastFallStart(gameObject);
+        }
+        else if(fastFallStarted && !IsFalling())
+        {
+            fastFallStarted=false;
+            OnFastFallEnd.Invoke();
+            EventManager.Current.OnFastFallEnd(gameObject);
+        }
+    }
+
+    // ============================================================================
+
+    [Header("Max Velocity")]
+    public float maxFallVelocity = -50;
+    
+    void UpdateMaxFall()
+    {
+        if(!IsFalling()) return;
+        
+        if(rb.velocity.y < maxFallVelocity)
+        {
+            rb.velocity = new(rb.velocity.x, maxFallVelocity, rb.velocity.z);
         }
     }
 
@@ -71,7 +103,12 @@ public class FallScript : MonoBehaviour
         {
             factor *= 10;
         }
-
         return Mathf.Round(num * factor) / factor;
     }
+
+    // ============================================================================
+    
+    [Header("Events")]
+    public UnityEvent OnFastFallStart;
+    public UnityEvent OnFastFallEnd;
 }

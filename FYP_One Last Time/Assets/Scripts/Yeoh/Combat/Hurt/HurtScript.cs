@@ -47,14 +47,14 @@ public class HurtScript : MonoBehaviour
 
     // check block/parry first before hurting
 
-    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
         if(iframe) return;
 
-        hp.Hurt(attack.damage);
+        hp.Hurt(hurtbox.damage);
 
-        EventManager.Current.OnHurt(gameObject, attacker, attack, contactPoint);
+        EventManager.Current.OnHurt(gameObject, attacker, hurtbox, contactPoint);
 
         OnHurtt.Invoke();
 
@@ -62,13 +62,13 @@ public class HurtScript : MonoBehaviour
         {
             DoIFraming(iframeSeconds);
 
-            HurtPoise(attacker, attack, contactPoint);
+            HurtPoise(attacker, hurtbox, contactPoint);
         }
         else
         {
-            EventManager.Current.OnKnockback(gameObject, attacker, attack, contactPoint);
+            EventManager.Current.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
             
-            EventManager.Current.OnDeath(gameObject, attacker, attack, contactPoint);
+            EventManager.Current.OnDeath(gameObject, attacker, hurtbox, contactPoint);
         }
     }
 
@@ -147,9 +147,9 @@ public class HurtScript : MonoBehaviour
     public float poise;
     float maxPoise;
 
-    public void HurtPoise(GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void HurtPoise(GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        poise -= attack.damage;
+        poise -= hurtbox.damage;
 
         lastPoiseDmgTime = Time.time;
 
@@ -157,7 +157,7 @@ public class HurtScript : MonoBehaviour
         {
             poise = maxPoise; // reset poise
 
-            EventManager.Current.OnKnockback(gameObject, attacker, attack, contactPoint);
+            EventManager.Current.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
 
             OnPoiseBreak.Invoke();
 
@@ -184,14 +184,14 @@ public class HurtScript : MonoBehaviour
 
     // ============================================================================
 
-    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 
         Vector3 kb_dir = (rb.transform.position - contactPoint).normalized;
 
         rb.velocity = Vector3.zero;
-        rb.AddForce(kb_dir * attack.knockback, ForceMode.Impulse);
+        rb.AddForce(kb_dir * hurtbox.knockback, ForceMode.Impulse);
     }
 
     // ============================================================================
@@ -199,7 +199,7 @@ public class HurtScript : MonoBehaviour
     [Header("Die")]
     public bool iframeOnDeath=true;
 
-    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 

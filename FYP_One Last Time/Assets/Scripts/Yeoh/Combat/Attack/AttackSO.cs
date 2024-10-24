@@ -10,34 +10,24 @@ public class AttackSO : ScriptableObject
     [TextArea]
     public string description;
 
-    [Header("Damage")]
-    public float damage=10;
-    public float knockback=5;
+    [Header("Animator")]
+    public bool hasAttackAnim = true;
+    public string animName = "Melee1";
+    public int animLayer = 0;
+    public float animBlendTime = 0;
 
-    [Header("Extra")]
-    public float damageBlock=5;
-    public bool parryable=true;
-    [Min(1)]
-    public int pierceCount=1;
+    [Header("Dash")]
+    public bool dashOnWindUp = false;
+    public bool dashOnRelease = true;
+    public float dashForce = 5;    
+    public Vector3 dashDirection = Vector3.forward;
+    public bool localDirection = true;
 
-    [Header("Stun")]
-    public float stunSeconds=1;
-    public float stunSpeedMult=.3f;      
+    [Header("Misc")]
+    public float cooldownTime = 0;
 
-    // ctor
-    public AttackSO(AttackSO so)
-    {
-        Name = so.Name;
-        description = so.description;
-        damage = so.damage;
-        knockback = so.knockback;
-        damageBlock = so.damageBlock;
-        parryable = so.parryable;
-        pierceCount = so.pierceCount;
-        stunSeconds = so.stunSeconds;
-        stunSpeedMult = so.stunSpeedMult;
-    }
-
+    // ============================================================================
+    
     [HideInInspector]
     public int ID => GetInstanceID();
 }

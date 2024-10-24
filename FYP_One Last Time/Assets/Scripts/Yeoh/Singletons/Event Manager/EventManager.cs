@@ -50,7 +50,7 @@ public class EventManager : MonoBehaviour
         SwitchPilotEvent?.Invoke(who, to);
     }   
 
-    // Actions ==================================================================================================================
+    // Movement ==================================================================================================================
 
     public event Action<GameObject, float> TryMoveXEvent;
     public event Action<GameObject, float> MoveXEvent;
@@ -110,19 +110,17 @@ public class EventManager : MonoBehaviour
         AutoJumpEvent?.Invoke(jumper, jump_dir);
     }    
     
-    public event Action<GameObject, string> TryStartCastEvent;
-    public event Action<GameObject, string> StartCastEvent;
-    
-    public void OnTryStartCast(GameObject caster, string ability_name)
+    public event Action<GameObject> FastFallStartEvent;
+    public event Action<GameObject> FastFallEndEvent;
+
+    public void OnFastFallStart(GameObject who)
     {
-        TryStartCastEvent?.Invoke(caster, ability_name);
+        FastFallStartEvent?.Invoke(who);
     }
-    public void OnStartCast(GameObject caster, string ability_name)
+    public void OnFastFallEnd(GameObject who)
     {
-        StartCastEvent?.Invoke(caster, ability_name);
-    }
-    
-    // Ground ==================================================================================================================
+        FastFallEndEvent?.Invoke(who);
+    }    
 
     public event Action<GameObject> LandGroundEvent;
     public event Action<GameObject> LeaveGroundEvent;
@@ -134,33 +132,66 @@ public class EventManager : MonoBehaviour
     public void OnLeaveGround(GameObject who)
     {
         LeaveGroundEvent?.Invoke(who);
-    }
-
-    // Combat ==================================================================================================================
-
-    public event Action<GameObject, GameObject, AttackSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
-    public event Action<GameObject, GameObject, AttackSO, Vector3> HurtEvent; // respects iframe/block/parry
-    public event Action<GameObject, GameObject, AttackSO, Vector3> KnockbackEvent;
-    public event Action<GameObject, GameObject, AttackSO, Vector3> DeathEvent;
-
-    public void OnTryHurt(GameObject attacker, GameObject victim, AttackSO attack, Vector3 contactPoint)
-    {
-        TryHurtEvent?.Invoke(attacker, victim, attack, contactPoint);
     }    
-    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+
+    // Attacks ==================================================================================================================
+
+    public event Action<GameObject, string> TryAttackEvent;
+    public event Action<GameObject, AttackSO> AttackEvent;
+
+    public void OnTryAttack(GameObject attacker, string type)
     {
-        HurtEvent?.Invoke(victim, attacker, attack, contactPoint);
+        TryAttackEvent?.Invoke(attacker, type);
     }
-    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    public void OnAttack(GameObject attacker, AttackSO attackSO)
     {
-        KnockbackEvent?.Invoke(victim, attacker, attack, contactPoint);
+        AttackEvent?.Invoke(attacker, attackSO);
+    }  
+
+    // Attack Anim Events ==================================================================================================================
+
+    public event Action<GameObject> AttackWindUpEvent;
+    public event Action<GameObject> AttackReleaseEvent;
+    public event Action<GameObject> AttackRecoverEvent;
+
+    public void OnAttackWindUp(GameObject attacker)
+    {
+        AttackWindUpEvent?.Invoke(attacker);
+    }  
+    public void OnAttackRelease(GameObject attacker)
+    {
+        AttackReleaseEvent?.Invoke(attacker);
+    }  
+    public void OnAttackRecover(GameObject attacker)
+    {
+        AttackRecoverEvent?.Invoke(attacker);
+    }  
+    
+    // Hurtbox ==================================================================================================================
+    
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent; // respects iframe/block/parry
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> KnockbackEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
+
+    public void OnTryHurt(GameObject attacker, GameObject victim, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        TryHurtEvent?.Invoke(attacker, victim, hurtbox, contactPoint);
+    }    
+    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        HurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }
-    public void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        DeathEvent?.Invoke(victim, killer, attack, contactPoint);
+        KnockbackEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
+    public void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        DeathEvent?.Invoke(victim, killer, hurtbox, contactPoint);
     }
 
-    // Item ==================================================================================================================
+    // Inventory ==================================================================================================================
     
     public event Action<GameObject, GameObject, LootInfo> LootEvent;
 
@@ -170,6 +201,18 @@ public class EventManager : MonoBehaviour
     }
 
     // Ability ==================================================================================================================
+
+    public event Action<GameObject, string> TryStartCastEvent;
+    public event Action<GameObject, string> StartCastEvent;
+    
+    public void OnTryStartCast(GameObject caster, string ability_name)
+    {
+        TryStartCastEvent?.Invoke(caster, ability_name);
+    }
+    public void OnStartCast(GameObject caster, string ability_name)
+    {
+        StartCastEvent?.Invoke(caster, ability_name);
+    }
 
     public event Action<GameObject, AbilitySlot> CastingEvent;
     public event Action<GameObject, AbilitySlot> CastWindUpEvent;
@@ -196,6 +239,15 @@ public class EventManager : MonoBehaviour
     public void OnCastCancel(GameObject caster)
     {
         CastCancelEvent?.Invoke(caster);
+    }
+
+    // Animator ==================================================================================================================
+
+    public event Action<GameObject, string, int, float> PlayAnimEvent;
+
+    public void OnPlayAnim(GameObject who, string animName, int animLayer, float blendSeconds=0)
+    {
+        PlayAnimEvent?.Invoke(who, animName, animLayer, blendSeconds);
     }
 
     // UI ==================================================================================================================
