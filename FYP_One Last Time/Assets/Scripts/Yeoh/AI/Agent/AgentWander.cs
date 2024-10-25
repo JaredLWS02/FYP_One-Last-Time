@@ -20,6 +20,7 @@ public class AgentWander : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agentVel = GetComponent<AgentVelocity>();
 
         wanderGoal.parent=null;
 

@@ -31,7 +31,6 @@ public class ActionManager : MonoBehaviour
     
     [Header("Toggles")]
     public bool AllowJump;
-    public bool AllowAutoJump;
     public bool AllowDash;
     public bool AllowAttack;
     public bool AllowCast;
@@ -109,7 +108,7 @@ public class ActionManager : MonoBehaviour
     {
         if(who!=gameObject) return;
 
-        if(!AllowAutoJump) return;
+        if(!AllowJump) return;
 
         if(!autoJump) return;
 
@@ -160,6 +159,7 @@ public class ActionManager : MonoBehaviour
 
     public bool IsGrounded()
     {
+        if(!ground) return false;
         return ground.IsGrounded();
     }
 
@@ -171,16 +171,19 @@ public class ActionManager : MonoBehaviour
 
     public bool IsDashing()
     {
+        //if(!dash) return false;
         return false;
     }
     
     public bool IsAttacking()
     {
+        if(!attack) return false;
         return attack.isAttacking;
     }
     
     public bool IsCasting()
     {
+        if(!caster) return false;
         return caster.isCasting;
     }   
 }
