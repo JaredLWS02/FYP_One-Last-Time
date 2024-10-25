@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class AISideSeek : MonoBehaviour
 {
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+
+    // ============================================================================
+
     [HideInInspector]
     public Transform goal;
     [HideInInspector]
@@ -15,10 +24,10 @@ public class AISideSeek : MonoBehaviour
     public float slowingRangeOffset=2;
 
     // ============================================================================
-
+    
     public void Move()
     {
-        EventManager.Current.OnTryMoveX(gameObject, GetSeekInput());
+        EventM.OnTryInputMove(gameObject, Vector3.right * GetSeekInput());
     }
 
     float GetSeekInput()

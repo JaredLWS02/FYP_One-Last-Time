@@ -5,11 +5,17 @@ using UnityEngine;
 public class ExplosionHurtbox2D : MonoBehaviour
 {
     public HurtboxSO hurtboxSO;
+    
+    // ============================================================================
 
     bool explodeOnAwake=true;
 
-    void Enable()
+    EventManager EventM;
+
+    void OnEnable()
     {
+        EventM = EventManager.Current;
+        
         if(explodeOnAwake)
         Explode();
     }
@@ -73,7 +79,7 @@ public class ExplosionHurtbox2D : MonoBehaviour
 
             contactPoint = rb.ClosestPoint(transform.position);
 
-            EventManager.Current.OnTryHurt(gameObject, rb.gameObject, hurtbox, contactPoint);
+            EventM.OnTryHurt(gameObject, rb.gameObject, hurtbox, contactPoint);
         }
     }
 

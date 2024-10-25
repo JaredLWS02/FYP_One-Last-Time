@@ -13,6 +13,15 @@ public class PlayerManager : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+
+    // ============================================================================
+
     public List<GameObject> characters = new();
 
     public void Register(GameObject obj)
@@ -66,8 +75,8 @@ public class PlayerManager : MonoBehaviour
 
         if(to_index == from_index) return;
 
-        EventManager.Current.OnSwitchPilot(switcher, Pilot.Type.AI);
-        EventManager.Current.OnSwitchPilot(characters[to_index], Pilot.Type.Player);
+        EventM.OnSwitchPilot(switcher, PilotType.AI);
+        EventM.OnSwitchPilot(characters[to_index], PilotType.Player);
 
         Debug.Log($"Switched Player from {switcher.name} to {characters[to_index].name}");
     }

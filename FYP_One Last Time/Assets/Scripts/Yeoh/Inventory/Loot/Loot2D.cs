@@ -23,17 +23,21 @@ public class Loot2D : MonoBehaviour
 
     // ============================================================================
 
-    public ItemSO item;
-    public int quantity=1;
+    EventManager EventM;
 
     void OnEnable()
     {
+        EventM = EventManager.Current;
+        
         Push();
 
         Invoke(nameof(EnableLoot), lootDelay);
     }
 
     // Sprite/Anim ============================================================================
+
+    public ItemSO item;
+    public int quantity=1;
 
     void Update()
     {
@@ -75,7 +79,7 @@ public class Loot2D : MonoBehaviour
         if(picked) return;
         picked=true;
 
-        EventManager.Current.OnLoot(looter, gameObject, CopyLootInfo());
+        EventM.OnLoot(looter, gameObject, CopyLootInfo());
 
         if(destroyOnLoot) Destroy(gameObject);
         else gameObject.SetActive(false);

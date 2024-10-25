@@ -15,25 +15,29 @@ public class VFXManager : MonoBehaviour
     
     // Event Manager ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        // EventManager.Current.HurtEvent += OnHurt;
-        // EventManager.Current.DeathEvent += OnDeath;
-        // EventManager.Current.LootEvent += OnLoot;
-        // EventManager.Current.AddBuffEvent += OnAddBuff;
-        // EventManager.Current.RemoveBuffEvent += OnRemoveBuff;
-        // EventManager.Current.EnderPearlEvent += OnEnderPearl;
-        // EventManager.Current.MaceSlamEvent += OnMaceSlam;
+        EventM = EventManager.Current;
+        
+        // EventM.HurtEvent += OnHurt;
+        // EventM.DeathEvent += OnDeath;
+        // EventM.LootEvent += OnLoot;
+        // EventM.AddBuffEvent += OnAddBuff;
+        // EventM.RemoveBuffEvent += OnRemoveBuff;
+        // EventM.EnderPearlEvent += OnEnderPearl;
+        // EventM.MaceSlamEvent += OnMaceSlam;
     }
     void OnDisable()
     {
-        // EventManager.Current.HurtEvent -= OnHurt;
-        // EventManager.Current.DeathEvent -= OnDeath;
-        // EventManager.Current.LootEvent -= OnLoot;
-        // EventManager.Current.AddBuffEvent -= OnAddBuff;
-        // EventManager.Current.RemoveBuffEvent -= OnRemoveBuff;
-        // EventManager.Current.EnderPearlEvent -= OnEnderPearl;
-        // EventManager.Current.MaceSlamEvent -= OnMaceSlam;
+        // EventM.HurtEvent -= OnHurt;
+        // EventM.DeathEvent -= OnDeath;
+        // EventM.LootEvent -= OnLoot;
+        // EventM.AddBuffEvent -= OnAddBuff;
+        // EventM.RemoveBuffEvent -= OnRemoveBuff;
+        // EventM.EnderPearlEvent -= OnEnderPearl;
+        // EventM.MaceSlamEvent -= OnMaceSlam;
     }
 
     // Events ============================================================================

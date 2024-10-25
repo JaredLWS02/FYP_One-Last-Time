@@ -15,20 +15,24 @@ public class OneWayPlatform2D : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.MoveYEvent += OnMoveY;
+        EventM = EventManager.Current;
+        
+        EventM.MoveEvent += OnMove;
     }
     void OnDisable()
     {
-        EventManager.Current.MoveYEvent -= OnMoveY;
+        EventM.MoveEvent -= OnMove;
     }
 
     // ============================================================================
 
-    void OnMoveY(GameObject mover, float input_y)
+    void OnMove(GameObject mover, Vector2 input)
     {
-        if(input_y > -0.7f) return;
+        if(input.y > -0.7f) return;
 
         foreach(var passenger in passengers)
         {

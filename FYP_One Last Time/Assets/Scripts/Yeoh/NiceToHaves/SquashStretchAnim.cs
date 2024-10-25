@@ -159,23 +159,27 @@ public class SquashStretchAnim : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.JumpEvent += OnJump;
-        EventManager.Current.AutoJumpEvent += OnAutoJump;
-        //EventManager.Current.FastFallStartEvent += OnFallStart;
-        //EventManager.Current.FastFallEndEvent += OnFallEnd;
-        EventManager.Current.LandGroundEvent += OnLand;
-        //EventManager.Current.DashEvent += OnDash;
+        EventM = EventManager.Current;
+        
+        EventM.JumpEvent += OnJump;
+        EventM.AutoJumpEvent += OnAutoJump;
+        //EventM.FastFallStartEvent += OnFallStart;
+        //EventM.FastFallEndEvent += OnFallEnd;
+        EventM.LandGroundEvent += OnLand;
+        //EventM.DashEvent += OnDash;
     }
     void OnDisable()
     {
-        EventManager.Current.JumpEvent -= OnJump;
-        EventManager.Current.AutoJumpEvent -= OnAutoJump;
-        //EventManager.Current.FastFallStartEvent -= OnFallStart;
-        //EventManager.Current.FastFallEndEvent -= OnFallEnd;
-        EventManager.Current.LandGroundEvent -= OnLand;
-        //EventManager.Current.DashEvent -= OnDash;
+        EventM.JumpEvent -= OnJump;
+        EventM.AutoJumpEvent -= OnAutoJump;
+        //EventM.FastFallStartEvent -= OnFallStart;
+        //EventM.FastFallEndEvent -= OnFallEnd;
+        EventM.LandGroundEvent -= OnLand;
+        //EventM.DashEvent -= OnDash;
     }
     
     // ============================================================================

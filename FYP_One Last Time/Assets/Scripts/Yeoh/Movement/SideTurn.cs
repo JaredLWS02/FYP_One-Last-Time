@@ -27,6 +27,8 @@ public class SideTurn : MonoBehaviour
 
     public void UpdateFlip(float dir_x)
     {
+        if(dir_x==0) return;
+
         if(isFlipDelaying) return;
 
         if(reverse)

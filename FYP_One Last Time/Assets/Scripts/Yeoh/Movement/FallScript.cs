@@ -13,6 +13,17 @@ public class FallScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
     }
+    
+    // ============================================================================
+
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+
+    // ============================================================================
 
     void FixedUpdate()
     {
@@ -60,13 +71,13 @@ public class FallScript : MonoBehaviour
         {
             fastFallStarted=true;
             OnFastFallStart.Invoke();
-            EventManager.Current.OnFastFallStart(gameObject);
+            EventM.OnFastFallStart(gameObject);
         }
         else if(fastFallStarted && !IsFalling())
         {
             fastFallStarted=false;
             OnFastFallEnd.Invoke();
-            EventManager.Current.OnFastFallEnd(gameObject);
+            EventM.OnFastFallEnd(gameObject);
         }
     }
 

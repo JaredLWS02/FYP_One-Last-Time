@@ -41,27 +41,54 @@ public class EventManager : MonoBehaviour
         SpawnEvent?.Invoke(spawned);
     }
 
-    // Control ==================================================================================================================
+    // Controls ==================================================================================================================
 
-    public event Action<GameObject, Pilot.Type> SwitchPilotEvent;
+    public event Action<GameObject, PilotType> SwitchPilotEvent;
 
-    public void OnSwitchPilot(GameObject who, Pilot.Type to)
+    public void OnSwitchPilot(GameObject who, PilotType to)
     {
         SwitchPilotEvent?.Invoke(who, to);
-    }   
+    }
 
+    public event Action<GameObject, Vector2> AgentTryMoveEvent;
+    public event Action<GameObject, float> AgentTryFaceXEvent;
+    public event Action<GameObject, float> AgentTryJumpEvent;
+    public event Action<GameObject, Vector3> AgentTryAutoJumpEvent;
+    public event Action<GameObject, string> AgentTryAttackEvent;
+
+    public void OnAgentTryMove(GameObject mover, Vector2 input)
+    {
+        AgentTryMoveEvent?.Invoke(mover, input);
+    }
+    public void OnAgentTryFaceX(GameObject facer, float dir_x)
+    {
+        AgentTryFaceXEvent?.Invoke(facer, dir_x);
+    }
+    public void OnAgentTryJump(GameObject jumper, float input)
+    {
+        AgentTryJumpEvent?.Invoke(jumper, input);
+    }
+    public void OnAgentTryAutoJump(GameObject jumper, Vector3 dir)
+    {
+        AgentTryAutoJumpEvent?.Invoke(jumper, dir);
+    }
+    public void OnAgentTryAttack(GameObject attacker, string type)
+    {
+        AgentTryAttackEvent?.Invoke(attacker, type);
+    }
+    
     // Movement ==================================================================================================================
 
-    public event Action<GameObject, float> TryMoveXEvent;
-    public event Action<GameObject, float> MoveXEvent;
+    public event Action<GameObject, Vector2> TryMoveEvent;
+    public event Action<GameObject, Vector2> MoveEvent;
 
-    public void OnTryMoveX(GameObject mover, float input_x)
+    public void OnTryMove(GameObject mover, Vector2 input)
     {
-        TryMoveXEvent?.Invoke(mover, input_x);
+        TryMoveEvent?.Invoke(mover, input);
     }  
-    public void OnMoveX(GameObject mover, float input_x)
+    public void OnMove(GameObject mover, Vector2 input)
     {
-        MoveXEvent?.Invoke(mover, input_x);
+        MoveEvent?.Invoke(mover, input);
     } 
 
     public event Action<GameObject, float> TryFaceXEvent;
@@ -75,18 +102,6 @@ public class EventManager : MonoBehaviour
     {
         FaceXEvent?.Invoke(who, input_x);
     } 
-    
-    public event Action<GameObject, float> TryMoveYEvent;
-    public event Action<GameObject, float> MoveYEvent;
-
-    public void OnTryMoveY(GameObject mover, float input_y)
-    {
-        TryMoveYEvent?.Invoke(mover, input_y);
-    } 
-    public void OnMoveY(GameObject mover, float input_y)
-    {
-        MoveYEvent?.Invoke(mover, input_y);
-    }
 
     public event Action<GameObject, float> TryJumpEvent;
     public event Action<GameObject, float> JumpEvent;
@@ -136,40 +151,16 @@ public class EventManager : MonoBehaviour
 
     // Attacks ==================================================================================================================
 
-    public event Action<GameObject> TryAttackEvent;
-    public event Action<GameObject> AttackEvent;
+    public event Action<GameObject, string> TryAttackEvent;
+    public event Action<GameObject, AttackSO> AttackEvent;
 
-    public void OnTryAttack(GameObject attacker)
+    public void OnTryAttack(GameObject attacker, string attackName)
     {
-        TryAttackEvent?.Invoke(attacker);
+        TryAttackEvent?.Invoke(attacker, attackName);
     }
-    public void OnAttack(GameObject attacker)
+    public void OnAttack(GameObject attacker, AttackSO attackSO)
     {
-        AttackEvent?.Invoke(attacker);
-    }  
-
-    public event Action<GameObject> TryLightAttackEvent;
-    public event Action<GameObject> LightAttackEvent;
-
-    public void OnTryLightAttack(GameObject attacker)
-    {
-        TryLightAttackEvent?.Invoke(attacker);
-    }
-    public void OnLightAttack(GameObject attacker)
-    {
-        LightAttackEvent?.Invoke(attacker);
-    }  
-
-    public event Action<GameObject> TryHeavyAttackEvent;
-    public event Action<GameObject> HeavyAttackEvent;
-
-    public void OnTryHeavyAttack(GameObject attacker)
-    {
-        TryHeavyAttackEvent?.Invoke(attacker);
-    }
-    public void OnHeavyAttack(GameObject attacker)
-    {
-        HeavyAttackEvent?.Invoke(attacker);
+        AttackEvent?.Invoke(attacker, attackSO);
     }  
 
     // Attack Anim Events ==================================================================================================================

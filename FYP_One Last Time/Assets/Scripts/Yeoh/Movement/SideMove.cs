@@ -12,24 +12,22 @@ public class SideMove : MonoBehaviour
     {
         move = GetComponent<MoveScript>();
     }
-    
-    // ============================================================================
-
-    public Vector3 sideAxis = Vector3.right;
-
-    void FixedUpdate()
-    {
-        dirX = move.Round(dirX, 1);
-
-        move.UpdateMoveMult(dirX, sideAxis);
-    }
 
     // ============================================================================
 
     float dirX;
 
-    public void UpdateMove(float input_x)
+    public void Move(float input_x)
     {
         dirX = input_x;
+    }
+    
+    // ============================================================================
+
+    void FixedUpdate()
+    {
+        dirX = move.Round(dirX, 1);
+
+        move.UpdateMoveMult(dirX, Vector3.right);
     }
 }

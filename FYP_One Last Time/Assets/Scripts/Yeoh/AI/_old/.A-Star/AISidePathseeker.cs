@@ -18,6 +18,15 @@ public class AISidePathseeker : MonoBehaviour
     }
 
     // ============================================================================
+
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+        
+    // ============================================================================
     
     Path path=null;
 
@@ -141,14 +150,14 @@ public class AISidePathseeker : MonoBehaviour
         // node is above
         if(node_height > nextNodeRange)
         {
-            EventManager.Current.OnTryJump(gameObject, 1); // jump duh
-            EventManager.Current.OnTryMoveY(gameObject, 1); // press up
+            EventM.OnTryInputJump(gameObject, 1); // jump duh
+            EventM.OnTryInputMove(gameObject, Vector3.up); // press up
         }
         // node is below
         else if(node_height < -nextNodeRange)
         {
-            EventManager.Current.OnTryJump(gameObject, 0); // jumpcut
-            EventManager.Current.OnTryMoveY(gameObject, -1); // press down
+            EventM.OnTryInputJump(gameObject, 0); // jumpcut
+            EventM.OnTryInputMove(gameObject, Vector3.down); // press down
         }
     }
 }

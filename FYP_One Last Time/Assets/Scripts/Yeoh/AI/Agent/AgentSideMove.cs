@@ -6,21 +6,29 @@ using UnityEngine;
 
 public class AgentSideMove : MonoBehaviour
 {
-    AgentVelocity agentV;
+    AgentVelocity agentVel;
 
     void Awake()
     {
-        agentV = GetComponent<AgentVelocity>();
+        agentVel = GetComponent<AgentVelocity>();
+    }
+
+    // ============================================================================
+
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
     }
 
     // ============================================================================
 
     void FixedUpdate()
     {
-        float dot_x = Vector3.Dot(Vector3.right, agentV.velocity);
-        float dot_y = Vector3.Dot(Vector3.up, agentV.velocity);
+        float dot_x = Vector3.Dot(Vector3.right, agentVel.velocity);
+        float dot_y = Vector3.Dot(Vector3.up, agentVel.velocity);
 
-        EventManager.Current.OnTryMoveX(gameObject, dot_x);
-        EventManager.Current.OnTryMoveY(gameObject, dot_y);
+        EventM.OnAgentTryMove(gameObject, new Vector2(dot_x, dot_y));
     }
 }

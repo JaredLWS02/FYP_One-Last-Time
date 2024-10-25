@@ -7,6 +7,6 @@ public class PrefabSpawn
 {
     public GameObject prefab;
     public Transform spawnpoint;
-    public bool followRotation=true;
     public bool parented=true;
+    public bool followRotation=true;
 }

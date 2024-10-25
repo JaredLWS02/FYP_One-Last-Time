@@ -18,6 +18,15 @@ public class JumpScript : MonoBehaviour
     
     // ============================================================================
 
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+
+    // ============================================================================
+
     public void OnJump(float input)
     {
         if(input>0) //press
@@ -83,7 +92,7 @@ public class JumpScript : MonoBehaviour
         jumpBufferLeft = -1;
         coyoteTimeLeft = -1;
 
-        EventManager.Current.OnJump(gameObject, 1);
+        EventM.OnJump(gameObject, 1);
     }
 
     // Cooldown ============================================================================
@@ -173,7 +182,7 @@ public class JumpScript : MonoBehaviour
         {
             rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
 
-            EventManager.Current.OnJump(gameObject, 0);
+            EventM.OnJump(gameObject, 0);
         }
     }
     

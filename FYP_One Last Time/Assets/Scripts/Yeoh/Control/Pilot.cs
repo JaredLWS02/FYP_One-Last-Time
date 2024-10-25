@@ -2,52 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PilotType
+{
+    None,
+    Player,
+    AI,
+}
+
 public class Pilot : MonoBehaviour
 {
-    public enum Type
-    {
-        None,
-        Player,
-        AI,
-    }
+    public PilotType currentPilot = PilotType.Player;  
 
-    public Type type = Type.Player;  
+    // ============================================================================
 
-    // Event Manager ============================================================================
+    EventManager EventM;
 
     void OnEnable()
     {
-        EventManager.Current.SwitchPilotEvent += SwitchPilot;
+        EventM = EventManager.Current;
+        
+        EventM.SwitchPilotEvent += SwitchPilot;
     }
     void OnDisable()
     {
-        EventManager.Current.SwitchPilotEvent -= SwitchPilot;
+        EventM.SwitchPilotEvent -= SwitchPilot;
     }
 
-    // Events ============================================================================
+    // ============================================================================
 
-    void SwitchPilot(GameObject who, Type to)
+    void SwitchPilot(GameObject who, PilotType to)
     {
         if(gameObject!=who) return;
 
-        type = to;
+        currentPilot = to;
     }
 
     //  ============================================================================
 
+    public bool IsType(PilotType type)
+    {
+        return currentPilot==type;
+    }
     public bool IsNone()
     {
-        return type==Type.None;
+        return IsType(PilotType.None);
     }    
-
     public bool IsPlayer()
     {
-        return type==Type.Player;
+        return IsType(PilotType.Player);
     }    
-
     public bool IsAI()
     {
-        return type==Type.AI;
+        return IsType(PilotType.AI);
     }    
     
 }

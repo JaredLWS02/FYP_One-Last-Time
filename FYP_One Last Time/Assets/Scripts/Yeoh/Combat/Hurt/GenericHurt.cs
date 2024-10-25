@@ -6,13 +6,17 @@ using UnityEngine;
 
 public class GenericHurt : MonoBehaviour
 {
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.TryHurtEvent += OnTryHurt;
+        EventM = EventManager.Current;
+        
+        EventM.TryHurtEvent += OnTryHurt;
     }
     void OnDisable()
     {
-        EventManager.Current.TryHurtEvent -= OnTryHurt;
+        EventM.TryHurtEvent -= OnTryHurt;
     }
 
     // ============================================================================
@@ -23,6 +27,6 @@ public class GenericHurt : MonoBehaviour
 
         // check block/parry first before hurting
 
-        EventManager.Current.OnHurt(attacker, victim, hurtbox, contactPoint);
+        EventM.OnHurt(attacker, victim, hurtbox, contactPoint);
     }
 }

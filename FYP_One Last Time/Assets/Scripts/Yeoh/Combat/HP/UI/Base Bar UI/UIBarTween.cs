@@ -17,13 +17,17 @@ public class UIBarTween : MonoBehaviour
 
     // Event Manager ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.UIBarUpdateEvent += OnUIBarUpdate;
+        EventM = EventManager.Current;
+        
+        EventM.UIBarUpdateEvent += OnUIBarUpdate;
     }
     void OnDisable()
     {
-        EventManager.Current.UIBarUpdateEvent -= OnUIBarUpdate;
+        EventM.UIBarUpdateEvent -= OnUIBarUpdate;
 
         barTween.Stop();
     }

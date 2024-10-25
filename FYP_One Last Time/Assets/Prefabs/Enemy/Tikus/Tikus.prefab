@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
   attack: {fileID: 3574276676473959355}
   comboName: Normal Combo
   comboSteps:
@@ -51,11 +52,11 @@ MonoBehaviour:
     attackSpawn:
       prefab: {fileID: 0}
       spawnpoint: {fileID: 0}
-      followRotation: 1
       parented: 1
-  resetTimer: 1
-  comboCooldownTime: 1
-  attackBufferTime: 0.2
+      followRotation: 1
+  bufferTime: 0.2
+  randomCombo: 0
+  comboResetTime: 1
 --- !u!1 &1611157070665987421
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7959029595139826251}
   m_Layer: 6
-  m_Name: Goals
+  m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,6 +117,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 738919972244586360}
   - {fileID: 6462888529248085389}
   - {fileID: 8596504045178056058}
   - {fileID: 7743744775743428774}
@@ -508,10 +510,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6415192565362938597}
   - component: {fileID: 8915720888079556032}
-  - component: {fileID: 4411169975042275805}
-  - component: {fileID: 7053281653195745219}
   - component: {fileID: 7015130824575028965}
   - component: {fileID: 1202456919539228410}
+  - component: {fileID: 4411169975042275805}
+  - component: {fileID: 4716763645380372994}
+  - component: {fileID: 5831448510275874491}
+  - component: {fileID: 8261427844462952279}
   - component: {fileID: 3371146443251301953}
   - component: {fileID: 5193524905132986524}
   - component: {fileID: 1514896727660394715}
@@ -519,7 +523,6 @@ GameObject:
   - component: {fileID: 8893670741154941565}
   - component: {fileID: 7877508715297963426}
   - component: {fileID: 919053695834915120}
-  - component: {fileID: 8405979632522786602}
   - component: {fileID: 7234808440485541836}
   - component: {fileID: 6732886466950275378}
   - component: {fileID: 7079224904407704343}
@@ -529,6 +532,7 @@ GameObject:
   - component: {fileID: 5059005152113843592}
   - component: {fileID: 1052805118213280258}
   - component: {fileID: 3574276676473959355}
+  - component: {fileID: 9093631142236611562}
   m_Layer: 6
   m_Name: Tikus
   m_TagString: Enemy
@@ -551,9 +555,9 @@ Transform:
   m_Children:
   - {fileID: 5197452418422829730}
   - {fileID: 231061859104957208}
-  - {fileID: 7959029595139826251}
   - {fileID: 168791646275403679}
   - {fileID: 7778149499531891223}
+  - {fileID: 7959029595139826251}
   - {fileID: 8449358400114368154}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -584,50 +588,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
---- !u!114 &4411169975042275805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73da3e4b6aafe624bbecb82ec7f72923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pilot: {fileID: 0}
-  AllowMoveX: 0
-  AllowMoveY: 0
-  AllowJump: 0
-  AllowAutoJump: 0
-  AllowAttack: 0
-  normalCombo: {fileID: 3962663419828832351}
-  hpM: {fileID: 704049436961937626}
-  healthyMinPercent: 50
-  enemyTag: Player
-  lootTag: Loot
-  arrivalRange: 1
-  attackRange: 3
-  maintainDistance: 2
-  showGizmos: 1
-  showArrivalRangeGizmo: 1
-  showMeleeRangeGizmo: 1
-  showMaintainDistanceGizmo: 1
-  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
---- !u!114 &7053281653195745219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f8295c98bc64c543948f2e70d08f856, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
 --- !u!114 &7015130824575028965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,7 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c243ce33fa331c3459fce6a85560b2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  currentPilot: 1
 --- !u!114 &1202456919539228410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,6 +614,78 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+--- !u!114 &4411169975042275805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73da3e4b6aafe624bbecb82ec7f72923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpM: {fileID: 704049436961937626}
+  healthyMinPercent: 50
+  radar: {fileID: 801440721258214197}
+  enemyTag: Player
+  lootTag: Loot
+  arrivalRange: 1
+  attackRange: 3
+  maintainDistance: 2
+  showGizmos: 1
+  showArrivalRangeGizmo: 1
+  showMeleeRangeGizmo: 1
+  showMaintainDistanceGizmo: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
+--- !u!114 &4716763645380372994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876dd77094cbc024c87f3d40274ed561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pilot: {fileID: 0}
+--- !u!114 &5831448510275874491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3092a9006deb434e87f80713f612069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllowMoveX: 0
+  AllowMoveY: 0
+  AllowJump: 0
+  AllowAutoJump: 0
+  AllowDash: 0
+  AllowAttack: 0
+  AllowCast: 0
+  attackCombos:
+  - {fileID: 3962663419828832351}
+--- !u!114 &8261427844462952279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f9f75b2fff009458593b8a88f11bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action: {fileID: 0}
 --- !u!114 &3371146443251301953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,7 +715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a010c1a4d7df435429b5810874b7b556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideAxis: {x: 1, y: 0, z: 0}
 --- !u!114 &1514896727660394715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,25 +814,6 @@ MonoBehaviour:
   OnFastFallEnd:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8405979632522786602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1c24ccd4b5c308438f0fbe10c18da17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 10
-  layers:
-    serializedVersion: 2
-    m_Bits: 8
-  targets: []
-  showGizmos: 1
-  gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
 --- !u!195 &7234808440485541836
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -958,13 +970,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bufferTime: 0.2
   attackSO: {fileID: 0}
   attackSpawn:
     prefab: {fileID: 0}
     spawnpoint: {fileID: 0}
-    followRotation: 1
     parented: 1
+    followRotation: 1
   cancelAnimName: Cancel
+--- !u!114 &9093631142236611562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98936e14bb119b54485a31a4203d28d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityList: {fileID: 0}
+  MP_Manager: {fileID: 0}
+  isCasting: 0
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1048,57 @@ CapsuleCollider:
   m_Height: 2.1329799
   m_Direction: 2
   m_Center: {x: -8.077936e-28, y: -0.7586425, z: -0.00000023841858}
+--- !u!1 &6474750746548374229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 738919972244586360}
+  - component: {fileID: 801440721258214197}
+  m_Layer: 6
+  m_Name: Radar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &738919972244586360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474750746548374229}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7959029595139826251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &801440721258214197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474750746548374229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c24ccd4b5c308438f0fbe10c18da17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 10
+  layers:
+    serializedVersion: 2
+    m_Bits: 8
+  targets: []
+  showGizmos: 1
+  gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
 --- !u!1 &7244821877251971682
 GameObject:
   m_ObjectHideFlags: 0

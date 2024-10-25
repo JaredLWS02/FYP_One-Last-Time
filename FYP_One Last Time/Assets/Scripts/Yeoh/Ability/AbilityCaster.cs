@@ -11,36 +11,40 @@ public class AbilityCaster : MonoBehaviour
     [HideInInspector]
     public bool isCasting;
 
-    // Event Manager ============================================================================
+    // ============================================================================
+
+    EventManager EventM;
 
     void OnEnable()
     {
-        abilityList.ResetCooldowns();
+        EventM = EventManager.Current;
 
-        EventManager.Current.CastingEvent += OnCasting;
-        EventManager.Current.CastWindUpEvent += OnCastWindUp;
-        EventManager.Current.CastReleaseEvent += OnCastRelease;
-        EventManager.Current.CastFinishEvent += OnCastFinish;
-        EventManager.Current.CastCancelEvent += OnCastCancel;
+        EventM.CastingEvent += OnCasting;
+        EventM.CastWindUpEvent += OnCastWindUp;
+        EventM.CastReleaseEvent += OnCastRelease;
+        EventM.CastFinishEvent += OnCastFinish;
+        EventM.CastCancelEvent += OnCastCancel;
+
+        abilityList.ResetCooldowns();
     }
     void OnDisable()
     {
-        abilityList.ResetCooldowns();
+        EventM.CastingEvent -= OnCasting;
+        EventM.CastWindUpEvent -= OnCastWindUp;
+        EventM.CastReleaseEvent -= OnCastRelease;
+        EventM.CastFinishEvent -= OnCastFinish;
+        EventM.CastCancelEvent -= OnCastCancel;
 
-        EventManager.Current.CastingEvent -= OnCasting;
-        EventManager.Current.CastWindUpEvent -= OnCastWindUp;
-        EventManager.Current.CastReleaseEvent -= OnCastRelease;
-        EventManager.Current.CastFinishEvent -= OnCastFinish;
-        EventManager.Current.CastCancelEvent -= OnCastCancel;
+        abilityList.ResetCooldowns();
     }
 
-    // Start Here ============================================================================
+    // Start ============================================================================
     
     public void StartCast(string ability_name)
     {
         if(isCasting) return;
 
-        EventManager.Current.OnStartCast(gameObject, ability_name);
+        EventM.OnStartCast(gameObject, ability_name);
 
         AbilitySlot abilitySlot = abilityList.GetAbility(ability_name);
 
@@ -53,7 +57,7 @@ public class AbilityCaster : MonoBehaviour
         // not enough mp
         if(MP_Manager.hp < abilitySlot.ability.cost) return;
 
-        EventManager.Current.OnCasting(gameObject, abilitySlot);
+        EventM.OnCasting(gameObject, abilitySlot);
     }
 
     // Casting ============================================================================
@@ -74,7 +78,7 @@ public class AbilityCaster : MonoBehaviour
 
         yield return new WaitForSeconds(abilitySlot.ability.castingTime);
 
-        EventManager.Current.OnCastWindUp(gameObject, abilitySlot);
+        EventM.OnCastWindUp(gameObject, abilitySlot);
 
         //if(sfxCastingLoop) AudioManager.Current.StopLoop(sfxCastingLoop);
     }
@@ -86,7 +90,7 @@ public class AbilityCaster : MonoBehaviour
         if(caster!=gameObject) return;
 
         // play ability.anim or something
-        // it must have anim event to trigger EventManager.Current.OnCastRelease
+        // it must have anim event to trigger EventM.OnCastRelease
     }
     
     // Release ============================================================================
@@ -114,7 +118,7 @@ public class AbilityCaster : MonoBehaviour
 
     public void Cancel()
     {
-        EventManager.Current.OnCastCancel(gameObject);
+        EventM.OnCastCancel(gameObject);
     }
 
     void OnCastCancel(GameObject caster)

@@ -23,13 +23,17 @@ public class Hurtbox : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.HurtEvent += OnHurt;
+        EventM = EventManager.Current;
+        
+        EventM.HurtEvent += OnHurt;
     }
     void OnDisable()
     {
-        EventManager.Current.HurtEvent -= OnHurt;
+        EventM.HurtEvent -= OnHurt;
     }
 
     // ============================================================================
@@ -74,7 +78,7 @@ public class Hurtbox : MonoBehaviour
         
         HurtboxSO hurtbox = new(hurtboxSO);
 
-        EventManager.Current.OnTryHurt(owner, otherRb.gameObject, hurtbox, contactPoint);
+        EventM.OnTryHurt(owner, otherRb.gameObject, hurtbox, contactPoint);
 
         OnHit.Invoke();
 
