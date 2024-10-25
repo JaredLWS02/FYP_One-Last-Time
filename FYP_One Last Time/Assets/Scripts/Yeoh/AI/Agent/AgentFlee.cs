@@ -4,27 +4,30 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AgentVelocity))]
 
 public class AgentFlee : MonoBehaviour
 {
     NavMeshAgent agent;
+    AgentVelocity agentVel;
 
-    public Transform goal;
+    public Transform fleeGoal;
 
     Vector3 goalPos;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agentVel = GetComponent<AgentVelocity>();
 
-        goal.parent=null;
+        fleeGoal.parent=null;
 
         goalPos = agent.transform.position;
     }
 
     void FixedUpdate()
     {
-        goal.position = goalPos;
+        fleeGoal.position = goalPos;
 
         CheckFlee();
     }
@@ -38,6 +41,9 @@ public class AgentFlee : MonoBehaviour
 
     void CheckFlee()
     {
+        // ignore if main agent's goal is not the flee goal
+        if(agentVel.goal != fleeGoal) return;
+
         if(!threat) return;
 
         if(!IsInRange(threat, range)) return;

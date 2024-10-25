@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SideMove))]
-[RequireComponent(typeof(SideTurn))]
-[RequireComponent(typeof(JumpScript))]
-[RequireComponent(typeof(GroundCheck))]
-[RequireComponent(typeof(AttackScript))]
-[RequireComponent(typeof(AbilityCaster))]
-
 public class ActionManager : MonoBehaviour
 {
     SideMove move;
@@ -38,7 +31,6 @@ public class ActionManager : MonoBehaviour
     
     [Header("Toggles")]
     public bool AllowJump;
-    public bool AllowAutoJump;
     public bool AllowDash;
     public bool AllowAttack;
     public bool AllowCast;
@@ -77,10 +69,13 @@ public class ActionManager : MonoBehaviour
         if(!AllowMoveX) input.x=0;
         if(!AllowMoveY) input.y=0;
 
-        EventM.OnMove(gameObject, input);
-
+        if(move)
         move.Move(input.x);
+
+        //if(climb)
         //climb.Move(gameObject, input.y);
+
+        EventM.OnMove(gameObject, input);
     }
 
     void OnTryFaceX(GameObject who, float input_x)
@@ -89,9 +84,11 @@ public class ActionManager : MonoBehaviour
 
         if(!AllowMoveX) input_x=0;
 
-        EventM.OnFaceX(gameObject, input_x);
+        if(!turn) return;
 
         turn.UpdateFlip(input_x);
+
+        EventM.OnFaceX(gameObject, input_x);
     }
     
     // ============================================================================
@@ -102,6 +99,8 @@ public class ActionManager : MonoBehaviour
 
         if(!AllowJump) return;
 
+        if(!jump) return;
+        
         jump.OnJump(input);        
     }
 
@@ -109,12 +108,14 @@ public class ActionManager : MonoBehaviour
     {
         if(who!=gameObject) return;
 
-        if(!autoJump) return;
+        if(!AllowJump) return;
 
-        if(!AllowAutoJump) return;
+        if(!autoJump) return;
 
         autoJump.StartJump();
 
+        if(!turn) return;
+        
         float dot_x = Vector3.Dot(jump_dir, Vector3.right);
 
         turn.UpdateFlip(dot_x);
@@ -148,6 +149,8 @@ public class ActionManager : MonoBehaviour
         if(who!=gameObject) return;
 
         if(!AllowCast) return;
+
+        if(!caster) return;
         
         caster.StartCast(ability_name);
     }
@@ -156,6 +159,7 @@ public class ActionManager : MonoBehaviour
 
     public bool IsGrounded()
     {
+        if(!ground) return false;
         return ground.IsGrounded();
     }
 
@@ -167,16 +171,19 @@ public class ActionManager : MonoBehaviour
 
     public bool IsDashing()
     {
+        //if(!dash) return false;
         return false;
     }
     
     public bool IsAttacking()
     {
+        if(!attack) return false;
         return attack.isAttacking;
     }
     
     public bool IsCasting()
     {
+        if(!caster) return false;
         return caster.isCasting;
     }   
 }

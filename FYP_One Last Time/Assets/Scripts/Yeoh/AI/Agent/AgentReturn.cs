@@ -20,24 +20,57 @@ public class AgentReturn : MonoBehaviour
     }
 
     // ============================================================================
-
-    public float maxChaseDownRange=7;
-    public float returnRange=20;
-
-    public bool ShouldReturn(Vector3 target_pos)
+    
+    void Update()
     {
-        // ignore if cant find a way back
-        if(!IsPathable(spawnpoint.position)) return false;
-
-        // ignore if still close to target
-        if(IsInRange(agent.transform.position, target_pos, maxChaseDownRange)) return false;
-
-        return !IsInRange(spawnpoint.position, transform.position, returnRange);
+        UpdateCooldown();
     }
 
-    public bool IsAtSpawnpoint(float stopping_range)
+    // ============================================================================
+
+    public float checkInterval=.5f;
+    float cooldownLeft;
+
+    void DoCooldown()
     {
-        return IsInRange(spawnpoint.position, agent.transform.position, stopping_range);
+        cooldownLeft = checkInterval;
+    }
+
+    void UpdateCooldown()
+    {
+        cooldownLeft -= Time.deltaTime;
+
+        if(cooldownLeft<0) cooldownLeft=0;
+    }
+
+    bool IsCooling()
+    {
+        return cooldownLeft>0;
+    }
+    
+    // ============================================================================
+
+    public bool shouldReturn {get; private set;}
+
+    public void CheckReturn(Vector3 chasedown_pos)
+    {
+        if(IsCooling()) return;
+        DoCooldown();
+
+        // ignore if cant find a way back
+        if(!IsPathable(spawnpoint.position))
+        {
+            shouldReturn=false;
+            return;
+        }
+        // ignore if still close to target
+        else if(CanStillChaseDown(chasedown_pos))
+        {
+            shouldReturn=false;
+            return;
+        }
+        
+        shouldReturn = !IsNearSpawnpoint();
     }
 
     // ============================================================================
@@ -45,6 +78,25 @@ public class AgentReturn : MonoBehaviour
     bool IsInRange(Vector3 from, Vector3 target, float range)
     {
         return Vector2.Distance(from, target) <= range;
+    }
+
+    public float maxChaseDownRange=7;
+
+    bool CanStillChaseDown(Vector3 chasedown_pos)
+    {
+        return IsInRange(agent.transform.position, chasedown_pos, maxChaseDownRange);
+    }
+
+    public float returnRange=20;
+
+    bool IsNearSpawnpoint()
+    {
+        return IsInRange(spawnpoint.position, transform.position, returnRange);
+    }
+
+    public bool IsAtSpawnpoint(float stopping_range)
+    {
+        return IsInRange(spawnpoint.position, agent.transform.position, stopping_range);
     }
 
     // ============================================================================

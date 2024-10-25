@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(AgentVelocity))]
 
 public class AgentWander : MonoBehaviour
 {
     NavMeshAgent agent;
-    public RandomDoughnut wanderDoughnut;
+    AgentVelocity agentVel;
 
-    public Transform goal;
+    public Transform wanderGoal;
+    public RandomDoughnut wanderDoughnut;
 
     Vector3 startPos;
     Vector3 goalPos;
@@ -18,8 +20,9 @@ public class AgentWander : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agentVel = GetComponent<AgentVelocity>();
 
-        goal.parent=null;
+        wanderGoal.parent=null;
 
         startPos = agent.transform.position;
         goalPos = agent.transform.position;
@@ -32,7 +35,7 @@ public class AgentWander : MonoBehaviour
 
     void FixedUpdate()
     {
-        goal.position = goalPos;
+        wanderGoal.position = goalPos;
     }
 
     // ============================================================================
@@ -55,6 +58,9 @@ public class AgentWander : MonoBehaviour
 
     void Relocate()
     {
+        // ignore if main agent's goal is not the wander goal
+        if(agentVel.goal != wanderGoal) return;
+
         if(IsTooFarFromStart())
         {
             goalPos = startPos;
