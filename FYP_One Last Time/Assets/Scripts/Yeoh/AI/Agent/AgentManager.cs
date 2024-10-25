@@ -167,7 +167,7 @@ public class AgentManager : MonoBehaviour
     public void SetGoalWander()
     {
         SetRange(arrivalRange);
-        SetGoal(wander.goal);
+        SetGoal(wander.wanderGoal);
     }
 
     public void SetGoalEnemy()
@@ -179,12 +179,12 @@ public class AgentManager : MonoBehaviour
     public void SetGoalFlee()
     {
         SetRange(arrivalRange);
-        SetGoal(flee.goal);
+        SetGoal(flee.fleeGoal);
     }
 
     public bool IsFleeing()
     {
-        return GetCurrentGoal()==flee.goal.gameObject;
+        return GetCurrentGoal()==flee.fleeGoal.gameObject;
     }
 
     public void SetGoalSpawnpoint()
@@ -254,8 +254,12 @@ public class AgentManager : MonoBehaviour
     
     public bool ShouldReturn()
     {
-        Vector3 enemy_pos = GetEnemy().transform.position;
-        return returner.ShouldReturn(enemy_pos);
+        GameObject enemy = GetEnemy();
+        if(!enemy) return false;
+
+        returner.CheckReturn(enemy.transform.position);
+
+        return returner.shouldReturn;
     }
 
     public bool IsAtSpawnpoint()

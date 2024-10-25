@@ -511,8 +511,6 @@ GameObject:
   - component: {fileID: 6415192565362938597}
   - component: {fileID: 8915720888079556032}
   - component: {fileID: 7015130824575028965}
-  - component: {fileID: 1202456919539228410}
-  - component: {fileID: 4411169975042275805}
   - component: {fileID: 4716763645380372994}
   - component: {fileID: 5831448510275874491}
   - component: {fileID: 8261427844462952279}
@@ -523,6 +521,9 @@ GameObject:
   - component: {fileID: 8893670741154941565}
   - component: {fileID: 7877508715297963426}
   - component: {fileID: 919053695834915120}
+  - component: {fileID: 3574276676473959355}
+  - component: {fileID: 4411169975042275805}
+  - component: {fileID: 1202456919539228410}
   - component: {fileID: 7234808440485541836}
   - component: {fileID: 6732886466950275378}
   - component: {fileID: 7079224904407704343}
@@ -531,8 +532,6 @@ GameObject:
   - component: {fileID: 2982932667220849315}
   - component: {fileID: 5059005152113843592}
   - component: {fileID: 1052805118213280258}
-  - component: {fileID: 3574276676473959355}
-  - component: {fileID: 9093631142236611562}
   m_Layer: 6
   m_Name: Tikus
   m_TagString: Enemy
@@ -600,45 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c243ce33fa331c3459fce6a85560b2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPilot: 1
---- !u!114 &1202456919539228410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ed8bb89c688f54db46642aab12c211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
---- !u!114 &4411169975042275805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73da3e4b6aafe624bbecb82ec7f72923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpM: {fileID: 704049436961937626}
-  healthyMinPercent: 50
-  radar: {fileID: 801440721258214197}
-  enemyTag: Player
-  lootTag: Loot
-  arrivalRange: 1
-  attackRange: 3
-  maintainDistance: 2
-  showGizmos: 1
-  showArrivalRangeGizmo: 1
-  showMeleeRangeGizmo: 1
-  showMaintainDistanceGizmo: 1
-  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
+  currentPilot: 2
 --- !u!114 &4716763645380372994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,6 +775,65 @@ MonoBehaviour:
   OnFastFallEnd:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3574276676473959355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bufferTime: 0.2
+  attackSO: {fileID: 0}
+  attackSpawn:
+    prefab: {fileID: 0}
+    spawnpoint: {fileID: 0}
+    parented: 1
+    followRotation: 1
+  cancelAnimName: Cancel
+--- !u!114 &4411169975042275805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73da3e4b6aafe624bbecb82ec7f72923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpM: {fileID: 704049436961937626}
+  okHPPercent: 50
+  lowHPPercent: 25
+  radar: {fileID: 801440721258214197}
+  enemyTag: Player
+  lootTag: Loot
+  arrivalRange: 1
+  attackRange: 3
+  maintainDistance: 2
+  showGizmos: 1
+  showArrivalRangeGizmo: 1
+  showMeleeRangeGizmo: 1
+  showMaintainDistanceGizmo: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
+--- !u!114 &1202456919539228410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ed8bb89c688f54db46642aab12c211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
 --- !u!195 &7234808440485541836
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -896,8 +916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d6d33d33a3c40843b271bf4b24ce0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wanderGoal: {fileID: 8596504045178056058}
   wanderDoughnut: {fileID: 5597274611592989443}
-  goal: {fileID: 8596504045178056058}
   relocateSeconds: {x: 1, y: 4}
   maxRetries: 1000
   axisMult: {x: 1, y: 1, z: 0}
@@ -916,7 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9266fbe312d7f8d43a9b7a3c42927794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 7743744775743428774}
+  fleeGoal: {fileID: 7743744775743428774}
   threat: {fileID: 0}
   range: 10
   axisMult: {x: 1, y: 1, z: 0}
@@ -952,47 +972,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnpoint: {fileID: 6462888529248085389}
+  checkInterval: 0.5
   maxChaseDownRange: 7
   returnRange: 20
   showGizmos: 1
   showMaxChaseDownRangeGizmo: 1
   showReturnRangeGizmo: 1
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
---- !u!114 &3574276676473959355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bufferTime: 0.2
-  attackSO: {fileID: 0}
-  attackSpawn:
-    prefab: {fileID: 0}
-    spawnpoint: {fileID: 0}
-    parented: 1
-    followRotation: 1
-  cancelAnimName: Cancel
---- !u!114 &9093631142236611562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98936e14bb119b54485a31a4203d28d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityList: {fileID: 0}
-  MP_Manager: {fileID: 0}
-  isCasting: 0
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0

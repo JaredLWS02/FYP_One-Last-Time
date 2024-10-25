@@ -77,7 +77,7 @@ public class State_Agent_Control_AI : BaseState
         {
             if(
                 !agent.GetEnemy() ||
-                !agent.IsOkHP() //||
+                !agent.IsLowHP() //||
             ){
                 return true;
             }
