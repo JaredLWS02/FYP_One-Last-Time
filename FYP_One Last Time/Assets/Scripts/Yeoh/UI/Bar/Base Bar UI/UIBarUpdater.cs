@@ -74,11 +74,11 @@ public class UIBarUpdater : MonoBehaviour
 
     [Header("Lerp")]
     public bool lerp;
-    public float lerpSpeed=2;
+    public float lerpSpeed=10;
 
     [Header("Damp")]
     public bool damp=true;
-    public float dampSeconds=.3f;
+    public float dampSeconds=.1f;
     float dampVelocity;
 
     [Header("Both")]

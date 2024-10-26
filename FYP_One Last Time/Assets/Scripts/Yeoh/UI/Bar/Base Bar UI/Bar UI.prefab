@@ -51,7 +51,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  tweenTime: 0.2
+  currentValue: 1
+  lerp: 0
+  lerpSpeed: 2
+  damp: 1
+  dampSeconds: 0.1
+  ignoreTime: 1
   slider: {fileID: 4863281412348005639}
   filledImage: {fileID: 0}
 --- !u!114 &8493445696568569565
@@ -66,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb860821e0a17a48b3393d689e345cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentValue: 0
+  value: 0
   maxValue: 1
   hideWhenFull: 1
   hideWhenEmpty: 0

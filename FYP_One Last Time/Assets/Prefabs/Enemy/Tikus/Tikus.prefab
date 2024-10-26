@@ -480,6 +480,7 @@ GameObject:
   - component: {fileID: 6955758431937353321}
   - component: {fileID: 3246547166422185978}
   - component: {fileID: 7933258386641521780}
+  - component: {fileID: 3342305840274279284}
   m_Layer: 8
   m_Name: Slam Firepoint
   m_TagString: Untagged
@@ -541,9 +542,9 @@ MonoBehaviour:
   OnStay:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3962663419828832351}
-        m_TargetAssemblyTypeName: AttackCombo, Assembly-CSharp
-        m_MethodName: DoBuffer
+      - m_Target: {fileID: 3342305840274279284}
+        m_TargetAssemblyTypeName: AgentAttackTrigger, Assembly-CSharp
+        m_MethodName: Attack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -556,6 +557,20 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3342305840274279284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625512440802626329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  attackName: Normal Combo
 --- !u!1 &4345753957651105915
 GameObject:
   m_ObjectHideFlags: 0
