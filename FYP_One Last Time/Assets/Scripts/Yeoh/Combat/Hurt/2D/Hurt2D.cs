@@ -53,7 +53,7 @@ public class Hurt2D : MonoBehaviour
     {
         if(iframe) return;
 
-        hp.Hurt(hurtbox.damage);
+        hp.Deplete(hurtbox.damage);
 
         EventM.OnHurt(gameObject, attacker, hurtbox, contactPoint);
 

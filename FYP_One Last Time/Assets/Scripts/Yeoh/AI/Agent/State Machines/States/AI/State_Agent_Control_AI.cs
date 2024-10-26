@@ -29,7 +29,7 @@ public class State_Agent_Control_AI : BaseState
         {
             if(
                 agent.GetEnemy() &&
-                agent.IsOkHP() &&
+                !agent.IsLowHP() &&
                 !agent.ShouldReturn() //&&
             ){
                 return true;
@@ -40,7 +40,6 @@ public class State_Agent_Control_AI : BaseState
         idle.AddTransition(fleeing, (timeInState) =>
         {
             if(
-                agent.GetEnemy() &&
                 agent.IsLowHP() //&&
             ){
                 return true;
@@ -51,6 +50,7 @@ public class State_Agent_Control_AI : BaseState
         idle.AddTransition(returning, (timeInState) =>
         {
             if(
+                !agent.IsLowHP() &&
                 agent.ShouldReturn() //&&
             ){
                 return true;
@@ -76,7 +76,6 @@ public class State_Agent_Control_AI : BaseState
         fleeing.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.GetEnemy() ||
                 !agent.IsLowHP() //||
             ){
                 return true;
@@ -87,6 +86,7 @@ public class State_Agent_Control_AI : BaseState
         returning.AddTransition(idle, (timeInState) =>
         {
             if(
+                agent.IsLowHP() ||
                 agent.IsAtSpawnpoint() //||
             ){
                 return true;

@@ -51,14 +51,12 @@ public class HurtScript : MonoBehaviour
 
     // check block/parry first before hurting
 
-    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
         if(iframe) return;
 
-        hp.Hurt(hurtbox.damage);
-
-        EventM.OnHurt(gameObject, attacker, hurtbox, contactPoint);
+        hp.Deplete(hurtbox.damage);
 
         OnHurtt.Invoke();
 

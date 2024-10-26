@@ -2,15 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class AttackScript : MonoBehaviour
 {
-    Rigidbody rb;
+    public GameObject owner;
+    public Rigidbody rb;
 
-    void Awake()
+    // ============================================================================
+
+    EventManager EventM;
+
+    void OnEnable()
     {
-        rb = GetComponent<Rigidbody>();
+        EventM = EventManager.Current;
+        
+        EventM.AttackWindUpEvent += OnAttackWindUp;
+        EventM.AttackReleaseEvent += OnAttackRelease;
+        EventM.AttackRecoverEvent += OnAttackRecover;
+    }
+    void OnDisable()
+    {
+        EventM.AttackWindUpEvent -= OnAttackWindUp;
+        EventM.AttackReleaseEvent -= OnAttackRelease;
+        EventM.AttackRecoverEvent -= OnAttackRecover;
     }
 
     // ============================================================================
@@ -29,10 +42,7 @@ public class AttackScript : MonoBehaviour
     public float bufferTime=.2f;
     float bufferLeft;
 
-    public void DoBuffer()
-    {
-        bufferLeft = bufferTime;
-    }
+    public void DoBuffer() => bufferLeft = bufferTime;
 
     void UpdateBuffer()
     {
@@ -41,15 +51,9 @@ public class AttackScript : MonoBehaviour
         if(bufferLeft<0) bufferLeft=0;
     }
 
-    bool HasBuffer()
-    {
-        return bufferLeft>0;
-    }
+    bool HasBuffer() => bufferLeft>0;
 
-    void ResetBuffer()
-    {
-        bufferLeft=0;
-    }
+    void ResetBuffer() => bufferLeft=0;
 
     // ============================================================================
     
@@ -90,38 +94,19 @@ public class AttackScript : MonoBehaviour
 
     void StartAttackAnim()
     {
-        EventM.OnPlayAnim(gameObject, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
+        EventM.OnPlayAnim(owner, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
     }
 
     void DoInstantAttack()
     {
-        EventM.OnAttackRelease(gameObject);
+        EventM.OnAttackRelease(owner);
     }
 
-    // ============================================================================
-
-    EventManager EventM;
-
-    void OnEnable()
-    {
-        EventM = EventManager.Current;
-        
-        EventM.AttackWindUpEvent += OnAttackWindUp;
-        EventM.AttackReleaseEvent += OnAttackRelease;
-        EventM.AttackRecoverEvent += OnAttackRecover;
-    }
-    void OnDisable()
-    {
-        EventM.AttackWindUpEvent -= OnAttackWindUp;
-        EventM.AttackReleaseEvent -= OnAttackRelease;
-        EventM.AttackRecoverEvent -= OnAttackRecover;
-    }
-
-    // attack anim events ============================================================================
+    // Attack Anim Events ============================================================================
 
     void OnAttackWindUp(GameObject attacker)
     {
-        if(attacker!=gameObject) return;
+        if(attacker!=owner) return;
 
         isAttacking=true;
 
@@ -131,16 +116,16 @@ public class AttackScript : MonoBehaviour
 
     void OnAttackRelease(GameObject attacker)
     {
-        if(attacker!=gameObject) return;
+        if(attacker!=owner) return;
 
         SpawnAttack();
 
-        EventM.OnAttack(gameObject, attackSO);
+        EventM.OnAttack(owner, attackSO);
     }
 
     void OnAttackRecover(GameObject attacker)
     {
-        if(attacker!=gameObject) return;
+        if(attacker!=owner) return;
 
         isAttacking=false;
     }  
@@ -155,12 +140,28 @@ public class AttackScript : MonoBehaviour
 
         if(attackSpawn.parented) spawned.transform.parent = attackSpawn.spawnpoint;
 
+        TryAssignHurtboxOwner(spawned);
+
         if(attackSO.dashOnRelease)
             Dash();
     }
 
+    void TryAssignHurtboxOwner(GameObject target)
+    {
+        if(target.TryGetComponent<Hurtbox>(out var hurtbox))
+        {
+            hurtbox.owner = owner;
+        }
+        if(target.TryGetComponent<ExplosionHurtbox>(out var e_hurtbox))
+        {
+            e_hurtbox.owner = owner;
+        }
+    }
+
     void Dash()
     {
+        if(!rb) return;
+        
         if(attackSO.dashForce==0) return;
         if(attackSO.dashDirection==Vector3.zero) return;
 
@@ -210,8 +211,8 @@ public class AttackScript : MonoBehaviour
     {
         if(!isAttacking) return;
 
-        EventM.OnPlayAnim(gameObject, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
+        EventM.OnPlayAnim(owner, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
 
-        EventM.OnAttackRecover(gameObject);
+        EventM.OnAttackRecover(owner);
     }
 }

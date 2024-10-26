@@ -144,7 +144,7 @@ public class AgentWander : MonoBehaviour
     // ============================================================================
 
     [Header("Debug")]
-    public bool showGizmos = true;
+    public bool showGizmos;
     public Color gizmoColor = Color.white;
 
     void OnDrawGizmosSelected()

@@ -7,9 +7,10 @@ using UnityEngine.Events;
 
 public class Hurtbox : MonoBehaviour
 {
-    public GameObject owner;
     public HurtboxSO hurtboxSO;
-    
+
+    // ============================================================================
+
     Collider coll;
     
     public bool enabledOnAwake=true;
@@ -19,6 +20,35 @@ public class Hurtbox : MonoBehaviour
         coll = GetComponent<Collider>();
 
         ToggleColl(enabledOnAwake);
+    }
+    
+    // ============================================================================
+
+    [HideInInspector]
+    public GameObject owner;
+
+    [Header("Optional")]
+    public Transform hurtboxOrigin;
+
+    Vector3 contactPoint;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.isTrigger) return;
+        Rigidbody otherRb = other.attachedRigidbody;
+        if(!otherRb) return;
+
+        Vector3 origin = hurtboxOrigin ? hurtboxOrigin.position : transform.position;
+        
+        contactPoint = other.ClosestPoint(origin);
+        
+        HurtboxSO new_hurtbox = HurtboxSO.CreateInstance(hurtboxSO);
+
+        EventM.OnTryHurt(otherRb.gameObject, owner, new_hurtbox, contactPoint);
+
+        OnHit.Invoke();
+
+        if(destroyOnHit) Destroy(gameObject);
     }
 
     // ============================================================================
@@ -44,45 +74,18 @@ public class Hurtbox : MonoBehaviour
         if(owner != attacker) return;
         if(hurtboxSO != hurtbox) return;
 
-        OnHurtt.Invoke();
-
-        if(destroyOnHurt)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         // decrease first, then check
         if(--hurtbox.pierceCount <= 0)
         ToggleColl(false); 
+
+        OnHurtt.Invoke();
+
+        if(destroyOnHurt) Destroy(gameObject);
     }   
 
     public void ToggleColl(bool toggle)
     {
         coll.enabled = toggle;
-    }
-    
-    // ============================================================================
-
-    [Header("Optional")]
-    public Transform hurtboxOrigin;
-    Vector3 contactPoint;
-
-    void OnTriggerStay(Collider other)
-    {
-        if(other.isTrigger) return;
-        Rigidbody otherRb = other.attachedRigidbody;
-        if(!otherRb) return;
-        
-        contactPoint = other.ClosestPoint(hurtboxOrigin ? hurtboxOrigin.position : transform.position);
-        
-        HurtboxSO hurtbox = new(hurtboxSO);
-
-        EventM.OnTryHurt(owner, otherRb.gameObject, hurtbox, contactPoint);
-
-        OnHit.Invoke();
-
-        if(destroyOnHit) Destroy(gameObject);
     }
     
     // ============================================================================

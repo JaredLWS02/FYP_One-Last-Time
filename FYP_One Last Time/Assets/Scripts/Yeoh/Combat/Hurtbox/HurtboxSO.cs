@@ -10,32 +10,37 @@ public class HurtboxSO : ScriptableObject
     [TextArea]
     public string description;
 
-    [Header("Damage")]
-    public float damage=10;
-    public float knockback=5;
-
-    [Header("Extra")]
-    public float damageBlock=5;
-    public bool parryable=true;
+    [Header("Hit")]
+    public float damage=25;
+    public float knockback=10;
+    public float damageBlock=25;
     [Min(1)]
     public int pierceCount=1;
+    
+    [Header("Parry")]
+    public bool parryable=true;
+    public bool parryStunsAttacker=true;
 
     [Header("Stun")]
-    public float stunSeconds=1;
+    public float stunSeconds=.5f;
     public float stunSpeedMult=.3f;      
 
-    // ctor
-    public HurtboxSO(HurtboxSO so)
+    public static HurtboxSO CreateInstance(HurtboxSO so)
     {
-        Name = so.Name;
-        description = so.description;
-        damage = so.damage;
-        knockback = so.knockback;
-        damageBlock = so.damageBlock;
-        parryable = so.parryable;
-        pierceCount = so.pierceCount;
-        stunSeconds = so.stunSeconds;
-        stunSpeedMult = so.stunSpeedMult;
+        HurtboxSO new_SO = ScriptableObject.CreateInstance<HurtboxSO>();
+
+        new_SO.Name = so.Name;
+        new_SO.description = so.description;
+        new_SO.damage = so.damage;
+        new_SO.knockback = so.knockback;
+        new_SO.damageBlock = so.damageBlock;
+        new_SO.pierceCount = so.pierceCount;
+        new_SO.parryable = so.parryable;
+        new_SO.parryStunsAttacker = so.parryStunsAttacker;
+        new_SO.stunSeconds = so.stunSeconds;
+        new_SO.stunSpeedMult = so.stunSpeedMult;
+
+        return new_SO;
     }
 
     [HideInInspector]

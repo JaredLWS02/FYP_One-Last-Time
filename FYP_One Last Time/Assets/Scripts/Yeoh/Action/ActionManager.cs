@@ -4,27 +4,6 @@ using UnityEngine;
 
 public class ActionManager : MonoBehaviour
 {
-    SideMove move;
-    SideTurn turn;
-    JumpScript jump;
-    AgentAutoJump autoJump;
-    GroundCheck ground;
-    AttackScript attack;
-    AbilityCaster caster;
-
-    void Awake()
-    {
-        move = GetComponent<SideMove>();
-        turn = GetComponent<SideTurn>();
-        jump = GetComponent<JumpScript>();
-        autoJump = GetComponent<AgentAutoJump>();
-        ground = GetComponent<GroundCheck>();
-        attack = GetComponent<AttackScript>();
-        caster = GetComponent<AbilityCaster>();
-    }
-
-    // ============================================================================
-
     [Header("Hold Toggles")]
     public bool AllowMoveX;
     public bool AllowMoveY;
@@ -48,7 +27,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent += OnTryJump;
         EventM.TryAutoJumpEvent += OnTryAutoJump;
         EventM.TryAttackEvent += OnTryAttack;
-        EventM.TryStartCastEvent += OnTryStartCast;
+        EventM.TryAbilityEvent += OnTryCast;
     }
     void OnDisable()
     {
@@ -57,10 +36,13 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent -= OnTryJump;
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
         EventM.TryAttackEvent -= OnTryAttack;
-        EventM.TryStartCastEvent -= OnTryStartCast;
+        EventM.TryAbilityEvent -= OnTryCast;
     }
 
     // ============================================================================
+
+    [Header("Movement")]
+    public SideMove move;
 
     void OnTryMove(GameObject who, Vector2 input)
     {
@@ -78,6 +60,8 @@ public class ActionManager : MonoBehaviour
         EventM.OnMove(gameObject, input);
     }
 
+    public SideTurn turn;
+
     void OnTryFaceX(GameObject who, float input_x)
     {
         if(who!=gameObject) return;
@@ -93,6 +77,10 @@ public class ActionManager : MonoBehaviour
     
     // ============================================================================
 
+    [Header("Jump")]
+    public JumpScript jump;
+    public GroundCheck ground;
+
     void OnTryJump(GameObject who, float input)
     {
         if(who!=gameObject) return;
@@ -103,6 +91,8 @@ public class ActionManager : MonoBehaviour
         
         jump.OnJump(input);        
     }
+
+    public AgentAutoJump autoJump;
 
     void OnTryAutoJump(GameObject who, Vector3 jump_dir)
     {
@@ -123,7 +113,8 @@ public class ActionManager : MonoBehaviour
 
     // ============================================================================
     
-    [Header("Attacks")]
+    [Header("Attack")]
+    public AttackScript attack;
     public List<AttackCombo> attackCombos = new();
 
     void OnTryAttack(GameObject who, string attackName)
@@ -144,7 +135,11 @@ public class ActionManager : MonoBehaviour
 
     // ============================================================================
 
-    void OnTryStartCast(GameObject who, string ability_name)
+    [Header("Ability")]
+    public AbilityCaster caster;
+    public HealAbility heal;
+
+    void OnTryCast(GameObject who, string ability_name)
     {
         if(who!=gameObject) return;
 
@@ -152,7 +147,10 @@ public class ActionManager : MonoBehaviour
 
         if(!caster) return;
         
-        caster.StartCast(ability_name);
+        if(ability_name=="Heal")
+        {
+            if(heal) heal.DoBuffer();
+        }
     }
 
     // ============================================================================
@@ -184,6 +182,6 @@ public class ActionManager : MonoBehaviour
     public bool IsCasting()
     {
         if(!caster) return false;
-        return caster.isCasting;
+        return caster.IsCasting();
     }   
 }

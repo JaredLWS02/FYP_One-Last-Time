@@ -6,15 +6,14 @@ using UnityEngine;
 public class AbilitySlot
 {
     public AbilitySO ability;
-    public float cooldownLeft=0;
 
     public bool IsEmpty() => ability==null;
 
-    public bool IsCooling() => cooldownLeft>0;
+    // ============================================================================
 
-    public void ResetCooldown() => cooldownLeft=0;
+    float cooldownLeft;
 
-    public void DoCooldown() => cooldownLeft=ability.cooldown;
+    public void DoCooldown() => cooldownLeft = ability.cooldownTime;
 
     public void UpdateCooldown()
     {
@@ -26,6 +25,10 @@ public class AbilitySlot
             cooldownLeft=0;
         }
     }
+
+    public bool IsCooling() => cooldownLeft>0;
+
+    public void ResetCooldown() => cooldownLeft=0;
 };
 
 // ============================================================================
@@ -37,30 +40,6 @@ public class AbilityListSO : ScriptableObject
     public List<AbilitySlot> abilitySlots;
 
     // Getters ============================================================================
-
-    public AbilitySlot GetAbility(AbilitySO ability)
-    {
-        foreach(var slot in abilitySlots)
-        {
-            if(slot.ability == ability)
-            {
-                return slot;
-            }
-        }
-        return null;
-    }
-
-    public AbilitySlot GetAbility(AbilitySlot ability)
-    {
-        foreach(var slot in abilitySlots)
-        {
-            if(slot == ability)
-            {
-                return slot;
-            }
-        }
-        return null;
-    }
 
     public AbilitySlot GetAbility(string ability_name)
     {
@@ -74,25 +53,45 @@ public class AbilityListSO : ScriptableObject
         return null;
     }
 
+    public AbilitySlot GetAbility(AbilitySO ability)
+    {
+        foreach(var slot in abilitySlots)
+        {
+            if(slot.ability == ability)
+            {
+                return slot;
+            }
+        }
+        return null;
+    }
+
+    public bool HasAbility(string ability_name, out AbilitySlot slot)
+    {
+        slot = GetAbility(ability_name);
+        return slot != null;
+    }
+
+    public bool HasAbility(string ability_name)
+    {
+        return HasAbility(ability_name, out var slot);
+    }
+    
     public bool HasAbility(AbilitySO abilitySO, out AbilitySlot slot)
     {
         slot = GetAbility(abilitySO);
-
         return slot != null;
+    }
+
+    public bool HasAbility(AbilitySO abilitySO)
+    {
+        return HasAbility(abilitySO, out var slot);
     }
     
-    public bool HasAbility(AbilitySlot abilitySlot, out AbilitySlot slot)
-    {
-        slot = GetAbility(abilitySlot);
-
-        return slot != null;
-    }
-
     // Setters ============================================================================
 
     public void AddAbility(AbilitySO abilitySO)
     {
-        if(HasAbility(abilitySO, out AbilitySlot ability))
+        if(HasAbility(abilitySO))
         {
             Debug.Log($"Already have ability: {abilitySO.Name}");
             return;

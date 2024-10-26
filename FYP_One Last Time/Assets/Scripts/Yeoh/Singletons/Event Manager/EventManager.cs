@@ -154,9 +154,9 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, string> TryAttackEvent;
     public event Action<GameObject, AttackSO> AttackEvent;
 
-    public void OnTryAttack(GameObject attacker, string attackName)
+    public void OnTryAttack(GameObject attacker, string attack_name)
     {
-        TryAttackEvent?.Invoke(attacker, attackName);
+        TryAttackEvent?.Invoke(attacker, attack_name);
     }
     public void OnAttack(GameObject attacker, AttackSO attackSO)
     {
@@ -189,9 +189,9 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> KnockbackEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
 
-    public void OnTryHurt(GameObject attacker, GameObject victim, HurtboxSO hurtbox, Vector3 contactPoint)
+    public void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        TryHurtEvent?.Invoke(attacker, victim, hurtbox, contactPoint);
+        TryHurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }    
     public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -217,44 +217,50 @@ public class EventManager : MonoBehaviour
 
     // Ability ==================================================================================================================
 
-    public event Action<GameObject, string> TryStartCastEvent;
-    public event Action<GameObject, string> StartCastEvent;
+    public event Action<GameObject, string> TryAbilityEvent;
+    public event Action<GameObject, AbilitySO> AbilityEvent;
     
-    public void OnTryStartCast(GameObject caster, string ability_name)
+    public void OnTryAbility(GameObject caster, string ability_name)
     {
-        TryStartCastEvent?.Invoke(caster, ability_name);
+        TryAbilityEvent?.Invoke(caster, ability_name);
     }
-    public void OnStartCast(GameObject caster, string ability_name)
+    public void OnAbility(GameObject caster, AbilitySO abilitySO)
     {
-        StartCastEvent?.Invoke(caster, ability_name);
+        AbilityEvent?.Invoke(caster, abilitySO);
+    }
+    
+    // Casting ==================================================================================================================
+    
+    public event Action<GameObject, AbilitySO> CastingEvent;
+    public event Action<GameObject, AbilitySO> CastEvent;
+
+    public void OnCasting(GameObject caster, AbilitySO abilitySO)
+    {
+        CastingEvent?.Invoke(caster, abilitySO);
+    }
+    public void OnCast(GameObject caster, AbilitySO abilitySO)
+    {
+        CastEvent?.Invoke(caster, abilitySO);
     }
 
-    public event Action<GameObject, AbilitySlot> CastingEvent;
-    public event Action<GameObject, AbilitySlot> CastWindUpEvent;
-    public event Action<GameObject, AbilitySlot> CastReleaseEvent;
-    public event Action<GameObject> CastFinishEvent;
-    public event Action<GameObject> CastCancelEvent;
+    // Cast Anim Events ==================================================================================================================
 
-    public void OnCasting(GameObject caster, AbilitySlot abilitySlot)
+    public event Action<GameObject> CastWindUpEvent;
+    public event Action<GameObject> CastReleaseEvent;
+    public event Action<GameObject> CastRecoverEvent;
+
+    public void OnCastWindUp(GameObject caster)
     {
-        CastingEvent?.Invoke(caster, abilitySlot);
-    }
-    public void OnCastWindUp(GameObject caster, AbilitySlot abilitySlot)
+        CastWindUpEvent?.Invoke(caster);
+    }  
+    public void OnCastRelease(GameObject caster)
     {
-        CastWindUpEvent?.Invoke(caster, abilitySlot);
-    }
-    public void OnCastRelease(GameObject caster, AbilitySlot abilitySlot)
+        CastReleaseEvent?.Invoke(caster);
+    }  
+    public void OnCastRecover(GameObject caster)
     {
-        CastReleaseEvent?.Invoke(caster, abilitySlot);
-    }
-    public void OnCastFinish(GameObject caster)
-    {
-        CastFinishEvent?.Invoke(caster);
-    }
-    public void OnCastCancel(GameObject caster)
-    {
-        CastCancelEvent?.Invoke(caster);
-    }
+        CastRecoverEvent?.Invoke(caster);
+    }  
 
     // Animator ==================================================================================================================
 

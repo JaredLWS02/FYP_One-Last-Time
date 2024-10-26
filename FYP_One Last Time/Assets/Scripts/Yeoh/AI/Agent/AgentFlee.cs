@@ -70,7 +70,7 @@ public class AgentFlee : MonoBehaviour
     // ============================================================================
     
     [Header("Debug")]
-    public bool showGizmos = true;
+    public bool showGizmos;
     public Color gizmoColor = Color.yellow;
 
     void OnDrawGizmosSelected()

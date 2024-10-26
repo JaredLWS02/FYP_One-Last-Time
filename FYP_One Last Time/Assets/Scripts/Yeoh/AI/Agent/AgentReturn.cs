@@ -120,7 +120,7 @@ public class AgentReturn : MonoBehaviour
     // ============================================================================
 
     [Header("Debug")]
-    public bool showGizmos = true;
+    public bool showGizmos;
 
     public bool showMaxChaseDownRangeGizmo = true;
     public bool showReturnRangeGizmo = true;
