@@ -18,12 +18,6 @@ public class AgentAutoJump : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
-    {
-        // use custom movement instead
-        agent.autoTraverseOffMeshLink = false;
-    }
-
     // ============================================================================
 
     EventManager EventM;
@@ -35,16 +29,26 @@ public class AgentAutoJump : MonoBehaviour
 
     // ============================================================================
 
+    void Update()
+    {
+        // use custom movement instead
+        agent.autoTraverseOffMeshLink = false;
+
+        UpdateCooldown();
+    }
+
     void FixedUpdate()
     {
-        CheckJump();
+        TryJump();
         UpdateJumpSpline();
 
         if(rb && isJumping)
         rb.isKinematic = true;
     }
 
-    void CheckJump()
+    // ============================================================================
+
+    void TryJump()
     {
         if(!agent.isOnOffMeshLink) return;
         if(isJumping) return;
@@ -55,7 +59,6 @@ public class AgentAutoJump : MonoBehaviour
     Vector3 GetJumpDir()
     {
         Vector3 end_pos = agent.currentOffMeshLinkData.endPos;
-
         return (end_pos - agent.transform.position).normalized;
     }
 
@@ -73,11 +76,13 @@ public class AgentAutoJump : MonoBehaviour
     {
         if(isJumping) return;
 
+        if(IsCooling()) return;
+        DoCooldown();
+
         isJumping=true;
         jumpProgress=0;
 
-        if(rb)
-        rb.isKinematic = true;
+        if(rb) rb.isKinematic = true;
 
         NavMeshLink link = (NavMeshLink) agent.navMeshOwner;
 
@@ -139,8 +144,7 @@ public class AgentAutoJump : MonoBehaviour
         isJumping=false;
         jumpProgress=0;
 
-        if(rb)
-        rb.isKinematic = false;
+        if(rb) rb.isKinematic = false;
 
         agent.CompleteOffMeshLink();
 
@@ -150,6 +154,37 @@ public class AgentAutoJump : MonoBehaviour
 
     // ============================================================================
 
+    public float cooldownTime=.5f;
+    float cooldownLeft;
+    
+    void DoCooldown()
+    {
+        cooldownLeft = cooldownTime;
+    }
+
+    void UpdateCooldown()
+    {
+        // only tick down if not jumping
+        if(isJumping) return;
+        
+        cooldownLeft -= Time.deltaTime;
+
+        if(cooldownLeft<0) cooldownLeft=0;
+    }
+
+    bool IsCooling()
+    {
+        return cooldownLeft>0;
+    }
+
+    void CancelCooldown()
+    {
+        cooldownLeft=0;
+    }
+
+    // ============================================================================
+
+    [Header("Events")]
     public UnityEvent OnJump;
     public UnityEvent OnLand;
 }

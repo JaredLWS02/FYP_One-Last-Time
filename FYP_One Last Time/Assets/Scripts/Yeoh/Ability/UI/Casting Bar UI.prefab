@@ -131,27 +131,32 @@ PrefabInstance:
     - target: {fileID: 3816229249412317877, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6571787855699799648, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3801
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6571787855699799648, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.3801
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6571787855699799648, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.3801
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571787855699799648, guid: c98737ceacb672a4196bf04ed8fe81d2,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7183972731097727471, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7439345783319888502, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
@@ -176,12 +181,12 @@ PrefabInstance:
     - target: {fileID: 8364332906307179731, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8364332906307179731, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9137635433702854155, guid: c98737ceacb672a4196bf04ed8fe81d2,
         type: 3}
@@ -234,4 +239,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   tween: {fileID: 1807341550775021564}
-  enableBarOnAwake: 1

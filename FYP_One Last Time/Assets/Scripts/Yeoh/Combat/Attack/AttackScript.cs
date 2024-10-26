@@ -155,8 +155,22 @@ public class AttackScript : MonoBehaviour
 
         if(attackSpawn.parented) spawned.transform.parent = attackSpawn.spawnpoint;
 
+        TryAssignHurtboxOwner(spawned);
+
         if(attackSO.dashOnRelease)
             Dash();
+    }
+
+    void TryAssignHurtboxOwner(GameObject target)
+    {
+        if(target.TryGetComponent<Hurtbox>(out var hurtbox))
+        {
+            hurtbox.owner = gameObject;
+        }
+        if(target.TryGetComponent<ExplosionHurtbox>(out var e_hurtbox))
+        {
+            e_hurtbox.owner = gameObject;
+        }
     }
 
     void Dash()

@@ -33,7 +33,16 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Input East",
+                    "name": "Input Light Attack",
+                    "type": "Button",
+                    "id": "30c0bf6f-96a8-4a71-b2a1-ee1a045681cc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Input Parry",
                     "type": "Button",
                     "id": "7f17d2f3-1265-4f98-a426-7df981aca2a6",
                     "expectedControlType": "Button",
@@ -59,7 +68,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Input East",
+                    "action": "Input Parry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -70,7 +79,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Input East",
+                    "action": "Input Parry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -81,7 +90,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Input East",
+                    "action": "Input Parry",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -296,12 +305,67 @@
                 },
                 {
                     "name": "",
+                    "id": "b362efd0-b1ff-4931-9fef-9e0236ccbe63",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "b0841a5d-1ec0-4ead-93fd-2921459d4302",
                     "path": "<DualShockGamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Input Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50e63a4b-42cd-4ba1-9b16-cc7c15571f38",
+                    "path": "<HID::Logitech Logitech Dual Action>/button8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f090da58-cd47-47bc-8791-e51aa1bfb43d",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input Light Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "431dbedb-3aeb-40b1-8324-f65792c1de1f",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input Light Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1cceef3d-a29c-4b1c-ad83-d39341405471",
+                    "path": "<HID::Logitech Logitech Dual Action>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Input Light Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

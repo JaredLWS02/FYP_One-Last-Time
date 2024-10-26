@@ -8,14 +8,6 @@ public class CastingBarUI : MonoBehaviour
     public GameObject owner;
     public UIBarTween tween;
 
-    public bool enableBarOnAwake = true;
-
-    void Awake()
-    {
-        if(enableBarOnAwake)
-        tween.gameObject.SetActive(true);
-    }
-
     // ============================================================================
 
     EventManager EventM;

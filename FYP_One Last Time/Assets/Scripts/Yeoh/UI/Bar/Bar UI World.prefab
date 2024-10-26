@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8736244252776526552}
   - component: {fileID: 7414739805559073810}
   - component: {fileID: 8175368402288132405}
+  - component: {fileID: 8177176074079971177}
   m_Layer: 5
   m_Name: Bar UI World
   m_TagString: Untagged
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &8736244252776526552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,8 +130,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableBillboard: 1
-  fixedUpdate: 1
+  fixedUpdate: 0
   rotateAxis: {x: 1, y: 1, z: 0}
+--- !u!114 &8177176074079971177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7439345783319888502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9793289159c26384a8e62a9b0c6828f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 7183972731097727471}
 --- !u!1001 &7203721759193902205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,6 +276,12 @@ PrefabInstance:
 --- !u!224 &6571787855699799648 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4092484505308709405, guid: 87b8e6806e430274da3b198f498f66f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7203721759193902205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7183972731097727471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 20930196453289362, guid: 87b8e6806e430274da3b198f498f66f4,
     type: 3}
   m_PrefabInstance: {fileID: 7203721759193902205}
   m_PrefabAsset: {fileID: 0}

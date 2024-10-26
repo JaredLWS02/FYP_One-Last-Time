@@ -76,7 +76,7 @@ public class AgentVerticalityCheck : MonoBehaviour
     // ============================================================================
 
     [Header("Debug")]
-    public bool showGizmos=true;
+    public bool showGizmos;
     public Color gizmoColor = new(0,1,0,.25f);
 
     void OnDrawGizmosSelected()

@@ -270,7 +270,7 @@ public class AgentManager : MonoBehaviour
     // ============================================================================
 
     [Header("Debug")]
-    public bool showGizmos = true;
+    public bool showGizmos;
     
     public bool showArrivalRangeGizmo = true;
     public bool showMeleeRangeGizmo = true;

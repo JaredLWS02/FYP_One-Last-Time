@@ -19,7 +19,7 @@ public class AttackSO : ScriptableObject
     [Header("Dash")]
     public bool dashOnWindUp = false;
     public bool dashOnRelease = true;
-    public float dashForce = 5;    
+    public float dashForce = 10;    
     public Vector3 dashDirection = Vector3.forward;
     public bool localDirection = true;
 

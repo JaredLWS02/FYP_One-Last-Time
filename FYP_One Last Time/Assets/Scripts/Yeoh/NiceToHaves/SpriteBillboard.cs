@@ -56,7 +56,11 @@ public class SpriteBillboard : MonoBehaviour
     {
         if(!enableBillboard) return;
 
-        Vector3 camera_angles = Camera.main.transform.rotation.eulerAngles;
+        if(!Camera.main) return;
+
+        Vector3 camera_angles = Camera.main.transform.eulerAngles;
+
+        if(!transform) return;
 
         transform.rotation = Quaternion.Euler(
             rotateAxis.x>0 ? camera_angles.x : 0,

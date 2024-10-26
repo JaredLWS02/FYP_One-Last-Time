@@ -10,18 +10,19 @@ public class HurtboxSO : ScriptableObject
     [TextArea]
     public string description;
 
-    [Header("Damage")]
-    public float damage=10;
-    public float knockback=5;
-
-    [Header("Extra")]
-    public float damageBlock=5;
-    public bool parryable=true;
+    [Header("Hit")]
+    public float damage=25;
+    public float knockback=10;
+    public float damageBlock=25;
     [Min(1)]
     public int pierceCount=1;
+    
+    [Header("Parry")]
+    public bool parryable=true;
+    public bool parryStunsAttacker=true;
 
     [Header("Stun")]
-    public float stunSeconds=1;
+    public float stunSeconds=.5f;
     public float stunSpeedMult=.3f;      
 
     // ctor

@@ -75,6 +75,9 @@ public class ExplosionHurtbox : MonoBehaviour
 
     // ============================================================================
 
+    [HideInInspector]
+    public GameObject owner;
+
     Vector3 contactPoint;
 
     void Damage()
@@ -96,7 +99,7 @@ public class ExplosionHurtbox : MonoBehaviour
 
             contactPoint = other.ClosestPoint(transform.position);
             
-            EventM.OnTryHurt(gameObject, otherRb.gameObject, hurtbox, contactPoint);
+            EventM.OnTryHurt(owner, otherRb.gameObject, hurtbox, contactPoint);
         }
     }
 

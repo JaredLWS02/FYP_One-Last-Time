@@ -82,7 +82,7 @@ public class Radar2D : MonoBehaviour
     // ============================================================================
 
     [Header("Debug")]
-    public bool showGizmos = true;
+    public bool showGizmos;
     public Color gizmoColor = new(0, 1, 1, .5f);
 
     void OnDrawGizmosSelected()

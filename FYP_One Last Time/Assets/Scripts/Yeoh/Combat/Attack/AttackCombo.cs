@@ -85,8 +85,8 @@ public class AttackCombo : MonoBehaviour
         RefillResetTime();
 
         if(randomCombo)
-        comboIndex = Random.Range(0, comboSteps.Count);
-
+        ChooseCombo(Random.Range(0, comboSteps.Count));
+        else
         ChooseCombo(comboIndex);
     }
 
@@ -143,7 +143,7 @@ public class AttackCombo : MonoBehaviour
     // ============================================================================
     
     [Header("During Combo")]
-    public float comboResetTime=1;
+    public float comboResetTime=.25f;
     float comboResetTimeLeft;
     
     void RefillResetTime()
@@ -180,7 +180,7 @@ public class AttackCombo : MonoBehaviour
     // ============================================================================
 
     [Header("After Combo")]
-    float comboCooldownTime = 1;
+    public float comboCooldownTime=.25f;
     float comboCooldownLeft;
     
     void DoComboCooldown()
