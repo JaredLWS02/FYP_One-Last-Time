@@ -273,7 +273,7 @@ public class AgentManager : MonoBehaviour
     public bool showGizmos;
     
     public bool showArrivalRangeGizmo = true;
-    public bool showMeleeRangeGizmo = true;
+    public bool showAttackRangeGizmo = true;
     public bool showMaintainDistanceGizmo = true;
 
     public Color gizmoColor = new(1, 1, 1, .25f);
@@ -287,7 +287,7 @@ public class AgentManager : MonoBehaviour
         if(showArrivalRangeGizmo)
         Gizmos.DrawWireSphere(transform.position, arrivalRange);
 
-        if(showMeleeRangeGizmo)
+        if(showAttackRangeGizmo)
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
         if(showMaintainDistanceGizmo)

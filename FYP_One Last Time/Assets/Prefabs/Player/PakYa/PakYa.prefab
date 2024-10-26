@@ -824,6 +824,8 @@ GameObject:
   - component: {fileID: 1353104093430078228}
   - component: {fileID: 8003095357430364833}
   - component: {fileID: 6639294003576150908}
+  - component: {fileID: 4334806704455733132}
+  - component: {fileID: 7545481002945307949}
   m_Layer: 3
   m_Name: PakYa
   m_TagString: Player
@@ -1131,6 +1133,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: 97874b5f7b402dd42b0d261e43d370ec, type: 2}
+--- !u!114 &4334806704455733132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fcf04fc67a6eea47859fee489ef793d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: {fileID: 1861734953551003033}
+  iframeSeconds: 0.5
+  iframe: 0
+  colorFlicker: 1
+  rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
+  colorFlickerInterval: 0.05
+  poise: 0
+  poiseRegenDelay: 3
+  iframeOnDeath: 1
+  OnHurtt:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPoiseBreak:
+    m_PersistentCalls:
+      m_Calls: []
+  OnIFrameEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathh:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7545481002945307949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d10c31cecf1996448b05dbdb04ab51b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1048519321936316235
 PrefabInstance:
   m_ObjectHideFlags: 0
