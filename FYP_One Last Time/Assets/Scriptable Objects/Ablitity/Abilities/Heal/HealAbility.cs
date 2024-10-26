@@ -2,9 +2,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AbilityCaster))]
+
 public class HealAbility : MonoBehaviour
 {
+    AbilityCaster caster;
+
+    public GameObject owner;
+    public AbilitySO healSO;
     public HPManager hp;
+
+    void Awake()
+    {
+        caster = GetComponent<AbilityCaster>();
+    }
+
+    // ============================================================================
+    
+    void Update()
+    {
+        UpdateBuffer();
+        TryStartCasting();
+    }
+    
+    // ============================================================================
+
+    [Header("Before Casting")]
+    public float bufferTime=.2f;
+    float bufferLeft;
+
+    public void DoBuffer() => bufferLeft = bufferTime;
+
+    void UpdateBuffer()
+    {
+        bufferLeft -= Time.deltaTime;
+
+        if(bufferLeft<0) bufferLeft=0;
+    }
+
+    bool HasBuffer() => bufferLeft>0;
+
+    void ResetBuffer() => bufferLeft=0;
+
+    // ============================================================================
+    
+    void TryStartCasting()
+    {
+        if(IsCasting()) return;
+
+        if(!HasBuffer()) return;
+
+        StartCasting();
+    }
+
+    void StartCasting()
+    {
+        ResetBuffer();
+
+        caster.abilitySO = healSO;
+
+        caster.DoBuffer();
+    }
+    
+    // ============================================================================
+
+    bool IsCasting()
+    {
+        return caster.IsCasting();
+    }
 
     // ============================================================================
 
@@ -14,46 +79,38 @@ public class HealAbility : MonoBehaviour
     {
         EventM = EventManager.Current;
         
-        //EventM.CastReleaseEvent += OnCastRelease;
-        //temp, no anim event yet
-        EventM.CastWindUpEvent += OnCastRelease;
+        EventM.AbilityEvent += OnAbility;
     }
     void OnDisable()
     {
-        //EventM.CastReleaseEvent -= OnCastRelease;
-        //temp, no anim event yet
-        EventM.CastWindUpEvent -= OnCastRelease;
+        EventM.AbilityEvent -= OnAbility;
     }
 
     // ============================================================================
 
-    void OnCastRelease(GameObject caster, AbilitySlot abilitySlot)
+    void OnAbility(GameObject caster, AbilitySO abilitySO)
     {
-        if(caster!=gameObject) return;
+        if(caster!=owner) return;
 
-        if(abilitySlot.ability.name!="Heal") return;
+        if(abilitySO!=healSO) return;
 
-        hp.Add(abilitySlot.ability.magnitude);
+        hp.Add(abilitySO.magnitude);
 
-        //temp, no anim event yet
-        EventM.OnCastRelease(gameObject, abilitySlot);
-        EventM.OnCastFinish(gameObject);
-
-        TempFeedback(abilitySlot);
+        TempVFX(abilitySO);
     }
 
     // Move to vfx manager later ============================================================================
 
-    void TempFeedback(AbilitySlot abilitySlot)
+    void TempVFX(AbilitySO abilitySO)
     {
         // flash green
-        SpriteManager.Current.FlashColor(gameObject, -1, 1, -1);
-        ModelManager.Current.FlashColor(gameObject, -1, 1, -1);
+        SpriteManager.Current.FlashColor(owner, -1, 1, -1);
+        ModelManager.Current.FlashColor(owner, -1, 1, -1);
 
-        Vector3 top = ColliderManager.Current.GetTop(gameObject);
+        Vector3 top = ColliderManager.Current.GetTop(owner);
 
         // pop up text
-        VFXManager.Current.SpawnPopUpText(top, $"+{abilitySlot.ability.magnitude}", Color.green);
+        VFXManager.Current.SpawnPopUpText(top, $"+{abilitySO.magnitude}", Color.green);
 
         //DisableCastTrails();
 

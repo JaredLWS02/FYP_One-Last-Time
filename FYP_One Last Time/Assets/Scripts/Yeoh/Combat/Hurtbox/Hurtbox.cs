@@ -32,17 +32,19 @@ public class Hurtbox : MonoBehaviour
 
     Vector3 contactPoint;
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if(other.isTrigger) return;
         Rigidbody otherRb = other.attachedRigidbody;
         if(!otherRb) return;
-        
-        contactPoint = other.ClosestPoint(hurtboxOrigin ? hurtboxOrigin.position : transform.position);
-        
-        HurtboxSO hurtbox = new(hurtboxSO);
 
-        EventM.OnTryHurt(owner, otherRb.gameObject, hurtbox, contactPoint);
+        Vector3 origin = hurtboxOrigin ? hurtboxOrigin.position : transform.position;
+        
+        contactPoint = other.ClosestPoint(origin);
+        
+        HurtboxSO new_hurtbox = HurtboxSO.CreateInstance(hurtboxSO);
+
+        EventM.OnTryHurt(otherRb.gameObject, owner, new_hurtbox, contactPoint);
 
         OnHit.Invoke();
 

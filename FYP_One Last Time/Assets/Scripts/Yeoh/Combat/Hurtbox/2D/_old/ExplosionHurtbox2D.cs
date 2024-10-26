@@ -70,16 +70,16 @@ public class ExplosionHurtbox2D : MonoBehaviour
         {
             float falloffMult = GetFallOffMult(transform.position, rb.transform.position, outerRange);
 
-            HurtboxSO hurtbox = new(hurtboxSO);
+            HurtboxSO new_hurtbox = HurtboxSO.CreateInstance(hurtboxSO);
             
-            hurtbox.damage *= falloffMult;
-            hurtbox.damageBlock *= falloffMult;
-            hurtbox.stunSeconds *= falloffMult;
-            hurtbox.knockback=0; // handled by Push()
+            new_hurtbox.damage *= falloffMult;
+            new_hurtbox.damageBlock *= falloffMult;
+            new_hurtbox.stunSeconds *= falloffMult;
+            new_hurtbox.knockback=0; // handled by Push()
 
             contactPoint = rb.ClosestPoint(transform.position);
 
-            EventM.OnTryHurt(gameObject, rb.gameObject, hurtbox, contactPoint);
+            EventM.OnTryHurt(rb.gameObject, gameObject, new_hurtbox, contactPoint);
         }
     }
 

@@ -13,8 +13,8 @@ public class AttackSO : ScriptableObject
     [Header("Animator")]
     public bool hasAttackAnim = true;
     public string animName = "Melee1";
-    public int animLayer = 0;
-    public float animBlendTime = 0;
+    public int animLayer;
+    public float animBlendTime;
 
     [Header("Dash")]
     public bool dashOnWindUp = false;

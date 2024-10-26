@@ -78,6 +78,6 @@ public class PlayerInputListener : MonoBehaviour
     {
         if(!pilot.IsPlayer()) return;
 
-        EventM.OnTryStartCast(gameObject, "Heal");
+        EventM.OnTryAbility(gameObject, "Heal");
     }
 }

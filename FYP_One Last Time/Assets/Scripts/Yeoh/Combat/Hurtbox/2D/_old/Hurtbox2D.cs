@@ -66,7 +66,7 @@ public class Hurtbox2D : MonoBehaviour
     public Transform hurtboxOrigin;
     Vector3 contactPoint;
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if(other.isTrigger) return;
         Rigidbody2D otherRb = other.attachedRigidbody;
@@ -75,9 +75,9 @@ public class Hurtbox2D : MonoBehaviour
         contactPoint = other.ClosestPoint(hurtboxOrigin ? hurtboxOrigin.position : transform.position);
         contactPoint.z=0;  // for 2D
 
-        HurtboxSO hurtbox = new(hurtboxSO);
+        HurtboxSO new_hurtbox = HurtboxSO.CreateInstance(hurtboxSO);
 
-        EventM.OnTryHurt(owner, otherRb.gameObject, hurtbox, contactPoint);
+        EventM.OnTryHurt(otherRb.gameObject, owner, new_hurtbox, contactPoint);
 
         OnHit.Invoke();
 

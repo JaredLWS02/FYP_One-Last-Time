@@ -81,8 +81,73 @@ MonoBehaviour:
   regenWhenEmpty: 0
   regenHp: 0.2
   regenInterval: 0.1
-  defaultRegenHp: 0
-  defaultRegenInterval: 0
+--- !u!1 &2756698445312053699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 98971669180264664}
+  - component: {fileID: 1410335126641825925}
+  - component: {fileID: 7975362184149562795}
+  m_Layer: 3
+  m_Name: Abilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &98971669180264664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756698445312053699}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4032536735459076646}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1410335126641825925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756698445312053699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98936e14bb119b54485a31a4203d28d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  abilityList: {fileID: 11400000, guid: 20654795a73aa1546b842d07d69881d9, type: 2}
+  MP_Manager: {fileID: 7058722310484815464}
+  bufferTime: 0.2
+  abilitySO: {fileID: 0}
+  cancelAnimName: Cancel
+--- !u!114 &7975362184149562795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756698445312053699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343ddc7facad07d4b95723ef1a151f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  healSO: {fileID: 11400000, guid: 289d739c06a77ac4f91862671cfa2768, type: 2}
+  hp: {fileID: 1861734953551003033}
+  bufferTime: 0.2
 --- !u!1 &2941172494308309934
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2968421400926582619}
+  - component: {fileID: 7022457898630109682}
   m_Layer: 3
   m_Name: Attacks
   m_TagString: Untagged
@@ -116,6 +182,28 @@ Transform:
   - {fileID: 6705404227923167189}
   m_Father: {fileID: 4032536735459076646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7022457898630109682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941172494308309934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
+  bufferTime: 0.2
+  attackSO: {fileID: 0}
+  attackSpawn:
+    prefab: {fileID: 0}
+    spawnpoint: {fileID: 0}
+    parented: 1
+    followRotation: 1
+  cancelAnimName: Cancel
 --- !u!1 &2948484968028016200
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
-  attack: {fileID: 6505367827229283128}
+  attack: {fileID: 7022457898630109682}
   comboName: Light Combo
   comboSteps:
   - attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
@@ -366,13 +454,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
-  attack: {fileID: 6505367827229283128}
+  attack: {fileID: 7022457898630109682}
   comboName: Heavy Combo
   comboSteps:
-  - attackSO: {fileID: 0}
+  - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     attackSpawn:
-      prefab: {fileID: 0}
-      spawnpoint: {fileID: 0}
+      prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
+        type: 3}
+      spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
   bufferTime: 0.2
@@ -392,6 +481,7 @@ GameObject:
   - component: {fileID: 4004871874835498188}
   - component: {fileID: 4728252470638691548}
   - component: {fileID: 9206634663529618913}
+  - component: {fileID: 4251276819503043955}
   - component: {fileID: 345509100620316827}
   - component: {fileID: 6876849668752172755}
   - component: {fileID: 8393169458917718466}
@@ -514,6 +604,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6941ca0d6d61d264eb9d8d0ce361ca7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+--- !u!114 &4251276819503043955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274980459159228368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1239702ffb013ba4b8c54b9b84ca7e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
@@ -697,8 +800,6 @@ MonoBehaviour:
   regenWhenEmpty: 0
   regenHp: 0.2
   regenInterval: 0.1
-  defaultRegenHp: 0
-  defaultRegenInterval: 0
 --- !u!1 &8987163089559660572
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,9 +823,6 @@ GameObject:
   - component: {fileID: 2535672027372677568}
   - component: {fileID: 1353104093430078228}
   - component: {fileID: 8003095357430364833}
-  - component: {fileID: 6505367827229283128}
-  - component: {fileID: 9071989056172940844}
-  - component: {fileID: 7128361844597336669}
   - component: {fileID: 6639294003576150908}
   m_Layer: 3
   m_Name: PakYa
@@ -751,6 +849,7 @@ Transform:
   - {fileID: 205841275096087312}
   - {fileID: 3214518180539662648}
   - {fileID: 2968421400926582619}
+  - {fileID: 98971669180264664}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &1642459170912960868
@@ -867,9 +966,17 @@ MonoBehaviour:
   AllowDash: 0
   AllowAttack: 0
   AllowCast: 0
+  move: {fileID: 3611210669050738406}
+  turn: {fileID: 4368493988338249805}
+  jump: {fileID: 2535672027372677568}
+  ground: {fileID: 1353104093430078228}
+  autoJump: {fileID: 0}
+  attack: {fileID: 7022457898630109682}
   attackCombos:
   - {fileID: 2589080218004393375}
   - {fileID: 6345980450733858254}
+  caster: {fileID: 1410335126641825925}
+  heal: {fileID: 7975362184149562795}
 --- !u!114 &6839865897356820154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,54 +1118,6 @@ MonoBehaviour:
   OnFastFallEnd:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6505367827229283128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bufferTime: 0.2
-  attackSO: {fileID: 0}
-  attackSpawn:
-    prefab: {fileID: 0}
-    spawnpoint: {fileID: 0}
-    parented: 1
-    followRotation: 1
-  cancelAnimName: Cancel
---- !u!114 &9071989056172940844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98936e14bb119b54485a31a4203d28d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityList: {fileID: 11400000, guid: 20654795a73aa1546b842d07d69881d9, type: 2}
-  MP_Manager: {fileID: 7058722310484815464}
-  isCasting: 0
---- !u!114 &7128361844597336669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 343ddc7facad07d4b95723ef1a151f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: {fileID: 1861734953551003033}
 --- !u!114 &6639294003576150908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,6 +1164,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PakYa Casting Bar
       objectReference: {fileID: 0}
+    - target: {fileID: 4867537330832089159, guid: 3be13b654dc63584d88befb44e243220,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 2756698445312053699}
     - target: {fileID: 7995688106823570850, guid: 3be13b654dc63584d88befb44e243220,
         type: 3}
       propertyPath: m_PresetInfoIsWorld

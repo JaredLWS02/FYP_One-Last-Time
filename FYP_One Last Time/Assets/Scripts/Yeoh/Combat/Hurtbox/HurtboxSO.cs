@@ -25,18 +25,22 @@ public class HurtboxSO : ScriptableObject
     public float stunSeconds=.5f;
     public float stunSpeedMult=.3f;      
 
-    // ctor
-    public HurtboxSO(HurtboxSO so)
+    public static HurtboxSO CreateInstance(HurtboxSO so)
     {
-        Name = so.Name;
-        description = so.description;
-        damage = so.damage;
-        knockback = so.knockback;
-        damageBlock = so.damageBlock;
-        parryable = so.parryable;
-        pierceCount = so.pierceCount;
-        stunSeconds = so.stunSeconds;
-        stunSpeedMult = so.stunSpeedMult;
+        HurtboxSO new_SO = ScriptableObject.CreateInstance<HurtboxSO>();
+
+        new_SO.Name = so.Name;
+        new_SO.description = so.description;
+        new_SO.damage = so.damage;
+        new_SO.knockback = so.knockback;
+        new_SO.damageBlock = so.damageBlock;
+        new_SO.pierceCount = so.pierceCount;
+        new_SO.parryable = so.parryable;
+        new_SO.parryStunsAttacker = so.parryStunsAttacker;
+        new_SO.stunSeconds = so.stunSeconds;
+        new_SO.stunSpeedMult = so.stunSpeedMult;
+
+        return new_SO;
     }
 
     [HideInInspector]

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
-  attack: {fileID: 3574276676473959355}
+  attack: {fileID: 6861530176262365675}
   comboName: Normal Combo
   comboSteps:
   - attackSO: {fileID: 0}
@@ -419,8 +419,6 @@ MonoBehaviour:
   regenWhenEmpty: 0
   regenHp: 0.2
   regenInterval: 0.1
-  defaultRegenHp: 0
-  defaultRegenInterval: 0
 --- !u!1 &3430685766635650827
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8449358400114368154}
+  - component: {fileID: 6861530176262365675}
   m_Layer: 6
   m_Name: Attacks
   m_TagString: Untagged
@@ -501,6 +500,28 @@ Transform:
   - {fileID: 3071236275463930265}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6861530176262365675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345753957651105915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  rb: {fileID: 8915720888079556032}
+  bufferTime: 0.2
+  attackSO: {fileID: 0}
+  attackSpawn:
+    prefab: {fileID: 0}
+    spawnpoint: {fileID: 0}
+    parented: 1
+    followRotation: 1
+  cancelAnimName: Cancel
 --- !u!1 &5261146206814944013
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +553,8 @@ GameObject:
   - component: {fileID: 8893670741154941565}
   - component: {fileID: 7877508715297963426}
   - component: {fileID: 919053695834915120}
-  - component: {fileID: 3574276676473959355}
+  - component: {fileID: 4642146714573691683}
+  - component: {fileID: 3691060632212682340}
   m_Layer: 6
   m_Name: Tikus
   m_TagString: Enemy
@@ -717,6 +739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isJumping: 0
   jumpSeconds: 0.8
+  cooldownTime: 0.5
   OnJump:
     m_PersistentCalls:
       m_Calls: []
@@ -816,8 +839,16 @@ MonoBehaviour:
   AllowDash: 0
   AllowAttack: 0
   AllowCast: 0
+  move: {fileID: 5193524905132986524}
+  turn: {fileID: 8899604075891903837}
+  jump: {fileID: 8893670741154941565}
+  ground: {fileID: 7877508715297963426}
+  autoJump: {fileID: 5609296010924524344}
+  attack: {fileID: 6861530176262365675}
   attackCombos:
   - {fileID: 3962663419828832351}
+  caster: {fileID: 0}
+  heal: {fileID: 0}
 --- !u!114 &8261427844462952279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,7 +990,7 @@ MonoBehaviour:
   OnFastFallEnd:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3574276676473959355
+--- !u!114 &4642146714573691683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -968,17 +999,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 5261146206814944013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f52613e3026c004baf641696de1ce9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fcf04fc67a6eea47859fee489ef793d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bufferTime: 0.2
-  attackSO: {fileID: 0}
-  attackSpawn:
-    prefab: {fileID: 0}
-    spawnpoint: {fileID: 0}
-    parented: 1
-    followRotation: 1
-  cancelAnimName: Cancel
+  hp: {fileID: 704049436961937626}
+  iframeSeconds: 0.1
+  iframe: 0
+  colorFlicker: 1
+  rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
+  colorFlickerInterval: 0.05
+  poise: 0
+  poiseRegenDelay: 3
+  iframeOnDeath: 1
+  OnHurtt:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPoiseBreak:
+    m_PersistentCalls:
+      m_Calls: []
+  OnIFrameEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeathh:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3691060632212682340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d10c31cecf1996448b05dbdb04ab51b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0

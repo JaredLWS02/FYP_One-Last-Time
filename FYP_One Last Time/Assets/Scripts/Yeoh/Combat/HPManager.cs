@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class HPManager : MonoBehaviour
@@ -22,41 +21,35 @@ public class HPManager : MonoBehaviour
         EventM = EventManager.Current;
         
         StartHpRegen();
-
-        StartUpdatingUIBar();
     }
 
-    // ============================================================================
+    // Regen ============================================================================
     
-    void Start()
-    {
-        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
-    }
-
     void Update()
     {
-        hp = Mathf.Clamp(hp, 0, hpMax);     
+        hp = Mathf.Clamp(hp, 0, hpMax);
+
+        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
 
         if(prevRegenInterval != regenInterval)
         {
             prevRegenInterval = regenInterval;
-
-            // update hp regen rate
-            StartHpRegen();
+            
+            StartHpRegen(); // update hp regen rate
         }
     }
 
-    // Regen ============================================================================
+    // ============================================================================
 
     [Header("Regeneration")]
-    public bool regen;
+    public bool regen=true;
     public bool regenWhenEmpty;
 
     public float regenHp=.2f;
     public float regenInterval=.1f;
 
-    [HideInInspector] public float defaultRegenHp;
-    [HideInInspector] public float defaultRegenInterval;
+    public float defaultRegenHp {get; private set;}
+    public float defaultRegenInterval {get; private set;}
     float prevRegenInterval;
 
     void RecordDefaults()
@@ -67,11 +60,11 @@ public class HPManager : MonoBehaviour
 
     void StartHpRegen()
     {
-        if(hpRegeneratingRt!=null) StopCoroutine(hpRegeneratingRt);
-        hpRegeneratingRt = StartCoroutine(HpRegenerating());
+        if(hpRegenerating_crt!=null) StopCoroutine(hpRegenerating_crt);
+        hpRegenerating_crt = StartCoroutine(HpRegenerating());
     }
 
-    Coroutine hpRegeneratingRt;
+    Coroutine hpRegenerating_crt;
     IEnumerator HpRegenerating()
     {
         while(true)
@@ -85,52 +78,27 @@ public class HPManager : MonoBehaviour
         }
     }
 
-    // UI Bar ============================================================================
-
-    void StartUpdatingUIBar()
-    {
-        if(updatingUIBarRt!=null) StopCoroutine(updatingUIBarRt);
-        updatingUIBarRt = StartCoroutine(UpdatingUIBar());
-    }
-
-    Coroutine updatingUIBarRt;
-    IEnumerator UpdatingUIBar()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(.2f);
-            EventM.OnUIBarUpdate(gameObject, hp, hpMax);
-        }
-    }
-
     // Setters ============================================================================
 
-    public void Hurt(float dmg)
+    public void Deplete(float dmg)
     {
-        if(dmg>0)
-        {
-            if(hp>dmg) hp-=dmg;
-            else hp=0;
-        }
-        
-        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
+        if(dmg<=0) return;
+
+        if(hp>dmg) hp-=dmg;
+        else hp=0;
     }
 
     public void Add(float amount)
     {
-        hp+=amount;
+        hp += amount;
         if(hp>hpMax) hp=hpMax;
-
-        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
     }
 
     public void SetHPPercent(float percent)
     {
-        percent = Mathf.Clamp(percent, .1f, 100);
+        percent = Mathf.Clamp(percent, .01f, 100);
 
         hp = hpMax * percent/100;
-
-        EventM.OnUIBarUpdate(gameObject, hp, hpMax);
     }
 
     // Getters ============================================================================
