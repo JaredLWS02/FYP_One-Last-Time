@@ -131,7 +131,7 @@ MonoBehaviour:
   MP_Manager: {fileID: 7058722310484815464}
   bufferTime: 0.2
   abilitySO: {fileID: 0}
-  cancelAnimName: Cancel
+  cancelAnimName: Cancel Cast
 --- !u!114 &7975362184149562795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
     spawnpoint: {fileID: 0}
     parented: 1
     followRotation: 1
-  cancelAnimName: Cancel
+  cancelAnimName: Cancel Attack
 --- !u!1 &2948484968028016200
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +483,7 @@ GameObject:
   - component: {fileID: 4728252470638691548}
   - component: {fileID: 9206634663529618913}
   - component: {fileID: 4251276819503043955}
+  - component: {fileID: 4352165570627224600}
   - component: {fileID: 345509100620316827}
   - component: {fileID: 6876849668752172755}
   - component: {fileID: 8393169458917718466}
@@ -603,6 +604,8 @@ MonoBehaviour:
   rightParamName: MoveX
   checkUp: 0
   upParamName: MoveY
+  changeBlendTreeSpeed: 1
+  speedParamName: MoveSpeed
 --- !u!114 &4728252470638691548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,6 +643,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1239702ffb013ba4b8c54b9b84ca7e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+--- !u!114 &4352165570627224600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274980459159228368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124838d4d0ad4b341af7a90f66847b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
@@ -849,6 +865,7 @@ GameObject:
   - component: {fileID: 6639294003576150908}
   - component: {fileID: 4334806704455733132}
   - component: {fileID: 7545481002945307949}
+  - component: {fileID: 110049388833876227}
   m_Layer: 3
   m_Name: PakYa
   m_TagString: Player
@@ -991,6 +1008,7 @@ MonoBehaviour:
   AllowDash: 0
   AllowAttack: 0
   AllowCast: 0
+  AllowStun: 0
   move: {fileID: 3611210669050738406}
   turn: {fileID: 4368493988338249805}
   jump: {fileID: 2535672027372677568}
@@ -1002,6 +1020,7 @@ MonoBehaviour:
   - {fileID: 6345980450733858254}
   caster: {fileID: 1410335126641825925}
   heal: {fileID: 7975362184149562795}
+  stun: {fileID: 110049388833876227}
 --- !u!114 &6839865897356820154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,6 +1220,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d10c31cecf1996448b05dbdb04ab51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &110049388833876227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57befce43c1e4044d97f26dd01c90123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  stunAnimNames:
+  - Stun1
+  stunAnimLayer: 0
+  stunAnimBlendTime: 0
+  cancelAnimName: Cancel Stun
 --- !u!1001 &1048519321936316235
 PrefabInstance:
   m_ObjectHideFlags: 0

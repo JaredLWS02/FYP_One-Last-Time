@@ -18,12 +18,16 @@ public class AttackScript : MonoBehaviour
         EventM.AttackWindUpEvent += OnAttackWindUp;
         EventM.AttackReleaseEvent += OnAttackRelease;
         EventM.AttackRecoverEvent += OnAttackRecover;
+
+        EventM.CancelAttackEvent += OnCancelAttack;
     }
     void OnDisable()
     {
         EventM.AttackWindUpEvent -= OnAttackWindUp;
         EventM.AttackReleaseEvent -= OnAttackRelease;
         EventM.AttackRecoverEvent -= OnAttackRecover;
+
+        EventM.CancelAttackEvent -= OnCancelAttack;
     }
 
     // ============================================================================
@@ -74,8 +78,6 @@ public class AttackScript : MonoBehaviour
 
     // During Attack ============================================================================
 
-    public bool isAttacking {get; private set;}
-
     void Attack()
     {
         ResetBuffer();
@@ -104,11 +106,15 @@ public class AttackScript : MonoBehaviour
 
     // Attack Anim Events ============================================================================
 
+    public bool isWindingUp {get; private set;}
+    public bool isAttacking {get; private set;}
+
     void OnAttackWindUp(GameObject attacker)
     {
         if(attacker!=owner) return;
 
-        isAttacking=true;
+        isWindingUp=true;
+        isAttacking=false;
 
         if(attackSO.dashOnWindUp)
             Dash();
@@ -117,6 +123,9 @@ public class AttackScript : MonoBehaviour
     void OnAttackRelease(GameObject attacker)
     {
         if(attacker!=owner) return;
+
+        isWindingUp=false;
+        isAttacking=true;
 
         SpawnAttack();
 
@@ -127,6 +136,7 @@ public class AttackScript : MonoBehaviour
     {
         if(attacker!=owner) return;
 
+        isWindingUp=false;
         isAttacking=false;
     }  
 
@@ -204,15 +214,29 @@ public class AttackScript : MonoBehaviour
 
     // ============================================================================
     
-    [Header("Cancel")]
-    public string cancelAnimName = "Cancel";
-
-    public void CancelAttackAnim()
+    public bool IsAttacking()
     {
-        if(!isAttacking) return;
+        return isAttacking || isWindingUp;
+    }
+    
+    // Cancel ============================================================================
+    
+    void OnCancelAttack(GameObject who)
+    {
+        if(who!=owner) return;
 
-        EventM.OnPlayAnim(owner, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
+        CancelAnim();
+    }
+
+    [Header("Cancel")]
+    public string cancelAnimName = "Cancel Attack";
+    
+    void CancelAnim()
+    {
+        if(!IsAttacking()) return;
 
         EventM.OnAttackRecover(owner);
-    }
+
+        EventM.OnPlayAnim(owner, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
+    }   
 }

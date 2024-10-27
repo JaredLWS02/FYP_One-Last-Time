@@ -13,6 +13,7 @@ public class ActionManager : MonoBehaviour
     public bool AllowDash;
     public bool AllowAttack;
     public bool AllowCast;
+    public bool AllowStun;
 
     // ============================================================================
 
@@ -28,6 +29,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryAutoJumpEvent += OnTryAutoJump;
         EventM.TryAttackEvent += OnTryAttack;
         EventM.TryAbilityEvent += OnTryCast;
+        EventM.TryStunEvent += OnTryStun;
     }
     void OnDisable()
     {
@@ -37,6 +39,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
         EventM.TryAttackEvent -= OnTryAttack;
         EventM.TryAbilityEvent -= OnTryCast;
+        EventM.TryStunEvent -= OnTryStun;
     }
 
     // ============================================================================
@@ -155,6 +158,22 @@ public class ActionManager : MonoBehaviour
 
     // ============================================================================
 
+    [Header("Stun")]
+    public StunScript stun;
+
+    void OnTryStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        if(victim!=gameObject) return;
+
+        if(!AllowStun) return;
+
+        if(!stun) return;
+
+        stun.Stun(gameObject, attacker, hurtbox, contactPoint);
+    }
+
+    // ============================================================================
+
     public bool IsGrounded()
     {
         if(!ground) return false;
@@ -173,6 +192,11 @@ public class ActionManager : MonoBehaviour
         return false;
     }
     
+    public bool IsAttackWindingUp()
+    {
+        if(!attack) return false;
+        return attack.isWindingUp;
+    }
     public bool IsAttacking()
     {
         if(!attack) return false;
@@ -182,6 +206,18 @@ public class ActionManager : MonoBehaviour
     public bool IsCasting()
     {
         if(!caster) return false;
-        return caster.IsCasting();
-    }   
+        return caster.isCasting;
+    }
+    public bool IsCast()
+    {
+        if(!caster) return false;
+        return caster.isCast;
+    }
+
+    public bool IsStunned()
+    {
+        if(!stun) return false;
+        return stun.isStunned;
+    }
+    
 }

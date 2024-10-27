@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Action_Grounded : BaseState
+public class State_Action_Cast : BaseState
 {
-    public override string Name => "Grounded";
+    public override string Name => "Cast";
 
     ActionManager action;
 
-    public State_Action_Grounded(StateMachine_Action sm)
+    public State_Action_Cast(StateMachine_Action sm)
     {
         action = sm.action;
     }
@@ -20,8 +20,8 @@ public class State_Action_Grounded : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        action.AllowMoveX = true;
-        action.AllowMoveY = true;
+        action.AllowMoveX = false;
+        action.AllowMoveY = false;
     }
 
     protected override void OnExit()
@@ -31,10 +31,6 @@ public class State_Action_Grounded : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        action.AllowJump = toggle;
-        action.AllowDash = toggle;
-        action.AllowAttack = toggle;
-        action.AllowCast = toggle;
-        action.AllowStun = toggle;
+        
     }
 }

@@ -22,6 +22,8 @@ public class AbilityCaster : MonoBehaviour
         EventM.CastReleaseEvent += OnCastRelease;
         EventM.CastRecoverEvent += OnCastRecover;
 
+        EventM.CancelCastEvent += OnCancelCast;
+
         abilityList.ResetCooldowns();
     }
     void OnDisable()
@@ -29,6 +31,8 @@ public class AbilityCaster : MonoBehaviour
         EventM.CastWindUpEvent -= OnCastWindUp;
         EventM.CastReleaseEvent -= OnCastRelease;
         EventM.CastRecoverEvent -= OnCastRecover;
+
+        EventM.CancelCastEvent -= OnCancelCast;
 
         abilityList.ResetCooldowns();
     }
@@ -111,10 +115,16 @@ public class AbilityCaster : MonoBehaviour
 
     // Progress ============================================================================
 
-    bool isCasting;
+    public bool isCasting {get; private set;}
+
     public float progress {get; private set;}
     
-    void ResetProgress() => progress=0;
+    void ResetProgress()
+    {
+        progress=0;
+        
+        EventM.OnUIBarUpdate(gameObject, progress, abilitySO.castingTime);
+    }
 
     bool IsProgressDone() => progress >= abilitySO.castingTime;
 
@@ -148,12 +158,10 @@ public class AbilityCaster : MonoBehaviour
 
     // After Cast ============================================================================
 
-    bool isCast;
+    public bool isCast {get; private set;}
 
     void Cast()
     {
-        isCast=true;
-
         StopCasting();
 
         // mp cost
@@ -161,9 +169,9 @@ public class AbilityCaster : MonoBehaviour
 
         currentSlot.DoCooldown();
 
-        PlayCastAnim();
-
         EventM.OnCast(owner, abilitySO);
+
+        PlayCastAnim();
     }
 
     void PlayCastAnim()
@@ -203,31 +211,24 @@ public class AbilityCaster : MonoBehaviour
 
     // Cancel ============================================================================
     
-    [Header("Cancel")]
-    public string cancelAnimName = "Cancel";
-
-    void Cancel()
+    void OnCancelCast(GameObject who)
     {
-        if(!isCasting) return;
+        if(who!=owner) return;
+        
+        CancelAnim();
+    }
+
+    [Header("Cancel")]
+    public string cancelAnimName = "Cancel Cast";
+
+    void CancelAnim()
+    {
+        if(!IsCasting()) return;
 
         StopCasting();
 
-        EventM.OnPlayAnim(owner, cancelAnimName, abilitySO.castingAnimLayer, abilitySO.castingAnimBlendTime);
-
         EventM.OnCastRecover(owner);
-    }
 
-    // ============================================================================
-
-    /*
-    public void OnHurt()
-    {
-        Cancel();
+        EventM.OnPlayAnim(owner, cancelAnimName, abilitySO.castingAnimLayer, abilitySO.castingAnimBlendTime);
     }
-
-    public void OnDeath()
-    {
-        Cancel();
-    }
-    */
 }

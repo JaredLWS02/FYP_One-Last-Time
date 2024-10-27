@@ -50,6 +50,8 @@ public class EventManager : MonoBehaviour
         SwitchPilotEvent?.Invoke(who, to);
     }
 
+    // Agent Controls ==================================================================================================================
+
     public event Action<GameObject, Vector2> AgentTryMoveEvent;
     public event Action<GameObject, float> AgentTryFaceXEvent;
     public event Action<GameObject, float> AgentTryJumpEvent;
@@ -181,40 +183,16 @@ public class EventManager : MonoBehaviour
     {
         AttackRecoverEvent?.Invoke(attacker);
     }  
+
+    // Attack Cancel ==================================================================================================================
+
+    public event Action<GameObject> CancelAttackEvent;
+
+    public void OnCancelAttack(GameObject attacker)
+    {
+        CancelAttackEvent?.Invoke(attacker);
+    }  
     
-    // Hurtbox ==================================================================================================================
-    
-    public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
-    public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent; // respects iframe/block/parry
-    public event Action<GameObject, GameObject, HurtboxSO, Vector3> KnockbackEvent;
-    public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
-
-    public void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
-    {
-        TryHurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
-    }    
-    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
-    {
-        HurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
-    }
-    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
-    {
-        KnockbackEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
-    }
-    public void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
-    {
-        DeathEvent?.Invoke(victim, killer, hurtbox, contactPoint);
-    }
-
-    // Inventory ==================================================================================================================
-    
-    public event Action<GameObject, GameObject, LootInfo> LootEvent;
-
-    public void OnLoot(GameObject looter, GameObject loot, LootInfo lootInfo)
-    {
-        LootEvent?.Invoke(looter, loot, lootInfo);
-    }
-
     // Ability ==================================================================================================================
 
     public event Action<GameObject, string> TryAbilityEvent;
@@ -262,6 +240,71 @@ public class EventManager : MonoBehaviour
         CastRecoverEvent?.Invoke(caster);
     }  
 
+    // Cast Cancel ==================================================================================================================
+
+    public event Action<GameObject> CancelCastEvent;
+
+    public void OnCancelCast(GameObject caster)
+    {
+        CancelCastEvent?.Invoke(caster);
+    }  
+    
+    // Hurt ==================================================================================================================
+    
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent; // respects iframe/block/parry
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> KnockbackEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
+
+    public void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        TryHurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }    
+    public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        HurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
+    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        KnockbackEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
+    public void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        DeathEvent?.Invoke(victim, killer, hurtbox, contactPoint);
+    }
+
+    // Stun ==================================================================================================================
+
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryStunEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> StunEvent;
+    
+    public void OnTryStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        TryStunEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
+    public void OnStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        StunEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
+
+    // Stun Anim Events ==================================================================================================================
+
+    public event Action<GameObject> StunRecoverEvent;
+
+    public void OnStunRecover(GameObject who)
+    {
+        StunRecoverEvent?.Invoke(who);
+    }  
+
+    // Stun Cancel ==================================================================================================================
+
+    public event Action<GameObject> CancelStunEvent;
+
+    public void OnCancelStun(GameObject who)
+    {
+        CancelStunEvent?.Invoke(who);
+    } 
+
     // Animator ==================================================================================================================
 
     public event Action<GameObject, string, int, float> PlayAnimEvent;
@@ -278,6 +321,15 @@ public class EventManager : MonoBehaviour
     public void OnUIBarUpdate(GameObject owner, float value, float maxValue)
     {
         UIBarUpdateEvent?.Invoke(owner, value, maxValue);
+    }
+
+    // Inventory ==================================================================================================================
+    
+    public event Action<GameObject, GameObject, LootInfo> LootEvent;
+
+    public void OnLoot(GameObject looter, GameObject loot, LootInfo lootInfo)
+    {
+        LootEvent?.Invoke(looter, loot, lootInfo);
     }
 
     // Mouse/Touch ==================================================================================================================

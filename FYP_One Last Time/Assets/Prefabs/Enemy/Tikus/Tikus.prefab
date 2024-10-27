@@ -171,6 +171,7 @@ GameObject:
   - component: {fileID: 7786861728038490430}
   - component: {fileID: 7114433548222468432}
   - component: {fileID: 2385068764117251220}
+  - component: {fileID: 7432243068392043879}
   - component: {fileID: 418708997891478844}
   - component: {fileID: 1477388138496825184}
   - component: {fileID: 412968695723508853}
@@ -293,6 +294,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6941ca0d6d61d264eb9d8d0ce361ca7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+--- !u!114 &7432243068392043879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719329177920231827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 124838d4d0ad4b341af7a90f66847b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
@@ -625,7 +639,7 @@ MonoBehaviour:
     spawnpoint: {fileID: 0}
     parented: 1
     followRotation: 1
-  cancelAnimName: Cancel
+  cancelAnimName: Cancel Attack
 --- !u!1 &5261146206814944013
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,6 +673,7 @@ GameObject:
   - component: {fileID: 919053695834915120}
   - component: {fileID: 4642146714573691683}
   - component: {fileID: 3691060632212682340}
+  - component: {fileID: 4272814330646281861}
   m_Layer: 6
   m_Name: Tikus
   m_TagString: Enemy
@@ -943,6 +958,7 @@ MonoBehaviour:
   AllowDash: 0
   AllowAttack: 0
   AllowCast: 0
+  AllowStun: 0
   move: {fileID: 5193524905132986524}
   turn: {fileID: 8899604075891903837}
   jump: {fileID: 8893670741154941565}
@@ -953,6 +969,7 @@ MonoBehaviour:
   - {fileID: 3962663419828832351}
   caster: {fileID: 0}
   heal: {fileID: 0}
+  stun: {fileID: 4272814330646281861}
 --- !u!114 &8261427844462952279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1139,6 +1156,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d10c31cecf1996448b05dbdb04ab51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4272814330646281861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57befce43c1e4044d97f26dd01c90123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  stunAnimNames:
+  - Stun1
+  stunAnimLayer: 0
+  stunAnimBlendTime: 0
+  cancelAnimName: Cancel Stun
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,6 +1275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 10
+  scanInterval: 0.5
   layers:
     serializedVersion: 2
     m_Bits: 8
@@ -1405,7 +1441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10396110c1c65e4f8512fa8681b6580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushoffForce: 10
+  bounceForce: 10
 --- !u!1001 &5174078680358092557
 PrefabInstance:
   m_ObjectHideFlags: 0

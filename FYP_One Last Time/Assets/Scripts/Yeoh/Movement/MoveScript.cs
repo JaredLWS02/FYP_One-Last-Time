@@ -110,6 +110,11 @@ public class MoveScript : MonoBehaviour
         }
     }
 
+    public void SetSpeedMult(float mult, float tweenTime=.25f)
+    {
+        SetSpeed(baseSpeed*mult, tweenTime);
+    }
+
     public void ResetSpeed(float tweenTime=.25f)
     {
         SetSpeed(baseSpeed, tweenTime);

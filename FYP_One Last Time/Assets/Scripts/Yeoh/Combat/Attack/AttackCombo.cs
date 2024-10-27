@@ -174,7 +174,7 @@ public class AttackCombo : MonoBehaviour
 
     bool IsAttacking()
     {
-        return attack.isAttacking;
+        return attack.IsAttacking();
     }
 
     // ============================================================================
@@ -206,12 +206,5 @@ public class AttackCombo : MonoBehaviour
     void CancelComboCooldown()
     {
         comboCooldownLeft=0;
-    }
-    
-    // Cancel ============================================================================
-
-    public void CancelAttackAnim()
-    {
-        attack.CancelAttackAnim();
     }
 }

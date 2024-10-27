@@ -21,10 +21,6 @@ public class HurtboxSO : ScriptableObject
     public bool parryable=true;
     public bool parryStunsAttacker=true;
 
-    [Header("Stun")]
-    public float stunSeconds=.5f;
-    public float stunSpeedMult=.3f;      
-
     public static HurtboxSO CreateInstance(HurtboxSO so)
     {
         HurtboxSO new_SO = ScriptableObject.CreateInstance<HurtboxSO>();
@@ -37,8 +33,6 @@ public class HurtboxSO : ScriptableObject
         new_SO.pierceCount = so.pierceCount;
         new_SO.parryable = so.parryable;
         new_SO.parryStunsAttacker = so.parryStunsAttacker;
-        new_SO.stunSeconds = so.stunSeconds;
-        new_SO.stunSpeedMult = so.stunSpeedMult;
 
         return new_SO;
     }
