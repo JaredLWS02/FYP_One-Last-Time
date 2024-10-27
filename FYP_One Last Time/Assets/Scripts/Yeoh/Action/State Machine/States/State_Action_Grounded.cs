@@ -34,6 +34,7 @@ public class State_Action_Grounded : BaseState
         action.AllowJump = toggle;
         action.AllowDash = toggle;
         action.AllowAttack = toggle;
+        action.AllowParry = toggle;
         action.AllowCast = toggle;
         action.AllowStun = toggle;
     }

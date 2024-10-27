@@ -12,6 +12,7 @@ public class ActionManager : MonoBehaviour
     public bool AllowJump;
     public bool AllowDash;
     public bool AllowAttack;
+    public bool AllowParry;
     public bool AllowCast;
     public bool AllowStun;
 
@@ -28,6 +29,8 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent += OnTryJump;
         EventM.TryAutoJumpEvent += OnTryAutoJump;
         EventM.TryAttackEvent += OnTryAttack;
+        EventM.TryParryEvent += OnTryParry;
+        EventM.TryRiposteAttackEvent += OnTryRiposteAttack;
         EventM.TryAbilityEvent += OnTryCast;
         EventM.TryStunEvent += OnTryStun;
     }
@@ -38,6 +41,8 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent -= OnTryJump;
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
         EventM.TryAttackEvent -= OnTryAttack;
+        EventM.TryParryEvent -= OnTryParry;
+        EventM.TryRiposteAttackEvent -= OnTryRiposteAttack;
         EventM.TryAbilityEvent -= OnTryCast;
         EventM.TryStunEvent -= OnTryStun;
     }
@@ -134,7 +139,34 @@ public class ActionManager : MonoBehaviour
                 break;
             }
         }
-    }    
+    }
+
+    // ============================================================================
+    
+    [Header("Parry")]
+    public ParryScript parry;
+
+    void OnTryParry(GameObject who)
+    {
+        if(who!=gameObject) return;
+
+        if(!AllowParry) return;
+
+        if(!parry) return;
+
+        parry.DoBuffer();
+    }
+
+    void OnTryRiposteAttack(GameObject who, string attackName)
+    {
+        if(who!=gameObject) return;
+
+        if(!AllowAttack) return;
+
+        if(!IsRiposteActive()) return;
+
+        OnTryAttack(who, attackName);
+    }  
 
     // ============================================================================
 
@@ -201,6 +233,22 @@ public class ActionManager : MonoBehaviour
     {
         if(!attack) return false;
         return attack.isAttacking;
+    }
+    
+    public bool IsParryRaised()
+    {
+        if(!parry) return false;
+        return parry.isParryRaised;
+    }
+    public bool IsParryLowering()
+    {
+        if(!parry) return false;
+        return parry.isParryLowering;
+    }
+    public bool IsRiposteActive()
+    {
+        if(!parry) return false;
+        return parry.IsRiposteActive();
     }
     
     public bool IsCasting()

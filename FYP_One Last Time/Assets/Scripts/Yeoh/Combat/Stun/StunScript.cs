@@ -37,6 +37,7 @@ public class StunScript : MonoBehaviour
 
         EventM.OnCancelAttack(gameObject);
         EventM.OnCancelCast(gameObject);
+        EventM.OnCancelParry(gameObject);
         
         EventM.OnStun(owner, attacker, hurtbox, contactPoint);
 
