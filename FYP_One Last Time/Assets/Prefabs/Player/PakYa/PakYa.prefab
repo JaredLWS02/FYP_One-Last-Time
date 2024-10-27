@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 8324220026941984535}
   - component: {fileID: 4728252470638691548}
   - component: {fileID: 9206634663529618913}
+  - component: {fileID: 4716451231667188826}
   - component: {fileID: 4251276819503043955}
   - component: {fileID: 4352165570627224600}
   - component: {fileID: 345509100620316827}
@@ -630,6 +631,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6941ca0d6d61d264eb9d8d0ce361ca7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+--- !u!114 &4716451231667188826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274980459159228368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ec5b9ffd5f6c545a1032485d9cdf33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
@@ -864,7 +878,8 @@ GameObject:
   - component: {fileID: 8003095357430364833}
   - component: {fileID: 6639294003576150908}
   - component: {fileID: 4334806704455733132}
-  - component: {fileID: 7545481002945307949}
+  - component: {fileID: 2505238066991637890}
+  - component: {fileID: 6485402941929711479}
   - component: {fileID: 110049388833876227}
   m_Layer: 3
   m_Name: PakYa
@@ -1007,6 +1022,7 @@ MonoBehaviour:
   AllowJump: 0
   AllowDash: 0
   AllowAttack: 0
+  AllowParry: 0
   AllowCast: 0
   AllowStun: 0
   move: {fileID: 3611210669050738406}
@@ -1018,6 +1034,7 @@ MonoBehaviour:
   attackCombos:
   - {fileID: 2589080218004393375}
   - {fileID: 6345980450733858254}
+  parry: {fileID: 6485402941929711479}
   caster: {fileID: 1410335126641825925}
   heal: {fileID: 7975362184149562795}
   stun: {fileID: 110049388833876227}
@@ -1208,7 +1225,7 @@ MonoBehaviour:
   OnDeathh:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7545481002945307949
+--- !u!114 &2505238066991637890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1217,9 +1234,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 8987163089559660572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d10c31cecf1996448b05dbdb04ab51b, type: 3}
+  m_Script: {fileID: 11500000, guid: c7707d864b16682498cf657452a1dd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  parry: {fileID: 6485402941929711479}
+--- !u!114 &6485402941929711479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4a1ddbc2ba56a40b5ede1fe0d9a662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
+  bufferTime: 0.2
+  parryAnimLayer: 0
+  parryAnimBlendTime: 0
+  raiseParryAnimName: Raise Parry
+  raiseParrySeconds: 0.3
+  lowerParryAnimName: Lower Parry
+  cooldownTime: 0.3
+  minParryDot: 0.2
+  riposteSeconds: 0.3
+  cancelAnimName: Cancel Parry
 --- !u!114 &110049388833876227
 MonoBehaviour:
   m_ObjectHideFlags: 0

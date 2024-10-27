@@ -237,6 +237,8 @@ public class AttackScript : MonoBehaviour
 
         EventM.OnAttackRecover(owner);
 
+        CancelCooldown();
+
         EventM.OnPlayAnim(owner, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
     }   
 }

@@ -13,12 +13,13 @@ public class HurtboxSO : ScriptableObject
     [Header("Hit")]
     public float damage=25;
     public float knockback=10;
-    public float damageBlock=25;
+    public float blockDamage=25;
+    public float blockKnockback=10;
     [Min(1)]
     public int pierceCount=1;
     
     [Header("Parry")]
-    public bool parryable=true;
+    public bool isParryable=true;
     public bool parryStunsAttacker=true;
 
     public static HurtboxSO CreateInstance(HurtboxSO so)
@@ -29,9 +30,9 @@ public class HurtboxSO : ScriptableObject
         new_SO.description = so.description;
         new_SO.damage = so.damage;
         new_SO.knockback = so.knockback;
-        new_SO.damageBlock = so.damageBlock;
+        new_SO.blockDamage = so.blockDamage;
         new_SO.pierceCount = so.pierceCount;
-        new_SO.parryable = so.parryable;
+        new_SO.isParryable = so.isParryable;
         new_SO.parryStunsAttacker = so.parryStunsAttacker;
 
         return new_SO;

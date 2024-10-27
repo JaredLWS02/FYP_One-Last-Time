@@ -63,6 +63,8 @@ public class PlayerInputListener : MonoBehaviour
         if(!pilot.IsPlayer()) return;
 
         EventM.OnTryAttack(gameObject, "Light Combo");
+
+        EventM.OnTryRiposteAttack(gameObject, "Riposte Combo");
     }
 
     void OnInputHeavyAttack()
@@ -70,6 +72,17 @@ public class PlayerInputListener : MonoBehaviour
         if(!pilot.IsPlayer()) return;
 
         EventM.OnTryAttack(gameObject, "Heavy Combo");
+        
+        EventM.OnTryRiposteAttack(gameObject, "Riposte Combo");
+    }
+
+    // Parry ============================================================================
+    
+    void OnInputParry()
+    {
+        if(!pilot.IsPlayer()) return;
+
+        EventM.OnTryParry(gameObject);
     }
 
     // Cast ============================================================================

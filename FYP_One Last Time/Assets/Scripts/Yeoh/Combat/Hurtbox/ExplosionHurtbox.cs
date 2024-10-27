@@ -93,7 +93,7 @@ public class ExplosionHurtbox : MonoBehaviour
             HurtboxSO new_hurtbox = HurtboxSO.CreateInstance(hurtboxSO);
 
             new_hurtbox.damage *= falloffMult;
-            new_hurtbox.damageBlock *= falloffMult;
+            new_hurtbox.blockDamage *= falloffMult;
             new_hurtbox.knockback=0; // handled by Push()
 
             contactPoint = other.ClosestPoint(transform.position);

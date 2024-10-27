@@ -29,11 +29,13 @@ public class StateMachine_Action : MonoBehaviour
 
         State_Hub hub = new();
         State_Action_Grounded grounded = new(this);
-        State_Action_MidAir midair = new(this);
-        State_Action_AutoJumping autojumping = new(this);
+        State_Action_MidAir midAir = new(this);
+        State_Action_AutoJumping autoJumping = new(this);
         State_Action_Dashing dashing = new(this);
         State_Action_AttackWindingUp attackWindingUp = new(this);
         State_Action_Attacking attacking = new(this);
+        State_Action_ParryRaised parryRaised = new(this);
+        State_Action_ParryLowering parryLowering = new(this);
         State_Action_Casting casting = new(this);
         State_Action_Cast cast = new(this);
         State_Action_Stunned stunned = new(this);
@@ -48,6 +50,8 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsDashing() &&
                 !action.IsAttackWindingUp() &&
                 !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
                 !action.IsCasting() &&
                 !action.IsCast() &&
                 !action.IsStunned() //&&
@@ -57,7 +61,7 @@ public class StateMachine_Action : MonoBehaviour
             return false;
         });
 
-        hub.AddTransition(midair, (timeInState) =>
+        hub.AddTransition(midAir, (timeInState) =>
         {
             if(
                 !action.IsGrounded() &&
@@ -65,6 +69,8 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsDashing() &&
                 !action.IsAttackWindingUp() &&
                 !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
                 !action.IsCasting() &&
                 !action.IsCast() &&
                 !action.IsStunned() //&&
@@ -74,13 +80,15 @@ public class StateMachine_Action : MonoBehaviour
             return false;
         });
         
-        hub.AddTransition(autojumping, (timeInState) =>
+        hub.AddTransition(autoJumping, (timeInState) =>
         {
             if(
                 action.IsAutoJumping() &&
                 !action.IsDashing() &&
                 !action.IsAttackWindingUp() &&
                 !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
                 !action.IsCasting() &&
                 !action.IsCast() &&
                 !action.IsStunned() //&&
@@ -97,6 +105,8 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsDashing() &&
                 !action.IsAttackWindingUp() &&
                 !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
                 !action.IsCasting() &&
                 !action.IsCast() &&
                 !action.IsStunned() //&&
@@ -113,6 +123,8 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsDashing() &&
                 action.IsAttackWindingUp() &&
                 !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
                 !action.IsCasting() &&
                 !action.IsCast() &&
                 !action.IsStunned() //&&
@@ -129,6 +141,44 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsDashing() &&
                 !action.IsAttackWindingUp() &&
                 action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
+                !action.IsCasting() &&
+                !action.IsCast() &&
+                !action.IsStunned() //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+                
+        hub.AddTransition(parryRaised, (timeInState) =>
+        {
+            if(
+                !action.IsAutoJumping() &&
+                !action.IsDashing() &&
+                !action.IsAttackWindingUp() &&
+                !action.IsAttacking() &&
+                action.IsParryRaised() &&
+                !action.IsParryLowering() &&
+                !action.IsCasting() &&
+                !action.IsCast() &&
+                !action.IsStunned() //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+                
+        hub.AddTransition(parryLowering, (timeInState) =>
+        {
+            if(
+                !action.IsAutoJumping() &&
+                !action.IsDashing() &&
+                !action.IsAttackWindingUp() &&
+                !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                action.IsParryLowering() &&
                 !action.IsCasting() &&
                 !action.IsCast() &&
                 !action.IsStunned() //&&
@@ -145,6 +195,8 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsDashing() &&
                 !action.IsAttackWindingUp() &&
                 !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
                 action.IsCasting() &&
                 !action.IsCast() &&
                 !action.IsStunned() //&&
@@ -161,6 +213,8 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsDashing() &&
                 !action.IsAttackWindingUp() &&
                 !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
                 !action.IsCasting() &&
                 action.IsCast() &&
                 !action.IsStunned() //&&
@@ -177,6 +231,8 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsDashing() &&
                 !action.IsAttackWindingUp() &&
                 !action.IsAttacking() &&
+                !action.IsParryRaised() &&
+                !action.IsParryLowering() &&
                 !action.IsCasting() &&
                 !action.IsCast() &&
                 action.IsStunned() //&&
@@ -196,6 +252,8 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsDashing() ||
                 action.IsAttackWindingUp() ||
                 action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
                 action.IsCasting() ||
                 action.IsCast() ||
                 action.IsStunned() //||
@@ -205,7 +263,7 @@ public class StateMachine_Action : MonoBehaviour
             return false;
         });
 
-        midair.AddTransition(hub, (timeInState) =>
+        midAir.AddTransition(hub, (timeInState) =>
         {
             if(
                 action.IsGrounded() ||
@@ -213,6 +271,8 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsDashing() ||
                 action.IsAttackWindingUp() ||
                 action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
                 action.IsCasting() ||
                 action.IsCast() ||
                 action.IsStunned() //||
@@ -222,13 +282,15 @@ public class StateMachine_Action : MonoBehaviour
             return false;
         });
 
-        autojumping.AddTransition(hub, (timeInState) =>
+        autoJumping.AddTransition(hub, (timeInState) =>
         {
             if(
                 !action.IsAutoJumping() ||
                 action.IsDashing() ||
                 action.IsAttackWindingUp() ||
                 action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
                 action.IsCasting() ||
                 action.IsCast() ||
                 action.IsStunned() //||
@@ -245,6 +307,8 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsDashing() ||
                 action.IsAttackWindingUp() ||
                 action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
                 action.IsCasting() ||
                 action.IsCast() ||
                 action.IsStunned() //||
@@ -261,6 +325,8 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsDashing() ||
                 !action.IsAttackWindingUp() ||
                 action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
                 action.IsCasting() ||
                 action.IsCast() ||
                 action.IsStunned() //||
@@ -277,6 +343,44 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsDashing() ||
                 action.IsAttackWindingUp() ||
                 !action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
+                action.IsCasting() ||
+                action.IsCast() ||
+                action.IsStunned() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        parryRaised.AddTransition(hub, (timeInState) =>
+        {
+            if(
+                action.IsAutoJumping() ||
+                action.IsDashing() ||
+                action.IsAttackWindingUp() ||
+                action.IsAttacking() ||
+                !action.IsParryRaised() ||
+                action.IsParryLowering() ||
+                action.IsCasting() ||
+                action.IsCast() ||
+                action.IsStunned() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        parryLowering.AddTransition(hub, (timeInState) =>
+        {
+            if(
+                action.IsAutoJumping() ||
+                action.IsDashing() ||
+                action.IsAttackWindingUp() ||
+                action.IsAttacking() ||
+                action.IsParryRaised() ||
+                !action.IsParryLowering() ||
                 action.IsCasting() ||
                 action.IsCast() ||
                 action.IsStunned() //||
@@ -293,6 +397,8 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsDashing() ||
                 action.IsAttackWindingUp() ||
                 action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
                 !action.IsCasting() ||
                 action.IsCast() ||
                 action.IsStunned() //||
@@ -309,6 +415,8 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsDashing() ||
                 action.IsAttackWindingUp() ||
                 action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
                 action.IsCasting() ||
                 !action.IsCast() ||
                 action.IsStunned() //||
@@ -325,6 +433,8 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsDashing() ||
                 action.IsAttackWindingUp() ||
                 action.IsAttacking() ||
+                action.IsParryRaised() ||
+                action.IsParryLowering() ||
                 action.IsCasting() ||
                 action.IsCast() ||
                 !action.IsStunned() //||

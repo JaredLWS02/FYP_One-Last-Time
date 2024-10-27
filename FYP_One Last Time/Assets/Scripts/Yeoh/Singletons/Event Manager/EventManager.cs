@@ -191,7 +191,44 @@ public class EventManager : MonoBehaviour
     public void OnCancelAttack(GameObject attacker)
     {
         CancelAttackEvent?.Invoke(attacker);
+    }
+
+    // Parry ==================================================================================================================
+
+    public event Action<GameObject> TryParryEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> ParrySuccessEvent;
+    public event Action<GameObject, string> TryRiposteAttackEvent;
+
+    public void OnTryParry(GameObject defender)
+    {
+        TryParryEvent?.Invoke(defender);
+    }
+    public void OnParrySuccess(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        ParrySuccessEvent?.Invoke(defender, attacker, hurtbox, contactPoint);
+    }
+    public void OnTryRiposteAttack(GameObject attacker, string attack_name)
+    {
+        TryRiposteAttackEvent?.Invoke(attacker, attack_name);
+    }
+
+    // Parry Anim Events ==================================================================================================================
+
+    public event Action<GameObject> ParryRecoverEvent;
+
+    public void OnParryRecover(GameObject attacker)
+    {
+        ParryRecoverEvent?.Invoke(attacker);
     }  
+
+    // Parry Cancel ==================================================================================================================
+
+    public event Action<GameObject> CancelParryEvent;
+
+    public void OnCancelParry(GameObject attacker)
+    {
+        CancelParryEvent?.Invoke(attacker);
+    }
     
     // Ability ==================================================================================================================
 
@@ -253,7 +290,7 @@ public class EventManager : MonoBehaviour
     
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent; // respects iframe/block/parry
-    public event Action<GameObject, GameObject, HurtboxSO, Vector3> KnockbackEvent;
+    public event Action<GameObject, float, Vector3> KnockbackEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
 
     public void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
@@ -264,9 +301,9 @@ public class EventManager : MonoBehaviour
     {
         HurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }
-    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    public void OnKnockback(GameObject who, float force, Vector3 contactPoint)
     {
-        KnockbackEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+        KnockbackEvent?.Invoke(who, force, contactPoint);
     }
     public void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {

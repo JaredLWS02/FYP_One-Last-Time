@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   description: 
-  damage: 0
-  knockback: 0
-  damageBlock: 0
-  parryable: 0
-  pierceCount: 0
-  stunSeconds: 0
-  stunSpeedMult: 0
+  damage: 25
+  knockback: 10
+  blockDamage: 25
+  blockKnockback: 10
+  pierceCount: 1
+  parryable: 1
+  parryStunsAttacker: 1

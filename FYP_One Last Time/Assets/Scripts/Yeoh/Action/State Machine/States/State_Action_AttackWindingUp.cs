@@ -32,6 +32,7 @@ public class State_Action_AttackWindingUp : BaseState
     void ToggleAllow(bool toggle)
     {
         action.AllowAttack = toggle;
+        action.AllowParry = toggle;
         action.AllowStun = toggle;
     }
 }

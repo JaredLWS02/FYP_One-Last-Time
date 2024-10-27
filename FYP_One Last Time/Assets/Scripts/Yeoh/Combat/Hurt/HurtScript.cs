@@ -68,7 +68,7 @@ public class HurtScript : MonoBehaviour
         }
         else
         {
-            EventM.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
+            EventM.OnKnockback(gameObject, hurtbox.knockback, contactPoint);
             
             EventM.OnDeath(gameObject, attacker, hurtbox, contactPoint);
         }
@@ -159,7 +159,7 @@ public class HurtScript : MonoBehaviour
         {
             poise = maxPoise; // reset poise
 
-            EventM.OnKnockback(gameObject, attacker, hurtbox, contactPoint);
+            EventM.OnKnockback(gameObject, hurtbox.knockback, contactPoint);
 
             EventM.OnTryStun(gameObject, attacker, hurtbox, contactPoint);
 
@@ -186,14 +186,14 @@ public class HurtScript : MonoBehaviour
 
     // ============================================================================
 
-    public void OnKnockback(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    public void OnKnockback(GameObject who, float force, Vector3 contactPoint)
     {
-        if(victim!=gameObject) return;
+        if(who!=gameObject) return;
 
         Vector3 kb_dir = (rb.transform.position - contactPoint).normalized;
 
         rb.velocity = Vector3.zero;
-        rb.AddForce(kb_dir * hurtbox.knockback, ForceMode.Impulse);
+        rb.AddForce(kb_dir * force, ForceMode.Impulse);
     }
 
     // ============================================================================
