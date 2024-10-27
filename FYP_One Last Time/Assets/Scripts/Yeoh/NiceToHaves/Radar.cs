@@ -5,16 +5,27 @@ using UnityEngine;
 public class Radar : MonoBehaviour
 {
     public float range=5;
+    public float scanInterval=.5f;
     public LayerMask layers;
     public List<GameObject> targets = new();
 
-    void Update()
+    // ============================================================================
+
+    void OnEnable()
     {
-        RemoveNulls(targets);
-        Scan();
+        StartCoroutine(Scanning());
     }
 
-    public void Scan()
+    IEnumerator Scanning()
+    {
+        while(true)
+        {
+            Scan();
+            yield return new WaitForSeconds(scanInterval);
+        }
+    }
+
+    void Scan()
     {
         targets.Clear();
 
@@ -73,6 +84,11 @@ public class Radar : MonoBehaviour
     }
 
     // ============================================================================
+
+    void Update()
+    {
+        RemoveNulls(targets);
+    }
 
     void RemoveNulls(List<GameObject> list)
     {
