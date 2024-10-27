@@ -125,12 +125,8 @@ public class ActionManager : MonoBehaviour
     public AttackScript attack;
     public List<AttackCombo> attackCombos = new();
 
-    void OnTryAttack(GameObject who, string attackName)
+    void FindComboNameAndAttack(string attackName)
     {
-        if(who!=gameObject) return;
-
-        if(!AllowAttack) return;
-
         foreach(var combo in attackCombos)
         {
             if(combo.comboName == attackName)
@@ -139,6 +135,17 @@ public class ActionManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    void OnTryAttack(GameObject who, string attackName)
+    {
+        if(who!=gameObject) return;
+
+        if(!AllowAttack) return;
+
+        if(IsRiposteActive()) return;
+
+        FindComboNameAndAttack(attackName);
     }
 
     // ============================================================================
@@ -165,7 +172,7 @@ public class ActionManager : MonoBehaviour
 
         if(!IsRiposteActive()) return;
 
-        OnTryAttack(who, attackName);
+        FindComboNameAndAttack(attackName);
     }  
 
     // ============================================================================

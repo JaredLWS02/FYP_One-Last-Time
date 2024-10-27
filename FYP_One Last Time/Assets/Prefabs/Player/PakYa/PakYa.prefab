@@ -180,6 +180,7 @@ Transform:
   m_Children:
   - {fileID: 3988350149641666891}
   - {fileID: 6705404227923167189}
+  - {fileID: 3441330446162689485}
   m_Father: {fileID: 4032536735459076646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7022457898630109682
@@ -748,6 +749,65 @@ MonoBehaviour:
   - scaleTo: {x: 1, y: 1, z: 1}
     seconds: 0.1
     ease: 3
+--- !u!1 &7275348868363192476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3441330446162689485}
+  - component: {fileID: 1382756791914587115}
+  m_Layer: 3
+  m_Name: Riposte Combo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3441330446162689485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275348868363192476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2968421400926582619}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1382756791914587115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275348868363192476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  attack: {fileID: 7022457898630109682}
+  comboName: Riposte Combo
+  comboSteps:
+  - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
+    attackSpawn:
+      prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
+        type: 3}
+      spawnpoint: {fileID: 4164968904663650128}
+      parented: 1
+      followRotation: 1
+  bufferTime: 0.2
+  randomCombo: 0
+  comboResetTime: 0.5
+  comboCooldownTime: 0.5
 --- !u!1 &8132836240672146080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1094,7 @@ MonoBehaviour:
   attackCombos:
   - {fileID: 2589080218004393375}
   - {fileID: 6345980450733858254}
+  - {fileID: 1382756791914587115}
   parry: {fileID: 6485402941929711479}
   caster: {fileID: 1410335126641825925}
   heal: {fileID: 7975362184149562795}

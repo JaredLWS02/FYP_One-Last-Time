@@ -72,7 +72,7 @@ public class PlayerInputListener : MonoBehaviour
         if(!pilot.IsPlayer()) return;
 
         EventM.OnTryAttack(gameObject, "Heavy Combo");
-        
+
         EventM.OnTryRiposteAttack(gameObject, "Riposte Combo");
     }
 
@@ -85,9 +85,23 @@ public class PlayerInputListener : MonoBehaviour
         EventM.OnTryParry(gameObject);
     }
 
-    // Cast ============================================================================
+    // Ability ============================================================================
 
-    void OnInputHeal()
+    void OnInputAbility1()
+    {
+        if(!pilot.IsPlayer()) return;
+
+        EventM.OnTryAbility(gameObject, "Heal");
+    }
+
+    void OnInputAbility2()
+    {
+        if(!pilot.IsPlayer()) return;
+
+        EventM.OnTryAbility(gameObject, "Heal");
+    }
+
+    void OnInputAbility3()
     {
         if(!pilot.IsPlayer()) return;
 
