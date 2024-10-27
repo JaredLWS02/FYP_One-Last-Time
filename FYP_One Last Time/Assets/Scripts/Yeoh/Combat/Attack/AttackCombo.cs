@@ -88,6 +88,8 @@ public class AttackCombo : MonoBehaviour
         ChooseCombo(Random.Range(0, comboSteps.Count));
         else
         ChooseCombo(comboIndex);
+
+        attack.DoBuffer();
     }
 
     void ChooseCombo(int i)
@@ -96,8 +98,6 @@ public class AttackCombo : MonoBehaviour
 
         attack.attackSO = step.attackSO;
         attack.attackSpawn = step.attackSpawn;
-
-        attack.DoBuffer();
     }
 
     // During Combo ============================================================================
@@ -121,9 +121,9 @@ public class AttackCombo : MonoBehaviour
     {
         if(attacker!=owner) return;
 
-        AttackSO currentAttackSO = comboSteps[comboIndex].attackSO;
+        AttackSO currentSO = comboSteps[comboIndex].attackSO;
 
-        if(attackSO!=currentAttackSO) return;
+        if(attackSO!=currentSO) return;
 
         StepComboUp();
     }

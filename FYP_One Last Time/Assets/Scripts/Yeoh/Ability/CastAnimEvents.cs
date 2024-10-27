@@ -17,17 +17,17 @@ public class CastAnimEvents : MonoBehaviour
     
     // ============================================================================
 
-    public void WindUp()
+    public void CastWindUp()
     {
         EventM.OnCastWindUp(owner);
     }
 
-    public void Release()
+    public void CastRelease()
     {
         EventM.OnCastRelease(owner);
     }
 
-    public void Recover()
+    public void CastRecover()
     {
         EventM.OnCastRecover(owner);
     }

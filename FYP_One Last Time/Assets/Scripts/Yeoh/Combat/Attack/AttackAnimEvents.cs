@@ -17,17 +17,17 @@ public class AttackAnimEvents : MonoBehaviour
     
     // ============================================================================
 
-    public void WindUp()
+    public void AttackWindUp()
     {
         EventM.OnAttackWindUp(owner);
     }
 
-    public void Release()
+    public void AttackRelease()
     {
         EventM.OnAttackRelease(owner);
     }
 
-    public void Recover()
+    public void AttackRecover()
     {
         EventM.OnAttackRecover(owner);
     }
