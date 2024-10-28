@@ -30,8 +30,10 @@ public class SideMove : MoveScript
     
     // ============================================================================
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         dirX = Round(dirX, 1);
 
         UpdateMoveMult(dirX, Vector3.right);

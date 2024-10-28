@@ -137,7 +137,7 @@ public class MoveScript : MonoBehaviour
     [Header("Debug")]
     public float velocity;
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         velocity = Round(rb.velocity.magnitude, 2);
     }
