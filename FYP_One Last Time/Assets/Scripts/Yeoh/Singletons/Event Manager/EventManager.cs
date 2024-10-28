@@ -56,17 +56,17 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, string> InputBufferingEvent;
     public event Action<GameObject, string> RemoveInputBufferEvent;
 
-    public void OnAddInputBuffer(GameObject who, string action_name, float buffer_time)
+    public void OnAddInputBuffer(GameObject who, string input_name, float buffer_time)
     {
-        AddInputBufferEvent?.Invoke(who, action_name, buffer_time);
+        AddInputBufferEvent?.Invoke(who, input_name, buffer_time);
     }
-    public void OnInputBuffering(GameObject who, string action_name)
+    public void OnInputBuffering(GameObject who, string input_name)
     {
-        InputBufferingEvent?.Invoke(who, action_name);
+        InputBufferingEvent?.Invoke(who, input_name);
     }
-    public void OnRemoveInputBuffer(GameObject who, string action_name)
+    public void OnRemoveInputBuffer(GameObject who, string input_name)
     {
-        RemoveInputBufferEvent?.Invoke(who, action_name);
+        RemoveInputBufferEvent?.Invoke(who, input_name);
     }
     
     // Movement ==================================================================================================================
@@ -369,10 +369,15 @@ public class EventManager : MonoBehaviour
     // Animator ==================================================================================================================
 
     public event Action<GameObject, string, int, float> PlayAnimEvent;
+    public event Action<GameObject, AnimPreset> PlayAnimPresetEvent;
 
-    public void OnPlayAnim(GameObject who, string animName, int animLayer, float blendSeconds=0)
+    public void OnPlayAnim(GameObject who, string animName, int animLayer, float blendTime=0)
     {
-        PlayAnimEvent?.Invoke(who, animName, animLayer, blendSeconds);
+        PlayAnimEvent?.Invoke(who, animName, animLayer, blendTime);
+    }
+    public void OnPlayAnimPreset(GameObject who, AnimPreset preset)
+    {
+        PlayAnimPresetEvent?.Invoke(who, preset);
     }
 
     // UI ==================================================================================================================

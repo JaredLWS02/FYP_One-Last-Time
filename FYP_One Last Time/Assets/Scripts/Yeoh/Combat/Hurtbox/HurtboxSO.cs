@@ -22,6 +22,12 @@ public class HurtboxSO : ScriptableObject
     public bool isParryable=true;
     public bool parryStunsAttacker=true;
 
+    [Header("Stun")]
+    public bool canStun=true;
+    public AnimPreset stunAnim;
+
+    // ============================================================================
+
     public static HurtboxSO CreateInstance(HurtboxSO so)
     {
         HurtboxSO new_SO = ScriptableObject.CreateInstance<HurtboxSO>();
@@ -34,9 +40,13 @@ public class HurtboxSO : ScriptableObject
         new_SO.pierceCount = so.pierceCount;
         new_SO.isParryable = so.isParryable;
         new_SO.parryStunsAttacker = so.parryStunsAttacker;
+        new_SO.canStun = so.canStun;
+        new_SO.stunAnim = so.stunAnim;
 
         return new_SO;
     }
+
+    // ============================================================================
 
     [HideInInspector]
     public int ID => GetInstanceID();

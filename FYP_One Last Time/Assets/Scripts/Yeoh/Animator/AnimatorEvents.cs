@@ -2,6 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class AnimPreset
+{
+    public List<string> names = new();
+    public int layer=0;
+    public float blendTime=0;
+    public string cancelName = "Cancel Action";
+
+    public string GetRandomName()
+    {
+        if(names.Count<=0) return "";
+
+        return names[Random.Range(0, names.Count)];
+    }
+
+    public void Play(GameObject who, string name)
+    {
+        EventManager.Current.OnPlayAnim(who, name, layer, blendTime);
+    }
+
+    public void Play(GameObject who)
+    {
+        if(names.Count<=0) return;
+
+        Play(who, GetRandomName());
+    }
+
+    public void Cancel(GameObject who)
+    {
+        Play(who, cancelName);
+    }
+}
+
+// ============================================================================
+
 public class AnimatorEvents : MonoBehaviour
 {
     public GameObject owner;
@@ -24,17 +59,17 @@ public class AnimatorEvents : MonoBehaviour
     
     // ============================================================================
     
-    void OnPlayAnim(GameObject who, string animName, int animLayer, float blendSeconds)
+    void OnPlayAnim(GameObject who, string animName, int animLayer, float blendTime)
     {
         if(who!=owner) return;
 
-        if(blendSeconds <= 0)
+        if(blendTime <= 0)
         {
             anim.Play(animName, animLayer, 0);
         }
         else
         {
-            anim.CrossFade(animName, blendSeconds, animLayer, 0);
+            anim.CrossFade(animName, blendTime, animLayer, 0);
         }
     }
 }

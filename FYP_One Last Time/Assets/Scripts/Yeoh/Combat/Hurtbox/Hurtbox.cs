@@ -7,8 +7,9 @@ using UnityEngine.Events;
 
 public class Hurtbox : MonoBehaviour
 {
-    public HurtboxSO hurtboxSO;
-
+    [HideInInspector]
+    public GameObject owner;
+    
     // ============================================================================
 
     Collider coll;
@@ -24,8 +25,7 @@ public class Hurtbox : MonoBehaviour
     
     // ============================================================================
 
-    [HideInInspector]
-    public GameObject owner;
+    public HurtboxSO hurtboxSO;
 
     [Header("Optional")]
     public Transform hurtboxOrigin;

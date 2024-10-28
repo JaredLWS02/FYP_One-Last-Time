@@ -7,8 +7,7 @@ using UnityEngine;
 public class HealAbility : MonoBehaviour
 {
     public GameObject owner;
-    public AbilitySO healSO;
-    public HPManager hp;
+    public HPManager hpM;    
 
     // ============================================================================
     
@@ -38,6 +37,13 @@ public class HealAbility : MonoBehaviour
 
     // ============================================================================
     
+    [Header("Heal")]
+    public AbilitySO healSO;
+    [Space]
+    public AnimPreset healCastingAnim;
+    [Space]
+    public AnimPreset healCastAnim;
+
     void OnAbility(GameObject who, string ability_name)
     {
         if(who!=owner) return;
@@ -52,6 +58,8 @@ public class HealAbility : MonoBehaviour
     void StartCasting()
     {
         caster.abilitySO = healSO;
+        caster.castingAnim = healCastingAnim;
+        caster.castAnim = healCastAnim;
 
         caster.TryStartCasting();
     }
@@ -71,7 +79,7 @@ public class HealAbility : MonoBehaviour
 
         if(abilitySO!=healSO) return;
 
-        hp.Add(abilitySO.magnitude);
+        hpM.Add(abilitySO.magnitude);
 
         TempVFX(abilitySO);
     }

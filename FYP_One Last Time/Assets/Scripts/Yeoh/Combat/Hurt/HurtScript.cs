@@ -161,6 +161,7 @@ public class HurtScript : MonoBehaviour
 
             EventM.OnKnockback(gameObject, hurtbox.knockback, contactPoint);
 
+            if(hurtbox.canStun)
             EventM.OnTryStun(gameObject, attacker, hurtbox, contactPoint);
 
             OnPoiseBreak.Invoke();

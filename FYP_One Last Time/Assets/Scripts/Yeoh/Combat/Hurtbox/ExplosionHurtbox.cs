@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ExplosionHurtbox : MonoBehaviour
 {
-    public HurtboxSO hurtboxSO;
-    
+    [HideInInspector]
+    public GameObject owner;
+
     // ============================================================================
 
     public bool explodeOnAwake=true;
@@ -75,8 +76,7 @@ public class ExplosionHurtbox : MonoBehaviour
 
     // ============================================================================
 
-    [HideInInspector]
-    public GameObject owner;
+    public HurtboxSO hurtboxSO;
 
     Vector3 contactPoint;
 
@@ -94,7 +94,7 @@ public class ExplosionHurtbox : MonoBehaviour
 
             new_hurtbox.damage *= falloffMult;
             new_hurtbox.blockDamage *= falloffMult;
-            new_hurtbox.knockback=0; // handled by Push()
+            new_hurtbox.knockback = 0; // handled by Push()
 
             contactPoint = other.ClosestPoint(transform.position);
             

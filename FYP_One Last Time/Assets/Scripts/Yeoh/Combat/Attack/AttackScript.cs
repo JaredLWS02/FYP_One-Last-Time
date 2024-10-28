@@ -25,7 +25,10 @@ public class AttackScript : MonoBehaviour
     // ============================================================================
     
     [Header("On Attack")]
+    public AnimPreset attackAnim;
+    [Space]
     public AttackSO attackSO;
+    [Space]
     public PrefabSpawn attackSpawn;
     
     public void TryAttack()
@@ -42,26 +45,16 @@ public class AttackScript : MonoBehaviour
 
     void Attack()
     {
-        if(attackSO.hasAttackAnim)
+        if(attackAnim.names.Count>0)
         {
-            PlayAttackAnim();
+            attackAnim.Play(owner);
         }
         else
         {
-            DoInstantAttack();
+            AttackRelease();
         }
 
         EventM.OnAttacked(owner, attackSO);
-    }
-
-    void PlayAttackAnim()
-    {
-        EventM.OnPlayAnim(owner, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
-    }
-
-    void DoInstantAttack()
-    {
-        AttackRelease();
     }
 
     // ============================================================================
@@ -82,7 +75,7 @@ public class AttackScript : MonoBehaviour
         isAttacking=false;
 
         if(attackSO.dashOnWindUp)
-            Dash();
+        Dash(attackSO.dashOnWindUpForce, attackSO.dashOnWindUpDir);
     }  
 
     public void AttackRelease()
@@ -92,6 +85,9 @@ public class AttackScript : MonoBehaviour
 
         SpawnAttack();
 
+        if(attackSO.dashOnRelease)
+        Dash(attackSO.dashOnReleaseForce, attackSO.dashOnReleaseDir);
+
         EventM.OnAttackReleased(owner, attackSO);
     }
 
@@ -99,6 +95,9 @@ public class AttackScript : MonoBehaviour
     {
         isWindingUp=false;
         isAttacking=false;
+
+        if(attackSO.dashOnRecover)
+        Dash(attackSO.dashOnRecoverForce, attackSO.dashOnRecoverDir);
     }  
 
     // ============================================================================
@@ -112,9 +111,6 @@ public class AttackScript : MonoBehaviour
         if(attackSpawn.parented) spawned.transform.parent = attackSpawn.spawnpoint;
 
         TryAssignHurtboxOwner(spawned);
-
-        if(attackSO.dashOnRelease)
-            Dash();
     }
 
     void TryAssignHurtboxOwner(GameObject target)
@@ -129,19 +125,21 @@ public class AttackScript : MonoBehaviour
         }
     }
 
-    void Dash()
+    // ============================================================================
+    
+    void Dash(float force, Vector3 dir)
     {
         if(!rb) return;
         
-        if(attackSO.dashForce==0) return;
-        if(attackSO.dashDirection==Vector3.zero) return;
+        if(force==0) return;
+        if(dir==Vector3.zero) return;
 
-        Vector3 direction = attackSO.dashDirection.normalized;
+        Vector3 direction = dir.normalized;
 
-        if(attackSO.localDirection)
+        if(attackSO.localDir)
         direction = transform.TransformDirection(direction);
 
-        rb.AddForce(attackSO.dashForce * direction, ForceMode.Impulse);
+        rb.AddForce(force * direction, ForceMode.Impulse);
     }
 
     // After Attack ============================================================================
@@ -190,16 +188,8 @@ public class AttackScript : MonoBehaviour
 
         AttackRecover();
 
+        attackAnim.Cancel(owner);
+
         EventM.OnAttackCancelled(owner);
-
-        PlayCancelAnim();
     }
-
-    [Header("Cancel")]
-    public string cancelAnimName = "Cancel Attack";
-    
-    void PlayCancelAnim()
-    {
-        EventM.OnPlayAnim(owner, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
-    }   
 }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class BufferedAction
+public class BufferedInput
 {
-    public string actionName;
+    public string inputName;
     public float bufferLeft;
 
     // ctor
-    public BufferedAction(string action_name, float buffer_time)
+    public BufferedInput(string input_name, float buffer_time)
     {
-        actionName = action_name;
+        inputName = input_name;
         DoBuffer(buffer_time);
     }
 
@@ -53,75 +53,75 @@ public class InputBuffer : MonoBehaviour
     
     // ============================================================================
     
-    public List<BufferedAction> actions = new();
+    public List<BufferedInput> inputs = new();
 
-    void OnAddBuffer(GameObject who, string action_name, float buffer_time)
+    void OnAddBuffer(GameObject who, string input_name, float buffer_time)
     {
         if(who!=owner) return;
 
-        if(HasAction(action_name, out var action))
+        if(HasAction(input_name, out var input))
         {
-            action.DoBuffer(buffer_time);
+            input.DoBuffer(buffer_time);
         }        
         else
         {
-            actions.Add(new BufferedAction(action_name, buffer_time));
+            inputs.Add(new BufferedInput(input_name, buffer_time));
         }
     }
 
-    bool HasAction(string action_name, out BufferedAction out_action)
+    bool HasAction(string input_name, out BufferedInput out_input)
     {
-        foreach(var action in actions)
+        foreach(var action in inputs)
         {
-            if(action.actionName == action_name)
+            if(action.inputName == input_name)
             {
-                out_action = action;
+                out_input = action;
                 return true;
             }
         }
-        out_action = null;
+        out_input = null;
         return false;
     }
     
     // ============================================================================
 
-    List<BufferedAction> actionsToRemove = new();
+    List<BufferedInput> inputsToRemove = new();
 
     void Update()
     {
-        foreach(var action in actions)
+        foreach(var input in inputs)
         {
-            EventM.OnInputBuffering(owner, action.actionName);
+            EventM.OnInputBuffering(owner, input.inputName);
             
-            action.UpdateBuffer();
+            input.UpdateBuffer();
 
             // if no buffer left
-            if(!action.HasBuffer())
+            if(!input.HasBuffer())
             {
                 // temp list to mark actions for removal
-                actionsToRemove.Add(action);
+                inputsToRemove.Add(input);
             }
         }
 
         // now remove from actual list
-        foreach(var action in actionsToRemove)
+        foreach(var input in inputsToRemove)
         {
-            actions.Remove(action);
+            inputs.Remove(input);
         }
-        actionsToRemove.Clear();
+        inputsToRemove.Clear();
     }
 
-    void OnRemoveBuffer(GameObject who, string action_name)
+    void OnRemoveBuffer(GameObject who, string input_name)
     {
         if(who!=owner) return;
 
-        if(HasAction(action_name, out var action))
+        if(HasAction(input_name, out var input))
         {
             // temp list to mark actions for removal
             // ignore if already marked
-            if(actionsToRemove.Contains(action)) return;
+            if(inputsToRemove.Contains(input)) return;
 
-            actionsToRemove.Add(action);
+            inputsToRemove.Add(input);
         }
     }
 }

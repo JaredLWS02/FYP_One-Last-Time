@@ -15,17 +15,18 @@ public class StunScript : MonoBehaviour
         EventM = EventManager.Current;
 
         EventM.StunEvent += OnStun;
-
         EventM.CancelStunEvent += OnCancelStun;
     }
     void OnDisable()
     {
         EventM.StunEvent -= OnStun;
-
         EventM.CancelStunEvent -= OnCancelStun;
     }
 
     // ============================================================================
+
+    [Header("Stun Anim")]
+    public AnimPreset stunAnim;
 
     public bool isStunned {get; private set;}
 
@@ -40,21 +41,11 @@ public class StunScript : MonoBehaviour
 
         isStunned=true;
 
+        stunAnim = hurtbox.stunAnim;
+        
+        stunAnim.Play(owner);
+
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
-
-        PlayStunAnim();
-    }
-    
-    [Header("Stun Anim")]
-    public List<string> stunAnimNames = new();
-    public int stunAnimLayer;
-    public float stunAnimBlendTime;
-
-    void PlayStunAnim()
-    {
-        string stunAnimName = stunAnimNames[Random.Range(0, stunAnimNames.Count)];
-
-        EventM.OnPlayAnim(owner, stunAnimName, stunAnimLayer, stunAnimBlendTime);
     }
     
     // Stun Anim Events ============================================================================
@@ -74,14 +65,6 @@ public class StunScript : MonoBehaviour
 
         StunRecover();
 
-        PlayCancelAnim();
-    }
-
-    [Header("Cancel")]
-    public string cancelAnimName = "Cancel Stun";
-
-    void PlayCancelAnim()
-    {
-        EventM.OnPlayAnim(owner, cancelAnimName, stunAnimLayer, stunAnimBlendTime);
+        stunAnim.Cancel(owner);
     }
 }

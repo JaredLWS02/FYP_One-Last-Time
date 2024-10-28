@@ -141,11 +141,11 @@ public class PlayerInputListener : MonoBehaviour
     
     // ============================================================================    
 
-    void OnInputBuffering(GameObject who, string action_name)
+    void OnInputBuffering(GameObject who, string input_name)
     {
         if(who!=gameObject) return;
 
-        switch(action_name)
+        switch(input_name)
         {
             case "Jump": EventM.OnTryJump(gameObject); break;
 

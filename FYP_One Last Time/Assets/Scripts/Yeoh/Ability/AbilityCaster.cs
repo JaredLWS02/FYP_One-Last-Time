@@ -61,21 +61,19 @@ public class AbilityCaster : MonoBehaviour
 
     // During Casting ============================================================================
 
+    [Space]
+    public AnimPreset castingAnim;
+
     void StartCasting()
     {
         ResetProgress();
         isCasting=true;
 
+        castingAnim.Play(owner);
+
         EventM.OnCasting(owner, abilitySO);
 
-        PlayCastingAnim();
-
         //sfxCastingLoop = AudioManager.Current.LoopSFX(owner, SFXManager.Current.sfxCastingLoop);
-    }
-
-    void PlayCastingAnim()
-    {
-        EventM.OnPlayAnim(owner, abilitySO.castingAnimName, abilitySO.castingAnimLayer, abilitySO.castingAnimBlendTime);
     }
 
     // Progress ============================================================================
@@ -123,6 +121,9 @@ public class AbilityCaster : MonoBehaviour
 
     // After Cast ============================================================================
 
+    [Space]
+    public AnimPreset castAnim;
+
     public bool isCast {get; private set;}
 
     void Cast()
@@ -134,14 +135,16 @@ public class AbilityCaster : MonoBehaviour
 
         currentSlot.DoCooldown();
 
+        if(castAnim.names.Count>0)
+        {
+            castAnim.Play(owner);
+        }
+        else
+        {
+            CastRelease();
+        }
+
         EventM.OnCast(owner, abilitySO);
-
-        PlayCastAnim();
-    }
-
-    void PlayCastAnim()
-    {
-        EventM.OnPlayAnim(owner, abilitySO.castAnimName, abilitySO.castAnimLayer, abilitySO.castAnimBlendTime);
     }
 
     // Cast Anim Events ============================================================================
@@ -180,16 +183,8 @@ public class AbilityCaster : MonoBehaviour
 
         CastRecover();
 
-        EventM.OnCastCancelled(owner);
+        castingAnim.Cancel(owner);
         
-        PlayCancelAnim();
-    }
-
-    [Header("Cancel")]
-    public string cancelAnimName = "Cancel Cast";
-
-    void PlayCancelAnim()
-    {
-        EventM.OnPlayAnim(owner, cancelAnimName, abilitySO.castingAnimLayer, abilitySO.castingAnimBlendTime);
+        EventM.OnCastCancelled(owner);
     }
 }

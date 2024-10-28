@@ -16,9 +16,15 @@ MonoBehaviour:
   description: 
   damage: 25
   knockback: 10
-  damageBlock: 25
+  blockDamage: 25
+  blockKnockback: 10
   pierceCount: 1
-  parryable: 1
+  isParryable: 1
   parryStunsAttacker: 1
-  stunSeconds: 0.5
-  stunSpeedMult: 0.3
+  canStun: 1
+  stunAnim:
+    names:
+    - Stun1
+    layer: 0
+    blendTime: 0
+    cancelName: Cancel Stun

@@ -23,9 +23,9 @@ public class MoveScript : MonoBehaviour
     // ============================================================================
 
     public float speed=10;
+    public float clamp=10;
     [HideInInspector]
     public float baseSpeed;
-    float clamp;
 
     public float acceleration=10;
     public float deceleration=10;
@@ -105,13 +105,13 @@ public class MoveScript : MonoBehaviour
         if(to>=baseSpeed)
         {
             TweenSpeed(to, tweenTime);
-            TweenClamp(baseSpeed, tweenTime);
         }
         else
         {
             TweenSpeed(baseSpeed, tweenTime);
-            TweenClamp(to, tweenTime);
         }
+        
+        TweenClamp(to, tweenTime);
     }
 
     public void SetSpeedMult(float mult, float tweenTime=.25f)

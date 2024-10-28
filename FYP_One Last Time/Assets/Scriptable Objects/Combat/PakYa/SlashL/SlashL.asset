@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: PakYa SlashL
   description: 
-  hasAttackAnim: 1
-  animName: SlashL
-  animLayer: 0
-  animBlendTime: 0
   dashOnWindUp: 0
+  dashOnWindUpForce: 30
+  dashOnWindUpDir: {x: 0, y: 0, z: 1}
   dashOnRelease: 1
-  dashForce: 20
-  dashDirection: {x: 0, y: 0, z: 1}
-  localDirection: 1
+  dashOnReleaseForce: 30
+  dashOnReleaseDir: {x: 0, y: 0, z: 1}
+  dashOnRecover: 0
+  dashOnRecoverForce: -30
+  dashOnRecoverDir: {x: 0, y: 0, z: 1}
+  localDir: 1
   cooldownTime: 0

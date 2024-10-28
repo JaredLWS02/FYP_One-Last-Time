@@ -42,6 +42,9 @@ public class ParryScript : MonoBehaviour
 
     // ============================================================================
 
+    [Header("Raise Parry Anim")]
+    public AnimPreset raiseParryAnim;
+
     void RaiseParry()
     {
         // attack cancelling
@@ -53,23 +56,9 @@ public class ParryScript : MonoBehaviour
 
         StartRaise();
 
-        PlayRaiseParryAnim();
+        raiseParryAnim.Play(owner);
 
         EventM.OnRaisedParry(owner);
-    }
-
-    // ============================================================================
-
-    [Header("Parry Anim")]
-    public int parryAnimLayer;
-    public float parryAnimBlendTime; 
-
-    [Header("Raise Parry Anim")]
-    public string raiseParryAnimName = "Raise Parry";
-
-    void PlayRaiseParryAnim()
-    {
-        EventM.OnPlayAnim(owner, raiseParryAnimName, parryAnimLayer, parryAnimBlendTime);
     }
 
     // ============================================================================
@@ -97,7 +86,7 @@ public class ParryScript : MonoBehaviour
     public float raiseParrySeconds=.3f;
     float raiseLeft;
 
-    public void StartRaise()
+    void StartRaise()
     {
         isParryRaised=true;
 
@@ -128,21 +117,14 @@ public class ParryScript : MonoBehaviour
 
     // Lower Parry ============================================================================
 
+    [Header("Lower Parry Anim")]
+    public AnimPreset lowerParryAnim;
+
     void LowerParry()
     {
         isParryLowering=true;
 
-        PlayLowerParryAnim();
-    }
-
-    // ============================================================================
-
-    [Header("Lower Parry Anim")]
-    public string lowerParryAnimName = "Lower Parry";
-
-    void PlayLowerParryAnim()
-    {
-        EventM.OnPlayAnim(owner, lowerParryAnimName, parryAnimLayer, parryAnimBlendTime);
+        lowerParryAnim.Play(owner);
     }
 
     // Parry Anim Events ============================================================================
@@ -192,6 +174,9 @@ public class ParryScript : MonoBehaviour
     
     // ============================================================================
     
+    [Header("On Parry Success")]
+    public AnimPreset parrySuccessAnim;
+
     void OnParrySuccess(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(defender!=owner) return;
@@ -207,17 +192,9 @@ public class ParryScript : MonoBehaviour
 
         EventM.OnKnockback(owner, hurtbox.blockKnockback, contactPoint);
 
-        PlayParrySuccessAnim();
+        parrySuccessAnim.Play(owner);
 
         StartRiposte();
-    }
-
-    [Header("On Parry Success")]
-    public string parrySuccessAnimName = "Parry Success";
-
-    void PlayParrySuccessAnim()
-    {
-        EventM.OnPlayAnim(owner, parrySuccessAnimName, parryAnimLayer, parryAnimBlendTime);
     }
 
     // ============================================================================
@@ -251,16 +228,8 @@ public class ParryScript : MonoBehaviour
 
         CancelRiposte();
 
+        raiseParryAnim.Cancel(owner);
+
         EventM.OnParryCancelled(owner);
-
-        PlayCancelAnim();
     }
-
-    [Header("Cancel")]
-    public string cancelAnimName = "Cancel Parry";
-    
-    void PlayCancelAnim()
-    {
-        EventM.OnPlayAnim(owner, cancelAnimName, parryAnimLayer, parryAnimBlendTime);
-    }       
 }
