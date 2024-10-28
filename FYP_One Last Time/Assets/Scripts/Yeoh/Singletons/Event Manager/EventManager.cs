@@ -172,6 +172,35 @@ public class EventManager : MonoBehaviour
         LeaveGroundEvent?.Invoke(who);
     }    
 
+    // Dash ==================================================================================================================
+    
+    public event Action<GameObject> TryDashEvent;
+    public event Action<GameObject> DashEvent;
+    public event Action<GameObject> DashedEvent;
+    public event Action<GameObject> CancelDashEvent;
+    public event Action<GameObject> DashCancelledEvent;
+
+    public void OnTryDash(GameObject who)
+    {
+        TryDashEvent?.Invoke(who);
+    }
+    public void OnDash(GameObject who)
+    {
+        DashEvent?.Invoke(who);
+    }    
+    public void OnDashed(GameObject who)
+    {
+        DashedEvent?.Invoke(who);
+    }    
+    public void OnCancelDash(GameObject who)
+    {
+        CancelDashEvent?.Invoke(who);
+    }    
+    public void OnDashCancelled(GameObject who)
+    {
+        DashCancelledEvent?.Invoke(who);
+    }    
+    
     // Agent Controls ==================================================================================================================
 
     public event Action<GameObject, Vector2> AgentTryMoveEvent;

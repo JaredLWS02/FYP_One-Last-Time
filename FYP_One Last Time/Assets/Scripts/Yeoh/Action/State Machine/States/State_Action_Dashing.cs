@@ -31,6 +31,7 @@ public class State_Action_Dashing : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        
+        action.AllowParry = toggle;
+        action.AllowStun = toggle;
     }
 }

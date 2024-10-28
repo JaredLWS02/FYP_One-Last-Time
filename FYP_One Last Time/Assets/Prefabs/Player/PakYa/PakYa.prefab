@@ -135,13 +135,13 @@ MonoBehaviour:
     - Casting
     layer: 0
     blendTime: 0
-    cancelName: Cancel Cast
+    cancelName: Idle
   castAnim:
     names:
     - Cast
     layer: 0
     blendTime: 0
-    cancelName: Cancel Cast
+    cancelName: Idle
 --- !u!114 &7975362184149562795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,13 +162,13 @@ MonoBehaviour:
     - Casting
     layer: 0
     blendTime: 0
-    cancelName: Cancel Cast
+    cancelName: Idle
   healCastAnim:
     names:
     - Cast
     layer: 0
     blendTime: 0
-    cancelName: Cancel Cast
+    cancelName: Idle
 --- !u!1 &2941172494308309934
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +222,7 @@ MonoBehaviour:
     names: []
     layer: 0
     blendTime: 0
-    cancelName: Cancel Attack
+    cancelName: Idle
   attackSO: {fileID: 0}
   attackSpawn:
     prefab: {fileID: 0}
@@ -383,7 +383,7 @@ MonoBehaviour:
       - SlashR
       layer: 0
       blendTime: 0
-      cancelName: Cancel Attack
+      cancelName: Idle
     attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
     attackSpawn:
       prefab: {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24,
@@ -396,7 +396,7 @@ MonoBehaviour:
       - SlashL
       layer: 0
       blendTime: 0
-      cancelName: Cancel Attack
+      cancelName: Idle
     attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
     attackSpawn:
       prefab: {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79,
@@ -409,7 +409,7 @@ MonoBehaviour:
       - Overhead
       layer: 0
       blendTime: 0
-      cancelName: Cancel Attack
+      cancelName: Idle
     attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     attackSpawn:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
@@ -504,7 +504,7 @@ MonoBehaviour:
       - Overhead
       layer: 0
       blendTime: 0
-      cancelName: Cancel Attack
+      cancelName: Idle
     attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     attackSpawn:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
@@ -934,7 +934,7 @@ MonoBehaviour:
       - Overhead
       layer: 0
       blendTime: 0
-      cancelName: Cancel Attack
+      cancelName: Idle
     attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     attackSpawn:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
@@ -1072,11 +1072,13 @@ GameObject:
   - component: {fileID: 2535672027372677568}
   - component: {fileID: 1353104093430078228}
   - component: {fileID: 8003095357430364833}
-  - component: {fileID: 6639294003576150908}
+  - component: {fileID: 2987166399731149274}
+  - component: {fileID: 8233763058552673176}
   - component: {fileID: 4334806704455733132}
   - component: {fileID: 2505238066991637890}
   - component: {fileID: 6485402941929711479}
   - component: {fileID: 110049388833876227}
+  - component: {fileID: 6639294003576150908}
   m_Layer: 3
   m_Name: PakYa
   m_TagString: Player
@@ -1202,6 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pilot: {fileID: 0}
   jumpBuffer: 0.2
+  dashBuffer: 0.2
   attackBuffer: 0.2
   parryBuffer: 0.2
   abilityBuffer: 0.2
@@ -1241,6 +1244,7 @@ MonoBehaviour:
   AllowStun: 0
   ground: {fileID: 1353104093430078228}
   autoJump: {fileID: 0}
+  dash: {fileID: 8233763058552673176}
   attack: {fileID: 7022457898630109682}
   parry: {fileID: 6485402941929711479}
   caster: {fileID: 1410335126641825925}
@@ -1365,7 +1369,7 @@ MonoBehaviour:
   OnFastFallEnd:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6639294003576150908
+--- !u!114 &2987166399731149274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1374,10 +1378,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 8987163089559660572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a21587320716eeb4a98977ccb3204a7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 97874b5f7b402dd42b0d261e43d370ec, type: 2}
+  colliders:
+  - {fileID: 5812872954807716688}
+  ignoredLayerNames:
+  - Enemy
+  - EnemyStopbox
+--- !u!114 &8233763058552673176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189265718b9a5a14baa8da28adc7852c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
+  dashAnim:
+    names:
+    - Dash
+    layer: 0
+    blendTime: 0
+    cancelName: Idle
+  dashSeconds: 0.2
+  dashForce: 10
+  dashDir: {x: 0, y: 0, z: 1}
+  localDir: 1
+  cooldownTime: 0.5
 --- !u!114 &4334806704455733132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1444,14 +1477,14 @@ MonoBehaviour:
     - Raise Parry
     layer: 0
     blendTime: 0
-    cancelName: Cancel Parry
+    cancelName: Idle
   raiseParrySeconds: 0.3
   lowerParryAnim:
     names:
     - Lower Parry
     layer: 0
     blendTime: 0
-    cancelName: Cancel Parry
+    cancelName: Idle
   cooldownTime: 0.3
   minParryDot: 0.2
   parrySuccessAnim:
@@ -1459,7 +1492,7 @@ MonoBehaviour:
     - Parry Success
     layer: 0
     blendTime: 0
-    cancelName: Cancel Parry
+    cancelName: Idle
   riposteSeconds: 0.5
 --- !u!114 &110049388833876227
 MonoBehaviour:
@@ -1479,7 +1512,20 @@ MonoBehaviour:
     - Stun1
     layer: 0
     blendTime: 0
-    cancelName: Cancel Stun
+    cancelName: Idle
+--- !u!114 &6639294003576150908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a21587320716eeb4a98977ccb3204a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 97874b5f7b402dd42b0d261e43d370ec, type: 2}
 --- !u!1001 &1048519321936316235
 PrefabInstance:
   m_ObjectHideFlags: 0

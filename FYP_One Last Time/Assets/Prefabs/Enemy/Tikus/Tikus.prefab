@@ -54,7 +54,7 @@ MonoBehaviour:
       - Slam
       layer: 0
       blendTime: 0
-      cancelName: Cancel Attack
+      cancelName: Idle
     attackSO: {fileID: 11400000, guid: 8db0e5daa15601340821c312ff964fc0, type: 2}
     attackSpawn:
       prefab: {fileID: 1242880141507026177, guid: c5c0261915e183d40b40f3bcbe09d457,
@@ -691,7 +691,7 @@ MonoBehaviour:
     names: []
     layer: 0
     blendTime: 0
-    cancelName: Cancel Attack
+    cancelName: Idle
   attackSO: {fileID: 0}
   attackSpawn:
     prefab: {fileID: 0}
@@ -1019,6 +1019,7 @@ MonoBehaviour:
   AllowStun: 0
   ground: {fileID: 7877508715297963426}
   autoJump: {fileID: 5609296010924524344}
+  dash: {fileID: 0}
   attack: {fileID: 6861530176262365675}
   parry: {fileID: 0}
   caster: {fileID: 0}
@@ -1206,7 +1207,7 @@ MonoBehaviour:
     - Stun1
     layer: 0
     blendTime: 0
-    cancelName: Cancel Stun
+    cancelName: Idle
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0

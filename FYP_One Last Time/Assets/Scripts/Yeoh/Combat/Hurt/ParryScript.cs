@@ -47,11 +47,10 @@ public class ParryScript : MonoBehaviour
 
     void RaiseParry()
     {
-        // attack cancelling
+        // action cancelling
+        EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
-        // ability cancelling
         EventM.OnCancelCast(owner);
-        // stun cancelling
         EventM.OnCancelStun(owner);
 
         StartRaise();

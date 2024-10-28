@@ -25,7 +25,6 @@ public class StunScript : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Stun Anim")]
     public AnimPreset stunAnim;
 
     public bool isStunned {get; private set;}
@@ -34,15 +33,16 @@ public class StunScript : MonoBehaviour
     {
         if(victim!=owner) return;
 
+        // action cancelling
+        EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
         EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
-        EventM.OnCancelStun(owner);
 
         isStunned=true;
 
         stunAnim = hurtbox.stunAnim;
-        
+
         stunAnim.Play(owner);
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);

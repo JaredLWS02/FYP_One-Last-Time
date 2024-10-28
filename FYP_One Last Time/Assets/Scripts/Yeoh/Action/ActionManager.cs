@@ -29,6 +29,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent += OnTryJump;
         EventM.TryJumpCutEvent += OnTryJumpCut;
         EventM.TryAutoJumpEvent += OnTryAutoJump;
+        EventM.TryDashEvent += OnTryDash;
         EventM.TryComboEvent += OnTryCombo;
         EventM.TryParryEvent += OnTryParry;
         EventM.TryRiposteComboEvent += OnTryRiposteCombo;
@@ -42,6 +43,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent -= OnTryJump;
         EventM.TryJumpCutEvent -= OnTryJumpCut;
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
+        EventM.TryDashEvent -= OnTryDash;
         EventM.TryComboEvent -= OnTryCombo;
         EventM.TryParryEvent -= OnTryParry;
         EventM.TryRiposteComboEvent -= OnTryRiposteCombo;
@@ -103,6 +105,17 @@ public class ActionManager : MonoBehaviour
         EventM.OnFaceX(gameObject, dot_x);
     }
 
+    // ============================================================================    
+    
+    void OnTryDash(GameObject who)
+    {
+        if(who!=gameObject) return;
+
+        if(!AllowDash) return;
+
+        EventM.OnDash(gameObject);
+    }
+    
     // ============================================================================    
 
     void OnTryCombo(GameObject who, string combo_name)
@@ -178,10 +191,12 @@ public class ActionManager : MonoBehaviour
         return autoJump.isJumping;
     }
 
+    public DashScript dash;
+
     public bool IsDashing()
     {
-        //if(!dash) return false;
-        return false;
+        if(!dash) return false;
+        return dash.IsDashing();
     }
     
     public AttackScript attack;

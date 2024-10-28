@@ -54,6 +54,17 @@ public class PlayerInputListener : MonoBehaviour
         }
     }
 
+    // Dash ============================================================================
+
+    public float dashBuffer=.2f;
+
+    void OnInputDash()
+    {
+        if(!pilot.IsPlayer()) return;
+
+        EventM.OnAddInputBuffer(gameObject, "Dash", dashBuffer);
+    }
+
     // Attack ============================================================================
 
     public float attackBuffer=.2f;
@@ -119,6 +130,8 @@ public class PlayerInputListener : MonoBehaviour
         EventM.InputBufferingEvent += OnInputBuffering;
 
         EventM.JumpedEvent += OnJumped;
+        EventM.DashedEvent += OnDashed;
+        EventM.DashCancelledEvent += OnDashCancelled;
         EventM.AttackedEvent += OnAttacked;
         EventM.AttackCancelledEvent += OnAttackCancelled;
         EventM.RaisedParryEvent += OnRaisedParry;
@@ -131,6 +144,8 @@ public class PlayerInputListener : MonoBehaviour
         EventM.InputBufferingEvent -= OnInputBuffering;
 
         EventM.JumpedEvent -= OnJumped;
+        EventM.DashedEvent -= OnDashed;
+        EventM.DashCancelledEvent -= OnDashCancelled;
         EventM.AttackedEvent -= OnAttacked;
         EventM.AttackCancelledEvent -= OnAttackCancelled;
         EventM.RaisedParryEvent -= OnRaisedParry;
@@ -148,6 +163,8 @@ public class PlayerInputListener : MonoBehaviour
         switch(input_name)
         {
             case "Jump": EventM.OnTryJump(gameObject); break;
+
+            case "Dash": EventM.OnTryDash(gameObject); break;
 
             case "LightAttack":
             {
@@ -180,6 +197,20 @@ public class PlayerInputListener : MonoBehaviour
         if(jumper!=gameObject) return;
         
         EventM.OnRemoveInputBuffer(gameObject, "Jump");
+    }
+    
+    void OnDashed(GameObject who)
+    {
+        if(who!=gameObject) return;
+        
+        EventM.OnRemoveInputBuffer(gameObject, "Dash");
+    }
+    
+    void OnDashCancelled(GameObject who)
+    {
+        if(who!=gameObject) return;
+        
+        EventM.OnRemoveInputBuffer(gameObject, "Dash");
     }
     
     void OnAttacked(GameObject attacker, AttackSO attackSO)

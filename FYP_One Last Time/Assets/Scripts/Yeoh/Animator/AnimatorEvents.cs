@@ -8,7 +8,7 @@ public class AnimPreset
     public List<string> names = new();
     public int layer=0;
     public float blendTime=0;
-    public string cancelName = "Cancel Action";
+    public string cancelName = "Idle";
 
     public string GetRandomName()
     {
