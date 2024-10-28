@@ -25,8 +25,6 @@ public class AttackScript : MonoBehaviour
     // ============================================================================
     
     [Header("On Attack")]
-    public AnimPreset attackAnim;
-    [Space]
     public AttackSO attackSO;
     [Space]
     public PrefabPreset attackPrefab;
@@ -45,13 +43,13 @@ public class AttackScript : MonoBehaviour
 
     void Attack()
     {
-        if(attackAnim.names.Count>0)
+        if(attackSO.noAnim)
         {
-            attackAnim.Play(owner);
+            AttackRelease();
         }
         else
         {
-            AttackRelease();
+            attackSO.anim.Play(owner);
         }
 
         EventM.OnAttacked(owner, attackSO);
@@ -184,7 +182,7 @@ public class AttackScript : MonoBehaviour
 
         AttackRecover();
 
-        attackAnim.Cancel(owner);
+        attackSO.anim.Cancel(owner);
 
         EventM.OnAttackCancelled(owner);
     }

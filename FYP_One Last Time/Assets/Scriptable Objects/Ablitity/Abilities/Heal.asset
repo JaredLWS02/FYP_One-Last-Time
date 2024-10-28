@@ -12,9 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db603f0e4e14c554d9b03f3b745dfb95, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  iconAnimOV: {fileID: 0}
   Name: Heal
   description: Heals duh
-  cost: 10
-  castTime: 1
-  cooldown: 3
+  castingTime: 1
+  magnitude: 25
+  mpCost: 10
+  cooldownTime: 3
+  castingAnim:
+    names:
+    - Casting
+    layer: 1
+    blendTime: 0
+    cancelName: Cancel
+  castAnim:
+    names:
+    - Cast
+    layer: 1
+    blendTime: 0
+    cancelName: Cancel
+  noCastAnim: 0

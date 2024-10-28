@@ -184,7 +184,7 @@ public class ParryScript : MonoBehaviour
 
         EventM.OnCancelParry(defender);
 
-        if(hurtbox.parryStunsAttacker)
+        if(hurtbox.parryStunsOwner)
         {
             // choose the parry's unique stun anim
             hurtbox.stunAnim = parryStunAnim;

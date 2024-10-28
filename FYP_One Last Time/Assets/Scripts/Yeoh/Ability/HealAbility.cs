@@ -39,10 +39,6 @@ public class HealAbility : MonoBehaviour
     
     [Header("Heal")]
     public AbilitySO healSO;
-    [Space]
-    public AnimPreset healCastingAnim;
-    [Space]
-    public AnimPreset healCastAnim;
 
     void OnAbility(GameObject who, string ability_name)
     {
@@ -58,8 +54,6 @@ public class HealAbility : MonoBehaviour
     void StartCasting()
     {
         caster.abilitySO = healSO;
-        caster.castingAnim = healCastingAnim;
-        caster.castAnim = healCastAnim;
 
         caster.TryStartCasting();
     }

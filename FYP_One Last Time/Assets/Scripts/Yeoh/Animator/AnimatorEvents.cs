@@ -6,9 +6,9 @@ using UnityEngine;
 public class AnimPreset
 {
     public List<string> names = new();
-    public int layer=0;
+    public int layer=1;
     public float blendTime=0;
-    public string cancelName = "Idle";
+    public string cancelName = "Cancel";
 
     public string GetRandomName()
     {

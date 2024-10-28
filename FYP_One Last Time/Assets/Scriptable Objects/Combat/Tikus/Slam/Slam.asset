@@ -14,6 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Tikus Slam
   description: 
+  anim:
+    names:
+    - Slam
+    layer: 1
+    blendTime: 0
+    cancelName: Cancel
   dashOnWindUp: 0
   dashOnWindUpForce: 0
   dashOnWindUpDir: {x: 0, y: 0, z: 1}
@@ -24,4 +30,5 @@ MonoBehaviour:
   dashOnRecoverForce: 0
   dashOnRecoverDir: {x: 0, y: 0, z: 1}
   localDir: 1
+  noAnim: 0
   cooldownTime: 1

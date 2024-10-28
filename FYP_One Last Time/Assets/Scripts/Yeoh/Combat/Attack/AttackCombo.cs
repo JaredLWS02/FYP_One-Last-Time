@@ -13,8 +13,6 @@ public class AttackCombo : MonoBehaviour
     [System.Serializable]
     public class ComboStep
     {
-        public AnimPreset attackAnim;
-        [Space]
         public AttackSO attackSO;
         [Space]
         public PrefabPreset attackPrefab;
@@ -75,7 +73,6 @@ public class AttackCombo : MonoBehaviour
     {
         ComboStep step = comboSteps[i];
 
-        attack.attackAnim = step.attackAnim;
         attack.attackSO = step.attackSO;
         attack.attackPrefab = step.attackPrefab;
     }
