@@ -80,7 +80,7 @@ public class DashScript : MonoBehaviour
     
     void DoDashTimer() => dashLeft = dashSeconds;
 
-    public bool IsDashing() => dashLeft>0;
+    bool IsDashing() => dashLeft>0;
 
     void UpdateDashTimer()
     {
@@ -88,7 +88,7 @@ public class DashScript : MonoBehaviour
 
         dashLeft -= Time.deltaTime;
 
-        if(dashLeft<=0) RecoverDash();
+        if(dashLeft<=0) FinishDash();
     }
 
     void CancelDashTimer() => dashLeft=0;
@@ -137,22 +137,46 @@ public class DashScript : MonoBehaviour
     // ============================================================================
     
     [Header("After Dash")]
-    public float cooldownTime=.5f;
-    float cooldownLeft;
+    public AnimPreset dashRecoverAnim;
+    bool isRecovering;
 
-    void RecoverDash()
+    void FinishDash()
     {
         CancelDashTimer();
 
         dashAnim.Cancel(owner);
+
+        isRecovering=true;
+
+        dashRecoverAnim.Play(owner);
+    }
+
+    // Parry Anim Events ============================================================================
+
+    public void DashRecover()
+    {
+        isRecovering=false;
     }
     
+    // ============================================================================
+    
+    public bool IsDashingOrRecovering()
+    {
+        return IsDashing() || isRecovering;
+    }
+    
+    // ============================================================================
+    
+    [Header("After Recover")]
+    public float cooldownTime=.5f;
+    float cooldownLeft;
+
     void DoCooldown() => cooldownLeft = cooldownTime;
 
     void UpdateCooldown()
     {
         // only tick down if not busy
-        if(IsDashing()) return;
+        if(IsDashingOrRecovering()) return;
         
         cooldownLeft -= Time.deltaTime;
 
@@ -171,7 +195,11 @@ public class DashScript : MonoBehaviour
 
         if(!IsDashing()) return;
 
-        RecoverDash();
+        FinishDash();
+
+        DashRecover();
+
+        dashRecoverAnim.Cancel(owner);
 
         EventM.OnDashCancelled(owner);
     }

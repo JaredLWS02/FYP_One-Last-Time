@@ -196,7 +196,7 @@ public class ActionManager : MonoBehaviour
     public bool IsDashing()
     {
         if(!dash) return false;
-        return dash.IsDashing();
+        return dash.IsDashingOrRecovering();
     }
     
     public AttackScript attack;

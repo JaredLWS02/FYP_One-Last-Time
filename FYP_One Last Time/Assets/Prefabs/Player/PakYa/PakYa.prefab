@@ -678,6 +678,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationEvents:
+  - eventName: DashRecover
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8233763058552673176}
+          m_TargetAssemblyTypeName: DashScript, Assembly-CSharp
+          m_MethodName: DashRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventName: AttackWindUp
     OnAnimationEvent:
       m_PersistentCalls:
@@ -1410,6 +1426,12 @@ MonoBehaviour:
   dashForce: 10
   dashDir: {x: 0, y: 0, z: 1}
   localDir: 1
+  dashRecoverAnim:
+    names:
+    - Dash Recover
+    layer: 0
+    blendTime: 0
+    cancelName: Idle
   cooldownTime: 0.5
 --- !u!114 &4334806704455733132
 MonoBehaviour:
