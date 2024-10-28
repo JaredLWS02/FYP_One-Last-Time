@@ -32,15 +32,15 @@ public class EventManager : MonoBehaviour
         if(Current!=this) Destroy(gameObject);
     }
     
-    // Actors ==================================================================================================================
+    // Spawn ==================================================================================================================
 
-    public event Action<GameObject> SpawnEvent;
+    public event Action<GameObject> SpawnedEvent;
 
-    public void OnSpawn(GameObject spawned)
+    public void OnSpawned(GameObject spawned)
     {
-        SpawnEvent?.Invoke(spawned);
+        SpawnedEvent?.Invoke(spawned);
     }
-
+    
     // Controls ==================================================================================================================
 
     public event Action<GameObject, PilotType> SwitchPilotEvent;

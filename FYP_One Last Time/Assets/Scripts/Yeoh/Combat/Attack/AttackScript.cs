@@ -104,11 +104,7 @@ public class AttackScript : MonoBehaviour
 
     public void SpawnAttack()
     {
-        Quaternion rotation = attackSpawn.followRotation ? attackSpawn.spawnpoint.rotation : Quaternion.identity;
-
-        GameObject spawned = Instantiate(attackSpawn.prefab, attackSpawn.spawnpoint.position, rotation);
-
-        if(attackSpawn.parented) spawned.transform.parent = attackSpawn.spawnpoint;
+        GameObject spawned = attackSpawn.Spawn();
 
         TryAssignHurtboxOwner(spawned);
     }

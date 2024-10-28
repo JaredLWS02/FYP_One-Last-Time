@@ -48,7 +48,7 @@ public class AgentManager : MonoBehaviour
     
     void Start()
     {
-        EventM.OnSpawn(gameObject);
+        EventM.OnSpawned(gameObject);
     }
 
     // ============================================================================
