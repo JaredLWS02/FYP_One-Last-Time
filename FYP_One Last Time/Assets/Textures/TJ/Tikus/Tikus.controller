@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: AttackRecover
   triggerTime: 0.9
+  triggerOnExit: 1
 --- !u!1102 &-7104964815559693924
 AnimatorState:
   serializedVersion: 6
@@ -58,6 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: AttackRelease
   triggerTime: 0.258
+  triggerOnExit: 0
 --- !u!1102 &-4062128346343110397
 AnimatorState:
   serializedVersion: 6
@@ -170,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: AttackWindUp
   triggerTime: 0
+  triggerOnExit: 0
 --- !u!1107 &6335452493250100665
 AnimatorStateMachine:
   serializedVersion: 6
@@ -234,3 +237,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: StunRecover
   triggerTime: 0.9
+  triggerOnExit: 1
