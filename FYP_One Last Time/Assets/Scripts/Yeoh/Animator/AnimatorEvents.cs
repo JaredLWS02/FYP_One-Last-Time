@@ -63,6 +63,8 @@ public class AnimatorEvents : MonoBehaviour
     {
         if(who!=owner) return;
 
+        if(animName=="" || animName==null) return;
+
         if(blendTime <= 0)
         {
             anim.Play(animName, animLayer, 0);

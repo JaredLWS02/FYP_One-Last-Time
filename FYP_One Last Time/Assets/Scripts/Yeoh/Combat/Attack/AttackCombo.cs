@@ -17,7 +17,7 @@ public class AttackCombo : MonoBehaviour
         [Space]
         public AttackSO attackSO;
         [Space]
-        public PrefabSpawn attackSpawn;
+        public PrefabPreset attackPrefab;
     }
 
     [Space]
@@ -77,7 +77,7 @@ public class AttackCombo : MonoBehaviour
 
         attack.attackAnim = step.attackAnim;
         attack.attackSO = step.attackSO;
-        attack.attackSpawn = step.attackSpawn;
+        attack.attackPrefab = step.attackPrefab;
     }
 
     // During Combo ============================================================================

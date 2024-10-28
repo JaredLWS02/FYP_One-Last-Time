@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PrefabSpawn
+public class PrefabPreset
 {
     public GameObject prefab;
     [Space]

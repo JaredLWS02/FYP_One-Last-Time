@@ -82,14 +82,15 @@ public class GroundCheck : MonoBehaviour
 
     // ============================================================================
 
-    public float minLandVelocity = -1;
+    //public float minLandVelocity = -1;
 
     void OnBoxEnter(Collider other)
     {
         if(previous_colliders.Count==0 && current_colliders.Count > 0)
         {
             // going down only
-            if(rb.velocity.y < minLandVelocity)
+            //if(rb.velocity.y <= minLandVelocity)
+            if(rb.velocity.y <= 0)
             {
                 OnLandGround.Invoke();
                 EventM.OnLandGround(gameObject);

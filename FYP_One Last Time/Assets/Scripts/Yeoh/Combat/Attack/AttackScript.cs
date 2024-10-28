@@ -29,7 +29,7 @@ public class AttackScript : MonoBehaviour
     [Space]
     public AttackSO attackSO;
     [Space]
-    public PrefabSpawn attackSpawn;
+    public PrefabPreset attackPrefab;
     
     public void TryAttack()
     {
@@ -104,7 +104,7 @@ public class AttackScript : MonoBehaviour
 
     public void SpawnAttack()
     {
-        GameObject spawned = attackSpawn.Spawn();
+        GameObject spawned = attackPrefab.Spawn();
 
         TryAssignHurtboxOwner(spawned);
     }

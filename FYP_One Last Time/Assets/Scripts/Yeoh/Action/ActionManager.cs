@@ -175,6 +175,7 @@ public class ActionManager : MonoBehaviour
 
     // ============================================================================
 
+    [Header("Checks")]
     public GroundCheck ground;
 
     public bool IsGrounded()
