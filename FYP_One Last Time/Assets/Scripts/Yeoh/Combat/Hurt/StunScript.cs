@@ -14,13 +14,13 @@ public class StunScript : MonoBehaviour
     {
         EventM = EventManager.Current;
 
-        EventM.StunRecoverEvent += OnStunRecover;
+        EventM.StunEvent += OnStun;
 
         EventM.CancelStunEvent += OnCancelStun;
     }
     void OnDisable()
     {
-        EventM.StunRecoverEvent -= OnStunRecover;
+        EventM.StunEvent -= OnStun;
 
         EventM.CancelStunEvent -= OnCancelStun;
     }
@@ -29,27 +29,26 @@ public class StunScript : MonoBehaviour
 
     public bool isStunned {get; private set;}
 
-    public void Stun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    void OnStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
 
+        EventM.OnCancelAttack(owner);
+        EventM.OnCancelParry(owner);
+        EventM.OnCancelCast(owner);
+        EventM.OnCancelStun(owner);
+
         isStunned=true;
 
-        EventM.OnCancelAttack(gameObject);
-        EventM.OnCancelCast(gameObject);
-        EventM.OnCancelParry(gameObject);
-        
-        EventM.OnStun(owner, attacker, hurtbox, contactPoint);
+        EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
 
         PlayStunAnim();
     }
-
-    // ============================================================================
     
     [Header("Stun Anim")]
     public List<string> stunAnimNames = new();
     public int stunAnimLayer;
-    public float stunAnimBlendTime; 
+    public float stunAnimBlendTime;
 
     void PlayStunAnim()
     {
@@ -60,10 +59,8 @@ public class StunScript : MonoBehaviour
     
     // Stun Anim Events ============================================================================
 
-    void OnStunRecover(GameObject who)
+    public void StunRecover()
     {
-        if(who!=owner) return;
-
         isStunned=false;
     }
 
@@ -73,18 +70,18 @@ public class StunScript : MonoBehaviour
     {
         if(who!=owner) return;
         
-        CancelAnim();
+        if(!isStunned) return;
+
+        StunRecover();
+
+        PlayCancelAnim();
     }
 
     [Header("Cancel")]
     public string cancelAnimName = "Cancel Stun";
 
-    void CancelAnim()
+    void PlayCancelAnim()
     {
-        if(!isStunned) return;
-
-        EventM.OnStunRecover(owner);
-
         EventM.OnPlayAnim(owner, cancelAnimName, stunAnimLayer, stunAnimBlendTime);
     }
 }

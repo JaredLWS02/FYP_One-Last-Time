@@ -31,6 +31,6 @@ public class State_Action_ParryRaised : BaseState
 
     void ToggleAllow(bool toggle)
     {
-
+        action.AllowStun = toggle;
     }
 }

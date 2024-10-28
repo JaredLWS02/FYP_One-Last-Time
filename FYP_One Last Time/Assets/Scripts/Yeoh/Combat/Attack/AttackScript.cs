@@ -15,49 +15,12 @@ public class AttackScript : MonoBehaviour
     {
         EventM = EventManager.Current;
         
-        EventM.AttackWindUpEvent += OnAttackWindUp;
-        EventM.AttackReleaseEvent += OnAttackRelease;
-        EventM.AttackRecoverEvent += OnAttackRecover;
-
         EventM.CancelAttackEvent += OnCancelAttack;
     }
     void OnDisable()
     {
-        EventM.AttackWindUpEvent -= OnAttackWindUp;
-        EventM.AttackReleaseEvent -= OnAttackRelease;
-        EventM.AttackRecoverEvent -= OnAttackRecover;
-
         EventM.CancelAttackEvent -= OnCancelAttack;
     }
-
-    // ============================================================================
-
-    void Update()
-    {
-        UpdateBuffer();
-        TryAttack();
-
-        UpdateCooldown();
-    }
-
-    // ============================================================================
-
-    [Header("Before Attack")]
-    public float bufferTime=.2f;
-    float bufferLeft;
-
-    public void DoBuffer() => bufferLeft = bufferTime;
-
-    void UpdateBuffer()
-    {
-        bufferLeft -= Time.deltaTime;
-
-        if(bufferLeft<0) bufferLeft=0;
-    }
-
-    bool HasBuffer() => bufferLeft>0;
-
-    void ResetBuffer() => bufferLeft=0;
 
     // ============================================================================
     
@@ -65,13 +28,12 @@ public class AttackScript : MonoBehaviour
     public AttackSO attackSO;
     public PrefabSpawn attackSpawn;
     
-    void TryAttack()
+    public void TryAttack()
     {
         if(isAttacking) return;
 
-        if(!HasBuffer()) return;
-
         if(IsCooling()) return;
+        DoCooldown();
 
         Attack();
     }
@@ -80,39 +42,42 @@ public class AttackScript : MonoBehaviour
 
     void Attack()
     {
-        ResetBuffer();
-
-        DoCooldown();
-
         if(attackSO.hasAttackAnim)
         {
-            StartAttackAnim();
+            PlayAttackAnim();
         }
         else
         {
             DoInstantAttack();
         }
+
+        EventM.OnAttacked(owner, attackSO);
     }
 
-    void StartAttackAnim()
+    void PlayAttackAnim()
     {
         EventM.OnPlayAnim(owner, attackSO.animName, attackSO.animLayer, attackSO.animBlendTime);
     }
 
     void DoInstantAttack()
     {
-        EventM.OnAttackRelease(owner);
+        AttackRelease();
+    }
+
+    // ============================================================================
+
+    public bool isWindingUp {get; private set;}
+    public bool isAttacking {get; private set;}
+    
+    public bool IsAttacking()
+    {
+        return isAttacking || isWindingUp;
     }
 
     // Attack Anim Events ============================================================================
 
-    public bool isWindingUp {get; private set;}
-    public bool isAttacking {get; private set;}
-
-    void OnAttackWindUp(GameObject attacker)
+    public void AttackWindUp()
     {
-        if(attacker!=owner) return;
-
         isWindingUp=true;
         isAttacking=false;
 
@@ -120,22 +85,18 @@ public class AttackScript : MonoBehaviour
             Dash();
     }  
 
-    void OnAttackRelease(GameObject attacker)
+    public void AttackRelease()
     {
-        if(attacker!=owner) return;
-
         isWindingUp=false;
         isAttacking=true;
 
         SpawnAttack();
 
-        EventM.OnAttack(owner, attackSO);
+        EventM.OnAttackReleased(owner, attackSO);
     }
 
-    void OnAttackRecover(GameObject attacker)
+    public void AttackRecover()
     {
-        if(attacker!=owner) return;
-
         isWindingUp=false;
         isAttacking=false;
     }  
@@ -185,6 +146,13 @@ public class AttackScript : MonoBehaviour
 
     // After Attack ============================================================================
 
+    void Update()
+    {
+        UpdateCooldown();
+    }
+
+    // ============================================================================
+
     float cooldownLeft;
     
     void DoCooldown()
@@ -195,7 +163,7 @@ public class AttackScript : MonoBehaviour
     void UpdateCooldown()
     {
         // only tick down if not busy
-        if(isAttacking) return;
+        if(IsAttacking()) return;
         
         cooldownLeft -= Time.deltaTime;
 
@@ -212,33 +180,26 @@ public class AttackScript : MonoBehaviour
         cooldownLeft=0;
     }
 
-    // ============================================================================
-    
-    public bool IsAttacking()
-    {
-        return isAttacking || isWindingUp;
-    }
-    
     // Cancel ============================================================================
     
     void OnCancelAttack(GameObject who)
     {
         if(who!=owner) return;
 
-        CancelAnim();
+        if(!IsAttacking()) return;
+
+        AttackRecover();
+
+        EventM.OnAttackCancelled(owner);
+
+        PlayCancelAnim();
     }
 
     [Header("Cancel")]
     public string cancelAnimName = "Cancel Attack";
     
-    void CancelAnim()
+    void PlayCancelAnim()
     {
-        if(!IsAttacking()) return;
-
-        EventM.OnAttackRecover(owner);
-
-        CancelCooldown();
-
         EventM.OnPlayAnim(owner, cancelAnimName, attackSO.animLayer, attackSO.animBlendTime);
     }   
 }

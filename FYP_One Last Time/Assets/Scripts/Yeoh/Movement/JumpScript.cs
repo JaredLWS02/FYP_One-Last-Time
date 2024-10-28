@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class JumpScript : MonoBehaviour
 {
+    public GameObject owner;
+
+    // ============================================================================
+    
     Rigidbody rb;
     GroundCheck ground;
 
@@ -23,51 +27,26 @@ public class JumpScript : MonoBehaviour
     void OnEnable()
     {
         EventM = EventManager.Current;
+
+        EventM.JumpEvent += OnJump;
+        EventM.JumpCutEvent += OnJumpCut;
     }
-
-    // ============================================================================
-
-    public void OnJump(float input)
+    void OnDisable()
     {
-        if(input>0) //press
-        {
-            JumpBuffer();
-        }
-        else //release
-        {
-            JumpCut();
-        }
-    }
-
-    // ============================================================================
-    
-    void Update()
-    {
-        UpdateExtraJumps();
-        UpdateJumpBuffer();
-        UpdateCoyoteTime();
-        
-        TryJump();
-    }
-
-    // ============================================================================
-
-    public bool CanJump()
-    {
-        if(isJumpCooling) return false;
-
-        if(extraJumpsLeft<=0) return false;
-
-        return true;
+        EventM.JumpEvent -= OnJump;
+        EventM.JumpCutEvent -= OnJumpCut;
     }
 
     // ============================================================================
     
     public float jumpForce=10;
 
-    void TryJump()
+    void OnJump(GameObject who)
     {
-        if(!HasJumpBuffer()) return;
+        if(who!=owner) return;
+        
+        // do not check cooling here
+        // won't cooldown if got jump buffer for some reason
 
         if(HasCoyoteTime())
         {
@@ -81,41 +60,55 @@ public class JumpScript : MonoBehaviour
 
     void Jump()
     {
-        if(isJumpCooling) return;
-        StartCoroutine(JumpCooling());
+        if(IsCooling()) return;
+        DoCooldown();
+
+        ResetCoyoteTime();
 
         if(!rb.isKinematic)
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         
         rb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
 
-        jumpBufferLeft = -1;
-        coyoteTimeLeft = -1;
-
-        EventM.OnJump(gameObject, 1);
+        EventM.OnJumped(owner);
     }
 
-    // Cooldown ============================================================================
+    // Jump Cut ============================================================================
 
-    public float jumpCooldown=.2f;
-    bool isJumpCooling;
+    public float jumpCutMult=.5f;
 
-    IEnumerator JumpCooling()
+    void OnJumpCut(GameObject who)
     {
-        isJumpCooling=true;
-        yield return new WaitForSeconds(jumpCooldown);
-        isJumpCooling=false;
+        if(who!=owner) return;
+
+        // only if going up
+        if(rb.velocity.y>0)
+        {
+            rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
+
+            EventM.OnJumpCutted(owner);
+        }
     }
 
-    // Extra Jump ============================================================================
+    // ============================================================================
+    
+    void Update()
+    {
+        UpdateExtraJumps();
+        UpdateCoyoteTime();
+        UpdateCooldown();
+    }
 
+    // ============================================================================
+
+    [Header("Extra")]
     public int extraJumps=1;
     int extraJumpsLeft;
 
     void UpdateExtraJumps()
     {
         // Only replenish extra jumps if grounded and jump not cooling
-        if(ground.IsGrounded() && !isJumpCooling)
+        if(ground.IsGrounded() && !IsCooling())
         {
             extraJumpsLeft = extraJumps;
         }
@@ -129,29 +122,9 @@ public class JumpScript : MonoBehaviour
         Jump();
     }
 
-    // Jump Buffer ============================================================================
+    // ============================================================================
 
-    [Header("Assist")]
-    public float jumpBufferTime=.2f;
-    float jumpBufferLeft;
-
-    public void JumpBuffer()
-    {
-        jumpBufferLeft = jumpBufferTime;
-    }
-
-    void UpdateJumpBuffer()
-    {
-        jumpBufferLeft -= Time.deltaTime;
-    }
-
-    bool HasJumpBuffer()
-    {
-        return jumpBufferLeft>0;
-    }
-
-    // Coyote Time ============================================================================
-
+    [Header("Coyote")]
     public float coyoteTime=.2f;
     float coyoteTimeLeft;
 
@@ -160,30 +133,45 @@ public class JumpScript : MonoBehaviour
         coyoteTimeLeft -= Time.deltaTime;
 
         // Only replenish coyote time if grounded and jump not cooling
-        if(ground.IsGrounded() && !isJumpCooling)
+        if(ground.IsGrounded() && !IsCooling())
         {
             coyoteTimeLeft = coyoteTime;
         }
     }
 
-    bool HasCoyoteTime()
-    {
-        return coyoteTimeLeft>0;
-    }
+    bool HasCoyoteTime()=> coyoteTimeLeft>0;
 
-    // Jump Cut ============================================================================
-
-    public float jumpCutMult=.5f;
-
-    public void JumpCut()
-    {
-        // only if going up
-        if(rb.velocity.y>0)
-        {
-            rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
-
-            EventM.OnJump(gameObject, 0);
-        }
-    }
+    void ResetCoyoteTime() => coyoteTimeLeft=0;
     
+    // ============================================================================
+
+    [Header("Cooldown")]
+    public float jumpCooldown=.2f;
+    float cooldownLeft;
+    
+    void DoCooldown() => cooldownLeft = jumpCooldown;
+
+    void UpdateCooldown()
+    {
+        cooldownLeft -= Time.deltaTime;
+
+        if(cooldownLeft<0) cooldownLeft=0;
+    }
+
+    bool IsCooling() => cooldownLeft>0;
+
+    void CancelCooldown() => cooldownLeft=0;
+
+
+
+
+    // ============================================================================
+    
+    bool CanJump()
+    {
+        if(IsCooling()) return false;
+        if(extraJumpsLeft<=0) return false;
+        return true;
+    }
+
 }

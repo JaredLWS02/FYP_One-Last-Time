@@ -49,34 +49,24 @@ public class EventManager : MonoBehaviour
     {
         SwitchPilotEvent?.Invoke(who, to);
     }
+    
+    // Input Buffer ==================================================================================================================
+    
+    public event Action<GameObject, string, float> AddInputBufferEvent;
+    public event Action<GameObject, string> InputBufferingEvent;
+    public event Action<GameObject, string> RemoveInputBufferEvent;
 
-    // Agent Controls ==================================================================================================================
-
-    public event Action<GameObject, Vector2> AgentTryMoveEvent;
-    public event Action<GameObject, float> AgentTryFaceXEvent;
-    public event Action<GameObject, float> AgentTryJumpEvent;
-    public event Action<GameObject, Vector3> AgentTryAutoJumpEvent;
-    public event Action<GameObject, string> AgentTryAttackEvent;
-
-    public void OnAgentTryMove(GameObject mover, Vector2 input)
+    public void OnAddInputBuffer(GameObject who, string action_name, float buffer_time)
     {
-        AgentTryMoveEvent?.Invoke(mover, input);
+        AddInputBufferEvent?.Invoke(who, action_name, buffer_time);
     }
-    public void OnAgentTryFaceX(GameObject facer, float dir_x)
+    public void OnInputBuffering(GameObject who, string action_name)
     {
-        AgentTryFaceXEvent?.Invoke(facer, dir_x);
+        InputBufferingEvent?.Invoke(who, action_name);
     }
-    public void OnAgentTryJump(GameObject jumper, float input)
+    public void OnRemoveInputBuffer(GameObject who, string action_name)
     {
-        AgentTryJumpEvent?.Invoke(jumper, input);
-    }
-    public void OnAgentTryAutoJump(GameObject jumper, Vector3 dir)
-    {
-        AgentTryAutoJumpEvent?.Invoke(jumper, dir);
-    }
-    public void OnAgentTryAttack(GameObject attacker, string type)
-    {
-        AgentTryAttackEvent?.Invoke(attacker, type);
+        RemoveInputBufferEvent?.Invoke(who, action_name);
     }
     
     // Movement ==================================================================================================================
@@ -105,19 +95,46 @@ public class EventManager : MonoBehaviour
         FaceXEvent?.Invoke(who, input_x);
     } 
 
-    public event Action<GameObject, float> TryJumpEvent;
-    public event Action<GameObject, float> JumpEvent;
+    // Jumps ==================================================================================================================
+    
+    public event Action<GameObject> TryJumpEvent;
+    public event Action<GameObject> JumpEvent;
+    public event Action<GameObject> JumpedEvent;
+
+    public void OnTryJump(GameObject jumper)
+    {
+        TryJumpEvent?.Invoke(jumper);
+    }
+    public void OnJump(GameObject jumper)
+    {
+        JumpEvent?.Invoke(jumper);
+    }
+    public void OnJumped(GameObject jumper)
+    {
+        JumpedEvent?.Invoke(jumper);
+    }    
+
+    public event Action<GameObject> TryJumpCutEvent;
+    public event Action<GameObject> JumpCutEvent;
+    public event Action<GameObject> JumpCuttedEvent;
+
+    public void OnTryJumpCut(GameObject jumper)
+    {
+        TryJumpCutEvent?.Invoke(jumper);
+    }
+    public void OnJumpCut(GameObject jumper)
+    {
+        JumpCutEvent?.Invoke(jumper);
+    }
+    public void OnJumpCutted(GameObject jumper)
+    {
+        JumpCuttedEvent?.Invoke(jumper);
+    }    
+
     public event Action<GameObject, Vector3> TryAutoJumpEvent;
     public event Action<GameObject, Vector3> AutoJumpEvent;
+    public event Action<GameObject, Vector3> AutoJumpedEvent;
 
-    public void OnTryJump(GameObject jumper, float input)
-    {
-        TryJumpEvent?.Invoke(jumper, input);
-    }
-    public void OnJump(GameObject jumper, float input)
-    {
-        JumpEvent?.Invoke(jumper, input);
-    }    
     public void OnTryAutoJump(GameObject jumper, Vector3 jump_dir)
     {
         TryAutoJumpEvent?.Invoke(jumper, jump_dir);
@@ -125,6 +142,10 @@ public class EventManager : MonoBehaviour
     public void OnAutoJump(GameObject jumper, Vector3 jump_dir)
     {
         AutoJumpEvent?.Invoke(jumper, jump_dir);
+    }    
+    public void OnAutoJumped(GameObject jumper, Vector3 jump_dir)
+    {
+        AutoJumpedEvent?.Invoke(jumper, jump_dir);
     }    
     
     public event Action<GameObject> FastFallStartEvent;
@@ -151,104 +172,131 @@ public class EventManager : MonoBehaviour
         LeaveGroundEvent?.Invoke(who);
     }    
 
-    // Attacks ==================================================================================================================
+    // Agent Controls ==================================================================================================================
 
-    public event Action<GameObject, string> TryAttackEvent;
-    public event Action<GameObject, AttackSO> AttackEvent;
+    public event Action<GameObject, Vector2> AgentTryMoveEvent;
+    public event Action<GameObject, float> AgentTryFaceXEvent;
+    public event Action<GameObject> AgentTryJumpEvent;
+    public event Action<GameObject> AgentTryJumpCutEvent;
+    public event Action<GameObject, Vector3> AgentTryAutoJumpEvent;
+    public event Action<GameObject, string> AgentTryAttackEvent;
 
-    public void OnTryAttack(GameObject attacker, string attack_name)
+    public void OnAgentTryMove(GameObject mover, Vector2 input)
     {
-        TryAttackEvent?.Invoke(attacker, attack_name);
+        AgentTryMoveEvent?.Invoke(mover, input);
     }
-    public void OnAttack(GameObject attacker, AttackSO attackSO)
+    public void OnAgentTryFaceX(GameObject facer, float dir_x)
     {
-        AttackEvent?.Invoke(attacker, attackSO);
-    }  
-
-    // Attack Anim Events ==================================================================================================================
-
-    public event Action<GameObject> AttackWindUpEvent;
-    public event Action<GameObject> AttackReleaseEvent;
-    public event Action<GameObject> AttackRecoverEvent;
-
-    public void OnAttackWindUp(GameObject attacker)
+        AgentTryFaceXEvent?.Invoke(facer, dir_x);
+    }
+    public void OnAgentTryJump(GameObject jumper)
     {
-        AttackWindUpEvent?.Invoke(attacker);
-    }  
-    public void OnAttackRelease(GameObject attacker)
+        AgentTryJumpEvent?.Invoke(jumper);
+    }
+    public void OnAgentTryJumpCut(GameObject jumper)
     {
-        AttackReleaseEvent?.Invoke(attacker);
-    }  
-    public void OnAttackRecover(GameObject attacker)
+        AgentTryJumpCutEvent?.Invoke(jumper);
+    }
+    public void OnAgentTryAutoJump(GameObject jumper, Vector3 dir)
     {
-        AttackRecoverEvent?.Invoke(attacker);
-    }  
+        AgentTryAutoJumpEvent?.Invoke(jumper, dir);
+    }
+    public void OnAgentTryAttack(GameObject attacker, string type)
+    {
+        AgentTryAttackEvent?.Invoke(attacker, type);
+    }
 
-    // Attack Cancel ==================================================================================================================
+    // Attacks and Combos ==================================================================================================================
 
+    public event Action<GameObject, string> TryComboEvent;
+    public event Action<GameObject, string> ComboEvent;
+    public event Action<GameObject, AttackSO> AttackedEvent;
+    public event Action<GameObject, AttackSO> AttackReleasedEvent;
     public event Action<GameObject> CancelAttackEvent;
+    public event Action<GameObject> AttackCancelledEvent;
 
+    public void OnTryCombo(GameObject attacker, string combo_name)
+    {
+        TryComboEvent?.Invoke(attacker, combo_name);
+    }
+    public void OnCombo(GameObject attacker, string combo_name)
+    {
+        ComboEvent?.Invoke(attacker, combo_name);
+    }
+    public void OnAttacked(GameObject attacker, AttackSO attackSO)
+    {
+        AttackedEvent?.Invoke(attacker, attackSO);
+    }  
+    public void OnAttackReleased(GameObject attacker, AttackSO attackSO)
+    {
+        AttackReleasedEvent?.Invoke(attacker, attackSO);
+    }  
     public void OnCancelAttack(GameObject attacker)
     {
         CancelAttackEvent?.Invoke(attacker);
     }
-
-    // Parry ==================================================================================================================
+    public void OnAttackCancelled(GameObject attacker)
+    {
+        AttackCancelledEvent?.Invoke(attacker);
+    }
+    
+    // Parry and Riposte ==================================================================================================================
 
     public event Action<GameObject> TryParryEvent;
+    public event Action<GameObject> ParryEvent;
+    public event Action<GameObject> RaisedParryEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> ParrySuccessEvent;
-    public event Action<GameObject, string> TryRiposteAttackEvent;
+    public event Action<GameObject, string> TryRiposteComboEvent;
+    public event Action<GameObject> CancelParryEvent;
+    public event Action<GameObject> ParryCancelledEvent;
 
     public void OnTryParry(GameObject defender)
     {
         TryParryEvent?.Invoke(defender);
     }
+    public void OnParry(GameObject defender)
+    {
+        ParryEvent?.Invoke(defender);
+    }
+    public void OnRaisedParry(GameObject defender)
+    {
+        RaisedParryEvent?.Invoke(defender);
+    }
     public void OnParrySuccess(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         ParrySuccessEvent?.Invoke(defender, attacker, hurtbox, contactPoint);
     }
-    public void OnTryRiposteAttack(GameObject attacker, string attack_name)
+    public void OnTryRiposteCombo(GameObject attacker, string combo_name)
     {
-        TryRiposteAttackEvent?.Invoke(attacker, attack_name);
+        TryRiposteComboEvent?.Invoke(attacker, combo_name);
     }
-
-    // Parry Anim Events ==================================================================================================================
-
-    public event Action<GameObject> ParryRecoverEvent;
-
-    public void OnParryRecover(GameObject attacker)
+    public void OnCancelParry(GameObject defender)
     {
-        ParryRecoverEvent?.Invoke(attacker);
-    }  
-
-    // Parry Cancel ==================================================================================================================
-
-    public event Action<GameObject> CancelParryEvent;
-
-    public void OnCancelParry(GameObject attacker)
+        CancelParryEvent?.Invoke(defender);
+    }
+    public void OnParryCancelled(GameObject defender)
     {
-        CancelParryEvent?.Invoke(attacker);
+        ParryCancelledEvent?.Invoke(defender);
     }
     
     // Ability ==================================================================================================================
 
     public event Action<GameObject, string> TryAbilityEvent;
-    public event Action<GameObject, AbilitySO> AbilityEvent;
+    public event Action<GameObject, string> AbilityEvent;
+    public event Action<GameObject, AbilitySO> CastingEvent;
+    public event Action<GameObject, AbilitySO> CastEvent;
+    public event Action<GameObject, AbilitySO> CastReleasedEvent;
+    public event Action<GameObject> CancelCastEvent;
+    public event Action<GameObject> CastCancelledEvent;
     
     public void OnTryAbility(GameObject caster, string ability_name)
     {
         TryAbilityEvent?.Invoke(caster, ability_name);
     }
-    public void OnAbility(GameObject caster, AbilitySO abilitySO)
+    public void OnAbility(GameObject caster, string ability_name)
     {
-        AbilityEvent?.Invoke(caster, abilitySO);
+        AbilityEvent?.Invoke(caster, ability_name);
     }
-    
-    // Casting ==================================================================================================================
-    
-    public event Action<GameObject, AbilitySO> CastingEvent;
-    public event Action<GameObject, AbilitySO> CastEvent;
-
     public void OnCasting(GameObject caster, AbilitySO abilitySO)
     {
         CastingEvent?.Invoke(caster, abilitySO);
@@ -257,33 +305,17 @@ public class EventManager : MonoBehaviour
     {
         CastEvent?.Invoke(caster, abilitySO);
     }
-
-    // Cast Anim Events ==================================================================================================================
-
-    public event Action<GameObject> CastWindUpEvent;
-    public event Action<GameObject> CastReleaseEvent;
-    public event Action<GameObject> CastRecoverEvent;
-
-    public void OnCastWindUp(GameObject caster)
+    public void OnCastReleased(GameObject caster, AbilitySO abilitySO)
     {
-        CastWindUpEvent?.Invoke(caster);
-    }  
-    public void OnCastRelease(GameObject caster)
-    {
-        CastReleaseEvent?.Invoke(caster);
-    }  
-    public void OnCastRecover(GameObject caster)
-    {
-        CastRecoverEvent?.Invoke(caster);
-    }  
-
-    // Cast Cancel ==================================================================================================================
-
-    public event Action<GameObject> CancelCastEvent;
-
+        CastReleasedEvent?.Invoke(caster, abilitySO);
+    }
     public void OnCancelCast(GameObject caster)
     {
         CancelCastEvent?.Invoke(caster);
+    }
+    public void OnCastCancelled(GameObject caster)
+    {
+        CastCancelledEvent?.Invoke(caster);
     }  
     
     // Hurt ==================================================================================================================
@@ -314,6 +346,8 @@ public class EventManager : MonoBehaviour
 
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryStunEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> StunEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> StunnedEvent;
+    public event Action<GameObject> CancelStunEvent;
     
     public void OnTryStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -323,20 +357,10 @@ public class EventManager : MonoBehaviour
     {
         StunEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }
-
-    // Stun Anim Events ==================================================================================================================
-
-    public event Action<GameObject> StunRecoverEvent;
-
-    public void OnStunRecover(GameObject who)
+    public void OnStunned(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        StunRecoverEvent?.Invoke(who);
-    }  
-
-    // Stun Cancel ==================================================================================================================
-
-    public event Action<GameObject> CancelStunEvent;
-
+        StunnedEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
     public void OnCancelStun(GameObject who)
     {
         CancelStunEvent?.Invoke(who);

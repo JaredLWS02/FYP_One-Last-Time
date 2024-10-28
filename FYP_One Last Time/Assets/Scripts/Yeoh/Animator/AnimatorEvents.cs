@@ -30,11 +30,11 @@ public class AnimatorEvents : MonoBehaviour
 
         if(blendSeconds <= 0)
         {
-            anim.Play(animName, animLayer);
+            anim.Play(animName, animLayer, 0);
         }
         else
         {
-            anim.CrossFade(animName, blendSeconds, animLayer);
+            anim.CrossFade(animName, blendSeconds, animLayer, 0);
         }
     }
 }

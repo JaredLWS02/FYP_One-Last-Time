@@ -25,6 +25,7 @@ public class AgentInputListener : MonoBehaviour
         EventM.AgentTryMoveEvent += OnAgentTryMove;
         EventM.AgentTryFaceXEvent += OnAgentTryFaceX;
         EventM.AgentTryJumpEvent += OnAgentTryJump;
+        EventM.AgentTryJumpCutEvent += OnAgentTryJumpCut;
         EventM.AgentTryAutoJumpEvent += OnAgentTryAutoJump;
         EventM.AgentTryAttackEvent += OnAgentTryAttack;
     }
@@ -33,6 +34,7 @@ public class AgentInputListener : MonoBehaviour
         EventM.AgentTryMoveEvent -= OnAgentTryMove;
         EventM.AgentTryFaceXEvent -= OnAgentTryFaceX;
         EventM.AgentTryJumpEvent -= OnAgentTryJump;
+        EventM.AgentTryJumpCutEvent -= OnAgentTryJumpCut;
         EventM.AgentTryAutoJumpEvent -= OnAgentTryAutoJump;
         EventM.AgentTryAttackEvent -= OnAgentTryAttack;
     }
@@ -68,13 +70,22 @@ public class AgentInputListener : MonoBehaviour
 
     // Jump ============================================================================
 
-    void OnAgentTryJump(GameObject jumper, float input)
+    void OnAgentTryJump(GameObject jumper)
     {
         if(!pilot.IsAI()) return;
 
         if(jumper!=gameObject) return;
 
-        EventM.OnTryJump(gameObject, input);
+        EventM.OnTryJump(gameObject);
+    }
+
+    void OnAgentTryJumpCut(GameObject jumper)
+    {
+        if(!pilot.IsAI()) return;
+
+        if(jumper!=gameObject) return;
+
+        EventM.OnTryJump(gameObject);
     }
 
     void OnAgentTryAutoJump(GameObject jumper, Vector3 dir)
@@ -94,6 +105,6 @@ public class AgentInputListener : MonoBehaviour
 
         if(attacker!=gameObject) return;
 
-        EventM.OnTryAttack(gameObject, type);
+        EventM.OnTryCombo(gameObject, type);
     }
 }

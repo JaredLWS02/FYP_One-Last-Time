@@ -129,7 +129,6 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   abilityList: {fileID: 11400000, guid: 20654795a73aa1546b842d07d69881d9, type: 2}
   MP_Manager: {fileID: 7058722310484815464}
-  bufferTime: 0.2
   abilitySO: {fileID: 0}
   cancelAnimName: Cancel Cast
 --- !u!114 &7975362184149562795
@@ -147,7 +146,6 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   healSO: {fileID: 11400000, guid: 289d739c06a77ac4f91862671cfa2768, type: 2}
   hp: {fileID: 1861734953551003033}
-  bufferTime: 0.2
 --- !u!1 &2941172494308309934
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
-  bufferTime: 0.2
   attackSO: {fileID: 0}
   attackSpawn:
     prefab: {fileID: 0}
@@ -375,7 +372,6 @@ MonoBehaviour:
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
-  bufferTime: 0.2
   randomCombo: 0
   comboResetTime: 0.25
   comboCooldownTime: 0.25
@@ -465,7 +461,6 @@ MonoBehaviour:
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
-  bufferTime: 0.2
   randomCombo: 0
   comboResetTime: 0.5
   comboCooldownTime: 0.5
@@ -482,10 +477,7 @@ GameObject:
   - component: {fileID: 4004871874835498188}
   - component: {fileID: 8324220026941984535}
   - component: {fileID: 4728252470638691548}
-  - component: {fileID: 9206634663529618913}
-  - component: {fileID: 4716451231667188826}
-  - component: {fileID: 4251276819503043955}
-  - component: {fileID: 4352165570627224600}
+  - component: {fileID: 8471822331360070094}
   - component: {fileID: 345509100620316827}
   - component: {fileID: 6876849668752172755}
   - component: {fileID: 8393169458917718466}
@@ -598,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 4004871874835498188}
   rb: {fileID: 1642459170912960868}
-  move: {fileID: 1511195835895261633}
+  move: {fileID: 3611210669050738406}
   baseSpeedMult: 0.88
   checkForward: 1
   forwardParamName: MoveZ
@@ -622,7 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   anim: {fileID: 4004871874835498188}
---- !u!114 &9206634663529618913
+--- !u!114 &8471822331360070094
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -631,49 +623,138 @@ MonoBehaviour:
   m_GameObject: {fileID: 7274980459159228368}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6941ca0d6d61d264eb9d8d0ce361ca7c, type: 3}
+  m_Script: {fileID: 11500000, guid: cbe80126baae4cf0ba8194133e415a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
---- !u!114 &4716451231667188826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7274980459159228368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ec5b9ffd5f6c545a1032485d9cdf33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
---- !u!114 &4251276819503043955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7274980459159228368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1239702ffb013ba4b8c54b9b84ca7e2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
---- !u!114 &4352165570627224600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7274980459159228368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124838d4d0ad4b341af7a90f66847b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
+  animationEvents:
+  - eventName: AttackWindUp
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7022457898630109682}
+          m_TargetAssemblyTypeName: AttackScript, Assembly-CSharp
+          m_MethodName: AttackWindUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: AttackRelease
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7022457898630109682}
+          m_TargetAssemblyTypeName: AttackScript, Assembly-CSharp
+          m_MethodName: AttackRelease
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: AttackRecover
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7022457898630109682}
+          m_TargetAssemblyTypeName: AttackScript, Assembly-CSharp
+          m_MethodName: AttackRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: ParryRecover
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6485402941929711479}
+          m_TargetAssemblyTypeName: ParryScript, Assembly-CSharp
+          m_MethodName: ParryRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: CastWindUp
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1410335126641825925}
+          m_TargetAssemblyTypeName: AbilityCaster, Assembly-CSharp
+          m_MethodName: CastWindUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: CastRelease
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1410335126641825925}
+          m_TargetAssemblyTypeName: AbilityCaster, Assembly-CSharp
+          m_MethodName: CastRelease
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: CastRecover
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1410335126641825925}
+          m_TargetAssemblyTypeName: AbilityCaster, Assembly-CSharp
+          m_MethodName: CastRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: StunRecover
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 110049388833876227}
+          m_TargetAssemblyTypeName: StunScript, Assembly-CSharp
+          m_MethodName: StunRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &345509100620316827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +885,6 @@ MonoBehaviour:
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
-  bufferTime: 0.2
   randomCombo: 0
   comboResetTime: 0.5
   comboCooldownTime: 0.5
@@ -927,11 +1007,10 @@ GameObject:
   - component: {fileID: 8412114488542826597}
   - component: {fileID: 4572757513184181502}
   - component: {fileID: 2149238698398928101}
+  - component: {fileID: 1905714820697627064}
   - component: {fileID: 4360392213960528418}
   - component: {fileID: 6839865897356820154}
-  - component: {fileID: 1511195835895261633}
   - component: {fileID: 3611210669050738406}
-  - component: {fileID: 5012553719974128323}
   - component: {fileID: 4368493988338249805}
   - component: {fileID: 2535672027372677568}
   - component: {fileID: 1353104093430078228}
@@ -1065,6 +1144,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pilot: {fileID: 0}
+  jumpBuffer: 0.2
+  attackBuffer: 0.2
+  parryBuffer: 0.2
+  abilityBuffer: 0.2
+--- !u!114 &1905714820697627064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580ca10c65b67314bab8a75ba6553494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
 --- !u!114 &4360392213960528418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,19 +1181,11 @@ MonoBehaviour:
   AllowParry: 0
   AllowCast: 0
   AllowStun: 0
-  move: {fileID: 3611210669050738406}
-  turn: {fileID: 4368493988338249805}
-  jump: {fileID: 2535672027372677568}
   ground: {fileID: 1353104093430078228}
   autoJump: {fileID: 0}
   attack: {fileID: 7022457898630109682}
-  attackCombos:
-  - {fileID: 2589080218004393375}
-  - {fileID: 6345980450733858254}
-  - {fileID: 1382756791914587115}
   parry: {fileID: 6485402941929711479}
   caster: {fileID: 1410335126641825925}
-  heal: {fileID: 7975362184149562795}
   stun: {fileID: 110049388833876227}
 --- !u!114 &6839865897356820154
 MonoBehaviour:
@@ -1112,23 +1200,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: {fileID: 0}
---- !u!114 &1511195835895261633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1023a964ada16ab4a91da203d9101324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  baseSpeed: 0
-  acceleration: 10
-  deceleration: 10
-  velocity: 0
 --- !u!114 &3611210669050738406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1141,22 +1212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a010c1a4d7df435429b5810874b7b556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5012553719974128323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c08f7221b95ed9a4a8a133bc263bd2d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 1000
-  baseTurnSpeed: 0
-  turnAxis: {x: 0, y: 1, z: 0}
-  linearTurn: 1
+  owner: {fileID: 8987163089559660572}
+  speed: 10
+  baseSpeed: 0
+  acceleration: 10
+  deceleration: 10
+  velocity: 0
 --- !u!114 &4368493988338249805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1169,6 +1230,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8621508b9e9d96f41896b91532a5224a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  turnSpeed: 1000
+  baseTurnSpeed: 0
+  turnAxis: {x: 0, y: 1, z: 0}
+  linearTurn: 1
   faceR: 1
   reverse: 0
   flipDelay: {x: 0, y: 0.2}
@@ -1185,10 +1251,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a4314937b99f24d9b0358b4b6c7222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
   jumpForce: 15
   jumpCooldown: 0.2
   extraJumps: 1
-  jumpBufferTime: 0.2
   coyoteTime: 0.2
   jumpCutMult: 0.5
 --- !u!114 &1353104093430078228
@@ -1314,7 +1380,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
-  bufferTime: 0.2
   parryAnimLayer: 0
   parryAnimBlendTime: 0
   raiseParryAnimName: Raise Parry
@@ -1322,7 +1387,8 @@ MonoBehaviour:
   lowerParryAnimName: Lower Parry
   cooldownTime: 0.3
   minParryDot: 0.2
-  riposteSeconds: 0.3
+  parrySuccessAnimName: Parry Success
+  riposteSeconds: 0.5
   cancelAnimName: Cancel Parry
 --- !u!114 &110049388833876227
 MonoBehaviour:

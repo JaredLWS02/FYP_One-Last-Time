@@ -7,6 +7,11 @@ using UnityEngine;
 
 public class MoveScript : MonoBehaviour
 {
+    [Header("Move Script")]
+    public GameObject owner;
+    
+    // ============================================================================
+    
     Rigidbody rb;
 
     void Awake()
@@ -17,7 +22,6 @@ public class MoveScript : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Move")]
     public float speed=10;
     [HideInInspector]
     public float baseSpeed;

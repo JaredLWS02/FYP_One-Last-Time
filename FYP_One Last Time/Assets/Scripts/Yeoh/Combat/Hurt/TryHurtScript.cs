@@ -5,7 +5,6 @@ using UnityEngine;
 public class TryHurtScript : MonoBehaviour
 {
     public GameObject owner;
-    public ParryScript parry;
 
     // ============================================================================
 
@@ -41,6 +40,9 @@ public class TryHurtScript : MonoBehaviour
 
     // ============================================================================
 
+    [Header("Optional")]
+    public ParryScript parry;
+
     bool IsParryRaised()
     {
         if(!parry) return false;
@@ -52,5 +54,8 @@ public class TryHurtScript : MonoBehaviour
         if(!parry) return false;
         return parry.IsFacing(target_pos);
     }
+
+    // ============================================================================
+
 
 }

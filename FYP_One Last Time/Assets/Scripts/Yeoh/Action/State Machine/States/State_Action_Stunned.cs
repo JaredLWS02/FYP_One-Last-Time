@@ -31,6 +31,7 @@ public class State_Action_Stunned : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        //action.AllowStun = toggle;
+        action.AllowParry = toggle;
+        action.AllowStun = toggle;
     }
 }

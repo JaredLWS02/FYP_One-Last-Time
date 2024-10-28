@@ -2,32 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MoveScript))]
+public class SideMove : MoveScript
+{    
+    EventManager EventM;
 
-public class SideMove : MonoBehaviour
-{
-    MoveScript move;
-
-    void Awake()
+    void OnEnable()
     {
-        move = GetComponent<MoveScript>();
+        EventM = EventManager.Current;
+        
+        EventM.MoveEvent += OnMove;
+    }
+    void OnDisable()
+    {
+        EventM.MoveEvent -= OnMove;
     }
 
     // ============================================================================
 
     float dirX;
 
-    public void Move(float input_x)
+    void OnMove(GameObject who, Vector2 input)
     {
-        dirX = input_x;
+        if(who!=owner) return;
+
+        dirX = input.x;
     }
     
     // ============================================================================
 
     void FixedUpdate()
     {
-        dirX = move.Round(dirX, 1);
+        dirX = Round(dirX, 1);
 
-        move.UpdateMoveMult(dirX, Vector3.right);
+        UpdateMoveMult(dirX, Vector3.right);
     }
 }

@@ -15,10 +15,9 @@ MonoBehaviour:
   Name: Tikus Slam Hurtbox
   description: 
   damage: 15
-  knockback: 100
-  damageBlock: 15
+  knockback: 30
+  blockDamage: 15
+  blockKnockback: 30
   pierceCount: 1
-  parryable: 1
+  isParryable: 1
   parryStunsAttacker: 1
-  stunSeconds: 0.5
-  stunSpeedMult: 0.3

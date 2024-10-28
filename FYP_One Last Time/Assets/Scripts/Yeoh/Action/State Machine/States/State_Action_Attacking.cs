@@ -31,6 +31,6 @@ public class State_Action_Attacking : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        action.AllowAttack = toggle;
+
     }
 }

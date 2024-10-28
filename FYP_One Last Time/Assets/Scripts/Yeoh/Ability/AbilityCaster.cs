@@ -5,9 +5,7 @@ using UnityEngine;
 public class AbilityCaster : MonoBehaviour
 {   
     public GameObject owner;
-
     public AbilityListSO abilityList;
-
     public HPManager MP_Manager;
 
     // ============================================================================
@@ -18,20 +16,12 @@ public class AbilityCaster : MonoBehaviour
     {
         EventM = EventManager.Current;
 
-        EventM.CastWindUpEvent += OnCastWindUp;
-        EventM.CastReleaseEvent += OnCastRelease;
-        EventM.CastRecoverEvent += OnCastRecover;
-
         EventM.CancelCastEvent += OnCancelCast;
 
         abilityList.ResetCooldowns();
     }
     void OnDisable()
     {
-        EventM.CastWindUpEvent -= OnCastWindUp;
-        EventM.CastReleaseEvent -= OnCastRelease;
-        EventM.CastRecoverEvent -= OnCastRecover;
-
         EventM.CancelCastEvent -= OnCancelCast;
 
         abilityList.ResetCooldowns();
@@ -41,8 +31,6 @@ public class AbilityCaster : MonoBehaviour
 
     void Update()
     {
-        UpdateBuffer();
-        TryStartCasting();
         UpdateProgress();
 
         abilityList.UpdateCooldowns();
@@ -51,35 +39,14 @@ public class AbilityCaster : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Before Casting")]
-    public float bufferTime=.2f;
-    float bufferLeft;
-
-    public void DoBuffer() => bufferLeft = bufferTime;
-
-    void UpdateBuffer()
-    {
-        bufferLeft -= Time.deltaTime;
-
-        if(bufferLeft<0) bufferLeft=0;
-    }
-
-    bool HasBuffer() => bufferLeft>0;
-
-    void ResetBuffer() => bufferLeft=0;
-
-    // ============================================================================
-
     [Header("On Casting")]
     public AbilitySO abilitySO;
 
     AbilitySlot currentSlot;
 
-    void TryStartCasting()
+    public void TryStartCasting()
     {
         if(isCasting) return;
-
-        if(!HasBuffer()) return;
 
         if(!abilityList.HasAbility(abilitySO, out var slot)) return;
 
@@ -96,14 +63,12 @@ public class AbilityCaster : MonoBehaviour
 
     void StartCasting()
     {
-        ResetBuffer();
-
         ResetProgress();
         isCasting=true;
 
-        PlayCastingAnim();
-
         EventM.OnCasting(owner, abilitySO);
+
+        PlayCastingAnim();
 
         //sfxCastingLoop = AudioManager.Current.LoopSFX(owner, SFXManager.Current.sfxCastingLoop);
     }
@@ -122,7 +87,7 @@ public class AbilityCaster : MonoBehaviour
     void ResetProgress()
     {
         progress=0;
-        
+
         EventM.OnUIBarUpdate(gameObject, progress, abilitySO.castingTime);
     }
 
@@ -181,24 +146,18 @@ public class AbilityCaster : MonoBehaviour
 
     // Cast Anim Events ============================================================================
 
-    void OnCastWindUp(GameObject caster)
+    public void CastWindUp()
     {
-        if(caster!=owner) return;
-
         isCast=true;
     }
 
-    void OnCastRelease(GameObject caster)
+    public void CastRelease()
     {
-        if(caster!=owner) return;
-
-        EventM.OnAbility(owner, abilitySO);
+        EventM.OnCastReleased(owner, abilitySO);
     }
 
-    void OnCastRecover(GameObject caster)
+    public void CastRecover()
     {
-        if(caster!=owner) return;
-
         isCast=false;
     }
 
@@ -214,21 +173,23 @@ public class AbilityCaster : MonoBehaviour
     void OnCancelCast(GameObject who)
     {
         if(who!=owner) return;
+
+        if(!IsCasting()) return;
+
+        StopCasting();
+
+        CastRecover();
+
+        EventM.OnCastCancelled(owner);
         
-        CancelAnim();
+        PlayCancelAnim();
     }
 
     [Header("Cancel")]
     public string cancelAnimName = "Cancel Cast";
 
-    void CancelAnim()
+    void PlayCancelAnim()
     {
-        if(!IsCasting()) return;
-
-        StopCasting();
-
-        EventM.OnCastRecover(owner);
-
         EventM.OnPlayAnim(owner, cancelAnimName, abilitySO.castingAnimLayer, abilitySO.castingAnimBlendTime);
     }
 }

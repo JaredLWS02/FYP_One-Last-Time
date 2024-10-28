@@ -170,8 +170,7 @@ GameObject:
   - component: {fileID: 3716319433280079349}
   - component: {fileID: 7786861728038490430}
   - component: {fileID: 7114433548222468432}
-  - component: {fileID: 2385068764117251220}
-  - component: {fileID: 7432243068392043879}
+  - component: {fileID: 3956280804667956790}
   - component: {fileID: 418708997891478844}
   - component: {fileID: 1477388138496825184}
   - component: {fileID: 412968695723508853}
@@ -284,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
   anim: {fileID: 7786861728038490430}
---- !u!114 &2385068764117251220
+--- !u!114 &3956280804667956790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -293,23 +292,74 @@ MonoBehaviour:
   m_GameObject: {fileID: 2719329177920231827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6941ca0d6d61d264eb9d8d0ce361ca7c, type: 3}
+  m_Script: {fileID: 11500000, guid: cbe80126baae4cf0ba8194133e415a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 5261146206814944013}
---- !u!114 &7432243068392043879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2719329177920231827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124838d4d0ad4b341af7a90f66847b44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 5261146206814944013}
+  animationEvents:
+  - eventName: AttackWindUp
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6861530176262365675}
+          m_TargetAssemblyTypeName: AttackScript, Assembly-CSharp
+          m_MethodName: AttackWindUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: AttackRelease
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6861530176262365675}
+          m_TargetAssemblyTypeName: AttackScript, Assembly-CSharp
+          m_MethodName: AttackRelease
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: AttackRecover
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6861530176262365675}
+          m_TargetAssemblyTypeName: AttackScript, Assembly-CSharp
+          m_MethodName: AttackRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: StunRecover
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4272814330646281861}
+          m_TargetAssemblyTypeName: StunScript, Assembly-CSharp
+          m_MethodName: StunRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &418708997891478844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,9 +714,7 @@ GameObject:
   - component: {fileID: 1052805118213280258}
   - component: {fileID: 5831448510275874491}
   - component: {fileID: 8261427844462952279}
-  - component: {fileID: 3371146443251301953}
   - component: {fileID: 5193524905132986524}
-  - component: {fileID: 1514896727660394715}
   - component: {fileID: 8899604075891903837}
   - component: {fileID: 8893670741154941565}
   - component: {fileID: 7877508715297963426}
@@ -856,6 +904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb9b64dadb3aa94d9dc148b5a3bbb09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
   isJumping: 0
   jumpSeconds: 0.8
   cooldownTime: 0.5
@@ -957,19 +1006,18 @@ MonoBehaviour:
   AllowJump: 0
   AllowDash: 0
   AllowAttack: 0
+  AllowParry: 0
   AllowCast: 0
   AllowStun: 0
-  move: {fileID: 5193524905132986524}
-  turn: {fileID: 8899604075891903837}
-  jump: {fileID: 8893670741154941565}
-  ground: {fileID: 7877508715297963426}
-  autoJump: {fileID: 5609296010924524344}
   attack: {fileID: 6861530176262365675}
   attackCombos:
   - {fileID: 3962663419828832351}
+  parry: {fileID: 0}
   caster: {fileID: 0}
   heal: {fileID: 0}
   stun: {fileID: 4272814330646281861}
+  ground: {fileID: 7877508715297963426}
+  autoJump: {fileID: 5609296010924524344}
 --- !u!114 &8261427844462952279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,23 +1031,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: {fileID: 0}
---- !u!114 &3371146443251301953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1023a964ada16ab4a91da203d9101324, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 8
-  baseSpeed: 0
-  acceleration: 10
-  deceleration: 10
-  velocity: 0
 --- !u!114 &5193524905132986524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,22 +1043,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a010c1a4d7df435429b5810874b7b556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1514896727660394715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c08f7221b95ed9a4a8a133bc263bd2d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 1000
-  baseTurnSpeed: 0
-  turnAxis: {x: 0, y: 1, z: 0}
-  linearTurn: 1
+  speed: 8
+  baseSpeed: 0
+  acceleration: 10
+  deceleration: 10
+  velocity: 0
+  owner: {fileID: 5261146206814944013}
 --- !u!114 &8899604075891903837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,6 +1061,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8621508b9e9d96f41896b91532a5224a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnSpeed: 1000
+  baseTurnSpeed: 0
+  turnAxis: {x: 0, y: 1, z: 0}
+  linearTurn: 1
+  owner: {fileID: 5261146206814944013}
   faceR: 1
   reverse: 0
   flipDelay: {x: 0, y: 0.2}
@@ -1056,6 +1082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a4314937b99f24d9b0358b4b6c7222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
   jumpForce: 20
   jumpCooldown: 0.2
   extraJumps: 0

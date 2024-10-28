@@ -6,62 +6,54 @@ using UnityEngine;
 
 public class HealAbility : MonoBehaviour
 {
-    AbilityCaster caster;
-
     public GameObject owner;
     public AbilitySO healSO;
     public HPManager hp;
+
+    // ============================================================================
+    
+    AbilityCaster caster;
 
     void Awake()
     {
         caster = GetComponent<AbilityCaster>();
     }
-
-    // ============================================================================
     
-    void Update()
+    // ============================================================================
+
+    EventManager EventM;
+
+    void OnEnable()
     {
-        UpdateBuffer();
-        TryStartCasting();
+        EventM = EventManager.Current;
+        
+        EventM.AbilityEvent += OnAbility;
+        EventM.CastReleasedEvent += OnCastReleased;
     }
-    
-    // ============================================================================
-
-    [Header("Before Casting")]
-    public float bufferTime=.2f;
-    float bufferLeft;
-
-    public void DoBuffer() => bufferLeft = bufferTime;
-
-    void UpdateBuffer()
+    void OnDisable()
     {
-        bufferLeft -= Time.deltaTime;
-
-        if(bufferLeft<0) bufferLeft=0;
+        EventM.AbilityEvent -= OnAbility;
+        EventM.CastReleasedEvent -= OnCastReleased;
     }
 
-    bool HasBuffer() => bufferLeft>0;
-
-    void ResetBuffer() => bufferLeft=0;
-
     // ============================================================================
     
-    void TryStartCasting()
+    void OnAbility(GameObject who, string ability_name)
     {
+        if(who!=owner) return;
+
+        if(ability_name != healSO.Name) return;
+
         if(IsCasting()) return;
-
-        if(!HasBuffer()) return;
 
         StartCasting();
     }
 
     void StartCasting()
     {
-        ResetBuffer();
-
         caster.abilitySO = healSO;
 
-        caster.DoBuffer();
+        caster.TryStartCasting();
     }
     
     // ============================================================================
@@ -73,22 +65,7 @@ public class HealAbility : MonoBehaviour
 
     // ============================================================================
 
-    EventManager EventM;
-
-    void OnEnable()
-    {
-        EventM = EventManager.Current;
-        
-        EventM.AbilityEvent += OnAbility;
-    }
-    void OnDisable()
-    {
-        EventM.AbilityEvent -= OnAbility;
-    }
-
-    // ============================================================================
-
-    void OnAbility(GameObject caster, AbilitySO abilitySO)
+    void OnCastReleased(GameObject caster, AbilitySO abilitySO)
     {
         if(caster!=owner) return;
 

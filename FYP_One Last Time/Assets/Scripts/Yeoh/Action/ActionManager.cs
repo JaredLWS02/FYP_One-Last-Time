@@ -27,11 +27,12 @@ public class ActionManager : MonoBehaviour
         EventM.TryMoveEvent += OnTryMove;
         EventM.TryFaceXEvent += OnTryFaceX;
         EventM.TryJumpEvent += OnTryJump;
+        EventM.TryJumpCutEvent += OnTryJumpCut;
         EventM.TryAutoJumpEvent += OnTryAutoJump;
-        EventM.TryAttackEvent += OnTryAttack;
+        EventM.TryComboEvent += OnTryCombo;
         EventM.TryParryEvent += OnTryParry;
-        EventM.TryRiposteAttackEvent += OnTryRiposteAttack;
-        EventM.TryAbilityEvent += OnTryCast;
+        EventM.TryRiposteComboEvent += OnTryRiposteCombo;
+        EventM.TryAbilityEvent += OnTryAbility;
         EventM.TryStunEvent += OnTryStun;
     }
     void OnDisable()
@@ -39,18 +40,16 @@ public class ActionManager : MonoBehaviour
         EventM.TryMoveEvent -= OnTryMove;
         EventM.TryFaceXEvent -= OnTryFaceX;
         EventM.TryJumpEvent -= OnTryJump;
+        EventM.TryJumpCutEvent -= OnTryJumpCut;
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
-        EventM.TryAttackEvent -= OnTryAttack;
+        EventM.TryComboEvent -= OnTryCombo;
         EventM.TryParryEvent -= OnTryParry;
-        EventM.TryRiposteAttackEvent -= OnTryRiposteAttack;
-        EventM.TryAbilityEvent -= OnTryCast;
+        EventM.TryRiposteComboEvent -= OnTryRiposteCombo;
+        EventM.TryAbilityEvent -= OnTryAbility;
         EventM.TryStunEvent -= OnTryStun;
     }
 
     // ============================================================================
-
-    [Header("Movement")]
-    public SideMove move;
 
     void OnTryMove(GameObject who, Vector2 input)
     {
@@ -59,16 +58,8 @@ public class ActionManager : MonoBehaviour
         if(!AllowMoveX) input.x=0;
         if(!AllowMoveY) input.y=0;
 
-        if(move)
-        move.Move(input.x);
-
-        //if(climb)
-        //climb.Move(gameObject, input.y);
-
         EventM.OnMove(gameObject, input);
     }
-
-    public SideTurn turn;
 
     void OnTryFaceX(GameObject who, float input_x)
     {
@@ -76,31 +67,28 @@ public class ActionManager : MonoBehaviour
 
         if(!AllowMoveX) input_x=0;
 
-        if(!turn) return;
-
-        turn.UpdateFlip(input_x);
-
         EventM.OnFaceX(gameObject, input_x);
     }
     
     // ============================================================================
 
-    [Header("Jump")]
-    public JumpScript jump;
-    public GroundCheck ground;
-
-    void OnTryJump(GameObject who, float input)
+    void OnTryJump(GameObject who)
     {
         if(who!=gameObject) return;
 
         if(!AllowJump) return;
 
-        if(!jump) return;
-        
-        jump.OnJump(input);        
+        EventM.OnJump(gameObject);
     }
 
-    public AgentAutoJump autoJump;
+    void OnTryJumpCut(GameObject who)
+    {
+        if(who!=gameObject) return;
+
+        if(!AllowJump) return;
+
+        EventM.OnJumpCut(gameObject);
+    }
 
     void OnTryAutoJump(GameObject who, Vector3 jump_dir)
     {
@@ -108,36 +96,16 @@ public class ActionManager : MonoBehaviour
 
         if(!AllowJump) return;
 
-        if(!autoJump) return;
-
-        autoJump.StartJump();
-
-        if(!turn) return;
+        EventM.OnAutoJump(gameObject, jump_dir);
         
         float dot_x = Vector3.Dot(jump_dir, Vector3.right);
 
-        turn.UpdateFlip(dot_x);
+        EventM.OnFaceX(gameObject, dot_x);
     }
 
-    // ============================================================================
-    
-    [Header("Attack")]
-    public AttackScript attack;
-    public List<AttackCombo> attackCombos = new();
+    // ============================================================================    
 
-    void FindComboNameAndAttack(string attackName)
-    {
-        foreach(var combo in attackCombos)
-        {
-            if(combo.comboName == attackName)
-            {
-                combo.DoBuffer();
-                break;
-            }
-        }
-    }
-
-    void OnTryAttack(GameObject who, string attackName)
+    void OnTryCombo(GameObject who, string combo_name)
     {
         if(who!=gameObject) return;
 
@@ -145,26 +113,10 @@ public class ActionManager : MonoBehaviour
 
         if(IsRiposteActive()) return;
 
-        FindComboNameAndAttack(attackName);
+        EventM.OnCombo(gameObject, combo_name);
     }
 
-    // ============================================================================
-    
-    [Header("Parry")]
-    public ParryScript parry;
-
-    void OnTryParry(GameObject who)
-    {
-        if(who!=gameObject) return;
-
-        if(!AllowParry) return;
-
-        if(!parry) return;
-
-        parry.DoBuffer();
-    }
-
-    void OnTryRiposteAttack(GameObject who, string attackName)
+    void OnTryRiposteCombo(GameObject who, string combo_name)
     {
         if(who!=gameObject) return;
 
@@ -172,33 +124,32 @@ public class ActionManager : MonoBehaviour
 
         if(!IsRiposteActive()) return;
 
-        FindComboNameAndAttack(attackName);
+        EventM.OnCombo(gameObject, combo_name);
     }  
 
     // ============================================================================
+    
+    void OnTryParry(GameObject who)
+    {
+        if(who!=gameObject) return;
 
-    [Header("Ability")]
-    public AbilityCaster caster;
-    public HealAbility heal;
+        if(!AllowParry) return;
 
-    void OnTryCast(GameObject who, string ability_name)
+        EventM.OnParry(gameObject);
+    }
+
+    // ============================================================================    
+
+    void OnTryAbility(GameObject who, string ability_name)
     {
         if(who!=gameObject) return;
 
         if(!AllowCast) return;
 
-        if(!caster) return;
-        
-        if(ability_name=="Heal")
-        {
-            if(heal) heal.DoBuffer();
-        }
+        EventM.OnAbility(gameObject, ability_name);
     }
 
     // ============================================================================
-
-    [Header("Stun")]
-    public StunScript stun;
 
     void OnTryStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -206,18 +157,20 @@ public class ActionManager : MonoBehaviour
 
         if(!AllowStun) return;
 
-        if(!stun) return;
-
-        stun.Stun(gameObject, attacker, hurtbox, contactPoint);
+        EventM.OnStun(gameObject, attacker, hurtbox, contactPoint);
     }
 
     // ============================================================================
+
+    public GroundCheck ground;
 
     public bool IsGrounded()
     {
         if(!ground) return false;
         return ground.IsGrounded();
     }
+
+    public AgentAutoJump autoJump;
 
     public bool IsAutoJumping()
     {
@@ -231,6 +184,8 @@ public class ActionManager : MonoBehaviour
         return false;
     }
     
+    public AttackScript attack;
+
     public bool IsAttackWindingUp()
     {
         if(!attack) return false;
@@ -242,6 +197,8 @@ public class ActionManager : MonoBehaviour
         return attack.isAttacking;
     }
     
+    public ParryScript parry;
+
     public bool IsParryRaised()
     {
         if(!parry) return false;
@@ -258,6 +215,8 @@ public class ActionManager : MonoBehaviour
         return parry.IsRiposteActive();
     }
     
+    public AbilityCaster caster;
+
     public bool IsCasting()
     {
         if(!caster) return false;
@@ -268,6 +227,8 @@ public class ActionManager : MonoBehaviour
         if(!caster) return false;
         return caster.isCast;
     }
+
+    public StunScript stun;
 
     public bool IsStunned()
     {

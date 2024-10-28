@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4014294989942184369}
-  - component: {fileID: 2717958703927925601}
+  - component: {fileID: 8463780727494457825}
+  - component: {fileID: 4609305043628110655}
   - component: {fileID: 8782049835207013567}
   m_Layer: 8
   m_Name: Slam Hurtbox
@@ -30,10 +31,32 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3973731762187139556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2717958703927925601
+--- !u!135 &8463780727494457825
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Material: {fileID: 13400000, guid: edae1f7d20673ce43a4ab1d96238699b, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.7
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4609305043628110655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,20 +65,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1242880141507026177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36df7c2817da679459075a21205317f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b0e50ac4e5d4d947af6c03178394b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hurtboxSO: {fileID: 11400000, guid: 9851d4c565cbb464c8ba8abc1aac326d, type: 2}
-  explodeOnAwake: 1
-  outerRange: 1.84
-  pushRangeMult: 1.75
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
+  enabledOnAwake: 1
   owner: {fileID: 0}
-  showGizmos: 1
-  gizmoColorOuter: {r: 1, g: 0.5, b: 0, a: 1}
-  gizmoColorPush: {r: 1, g: 0.5, b: 0, a: 0.5}
+  hurtboxOrigin: {fileID: 3973731762187139556}
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  destroyOnHit: 0
+  OnHurtt:
+    m_PersistentCalls:
+      m_Calls: []
+  destroyOnHurt: 0
 --- !u!114 &8782049835207013567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,3 +99,34 @@ MonoBehaviour:
   shrinkTo: {x: 0, y: 0, z: 0}
   shrinkTime: 0
   ignoreTime: 0
+--- !u!1 &3321845459215446752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3973731762187139556}
+  m_Layer: 7
+  m_Name: Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3973731762187139556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321845459215446752}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.11, z: -2.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4014294989942184369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -5,9 +5,7 @@ using UnityEngine;
 public class AttackCombo : MonoBehaviour
 {
     public GameObject owner;
-
     public AttackScript attack;
-
     public string comboName = "Normal Combo";
 
     // ============================================================================
@@ -21,57 +19,37 @@ public class AttackCombo : MonoBehaviour
     
     [Space]
     public List<ComboStep> comboSteps = new();
+
+    // ============================================================================
+
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+
+        EventM.ComboEvent += OnCombo;
+        EventM.AttackReleasedEvent += OnAttackReleased;
+    }
+    void OnDisable()
+    {
+        EventM.ComboEvent -= OnCombo;
+        EventM.AttackReleasedEvent -= OnAttackReleased;
+    }
+
+    // ============================================================================
     
-    // ============================================================================
-
-    void Update()
-    {
-        UpdateBuffer();
-        TryCombo();
-
-        UpdateResetTime();
-        UpdateComboCooldown();
-    }
-
-    // ============================================================================
-
-    [Header("Before Combo")]
-    public float bufferTime=.2f;
-    float bufferLeft;
-
-    public void DoBuffer()
-    {
-        bufferLeft = bufferTime;
-    }
-
-    void UpdateBuffer()
-    {
-        bufferLeft -= Time.deltaTime;
-
-        if(bufferLeft<0) bufferLeft=0;
-    }
-
-    bool HasBuffer()
-    {
-        return bufferLeft>0;
-    }
-
-    void ResetBuffer()
-    {
-        bufferLeft=0;
-    }
-
-    // ============================================================================
-
     public bool randomCombo;
 
     int comboIndex=0;
 
-    void TryCombo()
+    void OnCombo(GameObject who, string combo_name)
     {
-        if(IsAttacking()) return;
+        if(who!=owner) return;
 
-        if(!HasBuffer()) return;
+        if(combo_name != comboName) return;
+
+        if(IsAttacking()) return;
 
         if(IsComboCooling()) return;
         
@@ -80,8 +58,6 @@ public class AttackCombo : MonoBehaviour
 
     void DoCombo()
     {
-        ResetBuffer();
-
         RefillResetTime();
 
         if(randomCombo)
@@ -89,7 +65,7 @@ public class AttackCombo : MonoBehaviour
         else
         ChooseCombo(comboIndex);
 
-        attack.DoBuffer();
+        attack.TryAttack();
     }
 
     void ChooseCombo(int i)
@@ -102,22 +78,7 @@ public class AttackCombo : MonoBehaviour
 
     // During Combo ============================================================================
 
-    EventManager EventM;
-
-    void OnEnable()
-    {
-        EventM = EventManager.Current;
-        
-        EventM.AttackEvent += OnAttack;
-    }
-    void OnDisable()
-    {
-        EventM.AttackEvent -= OnAttack;
-    }
-
-    // ============================================================================
-
-    void OnAttack(GameObject attacker, AttackSO attackSO)
+    void OnAttackReleased(GameObject attacker, AttackSO attackSO)
     {
         if(attacker!=owner) return;
 
@@ -139,7 +100,15 @@ public class AttackCombo : MonoBehaviour
             DoComboCooldown();
         }
     }    
-    
+        
+    // ============================================================================
+
+    void Update()
+    {
+        UpdateResetTime();
+        UpdateComboCooldown();
+    }
+
     // ============================================================================
     
     [Header("During Combo")]

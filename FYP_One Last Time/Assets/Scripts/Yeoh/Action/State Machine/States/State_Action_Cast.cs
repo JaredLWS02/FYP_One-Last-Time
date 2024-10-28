@@ -31,6 +31,6 @@ public class State_Action_Cast : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        
+
     }
 }

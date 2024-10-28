@@ -2,31 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(TurnScript))]
-
-public class SideTurn : MonoBehaviour
+public class SideTurn : TurnScript
 {
-    TurnScript turn;
+    EventManager EventM;
 
-    void Awake()
+    void OnEnable()
     {
-        turn = GetComponent<TurnScript>();
+        EventM = EventManager.Current;
+        
+        EventM.FaceXEvent += OnFaceX;
+    }
+    void OnDisable()
+    {
+        EventM.FaceXEvent -= OnFaceX;
     }
 
     // ============================================================================
 
+    [Header("Side Turn")]
     public bool faceR=true;
     public bool reverse;
 
-    void FixedUpdate()
+    public void OnFaceX(GameObject who, float dir_x)
     {
-        turn.UpdateTurn(faceR ? Vector3.right : Vector3.left);
-    }    
+        if(who!=owner) return;
 
-    // ============================================================================
-
-    public void UpdateFlip(float dir_x)
-    {
         if(dir_x==0) return;
 
         if(isFlipDelaying) return;
@@ -86,4 +86,11 @@ public class SideTurn : MonoBehaviour
 
     [Header("If Using Billboard")]
     public SpriteRenderer sprite;
+    
+    // ============================================================================
+
+    void FixedUpdate()
+    {
+        UpdateTurn(faceR ? Vector3.right : Vector3.left);
+    }
 }

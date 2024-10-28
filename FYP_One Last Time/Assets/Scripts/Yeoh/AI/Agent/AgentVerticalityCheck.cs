@@ -62,13 +62,13 @@ public class AgentVerticalityCheck : MonoBehaviour
         // is above
         if(target_height > verticalCheckHeight)
         {
-            EventM.OnAgentTryJump(gameObject, 1); // jump duh
+            EventM.OnAgentTryJump(gameObject); // jump duh
             EventM.OnAgentTryMove(gameObject, Vector2.up); // press up
         }
         // is below
         else if(target_height < -verticalCheckHeight)
         {
-            EventM.OnAgentTryJump(gameObject, 0); // jumpcut
+            EventM.OnAgentTryJumpCut(gameObject); // jumpcut
             EventM.OnAgentTryMove(gameObject, Vector2.down); // press down
         }
     }    

@@ -15,61 +15,27 @@ public class ParryScript : MonoBehaviour
     {
         EventM = EventManager.Current;
         
-        EventM.ParryRecoverEvent += OnParryRecover;
-
+        EventM.ParryEvent += OnParry;
         EventM.ParrySuccessEvent += OnParrySuccess;
         EventM.CancelParryEvent += OnCancelParry;
     }
     void OnDisable()
     {
-        EventM.ParryRecoverEvent -= OnParryRecover;
-
+        EventM.ParryEvent -= OnParry;
         EventM.ParrySuccessEvent -= OnParrySuccess;
         EventM.CancelParryEvent -= OnCancelParry;
     }
 
     // ============================================================================
-
-    void Update()
-    {
-        UpdateBuffer();
-
-        TryRaiseParry();
-        UpdateRaise();
-
-        UpdateCooldown();
-
-        UpdateRiposte();
-    }
-
-    // ============================================================================
-
-    [Header("Before Parry")]
-    public float bufferTime=.2f;
-    float bufferLeft;
-
-    public void DoBuffer() => bufferLeft = bufferTime;
-
-    void UpdateBuffer()
-    {
-        bufferLeft -= Time.deltaTime;
-
-        if(bufferLeft<0) bufferLeft=0;
-    }
-
-    bool HasBuffer() => bufferLeft>0;
-
-    void ResetBuffer() => bufferLeft=0;
-
-    // On Raise Parry ============================================================================
         
-    void TryRaiseParry()
+    void OnParry(GameObject who)
     {
+        if(who!=owner) return;
+
         if(IsParrying()) return;
 
-        if(!HasBuffer()) return;
-
         if(IsCooling()) return;
+        DoCooldown();
 
         RaiseParry();
     }
@@ -78,18 +44,18 @@ public class ParryScript : MonoBehaviour
 
     void RaiseParry()
     {
-        ResetBuffer();
-
-        DoCooldown();
-
         // attack cancelling
         EventM.OnCancelAttack(owner);
         // ability cancelling
         EventM.OnCancelCast(owner);
+        // stun cancelling
+        EventM.OnCancelStun(owner);
 
         StartRaise();
 
         PlayRaiseParryAnim();
+
+        EventM.OnRaisedParry(owner);
     }
 
     // ============================================================================
@@ -118,6 +84,15 @@ public class ParryScript : MonoBehaviour
 
     // ============================================================================
 
+    void Update()
+    {
+        UpdateRaise();
+        UpdateCooldown();
+        UpdateRiposte();
+    }
+
+    // ============================================================================
+    
     [Header("During Raised Parry")]
     public float raiseParrySeconds=.3f;
     float raiseLeft;
@@ -172,10 +147,8 @@ public class ParryScript : MonoBehaviour
 
     // Parry Anim Events ============================================================================
 
-    void OnParryRecover(GameObject who)
+    public void ParryRecover()
     {
-        if(who!=owner) return;
-
         isParryRaised=false;
         isParryLowering=false;
     }
@@ -227,19 +200,30 @@ public class ParryScript : MonoBehaviour
 
         if(hurtbox.parryStunsAttacker)
         {
-            // stop attacker's attack first or else cant stun because state machine
-            EventM.OnCancelAttack(attacker);
-            EventM.OnTryStun(attacker, owner, hurtbox, contactPoint);
-            EventM.OnKnockback(attacker, hurtbox.blockKnockback, contactPoint);
+            EventM.OnStun(attacker, owner, hurtbox, contactPoint);
+
+            EventM.OnKnockback(attacker, hurtbox.knockback, contactPoint);
         }
 
         EventM.OnKnockback(owner, hurtbox.blockKnockback, contactPoint);
+
+        PlayParrySuccessAnim();
 
         StartRiposte();
     }
 
     [Header("On Parry Success")]
-    public float riposteSeconds=.3f;
+    public string parrySuccessAnimName = "Parry Success";
+
+    void PlayParrySuccessAnim()
+    {
+        EventM.OnPlayAnim(owner, parrySuccessAnimName, parryAnimLayer, parryAnimBlendTime);
+    }
+
+    // ============================================================================
+    
+    [Header("Riposte")]
+    public float riposteSeconds=.5f;
     float riposteLeft;
 
     void StartRiposte() => riposteLeft = riposteSeconds;
@@ -261,20 +245,22 @@ public class ParryScript : MonoBehaviour
     {
         if(who!=owner) return;
 
-        CancelAnim();
+        if(!IsParrying()) return;
+
+        ParryRecover();
+
+        CancelRiposte();
+
+        EventM.OnParryCancelled(owner);
+
+        PlayCancelAnim();
     }
 
     [Header("Cancel")]
     public string cancelAnimName = "Cancel Parry";
     
-    void CancelAnim()
+    void PlayCancelAnim()
     {
-        if(!IsParrying()) return;
-
-        EventM.OnParryRecover(owner);
-
-        CancelCooldown();
-
         EventM.OnPlayAnim(owner, cancelAnimName, parryAnimLayer, parryAnimBlendTime);
     }       
 }

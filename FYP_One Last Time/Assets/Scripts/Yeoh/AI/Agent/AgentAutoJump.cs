@@ -9,6 +9,10 @@ using UnityEngine.Events;
 
 public class AgentAutoJump : MonoBehaviour
 {
+    public GameObject owner;
+
+    // ============================================================================
+
     NavMeshAgent agent;
     Rigidbody rb; // optional
 
@@ -16,15 +20,6 @@ public class AgentAutoJump : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-    }
-
-    // ============================================================================
-
-    EventManager EventM;
-
-    void OnEnable()
-    {
-        EventM = EventManager.Current;
     }
 
     // ============================================================================
@@ -64,6 +59,35 @@ public class AgentAutoJump : MonoBehaviour
 
     // ============================================================================
 
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+
+        EventM.AutoJumpEvent += OnAutoJump;
+    }
+    void OnDisable()
+    {
+        EventM.AutoJumpEvent -= OnAutoJump;
+    }
+
+    // ============================================================================
+
+    void OnAutoJump(GameObject who, Vector3 jump_dir)
+    {
+        if(who!=owner) return;
+
+        if(isJumping) return;
+
+        if(IsCooling()) return;
+        DoCooldown();
+
+        StartJump();
+    }
+
+    // ============================================================================
+    
     [HideInInspector]
     public bool isJumping;
     float jumpProgress=0;
@@ -72,13 +96,8 @@ public class AgentAutoJump : MonoBehaviour
     Spline spline;
     bool isReversed;
 
-    public void StartJump()
+    void StartJump()
     {
-        if(isJumping) return;
-
-        if(IsCooling()) return;
-        DoCooldown();
-
         isJumping=true;
         jumpProgress=0;
 
@@ -93,9 +112,11 @@ public class AgentAutoJump : MonoBehaviour
         isReversed = IsJumpReversed(link);
 
         OnJump?.Invoke();
-        EventM.OnAutoJump(gameObject, GetJumpDir());
+        EventM.OnAutoJumped(gameObject, GetJumpDir());
     }
 
+    // ============================================================================
+    
     bool IsJumpReversed(NavMeshLink link)
     {
         // world positions
