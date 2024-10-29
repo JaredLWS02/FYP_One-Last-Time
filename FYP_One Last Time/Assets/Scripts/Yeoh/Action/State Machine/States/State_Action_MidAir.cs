@@ -35,6 +35,7 @@ public class State_Action_MidAir : BaseState
         action.AllowDash = toggle;
         action.AllowAttack = toggle;
         action.AllowParry = toggle;
+        action.AllowHurt = toggle;
         action.AllowStun = toggle;
     }
 }

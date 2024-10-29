@@ -754,13 +754,13 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventName: ParryRecover
+  - eventName: ParryLowered
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6485402941929711479}
           m_TargetAssemblyTypeName: ParryScript, Assembly-CSharp
-          m_MethodName: ParryRecover
+          m_MethodName: ParryLowered
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -770,13 +770,13 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventName: ParrySuccessRecover
+  - eventName: ParryRecover
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6485402941929711479}
           m_TargetAssemblyTypeName: ParryScript, Assembly-CSharp
-          m_MethodName: ParrySuccessRecover
+          m_MethodName: ParryRecover
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1132,7 +1132,6 @@ GameObject:
   - component: {fileID: 8003095357430364833}
   - component: {fileID: 8233763058552673176}
   - component: {fileID: 4334806704455733132}
-  - component: {fileID: 2505238066991637890}
   - component: {fileID: 6485402941929711479}
   - component: {fileID: 110049388833876227}
   - component: {fileID: 6639294003576150908}
@@ -1298,6 +1297,7 @@ MonoBehaviour:
   AllowAttack: 0
   AllowParry: 0
   AllowCast: 0
+  AllowHurt: 0
   AllowStun: 0
   ground: {fileID: 1353104093430078228}
   autoJump: {fileID: 0}
@@ -1490,20 +1490,6 @@ MonoBehaviour:
   OnDeathh:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2505238066991637890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7707d864b16682498cf657452a1dd2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
-  parry: {fileID: 6485402941929711479}
 --- !u!114 &6485402941929711479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1526,9 +1512,9 @@ MonoBehaviour:
     cancelName: Cancel
   cooldownTime: 0.3
   minParryDot: 0.2
-  parrySuccessAnim:
+  parryAnim:
     names:
-    - Parry Success
+    - Parry
     layer: 1
     blendTime: 0
     cancelName: Cancel

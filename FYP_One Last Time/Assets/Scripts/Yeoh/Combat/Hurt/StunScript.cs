@@ -38,14 +38,19 @@ public class StunScript : MonoBehaviour
         EventM.OnCancelAttack(owner);
         EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
-        EventM.OnCancelStun(owner);
-
-        isStunned=true;
 
         stunAnim = hurtbox.stunAnim;
-        stunAnim.Play(owner);
+
+        Stun();
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
+    }
+
+    void Stun()
+    {
+        isStunned=true;
+        
+        stunAnim.Play(owner);
     }
     
     // ============================================================================

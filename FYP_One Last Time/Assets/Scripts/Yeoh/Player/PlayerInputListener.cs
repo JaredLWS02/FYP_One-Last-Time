@@ -180,7 +180,7 @@ public class PlayerInputListener : MonoBehaviour
             }
             break;
 
-            case "Parry": EventM.OnTryParry(gameObject); break;
+            case "Parry": EventM.OnTryRaiseParry(gameObject); break;
 
             case "Ability1": EventM.OnTryAbility(gameObject, "Heal"); break;
 

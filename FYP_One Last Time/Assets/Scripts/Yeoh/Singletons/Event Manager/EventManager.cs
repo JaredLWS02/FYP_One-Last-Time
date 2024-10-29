@@ -271,29 +271,34 @@ public class EventManager : MonoBehaviour
     
     // Parry and Riposte ==================================================================================================================
 
-    public event Action<GameObject> TryParryEvent;
-    public event Action<GameObject> ParryEvent;
+    public event Action<GameObject> TryRaiseParryEvent;
+    public event Action<GameObject> RaiseParryEvent;
     public event Action<GameObject> RaisedParryEvent;
-    public event Action<GameObject, GameObject, HurtboxSO, Vector3> ParrySuccessEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryParryEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> ParryEvent;
     public event Action<GameObject, string> TryRiposteComboEvent;
     public event Action<GameObject> CancelParryEvent;
     public event Action<GameObject> ParryCancelledEvent;
 
-    public void OnTryParry(GameObject defender)
+    public void OnTryRaiseParry(GameObject defender)
     {
-        TryParryEvent?.Invoke(defender);
+        TryRaiseParryEvent?.Invoke(defender);
     }
-    public void OnParry(GameObject defender)
+    public void OnRaiseParry(GameObject defender)
     {
-        ParryEvent?.Invoke(defender);
+        RaiseParryEvent?.Invoke(defender);
     }
     public void OnRaisedParry(GameObject defender)
     {
         RaisedParryEvent?.Invoke(defender);
     }
-    public void OnParrySuccess(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    public void OnTryParry(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        ParrySuccessEvent?.Invoke(defender, attacker, hurtbox, contactPoint);
+        TryParryEvent?.Invoke(defender, attacker, hurtbox, contactPoint);
+    }
+    public void OnParry(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        ParryEvent?.Invoke(defender, attacker, hurtbox, contactPoint);
     }
     public void OnTryRiposteCombo(GameObject attacker, string combo_name)
     {

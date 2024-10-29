@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Action_ParryLowering : BaseState
+public class State_Action_TryingToParry : BaseState
 {
-    public override string Name => "Parry Lowering";
+    public override string Name => "Trying To Parry";
 
     ActionManager action;
 
-    public State_Action_ParryLowering(StateMachine_Action sm)
+    public State_Action_TryingToParry(StateMachine_Action sm)
     {
         action = sm.action;
     }
@@ -31,6 +31,7 @@ public class State_Action_ParryLowering : BaseState
 
     void ToggleAllow(bool toggle)
     {
+        action.AllowHurt = toggle;
         action.AllowStun = toggle;
     }
 }

@@ -31,6 +31,6 @@ public class State_Action_AutoJumping : BaseState
 
     void ToggleAllow(bool toggle)
     {
-
+        action.AllowHurt = toggle;
     }
 }

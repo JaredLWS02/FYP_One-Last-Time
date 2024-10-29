@@ -15,29 +15,31 @@ public class ParryScript : MonoBehaviour
     {
         EventM = EventManager.Current;
         
+        EventM.RaiseParryEvent += OnRaiseParry;
+        EventM.TryParryEvent += OnTryParry;
         EventM.ParryEvent += OnParry;
-        EventM.ParrySuccessEvent += OnParrySuccess;
         EventM.CancelParryEvent += OnCancelParry;
     }
     void OnDisable()
     {
+        EventM.RaiseParryEvent -= OnRaiseParry;
+        EventM.TryParryEvent -= OnTryParry;
         EventM.ParryEvent -= OnParry;
-        EventM.ParrySuccessEvent -= OnParrySuccess;
         EventM.CancelParryEvent -= OnCancelParry;
     }
 
     // ============================================================================
         
-    void OnParry(GameObject who)
+    void OnRaiseParry(GameObject who)
     {
         if(who!=owner) return;
 
-        if(IsParrying()) return;
+        if(IsTryingToParry()) return;
 
         if(IsCooling()) return;
         DoCooldown();
 
-        Parry();
+        RaiseParry();
     }
 
     // ============================================================================
@@ -45,12 +47,11 @@ public class ParryScript : MonoBehaviour
     [Header("Raise Parry Anim")]
     public AnimPreset raiseParryAnim;
     
-    void Parry()
+    void RaiseParry()
     {
         // action cancelling
         EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
-        EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
         EventM.OnCancelStun(owner);
 
@@ -61,12 +62,12 @@ public class ParryScript : MonoBehaviour
 
     // ============================================================================
 
-    public bool isParryRaised {get; private set;}
-    public bool isParryLowering {get; private set;}
+    bool isRaisingParry;
+    bool isLoweringParry;
 
-    bool IsParrying()
+    public bool IsTryingToParry()
     {
-        return isParryRaised || isParryLowering;
+        return isRaisingParry || isLoweringParry;
     }
 
     // ============================================================================
@@ -74,20 +75,20 @@ public class ParryScript : MonoBehaviour
     // Anim Event
     public void ParryRaise()
     {
-        isParryRaised=true;
-        isParryLowering=false;
+        isRaisingParry=true;
+        isLoweringParry=false;
     }
     // Anim Event
     public void ParryLower()
     {
-        isParryRaised=false;
-        isParryLowering=true;
+        isRaisingParry=false;
+        isLoweringParry=true;
     }
     // Anim Event
-    public void ParryRecover()
+    public void ParryLowered()
     {
-        isParryRaised=false;
-        isParryLowering=false;
+        isRaisingParry=false;
+        isLoweringParry=false;
     }
     // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
     // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
@@ -112,7 +113,7 @@ public class ParryScript : MonoBehaviour
     void UpdateCooldown()
     {
         // only tick down if not busy
-        if(IsParrying()) return;
+        if(IsTryingToParry()) return;
         
         cooldownLeft -= Time.deltaTime;
 
@@ -129,7 +130,7 @@ public class ParryScript : MonoBehaviour
     [Range(-1,1)]
     public float minParryDot=0.2f;
 
-    public bool IsFacing(Vector3 target_pos)
+    bool IsFacing(Vector3 target_pos)
     {
         Vector3 dir_to_target = (target_pos - owner.transform.position).normalized;
 
@@ -137,21 +138,40 @@ public class ParryScript : MonoBehaviour
 
         return dot > minParryDot;
     }
+
+    public bool CanParry(Vector3 attack_pos)
+    {
+        return IsFacing(attack_pos) && isRaisingParry;
+    }
+
+    void OnTryParry(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        if(victim!=owner) return;
+
+        if(CanParry(contactPoint) && hurtbox.isParryable)
+        {
+            EventM.OnParry(owner, attacker, hurtbox, contactPoint);
+        }
+        else
+        {
+            EventM.OnHurt(owner, attacker, hurtbox, contactPoint);
+        }
+    }
     
     // ============================================================================
     
-    [Header("On Parry Success")]
-    public AnimPreset parrySuccessAnim;
+    [Header("On Parry")]
+    public AnimPreset parryAnim;
     [Space]
     public AnimPreset parryStunAnim;
 
-    public bool isParrySuccessing {get; private set;}
+    public bool isParrying {get; private set;}
 
-    void OnParrySuccess(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    void OnParry(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(defender!=owner) return;
 
-        ParryRecover();
+        ParryLowered();
 
         CancelCooldown();
 
@@ -167,24 +187,24 @@ public class ParryScript : MonoBehaviour
 
         EventM.OnKnockback(owner, hurtbox.blockKnockback, contactPoint);
 
-        ParrySuccess();
+        Parry();
 
         StartRiposte();
     }
 
-    void ParrySuccess()
+    void Parry()
     {
-        isParrySuccessing=true;
+        isParrying=true;
 
-        parrySuccessAnim.Play(owner);
+        parryAnim.Play(owner);
     }
 
     // ============================================================================
     
     // Anim Event
-    public void ParrySuccessRecover()
+    public void ParryRecover()
     {
-        isParrySuccessing=false;
+        isParrying=false;
     }
     // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
     // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
@@ -215,20 +235,20 @@ public class ParryScript : MonoBehaviour
     {
         if(who!=owner) return;
 
-        if(IsParrying())
+        if(IsTryingToParry())
         {
-            ParryRecover();
+            ParryLowered();
 
             raiseParryAnim.Cancel(owner);
 
             EventM.OnParryCancelled(owner);
         }
 
-        if(isParrySuccessing)
+        if(isParrying)
         {
-            ParrySuccessRecover();
+            ParryRecover();
 
-            parrySuccessAnim.Cancel(owner);
+            parryAnim.Cancel(owner);
 
             CancelRiposte();
 
