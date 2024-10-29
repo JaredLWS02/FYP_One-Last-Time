@@ -279,6 +279,15 @@ public class AgentManager : MonoBehaviour
         return randomAttackBehaviour.currentOption;
     }
     
+    public RandomPicker randomFleeBehaviour;
+
+    public string GetRandomFleeBehaviour()
+    {
+        randomFleeBehaviour.UpdateManualTimer();
+
+        return randomFleeBehaviour.currentOption;
+    }
+    
     // ============================================================================
 
     [Header("Debug")]
