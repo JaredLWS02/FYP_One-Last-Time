@@ -739,11 +739,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   options:
   - name: Flee
-    weight: 3
+    weight: 2
   - name: Wander
     weight: 1
   currentOption: Flee
-  randomInterval: {x: 0.5, y: 3}
+  randomInterval: {x: 0.25, y: 3}
   enableTimerOnAwake: 0
 --- !u!1 &5261146206814944013
 GameObject:
@@ -1480,7 +1480,7 @@ MonoBehaviour:
   - name: Flee
     weight: 1
   currentOption: Attack
-  randomInterval: {x: 0.5, y: 3}
+  randomInterval: {x: 0.25, y: 3}
   enableTimerOnAwake: 0
 --- !u!1 &9172029450550698297
 GameObject:

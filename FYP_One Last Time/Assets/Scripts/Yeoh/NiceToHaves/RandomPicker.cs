@@ -18,7 +18,7 @@ public class RandomPicker : MonoBehaviour
     // ============================================================================
 
     [Header("Randomize")]
-    public Vector2 randomInterval = new(0.5f, 5);
+    public Vector2 randomInterval = new(0.25f, 3);
     float currentInterval;
 
     void RandomizeInterval()
@@ -40,11 +40,14 @@ public class RandomPicker : MonoBehaviour
 
     IEnumerator Randomizing()
     {
-        RandomizeOption();
+        while(true)
+        {
+            RandomizeOption();
 
-        currentInterval = Random.Range(randomInterval.x, randomInterval.y);
+            currentInterval = Random.Range(randomInterval.x, randomInterval.y);
 
-        yield return new WaitForSeconds(currentInterval);
+            yield return new WaitForSeconds(currentInterval);
+        }
     }
 
     // ============================================================================
@@ -53,6 +56,12 @@ public class RandomPicker : MonoBehaviour
     
     public void UpdateManualTimer()
     {
+        if(enableTimerOnAwake)
+        {
+            Debug.LogWarning($"{gameObject.name}: Turn off enableTimerOnAwake if updating manual timer");
+            return;
+        }
+
         manualCheck += Time.deltaTime;
 
         if(manualCheck >= currentInterval)
@@ -70,6 +79,8 @@ public class RandomPicker : MonoBehaviour
     [ContextMenu("Randomize")]
     void RandomizeOption()
     {
+        if(options.Count<=0) return;
+
         float total_weight=0;
 
         foreach(var option in options)
