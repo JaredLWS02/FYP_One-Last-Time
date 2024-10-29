@@ -81,6 +81,12 @@ public class RandomPicker : MonoBehaviour
     {
         if(options.Count<=0) return;
 
+        if(options.Count<=1)
+        {
+            currentOption = options[0].name;
+            return;
+        }
+
         float total_weight=0;
 
         foreach(var option in options)

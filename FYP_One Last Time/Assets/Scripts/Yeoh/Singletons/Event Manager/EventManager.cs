@@ -83,18 +83,23 @@ public class EventManager : MonoBehaviour
         MoveEvent?.Invoke(mover, input);
     } 
 
-    public event Action<GameObject, float> TryFaceXEvent;
-    public event Action<GameObject, float> FaceXEvent;
+    public event Action<GameObject, float> TryFlipEvent;
+    public event Action<GameObject, float> FlipEvent;
+    public event Action<GameObject> CancelFlipDelayEvent;
 
-    public void OnTryFaceX(GameObject who, float input_x)
+    public void OnTryFlip(GameObject who, float input_x)
     {
-        TryFaceXEvent?.Invoke(who, input_x);
+        TryFlipEvent?.Invoke(who, input_x);
     }  
-    public void OnFaceX(GameObject who, float input_x)
+    public void OnFlip(GameObject who, float input_x)
     {
-        FaceXEvent?.Invoke(who, input_x);
+        FlipEvent?.Invoke(who, input_x);
     } 
-
+    public void OnCancelFlipDelay(GameObject who)
+    {
+        CancelFlipDelayEvent?.Invoke(who);
+    } 
+    
     // Jumps ==================================================================================================================
     
     public event Action<GameObject> TryJumpEvent;

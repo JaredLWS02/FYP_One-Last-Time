@@ -65,7 +65,7 @@ public class AgentInputListener : MonoBehaviour
 
         if(facer!=gameObject) return;
 
-        EventM.OnTryFaceX(gameObject, dir_x);
+        EventM.OnTryFlip(gameObject, dir_x);
     }
 
     // Jump ============================================================================

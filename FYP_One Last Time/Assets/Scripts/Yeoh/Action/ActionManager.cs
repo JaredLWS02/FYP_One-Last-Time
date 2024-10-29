@@ -26,7 +26,7 @@ public class ActionManager : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.TryMoveEvent += OnTryMove;
-        EventM.TryFaceXEvent += OnTryFaceX;
+        EventM.TryFlipEvent += OnTryFlip;
         EventM.TryJumpEvent += OnTryJump;
         EventM.TryJumpCutEvent += OnTryJumpCut;
         EventM.TryAutoJumpEvent += OnTryAutoJump;
@@ -41,7 +41,7 @@ public class ActionManager : MonoBehaviour
     void OnDisable()
     {
         EventM.TryMoveEvent -= OnTryMove;
-        EventM.TryFaceXEvent -= OnTryFaceX;
+        EventM.TryFlipEvent -= OnTryFlip;
         EventM.TryJumpEvent -= OnTryJump;
         EventM.TryJumpCutEvent -= OnTryJumpCut;
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
@@ -56,6 +56,7 @@ public class ActionManager : MonoBehaviour
 
     // ============================================================================
 
+
     void OnTryMove(GameObject who, Vector2 input)
     {
         if(who!=gameObject) return;
@@ -66,13 +67,13 @@ public class ActionManager : MonoBehaviour
         EventM.OnMove(gameObject, input);
     }
 
-    void OnTryFaceX(GameObject who, float input_x)
+    void OnTryFlip(GameObject who, float input_x)
     {
         if(who!=gameObject) return;
 
         if(!AllowMoveX) input_x=0;
 
-        EventM.OnFaceX(gameObject, input_x);
+        EventM.OnFlip(gameObject, input_x);
     }
     
     // ============================================================================
@@ -105,7 +106,7 @@ public class ActionManager : MonoBehaviour
         
         float dot_x = Vector3.Dot(jump_dir, Vector3.right);
 
-        EventM.OnFaceX(gameObject, dot_x);
+        EventM.OnFlip(gameObject, dot_x);
     }
 
     // ============================================================================    
@@ -115,6 +116,8 @@ public class ActionManager : MonoBehaviour
         if(who!=gameObject) return;
 
         if(!AllowDash) return;
+
+        EventM.OnCancelFlipDelay(gameObject);
 
         EventM.OnDash(gameObject);
     }
@@ -129,6 +132,8 @@ public class ActionManager : MonoBehaviour
 
         if(IsRiposteActive()) return;
 
+        EventM.OnCancelFlipDelay(gameObject);
+
         EventM.OnCombo(gameObject, combo_name);
     }
 
@@ -139,6 +144,8 @@ public class ActionManager : MonoBehaviour
         if(!AllowAttack) return;
 
         if(!IsRiposteActive()) return;
+
+        EventM.OnCancelFlipDelay(gameObject);
 
         EventM.OnCombo(gameObject, combo_name);
     }  
@@ -151,6 +158,8 @@ public class ActionManager : MonoBehaviour
 
         if(!AllowParry) return;
 
+        EventM.OnCancelFlipDelay(gameObject);
+
         EventM.OnRaiseParry(gameObject);
     }
 
@@ -161,6 +170,8 @@ public class ActionManager : MonoBehaviour
         if(who!=gameObject) return;
 
         if(!AllowCast) return;
+
+        EventM.OnCancelFlipDelay(gameObject);
 
         EventM.OnAbility(gameObject, ability_name);
     }
