@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Action_AttackWindingUp : BaseState
+public class State_Action_ParrySuccessing : BaseState
 {
-    public override string Name => "Attack Winding Up";
+    public override string Name => "Parry Successing";
 
     ActionManager action;
 
-    public State_Action_AttackWindingUp(StateMachine_Action sm)
+    public State_Action_ParrySuccessing(StateMachine_Action sm)
     {
         action = sm.action;
     }
@@ -31,7 +31,9 @@ public class State_Action_AttackWindingUp : BaseState
 
     void ToggleAllow(bool toggle)
     {
+        action.AllowDash = toggle;
+        action.AllowAttack = toggle;
         action.AllowParry = toggle;
-        action.AllowStun = toggle;
+        action.AllowCast = toggle;
     }
 }

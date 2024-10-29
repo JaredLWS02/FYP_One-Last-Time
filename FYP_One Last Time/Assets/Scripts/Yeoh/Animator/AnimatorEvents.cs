@@ -17,9 +17,9 @@ public class AnimPreset
         return names[Random.Range(0, names.Count)];
     }
 
-    public void Play(GameObject who, string name)
+    public void Play(GameObject who, string any_name)
     {
-        EventManager.Current.OnPlayAnim(who, name, layer, blendTime);
+        EventManager.Current.OnPlayAnim(who, any_name, layer, blendTime);
     }
 
     public void Play(GameObject who)

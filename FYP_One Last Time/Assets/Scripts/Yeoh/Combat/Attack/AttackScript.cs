@@ -31,7 +31,7 @@ public class AttackScript : MonoBehaviour
     
     public void TryAttack()
     {
-        if(isAttacking) return;
+        if(IsAttacking()) return;
 
         if(IsCooling()) return;
         DoCooldown();
@@ -58,28 +58,29 @@ public class AttackScript : MonoBehaviour
     // ============================================================================
 
     public bool isWindingUp {get; private set;}
-    public bool isAttacking {get; private set;}
+    public bool isReleasing {get; private set;}
     
     public bool IsAttacking()
     {
-        return isAttacking || isWindingUp;
+        return isReleasing || isWindingUp;
     }
 
-    // Attack Anim Events ============================================================================
+    // ============================================================================
 
+    // Anim Event
     public void AttackWindUp()
     {
         isWindingUp=true;
-        isAttacking=false;
+        isReleasing=false;
 
         if(attackSO.dashOnWindUp)
         Dash(attackSO.dashOnWindUpForce, attackSO.dashOnWindUpDir);
     }  
-
+    // Anim Event
     public void AttackRelease()
     {
         isWindingUp=false;
-        isAttacking=true;
+        isReleasing=true;
 
         SpawnAttack();
 
@@ -88,15 +89,18 @@ public class AttackScript : MonoBehaviour
 
         EventM.OnAttackReleased(owner, attackSO);
     }
-
+    // Anim Event
     public void AttackRecover()
     {
         isWindingUp=false;
-        isAttacking=false;
+        isReleasing=false;        
 
         if(attackSO.dashOnRecover)
         Dash(attackSO.dashOnRecoverForce, attackSO.dashOnRecoverDir);
     }  
+    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
+    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
+    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
 
     // ============================================================================
 
@@ -147,10 +151,7 @@ public class AttackScript : MonoBehaviour
 
     float cooldownLeft;
     
-    void DoCooldown()
-    {
-        cooldownLeft = attackSO.cooldownTime;
-    }
+    void DoCooldown() => cooldownLeft = attackSO.cooldownTime;
 
     void UpdateCooldown()
     {
@@ -162,15 +163,9 @@ public class AttackScript : MonoBehaviour
         if(cooldownLeft<0) cooldownLeft=0;
     }
 
-    bool IsCooling()
-    {
-        return cooldownLeft>0;
-    }
+    bool IsCooling() => cooldownLeft>0;
 
-    void CancelCooldown()
-    {
-        cooldownLeft=0;
-    }
+    void CancelCooldown() => cooldownLeft=0;
 
     // Cancel ============================================================================
     

@@ -207,10 +207,10 @@ public class ActionManager : MonoBehaviour
         if(!attack) return false;
         return attack.isWindingUp;
     }
-    public bool IsAttacking()
+    public bool IsAttackReleasing()
     {
         if(!attack) return false;
-        return attack.isAttacking;
+        return attack.isReleasing;
     }
     
     public ParryScript parry;
@@ -224,6 +224,11 @@ public class ActionManager : MonoBehaviour
     {
         if(!parry) return false;
         return parry.isParryLowering;
+    }
+    public bool IsParrySuccessing()
+    {
+        if(!parry) return false;
+        return parry.isParrySuccessing;
     }
     public bool IsRiposteActive()
     {

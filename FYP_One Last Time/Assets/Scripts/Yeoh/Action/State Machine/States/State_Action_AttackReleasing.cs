@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Action_Attacking : BaseState
+public class State_Action_AttackReleasing : BaseState
 {
-    public override string Name => "Attacking";
+    public override string Name => "Attack Releasing";
 
     ActionManager action;
 
-    public State_Action_Attacking(StateMachine_Action sm)
+    public State_Action_AttackReleasing(StateMachine_Action sm)
     {
         action = sm.action;
     }

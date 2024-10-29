@@ -37,26 +37,25 @@ public class ParryScript : MonoBehaviour
         if(IsCooling()) return;
         DoCooldown();
 
-        RaiseParry();
+        Parry();
     }
 
     // ============================================================================
 
     [Header("Raise Parry Anim")]
     public AnimPreset raiseParryAnim;
-
-    void RaiseParry()
+    
+    void Parry()
     {
         // action cancelling
         EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
+        EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
         EventM.OnCancelStun(owner);
 
-        StartRaise();
-
         raiseParryAnim.Play(owner);
-
+        
         EventM.OnRaisedParry(owner);
     }
 
@@ -71,67 +70,35 @@ public class ParryScript : MonoBehaviour
     }
 
     // ============================================================================
-
-    void Update()
-    {
-        UpdateRaise();
-        UpdateCooldown();
-        UpdateRiposte();
-    }
-
-    // ============================================================================
     
-    [Header("During Raised Parry")]
-    public float raiseParrySeconds=.3f;
-    float raiseLeft;
-
-    void StartRaise()
+    // Anim Event
+    public void ParryRaise()
     {
         isParryRaised=true;
-
-        raiseLeft = raiseParrySeconds;
+        isParryLowering=false;
     }
-
-    void UpdateRaise()
+    // Anim Event
+    public void ParryLower()
     {
-        if(!isParryRaised) return;
-
-        raiseLeft -= Time.deltaTime;
-
-        if(raiseLeft<0) raiseLeft=0;
-
-        if(!HasRaise())
-        {
-            isParryRaised=false;
-
-            ResetRaise();
-
-            LowerParry();
-        }
-    }
-
-    bool HasRaise() => raiseLeft>0;
-
-    void ResetRaise() => raiseLeft=0;
-
-    // Lower Parry ============================================================================
-
-    [Header("Lower Parry Anim")]
-    public AnimPreset lowerParryAnim;
-
-    void LowerParry()
-    {
+        isParryRaised=false;
         isParryLowering=true;
-
-        lowerParryAnim.Play(owner);
     }
-
-    // Parry Anim Events ============================================================================
-
+    // Anim Event
     public void ParryRecover()
     {
         isParryRaised=false;
         isParryLowering=false;
+    }
+    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
+    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
+    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
+
+    // ============================================================================
+
+    void Update()
+    {
+        UpdateCooldown();
+        UpdateRiposte();
     }
 
     // ============================================================================
@@ -178,11 +145,15 @@ public class ParryScript : MonoBehaviour
     [Space]
     public AnimPreset parryStunAnim;
 
+    public bool isParrySuccessing {get; private set;}
+
     void OnParrySuccess(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(defender!=owner) return;
 
-        EventM.OnCancelParry(defender);
+        ParryRecover();
+
+        CancelCooldown();
 
         if(hurtbox.parryStunsOwner)
         {
@@ -196,10 +167,28 @@ public class ParryScript : MonoBehaviour
 
         EventM.OnKnockback(owner, hurtbox.blockKnockback, contactPoint);
 
-        parrySuccessAnim.Play(owner);
+        ParrySuccess();
 
         StartRiposte();
     }
+
+    void ParrySuccess()
+    {
+        isParrySuccessing=true;
+
+        parrySuccessAnim.Play(owner);
+    }
+
+    // ============================================================================
+    
+    // Anim Event
+    public void ParrySuccessRecover()
+    {
+        isParrySuccessing=false;
+    }
+    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
+    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
+    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
 
     // ============================================================================
     
@@ -226,14 +215,24 @@ public class ParryScript : MonoBehaviour
     {
         if(who!=owner) return;
 
-        if(!IsParrying()) return;
+        if(IsParrying())
+        {
+            ParryRecover();
 
-        ParryRecover();
+            raiseParryAnim.Cancel(owner);
 
-        CancelRiposte();
+            EventM.OnParryCancelled(owner);
+        }
 
-        raiseParryAnim.Cancel(owner);
+        if(isParrySuccessing)
+        {
+            ParrySuccessRecover();
 
-        EventM.OnParryCancelled(owner);
+            parrySuccessAnim.Cancel(owner);
+
+            CancelRiposte();
+
+            EventM.OnParryCancelled(owner);
+        }
     }
 }
