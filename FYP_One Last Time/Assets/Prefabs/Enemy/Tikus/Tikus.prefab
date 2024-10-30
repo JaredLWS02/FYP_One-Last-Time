@@ -49,13 +49,7 @@ MonoBehaviour:
   attack: {fileID: 6861530176262365675}
   comboName: Normal Combo
   comboSteps:
-  - attackAnim:
-      names:
-      - Slam
-      layer: 1
-      blendTime: 0
-      cancelName: Cancel
-    attackSO: {fileID: 11400000, guid: 8db0e5daa15601340821c312ff964fc0, type: 2}
+  - attackSO: {fileID: 11400000, guid: 8db0e5daa15601340821c312ff964fc0, type: 2}
     attackPrefab:
       prefab: {fileID: 1242880141507026177, guid: c5c0261915e183d40b40f3bcbe09d457,
         type: 3}
@@ -131,6 +125,8 @@ Transform:
   - {fileID: 6462888529248085389}
   - {fileID: 8596504045178056058}
   - {fileID: 7743744775743428774}
+  - {fileID: 2922281494765110120}
+  - {fileID: 3508486754713730256}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2647459806633737789
@@ -689,11 +685,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
   rb: {fileID: 8915720888079556032}
-  attackAnim:
-    names: []
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
   attackSO: {fileID: 0}
   attackPrefab:
     prefab: {fileID: 0}
@@ -702,6 +693,58 @@ MonoBehaviour:
     followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
+--- !u!1 &4999689017625808605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3508486754713730256}
+  - component: {fileID: 1143411079413609873}
+  m_Layer: 6
+  m_Name: Random Flee Behaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3508486754713730256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999689017625808605}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7959029595139826251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1143411079413609873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4999689017625808605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - name: Flee
+    weight: 2
+  - name: Wander
+    weight: 1
+  currentOption: Flee
+  randomInterval: {x: 0.25, y: 3}
+  enableTimerOnAwake: 0
 --- !u!1 &5261146206814944013
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,8 +877,10 @@ MonoBehaviour:
   enemyTag: Player
   lootTag: Loot
   arrivalRange: 1
-  attackRange: 4.47
-  maintainDistance: 2.93
+  attackRange: 5.15
+  maintainDistance: 3.46
+  randomAttackBehaviour: {fileID: 1218149885779216908}
+  randomFleeBehaviour: {fileID: 1143411079413609873}
   showGizmos: 0
   showArrivalRangeGizmo: 1
   showAttackRangeGizmo: 1
@@ -1020,6 +1065,7 @@ MonoBehaviour:
   AllowAttack: 0
   AllowParry: 0
   AllowCast: 0
+  AllowHurt: 0
   AllowStun: 0
   ground: {fileID: 7877508715297963426}
   autoJump: {fileID: 5609296010924524344}
@@ -1160,7 +1206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: {fileID: 704049436961937626}
-  iframeSeconds: 0.1
+  iframeSeconds: 0.25
   iframe: 0
   colorFlicker: 1
   rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
@@ -1382,6 +1428,60 @@ Transform:
   - {fileID: 505977819687569875}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8401221159546054650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2922281494765110120}
+  - component: {fileID: 1218149885779216908}
+  m_Layer: 6
+  m_Name: Random Attack Behaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2922281494765110120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401221159546054650}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7959029595139826251}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1218149885779216908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8401221159546054650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - name: Attack
+    weight: 3
+  - name: Wander
+    weight: 2
+  - name: Flee
+    weight: 1
+  currentOption: Attack
+  randomInterval: {x: 0.25, y: 3}
+  enableTimerOnAwake: 0
 --- !u!1 &9172029450550698297
 GameObject:
   m_ObjectHideFlags: 0

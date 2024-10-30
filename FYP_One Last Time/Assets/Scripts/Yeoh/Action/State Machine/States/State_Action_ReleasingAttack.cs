@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Action_AttackWindingUp : BaseState
+public class State_Action_ReleasingAttack : BaseState
 {
-    public override string Name => "AttackWindingUp";
+    public override string Name => "Releasing Attack";
 
     ActionManager action;
 
-    public State_Action_AttackWindingUp(StateMachine_Action sm)
+    public State_Action_ReleasingAttack(StateMachine_Action sm)
     {
         action = sm.action;
     }
@@ -31,7 +31,6 @@ public class State_Action_AttackWindingUp : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        action.AllowParry = toggle;
-        action.AllowStun = toggle;
+        action.AllowHurt = toggle;
     }
 }

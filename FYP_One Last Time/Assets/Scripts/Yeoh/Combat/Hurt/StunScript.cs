@@ -38,23 +38,31 @@ public class StunScript : MonoBehaviour
         EventM.OnCancelAttack(owner);
         EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
-        EventM.OnCancelStun(owner);
-
-        isStunned=true;
 
         stunAnim = hurtbox.stunAnim;
 
-        stunAnim.Play(owner);
+        Stun();
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
     }
-    
-    // Stun Anim Events ============================================================================
 
+    void Stun()
+    {
+        isStunned=true;
+        
+        stunAnim.Play(owner);
+    }
+    
+    // ============================================================================
+
+    // Anim Event
     public void StunRecover()
     {
         isStunned=false;
     }
+    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
+    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
+    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
 
     // Cancel ============================================================================
 

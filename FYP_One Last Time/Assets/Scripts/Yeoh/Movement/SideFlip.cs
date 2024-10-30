@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SideTurn : TurnScript
+public class SideFlip : TurnScript
 {
     EventManager EventM;
 
@@ -10,11 +10,13 @@ public class SideTurn : TurnScript
     {
         EventM = EventManager.Current;
         
-        EventM.FaceXEvent += OnFaceX;
+        EventM.FlipEvent += OnFlip;
+        EventM.CancelFlipDelayEvent += OnCancelFlipDelay;
     }
     void OnDisable()
     {
-        EventM.FaceXEvent -= OnFaceX;
+        EventM.FlipEvent -= OnFlip;
+        EventM.CancelFlipDelayEvent -= OnCancelFlipDelay;
     }
 
     // ============================================================================
@@ -23,7 +25,7 @@ public class SideTurn : TurnScript
     public bool faceR=true;
     public bool reverse;
 
-    public void OnFaceX(GameObject who, float dir_x)
+    public void OnFlip(GameObject who, float dir_x)
     {
         if(who!=owner) return;
 
@@ -68,6 +70,21 @@ public class SideTurn : TurnScript
 
         float t = Random.Range(flipDelay.x, flipDelay.y);
         yield return new WaitForSeconds(t);
+        Flip();
+
+        isFlipDelaying=false;
+    }
+
+    // ============================================================================
+
+    void OnCancelFlipDelay(GameObject who)
+    {
+        if(who!=owner) return;
+
+        if(!isFlipDelaying) return;
+
+        if(FlipDelaying_crt!=null) StopCoroutine(FlipDelaying_crt);
+
         Flip();
 
         isFlipDelaying=false;

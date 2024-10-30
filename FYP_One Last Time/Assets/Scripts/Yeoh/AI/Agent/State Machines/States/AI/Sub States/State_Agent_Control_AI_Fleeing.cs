@@ -20,9 +20,26 @@ public class State_Agent_Control_AI_Fleeing : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        agent.SetThreatEnemy();
+        string behaviour = agent.GetRandomFleeBehaviour();
+
+        switch(behaviour)
+        {
+            case "Flee": Flee(); break;
+            case "Wander": Wander(); break;
+            default: Flee(); break;
+        }
 
         agent.FaceMoveDir();
+    }
+
+    void Wander()
+    {
+        agent.SetGoalWander();
+    }
+
+    void Flee()
+    {
+        agent.SetThreatEnemy();
     }
 
     protected override void OnExit()

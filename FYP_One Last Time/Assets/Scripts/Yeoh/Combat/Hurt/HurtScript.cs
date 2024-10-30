@@ -191,6 +191,8 @@ public class HurtScript : MonoBehaviour
     {
         if(who!=gameObject) return;
 
+        if(rb.isKinematic) return;
+
         Vector3 kb_dir = (rb.transform.position - contactPoint).normalized;
 
         rb.velocity = Vector3.zero;

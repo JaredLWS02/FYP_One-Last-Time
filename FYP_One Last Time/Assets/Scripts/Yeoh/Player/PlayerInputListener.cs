@@ -24,7 +24,7 @@ public class PlayerInputListener : MonoBehaviour
         if(pilot.IsNone()) moveInput = Vector2.zero;
 
         EventM.OnTryMove(gameObject, moveInput);
-        EventM.OnTryFaceX(gameObject, moveInput.x);
+        EventM.OnTryFlip(gameObject, moveInput.x);
     }
 
     void OnInputMove(InputValue value)
@@ -180,7 +180,7 @@ public class PlayerInputListener : MonoBehaviour
             }
             break;
 
-            case "Parry": EventM.OnTryParry(gameObject); break;
+            case "Parry": EventM.OnTryRaiseParry(gameObject); break;
 
             case "Ability1": EventM.OnTryAbility(gameObject, "Heal"); break;
 

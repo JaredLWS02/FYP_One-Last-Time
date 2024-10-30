@@ -83,8 +83,6 @@ public class AbilityCaster : MonoBehaviour
         EventM.OnUIBarUpdate(gameObject, progress, abilitySO.castingTime);
     }
 
-    bool IsProgressDone() => progress >= abilitySO.castingTime;
-
     void UpdateProgress()
     {
         if(!isCasting) return;
@@ -97,9 +95,12 @@ public class AbilityCaster : MonoBehaviour
 
         if(IsProgressDone())
         {
+            StopCasting();
             Cast();
         }
     }
+
+    bool IsProgressDone() => progress >= abilitySO.castingTime;
 
     void StopCasting()
     {
@@ -107,6 +108,8 @@ public class AbilityCaster : MonoBehaviour
 
         isCasting=false;
         ResetProgress();
+
+        abilitySO.castingAnim.Cancel(owner);
 
         //if(sfxCastingLoop) AudioManager.Current.StopLoop(sfxCastingLoop);
     }
@@ -119,8 +122,6 @@ public class AbilityCaster : MonoBehaviour
 
     void Cast()
     {
-        StopCasting();
-
         // mp cost
         mpM.Deplete(abilitySO.mpCost);
 
@@ -139,22 +140,26 @@ public class AbilityCaster : MonoBehaviour
         EventM.OnCast(owner, abilitySO);
     }
 
-    // Cast Anim Events ============================================================================
+    // ============================================================================
 
+    // Anim Event
     public void CastWindUp()
     {
         isCast=true;
     }
-
+    // Anim Event
     public void CastRelease()
     {
         EventM.OnCastReleased(owner, abilitySO);
     }
-
+    // Anim Event
     public void CastRecover()
     {
         isCast=false;
     }
+    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
+    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
+    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
 
     // ============================================================================
     
@@ -175,7 +180,7 @@ public class AbilityCaster : MonoBehaviour
 
         CastRecover();
 
-        abilitySO.castingAnim.Cancel(owner);
+        abilitySO.castAnim.Cancel(owner);
         
         EventM.OnCastCancelled(owner);
     }

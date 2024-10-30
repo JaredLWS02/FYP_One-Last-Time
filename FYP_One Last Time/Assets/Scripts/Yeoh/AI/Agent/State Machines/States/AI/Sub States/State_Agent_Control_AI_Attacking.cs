@@ -20,6 +20,21 @@ public class State_Agent_Control_AI_Attacking : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
+        string behaviour = agent.GetRandomAttackBehaviour();
+
+        switch(behaviour)
+        {
+            case "Attack": Attack(); break;
+            case "Wander": Wander(); break;
+            case "Flee": Flee(); break;
+            default: Attack(); break;
+        }
+
+        agent.FaceEnemy();
+    }
+
+    void Attack()
+    {
         if(agent.IsEnemyTooClose())
         {
             agent.SetThreatEnemy();
@@ -28,8 +43,16 @@ public class State_Agent_Control_AI_Attacking : BaseState
         {
             agent.SetGoalEnemy();
         }
+    }
 
-        agent.FaceEnemy();
+    void Wander()
+    {
+        agent.SetGoalWander();
+    }
+
+    void Flee()
+    {
+        agent.SetThreatEnemy();
     }
 
     protected override void OnExit()

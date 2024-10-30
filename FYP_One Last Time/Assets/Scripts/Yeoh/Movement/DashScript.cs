@@ -2,21 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ColliderLayerToggler))]
-
 public class DashScript : MonoBehaviour
 {
     public GameObject owner;
-    public Rigidbody rb;
-
-    // ============================================================================
-    
-    ColliderLayerToggler toggler;
-
-    void Awake()
-    {
-        toggler = GetComponent<ColliderLayerToggler>();
-    }
+    public Rigidbody rb;    
 
     // ============================================================================
 
@@ -56,7 +45,7 @@ public class DashScript : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
 
-        DoDashTimer();
+        DoDashingTimer();
 
         dashAnim.Play(owner);
 
@@ -67,7 +56,7 @@ public class DashScript : MonoBehaviour
 
     void Update()
     {
-        UpdateDashTimer();
+        UpdateDashingTimer();
         UpdateLayerToggler();
         UpdateCooldown();
     }
@@ -75,23 +64,27 @@ public class DashScript : MonoBehaviour
     // ============================================================================
 
     [Header("Dashing")]
-    public float dashSeconds=.2f;
-    float dashLeft;
+    public float dashingSeconds=.2f;
+    float dashingLeft;
     
-    void DoDashTimer() => dashLeft = dashSeconds;
+    void DoDashingTimer() => dashingLeft = dashingSeconds;
 
-    bool IsDashing() => dashLeft>0;
+    bool IsDashing() => dashingLeft>0;
 
-    void UpdateDashTimer()
+    void UpdateDashingTimer()
     {
         if(!IsDashing()) return;
 
-        dashLeft -= Time.deltaTime;
+        dashingLeft -= Time.deltaTime;
 
-        if(dashLeft<=0) FinishDash();
+        if(dashingLeft<=0)
+        {
+            StopDashing();
+            StartRecovery();
+        }
     }
 
-    void CancelDashTimer() => dashLeft=0;
+    void CancelDashingTimer() => dashingLeft=0;
 
     // ============================================================================
     
@@ -100,7 +93,7 @@ public class DashScript : MonoBehaviour
         UpdateDashing();
     }
 
-    // ============================================================================
+    // Dashing Force ============================================================================
     
     public float dashForce=10;
     public Vector3 dashDir = Vector3.forward;
@@ -123,10 +116,14 @@ public class DashScript : MonoBehaviour
     
     // ============================================================================
     
+    [Header("Optional")]
+    public ColliderLayerToggler toggler;
     bool wasDashing;
 
     void UpdateLayerToggler()
     {
+        if(!toggler) return;
+
         if(wasDashing != IsDashing())
         {
             wasDashing = IsDashing();
@@ -140,23 +137,30 @@ public class DashScript : MonoBehaviour
     public AnimPreset dashRecoverAnim;
     bool isRecovering;
 
-    void FinishDash()
+    void StopDashing()
     {
-        CancelDashTimer();
+        CancelDashingTimer();
 
         dashAnim.Cancel(owner);
+    }
 
+    void StartRecovery()
+    {
         isRecovering=true;
 
         dashRecoverAnim.Play(owner);
     }
 
-    // Parry Anim Events ============================================================================
+    // ============================================================================
 
+    // Anim Event
     public void DashRecover()
     {
         isRecovering=false;
     }
+    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
+    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
+    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
     
     // ============================================================================
     
@@ -195,7 +199,7 @@ public class DashScript : MonoBehaviour
 
         if(!IsDashing()) return;
 
-        FinishDash();
+        StopDashing();
 
         DashRecover();
 

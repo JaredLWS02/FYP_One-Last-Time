@@ -218,8 +218,10 @@ AnimatorState:
   m_Name: Raise Parry
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_Transitions:
+  - {fileID: 7219920141440360494}
+  m_StateMachineBehaviours:
+  - {fileID: 9056203912517883324}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -428,6 +430,7 @@ AnimatorState:
   - {fileID: 6744018599432751119}
   m_StateMachineBehaviours:
   - {fileID: -1805362569808386650}
+  - {fileID: -1384639317318840469}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -476,9 +479,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: ParryRecover
-  triggerTime: 0.9
-  triggerOnExit: 1
+  eventName: ParryLower
+  triggerTime: 0
+  triggerOnExit: 0
 --- !u!1107 &-1718270413031024621
 AnimatorStateMachine:
   serializedVersion: 6
@@ -493,40 +496,40 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2689442696820787573}
-    m_Position: {x: 450, y: 120, z: 0}
+    m_Position: {x: 470, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3764601745268334094}
-    m_Position: {x: 870, y: 120, z: 0}
+    m_Position: {x: 890, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 70671841495135282}
-    m_Position: {x: 870, y: 170, z: 0}
+    m_Position: {x: 890, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7846124003760974997}
-    m_Position: {x: 870, y: 220, z: 0}
+    m_Position: {x: 890, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1604321689850791998}
-    m_Position: {x: 1290, y: 170, z: 0}
+    m_Position: {x: 1310, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6144393290585532029}
-    m_Position: {x: 1290, y: 120, z: 0}
+    m_Position: {x: 1310, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1503231814187960201}
-    m_Position: {x: 1500, y: 120, z: 0}
+    m_Position: {x: 1520, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5765247848262760518}
-    m_Position: {x: 1080, y: 120, z: 0}
+    m_Position: {x: 1100, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2410970811956554094}
-    m_Position: {x: 1080, y: 170, z: 0}
+    m_Position: {x: 1100, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8644531109814493094}
-    m_Position: {x: 1080, y: 220, z: 0}
+    m_Position: {x: 1100, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4770932286384752407}
-    m_Position: {x: 660, y: 120, z: 0}
+    m_Position: {x: 680, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5634582483704076130}
-    m_Position: {x: 660, y: 170, z: 0}
+    m_Position: {x: 680, y: 170, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -589,6 +592,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-1384639317318840469
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: ParryLowered
+  triggerTime: 0.9
+  triggerOnExit: 1
 --- !u!1101 &-873107679745913603
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -624,6 +642,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName: AttackRecover
+  triggerTime: 0.9
+  triggerOnExit: 1
+--- !u!114 &-90768055576164278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: ParryRecover
   triggerTime: 0.9
   triggerOnExit: 1
 --- !u!91 &9100000
@@ -1109,7 +1142,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cancel
-  m_Speed: 1
+  m_Speed: 9999
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -1127,6 +1160,28 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &7219920141440360494
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -2410970811956554094}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &7846124003760974997
 AnimatorState:
   serializedVersion: 6
@@ -1164,12 +1219,13 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Parry Success
+  m_Name: Parry
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2861446809904670702}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -90768055576164278}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1209,3 +1265,18 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &9056203912517883324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: ParryRaise
+  triggerTime: 0
+  triggerOnExit: 0

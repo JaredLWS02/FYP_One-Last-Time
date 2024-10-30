@@ -32,6 +32,7 @@ public class State_Action_Casting : BaseState
     void ToggleAllow(bool toggle)
     {
         action.AllowParry = toggle;
+        action.AllowHurt = toggle;
         action.AllowStun = toggle;
     }
 }

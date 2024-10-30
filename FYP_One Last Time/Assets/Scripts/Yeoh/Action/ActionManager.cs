@@ -14,6 +14,7 @@ public class ActionManager : MonoBehaviour
     public bool AllowAttack;
     public bool AllowParry;
     public bool AllowCast;
+    public bool AllowHurt;
     public bool AllowStun;
 
     // ============================================================================
@@ -25,33 +26,36 @@ public class ActionManager : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.TryMoveEvent += OnTryMove;
-        EventM.TryFaceXEvent += OnTryFaceX;
+        EventM.TryFlipEvent += OnTryFlip;
         EventM.TryJumpEvent += OnTryJump;
         EventM.TryJumpCutEvent += OnTryJumpCut;
         EventM.TryAutoJumpEvent += OnTryAutoJump;
         EventM.TryDashEvent += OnTryDash;
         EventM.TryComboEvent += OnTryCombo;
-        EventM.TryParryEvent += OnTryParry;
+        EventM.TryRaiseParryEvent += OnTryRaiseParry;
         EventM.TryRiposteComboEvent += OnTryRiposteCombo;
         EventM.TryAbilityEvent += OnTryAbility;
+        EventM.TryHurtEvent += OnTryHurt;
         EventM.TryStunEvent += OnTryStun;
     }
     void OnDisable()
     {
         EventM.TryMoveEvent -= OnTryMove;
-        EventM.TryFaceXEvent -= OnTryFaceX;
+        EventM.TryFlipEvent -= OnTryFlip;
         EventM.TryJumpEvent -= OnTryJump;
         EventM.TryJumpCutEvent -= OnTryJumpCut;
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
         EventM.TryDashEvent -= OnTryDash;
         EventM.TryComboEvent -= OnTryCombo;
-        EventM.TryParryEvent -= OnTryParry;
+        EventM.TryRaiseParryEvent -= OnTryRaiseParry;
         EventM.TryRiposteComboEvent -= OnTryRiposteCombo;
         EventM.TryAbilityEvent -= OnTryAbility;
+        EventM.TryHurtEvent -= OnTryHurt;
         EventM.TryStunEvent -= OnTryStun;
     }
 
     // ============================================================================
+
 
     void OnTryMove(GameObject who, Vector2 input)
     {
@@ -63,13 +67,13 @@ public class ActionManager : MonoBehaviour
         EventM.OnMove(gameObject, input);
     }
 
-    void OnTryFaceX(GameObject who, float input_x)
+    void OnTryFlip(GameObject who, float input_x)
     {
         if(who!=gameObject) return;
 
         if(!AllowMoveX) input_x=0;
 
-        EventM.OnFaceX(gameObject, input_x);
+        EventM.OnFlip(gameObject, input_x);
     }
     
     // ============================================================================
@@ -102,7 +106,7 @@ public class ActionManager : MonoBehaviour
         
         float dot_x = Vector3.Dot(jump_dir, Vector3.right);
 
-        EventM.OnFaceX(gameObject, dot_x);
+        EventM.OnFlip(gameObject, dot_x);
     }
 
     // ============================================================================    
@@ -112,6 +116,8 @@ public class ActionManager : MonoBehaviour
         if(who!=gameObject) return;
 
         if(!AllowDash) return;
+
+        EventM.OnCancelFlipDelay(gameObject);
 
         EventM.OnDash(gameObject);
     }
@@ -126,6 +132,8 @@ public class ActionManager : MonoBehaviour
 
         if(IsRiposteActive()) return;
 
+        EventM.OnCancelFlipDelay(gameObject);
+
         EventM.OnCombo(gameObject, combo_name);
     }
 
@@ -137,18 +145,22 @@ public class ActionManager : MonoBehaviour
 
         if(!IsRiposteActive()) return;
 
+        EventM.OnCancelFlipDelay(gameObject);
+
         EventM.OnCombo(gameObject, combo_name);
     }  
 
     // ============================================================================
     
-    void OnTryParry(GameObject who)
+    void OnTryRaiseParry(GameObject who)
     {
         if(who!=gameObject) return;
 
         if(!AllowParry) return;
 
-        EventM.OnParry(gameObject);
+        EventM.OnCancelFlipDelay(gameObject);
+
+        EventM.OnRaiseParry(gameObject);
     }
 
     // ============================================================================    
@@ -159,7 +171,20 @@ public class ActionManager : MonoBehaviour
 
         if(!AllowCast) return;
 
+        EventM.OnCancelFlipDelay(gameObject);
+
         EventM.OnAbility(gameObject, ability_name);
+    }
+
+    // ============================================================================
+    
+    void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        if(victim!=gameObject) return;
+
+        if(!AllowHurt) return;
+
+        EventM.OnTryParry(gameObject, attacker, hurtbox, contactPoint);
     }
 
     // ============================================================================
@@ -202,28 +227,28 @@ public class ActionManager : MonoBehaviour
     
     public AttackScript attack;
 
-    public bool IsAttackWindingUp()
+    public bool IsWindingUpAttack()
     {
         if(!attack) return false;
         return attack.isWindingUp;
     }
-    public bool IsAttacking()
+    public bool IsReleasingAttack()
     {
         if(!attack) return false;
-        return attack.isAttacking;
+        return attack.isReleasing;
     }
     
     public ParryScript parry;
 
-    public bool IsParryRaised()
+    public bool IsTryingToParry()
     {
         if(!parry) return false;
-        return parry.isParryRaised;
+        return parry.IsTryingToParry();
     }
-    public bool IsParryLowering()
+    public bool IsParrying()
     {
         if(!parry) return false;
-        return parry.isParryLowering;
+        return parry.isParrying;
     }
     public bool IsRiposteActive()
     {

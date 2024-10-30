@@ -12,9 +12,9 @@ public class HurtboxSO : ScriptableObject
 
     [Header("Hit")]
     public float damage=25;
-    public float knockback=10;
+    public float knockback=25;
     public float blockDamage=25;
-    public float blockKnockback=10;
+    public float blockKnockback=25;
     [Min(1)]
     public int pierceCount=1;
     

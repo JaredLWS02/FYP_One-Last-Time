@@ -600,7 +600,7 @@ MonoBehaviour:
   anim: {fileID: 4004871874835498188}
   rb: {fileID: 1642459170912960868}
   move: {fileID: 3611210669050738406}
-  baseSpeedMult: 0.88
+  baseSpeedMult: 0.9
   checkForward: 1
   forwardParamName: MoveZ
   checkRight: 0
@@ -713,6 +713,54 @@ MonoBehaviour:
         - m_Target: {fileID: 7022457898630109682}
           m_TargetAssemblyTypeName: AttackScript, Assembly-CSharp
           m_MethodName: AttackRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: ParryRaise
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6485402941929711479}
+          m_TargetAssemblyTypeName: ParryScript, Assembly-CSharp
+          m_MethodName: ParryRaise
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: ParryLower
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6485402941929711479}
+          m_TargetAssemblyTypeName: ParryScript, Assembly-CSharp
+          m_MethodName: ParryLower
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: ParryLowered
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6485402941929711479}
+          m_TargetAssemblyTypeName: ParryScript, Assembly-CSharp
+          m_MethodName: ParryLowered
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -947,6 +995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 123463650881099154}
   - component: {fileID: 5812872954807716688}
+  - component: {fileID: 7935989673976965938}
   m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
@@ -992,6 +1041,23 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7935989673976965938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8132836240672146080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders:
+  - {fileID: 5812872954807716688}
+  toggledLayerNames:
+  - Enemy
+  - EnemyStopbox
 --- !u!1 &8511508794433670427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,10 +1130,8 @@ GameObject:
   - component: {fileID: 2535672027372677568}
   - component: {fileID: 1353104093430078228}
   - component: {fileID: 8003095357430364833}
-  - component: {fileID: 2987166399731149274}
   - component: {fileID: 8233763058552673176}
   - component: {fileID: 4334806704455733132}
-  - component: {fileID: 2505238066991637890}
   - component: {fileID: 6485402941929711479}
   - component: {fileID: 110049388833876227}
   - component: {fileID: 6639294003576150908}
@@ -1233,6 +1297,7 @@ MonoBehaviour:
   AllowAttack: 0
   AllowParry: 0
   AllowCast: 0
+  AllowHurt: 0
   AllowStun: 0
   ground: {fileID: 1353104093430078228}
   autoJump: {fileID: 0}
@@ -1360,23 +1425,6 @@ MonoBehaviour:
   OnFastFallEnd:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2987166399731149274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 5812872954807716688}
-  ignoredLayerNames:
-  - Enemy
-  - EnemyStopbox
 --- !u!114 &8233763058552673176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1397,10 +1445,11 @@ MonoBehaviour:
     layer: 1
     blendTime: 0
     cancelName: Cancel
-  dashSeconds: 0.2
+  dashingSeconds: 0.2
   dashForce: 10
   dashDir: {x: 0, y: 0, z: 1}
   localDir: 1
+  toggler: {fileID: 7935989673976965938}
   dashRecoverAnim:
     names:
     - Dash Recover
@@ -1441,20 +1490,6 @@ MonoBehaviour:
   OnDeathh:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2505238066991637890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7707d864b16682498cf657452a1dd2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
-  parry: {fileID: 6485402941929711479}
 --- !u!114 &6485402941929711479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1475,18 +1510,11 @@ MonoBehaviour:
     layer: 1
     blendTime: 0
     cancelName: Cancel
-  raiseParrySeconds: 0.3
-  lowerParryAnim:
-    names:
-    - Lower Parry
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
   cooldownTime: 0.3
   minParryDot: 0.2
-  parrySuccessAnim:
+  parryAnim:
     names:
-    - Parry Success
+    - Parry
     layer: 1
     blendTime: 0
     cancelName: Cancel
