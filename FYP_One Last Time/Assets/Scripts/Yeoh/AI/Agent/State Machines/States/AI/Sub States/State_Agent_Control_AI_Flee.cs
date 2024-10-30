@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Agent_Control_AI_Fleeing : BaseState
+public class State_Agent_Control_AI_Flee : BaseState
 {
-    public override string Name => "AI Fleeing";
+    public override string Name => "AI Flee";
 
     AgentManager agent;
 
-    public State_Agent_Control_AI_Fleeing(StateMachine_Agent_Control sm)
+    public State_Agent_Control_AI_Flee(StateMachine_Agent_Control sm)
     {
         agent = sm.agent;
     }
@@ -34,12 +34,12 @@ public class State_Agent_Control_AI_Fleeing : BaseState
 
     void Wander()
     {
-        agent.SetGoalWander();
+        agent.SetGoalToWander();
     }
 
     void Flee()
     {
-        agent.SetThreatEnemy();
+        agent.SetThreatToTarget();
     }
 
     protected override void OnExit()

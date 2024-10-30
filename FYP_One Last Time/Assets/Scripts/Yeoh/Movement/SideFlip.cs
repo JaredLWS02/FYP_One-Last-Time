@@ -17,11 +17,12 @@ public class SideFlip : TurnScript
     {
         EventM.FlipEvent -= OnFlip;
         EventM.CancelFlipDelayEvent -= OnCancelFlipDelay;
+
     }
 
     // ============================================================================
 
-    [Header("Side Turn")]
+    [Header("Side Flip")]
     public bool faceR=true;
     public bool reverse;
 

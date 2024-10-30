@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Agent_Control_AI_Idle : BaseState
+public class State_Agent_Control_AI_Return : BaseState
 {
-    public override string Name => "AI Idle";
+    public override string Name => "AI Return";
 
     AgentManager agent;
 
-    public State_Agent_Control_AI_Idle(StateMachine_Agent_Control sm)
+    public State_Agent_Control_AI_Return(StateMachine_Agent_Control sm)
     {
         agent = sm.agent;
     }
@@ -20,8 +20,8 @@ public class State_Agent_Control_AI_Idle : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        agent.SetGoalToSelf();
-
+        agent.SetGoalToReturn();
+        
         agent.FaceMoveDir();
     }
 

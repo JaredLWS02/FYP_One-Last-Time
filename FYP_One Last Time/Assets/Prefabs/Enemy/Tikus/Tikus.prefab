@@ -101,8 +101,19 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7959029595139826251}
+  - component: {fileID: 7566550702933038159}
+  - component: {fileID: 1478645415520940421}
+  - component: {fileID: 3731827293064252220}
+  - component: {fileID: 1957543827569210308}
+  - component: {fileID: 4126835060992581792}
+  - component: {fileID: 5642966628567456030}
+  - component: {fileID: 3262543382017001155}
+  - component: {fileID: 2725102146154336571}
+  - component: {fileID: 3241738153653270062}
+  - component: {fileID: 8548537993051960101}
+  - component: {fileID: 8304675128609922631}
   m_Layer: 6
-  m_Name: AI
+  m_Name: Agent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,6 +140,230 @@ Transform:
   - {fileID: 3508486754713730256}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7566550702933038159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876dd77094cbc024c87f3d40274ed561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  pilot: {fileID: 7015130824575028965}
+--- !u!114 &1478645415520940421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73da3e4b6aafe624bbecb82ec7f72923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  pilot: {fileID: 7015130824575028965}
+  vehicle: {fileID: 4126835060992581792}
+  allowWander: 1
+  wander: {fileID: 3241738153653270062}
+  wanderArrivalRange: 1
+  radar: {fileID: 801440721258214197}
+  targetTag: Player
+  allowSeek: 1
+  seekArrivalRange: 3
+  maintainDistance: 3.46
+  randomSeekBehaviour: {fileID: 1218149885779216908}
+  allowFlee: 1
+  flee: {fileID: 8548537993051960101}
+  hpM: {fileID: 704049436961937626}
+  fleeHPPercent: 25
+  fleeArrivalRange: 1
+  randomFleeBehaviour: {fileID: 1143411079413609873}
+  allowReturn: 1
+  returner: {fileID: 8304675128609922631}
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
+  showWanderArrivalRangeGizmo: 1
+  showSeekArrivalRangeGizmo: 1
+  showMaintainDistanceGizmo: 1
+  showFleeArrivalRangeGizmo: 1
+--- !u!114 &3731827293064252220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ed8bb89c688f54db46642aab12c211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+--- !u!195 &1957543827569210308
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.1
+  m_Speed: 0
+  m_Acceleration: 0
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4126835060992581792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 321f2b502ff9ba44cb5c69b26adeb3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  agent: {fileID: 1957543827569210308}
+  move: {fileID: 5193524905132986524}
+  turn: {fileID: 8899604075891903837}
+  arrival: 1
+  stoppingRange: 1
+  slowingRangeOffset: 3
+  goal: {fileID: 0}
+--- !u!114 &5642966628567456030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1faf628c0046454684eda5109feaaa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  vehicle: {fileID: 4126835060992581792}
+--- !u!114 &3262543382017001155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3522842e4e1187244a9c40ad6ed6121a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  vehicle: {fileID: 4126835060992581792}
+  checkInterval: 0.25
+  checkHeight: 2.5
+  checkRange: 6
+  showGizmos: 0
+  gizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
+--- !u!114 &2725102146154336571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb9b64dadb3aa94d9dc148b5a3bbb09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  agent: {fileID: 1957543827569210308}
+  isJumping: 0
+  jumpSeconds: 0.8
+  cooldownTime: 0.5
+  rb: {fileID: 8915720888079556032}
+--- !u!114 &3241738153653270062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6d33d33a3c40843b271bf4b24ce0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  agent: {fileID: 1957543827569210308}
+  vehicle: {fileID: 4126835060992581792}
+  wanderGoal: {fileID: 8596504045178056058}
+  wanderDoughnut: {fileID: 5597274611592989443}
+  relocateSeconds: {x: 1, y: 4}
+  maxRetries: 1000
+  axisMult: {x: 1, y: 1, z: 0}
+  maxRangeFromStart: -1
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &8548537993051960101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9266fbe312d7f8d43a9b7a3c42927794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  agent: {fileID: 1957543827569210308}
+  vehicle: {fileID: 4126835060992581792}
+  fleeGoal: {fileID: 7743744775743428774}
+  threat: {fileID: 0}
+  range: 10
+  axisMult: {x: 1, y: 1, z: 0}
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.5176471}
+--- !u!114 &8304675128609922631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772463966900613630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f575e457a871c41996a48186071cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  agent: {fileID: 1957543827569210308}
+  spawnpoint: {fileID: 6462888529248085389}
+  checkInterval: 0.5
+  maxChaseDownRange: 7
+  returnRange: 20
+  showGizmos: 0
+  showMaxChaseDownRangeGizmo: 1
+  showReturnRangeGizmo: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!1 &2647459806633737789
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,17 +991,6 @@ GameObject:
   - component: {fileID: 6415192565362938597}
   - component: {fileID: 8915720888079556032}
   - component: {fileID: 7015130824575028965}
-  - component: {fileID: 4716763645380372994}
-  - component: {fileID: 4411169975042275805}
-  - component: {fileID: 1202456919539228410}
-  - component: {fileID: 7234808440485541836}
-  - component: {fileID: 6732886466950275378}
-  - component: {fileID: 7079224904407704343}
-  - component: {fileID: 5609296010924524344}
-  - component: {fileID: 4228785471254801634}
-  - component: {fileID: 2982932667220849315}
-  - component: {fileID: 5059005152113843592}
-  - component: {fileID: 1052805118213280258}
   - component: {fileID: 5831448510275874491}
   - component: {fileID: 8261427844462952279}
   - component: {fileID: 5193524905132986524}
@@ -845,207 +1069,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPilot: 2
---- !u!114 &4716763645380372994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876dd77094cbc024c87f3d40274ed561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pilot: {fileID: 0}
---- !u!114 &4411169975042275805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73da3e4b6aafe624bbecb82ec7f72923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpM: {fileID: 704049436961937626}
-  okHPPercent: 50
-  lowHPPercent: 25
-  radar: {fileID: 801440721258214197}
-  enemyTag: Player
-  lootTag: Loot
-  arrivalRange: 1
-  attackRange: 5.15
-  maintainDistance: 3.46
-  randomAttackBehaviour: {fileID: 1218149885779216908}
-  randomFleeBehaviour: {fileID: 1143411079413609873}
-  showGizmos: 0
-  showArrivalRangeGizmo: 1
-  showAttackRangeGizmo: 1
-  showMaintainDistanceGizmo: 1
-  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
---- !u!114 &1202456919539228410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ed8bb89c688f54db46642aab12c211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
---- !u!195 &7234808440485541836
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1.1
-  m_Speed: 0
-  m_Acceleration: 0
-  avoidancePriority: 50
-  m_AngularSpeed: 0
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.5
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &6732886466950275378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 321f2b502ff9ba44cb5c69b26adeb3c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goal: {fileID: 0}
-  arrival: 1
-  stoppingRange: 1
-  slowingRangeOffset: 3
---- !u!114 &7079224904407704343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1faf628c0046454684eda5109feaaa7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5609296010924524344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb9b64dadb3aa94d9dc148b5a3bbb09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 5261146206814944013}
-  isJumping: 0
-  jumpSeconds: 0.8
-  cooldownTime: 0.5
-  OnJump:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLand:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &4228785471254801634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d6d33d33a3c40843b271bf4b24ce0f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wanderGoal: {fileID: 8596504045178056058}
-  wanderDoughnut: {fileID: 5597274611592989443}
-  relocateSeconds: {x: 1, y: 4}
-  maxRetries: 1000
-  axisMult: {x: 1, y: 1, z: 0}
-  maxRangeFromStart: -1
-  showGizmos: 0
-  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &2982932667220849315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9266fbe312d7f8d43a9b7a3c42927794, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fleeGoal: {fileID: 7743744775743428774}
-  threat: {fileID: 0}
-  range: 10
-  axisMult: {x: 1, y: 1, z: 0}
-  showGizmos: 0
-  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.5176471}
---- !u!114 &5059005152113843592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3522842e4e1187244a9c40ad6ed6121a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkHeightInterval: 0.25
-  checkingRange: 6
-  verticalCheckHeight: 2.5
-  showGizmos: 0
-  gizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
---- !u!114 &1052805118213280258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44f575e457a871c41996a48186071cc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnpoint: {fileID: 6462888529248085389}
-  checkInterval: 0.5
-  maxChaseDownRange: 7
-  returnRange: 20
-  showGizmos: 0
-  showMaxChaseDownRangeGizmo: 1
-  showReturnRangeGizmo: 1
-  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!114 &5831448510275874491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,7 +1091,7 @@ MonoBehaviour:
   AllowHurt: 0
   AllowStun: 0
   ground: {fileID: 7877508715297963426}
-  autoJump: {fileID: 5609296010924524344}
+  autoJump: {fileID: 2725102146154336571}
   dash: {fileID: 0}
   attack: {fileID: 6861530176262365675}
   parry: {fileID: 0}
@@ -1213,19 +1236,11 @@ MonoBehaviour:
   colorFlickerInterval: 0.05
   poise: 0
   poiseRegenDelay: 3
+  allowStun: 1
+  allowKnockback: 1
+  knockbackMult: 1
   iframeOnDeath: 1
-  OnHurtt:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPoiseBreak:
-    m_PersistentCalls:
-      m_Calls: []
-  OnIFrameEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeathh:
-    m_PersistentCalls:
-      m_Calls: []
+  destroyOnDeath: 0
 --- !u!114 &3691060632212682340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1439,7 +1454,7 @@ GameObject:
   - component: {fileID: 2922281494765110120}
   - component: {fileID: 1218149885779216908}
   m_Layer: 6
-  m_Name: Random Attack Behaviour
+  m_Name: Random Seek Behaviour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1473,13 +1488,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   options:
-  - name: Attack
+  - name: Seek
     weight: 3
   - name: Wander
     weight: 2
   - name: Flee
     weight: 1
-  currentOption: Attack
+  currentOption: Seek
   randomInterval: {x: 0.25, y: 3}
   enableTimerOnAwake: 0
 --- !u!1 &9172029450550698297

@@ -16,12 +16,10 @@ public class AnimatorActions : MonoBehaviour
         EventM = EventManager.Current;
 
         EventM.JumpedEvent += OnJumped;
-        EventM.AutoJumpedEvent += OnAutoJumped;
     }
     void OnDisable()
     {
         EventM.JumpedEvent -= OnJumped;
-        EventM.AutoJumpedEvent -= OnAutoJumped;
     }
 
     // ============================================================================
@@ -42,13 +40,6 @@ public class AnimatorActions : MonoBehaviour
     public AnimPreset jumpAnim;
 
     void OnJumped(GameObject jumper)
-    {
-        if(jumper!=owner) return;
-
-        jumpAnim.Play(owner);
-    }
-
-    void OnAutoJumped(GameObject jumper, Vector3 jump_dir)
     {
         if(jumper!=owner) return;
 

@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Pilot))]
-
 public class AgentInputListener : MonoBehaviour
 {
-    [HideInInspector]
+    public GameObject owner;
     public Pilot pilot;
-
-    void Awake()
-    {
-        pilot = GetComponent<Pilot>();
-    }
 
     // ============================================================================
 
@@ -23,7 +16,7 @@ public class AgentInputListener : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.AgentTryMoveEvent += OnAgentTryMove;
-        EventM.AgentTryFaceXEvent += OnAgentTryFaceX;
+        EventM.AgentTryFlipEvent += OnAgentTryFlip;
         EventM.AgentTryJumpEvent += OnAgentTryJump;
         EventM.AgentTryJumpCutEvent += OnAgentTryJumpCut;
         EventM.AgentTryAutoJumpEvent += OnAgentTryAutoJump;
@@ -32,7 +25,7 @@ public class AgentInputListener : MonoBehaviour
     void OnDisable()
     {
         EventM.AgentTryMoveEvent -= OnAgentTryMove;
-        EventM.AgentTryFaceXEvent -= OnAgentTryFaceX;
+        EventM.AgentTryFlipEvent -= OnAgentTryFlip;
         EventM.AgentTryJumpEvent -= OnAgentTryJump;
         EventM.AgentTryJumpCutEvent -= OnAgentTryJumpCut;
         EventM.AgentTryAutoJumpEvent -= OnAgentTryAutoJump;
@@ -47,64 +40,64 @@ public class AgentInputListener : MonoBehaviour
     {
         if(pilot.IsNone()) moveInput = Vector2.zero;
 
-        EventM.OnTryMove(gameObject, moveInput);
+        EventM.OnTryMove(owner, moveInput);
     }
 
-    void OnAgentTryMove(GameObject mover, Vector2 input_dir)
+    void OnAgentTryMove(GameObject who, Vector2 input_dir)
     {
         if(!pilot.IsAI()) return;
 
-        if(mover!=gameObject) return;
+        if(who!=owner) return;
 
         moveInput = input_dir;
     } 
 
-    void OnAgentTryFaceX(GameObject facer, float dir_x)
+    void OnAgentTryFlip(GameObject who, float dir_x)
     {
         if(!pilot.IsAI()) return;
 
-        if(facer!=gameObject) return;
+        if(who!=owner) return;
 
-        EventM.OnTryFlip(gameObject, dir_x);
+        EventM.OnTryFlip(owner, dir_x);
     }
 
     // Jump ============================================================================
 
-    void OnAgentTryJump(GameObject jumper)
+    void OnAgentTryJump(GameObject who)
     {
         if(!pilot.IsAI()) return;
 
-        if(jumper!=gameObject) return;
+        if(who!=owner) return;
 
-        EventM.OnTryJump(gameObject);
+        EventM.OnTryJump(owner);
     }
 
-    void OnAgentTryJumpCut(GameObject jumper)
+    void OnAgentTryJumpCut(GameObject who)
     {
         if(!pilot.IsAI()) return;
 
-        if(jumper!=gameObject) return;
+        if(who!=owner) return;
 
-        EventM.OnTryJump(gameObject);
+        EventM.OnTryJump(owner);
     }
 
-    void OnAgentTryAutoJump(GameObject jumper, Vector3 dir)
+    void OnAgentTryAutoJump(GameObject who, Vector3 dir)
     {
         if(!pilot.IsAI()) return;
 
-        if(jumper!=gameObject) return;
+        if(who!=owner) return;
 
-        EventM.OnTryAutoJump(gameObject, dir);
+        EventM.OnTryAutoJump(owner, dir);
     }
 
     // Attack ============================================================================
 
-    void OnAgentTryAttack(GameObject attacker, string type)
+    void OnAgentTryAttack(GameObject who, string type)
     {
         if(!pilot.IsAI()) return;
 
-        if(attacker!=gameObject) return;
+        if(who!=owner) return;
 
-        EventM.OnTryCombo(gameObject, type);
+        EventM.OnTryCombo(owner, type);
     }
 }

@@ -3,27 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-
 public class AgentReturn : MonoBehaviour
 {
-    NavMeshAgent agent;
+    public GameObject owner;
+    public NavMeshAgent agent;
 
+    // ============================================================================
+    
+    [Header("Return")]
     public Transform spawnpoint;
 
     void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-
         spawnpoint.parent = null;
         spawnpoint.position = SnapToNavMesh(spawnpoint.position);
-    }
-
-    // ============================================================================
-    
-    void Update()
-    {
-        UpdateCooldown();
     }
 
     // ============================================================================
@@ -31,10 +24,7 @@ public class AgentReturn : MonoBehaviour
     public float checkInterval=.5f;
     float cooldownLeft;
 
-    void DoCooldown()
-    {
-        cooldownLeft = checkInterval;
-    }
+    void DoCooldown() => cooldownLeft = checkInterval;
 
     void UpdateCooldown()
     {
@@ -43,17 +33,15 @@ public class AgentReturn : MonoBehaviour
         if(cooldownLeft<0) cooldownLeft=0;
     }
 
-    bool IsCooling()
-    {
-        return cooldownLeft>0;
-    }
+    bool IsCooling() => cooldownLeft>0;
     
     // ============================================================================
 
     public bool shouldReturn {get; private set;}
 
-    public void CheckReturn(Vector3 chasedown_pos)
+    public void UpdateCheck(Vector3 chasedown_pos)
     {
+        UpdateCooldown();
         if(IsCooling()) return;
         DoCooldown();
 
@@ -84,19 +72,19 @@ public class AgentReturn : MonoBehaviour
 
     bool CanStillChaseDown(Vector3 chasedown_pos)
     {
-        return IsInRange(agent.transform.position, chasedown_pos, maxChaseDownRange);
+        return IsInRange(owner.transform.position, chasedown_pos, maxChaseDownRange);
     }
 
     public float returnRange=20;
 
     bool IsNearSpawnpoint()
     {
-        return IsInRange(spawnpoint.position, transform.position, returnRange);
+        return IsInRange(spawnpoint.position, owner.transform.position, returnRange);
     }
 
     public bool IsAtSpawnpoint(float stopping_range)
     {
-        return IsInRange(spawnpoint.position, agent.transform.position, stopping_range);
+        return IsInRange(spawnpoint.position, owner.transform.position, stopping_range);
     }
 
     // ============================================================================
@@ -107,7 +95,7 @@ public class AgentReturn : MonoBehaviour
         {
             return hit.position;
         }
-        return agent.transform.position;
+        return owner.transform.position;
     }
 
     bool IsPathable(Vector3 pos)
@@ -134,11 +122,11 @@ public class AgentReturn : MonoBehaviour
         Gizmos.color = gizmoColor;
 
         if(showMaxChaseDownRangeGizmo)
-        Gizmos.DrawWireSphere(transform.position, maxChaseDownRange);
+        Gizmos.DrawWireSphere(owner.transform.position, maxChaseDownRange);
 
         if(showReturnRangeGizmo)
         {
-            Vector3 spawn_pos = Application.isPlaying ? spawnpoint.position : transform.position;
+            Vector3 spawn_pos = Application.isPlaying ? spawnpoint.position : owner.transform.position;
             Gizmos.DrawWireSphere(spawn_pos, returnRange);
         }
     }

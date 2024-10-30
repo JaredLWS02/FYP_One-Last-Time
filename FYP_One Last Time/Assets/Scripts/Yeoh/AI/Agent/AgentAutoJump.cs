@@ -3,24 +3,11 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
-
-[RequireComponent(typeof(NavMeshAgent))]
 
 public class AgentAutoJump : MonoBehaviour
 {
     public GameObject owner;
-
-    // ============================================================================
-
-    NavMeshAgent agent;
-    Rigidbody rb; // optional
-
-    void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
-    }
+    public NavMeshAgent agent;
 
     // ============================================================================
 
@@ -48,13 +35,13 @@ public class AgentAutoJump : MonoBehaviour
         if(!agent.isOnOffMeshLink) return;
         if(isJumping) return;
 
-        EventM.OnAgentTryAutoJump(gameObject, GetJumpDir());
+        EventM.OnAgentTryAutoJump(owner, GetJumpDir());
     }
 
     Vector3 GetJumpDir()
     {
         Vector3 end_pos = agent.currentOffMeshLinkData.endPos;
-        return (end_pos - agent.transform.position).normalized;
+        return (end_pos - owner.transform.position).normalized;
     }
 
     // ============================================================================
@@ -92,7 +79,7 @@ public class AgentAutoJump : MonoBehaviour
     public bool isJumping;
     float jumpProgress=0;
 
-    Vector3 agentStartPos;
+    Vector3 startPos;
     Spline spline;
     bool isReversed;
 
@@ -107,12 +94,12 @@ public class AgentAutoJump : MonoBehaviour
 
         spline = link.GetComponent<Spline>();
 
-        agentStartPos = agent.transform.position;
+        startPos = owner.transform.position;
 
         isReversed = IsJumpReversed(link);
 
-        OnJump?.Invoke();
-        EventM.OnAutoJumped(gameObject, GetJumpDir());
+        EventM.OnJumped(owner);
+        EventM.OnAutoJumped(owner, GetJumpDir());
     }
 
     // ============================================================================
@@ -124,15 +111,16 @@ public class AgentAutoJump : MonoBehaviour
         Vector3 end_pos = link.transform.TransformPoint(link.endPoint);
 
         // distances
-        float agent_to_start = Vector3.Distance(agent.transform.position, start_pos);
-        float agent_to_end = Vector3.Distance(agent.transform.position, end_pos);
+        float owner_to_start = Vector3.Distance(owner.transform.position, start_pos);
+        float owner_to_end = Vector3.Distance(owner.transform.position, end_pos);
 
         // if closer to end point than start point
-        return agent_to_end < agent_to_start;
+        return owner_to_end < owner_to_start;
     }
 
     // ============================================================================
 
+    [Header("Jump")]
     [Min(.01f)]
     public float jumpSeconds=.8f;
 
@@ -147,10 +135,12 @@ public class AgentAutoJump : MonoBehaviour
         // invert value if reversed
         lerp01 = isReversed ? 1-lerp01 : lerp01;
 
-        // move agent along spline
-        agent.transform.position = isReversed
-            ? spline.CalcPosFromEnd(lerp01, agentStartPos)
-            : spline.CalcPosFromStart(lerp01, agentStartPos);
+        // move owner along spline
+        owner.transform.position = isReversed
+            ? spline.CalcPosFromEnd(lerp01, startPos)
+            : spline.CalcPosFromStart(lerp01, startPos);
+
+        EventM.OnAutoJumping(owner, GetJumpDir());
 
         if(jumpProgress>=1)
         {
@@ -169,8 +159,7 @@ public class AgentAutoJump : MonoBehaviour
 
         agent.CompleteOffMeshLink();
 
-        OnLand?.Invoke();
-        EventM.OnLandGround(gameObject);
+        EventM.OnLandGround(owner);
     }
 
     // ============================================================================
@@ -178,10 +167,7 @@ public class AgentAutoJump : MonoBehaviour
     public float cooldownTime=.5f;
     float cooldownLeft;
     
-    void DoCooldown()
-    {
-        cooldownLeft = cooldownTime;
-    }
+    void DoCooldown() => cooldownLeft = cooldownTime;
 
     void UpdateCooldown()
     {
@@ -193,21 +179,14 @@ public class AgentAutoJump : MonoBehaviour
         if(cooldownLeft<0) cooldownLeft=0;
     }
 
-    bool IsCooling()
-    {
-        return cooldownLeft>0;
-    }
+    bool IsCooling() => cooldownLeft>0;
 
-    void CancelCooldown()
-    {
-        cooldownLeft=0;
-    }
+    void CancelCooldown() => cooldownLeft=0;
 
     // ============================================================================
-
-    [Header("Events")]
-    public UnityEvent OnJump;
-    public UnityEvent OnLand;
+    
+    [Header("Optional")]
+    public Rigidbody rb;
 }
 
 // Tutorial by SunnyValleyStudio YouTube

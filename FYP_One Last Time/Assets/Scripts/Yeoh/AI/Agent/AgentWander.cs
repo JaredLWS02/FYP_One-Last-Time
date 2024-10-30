@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(AgentVelocity))]
-
 public class AgentWander : MonoBehaviour
 {
-    NavMeshAgent agent;
-    AgentVelocity agentVel;
+    public GameObject owner;
+    public NavMeshAgent agent;
+    public AgentVehicle vehicle;
 
+    // ============================================================================
+    
+    [Header("Wander")]
     public Transform wanderGoal;
     public RandomDoughnut wanderDoughnut;
 
@@ -19,19 +20,11 @@ public class AgentWander : MonoBehaviour
     
     void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agentVel = GetComponent<AgentVelocity>();
-
         wanderGoal.parent=null;
 
-        startPos = agent.transform.position;
-        goalPos = agent.transform.position;
+        startPos = owner.transform.position;
+        goalPos = owner.transform.position;
     }
-
-    void OnEnable()
-    {
-        StartCoroutine(Relocating());
-    }    
 
     void FixedUpdate()
     {
@@ -46,6 +39,11 @@ public class AgentWander : MonoBehaviour
 
     public Vector3 axisMult = Vector3.one;
 
+    void OnEnable()
+    {
+        StartCoroutine(Relocating());
+    }
+
     IEnumerator Relocating()
     {
         while(true)
@@ -59,7 +57,7 @@ public class AgentWander : MonoBehaviour
     void Relocate()
     {
         // ignore if main agent's goal is not the wander goal
-        if(agentVel.goal != wanderGoal) return;
+        if(vehicle.goal != wanderGoal) return;
 
         if(IsTooFarFromStart())
         {
@@ -85,14 +83,14 @@ public class AgentWander : MonoBehaviour
                 return;
             }
         }
-        Debug.Log($"{agent.name}: Couldn't find place to wander to");
+        Debug.Log($"{owner.name}: Couldn't find place to wander to");
     }
     
     // ============================================================================
 
     Vector3 GetDoughnutAroundAgent()
     {
-        return wanderDoughnut.GetRandomPos(agent.transform.position);
+        return wanderDoughnut.GetRandomPos(owner.transform.position);
     }
 
     // ============================================================================
@@ -103,14 +101,14 @@ public class AgentWander : MonoBehaviour
         {
             return hit.position;
         }
-        return agent.transform.position;
+        return owner.transform.position;
     }
 
     // ============================================================================
     
     bool IsTooNearDoughnut(Vector3 pos)
     {
-        float distance = Vector3.Distance(agent.transform.position, pos);
+        float distance = Vector3.Distance(owner.transform.position, pos);
         return distance < wanderDoughnut.rangeMinMax.x;
     }
 
@@ -129,7 +127,7 @@ public class AgentWander : MonoBehaviour
 
     bool IsTooFarFromStart()
     {
-        return IsTooFarFromStart(agent.transform.position);
+        return IsTooFarFromStart(owner.transform.position);
     }
 
     // ============================================================================
@@ -153,7 +151,7 @@ public class AgentWander : MonoBehaviour
 
         if(maxRangeFromStart<=0) return;
 
-        Vector3 pos = Application.isPlaying ? startPos : transform.position;
+        Vector3 pos = Application.isPlaying ? startPos : owner.transform.position;
         
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireSphere(pos, maxRangeFromStart);

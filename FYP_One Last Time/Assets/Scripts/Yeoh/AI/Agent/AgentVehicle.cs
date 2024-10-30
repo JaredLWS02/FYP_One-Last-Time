@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(MoveScript))]
-[RequireComponent(typeof(TurnScript))]
-
-public class AgentVelocity : MonoBehaviour
+public class AgentVehicle : MonoBehaviour
 {
-    NavMeshAgent agent;
-    MoveScript move;
-    TurnScript turn;
-
-    void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        move = GetComponent<MoveScript>();
-        turn = GetComponent<TurnScript>();
-    }
+    public GameObject owner;
+    public NavMeshAgent agent;
+    public MoveScript move;
+    public TurnScript turn;
 
     // ============================================================================
     
@@ -34,19 +24,17 @@ public class AgentVelocity : MonoBehaviour
     }
 
     // ============================================================================
-
-    public Transform goal;
     
     public Vector3 velocity {get; private set;} = Vector3.zero;
 
     void FixedUpdate()
     {
-        agent.destination = goal ? goal.position : agent.transform.position;
+        agent.destination = goal ? goal.position : owner.transform.position;
 
         velocity = GetArrivalVelocity(agent.desiredVelocity);
 
         // set agent virtual pos to rigidbody pos
-        agent.nextPosition = agent.transform.position;
+        agent.nextPosition = owner.transform.position;
     }
 
     // ============================================================================
@@ -62,7 +50,7 @@ public class AgentVelocity : MonoBehaviour
 
         if(!arrival) return velocity;
 
-        float distance = Mathf.Abs(goal.position.x - transform.position.x);
+        float distance = Mathf.Abs(goal.position.x - owner.transform.position.x);
 
         if(distance <= stoppingRange) return Vector3.zero;
 
@@ -74,4 +62,9 @@ public class AgentVelocity : MonoBehaviour
 
         return velocity.normalized * clipped_speed;
     }
+
+    // ============================================================================
+
+    [Header("Debug")]
+    public Transform goal;
 }

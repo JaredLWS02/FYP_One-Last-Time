@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(AgentVelocity))]
+[RequireComponent(typeof(AgentVehicle))]
 [RequireComponent(typeof(SteerScript))]
 
 public class AgentSteer : MonoBehaviour
 {
-    AgentVelocity move;
+    AgentVehicle move;
     SteerScript steer;
 
     void Awake()
     {
-        move = GetComponent<AgentVelocity>();
+        move = GetComponent<AgentVehicle>();
         steer = GetComponent<SteerScript>();
     }
 

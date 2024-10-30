@@ -43,6 +43,8 @@ public class AttackScript : MonoBehaviour
 
     void Attack()
     {
+        EventM.OnAttacked(owner, attackSO);
+        
         if(attackSO.noAnim)
         {
             AttackRelease();
@@ -51,8 +53,6 @@ public class AttackScript : MonoBehaviour
         {
             attackSO.anim.Play(owner);
         }
-
-        EventM.OnAttacked(owner, attackSO);
     }
 
     // ============================================================================
@@ -62,7 +62,7 @@ public class AttackScript : MonoBehaviour
     
     public bool IsAttacking()
     {
-        return isReleasing || isWindingUp;
+        return isWindingUp || isReleasing;
     }
 
     // ============================================================================
@@ -75,6 +75,8 @@ public class AttackScript : MonoBehaviour
 
         if(attackSO.dashOnWindUp)
         Dash(attackSO.dashOnWindUpForce, attackSO.dashOnWindUpDir);
+
+        EventM.OnAttackWindedUp(owner, attackSO);
     }  
     // Anim Event
     public void AttackRelease()

@@ -19,17 +19,18 @@ public class State_Agent_Control_AI : BaseState
         // SUB STATES ================================================================================
 
         State_Agent_Control_AI_Idle idle = new(sm);
-        State_Agent_Control_AI_Attacking attacking = new(sm);
-        State_Agent_Control_AI_Fleeing fleeing = new(sm);
-        State_Agent_Control_AI_Returning returning = new(sm);
+        State_Agent_Control_AI_Wander wander = new(sm);
+        State_Agent_Control_AI_Seek seek = new(sm);
+        State_Agent_Control_AI_Flee flee = new(sm);
+        State_Agent_Control_AI_Return returnn = new(sm);
 
         // HUB TRANSITIONS ================================================================================
 
-        idle.AddTransition(attacking, (timeInState) =>
+        idle.AddTransition(wander, (timeInState) =>
         {
             if(
-                agent.GetEnemy() &&
-                !agent.IsLowHP() &&
+                agent.allowWander &&
+                !agent.GetTarget() &&
                 !agent.ShouldReturn() //&&
             ){
                 return true;
@@ -37,20 +38,36 @@ public class State_Agent_Control_AI : BaseState
             return false;
         });
 
-        idle.AddTransition(fleeing, (timeInState) =>
+        idle.AddTransition(seek, (timeInState) =>
         {
             if(
-                agent.IsLowHP() //&&
+                agent.allowSeek &&
+                agent.GetTarget() &&
+                !agent.ShouldFlee() &&
+                !agent.ShouldReturn() //&&
             ){
                 return true;
             }
             return false;
         });
 
-        idle.AddTransition(returning, (timeInState) =>
+        idle.AddTransition(flee, (timeInState) =>
         {
             if(
-                !agent.IsLowHP() &&
+                agent.allowFlee &&
+                agent.GetTarget() &&
+                agent.ShouldFlee() //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        idle.AddTransition(returnn, (timeInState) =>
+        {
+            if(
+                agent.allowReturn &&
+                !agent.ShouldFlee() &&
                 agent.ShouldReturn() //&&
             ){
                 return true;
@@ -61,11 +78,11 @@ public class State_Agent_Control_AI : BaseState
         
         // RETURN TRANSITIONS ================================================================================
 
-        attacking.AddTransition(idle, (timeInState) =>
+        wander.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.GetEnemy() ||
-                agent.IsLowHP() ||
+                !agent.allowWander ||
+                agent.GetTarget() ||
                 agent.ShouldReturn() //||
             ){
                 return true;
@@ -73,20 +90,36 @@ public class State_Agent_Control_AI : BaseState
             return false;
         });
 
-        fleeing.AddTransition(idle, (timeInState) =>
+        seek.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.IsLowHP() //||
+                !agent.allowSeek ||
+                !agent.GetTarget() ||
+                agent.ShouldFlee() ||
+                agent.ShouldReturn() //||
             ){
                 return true;
             }
             return false;
         });
 
-        returning.AddTransition(idle, (timeInState) =>
+        flee.AddTransition(idle, (timeInState) =>
         {
             if(
-                agent.IsLowHP() ||
+                !agent.allowFlee ||
+                !agent.GetTarget() ||
+                !agent.ShouldFlee() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        returnn.AddTransition(idle, (timeInState) =>
+        {
+            if(
+                !agent.allowReturn ||
+                agent.ShouldFlee() ||
                 agent.IsAtSpawnpoint() //||
             ){
                 return true;

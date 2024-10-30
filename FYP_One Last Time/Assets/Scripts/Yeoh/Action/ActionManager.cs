@@ -30,6 +30,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent += OnTryJump;
         EventM.TryJumpCutEvent += OnTryJumpCut;
         EventM.TryAutoJumpEvent += OnTryAutoJump;
+        EventM.AutoJumpingEvent += OnAutoJumping;
         EventM.TryDashEvent += OnTryDash;
         EventM.TryComboEvent += OnTryCombo;
         EventM.TryRaiseParryEvent += OnTryRaiseParry;
@@ -45,6 +46,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent -= OnTryJump;
         EventM.TryJumpCutEvent -= OnTryJumpCut;
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
+        EventM.AutoJumpingEvent -= OnAutoJumping;
         EventM.TryDashEvent -= OnTryDash;
         EventM.TryComboEvent -= OnTryCombo;
         EventM.TryRaiseParryEvent -= OnTryRaiseParry;
@@ -71,7 +73,7 @@ public class ActionManager : MonoBehaviour
     {
         if(who!=gameObject) return;
 
-        if(!AllowMoveX) input_x=0;
+        if(!AllowMoveX) return;
 
         EventM.OnFlip(gameObject, input_x);
     }
@@ -103,7 +105,12 @@ public class ActionManager : MonoBehaviour
         if(!AllowJump) return;
 
         EventM.OnAutoJump(gameObject, jump_dir);
-        
+    }
+
+    void OnAutoJumping(GameObject who, Vector3 jump_dir)
+    {
+        if(who!=gameObject) return;
+
         float dot_x = Vector3.Dot(jump_dir, Vector3.right);
 
         EventM.OnFlip(gameObject, dot_x);

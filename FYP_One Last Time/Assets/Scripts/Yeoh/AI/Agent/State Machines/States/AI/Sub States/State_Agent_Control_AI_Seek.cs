@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Agent_Control_AI_Attacking : BaseState
+public class State_Agent_Control_AI_Seek : BaseState
 {
-    public override string Name => "AI Attacking";
+    public override string Name => "AI Seek";
 
     AgentManager agent;
 
-    public State_Agent_Control_AI_Attacking(StateMachine_Agent_Control sm)
+    public State_Agent_Control_AI_Seek(StateMachine_Agent_Control sm)
     {
         agent = sm.agent;
     }
@@ -20,39 +20,39 @@ public class State_Agent_Control_AI_Attacking : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        string behaviour = agent.GetRandomAttackBehaviour();
+        string behaviour = agent.GetRandomSeekBehaviour();
 
         switch(behaviour)
         {
-            case "Attack": Attack(); break;
+            case "Seek": Seek(); break;
             case "Wander": Wander(); break;
             case "Flee": Flee(); break;
-            default: Attack(); break;
+            default: Seek(); break;
         }
 
-        agent.FaceEnemy();
+        agent.FaceTarget();
     }
 
-    void Attack()
+    void Seek()
     {
-        if(agent.IsEnemyTooClose())
+        if(agent.IsTargetTooClose())
         {
-            agent.SetThreatEnemy();
+            agent.SetThreatToTarget();
         }
         else
         {
-            agent.SetGoalEnemy();
+            agent.SetGoalToSeek();
         }
     }
 
     void Wander()
     {
-        agent.SetGoalWander();
+        agent.SetGoalToWander();
     }
 
     void Flee()
     {
-        agent.SetThreatEnemy();
+        agent.SetThreatToTarget();
     }
 
     protected override void OnExit()

@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_Agent_Control_AI_Returning : BaseState
+public class State_Agent_Control_AI_Wander : BaseState
 {
-    public override string Name => "AI Returning";
+    public override string Name => "AI Wander";
 
     AgentManager agent;
 
-    public State_Agent_Control_AI_Returning(StateMachine_Agent_Control sm)
+    public State_Agent_Control_AI_Wander(StateMachine_Agent_Control sm)
     {
         agent = sm.agent;
     }
@@ -20,8 +20,8 @@ public class State_Agent_Control_AI_Returning : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        agent.SetGoalSpawnpoint();
-        
+        agent.SetGoalToWander();
+
         agent.FaceMoveDir();
     }
 

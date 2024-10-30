@@ -182,14 +182,23 @@ public class ParryScript : MonoBehaviour
 
             EventM.OnStun(attacker, owner, hurtbox, contactPoint);
 
-            EventM.OnKnockback(attacker, hurtbox.knockback, contactPoint);
+            ParryKnockback(attacker, hurtbox, contactPoint);
         }
 
-        EventM.OnKnockback(owner, hurtbox.blockKnockback, contactPoint);
+        EventM.OnTryKnockback(owner, hurtbox.blockKnockback, contactPoint);
 
         Parry();
 
         StartRiposte();
+    }
+
+    void ParryKnockback(GameObject who, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        float counter_knockback = hurtbox.knockback - hurtbox.blockKnockback;
+
+        counter_knockback = Mathf.Max(counter_knockback, hurtbox.blockKnockback);
+
+        EventM.OnTryKnockback(who, counter_knockback, contactPoint);
     }
 
     void Parry()
