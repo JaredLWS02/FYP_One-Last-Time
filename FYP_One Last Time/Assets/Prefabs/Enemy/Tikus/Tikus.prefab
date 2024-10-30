@@ -52,16 +52,18 @@ MonoBehaviour:
   - attackAnim:
       names:
       - Slam
-      layer: 0
+      layer: 1
       blendTime: 0
-      cancelName: Idle
+      cancelName: Cancel
     attackSO: {fileID: 11400000, guid: 8db0e5daa15601340821c312ff964fc0, type: 2}
-    attackSpawn:
+    attackPrefab:
       prefab: {fileID: 1242880141507026177, guid: c5c0261915e183d40b40f3bcbe09d457,
         type: 3}
       spawnpoint: {fileID: 6955758431937353321}
       parented: 1
       followRotation: 1
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
   randomCombo: 0
   comboResetTime: 0.25
   comboCooldownTime: 0.25
@@ -689,15 +691,17 @@ MonoBehaviour:
   rb: {fileID: 8915720888079556032}
   attackAnim:
     names: []
-    layer: 0
+    layer: 1
     blendTime: 0
-    cancelName: Idle
+    cancelName: Cancel
   attackSO: {fileID: 0}
-  attackSpawn:
+  attackPrefab:
     prefab: {fileID: 0}
     spawnpoint: {fileID: 0}
     parented: 1
     followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &5261146206814944013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,7 +1116,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  minLandVelocity: -1
   showGizmos: 1
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
   OnLandGround:
@@ -1205,9 +1208,9 @@ MonoBehaviour:
   stunAnim:
     names:
     - Stun1
-    layer: 0
+    layer: 1
     blendTime: 0
-    cancelName: Idle
+    cancelName: Cancel
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0

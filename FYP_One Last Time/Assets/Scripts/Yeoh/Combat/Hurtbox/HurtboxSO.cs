@@ -20,7 +20,7 @@ public class HurtboxSO : ScriptableObject
     
     [Header("Parry")]
     public bool isParryable=true;
-    public bool parryStunsAttacker=true;
+    public bool parryStunsOwner=true;
 
     [Header("Stun")]
     public bool canStun=true;
@@ -39,7 +39,7 @@ public class HurtboxSO : ScriptableObject
         new_SO.blockDamage = so.blockDamage;
         new_SO.pierceCount = so.pierceCount;
         new_SO.isParryable = so.isParryable;
-        new_SO.parryStunsAttacker = so.parryStunsAttacker;
+        new_SO.parryStunsOwner = so.parryStunsOwner;
         new_SO.canStun = so.canStun;
         new_SO.stunAnim = so.stunAnim;
 

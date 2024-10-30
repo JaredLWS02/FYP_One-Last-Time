@@ -38,6 +38,7 @@ public class StunScript : MonoBehaviour
         EventM.OnCancelAttack(owner);
         EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
+        EventM.OnCancelStun(owner);
 
         isStunned=true;
 

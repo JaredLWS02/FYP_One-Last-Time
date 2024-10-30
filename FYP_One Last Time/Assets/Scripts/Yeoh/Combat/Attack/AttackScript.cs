@@ -25,11 +25,9 @@ public class AttackScript : MonoBehaviour
     // ============================================================================
     
     [Header("On Attack")]
-    public AnimPreset attackAnim;
-    [Space]
     public AttackSO attackSO;
     [Space]
-    public PrefabSpawn attackSpawn;
+    public PrefabPreset attackPrefab;
     
     public void TryAttack()
     {
@@ -45,13 +43,13 @@ public class AttackScript : MonoBehaviour
 
     void Attack()
     {
-        if(attackAnim.names.Count>0)
+        if(attackSO.noAnim)
         {
-            attackAnim.Play(owner);
+            AttackRelease();
         }
         else
         {
-            AttackRelease();
+            attackSO.anim.Play(owner);
         }
 
         EventM.OnAttacked(owner, attackSO);
@@ -104,11 +102,7 @@ public class AttackScript : MonoBehaviour
 
     public void SpawnAttack()
     {
-        Quaternion rotation = attackSpawn.followRotation ? attackSpawn.spawnpoint.rotation : Quaternion.identity;
-
-        GameObject spawned = Instantiate(attackSpawn.prefab, attackSpawn.spawnpoint.position, rotation);
-
-        if(attackSpawn.parented) spawned.transform.parent = attackSpawn.spawnpoint;
+        GameObject spawned = attackPrefab.Spawn();
 
         TryAssignHurtboxOwner(spawned);
     }
@@ -188,7 +182,7 @@ public class AttackScript : MonoBehaviour
 
         AttackRecover();
 
-        attackAnim.Cancel(owner);
+        attackSO.anim.Cancel(owner);
 
         EventM.OnAttackCancelled(owner);
     }

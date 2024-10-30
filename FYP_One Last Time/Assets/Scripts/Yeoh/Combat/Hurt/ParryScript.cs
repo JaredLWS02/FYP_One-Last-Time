@@ -175,6 +175,8 @@ public class ParryScript : MonoBehaviour
     
     [Header("On Parry Success")]
     public AnimPreset parrySuccessAnim;
+    [Space]
+    public AnimPreset parryStunAnim;
 
     void OnParrySuccess(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -182,8 +184,11 @@ public class ParryScript : MonoBehaviour
 
         EventM.OnCancelParry(defender);
 
-        if(hurtbox.parryStunsAttacker)
+        if(hurtbox.parryStunsOwner)
         {
+            // choose the parry's unique stun anim
+            hurtbox.stunAnim = parryStunAnim;
+
             EventM.OnStun(attacker, owner, hurtbox, contactPoint);
 
             EventM.OnKnockback(attacker, hurtbox.knockback, contactPoint);

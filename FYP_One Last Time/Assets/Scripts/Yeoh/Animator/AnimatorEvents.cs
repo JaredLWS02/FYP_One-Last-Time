@@ -6,9 +6,9 @@ using UnityEngine;
 public class AnimPreset
 {
     public List<string> names = new();
-    public int layer=0;
+    public int layer=1;
     public float blendTime=0;
-    public string cancelName = "Idle";
+    public string cancelName = "Cancel";
 
     public string GetRandomName()
     {
@@ -62,6 +62,8 @@ public class AnimatorEvents : MonoBehaviour
     void OnPlayAnim(GameObject who, string animName, int animLayer, float blendTime)
     {
         if(who!=owner) return;
+
+        if(animName=="" || animName==null) return;
 
         if(blendTime <= 0)
         {

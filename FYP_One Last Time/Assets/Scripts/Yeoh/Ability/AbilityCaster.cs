@@ -5,8 +5,7 @@ using UnityEngine;
 public class AbilityCaster : MonoBehaviour
 {   
     public GameObject owner;
-    public AbilityListSO abilityList;
-    public HPManager MP_Manager;
+    public HPManager mpM;
 
     // ============================================================================
     
@@ -39,7 +38,7 @@ public class AbilityCaster : MonoBehaviour
 
     // ============================================================================
 
-    [Header("On Casting")]
+    public AbilityListSO abilityList;
     public AbilitySO abilitySO;
 
     AbilitySlot currentSlot;
@@ -52,24 +51,19 @@ public class AbilityCaster : MonoBehaviour
 
         if(slot.IsCooling()) return;
 
-        if(!abilitySO.HasEnoughMP(MP_Manager.hp)) return;
+        if(!abilitySO.HasEnoughMP(mpM.hp)) return;
 
         currentSlot = slot;
 
         StartCasting();
     }
 
-    // During Casting ============================================================================
-
-    [Space]
-    public AnimPreset castingAnim;
-
     void StartCasting()
     {
         ResetProgress();
         isCasting=true;
 
-        castingAnim.Play(owner);
+        abilitySO.castingAnim.Play(owner);
 
         EventM.OnCasting(owner, abilitySO);
 
@@ -121,9 +115,6 @@ public class AbilityCaster : MonoBehaviour
 
     // After Cast ============================================================================
 
-    [Space]
-    public AnimPreset castAnim;
-
     public bool isCast {get; private set;}
 
     void Cast()
@@ -131,17 +122,18 @@ public class AbilityCaster : MonoBehaviour
         StopCasting();
 
         // mp cost
-        MP_Manager.Deplete(abilitySO.mpCost);
+        mpM.Deplete(abilitySO.mpCost);
 
         currentSlot.DoCooldown();
 
-        if(castAnim.names.Count>0)
+        if(abilitySO.noCastAnim)
         {
-            castAnim.Play(owner);
+            CastRelease();
         }
         else
         {
-            CastRelease();
+            abilitySO.castAnim.Play(owner);
+            
         }
 
         EventM.OnCast(owner, abilitySO);
@@ -183,7 +175,7 @@ public class AbilityCaster : MonoBehaviour
 
         CastRecover();
 
-        castingAnim.Cancel(owner);
+        abilitySO.castingAnim.Cancel(owner);
         
         EventM.OnCastCancelled(owner);
     }

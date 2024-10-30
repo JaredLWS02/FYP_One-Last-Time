@@ -21,7 +21,7 @@ public class PakYa : MonoBehaviour
 
     void Start()
     {
-        EventM.OnSpawn(gameObject);
+        EventM.OnSpawned(gameObject);
     }
     
 }

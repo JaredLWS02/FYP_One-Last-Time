@@ -33,6 +33,18 @@ public class Singleton : MonoBehaviour
         return Application.platform == RuntimePlatform.WindowsPlayer ||
             Application.platform == RuntimePlatform.WindowsEditor;
     }
-    
+
     // ============================================================================
+
+    public GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rot, Transform parent)
+    {
+        GameObject spawned = Instantiate(prefab, pos, rot);
+
+        if(parent) spawned.transform.parent = parent;
+
+        EventManager.Current.OnSpawned(spawned);
+
+        return spawned;
+    }
+
 }

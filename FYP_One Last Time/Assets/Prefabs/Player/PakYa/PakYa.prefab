@@ -127,21 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
+  mpM: {fileID: 7058722310484815464}
   abilityList: {fileID: 11400000, guid: 20654795a73aa1546b842d07d69881d9, type: 2}
-  MP_Manager: {fileID: 7058722310484815464}
   abilitySO: {fileID: 0}
-  castingAnim:
-    names:
-    - Casting
-    layer: 0
-    blendTime: 0
-    cancelName: Idle
-  castAnim:
-    names:
-    - Cast
-    layer: 0
-    blendTime: 0
-    cancelName: Idle
 --- !u!114 &7975362184149562795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,18 +145,6 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   hpM: {fileID: 1861734953551003033}
   healSO: {fileID: 11400000, guid: 289d739c06a77ac4f91862671cfa2768, type: 2}
-  healCastingAnim:
-    names:
-    - Casting
-    layer: 0
-    blendTime: 0
-    cancelName: Idle
-  healCastAnim:
-    names:
-    - Cast
-    layer: 0
-    blendTime: 0
-    cancelName: Idle
 --- !u!1 &2941172494308309934
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,17 +194,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
-  attackAnim:
-    names: []
-    layer: 0
-    blendTime: 0
-    cancelName: Idle
   attackSO: {fileID: 0}
-  attackSpawn:
+  attackPrefab:
     prefab: {fileID: 0}
     spawnpoint: {fileID: 0}
     parented: 1
     followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &2948484968028016200
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,45 +351,33 @@ MonoBehaviour:
   attack: {fileID: 7022457898630109682}
   comboName: Light Combo
   comboSteps:
-  - attackAnim:
-      names:
-      - SlashR
-      layer: 0
-      blendTime: 0
-      cancelName: Idle
-    attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
-    attackSpawn:
+  - attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
+    attackPrefab:
       prefab: {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24,
         type: 3}
       spawnpoint: {fileID: 3111472536248378137}
       parented: 1
       followRotation: 1
-  - attackAnim:
-      names:
-      - SlashL
-      layer: 0
-      blendTime: 0
-      cancelName: Idle
-    attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
-    attackSpawn:
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  - attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
+    attackPrefab:
       prefab: {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79,
         type: 3}
       spawnpoint: {fileID: 4072668483182548298}
       parented: 1
       followRotation: 1
-  - attackAnim:
-      names:
-      - Overhead
-      layer: 0
-      blendTime: 0
-      cancelName: Idle
-    attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
-    attackSpawn:
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
+    attackPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
   randomCombo: 0
   comboResetTime: 0.25
   comboCooldownTime: 0.25
@@ -499,19 +460,15 @@ MonoBehaviour:
   attack: {fileID: 7022457898630109682}
   comboName: Heavy Combo
   comboSteps:
-  - attackAnim:
-      names:
-      - Overhead
-      layer: 0
-      blendTime: 0
-      cancelName: Idle
-    attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
-    attackSpawn:
+  - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
+    attackPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
   randomCombo: 0
   comboResetTime: 0.5
   comboCooldownTime: 0.5
@@ -527,6 +484,7 @@ GameObject:
   - component: {fileID: 4466723156777370603}
   - component: {fileID: 4004871874835498188}
   - component: {fileID: 8324220026941984535}
+  - component: {fileID: 1543390625886574444}
   - component: {fileID: 4728252470638691548}
   - component: {fileID: 8471822331360070094}
   - component: {fileID: 345509100620316827}
@@ -651,6 +609,28 @@ MonoBehaviour:
   upParamName: MoveY
   changeBlendTreeSpeed: 1
   speedParamName: MoveSpeed
+--- !u!114 &1543390625886574444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274980459159228368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e9c6e394fe13949abf33104818f0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  anim: {fileID: 4004871874835498188}
+  ground: {fileID: 1353104093430078228}
+  groundedBoolName: IsGrounded
+  jumpAnim:
+    names:
+    - Jump
+    layer: 1
+    blendTime: 0
+    cancelName: Cancel
 --- !u!114 &4728252470638691548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,6 +658,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationEvents:
+  - eventName: DashRecover
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8233763058552673176}
+          m_TargetAssemblyTypeName: DashScript, Assembly-CSharp
+          m_MethodName: DashRecover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventName: AttackWindUp
     OnAnimationEvent:
       m_PersistentCalls:
@@ -929,19 +925,15 @@ MonoBehaviour:
   attack: {fileID: 7022457898630109682}
   comboName: Riposte Combo
   comboSteps:
-  - attackAnim:
-      names:
-      - Overhead
-      layer: 0
-      blendTime: 0
-      cancelName: Idle
-    attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
-    attackSpawn:
+  - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
+    attackPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
   randomCombo: 0
   comboResetTime: 0.5
   comboCooldownTime: 0.5
@@ -1337,7 +1329,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  minLandVelocity: -1
   showGizmos: 1
   gizmoColor: {r: 0, g: 0, b: 1, a: 1}
   OnLandGround:
@@ -1403,13 +1394,19 @@ MonoBehaviour:
   dashAnim:
     names:
     - Dash
-    layer: 0
+    layer: 1
     blendTime: 0
-    cancelName: Idle
+    cancelName: Cancel
   dashSeconds: 0.2
   dashForce: 10
   dashDir: {x: 0, y: 0, z: 1}
   localDir: 1
+  dashRecoverAnim:
+    names:
+    - Dash Recover
+    layer: 1
+    blendTime: 0
+    cancelName: Cancel
   cooldownTime: 0.5
 --- !u!114 &4334806704455733132
 MonoBehaviour:
@@ -1475,24 +1472,30 @@ MonoBehaviour:
   raiseParryAnim:
     names:
     - Raise Parry
-    layer: 0
+    layer: 1
     blendTime: 0
-    cancelName: Idle
+    cancelName: Cancel
   raiseParrySeconds: 0.3
   lowerParryAnim:
     names:
     - Lower Parry
-    layer: 0
+    layer: 1
     blendTime: 0
-    cancelName: Idle
+    cancelName: Cancel
   cooldownTime: 0.3
   minParryDot: 0.2
   parrySuccessAnim:
     names:
     - Parry Success
-    layer: 0
+    layer: 1
     blendTime: 0
-    cancelName: Idle
+    cancelName: Cancel
+  parryStunAnim:
+    names:
+    - Stun1
+    layer: 1
+    blendTime: 0
+    cancelName: Cancel
   riposteSeconds: 0.5
 --- !u!114 &110049388833876227
 MonoBehaviour:
@@ -1510,9 +1513,9 @@ MonoBehaviour:
   stunAnim:
     names:
     - Stun1
-    layer: 0
+    layer: 1
     blendTime: 0
-    cancelName: Idle
+    cancelName: Cancel
 --- !u!114 &6639294003576150908
 MonoBehaviour:
   m_ObjectHideFlags: 0
