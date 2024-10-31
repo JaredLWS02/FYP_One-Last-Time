@@ -1389,19 +1389,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7aefc9d7a63e74ebe8aa84dec6d61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxSize: {x: 0.5, y: 0.05, z: 0.5}
-  boxOffset: {x: 0, y: 0, z: 0}
-  groundLayer:
+  checkInterval: 0
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+  OnFirstEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStay:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnLastExit:
+    m_PersistentCalls:
+      m_Calls: []
+  origin: {fileID: 4032536735459076646}
+  posOffset: {x: 0, y: 0.24, z: 0}
+  layers:
     serializedVersion: 2
     m_Bits: 1
+  range: 0.35
   showGizmos: 1
-  gizmoColor: {r: 0, g: 0, b: 1, a: 1}
-  OnLandGround:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLeaveGround:
-    m_PersistentCalls:
-      m_Calls: []
+  gizmoColor: {r: 0, g: 0, b: 1, a: 0.5019608}
+  rb: {fileID: 1642459170912960868}
 --- !u!114 &8003095357430364833
 MonoBehaviour:
   m_ObjectHideFlags: 0
