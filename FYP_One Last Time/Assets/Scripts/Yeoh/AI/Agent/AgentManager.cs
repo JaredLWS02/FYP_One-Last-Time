@@ -129,7 +129,7 @@ public class AgentManager : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Seek/Flee")]
+    [Header("Target")]
     public Radar radar;
     public string targetTag = "Player";
 

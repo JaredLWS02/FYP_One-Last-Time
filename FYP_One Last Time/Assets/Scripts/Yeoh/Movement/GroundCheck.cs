@@ -52,7 +52,13 @@ public class GroundCheck : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return overlap.IsOverlapping();
+        bool isOverlapping = overlap.IsOverlapping();
+
+        if(slope)
+        {
+            return isOverlapping && !slope.isTooSteep;
+        }
+        return isOverlapping;
     }
 
     // ============================================================================
@@ -65,4 +71,9 @@ public class GroundCheck : MonoBehaviour
     {
         anim?.SetBool(groundedBoolName, IsGrounded());
     }
+
+    // ============================================================================
+
+    [Header("Optional")]
+    public SlopeCheck slope;
 }
