@@ -1446,10 +1446,9 @@ MonoBehaviour:
     blendTime: 0
     cancelName: Cancel
   dashingSeconds: 0.2
-  dashForce: 10
+  dashVelocity: 50
   dashDir: {x: 0, y: 0, z: 1}
   localDir: 1
-  toggler: {fileID: 7935989673976965938}
   dashRecoverAnim:
     names:
     - Dash Recover
@@ -1457,6 +1456,9 @@ MonoBehaviour:
     blendTime: 0
     cancelName: Cancel
   cooldownTime: 0.5
+  toggler: {fileID: 7935989673976965938}
+  ground: {fileID: 1353104093430078228}
+  dashCount: 1
 --- !u!114 &4334806704455733132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1477,19 +1479,11 @@ MonoBehaviour:
   colorFlickerInterval: 0.05
   poise: 0
   poiseRegenDelay: 3
+  allowStun: 1
+  allowKnockback: 1
+  knockbackMult: 1
   iframeOnDeath: 1
-  OnHurtt:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPoiseBreak:
-    m_PersistentCalls:
-      m_Calls: []
-  OnIFrameEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeathh:
-    m_PersistentCalls:
-      m_Calls: []
+  destroyOnDeath: 0
 --- !u!114 &6485402941929711479
 MonoBehaviour:
   m_ObjectHideFlags: 0

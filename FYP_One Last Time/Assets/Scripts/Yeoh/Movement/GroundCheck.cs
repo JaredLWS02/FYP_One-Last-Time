@@ -1,18 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
-[RequireComponent(typeof(Rigidbody))]
 
 public class GroundCheck : MonoBehaviour
 {
-    Rigidbody rb;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    [Header("Ground Check")]
+    public Rigidbody rb;
     
     // ============================================================================
 
@@ -49,9 +42,17 @@ public class GroundCheck : MonoBehaviour
     {
         current_colliders.Clear();
 
+        CheckOnEnter();
+        CheckOnExit();
+
+        // Update old to new to prepare for the next round
+        previous_colliders = new(current_colliders);
+    }
+
+    void CheckOnEnter()
+    {
         Collider[] colliders = GetOverlap();
 
-        // Check OnEnter
         foreach(var coll in colliders)
         {
             // must not be trigger
@@ -65,8 +66,10 @@ public class GroundCheck : MonoBehaviour
                 OnBoxEnter(coll);
             }   
         }
-        
-        // Check OnExit
+    }
+
+    void CheckOnExit()
+    {
         foreach(var coll in previous_colliders)
         {
             // if present in previous but missing in current
@@ -75,10 +78,7 @@ public class GroundCheck : MonoBehaviour
                 OnBoxExit(coll);
             }
         }
-
-        // Update old to new to prepare for the next round
-        previous_colliders = new(current_colliders);
-    }    
+    }
 
     // ============================================================================
 
@@ -92,7 +92,6 @@ public class GroundCheck : MonoBehaviour
             //if(rb.velocity.y <= minLandVelocity)
             if(rb.velocity.y <= 0)
             {
-                OnLandGround.Invoke();
                 EventM.OnLandGround(gameObject);
             }
         }
@@ -102,7 +101,6 @@ public class GroundCheck : MonoBehaviour
     {
         if(previous_colliders.Count > 0 && current_colliders.Count==0)
         {
-            OnLeaveGround.Invoke();
             EventM.OnLeaveGround(gameObject);
         }
     }
@@ -135,10 +133,4 @@ public class GroundCheck : MonoBehaviour
         // Reset the Gizmos matrix to default
         Gizmos.matrix = Matrix4x4.identity;
     }
-
-    // ============================================================================
-    
-    [Header("Events")]
-    public UnityEvent OnLandGround;
-    public UnityEvent OnLeaveGround;
 }

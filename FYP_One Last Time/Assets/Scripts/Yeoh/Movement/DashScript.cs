@@ -5,7 +5,7 @@ using UnityEngine;
 public class DashScript : MonoBehaviour
 {
     public GameObject owner;
-    public Rigidbody rb;    
+    public Rigidbody rb;
 
     // ============================================================================
 
@@ -35,6 +35,8 @@ public class DashScript : MonoBehaviour
         
         if(IsDashing()) return;
 
+        if(ground && dashesLeft<=0) return;
+
         if(IsCooling()) return;
         DoCooldown();
 
@@ -43,7 +45,7 @@ public class DashScript : MonoBehaviour
 
     void Dash()
     {
-        rb.velocity = Vector3.zero;
+        if(ground) dashesLeft--;
 
         DoDashingTimer();
 
@@ -59,6 +61,7 @@ public class DashScript : MonoBehaviour
         UpdateDashingTimer();
         UpdateLayerToggler();
         UpdateCooldown();
+        UpdateGroundCheck();
     }
 
     // ============================================================================
@@ -95,7 +98,7 @@ public class DashScript : MonoBehaviour
 
     // Dashing Force ============================================================================
     
-    public float dashForce=10;
+    public float dashVelocity=50;
     public Vector3 dashDir = Vector3.forward;
     public bool localDir=true;
 
@@ -103,7 +106,7 @@ public class DashScript : MonoBehaviour
     {
         if(!IsDashing()) return;
 
-        if(dashForce==0) return;
+        if(dashVelocity==0) return;
         if(dashDir==Vector3.zero) return;
 
         Vector3 direction = dashDir.normalized;
@@ -111,24 +114,9 @@ public class DashScript : MonoBehaviour
         if(localDir)
         direction = transform.TransformDirection(direction);
 
-        rb.AddForce(dashForce * direction, ForceMode.Impulse);
-    }
-    
-    // ============================================================================
-    
-    [Header("Optional")]
-    public ColliderLayerToggler toggler;
-    bool wasDashing;
-
-    void UpdateLayerToggler()
-    {
-        if(!toggler) return;
-
-        if(wasDashing != IsDashing())
-        {
-            wasDashing = IsDashing();
-            toggler.ToggleIgnoreLayers(IsDashing());
-        }
+        rb.velocity = direction * dashVelocity;
+        // setting velocity instead of using AddForce
+        // to make sure its not affected by gravity
     }
 
     // ============================================================================
@@ -206,5 +194,38 @@ public class DashScript : MonoBehaviour
         dashRecoverAnim.Cancel(owner);
 
         EventM.OnDashCancelled(owner);
+    }
+
+    // ============================================================================
+    
+    [Header("Optional")]
+    public ColliderLayerToggler toggler;
+    bool wasDashing;
+
+    void UpdateLayerToggler()
+    {
+        if(!toggler) return;
+
+        if(wasDashing != IsDashing())
+        {
+            wasDashing = IsDashing();
+            toggler.ToggleIgnoreLayers(IsDashing());
+        }
+    }
+
+    // Ground ============================================================================
+
+    public GroundCheck ground;
+    public int dashCount=1;
+    int dashesLeft;
+
+    void UpdateGroundCheck()
+    {
+        if(!ground) return;
+        // Only replenish if grounded and not cooling
+        if(ground.IsGrounded() && !IsCooling())
+        {
+            dashesLeft = dashCount;
+        }
     }
 }
