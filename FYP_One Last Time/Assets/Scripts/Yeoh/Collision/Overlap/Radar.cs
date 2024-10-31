@@ -4,41 +4,46 @@ using UnityEngine;
 
 public class Radar : MonoBehaviour
 {
-    public float range=5;
-    public float scanInterval=.5f;
-    public LayerMask layers;
-    public List<GameObject> targets = new();
-
-    // ============================================================================
+    public OverlapScript overlap;
 
     void OnEnable()
     {
-        StartCoroutine(Scanning());
+        overlap.EnterEvent += OnEnter;
+        overlap.ExitEvent += OnExit;
+    }
+    void OnDisable()
+    {
+        overlap.EnterEvent -= OnEnter;
+        overlap.ExitEvent -= OnExit;
     }
 
-    IEnumerator Scanning()
-    {
-        while(true)
-        {
-            Scan();
-            yield return new WaitForSeconds(scanInterval);
-        }
-    }
+    // ============================================================================
 
-    void Scan()
-    {
-        targets.Clear();
+    public List<GameObject> targets = new();
 
-        Collider[] others = Physics.OverlapSphere(transform.position, range, layers);
+    void OnEnter(Collider other)
+    {
+        if(!other) return;
         
-        foreach(var other in others)
-        {
-            if(other.isTrigger) continue;
-            Rigidbody rb = other.attachedRigidbody;
-            if(!rb) continue;
+        Rigidbody rb = other.attachedRigidbody;
 
-            targets.Add(rb.gameObject);
-        }
+        GameObject target = rb ? rb.gameObject : other.gameObject;
+
+        if(targets.Contains(target)) return;
+
+        targets.Add(target);
+    }
+
+    void OnExit(Collider other)
+    {
+        if(!other) return;
+
+        Rigidbody rb = other.attachedRigidbody;
+
+        GameObject target = rb ? rb.gameObject : other.gameObject;
+
+        if(targets.Contains(target))
+        targets.Remove(rb ? rb.gameObject : other.gameObject);
     }
 
     // ============================================================================
@@ -93,19 +98,5 @@ public class Radar : MonoBehaviour
     void RemoveNulls(List<GameObject> list)
     {
         list.RemoveAll(item => item == null);
-    }
-
-    // ============================================================================
-
-    [Header("Debug")]
-    public bool showGizmos;
-    public Color gizmoColor = new(0, 1, 1, .5f);
-
-    void OnDrawGizmosSelected()
-    {
-        if(!showGizmos) return;
-        
-        Gizmos.color = gizmoColor;
-        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

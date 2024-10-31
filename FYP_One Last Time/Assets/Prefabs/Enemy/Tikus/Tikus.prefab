@@ -996,7 +996,6 @@ GameObject:
   - component: {fileID: 5193524905132986524}
   - component: {fileID: 8899604075891903837}
   - component: {fileID: 8893670741154941565}
-  - component: {fileID: 7877508715297963426}
   - component: {fileID: 919053695834915120}
   - component: {fileID: 4642146714573691683}
   - component: {fileID: 3691060632212682340}
@@ -1090,7 +1089,7 @@ MonoBehaviour:
   AllowCast: 0
   AllowHurt: 0
   AllowStun: 0
-  ground: {fileID: 7877508715297963426}
+  ground: {fileID: 4037544487675790279}
   autoJump: {fileID: 2725102146154336571}
   dash: {fileID: 0}
   attack: {fileID: 6861530176262365675}
@@ -1163,36 +1162,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
+  rb: {fileID: 8915720888079556032}
+  ground: {fileID: 4037544487675790279}
   jumpForce: 20
   jumpCutMult: 0.5
   extraJumps: 0
   coyoteTime: 0.2
   jumpCooldown: 0.2
---- !u!114 &7877508715297963426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5261146206814944013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7aefc9d7a63e74ebe8aa84dec6d61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxSize: {x: 1.2, y: 0.05, z: 1.2}
-  boxOffset: {x: 0, y: 0, z: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 1
-  showGizmos: 1
-  gizmoColor: {r: 0, g: 0, b: 1, a: 1}
-  OnLandGround:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLeaveGround:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &919053695834915120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,6 +1279,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8991564000686007991}
+  - {fileID: 4716324709663154297}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3188788791223888934
@@ -1338,6 +1315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 738919972244586360}
   - component: {fileID: 801440721258214197}
+  - component: {fileID: 5045764079593084986}
   m_Layer: 6
   m_Name: Radar
   m_TagString: Untagged
@@ -1372,13 +1350,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c24ccd4b5c308438f0fbe10c18da17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 10
-  scanInterval: 0.5
+  overlap: {fileID: 5045764079593084986}
+  targets: []
+--- !u!114 &5045764079593084986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474750746548374229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkInterval: 0.5
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  uEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 6415192565362938597}
+  posOffset: {x: 0, y: 0.68, z: 0}
   layers:
     serializedVersion: 2
     m_Bits: 8
-  targets: []
-  showGizmos: 0
+  range: 10
+  showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
 --- !u!1 &7244821877251971682
 GameObject:
@@ -1497,6 +1508,94 @@ MonoBehaviour:
   currentOption: Seek
   randomInterval: {x: 0.25, y: 3}
   enableTimerOnAwake: 0
+--- !u!1 &8814332884574839046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4716324709663154297}
+  - component: {fileID: 4037544487675790279}
+  - component: {fileID: 5128331210462455546}
+  m_Layer: 3
+  m_Name: Ground Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4716324709663154297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814332884574839046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071064, y: -0, z: -0.000000029802319, w: 0.70710725}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 231061859104957208}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &4037544487675790279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814332884574839046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7aefc9d7a63e74ebe8aa84dec6d61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8915720888079556032}
+  overlap: {fileID: 5128331210462455546}
+--- !u!114 &5128331210462455546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814332884574839046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e808f13da413cd4daed6a759ff438a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkInterval: 0
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+  uEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 6415192565362938597}
+  posOffset: {x: 0, y: 0.32, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 1
+  orientation: {fileID: 4716324709663154297}
+  radius: 0.35
+  height: 0.59
+  showGizmos: 1
+  gizmoColor: {r: 0, g: 0.08235294, b: 1, a: 0.5058824}
 --- !u!1 &9172029450550698297
 GameObject:
   m_ObjectHideFlags: 0

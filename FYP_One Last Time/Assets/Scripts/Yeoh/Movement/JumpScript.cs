@@ -3,22 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(GroundCheck))]
 
 public class JumpScript : MonoBehaviour
 {
     public GameObject owner;
-
-    // ============================================================================
-    
-    Rigidbody rb;
-    GroundCheck ground;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        ground = GetComponent<GroundCheck>();
-    }
+    public Rigidbody rb;
+    public GroundCheck ground;
     
     // ============================================================================
 

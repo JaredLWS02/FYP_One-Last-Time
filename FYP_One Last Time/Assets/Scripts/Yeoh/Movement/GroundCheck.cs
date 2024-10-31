@@ -2,25 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundCheck : SphereOverlap
+public class GroundCheck : MonoBehaviour
 {
-    [Header("Ground Check")]
     public Rigidbody rb;
-    
-    // ============================================================================
 
+    // ============================================================================
+    
     EventManager EventM;
+
+    public OverlapScript overlap;
 
     void OnEnable()
     {
         EventM = EventManager.Current;
+
+        overlap.FirstEnterEvent += OnFirstEnter;
+        overlap.LastExitEvent += OnLastExit;
+    }
+    void OnDisable()
+    {
+        overlap.FirstEnterEvent -= OnFirstEnter;
+        overlap.LastExitEvent -= OnLastExit;
     }
 
     // ============================================================================
     
     //public float minLandVelocity = -1;
     
-    public override void OnOverlapFirstEnter(Collider other)
+    void OnFirstEnter(Collider other)
     {
         // going down only
         //if(rb.velocity.y <= minLandVelocity)
@@ -30,7 +39,7 @@ public class GroundCheck : SphereOverlap
         }
     }
 
-    public override void OnOverlapLastExit(Collider other)
+    void OnLastExit(Collider other)
     {
         EventM.OnLeaveGround(gameObject);
     }
@@ -39,6 +48,6 @@ public class GroundCheck : SphereOverlap
 
     public bool IsGrounded()
     {
-        return IsOverlapping();
+        return overlap.IsOverlapping();
     }
 }

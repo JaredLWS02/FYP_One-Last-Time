@@ -412,6 +412,92 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3988350149641666891}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6177494582529698581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6120017875126648429}
+  - component: {fileID: 773448853722404963}
+  - component: {fileID: 5989547761167805548}
+  m_Layer: 3
+  m_Name: Ground Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6120017875126648429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177494582529698581}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 123463650881099154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &773448853722404963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177494582529698581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7aefc9d7a63e74ebe8aa84dec6d61a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1642459170912960868}
+  overlap: {fileID: 5989547761167805548}
+--- !u!114 &5989547761167805548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177494582529698581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkInterval: 0
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+  uEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 4032536735459076646}
+  posOffset: {x: 0, y: 0.3, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 1
+  range: 0.4
+  showGizmos: 1
+  gizmoColor: {r: 0, g: 0.083981514, b: 1, a: 0.5}
 --- !u!1 &6718153725386699021
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   anim: {fileID: 4004871874835498188}
-  ground: {fileID: 1353104093430078228}
+  ground: {fileID: 773448853722404963}
   groundedBoolName: IsGrounded
   jumpAnim:
     names:
@@ -1015,7 +1101,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6120017875126648429}
   m_Father: {fileID: 4032536735459076646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &5812872954807716688
@@ -1128,7 +1215,6 @@ GameObject:
   - component: {fileID: 3611210669050738406}
   - component: {fileID: 4368493988338249805}
   - component: {fileID: 2535672027372677568}
-  - component: {fileID: 1353104093430078228}
   - component: {fileID: 8003095357430364833}
   - component: {fileID: 8233763058552673176}
   - component: {fileID: 4334806704455733132}
@@ -1299,7 +1385,7 @@ MonoBehaviour:
   AllowCast: 0
   AllowHurt: 0
   AllowStun: 0
-  ground: {fileID: 1353104093430078228}
+  ground: {fileID: 773448853722404963}
   autoJump: {fileID: 0}
   dash: {fileID: 8233763058552673176}
   attack: {fileID: 7022457898630109682}
@@ -1372,50 +1458,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
+  ground: {fileID: 773448853722404963}
   jumpForce: 15
   jumpCutMult: 0.5
   extraJumps: 1
   coyoteTime: 0.2
   jumpCooldown: 0.2
---- !u!114 &1353104093430078228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7aefc9d7a63e74ebe8aa84dec6d61a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkInterval: 0
-  ignoreTriggers: 1
-  onlyRigidbodies: 0
-  OnFirstEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStay:
-    m_PersistentCalls:
-      m_Calls: []
-  OnExit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnLastExit:
-    m_PersistentCalls:
-      m_Calls: []
-  origin: {fileID: 4032536735459076646}
-  posOffset: {x: 0, y: 0.24, z: 0}
-  layers:
-    serializedVersion: 2
-    m_Bits: 1
-  range: 0.35
-  showGizmos: 1
-  gizmoColor: {r: 0, g: 0, b: 1, a: 0.5019608}
-  rb: {fileID: 1642459170912960868}
 --- !u!114 &8003095357430364833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,7 +1520,7 @@ MonoBehaviour:
     cancelName: Cancel
   cooldownTime: 0.5
   toggler: {fileID: 7935989673976965938}
-  ground: {fileID: 1353104093430078228}
+  ground: {fileID: 773448853722404963}
   dashCount: 1
 --- !u!114 &4334806704455733132
 MonoBehaviour:

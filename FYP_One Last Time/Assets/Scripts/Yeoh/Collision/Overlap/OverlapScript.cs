@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,11 +74,13 @@ public class OverlapScript : MonoBehaviour
             if(!previous_colliders.Contains(coll))
             {
                 OnOverlapFirstEnter(coll);
-                OnFirstEnter.Invoke();
+                OnFirstEnter(coll);
+                uEvents.FirstEnter.Invoke();
             }
 
             OnOverlapEnter(coll);
-            OnEnter.Invoke();
+            OnEnter(coll);
+            uEvents.Enter.Invoke();
         }
     }
 
@@ -86,7 +89,8 @@ public class OverlapScript : MonoBehaviour
         if(IsOverlapping())
         {
             OnOverlapStay(current_colliders);
-            OnStay.Invoke();
+            OnStay(current_colliders);
+            uEvents.Stay.Invoke();
         }
     }
 
@@ -98,12 +102,14 @@ public class OverlapScript : MonoBehaviour
             if(!current_colliders.Contains(prev))
             {
                 OnOverlapExit(prev);
-                OnExit.Invoke();
+                OnExit(prev);
+                uEvents.Exit.Invoke();
 
                 if(current_colliders.Count==0)
                 {
                     OnOverlapLastExit(prev);
-                    OnLastExit.Invoke();
+                    OnLastExit(prev);
+                    uEvents.LastExit.Invoke();
                 }
             }
         }
@@ -115,37 +121,66 @@ public class OverlapScript : MonoBehaviour
 
     public virtual void OnOverlapFirstEnter(Collider other)
     {
-        
     }
 
     public virtual void OnOverlapEnter(Collider other)
     {
-        
     }
 
     public virtual void OnOverlapStay(List<Collider> others)
     {
-        
     }
     
     public virtual void OnOverlapExit(Collider other)
     {
-        
     }
 
     public virtual void OnOverlapLastExit(Collider other)
     {
-        
     }
 
     // ============================================================================
 
-    [Header("Events")]
-    public UnityEvent OnFirstEnter;
-    public UnityEvent OnEnter;
-    public UnityEvent OnStay;
-    public UnityEvent OnExit;
-    public UnityEvent OnLastExit;
+    public event Action<Collider> FirstEnterEvent;
+    public event Action<Collider> EnterEvent;
+    public event Action<List<Collider>> StayEvent;
+    public event Action<Collider> ExitEvent;
+    public event Action<Collider> LastExitEvent;
+
+    void OnFirstEnter(Collider other)
+    {
+        FirstEnterEvent?.Invoke(other);
+    }
+    void OnEnter(Collider other)
+    {
+        EnterEvent?.Invoke(other);
+    }
+    void OnStay(List<Collider> others)
+    {
+        StayEvent?.Invoke(others);
+    }
+    void OnExit(Collider other)
+    {
+        ExitEvent?.Invoke(other);
+    }
+    void OnLastExit(Collider other)
+    {
+        LastExitEvent?.Invoke(other);
+    }
+    
+    // ============================================================================
+
+    [Serializable]
+    public struct UEvents
+    {
+        public UnityEvent FirstEnter;
+        public UnityEvent Enter;
+        public UnityEvent Stay;
+        public UnityEvent Exit;
+        public UnityEvent LastExit;
+    }
+    
+    public UEvents uEvents;
 
     // ============================================================================
     

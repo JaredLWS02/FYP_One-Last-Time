@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CapsuleOverlap : OverlapScript
 {
+    public Transform orientation;
+
     public float radius=.5f;
     public float height=2;
 
@@ -11,8 +13,8 @@ public class CapsuleOverlap : OverlapScript
     {
         float halfHeight = height*.5f;
 
-        Vector3 point1 = origin.position + posOffset + origin.up * -halfHeight;
-        Vector3 point2 = origin.position + posOffset + origin.up * halfHeight;
+        Vector3 point1 = origin.position + posOffset + orientation.up * -halfHeight;
+        Vector3 point2 = origin.position + posOffset + orientation.up * halfHeight;
 
         return Physics.OverlapCapsule(point1, point2, radius, layers);
     }
@@ -27,11 +29,12 @@ public class CapsuleOverlap : OverlapScript
     {
         if(!showGizmos) return;
         if(!origin) return;
+        if(!orientation) return;
 
         float halfHeight = height*.5f;
 
-        Vector3 point1 = origin.position + posOffset + origin.up * -halfHeight;
-        Vector3 point2 = origin.position + posOffset + origin.up * halfHeight;
+        Vector3 point1 = origin.position + posOffset + orientation.up * -halfHeight;
+        Vector3 point2 = origin.position + posOffset + orientation.up * halfHeight;
 
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireSphere(point1, radius);
