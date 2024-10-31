@@ -294,8 +294,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
   agent: {fileID: 1957543827569210308}
-  isJumping: 0
   jumpSeconds: 0.8
+  jumpAnim: {fileID: 0}
+  landAnim: {fileID: 0}
   cooldownTime: 0.5
   rb: {fileID: 8915720888079556032}
 --- !u!114 &3241738153653270062
@@ -780,10 +781,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6955758431937353321}
-  - component: {fileID: 3246547166422185978}
-  - component: {fileID: 7933258386641521780}
+  - component: {fileID: 2866308342831164494}
   - component: {fileID: 3342305840274279284}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Slam Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,28 +805,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3071236275463930265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3246547166422185978
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3625512440802626329}
-  m_Material: {fileID: 13400000, guid: edae1f7d20673ce43a4ab1d96238699b, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.74
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7933258386641521780
+--- !u!114 &2866308342831164494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -835,30 +814,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 3625512440802626329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a66975ba0c7d14894c871b32caa11b, type: 3}
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStay:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3342305840274279284}
-        m_TargetAssemblyTypeName: AgentAttackTrigger, Assembly-CSharp
-        m_MethodName: Attack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnExit:
-    m_PersistentCalls:
-      m_Calls: []
+  checkInterval: 0.5
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  uEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3342305840274279284}
+          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
+          m_MethodName: Attack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 6955758431937353321}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 8
+  range: 1.74
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!114 &3342305840274279284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,8 +1272,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8991564000686007991}
   - {fileID: 4716324709663154297}
+  - {fileID: 8991564000686007991}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3188788791223888934
@@ -1653,7 +1650,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0

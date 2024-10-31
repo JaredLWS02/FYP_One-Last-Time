@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorEvents : MonoBehaviour
+public class AnimatorPlayer : MonoBehaviour
 {
     public GameObject owner;
     public Animator anim;
