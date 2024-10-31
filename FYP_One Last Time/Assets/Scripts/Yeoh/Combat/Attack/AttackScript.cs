@@ -45,13 +45,14 @@ public class AttackScript : MonoBehaviour
     {
         EventM.OnAttacked(owner, attackSO);
         
-        if(attackSO.noAnim)
+        if(attackSO.anim)
         {
-            AttackRelease();
+            attackSO.anim.Play(owner);
         }
         else
         {
-            attackSO.anim.Play(owner);
+            AttackRelease();
+            isReleasing=false;
         }
     }
 
@@ -95,7 +96,7 @@ public class AttackScript : MonoBehaviour
     public void AttackRecover()
     {
         isWindingUp=false;
-        isReleasing=false;        
+        isReleasing=false;
 
         if(attackSO.dashOnRecover)
         Dash(attackSO.dashOnRecoverForce, attackSO.dashOnRecoverDir);

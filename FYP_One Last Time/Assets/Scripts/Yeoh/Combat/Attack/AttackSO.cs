@@ -11,7 +11,7 @@ public class AttackSO : ScriptableObject
     public string description;
 
     [Header("Anim")]
-    public AnimPreset anim;
+    public AnimSO anim;
 
     [Header("Dash")]
     public bool dashOnWindUp = false;
@@ -29,7 +29,6 @@ public class AttackSO : ScriptableObject
     public bool localDir = true;
 
     [Header("Optional")]
-    public bool noAnim;
     public float cooldownTime = 0;
 
     // ============================================================================

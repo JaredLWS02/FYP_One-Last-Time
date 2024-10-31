@@ -27,7 +27,7 @@ public class DashScript : MonoBehaviour
     // ============================================================================
 
     [Header("On Dash")]
-    public AnimPreset dashAnim;
+    public AnimSO dashAnim;
 
     void OnDash(GameObject who)
     {
@@ -49,7 +49,7 @@ public class DashScript : MonoBehaviour
 
         DoDashingTimer();
 
-        dashAnim.Play(owner);
+        dashAnim?.Play(owner);
 
         EventM.OnDashed(owner);
     }
@@ -122,7 +122,7 @@ public class DashScript : MonoBehaviour
     // ============================================================================
     
     [Header("After Dash")]
-    public AnimPreset dashRecoverAnim;
+    public AnimSO dashRecoverAnim;
     bool isRecovering;
 
     void StopDashing()
@@ -136,7 +136,11 @@ public class DashScript : MonoBehaviour
     {
         isRecovering=true;
 
-        dashRecoverAnim.Play(owner);
+        if(dashRecoverAnim)
+        {
+            dashRecoverAnim.Play(owner);
+        }
+        else DashRecover();
     }
 
     // ============================================================================

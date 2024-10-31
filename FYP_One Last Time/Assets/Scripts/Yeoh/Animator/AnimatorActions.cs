@@ -37,12 +37,12 @@ public class AnimatorActions : MonoBehaviour
     // ============================================================================
 
     [Header("Jump")]
-    public AnimPreset jumpAnim;
+    public AnimSO jumpAnim;
 
     void OnJumped(GameObject jumper)
     {
         if(jumper!=owner) return;
 
-        jumpAnim.Play(owner);
+        jumpAnim?.Play(owner);
     }
 }

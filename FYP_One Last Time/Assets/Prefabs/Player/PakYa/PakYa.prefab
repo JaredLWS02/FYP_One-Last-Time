@@ -711,12 +711,7 @@ MonoBehaviour:
   anim: {fileID: 4004871874835498188}
   ground: {fileID: 773448853722404963}
   groundedBoolName: IsGrounded
-  jumpAnim:
-    names:
-    - Jump
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
+  jumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
 --- !u!114 &4728252470638691548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,22 +1497,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
-  dashAnim:
-    names:
-    - Dash
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
+  dashAnim: {fileID: 11400000, guid: 41c4e92d9d632d742b05a9b8b97e6b57, type: 2}
   dashingSeconds: 0.2
   dashVelocity: 50
   dashDir: {x: 0, y: 0, z: 1}
   localDir: 1
-  dashRecoverAnim:
-    names:
-    - Dash Recover
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
+  dashRecoverAnim: {fileID: 11400000, guid: 56297a705dec634498ea3fee6483cad5, type: 2}
   cooldownTime: 0.5
   toggler: {fileID: 7935989673976965938}
   ground: {fileID: 773448853722404963}
@@ -1561,27 +1546,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
-  raiseParryAnim:
-    names:
-    - Raise Parry
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
-  cooldownTime: 0.3
+  tryParryAnim: {fileID: 11400000, guid: fe4e54c57f9cf884eaf0a32272a960e2, type: 2}
   minParryDot: 0.2
-  parryAnim:
-    names:
-    - Parry
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
-  parryStunAnim:
-    names:
-    - Stun1
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
-  riposteSeconds: 0.5
+  cooldownTime: 0.3
+  parryAnim: {fileID: 11400000, guid: e0f653934f89a0d488ef3b1dafebaa6d, type: 2}
+  counterStun: 1
+  counterKnockback: 1
+  selfKnockback: 1
+  parryCustomStunAnim: {fileID: 0}
+  riposteActiveSeconds: 0.5
 --- !u!114 &110049388833876227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1595,12 +1568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
-  stunAnim:
-    names:
-    - Stun1
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
+  defaultStunAnim: {fileID: 11400000, guid: 8f5f6b470198d004fab04f404f4051e1, type: 2}
 --- !u!114 &6639294003576150908
 MonoBehaviour:
   m_ObjectHideFlags: 0

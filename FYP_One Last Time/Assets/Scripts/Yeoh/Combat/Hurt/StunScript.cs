@@ -7,6 +7,16 @@ public class StunScript : MonoBehaviour
     public GameObject owner;
 
     // ============================================================================
+
+    public AnimSO defaultStunAnim;
+    AnimSO currentStunAnim;
+
+    void Awake()
+    {
+        currentStunAnim = defaultStunAnim;
+    }
+
+    // ============================================================================
     
     EventManager EventM;
 
@@ -24,9 +34,7 @@ public class StunScript : MonoBehaviour
     }
 
     // ============================================================================
-
-    public AnimPreset stunAnim;
-
+    
     public bool isStunned {get; private set;}
 
     void OnStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
@@ -39,7 +47,8 @@ public class StunScript : MonoBehaviour
         EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
 
-        stunAnim = hurtbox.stunAnim;
+        currentStunAnim = hurtbox.customStunAnim ?
+            hurtbox.customStunAnim : defaultStunAnim;
 
         Stun();
 
@@ -50,7 +59,7 @@ public class StunScript : MonoBehaviour
     {
         isStunned=true;
         
-        stunAnim.Play(owner);
+        currentStunAnim.Play(owner);
     }
     
     // ============================================================================
@@ -74,6 +83,6 @@ public class StunScript : MonoBehaviour
 
         StunRecover();
 
-        stunAnim.Cancel(owner);
+        currentStunAnim.Cancel(owner);
     }
 }

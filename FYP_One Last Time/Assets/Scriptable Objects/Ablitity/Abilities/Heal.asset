@@ -19,16 +19,5 @@ MonoBehaviour:
   magnitude: 25
   mpCost: 10
   cooldownTime: 3
-  castingAnim:
-    names:
-    - Casting
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
-  castAnim:
-    names:
-    - Cast
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
-  noCastAnim: 0
+  castingAnim: {fileID: 11400000, guid: 8ebc8d47f6535d045b4cbd66357c6bc8, type: 2}
+  castAnim: {fileID: 11400000, guid: 8d3ee0b4e0e914443a5135d1b39d9e5d, type: 2}

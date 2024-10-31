@@ -127,14 +127,13 @@ public class AbilityCaster : MonoBehaviour
 
         currentSlot.DoCooldown();
 
-        if(abilitySO.noCastAnim)
+        if(abilitySO.castAnim)
         {
-            CastRelease();
+            abilitySO.castAnim.Play(owner);
         }
         else
         {
-            abilitySO.castAnim.Play(owner);
-            
+            CastRelease();
         }
 
         EventM.OnCast(owner, abilitySO);

@@ -44,8 +44,8 @@ public class ParryScript : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Raise Parry Anim")]
-    public AnimPreset raiseParryAnim;
+    [Header("Try Parry")]
+    public AnimSO tryParryAnim;
     
     void RaiseParry()
     {
@@ -55,9 +55,43 @@ public class ParryScript : MonoBehaviour
         EventM.OnCancelCast(owner);
         EventM.OnCancelStun(owner);
 
-        raiseParryAnim.Play(owner);
+        tryParryAnim.Play(owner);
         
         EventM.OnRaisedParry(owner);
+    }
+
+    // ============================================================================
+    
+    [Range(-1,1)]
+    public float minParryDot=0.2f;
+
+    bool IsFacing(Vector3 target_pos)
+    {
+        Vector3 dir_to_target = (target_pos - owner.transform.position).normalized;
+
+        float dot = Vector3.Dot(transform.forward, dir_to_target);
+
+        return dot > minParryDot;
+    }
+
+    public bool CanParry(Vector3 attack_pos)
+    {
+        return IsFacing(attack_pos) && isRaisingParry;
+    }
+
+    // on hit parry
+    void OnTryParry(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        if(victim!=owner) return;
+
+        if(CanParry(contactPoint) && hurtbox.isParryable)
+        {
+            EventM.OnParry(owner, attacker, hurtbox, contactPoint);
+        }
+        else
+        {
+            EventM.OnHurt(owner, attacker, hurtbox, contactPoint);
+        }
     }
 
     // ============================================================================
@@ -123,47 +157,17 @@ public class ParryScript : MonoBehaviour
     bool IsCooling() => cooldownLeft>0;
 
     void CancelCooldown() => cooldownLeft=0;
-
-    // ============================================================================
-    
-    [Header("On Try Parry")]
-    [Range(-1,1)]
-    public float minParryDot=0.2f;
-
-    bool IsFacing(Vector3 target_pos)
-    {
-        Vector3 dir_to_target = (target_pos - owner.transform.position).normalized;
-
-        float dot = Vector3.Dot(transform.forward, dir_to_target);
-
-        return dot > minParryDot;
-    }
-
-    public bool CanParry(Vector3 attack_pos)
-    {
-        return IsFacing(attack_pos) && isRaisingParry;
-    }
-
-    void OnTryParry(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
-    {
-        if(victim!=owner) return;
-
-        if(CanParry(contactPoint) && hurtbox.isParryable)
-        {
-            EventM.OnParry(owner, attacker, hurtbox, contactPoint);
-        }
-        else
-        {
-            EventM.OnHurt(owner, attacker, hurtbox, contactPoint);
-        }
-    }
     
     // ============================================================================
     
     [Header("On Parry")]
-    public AnimPreset parryAnim;
-    [Space]
-    public AnimPreset parryStunAnim;
+    public AnimSO parryAnim;
+    public bool counterStun=true;
+    public bool counterKnockback=true;
+    public bool selfKnockback=true;
+
+    [Header("Optional")]
+    public AnimSO parryCustomStunAnim;
 
     public bool isParrying {get; private set;}
 
@@ -175,16 +179,19 @@ public class ParryScript : MonoBehaviour
 
         CancelCooldown();
 
-        if(hurtbox.parryStunsOwner)
+        if(counterStun && hurtbox.parryStunsOwner)
         {
             // choose the parry's unique stun anim
-            hurtbox.stunAnim = parryStunAnim;
+            if(parryCustomStunAnim)
+            hurtbox.customStunAnim = parryCustomStunAnim;
 
             EventM.OnStun(attacker, owner, hurtbox, contactPoint);
-
-            ParryKnockback(attacker, hurtbox, contactPoint);
         }
 
+        if(counterKnockback)
+        CounterKnockback(attacker, hurtbox, contactPoint);
+
+        if(selfKnockback)
         EventM.OnTryKnockback(owner, hurtbox.blockKnockback, contactPoint);
 
         Parry();
@@ -192,7 +199,7 @@ public class ParryScript : MonoBehaviour
         StartRiposte();
     }
 
-    void ParryKnockback(GameObject who, HurtboxSO hurtbox, Vector3 contactPoint)
+    void CounterKnockback(GameObject who, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         float counter_knockback = hurtbox.knockback - hurtbox.blockKnockback;
 
@@ -222,10 +229,10 @@ public class ParryScript : MonoBehaviour
     // ============================================================================
     
     [Header("Riposte")]
-    public float riposteSeconds=.5f;
+    public float riposteActiveSeconds=.5f;
     float riposteLeft;
 
-    void StartRiposte() => riposteLeft = riposteSeconds;
+    void StartRiposte() => riposteLeft = riposteActiveSeconds;
 
     void UpdateRiposte()
     {
@@ -248,7 +255,7 @@ public class ParryScript : MonoBehaviour
         {
             ParryLowered();
 
-            raiseParryAnim.Cancel(owner);
+            tryParryAnim.Cancel(owner);
 
             EventM.OnParryCancelled(owner);
         }

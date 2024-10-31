@@ -442,15 +442,10 @@ public class EventManager : MonoBehaviour
     // Animator ==================================================================================================================
 
     public event Action<GameObject, string, int, float> PlayAnimEvent;
-    public event Action<GameObject, AnimPreset> PlayAnimPresetEvent;
 
     public void OnPlayAnim(GameObject who, string animName, int animLayer, float blendTime=0)
     {
         PlayAnimEvent?.Invoke(who, animName, animLayer, blendTime);
-    }
-    public void OnPlayAnimPreset(GameObject who, AnimPreset preset)
-    {
-        PlayAnimPresetEvent?.Invoke(who, preset);
     }
 
     // UI ==================================================================================================================
