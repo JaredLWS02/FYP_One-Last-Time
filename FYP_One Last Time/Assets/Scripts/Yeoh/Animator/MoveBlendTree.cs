@@ -8,31 +8,40 @@ public class MoveBlendTree : MonoBehaviour
     public Rigidbody rb;
     public MoveScript move;
 
-    void FixedUpdate()
-    {
-        AnimBlendTree();
-    }
-
     // ============================================================================
+    
+    [Header("Velocity")]
+    public bool checkVelocity=true;
+    public string velXParamName="VelocityX";
+    public string velYParamName="VelocityY";
+    public string velZParamName="VelocityZ";
 
-    public float baseSpeedMult = .88f;
+    [Header("Ratio Offset")]
+    public float baseSpeedMult = .9f;
 
     [Header("Axis")]
     public bool checkForward=true;
-    public string forwardParamName="MoveZ";
-    [Space]
+    public string forwardParamName="ForwardRatio";
     public bool checkRight=true;
-    public string rightParamName="MoveX";
-    [Space]
+    public string rightParamName="RightRatio";
     public bool checkUp;
-    public string upParamName="MoveY";
+    public string upParamName="UpRatio";
 
     [Header("For Sprites")]
     public bool changeBlendTreeSpeed=true;
-    public string speedParamName="MoveSpeed";
+    public string speedParamName="VelocityRatio";
     
-    void AnimBlendTree()
+    // ============================================================================
+    
+    void FixedUpdate()
     {
+        if(checkVelocity)
+        {
+            anim.SetFloat(velXParamName, move.Round(rb.velocity.x, 2));
+            anim.SetFloat(velYParamName, move.Round(rb.velocity.y, 2));
+            anim.SetFloat(velZParamName, move.Round(rb.velocity.z, 2));
+        }
+
         float velocity_ratio = move.velocity/(move.baseSpeed*baseSpeedMult + .001f); // .001f in case baseSpeed is zero
 
         Vector3 move_dir = rb.velocity.normalized;

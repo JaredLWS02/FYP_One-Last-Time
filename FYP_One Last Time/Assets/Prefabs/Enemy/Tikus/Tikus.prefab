@@ -1165,8 +1165,10 @@ MonoBehaviour:
   rb: {fileID: 8915720888079556032}
   ground: {fileID: 4037544487675790279}
   jumpForce: 20
+  jumpAnim: {fileID: 0}
   jumpCutMult: 0.5
   extraJumps: 0
+  extraJumpAnim: {fileID: 0}
   coyoteTime: 0.2
   jumpCooldown: 0.2
 --- !u!114 &919053695834915120
@@ -1548,8 +1550,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7aefc9d7a63e74ebe8aa84dec6d61a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
   rb: {fileID: 8915720888079556032}
   overlap: {fileID: 5128331210462455546}
+  landAnim: {fileID: 0}
+  anim: {fileID: 7786861728038490430}
+  groundedBoolName: IsGrounded
 --- !u!114 &5128331210462455546
 MonoBehaviour:
   m_ObjectHideFlags: 0

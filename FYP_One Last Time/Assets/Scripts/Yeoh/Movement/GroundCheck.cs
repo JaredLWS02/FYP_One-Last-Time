@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
+    public GameObject owner;
     public Rigidbody rb;
 
     // ============================================================================
     
     EventManager EventM;
-
     public OverlapScript overlap;
 
     void OnEnable()
@@ -27,21 +27,25 @@ public class GroundCheck : MonoBehaviour
 
     // ============================================================================
     
+    [Header("Land")]
+    public AnimSO landAnim;
     //public float minLandVelocity = -1;
-    
+
     void OnFirstEnter(Collider other)
     {
         // going down only
         //if(rb.velocity.y <= minLandVelocity)
         if(rb.velocity.y <= 0)
         {
-            EventM.OnLandGround(gameObject);
+            landAnim?.Play(owner);
+
+            EventM.OnLandGround(owner);
         }
     }
 
     void OnLastExit(Collider other)
     {
-        EventM.OnLeaveGround(gameObject);
+        EventM.OnLeaveGround(owner);
     }
 
     // ============================================================================
@@ -49,5 +53,16 @@ public class GroundCheck : MonoBehaviour
     public bool IsGrounded()
     {
         return overlap.IsOverlapping();
+    }
+
+    // ============================================================================
+
+    [Header("Animator")]
+    public Animator anim;
+    public string groundedBoolName = "IsGrounded";
+
+    void FixedUpdate()
+    {
+        anim?.SetBool(groundedBoolName, IsGrounded());
     }
 }

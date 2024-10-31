@@ -75,8 +75,7 @@ public class AgentAutoJump : MonoBehaviour
 
     // ============================================================================
     
-    [HideInInspector]
-    public bool isJumping;
+    public bool isJumping {get; private set;}
     float jumpProgress=0;
 
     Vector3 startPos;
@@ -97,6 +96,8 @@ public class AgentAutoJump : MonoBehaviour
         startPos = owner.transform.position;
 
         isReversed = IsJumpReversed(link);
+
+        jumpAnim?.Play(owner);
 
         EventM.OnJumped(owner);
         EventM.OnAutoJumped(owner, GetJumpDir());
@@ -123,6 +124,7 @@ public class AgentAutoJump : MonoBehaviour
     [Header("Jump")]
     [Min(.01f)]
     public float jumpSeconds=.8f;
+    public AnimSO jumpAnim;
 
     void UpdateJumpSpline()
     {
@@ -150,6 +152,9 @@ public class AgentAutoJump : MonoBehaviour
     
     // ============================================================================
 
+    [Header("Land")]
+    public AnimSO landAnim;
+
     void FinishJump()
     {
         isJumping=false;
@@ -159,6 +164,8 @@ public class AgentAutoJump : MonoBehaviour
 
         agent.CompleteOffMeshLink();
 
+        landAnim?.Play(owner);
+        
         EventM.OnLandGround(owner);
     }
 
