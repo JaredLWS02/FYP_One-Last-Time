@@ -37,7 +37,7 @@ public class StateMachine_Action : MonoBehaviour
         State_Action_TryingToParry tryingToParry = new(this);
         State_Action_Parrying parrying = new(this);
         State_Action_Casting casting = new(this);
-        State_Action_Cast cast = new(this);
+        State_Action_Healing healing = new(this);
         State_Action_Stunned stunned = new(this);
 
         // HUB TRANSITIONS ================================================================================
@@ -53,7 +53,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -72,7 +72,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -90,7 +90,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -108,7 +108,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -126,7 +126,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -144,7 +144,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -162,7 +162,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -180,7 +180,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -198,7 +198,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -206,7 +206,7 @@ public class StateMachine_Action : MonoBehaviour
             return false;
         });
                 
-        hub.AddTransition(cast, (timeInState) =>
+        hub.AddTransition(healing, (timeInState) =>
         {
             if(
                 !action.IsAutoJumping() &&
@@ -216,7 +216,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                action.IsCast() &&
+                action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -234,7 +234,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
                 !action.IsCasting() &&
-                !action.IsCast() &&
+                !action.IsHealing() &&
                 action.IsStunned() //&&
             ){
                 return true;
@@ -255,7 +255,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -274,7 +274,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -292,7 +292,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -310,7 +310,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -328,7 +328,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -346,7 +346,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -364,7 +364,7 @@ public class StateMachine_Action : MonoBehaviour
                 !action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -382,7 +382,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 !action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -400,7 +400,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 !action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -408,7 +408,7 @@ public class StateMachine_Action : MonoBehaviour
             return false;
         });
 
-        cast.AddTransition(hub, (timeInState) =>
+        healing.AddTransition(hub, (timeInState) =>
         {
             if(
                 action.IsAutoJumping() ||
@@ -418,7 +418,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                !action.IsCast() ||
+                !action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -436,7 +436,7 @@ public class StateMachine_Action : MonoBehaviour
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
                 action.IsCasting() ||
-                action.IsCast() ||
+                action.IsHealing() ||
                 !action.IsStunned() //||
             ){
                 return true;

@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StunScript : MonoBehaviour
+public class StunScript : BaseAction
 {
-    public GameObject owner;
+    public AnimSO defaultStunAnim;
+    AnimSO currentStunAnim;
+
+    void Awake()
+    {
+        currentStunAnim = defaultStunAnim;
+    }
 
     // ============================================================================
     
@@ -24,11 +30,7 @@ public class StunScript : MonoBehaviour
     }
 
     // ============================================================================
-
-    public AnimPreset stunAnim;
-
-    public bool isStunned {get; private set;}
-
+    
     void OnStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
@@ -39,30 +41,14 @@ public class StunScript : MonoBehaviour
         EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
 
-        stunAnim = hurtbox.stunAnim;
+        currentStunAnim = hurtbox.customStunAnim ?
+            hurtbox.customStunAnim : defaultStunAnim;
 
-        Stun();
+        Perform(currentStunAnim);
+        Anim3_ReleaseEnd();
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
     }
-
-    void Stun()
-    {
-        isStunned=true;
-        
-        stunAnim.Play(owner);
-    }
-    
-    // ============================================================================
-
-    // Anim Event
-    public void StunRecover()
-    {
-        isStunned=false;
-    }
-    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
-    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
-    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
 
     // Cancel ============================================================================
 
@@ -70,10 +56,8 @@ public class StunScript : MonoBehaviour
     {
         if(who!=owner) return;
         
-        if(!isStunned) return;
+        if(!IsPerforming()) return;
 
-        StunRecover();
-
-        stunAnim.Cancel(owner);
+        CancelAnim();
     }
 }

@@ -138,6 +138,7 @@ public class EventManager : MonoBehaviour
 
     public event Action<GameObject, Vector3> TryAutoJumpEvent;
     public event Action<GameObject, Vector3> AutoJumpEvent;
+    public event Action<GameObject, Vector3> AutoJumpingEvent;
     public event Action<GameObject, Vector3> AutoJumpedEvent;
 
     public void OnTryAutoJump(GameObject jumper, Vector3 jump_dir)
@@ -147,6 +148,10 @@ public class EventManager : MonoBehaviour
     public void OnAutoJump(GameObject jumper, Vector3 jump_dir)
     {
         AutoJumpEvent?.Invoke(jumper, jump_dir);
+    }    
+    public void OnAutoJumping(GameObject jumper, Vector3 jump_dir)
+    {
+        AutoJumpingEvent?.Invoke(jumper, jump_dir);
     }    
     public void OnAutoJumped(GameObject jumper, Vector3 jump_dir)
     {
@@ -209,35 +214,35 @@ public class EventManager : MonoBehaviour
     // Agent Controls ==================================================================================================================
 
     public event Action<GameObject, Vector2> AgentTryMoveEvent;
-    public event Action<GameObject, float> AgentTryFaceXEvent;
+    public event Action<GameObject, float> AgentTryFlipEvent;
     public event Action<GameObject> AgentTryJumpEvent;
     public event Action<GameObject> AgentTryJumpCutEvent;
     public event Action<GameObject, Vector3> AgentTryAutoJumpEvent;
     public event Action<GameObject, string> AgentTryAttackEvent;
 
-    public void OnAgentTryMove(GameObject mover, Vector2 input)
+    public void OnAgentTryMove(GameObject who, Vector2 input)
     {
-        AgentTryMoveEvent?.Invoke(mover, input);
+        AgentTryMoveEvent?.Invoke(who, input);
     }
-    public void OnAgentTryFaceX(GameObject facer, float dir_x)
+    public void OnAgentTryFlip(GameObject who, float dir_x)
     {
-        AgentTryFaceXEvent?.Invoke(facer, dir_x);
+        AgentTryFlipEvent?.Invoke(who, dir_x);
     }
-    public void OnAgentTryJump(GameObject jumper)
+    public void OnAgentTryJump(GameObject who)
     {
-        AgentTryJumpEvent?.Invoke(jumper);
+        AgentTryJumpEvent?.Invoke(who);
     }
-    public void OnAgentTryJumpCut(GameObject jumper)
+    public void OnAgentTryJumpCut(GameObject who)
     {
-        AgentTryJumpCutEvent?.Invoke(jumper);
+        AgentTryJumpCutEvent?.Invoke(who);
     }
-    public void OnAgentTryAutoJump(GameObject jumper, Vector3 dir)
+    public void OnAgentTryAutoJump(GameObject who, Vector3 dir)
     {
-        AgentTryAutoJumpEvent?.Invoke(jumper, dir);
+        AgentTryAutoJumpEvent?.Invoke(who, dir);
     }
-    public void OnAgentTryAttack(GameObject attacker, string type)
+    public void OnAgentTryAttack(GameObject who, string type)
     {
-        AgentTryAttackEvent?.Invoke(attacker, type);
+        AgentTryAttackEvent?.Invoke(who, type);
     }
 
     // Attacks and Combos ==================================================================================================================
@@ -245,6 +250,7 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, string> TryComboEvent;
     public event Action<GameObject, string> ComboEvent;
     public event Action<GameObject, AttackSO> AttackedEvent;
+    public event Action<GameObject, AttackSO> AttackWindedUpEvent;
     public event Action<GameObject, AttackSO> AttackReleasedEvent;
     public event Action<GameObject> CancelAttackEvent;
     public event Action<GameObject> AttackCancelledEvent;
@@ -260,6 +266,10 @@ public class EventManager : MonoBehaviour
     public void OnAttacked(GameObject attacker, AttackSO attackSO)
     {
         AttackedEvent?.Invoke(attacker, attackSO);
+    }  
+    public void OnAttackWindedUp(GameObject attacker, AttackSO attackSO)
+    {
+        AttackWindedUpEvent?.Invoke(attacker, attackSO);
     }  
     public void OnAttackReleased(GameObject attacker, AttackSO attackSO)
     {
@@ -323,7 +333,7 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, string> TryAbilityEvent;
     public event Action<GameObject, string> AbilityEvent;
     public event Action<GameObject, AbilitySO> CastingEvent;
-    public event Action<GameObject, AbilitySO> CastEvent;
+    public event Action<GameObject, AbilitySlot> CastEvent;
     public event Action<GameObject, AbilitySO> CastReleasedEvent;
     public event Action<GameObject> CancelCastEvent;
     public event Action<GameObject> CastCancelledEvent;
@@ -340,9 +350,9 @@ public class EventManager : MonoBehaviour
     {
         CastingEvent?.Invoke(caster, abilitySO);
     }
-    public void OnCast(GameObject caster, AbilitySO abilitySO)
+    public void OnCast(GameObject caster, AbilitySlot slot)
     {
-        CastEvent?.Invoke(caster, abilitySO);
+        CastEvent?.Invoke(caster, slot);
     }
     public void OnCastReleased(GameObject caster, AbilitySO abilitySO)
     {
@@ -361,7 +371,8 @@ public class EventManager : MonoBehaviour
     
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent; // respects iframe/block/parry
-    public event Action<GameObject, float, Vector3> KnockbackEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> PoiseBreakEvent;
+    public event Action<GameObject, float, Vector3> TryKnockbackEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
 
     public void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
@@ -372,9 +383,13 @@ public class EventManager : MonoBehaviour
     {
         HurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }
-    public void OnKnockback(GameObject who, float force, Vector3 contactPoint)
+    public void OnPoiseBreak(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        KnockbackEvent?.Invoke(who, force, contactPoint);
+        PoiseBreakEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
+    public void OnTryKnockback(GameObject who, float force, Vector3 contactPoint)
+    {
+        TryKnockbackEvent?.Invoke(who, force, contactPoint);
     }
     public void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -405,18 +420,32 @@ public class EventManager : MonoBehaviour
         CancelStunEvent?.Invoke(who);
     } 
 
+    // iframe ==================================================================================================================
+
+    public event Action<GameObject, float> TryIFrameEvent;
+    public event Action<GameObject> IFrameStartEvent;
+    public event Action<GameObject> IFrameEndEvent;
+
+    public void OnTryIFrame(GameObject who, float duration)
+    {
+        TryIFrameEvent?.Invoke(who, duration);
+    }
+    public void OnIFrameStart(GameObject who)
+    {
+        IFrameStartEvent?.Invoke(who);
+    } 
+    public void OnIFrameEnd(GameObject who)
+    {
+        IFrameEndEvent?.Invoke(who);
+    } 
+
     // Animator ==================================================================================================================
 
     public event Action<GameObject, string, int, float> PlayAnimEvent;
-    public event Action<GameObject, AnimPreset> PlayAnimPresetEvent;
 
     public void OnPlayAnim(GameObject who, string animName, int animLayer, float blendTime=0)
     {
         PlayAnimEvent?.Invoke(who, animName, animLayer, blendTime);
-    }
-    public void OnPlayAnimPreset(GameObject who, AnimPreset preset)
-    {
-        PlayAnimPresetEvent?.Invoke(who, preset);
     }
 
     // UI ==================================================================================================================

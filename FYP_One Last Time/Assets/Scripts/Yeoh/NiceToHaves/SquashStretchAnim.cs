@@ -166,7 +166,6 @@ public class SquashStretchAnim : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.JumpedEvent += OnJumped;
-        EventM.AutoJumpedEvent += OnAutoJumped;
         //EventM.FastFallStartEvent += OnFallStart;
         //EventM.FastFallEndEvent += OnFallEnd;
         EventM.LandGroundEvent += OnLand;
@@ -175,7 +174,6 @@ public class SquashStretchAnim : MonoBehaviour
     void OnDisable()
     {
         EventM.JumpedEvent -= OnJumped;
-        EventM.AutoJumpedEvent -= OnAutoJumped;
         //EventM.FastFallStartEvent -= OnFallStart;
         //EventM.FastFallEndEvent -= OnFallEnd;
         EventM.LandGroundEvent -= OnLand;
@@ -185,14 +183,6 @@ public class SquashStretchAnim : MonoBehaviour
     // ============================================================================
     
     public void OnJumped(GameObject jumper)
-    {
-        if(jumper!=owner) return;
-
-        // wait for OnFallEnd to cancel all first
-        Invoke(nameof(Jump), 0.01f);
-    }
-
-    public void OnAutoJumped(GameObject jumper, Vector3 jump_dir)
     {
         if(jumper!=owner) return;
 

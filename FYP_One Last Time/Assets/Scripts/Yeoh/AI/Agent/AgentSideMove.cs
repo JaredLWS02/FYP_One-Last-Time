@@ -2,16 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AgentVelocity))]
-
 public class AgentSideMove : MonoBehaviour
 {
-    AgentVelocity agentVel;
-
-    void Awake()
-    {
-        agentVel = GetComponent<AgentVelocity>();
-    }
+    public GameObject owner;
+    public AgentVehicle vehicle;
 
     // ============================================================================
 
@@ -26,9 +20,11 @@ public class AgentSideMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        float dot_x = Vector3.Dot(Vector3.right, agentVel.velocity);
-        float dot_y = Vector3.Dot(Vector3.up, agentVel.velocity);
+        float dot_x = Vector3.Dot(Vector3.right, vehicle.velocity);
+        float dot_y = Vector3.Dot(Vector3.up, vehicle.velocity);
 
-        EventM.OnAgentTryMove(gameObject, new Vector2(dot_x, dot_y));
+        Vector2 moveInput = new(dot_x, dot_y);
+
+        EventM.OnAgentTryMove(owner, moveInput);
     }
 }

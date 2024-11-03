@@ -1,39 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-
-[RequireComponent(typeof(Pilot))]
-
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(AgentVelocity))]
-[RequireComponent(typeof(AgentSideMove))]
-[RequireComponent(typeof(AgentAutoJump))]
-[RequireComponent(typeof(AgentWander))]
-[RequireComponent(typeof(AgentFlee))]
-[RequireComponent(typeof(AgentReturn))]
-[RequireComponent(typeof(AgentVerticalityCheck))]
 
 public class AgentManager : MonoBehaviour
 {
-    public Pilot pilot {get; private set;}
-
-    NavMeshAgent agent;
-    AgentVelocity agentVel;
-    AgentWander wander;
-    AgentFlee flee;
-    AgentReturn returner;
-
-    void Awake()
-    {
-        pilot = GetComponent<Pilot>();
-
-        agent = GetComponent<NavMeshAgent>();
-        agentVel = GetComponent<AgentVelocity>();
-        wander = GetComponent<AgentWander>();
-        flee = GetComponent<AgentFlee>();
-        returner = GetComponent<AgentReturn>();
-    }
+    public GameObject owner;
+    public Pilot pilot;
 
     // ============================================================================
 
@@ -48,113 +20,27 @@ public class AgentManager : MonoBehaviour
     
     void Start()
     {
-        EventM.OnSpawned(gameObject);
-    }
-
-    // ============================================================================
-    
-    [Header("HP Check")]
-    public HPManager hpM;
-    public float okHPPercent=50;
-    public float lowHPPercent=25;
-
-    public bool IsFullHP()
-    {
-        return hpM.GetHPPercent() >= 100;
-    }
-    public bool IsOkHP()
-    {
-        return hpM.GetHPPercent() >= okHPPercent;
-    }
-    public bool IsLowHP()
-    {
-        return hpM.GetHPPercent() <= lowHPPercent;
+        EventM.OnSpawned(owner);
     }
     
     // ============================================================================
 
-    [Header("Radar")]
-    public Radar radar;
-    public string enemyTag = "Player";
-    public string lootTag = "Loot";
+    [Header("Goal/Range Manager")]
+    public AgentVehicle vehicle;
 
-    public GameObject GetClosest(string tag)
-    {
-        return radar.GetClosestTargetWithTag(tag);
-    }
-
-    public GameObject GetEnemy()
-    {
-        return GetClosest(enemyTag);
-    }
-
-    public GameObject GetLoot()
-    {
-        return GetClosest(lootTag);
-    }
-
-    // ============================================================================
-
-    [Header("Ranges")]
-    public float arrivalRange=1;
-    public float attackRange=3;
-
-    public float GetCurrentRange()
-    {
-        return agentVel.stoppingRange;
-    }
-
-    public void SetRange(float to)
-    {        
-        agentVel.stoppingRange = to;
-    }
-
-    public bool IsInRange(Vector3 from, Vector3 target, float range)
-    {
-        return Vector2.Distance(from, target) <= range;
-    }
-
-    public bool IsInRange(GameObject target, float range)
-    {
-        if(!target) return false;
-        return IsInRange(transform.position, target.transform.position, range);
-    }
-
-    public bool IsInRange(GameObject target)
-    {
-        return IsInRange(target, GetCurrentRange());
-    }
-
-    public bool IsInRange()
-    {
-        return IsInRange(GetCurrentGoal(), GetCurrentRange());
-    }
-    
-    // ============================================================================
-    
-    public float maintainDistance=2;
-
-    public bool IsEnemyTooClose()
-    {
-        return IsInRange(GetEnemy(), maintainDistance);
-    }
-
-    // ============================================================================
-    
     public GameObject GetCurrentGoal()
     {
-        return agentVel.goal.gameObject;
+        return vehicle.goal.gameObject;
     }
 
     public void SetGoal(Transform target)
     {
-        agentVel.goal = target;
+        vehicle.goal = target;
     }
 
     public void SetGoal(GameObject target)
     {
-        if(!target) return;
-
+        if(target)
         SetGoal(target.transform);
     }
 
@@ -164,53 +50,63 @@ public class AgentManager : MonoBehaviour
         SetGoal(target);
     }
 
-    public void SetGoalWander()
+    public void SetGoalToSelf()
     {
-        SetRange(arrivalRange);
-        SetGoal(wander.wanderGoal);
-    }
-
-    public void SetGoalEnemy()
-    {
-        SetRange(attackRange);
-        SetGoal(GetEnemy());
-    }
-
-    public void SetGoalFlee()
-    {
-        SetRange(arrivalRange);
-        SetGoal(flee.fleeGoal);
-    }
-
-    public bool IsFleeing()
-    {
-        return GetCurrentGoal()==flee.fleeGoal.gameObject;
-    }
-
-    public void SetGoalSpawnpoint()
-    {
-        SetRange(arrivalRange);
-        SetGoal(returner.spawnpoint);
+        SetRange(wanderArrivalRange);
+        SetGoal(owner);
     }
 
     // ============================================================================
+    
+    public float GetCurrentRange()
+    {
+        return vehicle.stoppingRange;
+    }
+
+    public void SetRange(float to)
+    {        
+        vehicle.stoppingRange = to;
+    }
+
+    public bool InRange(Vector3 from, Vector3 target, float range)
+    {
+        return Vector2.Distance(from, target) <= range;
+    }
+
+    public bool InRange(GameObject target, float range)
+    {
+        if(!target) return false;
+        return InRange(owner.transform.position, target.transform.position, range);
+    }
+
+    public bool InRange(GameObject target)
+    {
+        return InRange(target, GetCurrentRange());
+    }
+
+    public bool InRange()
+    {
+        return InRange(GetCurrentGoal(), GetCurrentRange());
+    }
+
+    // Facing ============================================================================
 
     public void FaceMoveDir()
     {
-        float dot_x = Vector3.Dot(Vector3.right, agentVel.velocity);
+        float dot_x = Vector3.Dot(Vector3.right, vehicle.velocity);
 
-        EventM.OnAgentTryFaceX(gameObject, dot_x);
+        EventM.OnAgentTryFlip(owner, dot_x);
     }
 
     public void FaceTarget(GameObject target)
     {
         if(!target) return;
 
-        Vector3 agent_to_target = (target.transform.position - agent.transform.position).normalized;
+        Vector3 owner_to_target = (target.transform.position - owner.transform.position).normalized;
 
-        float dot_x = Vector3.Dot(Vector3.right, agent_to_target);
+        float dot_x = Vector3.Dot(Vector3.right, owner_to_target);
 
-        EventM.OnAgentTryFaceX(gameObject, dot_x);
+        EventM.OnAgentTryFlip(owner, dot_x);
     }
 
     public void FaceGoal()
@@ -218,12 +114,111 @@ public class AgentManager : MonoBehaviour
         FaceTarget(GetCurrentGoal());
     }
 
-    public void FaceEnemy()
+    // ============================================================================
+
+    [Header("Wander")]
+    public bool allowWander=true;
+    public AgentWander wander;
+    public float wanderArrivalRange=1;
+
+    public void SetGoalToWander()
     {
-        FaceTarget(GetEnemy());
+        SetRange(wanderArrivalRange);
+        SetGoal(wander.wanderGoal);
     }
 
     // ============================================================================
+
+    [Header("Target")]
+    public Radar radar;
+    public string targetTag = "Player";
+
+    public GameObject GetClosest(string tag)
+    {
+        return radar.GetClosestTargetWithTag(tag);
+    }
+
+    public GameObject GetTarget()
+    {
+        return GetClosest(targetTag);
+    }
+
+    // ============================================================================
+    
+    public float expandRadarRangeMult = 1.5f;
+
+    public void ExpandRadarRange()
+    {
+        radar.MultiplyRadarRange(expandRadarRangeMult);
+    }
+
+    public void RevertRadarRange()
+    {
+        radar.RevertRadarRange();
+    }
+
+    // ============================================================================
+    
+    [Header("Seek")]
+    public bool allowSeek=true;
+    public float seekArrivalRange=3;
+
+    public void SetGoalToSeek()
+    {
+        SetRange(seekArrivalRange);
+        SetGoal(GetTarget());
+    }
+
+    public void FaceTarget()
+    {
+        FaceTarget(GetTarget());
+    }
+
+    public float maintainDistance=2;
+
+    public bool IsTargetTooClose()
+    {
+        return InRange(GetTarget(), maintainDistance);
+    }
+
+    public RandomPicker randomSeekBehaviour;
+
+    public string GetRandomSeekBehaviour()
+    {
+        randomSeekBehaviour.UpdateManualTimer();
+
+        return randomSeekBehaviour.currentOption;
+    }
+
+    // ============================================================================
+    
+    [Header("Flee")]
+    public bool allowFlee=true;
+    public AgentFlee flee;
+    public HPManager hpM;
+    public float fleeHPPercent=25;
+
+    public bool ShouldFlee()
+    {
+        return hpM.GetHPPercent() <= fleeHPPercent;
+    }
+
+    public float fleeArrivalRange=1;
+
+    public void SetGoalToFlee()
+    {
+        SetRange(fleeArrivalRange);
+        SetGoal(flee.fleeGoal);
+    }
+
+    public RandomPicker randomFleeBehaviour;
+
+    public string GetRandomFleeBehaviour()
+    {
+        randomFleeBehaviour.UpdateManualTimer();
+
+        return randomFleeBehaviour.currentOption;
+    }
 
     public GameObject GetThreat()
     {
@@ -235,7 +230,7 @@ public class AgentManager : MonoBehaviour
         if(!target) return;
 
         flee.threat = target;
-        SetGoalFlee();
+        SetGoalToFlee();
     }
 
     public void SetThreat(GameObject target)
@@ -245,59 +240,48 @@ public class AgentManager : MonoBehaviour
         SetThreat(target.transform);
     }
 
-    public void SetThreatEnemy()
+    public void SetThreatToTarget()
     {
-        SetThreat(GetEnemy());
+        SetThreat(GetTarget());
     }
 
     // ============================================================================
-    
+
+    [Header("Return")]
+    public bool allowReturn=true;
+    public AgentReturn returner;
+
     public bool ShouldReturn()
     {
-        GameObject enemy = GetEnemy();
-        if(!enemy) return false;
+        GameObject target = GetTarget();
+        if(!target) return false;
 
-        returner.CheckReturn(enemy.transform.position);
+        returner.UpdateCheck(target.transform.position);
 
         return returner.shouldReturn;
     }
 
+    public void SetGoalToReturn()
+    {
+        SetRange(wanderArrivalRange);
+        SetGoal(returner.spawnpoint);
+    }
+
     public bool IsAtSpawnpoint()
     {
-        return returner.IsAtSpawnpoint(agentVel.stoppingRange);
-    }
-
-    // ============================================================================
-
-    [Header("Randomness")]
-    public RandomPicker randomAttackBehaviour;
-
-    public string GetRandomAttackBehaviour()
-    {
-        randomAttackBehaviour.UpdateManualTimer();
-
-        return randomAttackBehaviour.currentOption;
-    }
-    
-    public RandomPicker randomFleeBehaviour;
-
-    public string GetRandomFleeBehaviour()
-    {
-        randomFleeBehaviour.UpdateManualTimer();
-
-        return randomFleeBehaviour.currentOption;
+        return returner.IsAtSpawnpoint(vehicle.stoppingRange);
     }
     
     // ============================================================================
 
     [Header("Debug")]
     public bool showGizmos;
-    
-    public bool showArrivalRangeGizmo = true;
-    public bool showAttackRangeGizmo = true;
-    public bool showMaintainDistanceGizmo = true;
-
     public Color gizmoColor = new(1, 1, 1, .25f);
+
+    public bool showWanderArrivalRangeGizmo = true;
+    public bool showSeekArrivalRangeGizmo = true;
+    public bool showMaintainDistanceGizmo = true;
+    public bool showFleeArrivalRangeGizmo = true;
 
     void OnDrawGizmosSelected()
     {
@@ -305,13 +289,16 @@ public class AgentManager : MonoBehaviour
 
         Gizmos.color = gizmoColor;
 
-        if(showArrivalRangeGizmo)
-        Gizmos.DrawWireSphere(transform.position, arrivalRange);
+        if(showWanderArrivalRangeGizmo)
+        Gizmos.DrawWireSphere(owner.transform.position, wanderArrivalRange);
 
-        if(showAttackRangeGizmo)
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        if(showSeekArrivalRangeGizmo)
+        Gizmos.DrawWireSphere(owner.transform.position, seekArrivalRange);
 
         if(showMaintainDistanceGizmo)
-        Gizmos.DrawWireSphere(transform.position, maintainDistance);
+        Gizmos.DrawWireSphere(owner.transform.position, maintainDistance);
+
+        if(showFleeArrivalRangeGizmo)
+        Gizmos.DrawWireSphere(owner.transform.position, fleeArrivalRange);
     }
 }

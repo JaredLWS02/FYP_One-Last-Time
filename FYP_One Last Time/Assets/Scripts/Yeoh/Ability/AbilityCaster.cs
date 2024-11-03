@@ -2,13 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityCaster : MonoBehaviour
+public class AbilityCaster : BaseAction
 {   
-    public GameObject owner;
-    public HPManager mpM;
-
-    // ============================================================================
-    
     EventManager EventM;
 
     void OnEnable()
@@ -17,13 +12,13 @@ public class AbilityCaster : MonoBehaviour
 
         EventM.CancelCastEvent += OnCancelCast;
 
-        abilityList.ResetCooldowns();
+        abilityList.CancelCooldowns();
     }
     void OnDisable()
     {
         EventM.CancelCastEvent -= OnCancelCast;
 
-        abilityList.ResetCooldowns();
+        abilityList.CancelCooldowns();
     }
 
     // ============================================================================
@@ -38,32 +33,35 @@ public class AbilityCaster : MonoBehaviour
 
     // ============================================================================
 
+    public HPManager mpM;
     public AbilityListSO abilityList;
-    public AbilitySO abilitySO;
-
     AbilitySlot currentSlot;
+
+    public AbilitySO abilitySO;
 
     public void TryStartCasting()
     {
-        if(isCasting) return;
+        if(IsPerforming()) return;
 
         if(!abilityList.HasAbility(abilitySO, out var slot)) return;
 
-        if(slot.IsCooling()) return;
+        if(!abilitySO.CanAfford(mpM.hp)) return;
 
-        if(!abilitySO.HasEnoughMP(mpM.hp)) return;
+        if(slot.IsCooling()) return;
 
         currentSlot = slot;
 
         StartCasting();
     }
 
+    //AudioSource sfxCastingLoop;
+
     void StartCasting()
     {
         ResetProgress();
-        isCasting=true;
 
-        abilitySO.castingAnim.Play(owner);
+        Perform(abilitySO.castingAnim);
+        Anim1_WindUp();
 
         EventM.OnCasting(owner, abilitySO);
 
@@ -71,8 +69,6 @@ public class AbilityCaster : MonoBehaviour
     }
 
     // Progress ============================================================================
-
-    public bool isCasting {get; private set;}
 
     public float progress {get; private set;}
     
@@ -85,7 +81,7 @@ public class AbilityCaster : MonoBehaviour
 
     void UpdateProgress()
     {
-        if(!isCasting) return;
+        if(!IsPerforming()) return;
 
         progress += Time.deltaTime;
 
@@ -96,91 +92,33 @@ public class AbilityCaster : MonoBehaviour
         if(IsProgressDone())
         {
             StopCasting();
-            Cast();
+            
+            EventM.OnCast(owner, currentSlot);
         }
     }
 
     bool IsProgressDone() => progress >= abilitySO.castingTime;
 
+    // ============================================================================
+    
     void StopCasting()
     {
-        if(!isCasting) return;
-
-        isCasting=false;
         ResetProgress();
 
-        abilitySO.castingAnim.Cancel(owner);
+        CancelAnim();
 
         //if(sfxCastingLoop) AudioManager.Current.StopLoop(sfxCastingLoop);
     }
-
-    //AudioSource sfxCastingLoop;
-
-    // After Cast ============================================================================
-
-    public bool isCast {get; private set;}
-
-    void Cast()
-    {
-        // mp cost
-        mpM.Deplete(abilitySO.mpCost);
-
-        currentSlot.DoCooldown();
-
-        if(abilitySO.noCastAnim)
-        {
-            CastRelease();
-        }
-        else
-        {
-            abilitySO.castAnim.Play(owner);
-            
-        }
-
-        EventM.OnCast(owner, abilitySO);
-    }
-
-    // ============================================================================
-
-    // Anim Event
-    public void CastWindUp()
-    {
-        isCast=true;
-    }
-    // Anim Event
-    public void CastRelease()
-    {
-        EventM.OnCastReleased(owner, abilitySO);
-    }
-    // Anim Event
-    public void CastRecover()
-    {
-        isCast=false;
-    }
-    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
-    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
-    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
-
-    // ============================================================================
     
-    public bool IsCasting()
-    {
-        return isCasting || isCast;
-    }
-
     // Cancel ============================================================================
     
     void OnCancelCast(GameObject who)
     {
         if(who!=owner) return;
 
-        if(!IsCasting()) return;
+        if(!IsPerforming()) return;
 
         StopCasting();
-
-        CastRecover();
-
-        abilitySO.castAnim.Cancel(owner);
         
         EventM.OnCastCancelled(owner);
     }

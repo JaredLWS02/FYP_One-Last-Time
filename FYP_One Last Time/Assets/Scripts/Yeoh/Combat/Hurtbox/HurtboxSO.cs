@@ -22,9 +22,9 @@ public class HurtboxSO : ScriptableObject
     public bool isParryable=true;
     public bool parryStunsOwner=true;
 
-    [Header("Stun")]
+    [Header("Stun Victim")]
     public bool canStun=true;
-    public AnimPreset stunAnim;
+    public AnimSO customStunAnim;
 
     // ============================================================================
 
@@ -40,8 +40,7 @@ public class HurtboxSO : ScriptableObject
         new_SO.pierceCount = so.pierceCount;
         new_SO.isParryable = so.isParryable;
         new_SO.parryStunsOwner = so.parryStunsOwner;
-        new_SO.canStun = so.canStun;
-        new_SO.stunAnim = so.stunAnim;
+        new_SO.customStunAnim = so.customStunAnim;
 
         return new_SO;
     }

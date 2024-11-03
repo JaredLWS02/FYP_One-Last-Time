@@ -2,13 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackScript : MonoBehaviour
+public class AttackScript : BaseAction
 {
-    public GameObject owner;
-    public Rigidbody rb;
-
-    // ============================================================================
-
     EventManager EventM;
 
     void OnEnable()
@@ -31,76 +26,40 @@ public class AttackScript : MonoBehaviour
     
     public void TryAttack()
     {
-        if(IsAttacking()) return;
+        if(IsPerforming()) return;
 
         if(IsCooling()) return;
-        DoCooldown();
 
-        Attack();
-    }
-
-    // During Attack ============================================================================
-
-    void Attack()
-    {
-        if(attackSO.noAnim)
-        {
-            AttackRelease();
-        }
-        else
-        {
-            attackSO.anim.Play(owner);
-        }
+        Perform(attackSO.anim);
 
         EventM.OnAttacked(owner, attackSO);
     }
 
     // ============================================================================
 
-    public bool isWindingUp {get; private set;}
-    public bool isReleasing {get; private set;}
-    
-    public bool IsAttacking()
-    {
-        return isReleasing || isWindingUp;
-    }
-
-    // ============================================================================
-
     // Anim Event
-    public void AttackWindUp()
+    public override void OnAnimWindUp()
     {
-        isWindingUp=true;
-        isReleasing=false;
-
         if(attackSO.dashOnWindUp)
         Dash(attackSO.dashOnWindUpForce, attackSO.dashOnWindUpDir);
+
+        EventM.OnAttackWindedUp(owner, attackSO);
     }  
     // Anim Event
-    public void AttackRelease()
+    public override void OnAnimReleaseStart()
     {
-        isWindingUp=false;
-        isReleasing=true;
-
-        SpawnAttack();
-
         if(attackSO.dashOnRelease)
         Dash(attackSO.dashOnReleaseForce, attackSO.dashOnReleaseDir);
+
+        SpawnAttack();
 
         EventM.OnAttackReleased(owner, attackSO);
     }
     // Anim Event
-    public void AttackRecover()
+    public override void OnAnimRecover()
     {
-        isWindingUp=false;
-        isReleasing=false;        
-
-        if(attackSO.dashOnRecover)
-        Dash(attackSO.dashOnRecoverForce, attackSO.dashOnRecoverDir);
+        DoCooldown();
     }  
-    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
-    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
-    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
 
     // ============================================================================
 
@@ -125,6 +84,9 @@ public class AttackScript : MonoBehaviour
 
     // ============================================================================
     
+    [Header("Attack Dash")]
+    public Rigidbody rb;
+
     void Dash(float force, Vector3 dir)
     {
         if(!rb) return;
@@ -140,32 +102,14 @@ public class AttackScript : MonoBehaviour
         rb.AddForce(force * direction, ForceMode.Impulse);
     }
 
-    // After Attack ============================================================================
-
-    void Update()
-    {
-        UpdateCooldown();
-    }
-
     // ============================================================================
 
-    float cooldownLeft;
-    
-    void DoCooldown() => cooldownLeft = attackSO.cooldownTime;
+    [Header("After Attack")]
+    public Timer cooldown;
 
-    void UpdateCooldown()
-    {
-        // only tick down if not busy
-        if(IsAttacking()) return;
-        
-        cooldownLeft -= Time.deltaTime;
-
-        if(cooldownLeft<0) cooldownLeft=0;
-    }
-
-    bool IsCooling() => cooldownLeft>0;
-
-    void CancelCooldown() => cooldownLeft=0;
+    void DoCooldown() => cooldown?.StartTimer(attackSO.cooldownTime);
+    bool IsCooling() => cooldown?.IsTicking() ?? false;
+    void CancelCooldown() => cooldown?.FinishTimer();
 
     // Cancel ============================================================================
     
@@ -173,11 +117,9 @@ public class AttackScript : MonoBehaviour
     {
         if(who!=owner) return;
 
-        if(!IsAttacking()) return;
+        if(!IsPerforming()) return;
 
-        AttackRecover();
-
-        attackSO.anim.Cancel(owner);
+        CancelAnim();
 
         EventM.OnAttackCancelled(owner);
     }

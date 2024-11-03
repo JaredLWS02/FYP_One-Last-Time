@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ActionManager : MonoBehaviour
 {
+    public GameObject owner;
+
+    // ============================================================================
+
     [Header("Hold Toggles")]
     public bool AllowMoveX;
     public bool AllowMoveY;
@@ -30,6 +34,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent += OnTryJump;
         EventM.TryJumpCutEvent += OnTryJumpCut;
         EventM.TryAutoJumpEvent += OnTryAutoJump;
+        EventM.AutoJumpingEvent += OnAutoJumping;
         EventM.TryDashEvent += OnTryDash;
         EventM.TryComboEvent += OnTryCombo;
         EventM.TryRaiseParryEvent += OnTryRaiseParry;
@@ -45,6 +50,7 @@ public class ActionManager : MonoBehaviour
         EventM.TryJumpEvent -= OnTryJump;
         EventM.TryJumpCutEvent -= OnTryJumpCut;
         EventM.TryAutoJumpEvent -= OnTryAutoJump;
+        EventM.AutoJumpingEvent -= OnAutoJumping;
         EventM.TryDashEvent -= OnTryDash;
         EventM.TryComboEvent -= OnTryCombo;
         EventM.TryRaiseParryEvent -= OnTryRaiseParry;
@@ -59,222 +65,183 @@ public class ActionManager : MonoBehaviour
 
     void OnTryMove(GameObject who, Vector2 input)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowMoveX) input.x=0;
         if(!AllowMoveY) input.y=0;
 
-        EventM.OnMove(gameObject, input);
+        EventM.OnMove(owner, input);
     }
 
     void OnTryFlip(GameObject who, float input_x)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
-        if(!AllowMoveX) input_x=0;
+        if(!AllowMoveX) return;
 
-        EventM.OnFlip(gameObject, input_x);
+        EventM.OnFlip(owner, input_x);
     }
     
     // ============================================================================
 
     void OnTryJump(GameObject who)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowJump) return;
 
-        EventM.OnJump(gameObject);
+        EventM.OnJump(owner);
     }
 
     void OnTryJumpCut(GameObject who)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowJump) return;
 
-        EventM.OnJumpCut(gameObject);
+        EventM.OnJumpCut(owner);
     }
 
     void OnTryAutoJump(GameObject who, Vector3 jump_dir)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowJump) return;
 
-        EventM.OnAutoJump(gameObject, jump_dir);
-        
+        EventM.OnAutoJump(owner, jump_dir);
+    }
+
+    void OnAutoJumping(GameObject who, Vector3 jump_dir)
+    {
+        if(who!=owner) return;
+
         float dot_x = Vector3.Dot(jump_dir, Vector3.right);
 
-        EventM.OnFlip(gameObject, dot_x);
+        EventM.OnFlip(owner, dot_x);
     }
 
     // ============================================================================    
     
     void OnTryDash(GameObject who)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowDash) return;
 
-        EventM.OnCancelFlipDelay(gameObject);
+        EventM.OnCancelFlipDelay(owner);
 
-        EventM.OnDash(gameObject);
+        EventM.OnDash(owner);
     }
     
     // ============================================================================    
 
     void OnTryCombo(GameObject who, string combo_name)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowAttack) return;
 
         if(IsRiposteActive()) return;
 
-        EventM.OnCancelFlipDelay(gameObject);
+        EventM.OnCancelFlipDelay(owner);
 
-        EventM.OnCombo(gameObject, combo_name);
+        EventM.OnCombo(owner, combo_name);
     }
 
     void OnTryRiposteCombo(GameObject who, string combo_name)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowAttack) return;
 
         if(!IsRiposteActive()) return;
 
-        EventM.OnCancelFlipDelay(gameObject);
+        EventM.OnCancelFlipDelay(owner);
 
-        EventM.OnCombo(gameObject, combo_name);
+        EventM.OnCombo(owner, combo_name);
     }  
 
     // ============================================================================
     
     void OnTryRaiseParry(GameObject who)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowParry) return;
 
-        EventM.OnCancelFlipDelay(gameObject);
+        EventM.OnCancelFlipDelay(owner);
 
-        EventM.OnRaiseParry(gameObject);
+        EventM.OnRaiseParry(owner);
     }
 
     // ============================================================================    
 
     void OnTryAbility(GameObject who, string ability_name)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!AllowCast) return;
 
-        EventM.OnCancelFlipDelay(gameObject);
+        EventM.OnCancelFlipDelay(owner);
 
-        EventM.OnAbility(gameObject, ability_name);
+        EventM.OnAbility(owner, ability_name);
     }
 
     // ============================================================================
     
     void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        if(victim!=gameObject) return;
+        if(victim!=owner) return;
 
         if(!AllowHurt) return;
 
-        EventM.OnTryParry(gameObject, attacker, hurtbox, contactPoint);
+        EventM.OnTryParry(owner, attacker, hurtbox, contactPoint);
     }
 
     // ============================================================================
 
     void OnTryStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        if(victim!=gameObject) return;
+        if(victim!=owner) return;
 
         if(!AllowStun) return;
 
-        EventM.OnStun(gameObject, attacker, hurtbox, contactPoint);
+        EventM.OnStun(owner, attacker, hurtbox, contactPoint);
     }
 
     // ============================================================================
 
-    [Header("Checks")]
+    [Header("Check Action States")]
+    // ?? operator means that if null, it will choose the other option
+    // in this case, if null, choose false
     public GroundCheck ground;
-
-    public bool IsGrounded()
-    {
-        if(!ground) return false;
-        return ground.IsGrounded();
-    }
+    public bool IsGrounded() => ground?.IsGrounded() ?? false;
 
     public AgentAutoJump autoJump;
-
-    public bool IsAutoJumping()
-    {
-        if(!autoJump) return false;
-        return autoJump.isJumping;
-    }
+    public bool IsAutoJumping() => autoJump?.isJumping ?? false;
 
     public DashScript dash;
-
-    public bool IsDashing()
-    {
-        if(!dash) return false;
-        return dash.IsDashingOrRecovering();
-    }
+    public bool IsDashing() => dash?.IsPerforming() ?? false;
     
     public AttackScript attack;
-
-    public bool IsWindingUpAttack()
-    {
-        if(!attack) return false;
-        return attack.isWindingUp;
-    }
-    public bool IsReleasingAttack()
-    {
-        if(!attack) return false;
-        return attack.isReleasing;
-    }
+    public bool IsWindingUpAttack() => attack?.IsWindingUp() ?? false;
+    public bool IsReleasingAttack() => attack?.HasReleased() ?? false;
     
-    public ParryScript parry;
+    public TryParryScript tryParry;
+    public bool IsTryingToParry() => tryParry?.IsPerforming() ?? false;
 
-    public bool IsTryingToParry()
-    {
-        if(!parry) return false;
-        return parry.IsTryingToParry();
-    }
-    public bool IsParrying()
-    {
-        if(!parry) return false;
-        return parry.isParrying;
-    }
-    public bool IsRiposteActive()
-    {
-        if(!parry) return false;
-        return parry.IsRiposteActive();
-    }
+    public OnParryScript onParry;
+    public bool IsParrying() => onParry?.IsPerforming() ?? false;
+
+    public RiposteScript riposte;
+    public bool IsRiposteActive() => riposte?.IsRiposteActive() ?? false;
     
     public AbilityCaster caster;
+    public bool IsCasting() => caster?.IsPerforming() ?? false;
 
-    public bool IsCasting()
-    {
-        if(!caster) return false;
-        return caster.isCasting;
-    }
-    public bool IsCast()
-    {
-        if(!caster) return false;
-        return caster.isCast;
-    }
+    public HealAbility heal;
+    public bool IsHealing() => heal?.IsPerforming() ?? false;
 
     public StunScript stun;
-
-    public bool IsStunned()
-    {
-        if(!stun) return false;
-        return stun.isStunned;
-    }
-    
+    public bool IsStunned() => stun?.IsPerforming() ?? false;
 }

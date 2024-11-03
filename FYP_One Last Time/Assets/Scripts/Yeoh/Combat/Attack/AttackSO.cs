@@ -11,7 +11,7 @@ public class AttackSO : ScriptableObject
     public string description;
 
     [Header("Anim")]
-    public AnimPreset anim;
+    public AnimSO anim;
 
     [Header("Dash")]
     public bool dashOnWindUp = false;
@@ -22,14 +22,9 @@ public class AttackSO : ScriptableObject
     public float dashOnReleaseForce = 30;
     public Vector3 dashOnReleaseDir = Vector3.forward;
     [Space]
-    public bool dashOnRecover = false;
-    public float dashOnRecoverForce = -30;
-    public Vector3 dashOnRecoverDir = Vector3.forward;
-    [Space]
     public bool localDir = true;
 
     [Header("Optional")]
-    public bool noAnim;
     public float cooldownTime = 0;
 
     // ============================================================================

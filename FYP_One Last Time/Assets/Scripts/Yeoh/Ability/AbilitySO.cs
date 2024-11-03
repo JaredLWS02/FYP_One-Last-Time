@@ -19,16 +19,12 @@ public class AbilitySO : ScriptableObject
     public float cooldownTime=3;
     
     [Header("Anim")]
-    public AnimPreset castingAnim;
-    [Space]
-    public AnimPreset castAnim;
-
-    [Header("Optional")]
-    public bool noCastAnim;
+    public AnimSO castingAnim;
+    public AnimSO castAnim;
 
     // ============================================================================
     
-    public bool HasEnoughMP(float budget)
+    public bool CanAfford(float budget)
     {
         return budget >= mpCost;
     }

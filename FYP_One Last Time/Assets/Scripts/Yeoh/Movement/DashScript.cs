@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashScript : MonoBehaviour
+public class DashScript : BaseAction
 {
-    public GameObject owner;
-    public Rigidbody rb;    
+    public Rigidbody rb;
 
     // ============================================================================
 
@@ -16,18 +15,20 @@ public class DashScript : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.DashEvent += OnDash;
+        dashingTimer.TimerFinishedEvent += OnDashingFinished;
         EventM.CancelDashEvent += OnCancelDash;
     }
     void OnDisable()
     {
         EventM.DashEvent -= OnDash;
+        dashingTimer.TimerFinishedEvent -= OnDashingFinished;
         EventM.CancelDashEvent -= OnCancelDash;
     }
 
     // ============================================================================
 
     [Header("On Dash")]
-    public AnimPreset dashAnim;
+    public AnimSO dashAnim;
 
     void OnDash(GameObject who)
     {
@@ -35,75 +36,57 @@ public class DashScript : MonoBehaviour
         
         if(IsDashing()) return;
 
+        if(ground && dashesLeft<=0) return;
+
         if(IsCooling()) return;
-        DoCooldown();
 
         Dash();
     }
 
     void Dash()
     {
-        rb.velocity = Vector3.zero;
+        // action cancelling
+        EventM.OnCancelAttack(owner);
+        EventM.OnCancelCast(owner);
 
-        DoDashingTimer();
+        toggler?.ToggleIgnoreLayers(true);
 
-        dashAnim.Play(owner);
+        if(ground) dashesLeft--;
+
+        DoDashing();
+
+        Perform(dashAnim);
+        Anim2_ReleaseStart();
 
         EventM.OnDashed(owner);
     }
-
+    
     // During Dash ============================================================================
 
-    void Update()
-    {
-        UpdateDashingTimer();
-        UpdateLayerToggler();
-        UpdateCooldown();
-    }
-
-    // ============================================================================
-
     [Header("Dashing")]
+    public Timer dashingTimer;
     public float dashingSeconds=.2f;
-    float dashingLeft;
     
-    void DoDashingTimer() => dashingLeft = dashingSeconds;
-
-    bool IsDashing() => dashingLeft>0;
-
-    void UpdateDashingTimer()
-    {
-        if(!IsDashing()) return;
-
-        dashingLeft -= Time.deltaTime;
-
-        if(dashingLeft<=0)
-        {
-            StopDashing();
-            StartRecovery();
-        }
-    }
-
-    void CancelDashingTimer() => dashingLeft=0;
+    void DoDashing() => dashingTimer.StartTimer(dashingSeconds);
+    public bool IsDashing() => dashingTimer.IsTicking();
+    void CancelDashing() => dashingTimer.FinishTimer();
 
     // ============================================================================
     
+    public float dashVelocity=50;
+    public Vector3 dashDir = Vector3.forward;
+    public bool localDir=true;
+
     void FixedUpdate()
     {
         UpdateDashing();
     }
-
-    // Dashing Force ============================================================================
     
-    public float dashForce=10;
-    public Vector3 dashDir = Vector3.forward;
-    public bool localDir=true;
-
     void UpdateDashing()
     {
         if(!IsDashing()) return;
 
-        if(dashForce==0) return;
+        if(dashVelocity==0) return;
         if(dashDir==Vector3.zero) return;
 
         Vector3 direction = dashDir.normalized;
@@ -111,85 +94,46 @@ public class DashScript : MonoBehaviour
         if(localDir)
         direction = transform.TransformDirection(direction);
 
-        rb.AddForce(dashForce * direction, ForceMode.Impulse);
-    }
-    
-    // ============================================================================
-    
-    [Header("Optional")]
-    public ColliderLayerToggler toggler;
-    bool wasDashing;
-
-    void UpdateLayerToggler()
-    {
-        if(!toggler) return;
-
-        if(wasDashing != IsDashing())
-        {
-            wasDashing = IsDashing();
-            toggler.ToggleIgnoreLayers(IsDashing());
-        }
+        rb.velocity = direction * dashVelocity;
+        // setting velocity instead of using AddForce
+        // to make sure its not affected by gravity
     }
 
     // ============================================================================
     
     [Header("After Dash")]
-    public AnimPreset dashRecoverAnim;
-    bool isRecovering;
-
-    void StopDashing()
+    public AnimSO dashRecoverAnim;
+    
+    void OnDashingFinished()
     {
-        CancelDashingTimer();
+        toggler?.ToggleIgnoreLayers(false);
 
-        dashAnim.Cancel(owner);
+        Anim3_ReleaseEnd();
+
+        if(dashRecoverAnim)
+        {
+            Perform(dashRecoverAnim);
+        }
+        else OnAnimRecover();
     }
-
-    void StartRecovery()
-    {
-        isRecovering=true;
-
-        dashRecoverAnim.Play(owner);
-    }
-
+    
     // ============================================================================
 
     // Anim Event
-    public void DashRecover()
+    public override void OnAnimRecover()
     {
-        isRecovering=false;
-    }
-    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
-    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
-    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
-    
-    // ============================================================================
-    
-    public bool IsDashingOrRecovering()
-    {
-        return IsDashing() || isRecovering;
+        DoCooldown();
     }
     
     // ============================================================================
     
     [Header("After Recover")]
+    public Timer cooldown;
     public float cooldownTime=.5f;
-    float cooldownLeft;
 
-    void DoCooldown() => cooldownLeft = cooldownTime;
-
-    void UpdateCooldown()
-    {
-        // only tick down if not busy
-        if(IsDashingOrRecovering()) return;
-        
-        cooldownLeft -= Time.deltaTime;
-
-        if(cooldownLeft<0) cooldownLeft=0;
-    }
-
-    bool IsCooling() => cooldownLeft>0;
-
-    void CancelCooldown() => cooldownLeft=0;
+    void DoCooldown() => cooldown?.StartTimer(cooldownTime);
+    bool IsCooling() => cooldown?.IsTicking() ?? false;
+    void CancelCooldown() => cooldown?.FinishTimer();
 
     // Cancel ============================================================================
 
@@ -199,12 +143,37 @@ public class DashScript : MonoBehaviour
 
         if(!IsDashing()) return;
 
-        StopDashing();
-
-        DashRecover();
-
-        dashRecoverAnim.Cancel(owner);
+        CancelAnim();
 
         EventM.OnDashCancelled(owner);
+    }
+
+    // ============================================================================
+    
+    [Header("Optional")]
+    public ColliderLayerToggler toggler;
+
+    public GroundCheck ground;
+    public int dashCount=1;
+    int dashesLeft;
+
+    void Start()
+    {
+        dashesLeft = dashCount;
+    }
+
+    void Update()
+    {
+        UpdateGroundCheck();
+    }
+
+    void UpdateGroundCheck()
+    {
+        if(!ground) return;
+        // Only replenish if grounded and not cooling
+        if(ground.IsGrounded() && !IsCooling())
+        {
+            dashesLeft = dashCount;
+        }
     }
 }

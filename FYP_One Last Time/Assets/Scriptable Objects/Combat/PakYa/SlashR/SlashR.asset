@@ -14,12 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: PakYa SlashR
   description: 
-  anim:
-    names:
-    - SlashR
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
+  anim: {fileID: 11400000, guid: fc1d49615b84a254f8b0fcb415694e17, type: 2}
   dashOnWindUp: 0
   dashOnWindUpForce: 30
   dashOnWindUpDir: {x: 0, y: 0, z: 1}
@@ -30,5 +25,4 @@ MonoBehaviour:
   dashOnRecoverForce: -30
   dashOnRecoverDir: {x: 0, y: 0, z: 1}
   localDir: 1
-  noAnim: 0
   cooldownTime: 0

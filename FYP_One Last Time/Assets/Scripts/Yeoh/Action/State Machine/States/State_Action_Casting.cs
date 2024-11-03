@@ -13,7 +13,7 @@ public class State_Action_Casting : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.gameObject.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {Name}");
 
         ToggleAllow(true);
     }
@@ -31,6 +31,7 @@ public class State_Action_Casting : BaseState
 
     void ToggleAllow(bool toggle)
     {
+        action.AllowDash = toggle;
         action.AllowParry = toggle;
         action.AllowHurt = toggle;
         action.AllowStun = toggle;

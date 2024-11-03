@@ -13,7 +13,7 @@ public class State_Action_Grounded : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.gameObject.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {Name}");
 
         ToggleAllow(true);
     }

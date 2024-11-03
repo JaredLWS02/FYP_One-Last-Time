@@ -2,23 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(GroundCheck))]
-
 public class JumpScript : MonoBehaviour
 {
     public GameObject owner;
-
-    // ============================================================================
-    
-    Rigidbody rb;
-    GroundCheck ground;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        ground = GetComponent<GroundCheck>();
-    }
+    public Rigidbody rb;
+    public GroundCheck ground;
     
     // ============================================================================
 
@@ -39,7 +27,9 @@ public class JumpScript : MonoBehaviour
 
     // ============================================================================
     
+    [Header("Jump")]
     public float jumpForce=10;
+    public AnimSO jumpAnim;
 
     void OnJump(GameObject who)
     {
@@ -50,11 +40,13 @@ public class JumpScript : MonoBehaviour
 
         if(HasCoyoteTime())
         {
-            Jump();            
+            Jump();
+            jumpAnim?.Play(owner);
         }
         else
         {
             DoExtraJump();
+            extraJumpAnim?.Play(owner);
         }
     }
 
@@ -75,6 +67,7 @@ public class JumpScript : MonoBehaviour
 
     // Jump Cut ============================================================================
 
+    [Space]
     public float jumpCutMult=.5f;
 
     void OnJumpCut(GameObject who)
@@ -96,7 +89,6 @@ public class JumpScript : MonoBehaviour
     {
         UpdateExtraJumps();
         UpdateCoyoteTime();
-        UpdateCooldown();
     }
 
     // ============================================================================
@@ -104,6 +96,7 @@ public class JumpScript : MonoBehaviour
     [Header("Extra")]
     public int extraJumps=1;
     int extraJumpsLeft;
+    public AnimSO extraJumpAnim;
 
     void UpdateExtraJumps()
     {
@@ -145,25 +138,13 @@ public class JumpScript : MonoBehaviour
     
     // ============================================================================
 
-    [Header("Cooldown")]
-    public float jumpCooldown=.2f;
-    float cooldownLeft;
-    
-    void DoCooldown() => cooldownLeft = jumpCooldown;
+    [Header("After Jump")]
+    public Timer cooldown;
+    public float cooldownTime=.2f;
 
-    void UpdateCooldown()
-    {
-        cooldownLeft -= Time.deltaTime;
-
-        if(cooldownLeft<0) cooldownLeft=0;
-    }
-
-    bool IsCooling() => cooldownLeft>0;
-
-    void CancelCooldown() => cooldownLeft=0;
-
-
-
+    void DoCooldown() => cooldown?.StartTimer(cooldownTime);
+    bool IsCooling() => cooldown?.IsTicking() ?? false;
+    void CancelCooldown() => cooldown?.FinishTimer();
 
     // ============================================================================
     

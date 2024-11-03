@@ -13,7 +13,7 @@ public class State_Agent_Control_None : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{agent.gameObject.name} State: {Name}");
+        Debug.Log($"{agent.owner.name} State: {Name}");
 
         ToggleAllow(true);
     }
