@@ -25,4 +25,18 @@ public class SphereOverlap : OverlapScript
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireSphere(origin.position + posOffset, range);
     }
+
+    // ============================================================================
+
+    public float base_range {get; private set;}
+
+    void Awake()
+    {
+        base_range = range;
+    }
+
+    public void SetDefault()
+    {
+        range = base_range;
+    }
 }

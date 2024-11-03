@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class State_Action_Cast : BaseState
+public class State_Action_Healing : BaseState
 {
-    public override string Name => "Cast";
+    public override string Name => "Healing";
 
     ActionManager action;
 
-    public State_Action_Cast(StateMachine_Action sm)
+    public State_Action_Healing(StateMachine_Action sm)
     {
         action = sm.action;
     }
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.gameObject.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {Name}");
 
         ToggleAllow(true);
     }

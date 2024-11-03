@@ -333,7 +333,7 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, string> TryAbilityEvent;
     public event Action<GameObject, string> AbilityEvent;
     public event Action<GameObject, AbilitySO> CastingEvent;
-    public event Action<GameObject, AbilitySO> CastEvent;
+    public event Action<GameObject, AbilitySlot> CastEvent;
     public event Action<GameObject, AbilitySO> CastReleasedEvent;
     public event Action<GameObject> CancelCastEvent;
     public event Action<GameObject> CastCancelledEvent;
@@ -350,9 +350,9 @@ public class EventManager : MonoBehaviour
     {
         CastingEvent?.Invoke(caster, abilitySO);
     }
-    public void OnCast(GameObject caster, AbilitySO abilitySO)
+    public void OnCast(GameObject caster, AbilitySlot slot)
     {
-        CastEvent?.Invoke(caster, abilitySO);
+        CastEvent?.Invoke(caster, slot);
     }
     public void OnCastReleased(GameObject caster, AbilitySO abilitySO)
     {

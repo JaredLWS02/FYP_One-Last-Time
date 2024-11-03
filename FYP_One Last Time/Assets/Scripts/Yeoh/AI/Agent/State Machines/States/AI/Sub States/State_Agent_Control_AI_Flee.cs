@@ -13,7 +13,7 @@ public class State_Agent_Control_AI_Flee : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{agent.gameObject.name} SubState: {Name}");
+        Debug.Log($"{agent.owner.name} SubState: {Name}");
 
         ToggleAllow(true);
     }
@@ -28,18 +28,18 @@ public class State_Agent_Control_AI_Flee : BaseState
             case "Wander": Wander(); break;
             default: Flee(); break;
         }
-
-        agent.FaceMoveDir();
     }
 
     void Wander()
     {
         agent.SetGoalToWander();
+        agent.FaceTarget();
     }
 
     void Flee()
     {
         agent.SetThreatToTarget();
+        agent.FaceMoveDir();
     }
 
     protected override void OnExit()

@@ -236,7 +236,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 7219920141440360494}
   m_StateMachineBehaviours:
-  - {fileID: 9056203912517883324}
+  - {fileID: 1064049159793291483}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: ParryLower
+  eventName: TryParryEnd
   triggerTime: 0
   triggerOnExit: 0
 --- !u!1101 &-873107679745913603
@@ -756,7 +756,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName: CastRelease
-  triggerTime: 0.662
+  triggerTime: 0.5
+  triggerOnExit: 0
+--- !u!114 &1064049159793291483
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: TryParryStart
+  triggerTime: 0
   triggerOnExit: 0
 --- !u!1101 &1064946948820603590
 AnimatorStateTransition:
@@ -956,7 +971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: ParryLowered
+  eventName: TryParryLowered
   triggerTime: 0.9
   triggerOnExit: 1
 --- !u!114 &3413680884303977211
@@ -1311,18 +1326,3 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &9056203912517883324
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventName: ParryRaise
-  triggerTime: 0
-  triggerOnExit: 0

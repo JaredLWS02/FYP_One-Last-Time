@@ -12,23 +12,20 @@ public class AbilitySlot
     // ============================================================================
 
     float cooldownLeft;
-
+    
     public void DoCooldown() => cooldownLeft = ability.cooldownTime;
+
+    public bool IsCooling() => cooldownLeft>0;
 
     public void UpdateCooldown()
     {
         if(IsCooling())
-        {
-            cooldownLeft -= Time.deltaTime;
+        cooldownLeft -= Time.deltaTime;
 
-            if(cooldownLeft<0)
-            cooldownLeft=0;
-        }
+        if(cooldownLeft<0) cooldownLeft=0;
     }
 
-    public bool IsCooling() => cooldownLeft>0;
-
-    public void ResetCooldown() => cooldownLeft=0;
+    public void CancelCooldown() => cooldownLeft=0;
 };
 
 // ============================================================================
@@ -37,7 +34,7 @@ public class AbilitySlot
 
 public class AbilityListSO : ScriptableObject
 {
-    public List<AbilitySlot> abilitySlots;
+    public List<AbilitySlot> abilitySlots = new();
 
     // Getters ============================================================================
 
@@ -127,11 +124,11 @@ public class AbilityListSO : ScriptableObject
         }
     }
 
-    public void ResetCooldowns()
+    public void CancelCooldowns()
     {
         foreach(var ability in abilitySlots)
         {
-            ability.ResetCooldown();
+            ability.CancelCooldown();
         }
     }
 

@@ -13,9 +13,11 @@ public class State_Agent_Control_AI_Seek : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{agent.gameObject.name} SubState: {Name}");
+        Debug.Log($"{agent.owner.name} SubState: {Name}");
 
         ToggleAllow(true);
+
+        agent.ExpandRadarRange();
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -58,6 +60,8 @@ public class State_Agent_Control_AI_Seek : BaseState
     protected override void OnExit()
     {
         ToggleAllow(false);
+
+        agent.RevertRadarRange();
     }
 
     void ToggleAllow(bool toggle)

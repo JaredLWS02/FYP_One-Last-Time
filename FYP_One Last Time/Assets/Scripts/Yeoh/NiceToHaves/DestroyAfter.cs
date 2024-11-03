@@ -12,7 +12,7 @@ public class DestroyAfter : MonoBehaviour
     public List<GameObject> shrinkObjects = new();
     public Vector3 shrinkTo = Vector3.zero;
     public float shrinkTime=.5f;
-    public bool ignoreTime;
+    public bool ignoreTimescale;
 
     // ==================================================================================================================
 
@@ -35,14 +35,14 @@ public class DestroyAfter : MonoBehaviour
     {
         float delay = Random.Range(destroyDelay.x, destroyDelay.y);
 
-        if(ignoreTime)
+        if(ignoreTimescale)
         yield return new WaitForSecondsRealtime(delay);
         else
         yield return new WaitForSeconds(delay);
 
         ShrinkAnim(shrinkTo, shrinkTime);
 
-        if(ignoreTime)
+        if(ignoreTimescale)
         yield return new WaitForSecondsRealtime(shrinkTime);
         else
         yield return new WaitForSeconds(shrinkTime);
@@ -54,7 +54,7 @@ public class DestroyAfter : MonoBehaviour
     {
         foreach(var obj in shrinkObjects)
         {
-            if(time>0) Tween.Scale(obj.transform, to, time, Ease.InOutSine, useUnscaledTime: ignoreTime);
+            if(time>0) Tween.Scale(obj.transform, to, time, Ease.InOutSine, useUnscaledTime: ignoreTimescale);
             else obj.transform.localScale = to;
         }
     }

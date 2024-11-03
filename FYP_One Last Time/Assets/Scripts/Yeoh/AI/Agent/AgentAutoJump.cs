@@ -15,8 +15,6 @@ public class AgentAutoJump : MonoBehaviour
     {
         // use custom movement instead
         agent.autoTraverseOffMeshLink = false;
-
-        UpdateCooldown();
     }
 
     void FixedUpdate()
@@ -68,7 +66,8 @@ public class AgentAutoJump : MonoBehaviour
         if(isJumping) return;
 
         if(IsCooling()) return;
-        DoCooldown();
+
+        if(ground && !ground.IsGrounded()) return;
 
         StartJump();
     }
@@ -167,33 +166,25 @@ public class AgentAutoJump : MonoBehaviour
         landAnim?.Play(owner);
         
         EventM.OnLandGround(owner);
+
+        DoCooldown();
     }
 
     // ============================================================================
 
+    [Header("After Land")]
+    public Timer cooldown;
     public float cooldownTime=.5f;
-    float cooldownLeft;
-    
-    void DoCooldown() => cooldownLeft = cooldownTime;
 
-    void UpdateCooldown()
-    {
-        // only tick down if not jumping
-        if(isJumping) return;
-        
-        cooldownLeft -= Time.deltaTime;
-
-        if(cooldownLeft<0) cooldownLeft=0;
-    }
-
-    bool IsCooling() => cooldownLeft>0;
-
-    void CancelCooldown() => cooldownLeft=0;
+    void DoCooldown() => cooldown?.StartTimer(cooldownTime);
+    bool IsCooling() => cooldown?.IsTicking() ?? false;
+    void CancelCooldown() => cooldown?.FinishTimer();
 
     // ============================================================================
     
     [Header("Optional")]
     public Rigidbody rb;
+    public GroundCheck ground;
 }
 
 // Tutorial by SunnyValleyStudio YouTube

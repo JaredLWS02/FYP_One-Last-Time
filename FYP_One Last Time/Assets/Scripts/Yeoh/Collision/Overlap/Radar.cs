@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class Radar : MonoBehaviour
 {
-    public OverlapScript overlap;
+    public SphereOverlap overlap;
 
     void OnEnable()
     {
-        overlap.EnterEvent += OnEnter;
-        overlap.ExitEvent += OnExit;
+        overlap.OverlapEnterEvent += OnOverlapEnter;
+        overlap.OverlapExitEvent += OnOverlapExit;
     }
     void OnDisable()
     {
-        overlap.EnterEvent -= OnEnter;
-        overlap.ExitEvent -= OnExit;
+        overlap.OverlapEnterEvent -= OnOverlapEnter;
+        overlap.OverlapExitEvent -= OnOverlapExit;
     }
 
     // ============================================================================
 
     public List<GameObject> targets = new();
 
-    void OnEnter(Collider other)
+    void OnOverlapEnter(Collider other)
     {
         if(!other) return;
         
@@ -34,7 +34,7 @@ public class Radar : MonoBehaviour
         targets.Add(target);
     }
 
-    void OnExit(Collider other)
+    void OnOverlapExit(Collider other)
     {
         if(!other) return;
 
@@ -98,5 +98,22 @@ public class Radar : MonoBehaviour
     void RemoveNulls(List<GameObject> list)
     {
         list.RemoveAll(item => item == null);
+    }
+
+    // ============================================================================
+
+    public void SetRadarRange(float to)
+    {
+        overlap.range = to;
+    }
+
+    public void MultiplyRadarRange(float mult)
+    {
+        SetRadarRange(overlap.base_range * mult);
+    }
+
+    public void RevertRadarRange()
+    {
+        overlap.range = overlap.base_range;
     }
 }

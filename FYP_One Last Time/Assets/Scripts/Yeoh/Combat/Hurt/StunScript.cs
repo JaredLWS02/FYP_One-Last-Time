@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StunScript : MonoBehaviour
+public class StunScript : BaseAction
 {
-    public GameObject owner;
-
-    // ============================================================================
-
     public AnimSO defaultStunAnim;
     AnimSO currentStunAnim;
 
@@ -35,8 +31,6 @@ public class StunScript : MonoBehaviour
 
     // ============================================================================
     
-    public bool isStunned {get; private set;}
-
     void OnStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
@@ -50,28 +44,11 @@ public class StunScript : MonoBehaviour
         currentStunAnim = hurtbox.customStunAnim ?
             hurtbox.customStunAnim : defaultStunAnim;
 
-        Stun();
+        Perform(currentStunAnim);
+        Anim3_ReleaseEnd();
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
     }
-
-    void Stun()
-    {
-        isStunned=true;
-        
-        currentStunAnim.Play(owner);
-    }
-    
-    // ============================================================================
-
-    // Anim Event
-    public void StunRecover()
-    {
-        isStunned=false;
-    }
-    // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
-    // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
-    // IF GOT ANY PLAY/CANCEL ANIM ON EXIT, IT WILL REPLACE IT
 
     // Cancel ============================================================================
 
@@ -79,10 +56,8 @@ public class StunScript : MonoBehaviour
     {
         if(who!=owner) return;
         
-        if(!isStunned) return;
+        if(!IsPerforming()) return;
 
-        StunRecover();
-
-        currentStunAnim.Cancel(owner);
+        CancelAnim();
     }
 }

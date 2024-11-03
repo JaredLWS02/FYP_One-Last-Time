@@ -13,7 +13,7 @@ public class State_Agent_Control_AI_Return : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{agent.gameObject.name} SubState: {Name}");
+        Debug.Log($"{agent.owner.name} SubState: {Name}");
 
         ToggleAllow(true);
     }

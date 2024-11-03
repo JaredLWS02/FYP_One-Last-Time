@@ -33,4 +33,18 @@ public class BoxOverlap : OverlapScript
         // Reset the Gizmos matrix to default
         Gizmos.matrix = Matrix4x4.identity;
     }
+
+    // ============================================================================
+
+    Vector3 base_size;
+
+    void Awake()
+    {
+        base_size = boxSize;
+    }
+
+    public void SetDefault()
+    {
+        boxSize = base_size;
+    }
 }

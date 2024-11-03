@@ -16,13 +16,13 @@ public class GroundCheck : MonoBehaviour
     {
         EventM = EventManager.Current;
 
-        overlap.FirstEnterEvent += OnFirstEnter;
-        overlap.LastExitEvent += OnLastExit;
+        overlap.OverlapFirstEnterEvent += OnFirstEnter;
+        overlap.OverlapLastExitEvent += OnLastExit;
     }
     void OnDisable()
     {
-        overlap.FirstEnterEvent -= OnFirstEnter;
-        overlap.LastExitEvent -= OnLastExit;
+        overlap.OverlapFirstEnterEvent -= OnFirstEnter;
+        overlap.OverlapLastExitEvent -= OnLastExit;
     }
 
     // ============================================================================

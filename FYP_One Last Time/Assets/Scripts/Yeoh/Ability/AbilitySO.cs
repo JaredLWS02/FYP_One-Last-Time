@@ -24,7 +24,7 @@ public class AbilitySO : ScriptableObject
 
     // ============================================================================
     
-    public bool HasEnoughMP(float budget)
+    public bool CanAfford(float budget)
     {
         return budget >= mpCost;
     }

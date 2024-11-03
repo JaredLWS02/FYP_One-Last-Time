@@ -74,13 +74,13 @@ public class OverlapScript : MonoBehaviour
             if(!previous_colliders.Contains(coll))
             {
                 OnOverlapFirstEnter(coll);
-                OnFirstEnter(coll);
-                uEvents.FirstEnter.Invoke();
+                OverlapFirstEnterEvent?.Invoke(coll);
+                uEvents.OverlapFirstEnter?.Invoke();
             }
 
             OnOverlapEnter(coll);
-            OnEnter(coll);
-            uEvents.Enter.Invoke();
+            OverlapEnterEvent?.Invoke(coll);
+            uEvents.OverlapEnter?.Invoke();
         }
     }
 
@@ -89,8 +89,8 @@ public class OverlapScript : MonoBehaviour
         if(IsOverlapping())
         {
             OnOverlapStay(current_colliders);
-            OnStay(current_colliders);
-            uEvents.Stay.Invoke();
+            OverlapStayEvent?.Invoke(current_colliders);
+            uEvents.OverlapStay?.Invoke();
         }
     }
 
@@ -102,14 +102,14 @@ public class OverlapScript : MonoBehaviour
             if(!current_colliders.Contains(prev))
             {
                 OnOverlapExit(prev);
-                OnExit(prev);
-                uEvents.Exit.Invoke();
+                OverlapExitEvent?.Invoke(prev);
+                uEvents.OverlapExit?.Invoke();
 
                 if(current_colliders.Count==0)
                 {
                     OnOverlapLastExit(prev);
-                    OnLastExit(prev);
-                    uEvents.LastExit.Invoke();
+                    OverlapLastExitEvent?.Invoke(prev);
+                    uEvents.OverlapLastExit?.Invoke();
                 }
             }
         }
@@ -119,65 +119,30 @@ public class OverlapScript : MonoBehaviour
 
     // ============================================================================
 
-    public virtual void OnOverlapFirstEnter(Collider other)
-    {
-    }
-
-    public virtual void OnOverlapEnter(Collider other)
-    {
-    }
-
-    public virtual void OnOverlapStay(List<Collider> others)
-    {
-    }
-    
-    public virtual void OnOverlapExit(Collider other)
-    {
-    }
-
-    public virtual void OnOverlapLastExit(Collider other)
-    {
-    }
+    public virtual void OnOverlapFirstEnter(Collider other){}
+    public virtual void OnOverlapEnter(Collider other){}
+    public virtual void OnOverlapStay(List<Collider> others){}
+    public virtual void OnOverlapExit(Collider other){}
+    public virtual void OnOverlapLastExit(Collider other){}
 
     // ============================================================================
 
-    public event Action<Collider> FirstEnterEvent;
-    public event Action<Collider> EnterEvent;
-    public event Action<List<Collider>> StayEvent;
-    public event Action<Collider> ExitEvent;
-    public event Action<Collider> LastExitEvent;
-
-    void OnFirstEnter(Collider other)
-    {
-        FirstEnterEvent?.Invoke(other);
-    }
-    void OnEnter(Collider other)
-    {
-        EnterEvent?.Invoke(other);
-    }
-    void OnStay(List<Collider> others)
-    {
-        StayEvent?.Invoke(others);
-    }
-    void OnExit(Collider other)
-    {
-        ExitEvent?.Invoke(other);
-    }
-    void OnLastExit(Collider other)
-    {
-        LastExitEvent?.Invoke(other);
-    }
+    public event Action<Collider> OverlapFirstEnterEvent;
+    public event Action<Collider> OverlapEnterEvent;
+    public event Action<List<Collider>> OverlapStayEvent;
+    public event Action<Collider> OverlapExitEvent;
+    public event Action<Collider> OverlapLastExitEvent;
     
     // ============================================================================
 
     [Serializable]
     public struct UEvents
     {
-        public UnityEvent FirstEnter;
-        public UnityEvent Enter;
-        public UnityEvent Stay;
-        public UnityEvent Exit;
-        public UnityEvent LastExit;
+        public UnityEvent OverlapFirstEnter;
+        public UnityEvent OverlapEnter;
+        public UnityEvent OverlapStay;
+        public UnityEvent OverlapExit;
+        public UnityEvent OverlapLastExit;
     }
     
     public UEvents uEvents;
@@ -196,8 +161,5 @@ public class OverlapScript : MonoBehaviour
 
     // ============================================================================
 
-    public bool IsOverlapping()
-    {
-        return current_colliders.Count > 0;
-    }
+    public bool IsOverlapping() => current_colliders.Count > 0;
 }

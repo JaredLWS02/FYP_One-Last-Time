@@ -2,85 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AbilityCaster))]
-
-public class HealAbility : MonoBehaviour
+public class HealAbility : BaseAbility
 {
-    public GameObject owner;
-    public HPManager hpM;    
-
-    // ============================================================================
-    
-    AbilityCaster caster;
-
-    void Awake()
-    {
-        caster = GetComponent<AbilityCaster>();
-    }
+    [Header("Heal Ability")]
+    public HPManager hpM;
     
     // ============================================================================
-
-    EventManager EventM;
-
-    void OnEnable()
-    {
-        EventM = EventManager.Current;
-        
-        EventM.AbilityEvent += OnAbility;
-        EventM.CastReleasedEvent += OnCastReleased;
-    }
-    void OnDisable()
-    {
-        EventM.AbilityEvent -= OnAbility;
-        EventM.CastReleasedEvent -= OnCastReleased;
-    }
-
-    // ============================================================================
     
-    [Header("Heal")]
-    public AbilitySO healSO;
-
-    void OnAbility(GameObject who, string ability_name)
+    public override void OnAnimReleaseStart()
     {
-        if(who!=owner) return;
-
-        if(ability_name != healSO.Name) return;
-
-        if(IsCasting()) return;
-
-        StartCasting();
-    }
-
-    void StartCasting()
-    {
-        caster.abilitySO = healSO;
-
-        caster.TryStartCasting();
-    }
-    
-    // ============================================================================
-
-    bool IsCasting()
-    {
-        return caster.IsCasting();
-    }
-
-    // ============================================================================
-
-    void OnCastReleased(GameObject caster, AbilitySO abilitySO)
-    {
-        if(caster!=owner) return;
-
-        if(abilitySO!=healSO) return;
-
         hpM.Add(abilitySO.magnitude);
 
-        TempVFX(abilitySO);
+        EventM.OnCastReleased(owner, abilitySO);
+
+        TempVFX();
     }
 
     // Move to vfx manager later ============================================================================
 
-    void TempVFX(AbilitySO abilitySO)
+    void TempVFX()
     {
         // flash green
         SpriteManager.Current.FlashColor(owner, -1, 1, -1);

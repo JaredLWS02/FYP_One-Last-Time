@@ -89,7 +89,6 @@ public class JumpScript : MonoBehaviour
     {
         UpdateExtraJumps();
         UpdateCoyoteTime();
-        UpdateCooldown();
     }
 
     // ============================================================================
@@ -139,25 +138,13 @@ public class JumpScript : MonoBehaviour
     
     // ============================================================================
 
-    [Header("Cooldown")]
-    public float jumpCooldown=.2f;
-    float cooldownLeft;
-    
-    void DoCooldown() => cooldownLeft = jumpCooldown;
+    [Header("After Jump")]
+    public Timer cooldown;
+    public float cooldownTime=.2f;
 
-    void UpdateCooldown()
-    {
-        cooldownLeft -= Time.deltaTime;
-
-        if(cooldownLeft<0) cooldownLeft=0;
-    }
-
-    bool IsCooling() => cooldownLeft>0;
-
-    void CancelCooldown() => cooldownLeft=0;
-
-
-
+    void DoCooldown() => cooldown?.StartTimer(cooldownTime);
+    bool IsCooling() => cooldown?.IsTicking() ?? false;
+    void CancelCooldown() => cooldown?.FinishTimer();
 
     // ============================================================================
     

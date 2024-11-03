@@ -145,6 +145,20 @@ public class AgentManager : MonoBehaviour
 
     // ============================================================================
     
+    public float expandRadarRangeMult = 1.5f;
+
+    public void ExpandRadarRange()
+    {
+        radar.MultiplyRadarRange(expandRadarRangeMult);
+    }
+
+    public void RevertRadarRange()
+    {
+        radar.RevertRadarRange();
+    }
+
+    // ============================================================================
+    
     [Header("Seek")]
     public bool allowSeek=true;
     public float seekArrivalRange=3;

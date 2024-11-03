@@ -46,7 +46,7 @@ public class Hurtbox : MonoBehaviour
 
         EventM.OnTryHurt(otherRb.gameObject, owner, new_hurtbox, contactPoint);
 
-        OnHit.Invoke();
+        uEvents.Hit?.Invoke();
 
         if(destroyOnHit) Destroy(gameObject);
     }
@@ -60,10 +60,14 @@ public class Hurtbox : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.HurtEvent += OnHurt;
+
+        EventM.AttackCancelledEvent += OnAttackCancelled;
     }
     void OnDisable()
     {
         EventM.HurtEvent -= OnHurt;
+
+        EventM.AttackCancelledEvent -= OnAttackCancelled;
     }
 
     // ============================================================================
@@ -78,7 +82,7 @@ public class Hurtbox : MonoBehaviour
         if(--hurtbox.pierceCount <= 0)
         ToggleColl(false); 
 
-        OnHurtt.Invoke();
+        uEvents.Hurt?.Invoke();
 
         if(destroyOnHurt) Destroy(gameObject);
     }   
@@ -87,8 +91,39 @@ public class Hurtbox : MonoBehaviour
     {
         coll.enabled = toggle;
     }
-    
+
     // ============================================================================
+
+    void OnAttackCancelled(GameObject who)
+    {
+        if(who!=owner) return;
+
+        ToggleColl(false);
+    }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct UEvents
+    {
+        public UnityEvent Hit;
+        public UnityEvent Hurt;
+    }
+    
+    public UEvents uEvents;
+
+    public bool destroyOnHit;
+    public bool destroyOnHurt;
+
+
+
+
+
+
+
+
+
+    // Old ============================================================================
 
     public void Blink(float time=.1f)
     {
@@ -107,12 +142,4 @@ public class Hurtbox : MonoBehaviour
         yield return new WaitForSeconds(t);
         ToggleColl(false);
     }
-
-    // ============================================================================
-
-    [Space]
-    public UnityEvent OnHit;
-    public bool destroyOnHit;
-    public UnityEvent OnHurtt;
-    public bool destroyOnHurt;
 }

@@ -46,18 +46,13 @@ public class AgentReturn : MonoBehaviour
         DoCooldown();
 
         // ignore if cant find a way back
-        if(!IsPathable(spawnpoint.position))
+        // or if still close to target
+        if(!IsPathable(spawnpoint.position) || CanStillChaseDown(chasedown_pos))
         {
             shouldReturn=false;
             return;
         }
-        // ignore if still close to target
-        else if(CanStillChaseDown(chasedown_pos))
-        {
-            shouldReturn=false;
-            return;
-        }
-        
+                
         shouldReturn = !IsNearSpawnpoint();
     }
 

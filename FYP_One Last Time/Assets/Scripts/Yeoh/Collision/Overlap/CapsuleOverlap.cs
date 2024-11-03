@@ -41,4 +41,21 @@ public class CapsuleOverlap : OverlapScript
         Gizmos.DrawWireSphere(point2, radius);
         Gizmos.DrawLine(point1, point2);
     }
+
+    // ============================================================================
+
+    float base_radius;
+    float base_height;
+
+    void Awake()
+    {
+        base_radius = radius;
+        base_height = height;
+    }
+
+    public void SetDefault()
+    {
+        radius = base_radius;
+        height = base_height;
+    }
 }

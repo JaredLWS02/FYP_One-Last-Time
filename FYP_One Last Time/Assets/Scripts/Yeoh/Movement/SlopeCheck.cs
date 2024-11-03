@@ -12,7 +12,7 @@ public class SlopeCheck : MonoBehaviour
     
     [Header("Ray")]
     public Transform rayOrigin;
-    public float rayLength=1;
+    public float rayLength=2;
     public LayerMask layers;
     RaycastHit rayHit;
     

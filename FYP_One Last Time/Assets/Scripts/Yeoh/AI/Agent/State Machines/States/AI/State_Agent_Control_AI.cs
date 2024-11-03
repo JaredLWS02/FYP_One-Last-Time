@@ -30,8 +30,8 @@ public class State_Agent_Control_AI : BaseState
         {
             if(
                 agent.allowWander &&
-                !agent.GetTarget() &&
-                !agent.ShouldReturn() //&&
+                !agent.GetTarget() //&&
+                //!agent.ShouldReturn() //&&
             ){
                 return true;
             }
@@ -43,8 +43,8 @@ public class State_Agent_Control_AI : BaseState
             if(
                 agent.allowSeek &&
                 agent.GetTarget() &&
-                !agent.ShouldFlee() &&
-                !agent.ShouldReturn() //&&
+                !agent.ShouldFlee() //&&
+                //!agent.ShouldReturn() //&&
             ){
                 return true;
             }
@@ -67,8 +67,8 @@ public class State_Agent_Control_AI : BaseState
         {
             if(
                 agent.allowReturn &&
-                !agent.ShouldFlee() &&
-                agent.ShouldReturn() //&&
+                !agent.ShouldFlee() //&&
+                //agent.ShouldReturn() //&&
             ){
                 return true;
             }
@@ -82,8 +82,8 @@ public class State_Agent_Control_AI : BaseState
         {
             if(
                 !agent.allowWander ||
-                agent.GetTarget() ||
-                agent.ShouldReturn() //||
+                agent.GetTarget() //||
+                //agent.ShouldReturn() //||
             ){
                 return true;
             }
@@ -95,8 +95,8 @@ public class State_Agent_Control_AI : BaseState
             if(
                 !agent.allowSeek ||
                 !agent.GetTarget() ||
-                agent.ShouldFlee() ||
-                agent.ShouldReturn() //||
+                agent.ShouldFlee() //||
+                //agent.ShouldReturn() //||
             ){
                 return true;
             }
@@ -119,8 +119,8 @@ public class State_Agent_Control_AI : BaseState
         {
             if(
                 !agent.allowReturn ||
-                agent.ShouldFlee() ||
-                agent.IsAtSpawnpoint() //||
+                agent.ShouldFlee() //||
+                //agent.IsAtSpawnpoint() //||
             ){
                 return true;
             }
@@ -136,7 +136,7 @@ public class State_Agent_Control_AI : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{agent.gameObject.name} State: {Name}");
+        Debug.Log($"{agent.owner.name} State: {Name}");
 
         ToggleAllow(true);
     }

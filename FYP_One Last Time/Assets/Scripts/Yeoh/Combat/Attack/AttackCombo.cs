@@ -31,11 +31,13 @@ public class AttackCombo : MonoBehaviour
 
         EventM.ComboEvent += OnCombo;
         EventM.AttackReleasedEvent += OnAttackReleased;
+        comboResetTimer.TimerFinishedEvent += OnComboResetTimerFinished;
     }
     void OnDisable()
     {
         EventM.ComboEvent -= OnCombo;
         EventM.AttackReleasedEvent -= OnAttackReleased;
+        comboResetTimer.TimerFinishedEvent -= OnComboResetTimerFinished;
     }
 
     // ============================================================================
@@ -59,7 +61,7 @@ public class AttackCombo : MonoBehaviour
 
     void DoCombo()
     {
-        RefillResetTime();
+        RefillComboResetTime();
 
         if(randomCombo)
         ChooseCombo(Random.Range(0, comboSteps.Count));
@@ -76,6 +78,10 @@ public class AttackCombo : MonoBehaviour
         attack.attackSO = step.attackSO;
         attack.attackPrefab = step.attackPrefab;
     }
+    
+    // ============================================================================
+    
+    bool IsAttacking() => attack.IsPerforming();
 
     // During Combo ============================================================================
 
@@ -100,81 +106,34 @@ public class AttackCombo : MonoBehaviour
             // cooldown before next combo
             DoComboCooldown();
         }
-    }    
+    }
+
+    void ResetCombo() => comboIndex=0;
         
     // ============================================================================
 
     void Update()
     {
-        UpdateResetTime();
-        UpdateComboCooldown();
+        comboResetTimer.canTick = !IsAttacking();
+        cooldown.canTick = !IsAttacking();
     }
 
     // ============================================================================
     
     [Header("During Combo")]
+    public Timer comboResetTimer;
     public float comboResetTime=.25f;
-    float comboResetTimeLeft;
     
-    void RefillResetTime()
-    {
-        comboResetTimeLeft = comboResetTime;
-    }
-
-    void UpdateResetTime()
-    {
-        // only tick down if not busy
-        if(IsAttacking()) return;
-
-        comboResetTimeLeft -= Time.deltaTime;
-
-        if(comboResetTimeLeft<=0)
-        {
-            comboResetTimeLeft=0;
-            ResetCombo();
-        }
-    }
-
-    void ResetCombo()
-    {
-        comboIndex=0;
-    }
-
-    // ============================================================================
-
-    bool IsAttacking()
-    {
-        return attack.IsAttacking();
-    }
+    void RefillComboResetTime() => comboResetTimer?.StartTimer(comboResetTime);
+    void OnComboResetTimerFinished() => ResetCombo();
 
     // ============================================================================
 
     [Header("After Combo")]
+    public Timer cooldown;
     public float comboCooldownTime=.25f;
-    float comboCooldownLeft;
-    
-    void DoComboCooldown()
-    {
-        comboCooldownLeft = comboCooldownTime;
-    }
 
-    void UpdateComboCooldown()
-    {
-        // only tick down if not busy
-        if(IsAttacking()) return;
-        
-        comboCooldownLeft -= Time.deltaTime;
-
-        if(comboCooldownLeft<0) comboCooldownLeft=0;
-    }
-
-    bool IsComboCooling()
-    {
-        return comboCooldownLeft>0;
-    }
-
-    void CancelComboCooldown()
-    {
-        comboCooldownLeft=0;
-    }
+    void DoComboCooldown() => cooldown?.StartTimer(comboCooldownTime);
+    bool IsComboCooling() => cooldown?.IsTicking() ?? false;
+    void CancelComboCooldown() => cooldown?.FinishTimer();
 }

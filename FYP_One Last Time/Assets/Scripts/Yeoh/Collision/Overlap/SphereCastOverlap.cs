@@ -46,4 +46,21 @@ public class SphereCastOverlap : OverlapScript
         Gizmos.DrawWireSphere(end, radius);
         Gizmos.DrawLine(start, end);
     }
+
+    // ============================================================================
+
+    float base_radius;
+    float base_length;
+
+    void Awake()
+    {
+        base_radius = radius;
+        base_length = length;
+    }
+
+    public void SetDefault()
+    {
+        radius = base_radius;
+        length = base_length;
+    }
 }
