@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BehaviourPhaseManager : MonoBehaviour
+public class PhaseBehaviourManager : MonoBehaviour
 {
     public GameObject owner;
     public HPManager hpM;
