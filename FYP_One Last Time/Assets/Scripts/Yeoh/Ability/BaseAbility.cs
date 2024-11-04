@@ -54,6 +54,10 @@ public class BaseAbility : BaseAction
 
     void OnCast(GameObject caster, AbilitySlot slot)
     {
+        if(caster!=owner) return;
+
+        if(slot.ability != abilitySO) return;
+
         if(IsPerforming()) return;
         // mp cost
         mpM.Deplete(slot.ability.mpCost);

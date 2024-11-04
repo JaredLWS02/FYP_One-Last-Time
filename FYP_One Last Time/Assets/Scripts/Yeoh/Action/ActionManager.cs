@@ -62,7 +62,6 @@ public class ActionManager : MonoBehaviour
 
     // ============================================================================
 
-
     void OnTryMove(GameObject who, Vector2 input)
     {
         if(who!=owner) return;
