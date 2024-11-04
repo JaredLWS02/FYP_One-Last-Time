@@ -68,6 +68,40 @@ public class EventManager : MonoBehaviour
     {
         RemoveInputBufferEvent?.Invoke(who, input_name);
     }
+
+    // Agent Controls ==================================================================================================================
+
+    public event Action<GameObject, Vector2> AgentTryMoveEvent;
+    public event Action<GameObject, float> AgentTryFlipEvent;
+    public event Action<GameObject> AgentTryJumpEvent;
+    public event Action<GameObject> AgentTryJumpCutEvent;
+    public event Action<GameObject, Vector3> AgentTryAutoJumpEvent;
+    public event Action<GameObject, string> AgentTryAttackEvent;
+
+    public void OnAgentTryMove(GameObject who, Vector2 input)
+    {
+        AgentTryMoveEvent?.Invoke(who, input);
+    }
+    public void OnAgentTryFlip(GameObject who, float dir_x)
+    {
+        AgentTryFlipEvent?.Invoke(who, dir_x);
+    }
+    public void OnAgentTryJump(GameObject who)
+    {
+        AgentTryJumpEvent?.Invoke(who);
+    }
+    public void OnAgentTryJumpCut(GameObject who)
+    {
+        AgentTryJumpCutEvent?.Invoke(who);
+    }
+    public void OnAgentTryAutoJump(GameObject who, Vector3 dir)
+    {
+        AgentTryAutoJumpEvent?.Invoke(who, dir);
+    }
+    public void OnAgentTryAttack(GameObject who, string type)
+    {
+        AgentTryAttackEvent?.Invoke(who, type);
+    }
     
     // Movement ==================================================================================================================
 
@@ -211,40 +245,6 @@ public class EventManager : MonoBehaviour
         DashCancelledEvent?.Invoke(who);
     }    
     
-    // Agent Controls ==================================================================================================================
-
-    public event Action<GameObject, Vector2> AgentTryMoveEvent;
-    public event Action<GameObject, float> AgentTryFlipEvent;
-    public event Action<GameObject> AgentTryJumpEvent;
-    public event Action<GameObject> AgentTryJumpCutEvent;
-    public event Action<GameObject, Vector3> AgentTryAutoJumpEvent;
-    public event Action<GameObject, string> AgentTryAttackEvent;
-
-    public void OnAgentTryMove(GameObject who, Vector2 input)
-    {
-        AgentTryMoveEvent?.Invoke(who, input);
-    }
-    public void OnAgentTryFlip(GameObject who, float dir_x)
-    {
-        AgentTryFlipEvent?.Invoke(who, dir_x);
-    }
-    public void OnAgentTryJump(GameObject who)
-    {
-        AgentTryJumpEvent?.Invoke(who);
-    }
-    public void OnAgentTryJumpCut(GameObject who)
-    {
-        AgentTryJumpCutEvent?.Invoke(who);
-    }
-    public void OnAgentTryAutoJump(GameObject who, Vector3 dir)
-    {
-        AgentTryAutoJumpEvent?.Invoke(who, dir);
-    }
-    public void OnAgentTryAttack(GameObject who, string type)
-    {
-        AgentTryAttackEvent?.Invoke(who, type);
-    }
-
     // Attacks and Combos ==================================================================================================================
 
     public event Action<GameObject, string> TryComboEvent;
@@ -448,6 +448,20 @@ public class EventManager : MonoBehaviour
         PlayAnimEvent?.Invoke(who, animName, animLayer, blendTime);
     }
 
+    // Boss ==================================================================================================================
+
+    public event Action<GameObject> ActionCompleteEvent;
+    public event Action<GameObject, string> PhaseChangeEvent;
+
+    public void OnActionComplete(GameObject who)
+    {
+        ActionCompleteEvent?.Invoke(who);
+    }
+    public void OnPhaseChanged(GameObject who, string phaseName)
+    {
+        PhaseChangeEvent?.Invoke(who, phaseName);
+    }
+    
     // UI ==================================================================================================================
 
     public event Action<GameObject, float, float> UIBarUpdateEvent;

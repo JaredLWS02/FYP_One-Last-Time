@@ -105,6 +105,8 @@ public class HPManager : MonoBehaviour
 
     public float GetHPPercent()
     {
+        if(hpMax<=0) return 0;
+        
         return hp/hpMax*100;
     }
 }
