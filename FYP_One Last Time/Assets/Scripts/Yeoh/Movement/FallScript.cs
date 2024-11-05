@@ -3,16 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class FallScript : MonoBehaviour
 {
-    Rigidbody rb;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    public Rigidbody rb;
     
     // ============================================================================
 
@@ -32,7 +25,6 @@ public class FallScript : MonoBehaviour
         UpdateMaxFall();
 
         UpdateDebug();
-
     }
 
     // ============================================================================
@@ -70,13 +62,13 @@ public class FallScript : MonoBehaviour
         if(!fastFallStarted && IsFastFalling())
         {
             fastFallStarted=true;
-            OnFastFallStart.Invoke();
+            uEvents.FastFallStart?.Invoke();
             EventM.OnFastFallStart(gameObject);
         }
         else if(fastFallStarted && !IsFalling())
         {
             fastFallStarted=false;
-            OnFastFallEnd.Invoke();
+            uEvents.FastFallEnd?.Invoke();
             EventM.OnFastFallEnd(gameObject);
         }
     }
@@ -95,6 +87,18 @@ public class FallScript : MonoBehaviour
             rb.velocity = new(rb.velocity.x, maxFallVelocity, rb.velocity.z);
         }
     }
+
+    // ============================================================================
+    
+    [System.Serializable]
+    public struct UEvents
+    {
+        public UnityEvent FastFallStart;
+        public UnityEvent FastFallEnd;
+    }
+    
+    [Header("Unity Events")]
+    public UEvents uEvents;
 
     // ============================================================================
 
@@ -116,10 +120,4 @@ public class FallScript : MonoBehaviour
         }
         return Mathf.Round(num * factor) / factor;
     }
-
-    // ============================================================================
-    
-    [Header("Events")]
-    public UnityEvent OnFastFallStart;
-    public UnityEvent OnFastFallEnd;
 }

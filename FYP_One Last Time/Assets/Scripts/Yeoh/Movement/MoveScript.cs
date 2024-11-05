@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using PrimeTween;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class MoveScript : MonoBehaviour
 {
-    [Header("Move Script")]
     public GameObject owner;
+    public Rigidbody rb;
     
     // ============================================================================
-    
-    Rigidbody rb;
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         baseSpeed = clamp = speed;
     }
 
     // ============================================================================
 
+    [Header("Move")]
     public float speed=10;
     public float clamp=10;
     [HideInInspector]
@@ -65,6 +61,9 @@ public class MoveScript : MonoBehaviour
     
     void Move(float speed, Vector3 direction)
     {
+        if(!IsGrounded()) return;
+        if(IsTooSteep()) return;
+
         direction.Normalize();
 
         float accelRate = Mathf.Abs(speed)>0 ? acceleration : deceleration; // use decelerate value if no input, and vice versa
@@ -131,6 +130,15 @@ public class MoveScript : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.AddForce(velocity, ForceMode.Impulse);
     }
+
+    // ============================================================================
+
+    [Header("Optional")]
+    public GroundCheck ground;
+    bool IsGrounded() => ground?.IsGrounded() ?? true;
+
+    public SlopeCheck slope;
+    bool IsTooSteep() => slope?.isTooSteep ?? false;
 
     // ============================================================================
 

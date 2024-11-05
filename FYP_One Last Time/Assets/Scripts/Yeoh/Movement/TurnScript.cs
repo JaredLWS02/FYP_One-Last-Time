@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TurnScript : MonoBehaviour
 {
-    [Header("Turn Script")]
     public GameObject owner;
 
     // ============================================================================
     
+    [Header("Turn")]
     public float turnSpeed=10;
     [HideInInspector]
     public float baseTurnSpeed;

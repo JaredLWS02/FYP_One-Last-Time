@@ -1,17 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
-[RequireComponent(typeof(Rigidbody))]
 
 public class HurtScript : MonoBehaviour
 {
-    Rigidbody rb;
-
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         maxPoise=poise;
     }
 
@@ -153,6 +147,8 @@ public class HurtScript : MonoBehaviour
     public float poise;
     float maxPoise;
 
+    public bool allowStun=true;
+
     public void HurtPoise(GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         poise -= hurtbox.damage;
@@ -191,7 +187,8 @@ public class HurtScript : MonoBehaviour
 
     // ============================================================================
 
-    public bool allowStun=true;
+    [Header("Knockback")]
+    public Rigidbody rb;
     public bool allowKnockback=true;
     public float knockbackMult=1;
 

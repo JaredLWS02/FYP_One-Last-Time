@@ -11,6 +11,7 @@ public enum PilotType
 
 public class Pilot : MonoBehaviour
 {
+    public GameObject owner;
     public PilotType currentPilot = PilotType.Player;  
 
     // ============================================================================
@@ -32,8 +33,7 @@ public class Pilot : MonoBehaviour
 
     void SwitchPilot(GameObject who, PilotType to)
     {
-        if(gameObject!=who) return;
-
+        if(who!=owner) return;
         currentPilot = to;
     }
 

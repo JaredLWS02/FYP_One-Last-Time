@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
+
 public class PakYaActionInputs : MonoBehaviour
 {
+    public GameObject owner;
     public Pilot pilot;
 
     // Move ============================================================================
@@ -15,8 +18,8 @@ public class PakYaActionInputs : MonoBehaviour
     {
         if(pilot.IsNone()) moveInput = Vector2.zero;
 
-        EventM.OnTryMove(gameObject, moveInput);
-        EventM.OnTryFlip(gameObject, moveInput.x);
+        EventM.OnTryMove(owner, moveInput);
+        EventM.OnTryFlip(owner, moveInput.x);
     }
 
     void OnInputMove(InputValue value)
@@ -28,6 +31,7 @@ public class PakYaActionInputs : MonoBehaviour
 
     // Jump ============================================================================
 
+    [Header("Input Buffers")]
     public float jumpBuffer=.2f;
 
     void OnInputJump(InputValue value)
@@ -38,11 +42,11 @@ public class PakYaActionInputs : MonoBehaviour
 
         if(jumpInput>0) //press
         {
-            EventM.OnAddInputBuffer(gameObject, "Jump", jumpBuffer);
+            EventM.OnAddInputBuffer(owner, "Jump", jumpBuffer);
         }
         else //release
         {
-            EventM.OnTryJumpCut(gameObject);
+            EventM.OnTryJumpCut(owner);
         }
     }
 
@@ -54,7 +58,7 @@ public class PakYaActionInputs : MonoBehaviour
     {
         if(!pilot.IsPlayer()) return;
 
-        EventM.OnAddInputBuffer(gameObject, "Dash", dashBuffer);
+        EventM.OnAddInputBuffer(owner, "Dash", dashBuffer);
     }
 
     // Attack ============================================================================
@@ -65,14 +69,14 @@ public class PakYaActionInputs : MonoBehaviour
     {
         if(!pilot.IsPlayer()) return;
 
-        EventM.OnAddInputBuffer(gameObject, "LightAttack", attackBuffer);
+        EventM.OnAddInputBuffer(owner, "LightAttack", attackBuffer);
     }
 
     void OnInputHeavyAttack()
     {
         if(!pilot.IsPlayer()) return;
 
-        EventM.OnAddInputBuffer(gameObject, "HeavyAttack", attackBuffer);
+        EventM.OnAddInputBuffer(owner, "HeavyAttack", attackBuffer);
     }
 
     // Parry ============================================================================
@@ -83,7 +87,7 @@ public class PakYaActionInputs : MonoBehaviour
     {
         if(!pilot.IsPlayer()) return;
 
-        EventM.OnAddInputBuffer(gameObject, "Parry", parryBuffer);
+        EventM.OnAddInputBuffer(owner, "Parry", parryBuffer);
     }
 
     // Ability ============================================================================
@@ -94,21 +98,21 @@ public class PakYaActionInputs : MonoBehaviour
     {
         if(!pilot.IsPlayer()) return;
 
-        EventM.OnAddInputBuffer(gameObject, "Ability1", abilityBuffer);
+        EventM.OnAddInputBuffer(owner, "Ability1", abilityBuffer);
     }
 
     void OnInputAbility2()
     {
         if(!pilot.IsPlayer()) return;
 
-        EventM.OnAddInputBuffer(gameObject, "Ability2", abilityBuffer);
+        EventM.OnAddInputBuffer(owner, "Ability2", abilityBuffer);
     }
 
     void OnInputAbility3()
     {
         if(!pilot.IsPlayer()) return;
 
-        EventM.OnAddInputBuffer(gameObject, "Ability3", abilityBuffer);
+        EventM.OnAddInputBuffer(owner, "Ability3", abilityBuffer);
     }
     
     // Input Buffer ============================================================================
@@ -150,35 +154,35 @@ public class PakYaActionInputs : MonoBehaviour
 
     void OnInputBuffering(GameObject who, string input_name)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         switch(input_name)
         {
-            case "Jump": EventM.OnTryJump(gameObject); break;
+            case "Jump": EventM.OnTryJump(owner); break;
 
-            case "Dash": EventM.OnTryDash(gameObject); break;
+            case "Dash": EventM.OnTryDash(owner); break;
 
             case "LightAttack":
             {
-                EventM.OnTryCombo(gameObject, "Light Combo");
-                EventM.OnTryRiposteCombo(gameObject, "Riposte Combo");
+                EventM.OnTryCombo(owner, "Light Combo");
+                EventM.OnTryRiposteCombo(owner, "Riposte Combo");
             }
             break;
 
             case "HeavyAttack":
             {
-                EventM.OnTryCombo(gameObject, "Heavy Combo");
-                EventM.OnTryRiposteCombo(gameObject, "Riposte Combo");
+                EventM.OnTryCombo(owner, "Heavy Combo");
+                EventM.OnTryRiposteCombo(owner, "Riposte Combo");
             }
             break;
 
-            case "Parry": EventM.OnTryRaiseParry(gameObject); break;
+            case "Parry": EventM.OnTryRaiseParry(owner); break;
 
-            case "Ability1": EventM.OnTryAbility(gameObject, "Heal"); break;
+            case "Ability1": EventM.OnTryAbility(owner, "Heal"); break;
 
-            case "Ability2": EventM.OnTryAbility(gameObject, "Heal"); break;
+            case "Ability2": EventM.OnTryAbility(owner, "Heal"); break;
 
-            case "Ability3": EventM.OnTryAbility(gameObject, "Heal"); break;
+            case "Ability3": EventM.OnTryAbility(owner, "Heal"); break;
         }
     }
 
@@ -186,71 +190,71 @@ public class PakYaActionInputs : MonoBehaviour
 
     void OnJumped(GameObject jumper)
     {
-        if(jumper!=gameObject) return;
+        if(jumper!=owner) return;
         
-        EventM.OnRemoveInputBuffer(gameObject, "Jump");
+        EventM.OnRemoveInputBuffer(owner, "Jump");
     }
     
     void OnDashed(GameObject who)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
         
-        EventM.OnRemoveInputBuffer(gameObject, "Dash");
+        EventM.OnRemoveInputBuffer(owner, "Dash");
     }
     
     void OnDashCancelled(GameObject who)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
         
-        EventM.OnRemoveInputBuffer(gameObject, "Dash");
+        EventM.OnRemoveInputBuffer(owner, "Dash");
     }
     
     void OnAttacked(GameObject attacker, AttackSO attackSO)
     {
-        if(attacker!=gameObject) return;
+        if(attacker!=owner) return;
 
-        EventM.OnRemoveInputBuffer(gameObject, "LightAttack");
-        EventM.OnRemoveInputBuffer(gameObject, "HeavyAttack");
+        EventM.OnRemoveInputBuffer(owner, "LightAttack");
+        EventM.OnRemoveInputBuffer(owner, "HeavyAttack");
     }
 
     void OnAttackCancelled(GameObject attacker)
     {
-        if(attacker!=gameObject) return;
+        if(attacker!=owner) return;
 
-        EventM.OnRemoveInputBuffer(gameObject, "LightAttack");
-        EventM.OnRemoveInputBuffer(gameObject, "HeavyAttack");
+        EventM.OnRemoveInputBuffer(owner, "LightAttack");
+        EventM.OnRemoveInputBuffer(owner, "HeavyAttack");
     }
 
     void OnRaisedParry(GameObject defender)
     {
-        if(defender!=gameObject) return;
+        if(defender!=owner) return;
 
-        EventM.OnRemoveInputBuffer(gameObject, "Parry");
+        EventM.OnRemoveInputBuffer(owner, "Parry");
     }
     
     void OnParryCancelled(GameObject defender)
     {
-        if(defender!=gameObject) return;
+        if(defender!=owner) return;
 
-        EventM.OnRemoveInputBuffer(gameObject, "Parry");
+        EventM.OnRemoveInputBuffer(owner, "Parry");
     }
 
     void OnCasting(GameObject caster, AbilitySO abilitySO)
     {
-        if(caster!=gameObject) return;
+        if(caster!=owner) return;
 
-        EventM.OnRemoveInputBuffer(gameObject, "Ability1");
-        EventM.OnRemoveInputBuffer(gameObject, "Ability2");
-        EventM.OnRemoveInputBuffer(gameObject, "Ability3");
+        EventM.OnRemoveInputBuffer(owner, "Ability1");
+        EventM.OnRemoveInputBuffer(owner, "Ability2");
+        EventM.OnRemoveInputBuffer(owner, "Ability3");
     }
 
     void OnCastCancelled(GameObject caster)
     {
-        if(caster!=gameObject) return;
+        if(caster!=owner) return;
 
-        EventM.OnRemoveInputBuffer(gameObject, "Ability1");
-        EventM.OnRemoveInputBuffer(gameObject, "Ability2");
-        EventM.OnRemoveInputBuffer(gameObject, "Ability3");
+        EventM.OnRemoveInputBuffer(owner, "Ability1");
+        EventM.OnRemoveInputBuffer(owner, "Ability2");
+        EventM.OnRemoveInputBuffer(owner, "Ability3");
     }
 
 }
