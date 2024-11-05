@@ -6,7 +6,6 @@ using UnityEngine;
 public class SequenceLoop
 {
     public List<string> options = new();
-
     public int index=0;
 
     // ============================================================================

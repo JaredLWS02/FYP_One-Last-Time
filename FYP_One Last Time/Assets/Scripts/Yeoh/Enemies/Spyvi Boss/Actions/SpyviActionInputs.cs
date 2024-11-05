@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentInputListener : MonoBehaviour
+public class SpyviActionInputs : MonoBehaviour
 {
     public GameObject owner;
     public Pilot pilot;
@@ -20,7 +20,6 @@ public class AgentInputListener : MonoBehaviour
         EventM.AgentTryJumpEvent += OnAgentTryJump;
         EventM.AgentTryJumpCutEvent += OnAgentTryJumpCut;
         EventM.AgentTryAutoJumpEvent += OnAgentTryAutoJump;
-        EventM.AgentTryAttackEvent += OnAgentTryAttack;
     }
     void OnDisable()
     {
@@ -29,7 +28,6 @@ public class AgentInputListener : MonoBehaviour
         EventM.AgentTryJumpEvent -= OnAgentTryJump;
         EventM.AgentTryJumpCutEvent -= OnAgentTryJumpCut;
         EventM.AgentTryAutoJumpEvent -= OnAgentTryAutoJump;
-        EventM.AgentTryAttackEvent -= OnAgentTryAttack;
     }
 
     // Move ============================================================================
@@ -90,14 +88,4 @@ public class AgentInputListener : MonoBehaviour
         EventM.OnTryAutoJump(owner, dir);
     }
 
-    // Attack ============================================================================
-
-    void OnAgentTryAttack(GameObject who, string type)
-    {
-        if(!pilot.IsAI()) return;
-
-        if(who!=owner) return;
-
-        EventM.OnTryCombo(owner, type);
-    }
 }

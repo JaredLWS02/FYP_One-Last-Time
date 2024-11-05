@@ -3,17 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Pilot))]
-
-public class PlayerInputListener : MonoBehaviour
+public class PakYaActionInputs : MonoBehaviour
 {
-    [HideInInspector]
     public Pilot pilot;
-
-    void Awake()
-    {
-        pilot = GetComponent<Pilot>();
-    }
 
     // Move ============================================================================
 

@@ -2189,7 +2189,7 @@ GameObject:
   - component: {fileID: 1683362768}
   - component: {fileID: 1683362767}
   m_Layer: 0
-  m_Name: Temp
+  m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2208,7 +2208,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 1683362766}
-  hpM: {fileID: 1060896139}
+  currentState: 0
+  anim: {fileID: 0}
+  uEvents:
+    WindUp:
+      m_PersistentCalls:
+        m_Calls: []
+    ReleaseStart:
+      m_PersistentCalls:
+        m_Calls: []
+    ReleaseEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    Recover:
+      m_PersistentCalls:
+        m_Calls: []
+    Cancel:
+      m_PersistentCalls:
+        m_Calls: []
   phases:
   - phaseName: Phase1
     loop:
@@ -2218,6 +2235,7 @@ MonoBehaviour:
       - Melee
       index: 0
     HPPercent: 100
+    phaseAnim: {fileID: 0}
   - phaseName: Phase2
     loop:
       options:
@@ -2233,6 +2251,7 @@ MonoBehaviour:
       - Melee
       index: 0
     HPPercent: 100
+    phaseAnim: {fileID: 0}
   - phaseName: Phase3
     loop:
       options:
@@ -2249,6 +2268,8 @@ MonoBehaviour:
       - Melee
       index: 0
     HPPercent: 100
+    phaseAnim: {fileID: 0}
+  hpM: {fileID: 1060896139}
 --- !u!4 &1683362768
 Transform:
   m_ObjectHideFlags: 0

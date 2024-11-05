@@ -2,60 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhaseScript : MonoBehaviour
+public class PhaseScript : BaseAction
 {
-    public GameObject owner;
-    public HPManager hpM;
-
-    // ============================================================================
-
     [System.Serializable]
     public class Phase
     {
         public string phaseName;
         public SequenceLoop loop;
         public float HPPercent=100;
+        public AnimSO phaseAnim;
     }
 
+    [Header("Phase Script")]
     public List<Phase> phases = new();
-
     int index=0;
 
     // ============================================================================
     
     Phase CurrentPhase() => phases[index];
-
     bool IsFirstPhase() => index <= 0;
-    bool IsLastPhase() => index >= phases.Count;
+    bool IsLastPhase() => index >= phases.Count-1;
 
     Phase GetNextPhase()
     {
         if(IsLastPhase()) return null;
-
         return phases[index+1];
     }
     Phase GetPrevPhase()
     {
         if(IsFirstPhase()) return null;
-
         return phases[index-1];
     }
+
+    // ============================================================================
     
-    float GetHPPercent(Phase phase)
-    {
-        if(phase==null) return float.NaN;
-
-        return phase.HPPercent;
-    }
-
+    SequenceLoop CurrentLoop() => CurrentPhase().loop;
+    public string CurrentBehaviour() => CurrentLoop().CurrentOption();
+    void NextBehaviour() => CurrentLoop().Next();
+    
+    // ============================================================================
+    
+    float GetHPPercent(Phase phase) => phase?.HPPercent ?? float.NaN;
     float CurrentHPPercent() => GetHPPercent(CurrentPhase());
     float NextHPPercent() => GetHPPercent(GetNextPhase());
     float PrevHPPercent() => GetHPPercent(GetPrevPhase());
 
-    SequenceLoop CurrentLoop() => CurrentPhase().loop;
+    // ============================================================================
 
-    public string CurrentBehaviour() => CurrentLoop().CurrentOption();
-    void NextBehaviour() => CurrentLoop().Next();
+    AnimSO CurrentPhaseAnim() => CurrentPhase()?.phaseAnim;
 
     // ============================================================================
 
@@ -66,6 +60,8 @@ public class PhaseScript : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.ActionCompleteEvent += OnActionComplete;
+
+        InvokeRepeating(nameof(SlowUpdate), 0, .5f);
     }
     void OnDisable()
     {
@@ -77,13 +73,14 @@ public class PhaseScript : MonoBehaviour
     void OnActionComplete(GameObject who)
     {
         if(who!=owner) return;
-
         NextBehaviour();
     }
 
     // ============================================================================
 
-    void Update()
+    public HPManager hpM;
+
+    void SlowUpdate()
     {
         CheckPhase();
     }
@@ -104,22 +101,30 @@ public class PhaseScript : MonoBehaviour
 
     void NextPhase()
     {
-        if(index >= phases.Count) return;
+        if(IsPerforming()) return;
+
+        if(IsLastPhase()) return;
 
         CurrentLoop().Reset();
 
         index++;
+
+        Perform(CurrentPhaseAnim());
 
         EventM.OnPhaseChanged(owner, CurrentPhase().phaseName);
     }
     
     void PrevPhase()
     {
-        if(index<=0) return;
+        if(IsPerforming()) return;
+
+        if(IsFirstPhase()) return;
 
         CurrentLoop().Reset();
 
         index--;
+
+        Perform(CurrentPhaseAnim());
 
         EventM.OnPhaseChanged(owner, CurrentPhase().phaseName);
     }
