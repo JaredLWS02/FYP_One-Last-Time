@@ -9,7 +9,6 @@ public class Settings : MonoBehaviour
 {
     public AudioMixer mixer;
     public TMP_Dropdown resolutionDropdown;
-    public GameObject displayMenu, audioMenu, controlsMenu;
     Resolution[] resolutions;
     private void Start()
     {
@@ -65,26 +64,5 @@ public class Settings : MonoBehaviour
     public void SetSFXVolume (float volume)
     {
         mixer.SetFloat("sfxVolume", volume);
-    }
-
-    public void showDisplay()
-    {
-        displayMenu.SetActive(true);
-        audioMenu.SetActive(false);
-        controlsMenu.SetActive(false);
-    }
-
-    public void showAudio()
-    {
-        displayMenu.SetActive(false);
-        audioMenu.SetActive(true);
-        controlsMenu.SetActive(false);
-    }
-
-    public void showControls()
-    {
-        displayMenu.SetActive(false);
-        audioMenu.SetActive(false);
-        controlsMenu.SetActive(true);
     }
 }

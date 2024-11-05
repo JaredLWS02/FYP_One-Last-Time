@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public enum Scenes // must be in the same order as in the build settings, and case sensitive
 {
+    Intro,
+    MainMenu,
     Yeoh1,
     LoseScene,
-    WinScene,
-    MainMenu,
+    WinScene
 }
 
 public class ScenesManager : MonoBehaviour

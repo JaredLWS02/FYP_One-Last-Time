@@ -123,6 +123,10 @@ public class SFXManager : MonoBehaviour
     // public AudioClip[] sfxHitFlesh;
     // public AudioClip[] voiceAlexHurt;
 
+    [Header("Main Menu UI")]
+    public AudioClip[] sfxUISelectButton;
+    public AudioClip[] sfxUIHoverButton;
+
     Dictionary<GameObject, AudioSource> soundLoops = new();
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
