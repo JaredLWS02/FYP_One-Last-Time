@@ -50,6 +50,8 @@ public class PhaseScript : BaseAction
     // ============================================================================
 
     AnimSO CurrentPhaseAnim() => CurrentPhase()?.phaseAnim;
+    AnimSO NextPhaseAnim() => GetNextPhase().phaseAnim;
+    AnimSO PrevPhaseAnim() => GetPrevPhase().phaseAnim;
 
     // ============================================================================
 
@@ -60,12 +62,12 @@ public class PhaseScript : BaseAction
         EventM = EventManager.Current;
         
         EventM.ActionCompleteEvent += OnActionComplete;
-
-        InvokeRepeating(nameof(SlowUpdate), 0, .5f);
+        EventM.TryChangePhaseEvent += OnTryChangePhase;
     }
     void OnDisable()
     {
         EventM.ActionCompleteEvent -= OnActionComplete;
+        EventM.TryChangePhaseEvent -= OnTryChangePhase;
     }
 
     // ============================================================================
@@ -80,13 +82,10 @@ public class PhaseScript : BaseAction
 
     public HPManager hpM;
 
-    void SlowUpdate()
+    void OnTryChangePhase(GameObject who)
     {
-        CheckPhase();
-    }
-
-    void CheckPhase()
-    {
+        if(who!=owner) return;
+        
         float hp = hpM.GetHPPercent();
 
         if(hp <= NextHPPercent())
@@ -99,33 +98,51 @@ public class PhaseScript : BaseAction
         }
     }
 
+    // ============================================================================
+    
+    int phase_direction = 1;
+
     void NextPhase()
     {
-        if(IsPerforming()) return;
-
         if(IsLastPhase()) return;
 
-        CurrentLoop().Reset();
+        if(IsPerforming()) return;
 
-        index++;
+        phase_direction = 1;
 
-        Perform(CurrentPhaseAnim());
-
-        EventM.OnPhaseChanged(owner, CurrentPhase().phaseName);
+        Perform(NextPhaseAnim());
     }
     
     void PrevPhase()
     {
-        if(IsPerforming()) return;
-
         if(IsFirstPhase()) return;
 
+        if(IsPerforming()) return;
+
+        phase_direction = -1;
+
+        Perform(PrevPhaseAnim());
+    }
+
+    // ============================================================================
+
+    public override void OnAnimRecover()
+    {
         CurrentLoop().Reset();
 
-        index--;
-
-        Perform(CurrentPhaseAnim());
+        index += phase_direction;
 
         EventM.OnPhaseChanged(owner, CurrentPhase().phaseName);
+    }
+
+    // Cancel ============================================================================
+
+    void OnCancelPhaseChange(GameObject who)
+    {
+        if(who!=owner) return;
+
+        if(!IsPerforming()) return;
+
+        CancelAnim();
     }
 }

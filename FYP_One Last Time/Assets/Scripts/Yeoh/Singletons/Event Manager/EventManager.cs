@@ -451,15 +451,20 @@ public class EventManager : MonoBehaviour
     // Boss ==================================================================================================================
 
     public event Action<GameObject> ActionCompleteEvent;
-    public event Action<GameObject, string> PhaseChangeEvent;
+    public event Action<GameObject> TryChangePhaseEvent;
+    public event Action<GameObject, string> PhaseChangedEvent;
 
     public void OnActionComplete(GameObject who)
     {
         ActionCompleteEvent?.Invoke(who);
     }
+    public void OnTryChangePhase(GameObject who)
+    {
+        TryChangePhaseEvent?.Invoke(who);
+    }
     public void OnPhaseChanged(GameObject who, string phaseName)
     {
-        PhaseChangeEvent?.Invoke(who, phaseName);
+        PhaseChangedEvent?.Invoke(who, phaseName);
     }
     
     // UI ==================================================================================================================

@@ -19,6 +19,10 @@ public class SpyviActions : MonoBehaviour
     public bool AllowHurt;
     public bool AllowStun;
 
+    [Header("Spyvi Toggles")]
+    public bool AllowPhase;
+    public bool AllowSpyviDash;
+
     // ============================================================================
 
     EventManager EventM;
@@ -35,6 +39,8 @@ public class SpyviActions : MonoBehaviour
         EventM.AutoJumpingEvent += OnAutoJumping;
         EventM.TryHurtEvent += OnTryHurt;
         EventM.TryStunEvent += OnTryStun;
+
+        InvokeRepeating(nameof(SlowUpdate), 0, .5f);
     }
     void OnDisable()
     {
@@ -46,7 +52,7 @@ public class SpyviActions : MonoBehaviour
         EventM.AutoJumpingEvent -= OnAutoJumping;
         EventM.TryHurtEvent -= OnTryHurt;
         EventM.TryStunEvent -= OnTryStun;
-    }
+    }    
 
     // ============================================================================
 
@@ -131,6 +137,19 @@ public class SpyviActions : MonoBehaviour
 
     // ============================================================================
 
+    void OnTrySpyviDash(GameObject who)
+    {
+        if(who!=owner) return;
+
+        if(!AllowSpyviDash) return;
+
+        if(CurrentBehaviour() != "Dash") return;
+
+        //EventM.OnSpyviDash();
+    }
+
+    // ============================================================================
+
     [Header("Check Action States")]
     // ?? operator means that if null, it will choose the other option
     // in this case, if null, choose false
@@ -142,4 +161,17 @@ public class SpyviActions : MonoBehaviour
     
     public StunScript stun;
     public bool IsStunned() => stun?.IsPerforming() ?? false;
+
+    public PhaseScript phase;
+    public bool IsPhasing() => phase?.IsPerforming() ?? false;
+
+    // ============================================================================
+
+    public string CurrentBehaviour() => phase.CurrentBehaviour();
+
+    void SlowUpdate()
+    {
+        if(AllowPhase)
+        EventM.OnTryChangePhase(owner);
+    }
 }
