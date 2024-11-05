@@ -1677,6 +1677,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5568401318979574577}
+  - component: {fileID: 7959191527398094115}
   - component: {fileID: 4583146008036901521}
   - component: {fileID: 4018727011482842599}
   m_Layer: 3
@@ -1706,6 +1707,24 @@ Transform:
   - {fileID: 98971669180264664}
   m_Father: {fileID: 4032536735459076646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7959191527398094115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7744259096066021052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b9aac1ad003b64bbc0555282a343ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pilot: {fileID: 4572757513184181502}
+  jumpBuffer: 0.2
+  dashBuffer: 0.2
+  attackBuffer: 0.2
+  parryBuffer: 0.2
+  abilityBuffer: 0.2
 --- !u!114 &4583146008036901521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,7 +1748,6 @@ MonoBehaviour:
   AllowHurt: 0
   AllowStun: 0
   ground: {fileID: 773448853722404963}
-  autoJump: {fileID: 0}
   dash: {fileID: 6281709897807071656}
   attack: {fileID: 7022457898630109682}
   tryParry: {fileID: 8037787176530487218}
@@ -1961,7 +1979,6 @@ GameObject:
   - component: {fileID: 1170332012420382783}
   - component: {fileID: 8412114488542826597}
   - component: {fileID: 4572757513184181502}
-  - component: {fileID: 2149238698398928101}
   - component: {fileID: 1905714820697627064}
   - component: {fileID: 3611210669050738406}
   - component: {fileID: 4368493988338249805}
@@ -2079,24 +2096,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPilot: 1
---- !u!114 &2149238698398928101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987163089559660572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1b9aac1ad003b64bbc0555282a343ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pilot: {fileID: 0}
-  jumpBuffer: 0.2
-  dashBuffer: 0.2
-  attackBuffer: 0.2
-  parryBuffer: 0.2
-  abilityBuffer: 0.2
 --- !u!114 &1905714820697627064
 MonoBehaviour:
   m_ObjectHideFlags: 0

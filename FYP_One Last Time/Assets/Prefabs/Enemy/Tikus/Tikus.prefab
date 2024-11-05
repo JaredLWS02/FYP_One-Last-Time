@@ -201,10 +201,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7959029595139826251}
-  - component: {fileID: 7566550702933038159}
+  - component: {fileID: 1957543827569210308}
   - component: {fileID: 1478645415520940421}
   - component: {fileID: 3731827293064252220}
-  - component: {fileID: 1957543827569210308}
   - component: {fileID: 4126835060992581792}
   - component: {fileID: 5642966628567456030}
   - component: {fileID: 3262543382017001155}
@@ -239,20 +238,28 @@ Transform:
   - {fileID: 3508486754713730256}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7566550702933038159
-MonoBehaviour:
+--- !u!195 &1957543827569210308
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772463966900613630}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876dd77094cbc024c87f3d40274ed561, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 5261146206814944013}
-  pilot: {fileID: 7015130824575028965}
+  m_AgentTypeID: 0
+  m_Radius: 1.1
+  m_Speed: 0
+  m_Acceleration: 0
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &1478645415520940421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,28 +312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
---- !u!195 &1957543827569210308
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772463966900613630}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 1.1
-  m_Speed: 0
-  m_Acceleration: 0
-  avoidancePriority: 50
-  m_AngularSpeed: 0
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.5
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &4126835060992581792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1119,8 +1104,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2961089990564272037}
-  - component: {fileID: 4094533758250832120}
-  - component: {fileID: 2906986384892081872}
+  - component: {fileID: 2035220173655765757}
+  - component: {fileID: 2005189343605618808}
+  - component: {fileID: 3422312068734313863}
   m_Layer: 3
   m_Name: Actions
   m_TagString: Untagged
@@ -1146,7 +1132,7 @@ Transform:
   - {fileID: 8449358400114368154}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4094533758250832120
+--- !u!114 &2035220173655765757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1155,29 +1141,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 4955684307425597312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3092a9006deb434e87f80713f612069, type: 3}
+  m_Script: {fileID: 11500000, guid: 876dd77094cbc024c87f3d40274ed561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  pilot: {fileID: 7015130824575028965}
+--- !u!114 &2005189343605618808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4955684307425597312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643c44e05cf4979439af8ca85d5a5e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
   AllowMoveX: 0
   AllowMoveY: 0
   AllowJump: 0
-  AllowDash: 0
+  AllowAutoJump: 0
   AllowAttack: 0
-  AllowParry: 0
-  AllowCast: 0
   AllowHurt: 0
   AllowStun: 0
   ground: {fileID: 4037544487675790279}
   autoJump: {fileID: 4300309323571415192}
-  dash: {fileID: 0}
   attack: {fileID: 6861530176262365675}
-  tryParry: {fileID: 0}
-  onParry: {fileID: 0}
-  riposte: {fileID: 0}
-  caster: {fileID: 0}
   stun: {fileID: 4272814330646281861}
---- !u!114 &2906986384892081872
+--- !u!114 &3422312068734313863
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1186,7 +1179,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4955684307425597312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f9f75b2fff009458593b8a88f11bb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d448da502bc0bf44983ca0725cd1359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   action: {fileID: 0}
