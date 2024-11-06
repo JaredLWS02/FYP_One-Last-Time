@@ -79,7 +79,35 @@ public class AgentFlee : MonoBehaviour
         }
         return owner.transform.position;
     }
+
+    // ============================================================================
     
+    public GameObject GetThreat() => threat.gameObject;
+
+    public void SetThreat(Transform target)
+    {
+        if(!target) return;
+        threat = target;
+        SetGoalToFlee();
+    }
+
+    public void SetThreat(GameObject target)
+    {
+        if(!target) return;
+        SetThreat(target.transform);
+    }
+
+    // ============================================================================
+    
+    [Header("Agent")]
+    public float fleeArrivalRange=1;
+
+    public void SetGoalToFlee()
+    {
+        vehicle.SetRange(fleeArrivalRange);
+        vehicle.SetGoal(fleeGoal);
+    }
+        
     // ============================================================================
     
     [Header("Debug")]
@@ -92,5 +120,6 @@ public class AgentFlee : MonoBehaviour
         
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireSphere(owner.transform.position, range);
+        Gizmos.DrawWireSphere(owner.transform.position, fleeArrivalRange);
     }
 }

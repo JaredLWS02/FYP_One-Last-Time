@@ -29,7 +29,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         idle.AddTransition(wander, (timeInState) =>
         {
             if(
-                agent.allowWander &&
+                agent.wander &&
                 !agent.GetTarget() //&&
                 //!agent.ShouldReturn() //&&
             ){
@@ -41,7 +41,6 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         idle.AddTransition(seek, (timeInState) =>
         {
             if(
-                agent.allowSeek &&
                 agent.GetTarget() &&
                 !agent.ShouldFlee() //&&
                 //!agent.ShouldReturn() //&&
@@ -54,7 +53,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         idle.AddTransition(flee, (timeInState) =>
         {
             if(
-                agent.allowFlee &&
+                agent.flee &&
                 agent.GetTarget() &&
                 agent.ShouldFlee() //&&
             ){
@@ -66,7 +65,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         idle.AddTransition(returnn, (timeInState) =>
         {
             if(
-                agent.allowReturn &&
+                agent.returner &&
                 !agent.ShouldFlee() //&&
                 //agent.ShouldReturn() //&&
             ){
@@ -81,7 +80,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         wander.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.allowWander ||
+                !agent.wander ||
                 agent.GetTarget() //||
                 //agent.ShouldReturn() //||
             ){
@@ -93,7 +92,6 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         seek.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.allowSeek ||
                 !agent.GetTarget() ||
                 agent.ShouldFlee() //||
                 //agent.ShouldReturn() //||
@@ -106,7 +104,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         flee.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.allowFlee ||
+                !agent.flee ||
                 !agent.GetTarget() ||
                 !agent.ShouldFlee() //||
             ){
@@ -118,7 +116,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         returnn.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.allowReturn ||
+                !agent.returner ||
                 agent.ShouldFlee() //||
                 //agent.IsAtSpawnpoint() //||
             ){

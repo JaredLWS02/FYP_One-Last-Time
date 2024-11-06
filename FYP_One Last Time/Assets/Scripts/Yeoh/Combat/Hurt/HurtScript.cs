@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class HurtScript : MonoBehaviour
 {
+    public GameObject owner;
+
+    // ============================================================================
+
     void Awake()
     {
         maxPoise=poise;
@@ -49,20 +53,20 @@ public class HurtScript : MonoBehaviour
 
     void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        if(victim!=gameObject) return;
+        if(victim!=owner) return;
         if(iframe) return;
 
         hp.Deplete(hurtbox.damage);
 
         if(hp.hp>0) // if still alive
         {
-            EventM.OnTryIFrame(gameObject, iframeSeconds);
+            EventM.OnTryIFrame(owner, iframeSeconds);
 
             HurtPoise(attacker, hurtbox, contactPoint);
         }
         else
         {
-            EventM.OnDeath(gameObject, attacker, hurtbox, contactPoint);
+            EventM.OnDeath(owner, attacker, hurtbox, contactPoint);
         }
     }
 
@@ -75,7 +79,7 @@ public class HurtScript : MonoBehaviour
 
     void OnTryIFrame(GameObject who, float duration)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(duration<=0) return;
 
@@ -92,14 +96,14 @@ public class HurtScript : MonoBehaviour
         if(colorFlicker)
         ToggleColorFlicker(true);
 
-        EventM.OnIFrameStart(gameObject);
+        EventM.OnIFrameStart(owner);
 
         yield return new WaitForSeconds(t);
 
         iframe=false;
         ToggleColorFlicker(false);
 
-        EventM.OnIFrameEnd(gameObject);
+        EventM.OnIFrameEnd(owner);
     }
 
     // ============================================================================
@@ -114,7 +118,7 @@ public class HurtScript : MonoBehaviour
 
         if(toggle) colorFlickering_crt = StartCoroutine(ColorFlickering());
 
-        else RevertColor(gameObject);
+        else RevertColor(owner);
     }
 
     Coroutine colorFlickering_crt;
@@ -123,9 +127,9 @@ public class HurtScript : MonoBehaviour
     {
         while(true)
         {
-            OffsetColor(gameObject, rgbOffset.x, rgbOffset.y, rgbOffset.z);
+            OffsetColor(owner, rgbOffset.x, rgbOffset.y, rgbOffset.z);
             yield return new WaitForSecondsRealtime(colorFlickerInterval);
-            RevertColor(gameObject);
+            RevertColor(owner);
             yield return new WaitForSecondsRealtime(colorFlickerInterval);
         }
     }
@@ -159,12 +163,12 @@ public class HurtScript : MonoBehaviour
         {
             poise = maxPoise; // reset poise
 
-            EventM.OnTryKnockback(gameObject, hurtbox.knockback, contactPoint);
+            EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
 
             if(allowStun && hurtbox.canStun)
-            EventM.OnTryStun(gameObject, attacker, hurtbox, contactPoint);
+            EventM.OnTryStun(owner, attacker, hurtbox, contactPoint);
 
-            EventM.OnPoiseBreak(gameObject, attacker, hurtbox, contactPoint);
+            EventM.OnPoiseBreak(owner, attacker, hurtbox, contactPoint);
         }
     }
 
@@ -194,7 +198,7 @@ public class HurtScript : MonoBehaviour
 
     public void OnTryKnockback(GameObject who, float force, Vector3 contactPoint)
     {
-        if(who!=gameObject) return;
+        if(who!=owner) return;
 
         if(!allowKnockback) return;
         if(knockbackMult==0) return;
@@ -218,17 +222,17 @@ public class HurtScript : MonoBehaviour
 
     void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        if(victim!=gameObject) return;
+        if(victim!=owner) return;
 
         StopAllCoroutines();
 
-        EventM.OnTryKnockback(gameObject, hurtbox.knockback, contactPoint);
+        EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
 
         iframe = iframeOnDeath;
 
-        RevertColor(gameObject);
+        RevertColor(owner);
 
         if(destroyOnDeath)
-        Destroy(gameObject);
+        Destroy(owner);
     }
 }

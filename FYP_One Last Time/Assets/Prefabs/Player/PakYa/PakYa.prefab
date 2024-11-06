@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcf04fc67a6eea47859fee489ef793d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
   hp: {fileID: 1861734953551003033}
   iframeSeconds: 0.5
   iframe: 0
@@ -2033,6 +2034,7 @@ MonoBehaviour:
   baseSpeed: 0
   acceleration: 10
   deceleration: 10
+  ground: {fileID: 0}
   slope: {fileID: 714563234870328098}
   velocity: 0
 --- !u!114 &4356934144492142455
@@ -2068,6 +2070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4494d85d82a9a7247bb6feb8f059a21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
   fastFall: 1
   minFastFallVelocity: -1

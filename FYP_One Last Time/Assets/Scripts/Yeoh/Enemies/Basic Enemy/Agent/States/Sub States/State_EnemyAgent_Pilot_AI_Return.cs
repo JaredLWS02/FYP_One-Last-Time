@@ -20,9 +20,9 @@ public class State_EnemyAgent_Pilot_AI_Return : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        agent.SetGoalToReturn();
+        agent.returner.SetGoalToReturn();
         
-        agent.FaceMoveDir();
+        agent.move.FaceMoveDir();
     }
 
     protected override void OnExit()

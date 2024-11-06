@@ -32,14 +32,14 @@ public class State_EnemyAgent_Pilot_AI_Flee : BaseState
 
     void Wander()
     {
-        agent.SetGoalToWander();
+        agent.wander.SetGoalToWander();
         agent.FaceTarget();
     }
 
     void Flee()
     {
         agent.SetThreatToTarget();
-        agent.FaceMoveDir();
+        agent.move.FaceMoveDir();
     }
 
     protected override void OnExit()

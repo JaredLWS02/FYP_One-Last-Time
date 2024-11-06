@@ -20,9 +20,9 @@ public class State_EnemyAgent_Pilot_AI_Wander : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        agent.SetGoalToWander();
+        agent.wander.SetGoalToWander();
 
-        agent.FaceMoveDir();
+        agent.move.FaceMoveDir();
     }
 
     protected override void OnExit()

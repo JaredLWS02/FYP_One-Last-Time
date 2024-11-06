@@ -140,10 +140,21 @@ public class AgentWander : MonoBehaviour
     }
 
     // ============================================================================
+    
+    [Header("Agent")]
+    public float wanderArrivalRange=1;
+
+    public void SetGoalToWander()
+    {
+        vehicle.SetRange(wanderArrivalRange);
+        vehicle.SetGoal(wanderGoal);
+    }
+    
+    // ============================================================================
 
     [Header("Debug")]
     public bool showGizmos;
-    public Color gizmoColor = Color.white;
+    public Color gizmoColor = new(1, 1, 1, .25f);
 
     void OnDrawGizmosSelected()
     {
@@ -155,5 +166,6 @@ public class AgentWander : MonoBehaviour
         
         Gizmos.color = gizmoColor;
         Gizmos.DrawWireSphere(pos, maxRangeFromStart);
+        Gizmos.DrawWireSphere(owner.transform.position, wanderArrivalRange);
     }
 }

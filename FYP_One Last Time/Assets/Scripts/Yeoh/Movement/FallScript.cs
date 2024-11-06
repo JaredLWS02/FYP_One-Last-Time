@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class FallScript : MonoBehaviour
 {
+    public GameObject owner;
     public Rigidbody rb;
     
     // ============================================================================
@@ -63,13 +64,13 @@ public class FallScript : MonoBehaviour
         {
             fastFallStarted=true;
             uEvents.FastFallStart?.Invoke();
-            EventM.OnFastFallStart(gameObject);
+            EventM.OnFastFallStart(owner);
         }
         else if(fastFallStarted && !IsFalling())
         {
             fastFallStarted=false;
             uEvents.FastFallEnd?.Invoke();
-            EventM.OnFastFallEnd(gameObject);
+            EventM.OnFastFallEnd(owner);
         }
     }
 

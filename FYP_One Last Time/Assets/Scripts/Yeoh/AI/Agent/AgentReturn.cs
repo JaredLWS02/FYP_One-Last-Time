@@ -7,6 +7,7 @@ public class AgentReturn : MonoBehaviour
 {
     public GameObject owner;
     public NavMeshAgent agent;
+    public AgentVehicle vehicle;
 
     // ============================================================================
     
@@ -77,9 +78,9 @@ public class AgentReturn : MonoBehaviour
         return IsInRange(spawnpoint.position, owner.transform.position, returnRange);
     }
 
-    public bool IsAtSpawnpoint(float stopping_range)
+    public bool IsAtSpawnpoint()
     {
-        return IsInRange(spawnpoint.position, owner.transform.position, stopping_range);
+        return IsInRange(spawnpoint.position, owner.transform.position, vehicle.stoppingRange);
     }
 
     // ============================================================================
@@ -101,12 +102,24 @@ public class AgentReturn : MonoBehaviour
     }
 
     // ============================================================================
+    
+    [Header("Agent")]
+    public float returnArrivalRange=1;
+
+    public void SetGoalToReturn()
+    {
+        vehicle.SetRange(returnArrivalRange);
+        vehicle.SetGoal(spawnpoint);
+    }
+    
+    // ============================================================================
 
     [Header("Debug")]
     public bool showGizmos;
 
     public bool showMaxChaseDownRangeGizmo = true;
     public bool showReturnRangeGizmo = true;
+    public bool showReturnArrivalRangeGizmo = true;
 
     public Color gizmoColor = new(1, 1, 1, .25f);
 
@@ -124,5 +137,8 @@ public class AgentReturn : MonoBehaviour
             Vector3 spawn_pos = Application.isPlaying ? spawnpoint.position : owner.transform.position;
             Gizmos.DrawWireSphere(spawn_pos, returnRange);
         }
+        
+        if(showReturnArrivalRangeGizmo)
+        Gizmos.DrawWireSphere(owner.transform.position, returnArrivalRange);
     }
 }

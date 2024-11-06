@@ -27,4 +27,29 @@ public class AgentSideMove : MonoBehaviour
 
         EventM.OnAgentTryMove(owner, moveInput);
     }
+
+    // Facing ============================================================================
+
+    public void FaceMoveDir()
+    {
+        float dot_x = Vector3.Dot(Vector3.right, vehicle.velocity);
+
+        EventM.OnAgentTryFlip(owner, dot_x);
+    }
+
+    public void FaceTarget(GameObject target)
+    {
+        if(!target) return;
+
+        Vector3 owner_to_target = (target.transform.position - owner.transform.position).normalized;
+
+        float dot_x = Vector3.Dot(Vector3.right, owner_to_target);
+
+        EventM.OnAgentTryFlip(owner, dot_x);
+    }
+
+    public void FaceGoal()
+    {
+        FaceTarget(vehicle.goal.gameObject);
+    }
 }
