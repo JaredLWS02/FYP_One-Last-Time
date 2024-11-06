@@ -20,9 +20,9 @@ public class State_EnemyAgent_Pilot_AI_Idle : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        agent.SetGoalToSelf();
+        agent.vehicle.SetGoalToSelf();
 
-        agent.FaceMoveDir();
+        agent.move.FaceMoveDir();
     }
 
     protected override void OnExit()

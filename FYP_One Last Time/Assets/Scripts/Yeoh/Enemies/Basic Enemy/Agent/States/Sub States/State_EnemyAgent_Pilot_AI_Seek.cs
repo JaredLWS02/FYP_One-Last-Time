@@ -17,7 +17,7 @@ public class State_EnemyAgent_Pilot_AI_Seek : BaseState
 
         ToggleAllow(true);
 
-        agent.ExpandRadarRange();
+        agent.radar.MultiplyRadarRange(agent.expandRadarRangeMult);
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -43,13 +43,13 @@ public class State_EnemyAgent_Pilot_AI_Seek : BaseState
         }
         else
         {
-            agent.SetGoalToSeek();
+            agent.SetGoalToTarget();
         }
     }
 
     void Wander()
     {
-        agent.SetGoalToWander();
+        agent.wander.SetGoalToWander();
     }
 
     void Flee()
@@ -61,7 +61,7 @@ public class State_EnemyAgent_Pilot_AI_Seek : BaseState
     {
         ToggleAllow(false);
 
-        agent.RevertRadarRange();
+        agent.radar.RevertRadarRange();
     }
 
     void ToggleAllow(bool toggle)

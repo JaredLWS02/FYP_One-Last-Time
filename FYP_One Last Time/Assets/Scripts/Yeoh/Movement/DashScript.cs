@@ -80,6 +80,7 @@ public class DashScript : BaseAction
     void FixedUpdate()
     {
         UpdateDashing();
+        UpdateGroundCheck();
     }
     
     void UpdateDashing()
@@ -157,14 +158,9 @@ public class DashScript : BaseAction
     public int dashCount=1;
     int dashesLeft;
 
-    void Start()
+    void Awake()
     {
         dashesLeft = dashCount;
-    }
-
-    void Update()
-    {
-        UpdateGroundCheck();
     }
 
     void UpdateGroundCheck()

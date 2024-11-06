@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4494d85d82a9a7247bb6feb8f059a21e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   rb: {fileID: 8915720888079556032}
   fastFall: 1
   minFastFallVelocity: -1
@@ -370,30 +371,18 @@ MonoBehaviour:
   owner: {fileID: 5261146206814944013}
   pilot: {fileID: 7015130824575028965}
   vehicle: {fileID: 293840219241273385}
-  allowWander: 1
+  move: {fileID: 5446114617604419300}
   wander: {fileID: 2178936604896462922}
-  wanderArrivalRange: 1
   radar: {fileID: 801440721258214197}
   targetTag: Player
   expandRadarRangeMult: 1.5
-  allowSeek: 1
-  seekArrivalRange: 3
-  maintainDistance: 3.46
+  targetArrivalRange: 3
   randomSeekBehaviour: {fileID: 1218149885779216908}
-  allowFlee: 1
   flee: {fileID: 3971028520478048224}
   hpM: {fileID: 704049436961937626}
   fleeHPPercent: 25
-  fleeArrivalRange: 1
   randomFleeBehaviour: {fileID: 1143411079413609873}
-  allowReturn: 1
   returner: {fileID: 8569300168571094313}
-  showGizmos: 0
-  gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
-  showWanderArrivalRangeGizmo: 1
-  showSeekArrivalRangeGizmo: 1
-  showMaintainDistanceGizmo: 1
-  showFleeArrivalRangeGizmo: 1
 --- !u!114 &3731827293064252220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +450,7 @@ MonoBehaviour:
   maxRetries: 1000
   axisMult: {x: 1, y: 1, z: 0}
   maxRangeFromStart: 30
+  wanderArrivalRange: 1
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.101960786}
 --- !u!1 &2035270443671090063
@@ -516,6 +506,7 @@ MonoBehaviour:
   threat: {fileID: 0}
   range: 10
   axisMult: {x: 1, y: 1, z: 0}
+  fleeArrivalRange: 1
   showGizmos: 0
   gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 0.5176471}
 --- !u!1 &2178405847841668163
@@ -638,10 +629,19 @@ MonoBehaviour:
   agent: {fileID: 1957543827569210308}
   move: {fileID: 2080831364828353911}
   turn: {fileID: 8663946442160230497}
+  goal: {fileID: 0}
   arrival: 1
   stoppingRange: 1
   slowingRangeOffset: 3
-  goal: {fileID: 0}
+  selfStoppingRange: 0.5
+  maintainDistance: 2
+  showGizmos: 0
+  showStoppingRangeGizmo: 1
+  stoppingRangeGizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
+  showSlowingRangeGizmo: 1
+  slowingRangeGizmoColor: {r: 1, g: 1, b: 0, a: 0.25}
+  showMaintainRangeGizmo: 1
+  maintainRangeGizmoColor: {r: 1, g: 0, b: 0, a: 0.25}
 --- !u!114 &5446114617604419300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,13 +1596,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
   agent: {fileID: 1957543827569210308}
+  vehicle: {fileID: 293840219241273385}
   spawnpoint: {fileID: 6462888529248085389}
   checkInterval: 0.5
   maxChaseDownRange: 7
   returnRange: 20
+  returnArrivalRange: 1
   showGizmos: 0
   showMaxChaseDownRangeGizmo: 1
   showReturnRangeGizmo: 1
+  showReturnArrivalRangeGizmo: 1
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
 --- !u!1 &6474750746548374229
 GameObject:
@@ -1944,6 +1947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcf04fc67a6eea47859fee489ef793d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
   hp: {fileID: 704049436961937626}
   iframeSeconds: 0.25
   iframe: 0
@@ -1970,6 +1974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d10c31cecf1996448b05dbdb04ab51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
 --- !u!114 &5138522953899574682
 MonoBehaviour:
   m_ObjectHideFlags: 0

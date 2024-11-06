@@ -29,7 +29,9 @@ public class AgentVehicle : MonoBehaviour
 
     void FixedUpdate()
     {
-        agent.destination = goal ? goal.position : owner.transform.position;
+        if(!goal) SetGoalToSelf();
+
+        agent.destination = goal.position;
 
         velocity = GetArrivalVelocity(agent.desiredVelocity);
 
@@ -40,6 +42,7 @@ public class AgentVehicle : MonoBehaviour
     // ============================================================================
 
     [Header("Arrival")]
+    public Transform goal;
     public bool arrival=true;
     public float stoppingRange=1;
     public float slowingRangeOffset=3;
@@ -65,6 +68,96 @@ public class AgentVehicle : MonoBehaviour
 
     // ============================================================================
 
+    public GameObject GetCurrentGoal() => goal.gameObject;
+
+    public void SetGoal(Transform target) => goal = target;
+
+    public void SetGoal(GameObject target)
+    {
+        if(target)
+        SetGoal(target.transform);
+    }
+
+    public void SetGoal(GameObject target, float range)
+    {
+        SetRange(range);
+        SetGoal(target);
+    }
+
+    [Header("Idle")]
+    public float selfStoppingRange=.5f;
+
+    public void SetGoalToSelf()
+    {
+        SetRange(selfStoppingRange);
+        SetGoal(owner);
+    }
+
+    // ============================================================================
+    
+    public float GetCurrentRange() => stoppingRange;
+
+    public void SetRange(float to) => stoppingRange = to;
+
+    public bool InRange(Vector3 from, Vector3 target, float range)
+    {
+        return Vector2.Distance(from, target) <= range;
+    }
+
+    public bool InRange(GameObject target, float range)
+    {
+        if(!target) return false;
+        return InRange(owner.transform.position, target.transform.position, range);
+    }
+
+    public bool InRange(GameObject target) => InRange(target, GetCurrentRange());
+
+    public bool InRange() => InRange(GetCurrentGoal(), GetCurrentRange());
+    
+    // ============================================================================
+
+    [Header("Check Too Close")]
+    public float maintainDistance=2;
+
+    public bool IsTooClose(GameObject target)
+    {
+        return InRange(target, maintainDistance);
+    }
+
+    // ============================================================================
+
     [Header("Debug")]
-    public Transform goal;
+    public bool showGizmos;
+
+    public bool showStoppingRangeGizmo=true;
+    public Color stoppingRangeGizmoColor = new(0, 1, 0, .25f);
+
+    public bool showSlowingRangeGizmo=true;
+    public Color slowingRangeGizmoColor = new(1, 1, 0, .25f);
+
+    public bool showMaintainRangeGizmo=true;
+    public Color maintainRangeGizmoColor = new(1, 0, 0, .25f);
+
+    void OnDrawGizmosSelected()
+    {
+        if(!showGizmos) return;
+
+        if(showStoppingRangeGizmo)
+        {
+            Gizmos.color = stoppingRangeGizmoColor;
+            Gizmos.DrawWireSphere(owner.transform.position, stoppingRange);
+        }
+
+        if(showSlowingRangeGizmo)
+        {
+            Gizmos.color = slowingRangeGizmoColor;
+            Gizmos.DrawWireSphere(owner.transform.position, stoppingRange+slowingRangeOffset);
+        }
+
+        if(showMaintainRangeGizmo)
+        {
+            Gizmos.color = maintainRangeGizmoColor;
+            Gizmos.DrawWireSphere(owner.transform.position, maintainDistance);
+        }
+    }
 }
