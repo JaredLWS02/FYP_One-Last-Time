@@ -4,53 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OverlapScript : MonoBehaviour
+public class OverlapScript : SlowUpdate
 {    
-    [Min(0)]
-    public float checkInterval=.5f;
-
-    void FixedUpdate()
-    {
-        if(checkInterval>0)
-        {
-            if(checking_crt==null)
-            {
-                checking_crt = StartCoroutine(Checking());
-            }
-        }
-        else
-        {
-            if(checking_crt!=null)
-            {
-                StopCoroutine(checking_crt);
-                checking_crt = null;
-            }
-
-            Check();
-        }
-    }
-
-    Coroutine checking_crt;
-
-    IEnumerator Checking()
-    {
-        while(checkInterval>0)
-        {
-            yield return new WaitForSeconds(checkInterval);
-            Check();
-        }
-    }
-
-    // ============================================================================
-    
-    [Space]
+    [Header("Overlap Script")]
     public bool ignoreTriggers=true;
     public bool onlyRigidbodies=true;
 
     List<Collider> previous_colliders = new();
     List<Collider> current_colliders = new();
 
-    void Check()
+    public override void OnSlowUpdate()
     {
         CheckOnEnter();
         CheckOnStay();
@@ -144,7 +107,7 @@ public class OverlapScript : MonoBehaviour
         public UnityEvent OverlapExit;
         public UnityEvent OverlapLastExit;
     }
-    
+    [Header("Unity Events")]
     public UEvents uEvents;
 
     // ============================================================================
