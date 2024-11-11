@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SphereCastOverlap : OverlapScript
+public class SphereCastOverlap : BaseOverlap
 {
     public Transform orientation;
 

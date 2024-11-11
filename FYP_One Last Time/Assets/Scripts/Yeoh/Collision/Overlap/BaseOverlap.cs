@@ -4,26 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OverlapScript : SlowUpdate
+public class BaseOverlap : SlowUpdate
 {    
     [Header("Overlap Script")]
     public bool ignoreTriggers=true;
     public bool onlyRigidbodies=true;
+
+    // ============================================================================
 
     List<Collider> previous_colliders = new();
     List<Collider> current_colliders = new();
 
     public override void OnSlowUpdate()
     {
+        current_colliders.Clear();
+
         CheckOnEnter();
         CheckOnStay();
         CheckOnExit();
+
+        // Update old to new to prepare for the next round
+        previous_colliders = new(current_colliders);
     }
 
     void CheckOnEnter()
     {
-        current_colliders.Clear();
-
         Collider[] colliders = GetOverlap();
 
         foreach(var coll in colliders)
@@ -38,12 +43,12 @@ public class OverlapScript : SlowUpdate
             {
                 OnOverlapFirstEnter(coll);
                 OverlapFirstEnterEvent?.Invoke(coll);
-                uEvents.OverlapFirstEnter?.Invoke();
+                uEvents.OverlapFirstEnter?.Invoke(coll);
             }
 
             OnOverlapEnter(coll);
             OverlapEnterEvent?.Invoke(coll);
-            uEvents.OverlapEnter?.Invoke();
+            uEvents.OverlapEnter?.Invoke(coll);
         }
     }
 
@@ -53,7 +58,7 @@ public class OverlapScript : SlowUpdate
         {
             OnOverlapStay(current_colliders);
             OverlapStayEvent?.Invoke(current_colliders);
-            uEvents.OverlapStay?.Invoke();
+            uEvents.OverlapStay?.Invoke(current_colliders);
         }
     }
 
@@ -66,18 +71,16 @@ public class OverlapScript : SlowUpdate
             {
                 OnOverlapExit(prev);
                 OverlapExitEvent?.Invoke(prev);
-                uEvents.OverlapExit?.Invoke();
+                uEvents.OverlapExit?.Invoke(prev);
 
                 if(current_colliders.Count==0)
                 {
                     OnOverlapLastExit(prev);
                     OverlapLastExitEvent?.Invoke(prev);
-                    uEvents.OverlapLastExit?.Invoke();
+                    uEvents.OverlapLastExit?.Invoke(prev);
                 }
             }
         }
-        // Update old to new to prepare for the next round
-        previous_colliders = new(current_colliders);
     }
 
     // ============================================================================
@@ -101,11 +104,11 @@ public class OverlapScript : SlowUpdate
     [Serializable]
     public struct UEvents
     {
-        public UnityEvent OverlapFirstEnter;
-        public UnityEvent OverlapEnter;
-        public UnityEvent OverlapStay;
-        public UnityEvent OverlapExit;
-        public UnityEvent OverlapLastExit;
+        public UnityEvent<Collider> OverlapFirstEnter;
+        public UnityEvent<Collider> OverlapEnter;
+        public UnityEvent<List<Collider>> OverlapStay;
+        public UnityEvent<Collider> OverlapExit;
+        public UnityEvent<Collider> OverlapLastExit;
     }
     [Header("Unity Events")]
     public UEvents uEvents;

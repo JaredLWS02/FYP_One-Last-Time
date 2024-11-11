@@ -10,7 +10,7 @@ public class GroundCheck : MonoBehaviour
     // ============================================================================
     
     EventManager EventM;
-    public OverlapScript overlap;
+    public BaseOverlap overlap;
 
     void OnEnable()
     {

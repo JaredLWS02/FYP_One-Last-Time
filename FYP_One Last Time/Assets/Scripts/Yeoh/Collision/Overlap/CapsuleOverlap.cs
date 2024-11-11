@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CapsuleOverlap : OverlapScript
+public class CapsuleOverlap : BaseOverlap
 {
     public Transform orientation;
 

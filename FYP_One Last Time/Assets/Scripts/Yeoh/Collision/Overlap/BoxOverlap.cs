@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxOverlap : OverlapScript
+public class BoxOverlap : BaseOverlap
 {
     public Vector3 boxSize = Vector3.one;
 
