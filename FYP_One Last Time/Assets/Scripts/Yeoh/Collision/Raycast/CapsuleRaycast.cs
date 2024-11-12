@@ -1,0 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CapsuleRaycast : BaseRaycast
+{
+    [Header("Capsule Cast")]
+    public float radius=1;
+    float base_radius;
+    public float height=1;
+    float base_height;
+
+    public override bool HasHitTarget(out GameObject target)
+    {
+        GetCapsule(rayOrigin.position, out var top, out var bottom);
+
+        if(Physics.CapsuleCast(top, bottom, radius, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
+        {
+            if(IsHitValid(out var hitObj))
+            {
+                target = hitObj;
+                return true;
+            }
+        }
+        target=null;
+        return false;
+    }
+
+    void GetCapsule(Vector3 pos, out Vector3 top, out Vector3 bottom)
+    {
+        top = pos + rayOrigin.up * height*.5f;
+        bottom = pos + -rayOrigin.up * height*.5f;
+    }
+
+    // ============================================================================
+    
+    public override void OnBaseAwake()
+    {
+        base_radius = radius;
+        base_height = height;
+    }
+
+    public override void OnSetDefault()
+    {
+        radius = base_radius;
+        height = base_height;
+    }
+
+    // ============================================================================
+        
+    public override void OnBaseDrawGizmos(Vector3 start, Vector3 end)
+    {
+        DrawWireCapsule(start);
+        DrawWireCapsule(end);
+
+        GetCapsule(start, out var top1, out var bottom1);
+        GetCapsule(end, out var top2, out var bottom2);
+        Gizmos.DrawLine(top1, top2);
+        Gizmos.DrawLine(bottom1, bottom2);
+    }
+
+    void DrawWireCapsule(Vector3 pos)
+    {
+        GetCapsule(pos, out var top, out var bottom);
+
+        Gizmos.DrawWireSphere(top, radius);
+        Gizmos.DrawWireSphere(bottom, radius);
+        Gizmos.DrawLine(top, bottom);
+    }
+}

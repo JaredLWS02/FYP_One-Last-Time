@@ -30,7 +30,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 agent.wander &&
-                !agent.GetTarget() //&&
+                !agent.CanSeeTarget() //&&
                 //!agent.ShouldReturn() //&&
             ){
                 return true;
@@ -41,7 +41,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         idle.AddTransition(seek, (timeInState) =>
         {
             if(
-                agent.GetTarget() &&
+                agent.CanSeeTarget() &&
                 !agent.ShouldFlee() //&&
                 //!agent.ShouldReturn() //&&
             ){
@@ -54,7 +54,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 agent.flee &&
-                agent.GetTarget() &&
+                agent.CanSeeTarget() &&
                 agent.ShouldFlee() //&&
             ){
                 return true;
@@ -81,7 +81,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 !agent.wander ||
-                agent.GetTarget() //||
+                agent.CanSeeTarget() //||
                 //agent.ShouldReturn() //||
             ){
                 return true;
@@ -92,7 +92,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         seek.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.GetTarget() ||
+                !agent.CanSeeTarget() ||
                 agent.ShouldFlee() //||
                 //agent.ShouldReturn() //||
             ){
@@ -105,7 +105,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 !agent.flee ||
-                !agent.GetTarget() ||
+                !agent.CanSeeTarget() ||
                 !agent.ShouldFlee() //||
             ){
                 return true;

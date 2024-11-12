@@ -21,41 +21,39 @@ public class Radar : MonoBehaviour
 
     public List<GameObject> targets = new();
 
-    void OnOverlapEnter(Collider other)
+    void OnOverlapEnter(GameObject who)
     {
-        if(!other) return;
+        if(!who) return;
         
-        Rigidbody rb = other.attachedRigidbody;
+        if(targets.Contains(who)) return;
 
-        GameObject target = rb ? rb.gameObject : other.gameObject;
-
-        if(targets.Contains(target)) return;
-
-        targets.Add(target);
+        targets.Add(who);
     }
 
-    void OnOverlapExit(Collider other)
+    void OnOverlapExit(GameObject who)
     {
-        if(!other) return;
+        if(!who) return;
 
-        Rigidbody rb = other.attachedRigidbody;
+        if(!targets.Contains(who)) return;
 
-        GameObject target = rb ? rb.gameObject : other.gameObject;
+        targets.Remove(who);
 
-        if(targets.Contains(target))
-        targets.Remove(rb ? rb.gameObject : other.gameObject);
+        if(who==closest) closest=null;
     }
 
     // ============================================================================
 
+    GameObject closest;
+
     public GameObject GetClosest(List<GameObject> objects)
     {
+        closest=null;
+
         if(objects.Count==0) return null;
 
-        GameObject closest = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach(var obj in objects) // go through all detected colliders
+        foreach(var obj in objects)
         {
             float distance = Vector3.Distance(obj.transform.position, transform.position);
 
@@ -68,13 +66,15 @@ public class Radar : MonoBehaviour
         return closest;
     }
 
+    List<GameObject> matches = new();
+
     public List<GameObject> GetTargetsWithTag(string tag)
     {
-        List<GameObject> matches = new();
+        matches.Clear();
 
         foreach(var target in targets)
         {
-            if(target && target.tag==tag)
+            if(target && target.CompareTag(tag))
             {
                 matches.Add(target);
             }
@@ -84,8 +84,8 @@ public class Radar : MonoBehaviour
 
     public GameObject GetClosestTargetWithTag(string tag)
     {
-        List<GameObject> targets = GetTargetsWithTag(tag);
-        return GetClosest(targets);
+        GetTargetsWithTag(tag);
+        return GetClosest(matches);
     }
 
     // ============================================================================
@@ -93,6 +93,7 @@ public class Radar : MonoBehaviour
     void Update()
     {
         RemoveNulls(targets);
+        RemoveNulls(matches);
     }
 
     void RemoveNulls(List<GameObject> list)

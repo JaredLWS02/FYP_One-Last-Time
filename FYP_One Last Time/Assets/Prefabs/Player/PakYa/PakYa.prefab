@@ -101,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4072668483182548298}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: SlashL Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 404301175344531863}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6199999, z: 1.7900012}
+  m_LocalPosition: {x: -0, y: 1.98, z: 0.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -597,7 +597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4164968904663650128}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Overhead Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ Transform:
   m_GameObject: {fileID: 3716384903569998901}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2099999, z: 2.5900002}
+  m_LocalPosition: {x: -0, y: 1.5, z: 2.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -741,7 +741,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3111472536248378137}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: SlashR Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +757,7 @@ Transform:
   m_GameObject: {fileID: 5832383311088423010}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.393, z: 1.2000003}
+  m_LocalPosition: {x: -0, y: 1.59, z: 1.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -934,6 +934,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkInterval: 0
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
   ignoreTriggers: 1
   onlyRigidbodies: 0
   uEvents:

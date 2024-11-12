@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class EnemyAgent : MonoBehaviour
@@ -34,6 +35,21 @@ public class EnemyAgent : MonoBehaviour
     public float expandRadarRangeMult = 1.5f;
 
     public GameObject GetTarget() => radar.GetClosestTargetWithTag(targetTag);
+
+    // ============================================================================
+    
+    [Header("Sight")]
+    public BaseRaycast sight;
+
+    public bool CanSeeTarget()
+    {
+        GameObject target = GetTarget();
+        if(!target) return false;
+
+        if(!sight) return true;
+
+        return sight.IsHitting(out var obj) && obj==target;
+    }
 
     // ============================================================================
     

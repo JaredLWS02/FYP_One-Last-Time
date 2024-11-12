@@ -46,7 +46,6 @@ public class JumpScript : MonoBehaviour
         else
         {
             DoExtraJump();
-            extraJumpAnim?.Play(owner);
         }
     }
 
@@ -113,6 +112,7 @@ public class JumpScript : MonoBehaviour
 
         extraJumpsLeft--;
         Jump();
+        extraJumpAnim?.Play(owner);
     }
 
     // ============================================================================

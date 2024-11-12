@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3861977753639729580}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.15, z: -0.53}
+  m_LocalPosition: {x: -0, y: 0, z: -0.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101,17 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0e50ac4e5d4d947af6c03178394b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtboxSO: {fileID: 11400000, guid: f2930533720def2418a131f273b2550b, type: 2}
-  enabledOnAwake: 1
   owner: {fileID: 0}
+  enabledOnAwake: 1
+  hurtboxSO: {fileID: 11400000, guid: f2930533720def2418a131f273b2550b, type: 2}
   hurtboxOrigin: {fileID: 3518109613385436397}
-  OnHit:
-    m_PersistentCalls:
-      m_Calls: []
+  uEvents:
+    Hit:
+      m_PersistentCalls:
+        m_Calls: []
+    Hurt:
+      m_PersistentCalls:
+        m_Calls: []
   destroyOnHit: 0
-  OnHurtt:
-    m_PersistentCalls:
-      m_Calls: []
   destroyOnHurt: 0
 --- !u!114 &2569137203683378439
 MonoBehaviour:
@@ -131,4 +132,4 @@ MonoBehaviour:
   - {fileID: 6110048730885984798}
   shrinkTo: {x: 0, y: 0, z: 0}
   shrinkTime: 0
-  ignoreTime: 0
+  ignoreTimescale: 0

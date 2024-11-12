@@ -21,7 +21,10 @@ public class SpyviActions : MonoBehaviour
 
     [Header("Spyvi Toggles")]
     public bool AllowPhase;
-    public bool AllowSpyviDash;
+    public bool AllowSpyviRush;
+
+    [Header("Keywords")]
+    public string rushKeyword="Rush";
 
     // ============================================================================
 
@@ -137,15 +140,15 @@ public class SpyviActions : MonoBehaviour
 
     // ============================================================================
 
-    void OnTrySpyviDash(GameObject who)
+    public void TrySpyviRush(GameObject who)
     {
         if(who!=owner) return;
 
-        if(!AllowSpyviDash) return;
+        if(!AllowSpyviRush) return;
 
-        if(CurrentBehaviour() != "Dash") return;
+        if(CurrentBehaviour() != rushKeyword) return;
 
-        //EventM.OnSpyviDash();
+        //EventM.OnSpyviRush();
     }
 
     // ============================================================================
