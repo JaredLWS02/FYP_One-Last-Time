@@ -31,7 +31,7 @@ public class GroundCheck : MonoBehaviour
     public AnimSO landAnim;
     //public float minLandVelocity = -1;
 
-    void OnFirstEnter(Collider other)
+    void OnFirstEnter(GameObject who)
     {
         // going down only
         //if(rb.velocity.y <= minLandVelocity)
@@ -43,7 +43,7 @@ public class GroundCheck : MonoBehaviour
         }
     }
 
-    void OnLastExit(Collider other)
+    void OnLastExit(GameObject who)
     {
         EventM.OnLeaveGround(owner);
     }

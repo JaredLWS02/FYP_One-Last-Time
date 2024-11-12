@@ -9,44 +9,10 @@ public class BaseRaycast : SlowUpdate
     [Header("Ray")]
     public Transform rayOrigin;
     public float range=5;
-    
+
     public LayerMask hitLayers;
     public LayerMask targetLayers;
-    //public List<string> targetLayerNames = new();
-    protected RaycastHit rayHit;
 
-    public bool ignoreTriggers=true;
-    public bool onlyRigidbodies;
-
-    [Header("Optional")]
-    public Transform target;
-
-    // ============================================================================
-    
-    public virtual bool HasHit()
-    {
-        return Physics.Raycast(rayOrigin.position, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore);
-    }
-
-    public Vector3 GetRayDir()
-    {
-        return target ?
-            (target.position - rayOrigin.position).normalized :
-            rayOrigin.forward;
-    }
-
-    // public bool IsInTargetLayer(GameObject who)
-    // {
-    //     // foreach(var layer_name in targetLayerNames)
-    //     // {
-    //     //     if(LayerMask.NameToLayer(layer_name) == who.layer)
-    //     //     {
-    //     //         return true;
-    //     //     }
-    //     // }
-    //     // return false;
-    // }
-    
     public bool IsInTargetLayer(GameObject who)
     {
         return (targetLayers & (1 << who.layer)) != 0;
@@ -54,8 +20,66 @@ public class BaseRaycast : SlowUpdate
 
     // ============================================================================
     
+    public virtual bool HasHitTarget(out GameObject target)
+    {
+        if(Physics.Raycast(rayOrigin.position, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
+        {
+            if(IsHitValid(out var hitObj))
+            {
+                target = hitObj;
+                return true;
+            }
+        }
+        target=null;
+        return false;
+    }
+
+    bool HasHitTarget()
+    {
+        return HasHitTarget(out var target);
+    }
+
+    // ============================================================================
+    
+    protected RaycastHit rayHit;
+    public bool ignoreTriggers=true;
+    public bool onlyRigidbodies;
+
+    protected bool IsHitValid(out GameObject hitObj)
+    {
+        Collider coll = rayHit.collider;
+
+        if(ignoreTriggers && coll.isTrigger)
+        {
+            hitObj=null;
+            return false;
+        }
+
+        Rigidbody rb = coll.attachedRigidbody;
+
+        if(onlyRigidbodies && !rb)
+        {
+            hitObj=null;
+            return false;
+        }
+
+        GameObject obj = rb ? rb.gameObject : coll.gameObject;
+
+        if(!IsInTargetLayer(obj))
+        {
+            hitObj=null;
+            return false;
+        }
+
+        hitObj=obj;
+        return true;
+    }
+
+    // ============================================================================
+    
     GameObject previous_hit = null;
     GameObject current_hit = null;
+    bool hasExited;
         
     public override void OnSlowUpdate()
     {
@@ -70,28 +94,26 @@ public class BaseRaycast : SlowUpdate
 
     void CheckHitEnter()
     {
-        if(!HasHit()) return;
+        if(!HasHitTarget(out var target)) return;
 
-        Collider coll = rayHit.collider;
-        if(ignoreTriggers && coll.isTrigger) return;
-
-        Rigidbody rb = coll.attachedRigidbody;
-        if(onlyRigidbodies && !rb) return;
-
-        GameObject hitObj = rb ? rb.gameObject : coll.gameObject;
-        if(!IsInTargetLayer(hitObj)) return;
-
-        current_hit = hitObj;
+        current_hit = target;
 
         if(previous_hit != current_hit)
         {
-            OnHitEnter(hitObj, rayHit);
-            HitEnterEvent?.Invoke(hitObj, rayHit);
-            uEvents.OnHitEnter?.Invoke(hitObj, rayHit);
+            OnHitEnter(target, rayHit);
+            HitEnterEvent?.Invoke(target, rayHit);
+            uEvents.OnHitEnter?.Invoke(target, rayHit);
             //Debug.Log("Hit Enter");
+
+            hasExited=false;
         }
     }
 
+    public bool IsHitting(out GameObject obj)
+    {
+        obj = current_hit;
+        return obj!=null;
+    }
     public bool IsHitting() => current_hit!=null;
     
     void CheckHitStay()
@@ -107,10 +129,10 @@ public class BaseRaycast : SlowUpdate
 
     void CheckHitExit()
     {
-        if(!previous_hit) return;
-
-        if(previous_hit != current_hit)
+        if(previous_hit != current_hit && !hasExited)
         {
+            hasExited=true;
+            
             OnHitExit(previous_hit, rayHit);
             HitExitEvent?.Invoke(previous_hit, rayHit);
             uEvents.OnHitExit?.Invoke(previous_hit, rayHit);
@@ -164,9 +186,22 @@ public class BaseRaycast : SlowUpdate
 
     // ============================================================================
     
+    [Header("Optional")]
+    public Transform target;
+    
+    public Vector3 GetRayDir()
+    {
+        return target ?
+            (target.position - rayOrigin.position).normalized :
+            rayOrigin.forward;
+    }
+
+    // ============================================================================
+    
     [Header("Debug")]
     public bool showGizmos = true;
-    public Color gizmosColor = new(0, 1, 0, .5f);
+    public Color gizmoColor = new(1, 1, 1, .5f);
+    public Color gizmoHitColor = new(0, 1, 0, .5f);
 
     void OnDrawGizmosSelected()
     {
@@ -176,7 +211,7 @@ public class BaseRaycast : SlowUpdate
         Vector3 start = rayOrigin.position;
         Vector3 end = start + GetRayDir() * range;
 
-        Gizmos.color = gizmosColor;
+        Gizmos.color = HasHitTarget() ? gizmoHitColor : gizmoColor;
         Gizmos.DrawLine(start, end);
 
         OnBaseDrawGizmos(start, end);

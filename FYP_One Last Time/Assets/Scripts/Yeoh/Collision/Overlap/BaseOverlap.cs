@@ -12,8 +12,8 @@ public class BaseOverlap : SlowUpdate
 
     // ============================================================================
 
-    List<Collider> previous_colliders = new();
-    List<Collider> current_colliders = new();
+    List<GameObject> previous_colliders = new();
+    List<GameObject> current_colliders = new();
 
     public override void OnSlowUpdate()
     {
@@ -34,21 +34,25 @@ public class BaseOverlap : SlowUpdate
         foreach(var coll in colliders)
         {
             if(ignoreTriggers && coll.isTrigger) continue;
-            if(onlyRigidbodies && !coll.attachedRigidbody) continue;
 
-            current_colliders.Add(coll);
+            Rigidbody rb = coll.attachedRigidbody;
+            if(onlyRigidbodies && !rb) continue;
+
+            GameObject obj = rb ? rb.gameObject : coll.gameObject;
+
+            current_colliders.Add(obj);
 
             // if present in current but missing in previous
-            if(!previous_colliders.Contains(coll))
+            if(!previous_colliders.Contains(obj))
             {
-                OnOverlapFirstEnter(coll);
-                OverlapFirstEnterEvent?.Invoke(coll);
-                uEvents.OverlapFirstEnter?.Invoke(coll);
+                OnOverlapFirstEnter(obj);
+                OverlapFirstEnterEvent?.Invoke(obj);
+                uEvents.OverlapFirstEnter?.Invoke(obj);
             }
 
-            OnOverlapEnter(coll);
-            OverlapEnterEvent?.Invoke(coll);
-            uEvents.OverlapEnter?.Invoke(coll);
+            OnOverlapEnter(obj);
+            OverlapEnterEvent?.Invoke(obj);
+            uEvents.OverlapEnter?.Invoke(obj);
         }
     }
 
@@ -67,7 +71,8 @@ public class BaseOverlap : SlowUpdate
         foreach(var prev in previous_colliders)
         {
             // if present in previous but missing in current
-            if(!current_colliders.Contains(prev))
+            // or its null because got destroyed
+            if(!current_colliders.Contains(prev) || !prev)
             {
                 OnOverlapExit(prev);
                 OverlapExitEvent?.Invoke(prev);
@@ -85,30 +90,30 @@ public class BaseOverlap : SlowUpdate
 
     // ============================================================================
 
-    public virtual void OnOverlapFirstEnter(Collider other){}
-    public virtual void OnOverlapEnter(Collider other){}
-    public virtual void OnOverlapStay(List<Collider> others){}
-    public virtual void OnOverlapExit(Collider other){}
-    public virtual void OnOverlapLastExit(Collider other){}
+    public virtual void OnOverlapFirstEnter(GameObject who){}
+    public virtual void OnOverlapEnter(GameObject who){}
+    public virtual void OnOverlapStay(List<GameObject> whos){}
+    public virtual void OnOverlapExit(GameObject who){}
+    public virtual void OnOverlapLastExit(GameObject who){}
 
     // ============================================================================
 
-    public event Action<Collider> OverlapFirstEnterEvent;
-    public event Action<Collider> OverlapEnterEvent;
-    public event Action<List<Collider>> OverlapStayEvent;
-    public event Action<Collider> OverlapExitEvent;
-    public event Action<Collider> OverlapLastExitEvent;
+    public event Action<GameObject> OverlapFirstEnterEvent;
+    public event Action<GameObject> OverlapEnterEvent;
+    public event Action<List<GameObject>> OverlapStayEvent;
+    public event Action<GameObject> OverlapExitEvent;
+    public event Action<GameObject> OverlapLastExitEvent;
     
     // ============================================================================
 
     [Serializable]
     public struct UEvents
     {
-        public UnityEvent<Collider> OverlapFirstEnter;
-        public UnityEvent<Collider> OverlapEnter;
-        public UnityEvent<List<Collider>> OverlapStay;
-        public UnityEvent<Collider> OverlapExit;
-        public UnityEvent<Collider> OverlapLastExit;
+        public UnityEvent<GameObject> OverlapFirstEnter;
+        public UnityEvent<GameObject> OverlapEnter;
+        public UnityEvent<List<GameObject>> OverlapStay;
+        public UnityEvent<GameObject> OverlapExit;
+        public UnityEvent<GameObject> OverlapLastExit;
     }
     [Header("Unity Events")]
     public UEvents uEvents;

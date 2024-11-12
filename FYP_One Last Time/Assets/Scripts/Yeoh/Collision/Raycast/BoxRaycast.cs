@@ -8,9 +8,18 @@ public class BoxRaycast : BaseRaycast
     public Vector3 size = Vector3.one;
     Vector3 base_size;
 
-    public override bool HasHit()
+    public override bool HasHitTarget(out GameObject target)
     {
-        return Physics.BoxCast(rayOrigin.position, size*.5f, GetRayDir(), out rayHit, rayOrigin.rotation, range, hitLayers, QueryTriggerInteraction.Ignore);
+        if(Physics.BoxCast(rayOrigin.position, size*.5f, GetRayDir(), out rayHit, rayOrigin.rotation, range, hitLayers, QueryTriggerInteraction.Ignore))
+        {
+            if(IsHitValid(out var hitObj))
+            {
+                target = hitObj;
+                return true;
+            }
+        }
+        target=null;
+        return false;
     }
 
     // ============================================================================

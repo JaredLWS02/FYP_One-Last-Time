@@ -21,6 +21,14 @@ public class AgentAttack : MonoBehaviour
 
     public void Attack()
     {
+        if(CanSeeTarget())
         EventM.OnAgentTryAttack(owner, attackName);
     }
+
+    // ============================================================================
+    
+    [Header("Sight")]
+    public BaseRaycast sight;
+    public bool CanSeeTarget() => sight?.IsHitting() ?? true;
+
 }
