@@ -35,8 +35,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
         State_PakYaActions_AttackReleasing attackReleasing = new(this);
         State_PakYaActions_TryingToParry tryingToParry = new(this);
         State_PakYaActions_Parrying parrying = new(this);
-        State_PakYaActions_Casting casting = new(this);
-        State_PakYaActions_HealAbility healAbility = new(this);
         State_PakYaActions_Stunned stunned = new(this);
 
         // HUB TRANSITIONS ================================================================================
@@ -50,8 +48,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 !action.IsReleasingAttack() &&
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
-                !action.IsCasting() &&
-                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -68,8 +64,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 !action.IsReleasingAttack() &&
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
-                !action.IsCasting() &&
-                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -85,8 +79,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 !action.IsReleasingAttack() &&
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
-                !action.IsCasting() &&
-                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -102,8 +94,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 !action.IsReleasingAttack() &&
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
-                !action.IsCasting() &&
-                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -119,8 +109,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 action.IsReleasingAttack() &&
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
-                !action.IsCasting() &&
-                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -136,8 +124,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 !action.IsReleasingAttack() &&
                 action.IsTryingToParry() &&
                 !action.IsParrying() &&
-                !action.IsCasting() &&
-                !action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -153,42 +139,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 !action.IsReleasingAttack() &&
                 !action.IsTryingToParry() &&
                 action.IsParrying() &&
-                !action.IsCasting() &&
-                !action.IsHealing() &&
-                !action.IsStunned() //&&
-            ){
-                return true;
-            }
-            return false;
-        });
-                
-        hub.AddTransition(casting, (timeInState) =>
-        {
-            if(
-                !action.IsDashing() &&
-                !action.IsWindingUpAttack() &&
-                !action.IsReleasingAttack() &&
-                !action.IsTryingToParry() &&
-                !action.IsParrying() &&
-                action.IsCasting() &&
-                !action.IsHealing() &&
-                !action.IsStunned() //&&
-            ){
-                return true;
-            }
-            return false;
-        });
-                
-        hub.AddTransition(healAbility, (timeInState) =>
-        {
-            if(
-                !action.IsDashing() &&
-                !action.IsWindingUpAttack() &&
-                !action.IsReleasingAttack() &&
-                !action.IsTryingToParry() &&
-                !action.IsParrying() &&
-                !action.IsCasting() &&
-                action.IsHealing() &&
                 !action.IsStunned() //&&
             ){
                 return true;
@@ -204,8 +154,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 !action.IsReleasingAttack() &&
                 !action.IsTryingToParry() &&
                 !action.IsParrying() &&
-                !action.IsCasting() &&
-                !action.IsHealing() &&
                 action.IsStunned() //&&
             ){
                 return true;
@@ -224,8 +172,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 action.IsReleasingAttack() ||
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
-                action.IsCasting() ||
-                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -242,8 +188,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 action.IsReleasingAttack() ||
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
-                action.IsCasting() ||
-                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -259,8 +203,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 action.IsReleasingAttack() ||
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
-                action.IsCasting() ||
-                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -276,8 +218,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 action.IsReleasingAttack() ||
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
-                action.IsCasting() ||
-                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -293,8 +233,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 !action.IsReleasingAttack() ||
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
-                action.IsCasting() ||
-                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -310,8 +248,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 action.IsReleasingAttack() ||
                 !action.IsTryingToParry() ||
                 action.IsParrying() ||
-                action.IsCasting() ||
-                action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -327,42 +263,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 action.IsReleasingAttack() ||
                 action.IsTryingToParry() ||
                 !action.IsParrying() ||
-                action.IsCasting() ||
-                action.IsHealing() ||
-                action.IsStunned() //||
-            ){
-                return true;
-            }
-            return false;
-        });
-
-        casting.AddTransition(hub, (timeInState) =>
-        {
-            if(
-                action.IsDashing() ||
-                action.IsWindingUpAttack() ||
-                action.IsReleasingAttack() ||
-                action.IsTryingToParry() ||
-                action.IsParrying() ||
-                !action.IsCasting() ||
-                action.IsHealing() ||
-                action.IsStunned() //||
-            ){
-                return true;
-            }
-            return false;
-        });
-
-        healAbility.AddTransition(hub, (timeInState) =>
-        {
-            if(
-                action.IsDashing() ||
-                action.IsWindingUpAttack() ||
-                action.IsReleasingAttack() ||
-                action.IsTryingToParry() ||
-                action.IsParrying() ||
-                action.IsCasting() ||
-                !action.IsHealing() ||
                 action.IsStunned() //||
             ){
                 return true;
@@ -378,8 +278,6 @@ public class StateMachine_PakYaActions : MonoBehaviour
                 action.IsReleasingAttack() ||
                 action.IsTryingToParry() ||
                 action.IsParrying() ||
-                action.IsCasting() ||
-                action.IsHealing() ||
                 !action.IsStunned() //||
             ){
                 return true;

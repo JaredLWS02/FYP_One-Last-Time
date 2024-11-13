@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class BufferedInput
 {
     public string inputName;
@@ -15,15 +16,9 @@ public class BufferedInput
         DoBuffer(buffer_time);
     }
 
-    public void DoBuffer(float buffer_time)
-    {
-        bufferLeft = buffer_time;
-    }
+    public void DoBuffer(float buffer_time) => bufferLeft = buffer_time;
 
-    public void UpdateBuffer()
-    {
-        bufferLeft -= Time.deltaTime;
-    }
+    public void UpdateBuffer() => bufferLeft -= Time.deltaTime;
 
     public bool HasBuffer() => bufferLeft>0;
 }
@@ -32,35 +27,14 @@ public class BufferedInput
 
 public class InputBuffer : MonoBehaviour
 {
-    public GameObject owner;
-
-    // ============================================================================
-    
-    EventManager EventM;
-
-    void OnEnable()
-    {
-        EventM = EventManager.Current;
-
-        EventM.AddInputBufferEvent += OnAddBuffer;
-        EventM.RemoveInputBufferEvent += OnRemoveBuffer;
-    }
-    void OnDisable()
-    {
-        EventM.AddInputBufferEvent -= OnAddBuffer;
-        EventM.RemoveInputBufferEvent -= OnRemoveBuffer;
-    }
-    
-    // ============================================================================
-    
+    [Header("Debug")]
     public List<BufferedInput> inputs = new();
 
-    void OnAddBuffer(GameObject who, string input_name, float buffer_time)
+    public void AddBuffer(string input_name, float buffer_time)
     {
-        if(who!=owner) return;
-
         if(HasAction(input_name, out var input))
         {
+            // refill buffer if already got
             input.DoBuffer(buffer_time);
         }        
         else
@@ -85,13 +59,15 @@ public class InputBuffer : MonoBehaviour
     
     // ============================================================================
 
+    public event Action<string> InputBufferingEvent;
+
     List<BufferedInput> inputsToRemove = new();
 
     void Update()
     {
         foreach(var input in inputs)
         {
-            EventM.OnInputBuffering(owner, input.inputName);
+            InputBufferingEvent?.Invoke(input.inputName);
             
             input.UpdateBuffer();
 
@@ -111,10 +87,8 @@ public class InputBuffer : MonoBehaviour
         inputsToRemove.Clear();
     }
 
-    void OnRemoveBuffer(GameObject who, string input_name)
+    public void RemoveBuffer(string input_name)
     {
-        if(who!=owner) return;
-
         if(HasAction(input_name, out var input))
         {
             // temp list to mark actions for removal

@@ -46,7 +46,7 @@ public class TryParryScript : BaseAction
         // action cancelling
         EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
-        EventM.OnCancelCast(owner);
+        //EventM.OnCancelCast(owner);
         EventM.OnCancelStun(owner);
 
         Perform(raiseParryAnim);
