@@ -18,6 +18,7 @@ public class BaseAction : MonoBehaviour
         Recovering,
     }
 
+    [Header("Action")]
     public State currentState = State.None;
 
     public bool IsWindingUp() => currentState == State.WindingUp;
@@ -104,6 +105,7 @@ public class BaseAction : MonoBehaviour
     {
         if(!IsPerforming()) return;
 
+        Anim3_ReleaseEnd();
         Anim4_Recover();
 
         anim?.Cancel(owner);

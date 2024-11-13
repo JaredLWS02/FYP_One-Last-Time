@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3861977753639729580}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.13, z: -0.92}
+  m_LocalPosition: {x: -0, y: -0.01, z: -0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -86,7 +86,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.67
-  m_Height: 2.79
+  m_Height: 2.5
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4398210535468763715
@@ -101,17 +101,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0e50ac4e5d4d947af6c03178394b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtboxSO: {fileID: 11400000, guid: 798b04386442c8f42b653f12aa9bbe7b, type: 2}
-  enabledOnAwake: 1
   owner: {fileID: 0}
+  enabledOnAwake: 1
+  hurtboxSO: {fileID: 11400000, guid: 798b04386442c8f42b653f12aa9bbe7b, type: 2}
   hurtboxOrigin: {fileID: 3518109613385436397}
-  OnHit:
-    m_PersistentCalls:
-      m_Calls: []
+  uEvents:
+    Hit:
+      m_PersistentCalls:
+        m_Calls: []
+    Hurt:
+      m_PersistentCalls:
+        m_Calls: []
   destroyOnHit: 0
-  OnHurtt:
-    m_PersistentCalls:
-      m_Calls: []
   destroyOnHurt: 0
 --- !u!114 &2569137203683378439
 MonoBehaviour:
@@ -120,7 +121,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6110048730885984798}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a26fb29979e03b5408c372e0f76f81d1, type: 3}
   m_Name: 
@@ -131,4 +132,4 @@ MonoBehaviour:
   - {fileID: 6110048730885984798}
   shrinkTo: {x: 0, y: 0, z: 0}
   shrinkTime: 0
-  ignoreTime: 0
+  ignoreTimescale: 0

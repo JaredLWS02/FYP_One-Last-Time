@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SphereOverlap : OverlapScript
+public class SphereOverlap : BaseOverlap
 {
     public float range=.5f;
 

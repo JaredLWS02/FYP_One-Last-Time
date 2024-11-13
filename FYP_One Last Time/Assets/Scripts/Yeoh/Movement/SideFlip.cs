@@ -98,12 +98,33 @@ public class SideFlip : TurnScript
         faceR=!faceR;
         //transform.Rotate(0, 180, 0);
 
-        if(sprite)
-        sprite.flipX = !faceR;
+        foreach(var sprite in spritesToFlip)
+        {
+            sprite.flipX = !faceR;
+        }
+        
+        foreach(var tr in transformsToInvert)
+        {
+            tr.localPosition = Mirror(tr.localPosition, invertPosAxis);
+        }
     }
 
     [Header("If Using Billboard")]
-    public SpriteRenderer sprite;
+    public List<SpriteRenderer> spritesToFlip = new();
+
+    [Header("If Any Children")]
+    public List<Transform> transformsToInvert = new();
+    public Vector3Int invertPosAxis = new(1,0,0);
+
+    Vector3 Mirror(Vector3 vector, Vector3Int axis)
+    {
+        return new
+        (
+            axis.x>0 ? -vector.x : vector.x,
+            axis.y>0 ? -vector.y : vector.y,
+            axis.z>0 ? -vector.z : vector.z
+        );
+    }
     
     // ============================================================================
 

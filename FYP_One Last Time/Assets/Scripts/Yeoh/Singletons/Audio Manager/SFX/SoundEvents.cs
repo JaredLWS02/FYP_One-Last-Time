@@ -5,115 +5,139 @@ using UnityEngine.Events;
 
 public class SoundEvents : MonoBehaviour
 {
-    public UnityEvent OnEnabled;
-    public UnityEvent OnDisabled;
+    AudioManager AudioM;
+    SFXManager SfxM;
+
+    public UnityEvent OnEnableEvent;
+    public UnityEvent OnDisableEvent;
 
     void OnEnable()
     {
-        OnEnabled.Invoke();
+        AudioM = AudioManager.Current;
+        SfxM = SFXManager.Current;
+
+        OnEnableEvent?.Invoke();
     }   
     void OnDisable()
     {
-        OnDisabled.Invoke();
+        OnDisableEvent?.Invoke();
     }   
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    // public void PlaySfxFireIgnite()
-    // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxFireIgnite, transform.position);
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxFireIgnite2, transform.position);
-    // }
-    // public void LoopSfxFireLoop()
-    // {
-    //     looping = AudioManager.Current.LoopSFX(gameObject, SFXManager.Current.sfxFireLoop);
-    // }
+    // ============================================================================
 
-    AudioSource looping;
+    AudioSource loopSource;
 
     public void StopLoop()
     {
-        if(looping) AudioManager.Current.StopLoop(looping);
+        AudioM.StopLoop(loopSource);
     }
+
+    // ============================================================================
+    
+    // public void PlaySfxFireIgnite()
+    // {
+    //     AudioM.PlaySFX(SfxM.sfxFireIgnite, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxFireIgnite2, transform.position);
+    // }
+    // public void LoopSfxFireLoop()
+    // {
+    //     looping = AudioM.LoopSFX(gameObject, SfxM.sfxFireLoop);
+    // }
+
+    // ============================================================================
 
     // public void PlaySfxMaceCharge()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxMaceCharge, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxMaceCharge, transform.position);
     // }
+
+    // ============================================================================
 
     // public void PlaySfxUIBook()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIBook, transform.position, false);
+    //     AudioM.PlaySFX(SfxM.sfxUIBook, transform.position, false);
     // }
+
+    // ============================================================================
 
     // public void PlaySfxBowDraw()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxBowDraw, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxBowDraw, transform.position);
     // }
     // public void PlaySfxBowShoot()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxBowShoot, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxBowShoot, transform.position);
     // }
+
+    // ============================================================================
 
     // public void PlaySfxFstNpc()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxFstNpc, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxFstNpc, transform.position);
     // }
     // public void PlaySfxFstSkeleton()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxFstSkeleton, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxFstSkeleton, transform.position);
     // }
     // public void PlaySfxFstSpider()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxFstSpider, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxFstSpider, transform.position);
     // }
     // public void PlaySfxFstZombie()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxFstZombie, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxFstZombie, transform.position);
     // }
+
+    // ============================================================================
 
     // public void PlaySfxHitArrow()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxHitArrow, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxHitArrow, transform.position);
     // }
     // public void PlaySfxHitFire()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxHitFire, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxHitFire, transform.position);
     // }
     // public void PlaySfxHitFist()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxHitFist, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxHitFist, transform.position);
     // }
     // public void PlaySfxHitSword()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxHitSword, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxHitSword, transform.position);
     // }
     // public void PlaySfxHitTool()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxHitTool, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxHitTool, transform.position);
     // }
     
+    // ============================================================================
+
     // public void PlaySfxSwingFist()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxSwingFist, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxSwingFist, transform.position);
     // }
     // public void PlaySfxSwingTool()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxSwingTool, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxSwingTool, transform.position);
     // }
     
+    // ============================================================================
+
     // public void PlaySfxThrow()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxThrow, transform.position);
+    //     AudioM.PlaySFX(SfxM.sfxThrow, transform.position);
     // }
     
+    // ============================================================================
+
     // public void PlaySfxUIInvClose()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIInvClose, transform.position, false);
+    //     AudioM.PlaySFX(SfxM.sfxUIInvClose, transform.position, false);
     // }
     // public void PlaySfxUIInvOpen()
     // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIInvOpen, transform.position, false);
+    //     AudioM.PlaySFX(SfxM.sfxUIInvOpen, transform.position, false);
     // }
     
     

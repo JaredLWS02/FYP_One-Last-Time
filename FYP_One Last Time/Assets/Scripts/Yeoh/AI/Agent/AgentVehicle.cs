@@ -11,6 +11,13 @@ public class AgentVehicle : MonoBehaviour
     public TurnScript turn;
 
     // ============================================================================
+
+    void Awake()
+    {
+        def_stoppingRange = stoppingRange;
+    }
+
+    // ============================================================================
     
     void Update()
     {
@@ -45,6 +52,7 @@ public class AgentVehicle : MonoBehaviour
     public Transform goal;
     public bool arrival=true;
     public float stoppingRange=1;
+    float def_stoppingRange;
     public float slowingRangeOffset=3;
 
     Vector3 GetArrivalVelocity(Vector3 velocity)
@@ -84,20 +92,13 @@ public class AgentVehicle : MonoBehaviour
         SetGoal(target);
     }
 
-    [Header("Idle")]
-    public float selfStoppingRange=.5f;
-
-    public void SetGoalToSelf()
-    {
-        SetRange(selfStoppingRange);
-        SetGoal(owner);
-    }
-
     // ============================================================================
     
     public float GetCurrentRange() => stoppingRange;
 
     public void SetRange(float to) => stoppingRange = to;
+
+    public void RevertRange() => stoppingRange = def_stoppingRange;
 
     public bool InRange(Vector3 from, Vector3 target, float range)
     {
@@ -116,12 +117,22 @@ public class AgentVehicle : MonoBehaviour
     
     // ============================================================================
 
-    [Header("Check Too Close")]
-    public float maintainDistance=2;
+    public float maintainRange=2;
 
     public bool IsTooClose(GameObject target)
     {
-        return InRange(target, maintainDistance);
+        return InRange(target, maintainRange);
+    }
+
+    // ============================================================================
+
+    [Header("Wait")]
+    public float selfStoppingRange=.5f;
+
+    public void SetGoalToSelf()
+    {
+        SetRange(selfStoppingRange);
+        SetGoal(owner);
     }
 
     // ============================================================================
@@ -157,7 +168,7 @@ public class AgentVehicle : MonoBehaviour
         if(showMaintainRangeGizmo)
         {
             Gizmos.color = maintainRangeGizmoColor;
-            Gizmos.DrawWireSphere(owner.transform.position, maintainDistance);
+            Gizmos.DrawWireSphere(owner.transform.position, maintainRange);
         }
     }
 }

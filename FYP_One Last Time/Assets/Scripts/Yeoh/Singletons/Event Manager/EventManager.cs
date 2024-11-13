@@ -50,25 +50,6 @@ public class EventManager : MonoBehaviour
         SwitchPilotEvent?.Invoke(who, to);
     }
     
-    // Input Buffer ==================================================================================================================
-    
-    public event Action<GameObject, string, float> AddInputBufferEvent;
-    public event Action<GameObject, string> InputBufferingEvent;
-    public event Action<GameObject, string> RemoveInputBufferEvent;
-
-    public void OnAddInputBuffer(GameObject who, string input_name, float buffer_time)
-    {
-        AddInputBufferEvent?.Invoke(who, input_name, buffer_time);
-    }
-    public void OnInputBuffering(GameObject who, string input_name)
-    {
-        InputBufferingEvent?.Invoke(who, input_name);
-    }
-    public void OnRemoveInputBuffer(GameObject who, string input_name)
-    {
-        RemoveInputBufferEvent?.Invoke(who, input_name);
-    }
-
     // Agent Controls ==================================================================================================================
 
     public event Action<GameObject, Vector2> AgentTryMoveEvent;

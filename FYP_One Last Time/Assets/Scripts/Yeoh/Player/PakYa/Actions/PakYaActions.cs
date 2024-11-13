@@ -17,7 +17,6 @@ public class PakYaActions : MonoBehaviour
     public bool AllowDash;
     public bool AllowAttack;
     public bool AllowParry;
-    public bool AllowCast;
     public bool AllowHurt;
     public bool AllowStun;
 
@@ -37,7 +36,6 @@ public class PakYaActions : MonoBehaviour
         EventM.TryComboEvent += OnTryCombo;
         EventM.TryRaiseParryEvent += OnTryRaiseParry;
         EventM.TryRiposteComboEvent += OnTryRiposteCombo;
-        EventM.TryAbilityEvent += OnTryAbility;
         EventM.TryHurtEvent += OnTryHurt;
         EventM.TryStunEvent += OnTryStun;
     }
@@ -51,7 +49,6 @@ public class PakYaActions : MonoBehaviour
         EventM.TryComboEvent -= OnTryCombo;
         EventM.TryRaiseParryEvent -= OnTryRaiseParry;
         EventM.TryRiposteComboEvent -= OnTryRiposteCombo;
-        EventM.TryAbilityEvent -= OnTryAbility;
         EventM.TryHurtEvent -= OnTryHurt;
         EventM.TryStunEvent -= OnTryStun;
     }
@@ -151,19 +148,6 @@ public class PakYaActions : MonoBehaviour
         EventM.OnRaiseParry(owner);
     }
 
-    // ============================================================================    
-
-    void OnTryAbility(GameObject who, string ability_name)
-    {
-        if(who!=owner) return;
-
-        if(!AllowCast) return;
-
-        EventM.OnCancelFlipDelay(owner);
-
-        EventM.OnAbility(owner, ability_name);
-    }
-
     // ============================================================================
     
     void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
@@ -210,12 +194,6 @@ public class PakYaActions : MonoBehaviour
     public RiposteScript riposte;
     public bool IsRiposteActive() => riposte?.IsRiposteActive() ?? false;
     
-    public AbilityCaster caster;
-    public bool IsCasting() => caster?.IsPerforming() ?? false;
-
-    public HealAbility heal;
-    public bool IsHealing() => heal?.IsPerforming() ?? false;
-
     public StunScript stun;
     public bool IsStunned() => stun?.IsPerforming() ?? false;
 }

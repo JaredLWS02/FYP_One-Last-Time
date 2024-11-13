@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 public class EnemyAgent : MonoBehaviour
@@ -28,7 +29,7 @@ public class EnemyAgent : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Target")]
+    [Header("Targeting")]
     public Radar radar;
     public string targetTag = "Player";
     public float expandRadarRangeMult = 1.5f;
@@ -37,12 +38,23 @@ public class EnemyAgent : MonoBehaviour
 
     // ============================================================================
     
-    [Header("Seek")]
-    public float targetArrivalRange=3;
+    public BaseRaycast sight;
 
+    public bool CanSeeTarget()
+    {
+        GameObject target = GetTarget();
+        if(!target) return false;
+
+        if(!sight) return true;
+
+        return sight.IsHitting(out var obj) && obj==target;
+    }
+
+    // ============================================================================
+    
     public void SetGoalToTarget()
     {
-        vehicle.SetRange(targetArrivalRange);
+        vehicle.RevertRange();
         vehicle.SetGoal(GetTarget());
     }
 
