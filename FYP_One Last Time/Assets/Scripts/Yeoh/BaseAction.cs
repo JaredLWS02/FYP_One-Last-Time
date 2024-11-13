@@ -105,6 +105,7 @@ public class BaseAction : MonoBehaviour
     {
         if(!IsPerforming()) return;
 
+        Anim3_ReleaseEnd();
         Anim4_Recover();
 
         anim?.Cancel(owner);

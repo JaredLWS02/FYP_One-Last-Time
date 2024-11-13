@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class StateMachine_EnemyActions : MonoBehaviour
 {
-    [HideInInspector]
-    public EnemyActions action;
+    public EnemyActions action {get; private set;}
 
     void Awake()
     {

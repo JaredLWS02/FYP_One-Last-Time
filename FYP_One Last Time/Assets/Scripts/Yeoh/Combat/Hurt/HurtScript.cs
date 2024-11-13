@@ -74,8 +74,7 @@ public class HurtScript : MonoBehaviour
 
     [Header("iFrame")]
     public float iframeSeconds=.5f;
-    [HideInInspector]
-    public bool iframe;
+    public bool iframe {get; private set;}
 
     void OnTryIFrame(GameObject who, float duration)
     {

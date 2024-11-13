@@ -47,7 +47,7 @@ public class DashScript : BaseAction
     {
         // action cancelling
         EventM.OnCancelAttack(owner);
-        EventM.OnCancelCast(owner);
+        //EventM.OnCancelCast(owner);
 
         toggler?.ToggleIgnoreLayers(true);
 

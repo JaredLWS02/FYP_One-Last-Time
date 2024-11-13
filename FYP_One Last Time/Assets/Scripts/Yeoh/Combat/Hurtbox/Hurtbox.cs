@@ -32,7 +32,7 @@ public class Hurtbox : MonoBehaviour
 
     Vector3 contactPoint;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if(other.isTrigger) return;
         Rigidbody otherRb = other.attachedRigidbody;

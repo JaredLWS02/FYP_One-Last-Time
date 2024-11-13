@@ -15,7 +15,7 @@ public class AttackCombo : MonoBehaviour
     {
         public AttackSO attackSO;
         [Space]
-        public PrefabPreset attackPrefab;
+        public PrefabPreset hurtboxPrefab;
     }
 
     [Space]
@@ -76,7 +76,7 @@ public class AttackCombo : MonoBehaviour
         ComboStep step = comboSteps[i];
 
         attack.attackSO = step.attackSO;
-        attack.attackPrefab = step.attackPrefab;
+        attack.hurtboxPrefab = step.hurtboxPrefab;
     }
     
     // ============================================================================

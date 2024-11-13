@@ -15,6 +15,8 @@ public class AttackScript : BaseAction
     void OnDisable()
     {
         EventM.CancelAttackEvent -= OnCancelAttack;
+
+        DespawnHurtbox();
     }
 
     // ============================================================================
@@ -22,7 +24,7 @@ public class AttackScript : BaseAction
     [Header("On Attack")]
     public AttackSO attackSO;
     [Space]
-    public PrefabPreset attackPrefab;
+    public PrefabPreset hurtboxPrefab;
     
     public void TryAttack()
     {
@@ -51,23 +53,32 @@ public class AttackScript : BaseAction
         if(attackSO.dashOnRelease)
         Dash(attackSO.dashOnReleaseForce, attackSO.dashOnReleaseDir);
 
-        SpawnAttack();
+        SpawnHurtbox();
 
         EventM.OnAttackReleased(owner, attackSO);
+    }
+    // Anim Event
+    public override void OnAnimReleaseEnd()
+    {
+        DespawnHurtbox();
     }
     // Anim Event
     public override void OnAnimRecover()
     {
         DoCooldown();
+
+        DespawnHurtbox();
     }  
 
     // ============================================================================
 
-    public void SpawnAttack()
-    {
-        GameObject spawned = attackPrefab.Spawn();
+    GameObject hurtbox;
 
-        TryAssignHurtboxOwner(spawned);
+    public void SpawnHurtbox()
+    {
+        hurtbox = hurtboxPrefab.Spawn();
+
+        TryAssignHurtboxOwner(hurtbox);
     }
 
     void TryAssignHurtboxOwner(GameObject target)
@@ -80,6 +91,11 @@ public class AttackScript : BaseAction
         {
             e_hurtbox.owner = owner;
         }
+    }
+
+    void DespawnHurtbox()
+    {
+        if(hurtbox) Destroy(hurtbox);
     }
 
     // ============================================================================

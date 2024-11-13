@@ -46,7 +46,7 @@ public class TryParryScript : BaseAction
         // action cancelling
         EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
-        EventM.OnCancelCast(owner);
+        //EventM.OnCancelCast(owner);
         EventM.OnCancelStun(owner);
 
         Perform(raiseParryAnim);
@@ -92,10 +92,14 @@ public class TryParryScript : BaseAction
         return IsFacing(attack_pos) && IsReleasing();
     }
 
+    public HurtScript hurt;
+
     // on hit parry
     void OnTryParry(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
+
+        if(hurt.iframe) return;
 
         if(CanParry(contactPoint) && hurtbox.isParryable)
         {

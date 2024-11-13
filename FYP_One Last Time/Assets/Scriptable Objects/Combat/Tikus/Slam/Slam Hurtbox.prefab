@@ -68,17 +68,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0e50ac4e5d4d947af6c03178394b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtboxSO: {fileID: 11400000, guid: 9851d4c565cbb464c8ba8abc1aac326d, type: 2}
-  enabledOnAwake: 1
   owner: {fileID: 0}
+  enabledOnAwake: 1
+  hurtboxSO: {fileID: 11400000, guid: 9851d4c565cbb464c8ba8abc1aac326d, type: 2}
   hurtboxOrigin: {fileID: 3973731762187139556}
-  OnHit:
-    m_PersistentCalls:
-      m_Calls: []
+  uEvents:
+    Hit:
+      m_PersistentCalls:
+        m_Calls: []
+    Hurt:
+      m_PersistentCalls:
+        m_Calls: []
   destroyOnHit: 0
-  OnHurtt:
-    m_PersistentCalls:
-      m_Calls: []
   destroyOnHurt: 0
 --- !u!114 &8782049835207013567
 MonoBehaviour:
@@ -87,7 +88,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242880141507026177}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a26fb29979e03b5408c372e0f76f81d1, type: 3}
   m_Name: 
@@ -98,7 +99,7 @@ MonoBehaviour:
   - {fileID: 1242880141507026177}
   shrinkTo: {x: 0, y: 0, z: 0}
   shrinkTime: 0
-  ignoreTime: 0
+  ignoreTimescale: 0
 --- !u!1 &3321845459215446752
 GameObject:
   m_ObjectHideFlags: 0

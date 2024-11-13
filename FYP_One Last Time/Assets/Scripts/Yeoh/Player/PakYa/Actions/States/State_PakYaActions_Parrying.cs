@@ -34,6 +34,5 @@ public class State_PakYaActions_Parrying : BaseState
         action.AllowDash = toggle;
         action.AllowAttack = toggle;
         action.AllowParry = toggle;
-        action.AllowCast = toggle;
     }
 }

@@ -81,9 +81,9 @@ public class Attachment2D : MonoBehaviour
     {
         return new
         (
-            axis.x==0 ? vector.x : -vector.x,
-            axis.y==0 ? vector.y : -vector.y,
-            axis.z==0 ? vector.z : -vector.z
+            axis.x>0 ? -vector.x : vector.x,
+            axis.y>0 ? -vector.y : vector.y,
+            axis.z>0 ? -vector.z : vector.z
         );
     }
 }
