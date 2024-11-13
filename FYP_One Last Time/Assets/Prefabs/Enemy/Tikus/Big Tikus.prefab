@@ -78,6 +78,8 @@ MonoBehaviour:
   flipDelay: {x: 0, y: 0.2}
   spritesToFlip:
   - {fileID: 3716319433280079349}
+  transformsToInvert: []
+  invertPosAxis: {x: 1, y: 0, z: 0}
 --- !u!114 &3558659497958859496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +158,7 @@ MonoBehaviour:
   comboName: Normal Combo
   comboSteps:
   - attackSO: {fileID: 11400000, guid: 8db0e5daa15601340821c312ff964fc0, type: 2}
-    attackPrefab:
+    hurtboxPrefab:
       prefab: {fileID: 1242880141507026177, guid: c5c0261915e183d40b40f3bcbe09d457,
         type: 3}
       spawnpoint: {fileID: 6955758431937353321}
@@ -455,7 +457,6 @@ MonoBehaviour:
   targetTag: Player
   expandRadarRangeMult: 1.5
   sight: {fileID: 6204625320909554525}
-  targetArrivalRange: 3
   randomSeekBehaviour: {fileID: 1218149885779216908}
   flee: {fileID: 3971028520478048224}
   hpM: {fileID: 704049436961937626}
@@ -710,10 +711,10 @@ MonoBehaviour:
   turn: {fileID: 8663946442160230497}
   goal: {fileID: 0}
   arrival: 1
-  stoppingRange: 1
+  stoppingRange: 5.5
   slowingRangeOffset: 3
+  maintainRange: 4.5
   selfStoppingRange: 0.5
-  maintainDistance: 2
   showGizmos: 0
   showStoppingRangeGizmo: 1
   stoppingRangeGizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
@@ -940,13 +941,29 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventName: AttackRelease
+  - eventName: AttackReleaseStart
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6861530176262365675}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim2_ReleaseStart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: AttackReleaseEnd
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6861530176262365675}
+          m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
+          m_MethodName: Anim3_ReleaseEnd
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1331,7 +1348,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   attackSO: {fileID: 0}
-  attackPrefab:
+  hurtboxPrefab:
     prefab: {fileID: 0}
     spawnpoint: {fileID: 0}
     parented: 1
@@ -1443,7 +1460,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d448da502bc0bf44983ca0725cd1359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 0}
 --- !u!1 &4999689017625808605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,7 +1524,7 @@ GameObject:
   - component: {fileID: 8915720888079556032}
   - component: {fileID: 7015130824575028965}
   m_Layer: 6
-  m_Name: Tikus
+  m_Name: Big Tikus
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1984,9 +2000,9 @@ MonoBehaviour:
   options:
   - name: Seek
     weight: 3
-  - name: Wander
+  - name: Wander (disabled)
     weight: 1
-  - name: Flee
+  - name: Flee (disabled)
     weight: 1
   currentOption: Seek
   randomInterval: {x: 0.25, y: 3}
@@ -2001,7 +2017,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5442243828401948624}
   - component: {fileID: 1099085624676017755}
-  - component: {fileID: 9073832071307198208}
   - component: {fileID: 5138522953899574682}
   m_Layer: 3
   m_Name: Hurt
@@ -2040,7 +2055,6 @@ MonoBehaviour:
   owner: {fileID: 5261146206814944013}
   hp: {fileID: 704049436961937626}
   iframeSeconds: 0.25
-  iframe: 0
   colorFlicker: 1
   rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
   colorFlickerInterval: 0.05
@@ -2052,19 +2066,6 @@ MonoBehaviour:
   knockbackMult: 1
   iframeOnDeath: 1
   destroyOnDeath: 0
---- !u!114 &9073832071307198208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8460407787441312423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d10c31cecf1996448b05dbdb04ab51b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 5261146206814944013}
 --- !u!114 &5138522953899574682
 MonoBehaviour:
   m_ObjectHideFlags: 0

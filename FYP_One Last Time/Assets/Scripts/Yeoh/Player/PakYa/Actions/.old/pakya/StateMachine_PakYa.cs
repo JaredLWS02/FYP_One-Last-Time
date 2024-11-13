@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class StateMachine_PakYa : MonoBehaviour
 {
-    [HideInInspector]
-    public PakYa pakya;
+    public PakYa pakya {get; private set;}
 
     void Awake()
     {

@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class StateMachine_Agent : MonoBehaviour
 {
-    [HideInInspector]
-    public AgentManager agent;
+    public AgentManager agent {get; private set;}
 
     void Awake()
     {

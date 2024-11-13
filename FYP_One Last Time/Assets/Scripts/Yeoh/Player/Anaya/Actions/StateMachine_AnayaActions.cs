@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class StateMachine_AnayaActions : MonoBehaviour
 {
-    [HideInInspector]
-    public AnayaActions action;
+    public AnayaActions action {get; private set;}
 
     void Awake()
     {

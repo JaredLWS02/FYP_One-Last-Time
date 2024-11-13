@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: AttackRelease
+  eventName: AttackReleaseStart
   triggerTime: 0.34
   triggerOnExit: 0
 --- !u!1101 &-7589298519356893147
@@ -319,8 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: AttackRecover
-  triggerTime: 0.9
+  eventName: AttackReleaseEnd
+  triggerTime: 0.67
   triggerOnExit: 1
 --- !u!206 &-4335292391287494136
 BlendTree:
@@ -385,6 +385,7 @@ AnimatorState:
   - {fileID: 5655234549363528764}
   - {fileID: 2601443639900977057}
   - {fileID: -679685967497246476}
+  - {fileID: 4725222365429035171}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -656,8 +657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: AttackRecover
-  triggerTime: 0.9
+  eventName: AttackReleaseEnd
+  triggerTime: 0.67
   triggerOnExit: 1
 --- !u!1102 &-299996349181409694
 AnimatorState:
@@ -686,6 +687,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-138933707278855218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: AttackRecover
+  triggerTime: 0.9
+  triggerOnExit: 1
 --- !u!114 &-90768055576164278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -787,6 +803,7 @@ AnimatorState:
   - {fileID: 3792049537745841569}
   - {fileID: -8410331709022185062}
   - {fileID: -5228125023521321348}
+  - {fileID: 4028079445415956287}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -939,8 +956,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: AttackRelease
-  triggerTime: 0.34
+  eventName: AttackReleaseStart
+  triggerTime: 0.336
   triggerOnExit: 0
 --- !u!1102 &2689442696820787573
 AnimatorState:
@@ -1059,6 +1076,21 @@ MonoBehaviour:
   eventName: AttackWindUp
   triggerTime: 0
   triggerOnExit: 0
+--- !u!114 &4028079445415956287
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: AttackRecover
+  triggerTime: 0.9
+  triggerOnExit: 1
 --- !u!1102 &4485920860160453961
 AnimatorState:
   serializedVersion: 6
@@ -1087,6 +1119,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &4725222365429035171
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: AttackRecover
+  triggerTime: 0.9
+  triggerOnExit: 1
 --- !u!1102 &4770932286384752407
 AnimatorState:
   serializedVersion: 6
@@ -1125,8 +1172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: AttackRecover
-  triggerTime: 0.9
+  eventName: AttackReleaseEnd
+  triggerTime: 0.5
   triggerOnExit: 1
 --- !u!1101 &5543742362282964243
 AnimatorStateTransition:
@@ -1183,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: AttackRelease
+  eventName: AttackReleaseStart
   triggerTime: 0.25
   triggerOnExit: 0
 --- !u!206 &6327047545034958914
@@ -1321,6 +1368,7 @@ AnimatorState:
   - {fileID: -6467143713850549384}
   - {fileID: 6045186693552506441}
   - {fileID: 5395171235971059073}
+  - {fileID: -138933707278855218}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

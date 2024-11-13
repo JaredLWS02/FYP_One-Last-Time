@@ -48,7 +48,6 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   hp: {fileID: 1861734953551003033}
   iframeSeconds: 0.5
-  iframe: 0
   colorFlicker: 1
   rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
   colorFlickerInterval: 0.05
@@ -565,7 +564,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   attackSO: {fileID: 0}
-  attackPrefab:
+  hurtboxPrefab:
     prefab: {fileID: 0}
     spawnpoint: {fileID: 0}
     parented: 1
@@ -800,7 +799,7 @@ MonoBehaviour:
   comboName: Light Combo
   comboSteps:
   - attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
-    attackPrefab:
+    hurtboxPrefab:
       prefab: {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24,
         type: 3}
       spawnpoint: {fileID: 3111472536248378137}
@@ -809,7 +808,7 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
   - attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
-    attackPrefab:
+    hurtboxPrefab:
       prefab: {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79,
         type: 3}
       spawnpoint: {fileID: 4072668483182548298}
@@ -818,7 +817,7 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
-    attackPrefab:
+    hurtboxPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
       spawnpoint: {fileID: 4164968904663650128}
@@ -1410,7 +1409,7 @@ MonoBehaviour:
   comboName: Heavy Combo
   comboSteps:
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
-    attackPrefab:
+    hurtboxPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
       spawnpoint: {fileID: 4164968904663650128}
@@ -1521,6 +1520,7 @@ MonoBehaviour:
   cooldown: {fileID: 2189189842004329316}
   cooldownTime: 0.3
   minParryDot: 0.2
+  hurt: {fileID: 6892551064611265885}
 --- !u!114 &2189189842004329316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1664,7 +1664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfc599fe3a081848b0210c2a49f983f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 0}
 --- !u!1 &7036779356328765179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,13 +1926,29 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - eventName: AttackRelease
+  - eventName: AttackReleaseStart
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 7022457898630109682}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim2_ReleaseStart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: AttackReleaseEnd
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7022457898630109682}
+          m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
+          m_MethodName: Anim3_ReleaseEnd
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2213,7 +2228,7 @@ MonoBehaviour:
   comboName: Riposte Combo
   comboSteps:
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
-    attackPrefab:
+    hurtboxPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
       spawnpoint: {fileID: 4164968904663650128}
@@ -2367,7 +2382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f9f75b2fff009458593b8a88f11bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: 0}
 --- !u!1 &7966764484049088294
 GameObject:
   m_ObjectHideFlags: 0

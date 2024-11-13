@@ -92,10 +92,14 @@ public class TryParryScript : BaseAction
         return IsFacing(attack_pos) && IsReleasing();
     }
 
+    public HurtScript hurt;
+
     // on hit parry
     void OnTryParry(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
+
+        if(hurt.iframe) return;
 
         if(CanParry(contactPoint) && hurtbox.isParryable)
         {
