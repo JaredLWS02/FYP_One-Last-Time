@@ -6,6 +6,7 @@ using UnityEngine;
 public class PrefabPreset
 {
     public GameObject prefab;
+    public bool hideInHierarchy;
     [Space]
     public Transform spawnpoint;
     public bool parented=true;
@@ -38,6 +39,8 @@ public class PrefabPreset
             parent = null;
         }
 
-        return Singleton.Current.Spawn(prefab, pos, rot, parent);
+        return Singleton.Current.Spawn(prefab, pos, rot, parent, hideInHierarchy);
     }
+
+    public void Despawn(GameObject obj, float delay=0) => Singleton.Current.Despawn(obj, delay);
 }

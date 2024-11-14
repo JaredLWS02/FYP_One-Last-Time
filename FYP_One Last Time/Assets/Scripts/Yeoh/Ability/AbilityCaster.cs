@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AbilityCaster : BaseAction
 {   
@@ -65,6 +66,7 @@ public class AbilityCaster : BaseAction
 
         EventM.OnCasting(owner, abilitySO);
 
+        castingEvents.CastingStart?.Invoke($"{abilitySO.Name} Casting Start");
         //sfxCastingLoop = AudioManager.Current.LoopSFX(owner, SFXManager.Current.sfxCastingLoop);
     }
 
@@ -107,6 +109,7 @@ public class AbilityCaster : BaseAction
 
         CancelAnim();
 
+        castingEvents.CastingStop?.Invoke($"{abilitySO.Name} Casting Stop");
         //if(sfxCastingLoop) AudioManager.Current.StopLoop(sfxCastingLoop);
     }
     
@@ -122,4 +125,15 @@ public class AbilityCaster : BaseAction
         
         EventM.OnCastCancelled(owner);
     }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct CastingEvents
+    {
+        public UnityEvent<string> CastingStart;
+        public UnityEvent<string> CastingStop;
+    }
+    [Space]
+    public CastingEvents castingEvents;
 }
