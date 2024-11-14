@@ -224,8 +224,16 @@ public class EventManager : MonoBehaviour
     public void OnDashCancelled(GameObject who)
     {
         DashCancelledEvent?.Invoke(who);
-    }    
-    
+    }
+
+    // Vine Pull ==================================================================================================================
+
+    //public event Action<GameObject> TryVinePullEvent;
+    //public event Action<GameObject> VinePullEvent;
+    //public event Action<GameObject> VinePulledEvent;
+    //public event Action<GameObject> VinePullCutEvent;
+
+
     // Attacks and Combos ==================================================================================================================
 
     public event Action<GameObject, string> TryComboEvent;
