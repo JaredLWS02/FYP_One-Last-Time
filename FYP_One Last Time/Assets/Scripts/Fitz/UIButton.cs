@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIButton : MonoBehaviour
@@ -12,15 +13,17 @@ public class UIButton : MonoBehaviour
         buttonComp = GetComponent<Button>();
     }
 
-    public void OnClick()
-    {
-        AudioManager.Current.PlaySFX(SFXManager.Current.sfxUISelectButton, transform.position, false);
-    }
+    // public void OnClick()
+    // {
+    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxUISelectButton, transform.position, false);
+    // }
 
     public void OnHover()
     {
-        if (buttonComp.interactable)
-            AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIHoverButton, transform.position, false);
+        if(buttonComp.interactable)
+        buttonEvents.hoverEvent?.Invoke();
+
+        //AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIHoverButton, transform.position, false);
     }
 
     public void OnQuit()
@@ -32,4 +35,14 @@ public class UIButton : MonoBehaviour
     {
         ScenesManager.Current.LoadNextScene();
     }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct ButtonEvents
+    {
+        public UnityEvent hoverEvent;
+    }
+    [Space]
+    public ButtonEvents buttonEvents;
 }

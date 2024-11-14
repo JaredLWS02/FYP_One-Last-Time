@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AmbientManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class AmbientManager : MonoBehaviour
         defVolume = ambSource.volume;
         ambSource.loop=false;
     }
+
+    // ============================================================================
 
     [Header("Ambient")]
     public bool ambEnabled=true;
@@ -49,7 +52,7 @@ public class AmbientManager : MonoBehaviour
         }
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     void Update()
     {
@@ -61,7 +64,7 @@ public class AmbientManager : MonoBehaviour
         if(!ambSource.isPlaying) RestartAmb();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     public void ChangeAmb(AudioClip[] clips, float fadeOutTime=3)
     {
@@ -78,7 +81,7 @@ public class AmbientManager : MonoBehaviour
         if(HasClips(clips)) SwapAmb(clips);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     public void PlayAmb(AudioClip[] clips)
     {
@@ -95,19 +98,20 @@ public class AmbientManager : MonoBehaviour
         }
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     [Header("Short Ambient")]
     public bool ambShortEnabled=true;
-    public AudioClip[] ambShort;
     public Vector2 ambShortInterval = new Vector2(2, 10);
+
+    
 
     void OnEnable()
     {
         StartShortAmb();
     }
 
-    public void StartShortAmb()
+    void StartShortAmb()
     {
         randAmbRt = StartCoroutine(RandAmb());
     }
@@ -123,17 +127,10 @@ public class AmbientManager : MonoBehaviour
             {
                 for(int i=0; i<Random.Range(1, 3); i++)
                 {   
-                    PlayShortAmb(ambShort);
+                    ambEvents.ambShortEvent?.Invoke();
                 }
             }
         }
-    }
-
-    public void PlayShortAmb(AudioClip[] clips)
-    {
-        if(clips.Length==0) return;
-        
-        AudioManager.Current.PlaySFX(clips, transform.position, false, true, Random.Range(-1f, 1f), Random.Range(.1f, 1));
     }
 
     public void StopShortAmb()
@@ -141,10 +138,20 @@ public class AmbientManager : MonoBehaviour
         if(randAmbRt!=null) StopCoroutine(randAmbRt);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     public bool HasClips(AudioClip[] clips)
     {
         return clips!=null && clips.Length>0;
     }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct AmbEvents
+    {
+        public UnityEvent ambShortEvent;
+    }
+    [Header("Ambient Events")]
+    public AmbEvents ambEvents;
 }
