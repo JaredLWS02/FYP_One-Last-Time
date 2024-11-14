@@ -8,13 +8,29 @@ public class AudioSpawner : MonoBehaviour
     public List<AudioPrefab> audioPrefabs = new();
 
     public AudioPrefab GetAudioPrefab(string audio_name)
-        => audioPrefabs.Find(audioPrefab => audioPrefab.audioSO.Name == audio_name);
+    {
+        if(string.IsNullOrEmpty(audio_name))
+        {
+            Debug.LogWarning("Audio name is null or empty.");
+            return null;
+        }
+        
+        AudioPrefab audioPrefab = audioPrefabs.Find(audioPrefab => audioPrefab.audioSO.Name == audio_name);
+        
+        if(audioPrefab==null)
+        {
+            Debug.LogWarning($"AudioSO with name '{audio_name}' not found.");
+        }
+
+        return audioPrefab;
+    }
 
     // ============================================================================
 
     AudioSource PlayAndReturn(string audio_name)
     {
         AudioPrefab audio = GetAudioPrefab(audio_name);
+        if(audio==null) return null;
         return audio.SpawnAudio();
     }
 
@@ -26,6 +42,7 @@ public class AudioSpawner : MonoBehaviour
     public void Stop(string audio_name)
     {
         AudioPrefab audio = GetAudioPrefab(audio_name);
+        if(audio==null) return;
         audio.DespawnAudio();
     }
 
@@ -34,6 +51,7 @@ public class AudioSpawner : MonoBehaviour
     public void StartLoop(string loop_in_name, string loop_name)
     {
         AudioSource source = PlayAndReturn(loop_in_name);
+        if(!source) return;
         // wait for loop in to finish
         StartCoroutine(StartingLoop(loop_name, source.clip.length));
     }

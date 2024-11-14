@@ -566,6 +566,7 @@ MonoBehaviour:
   attackSO: {fileID: 0}
   hurtboxPrefab:
     prefab: {fileID: 0}
+    hideInHierarchy: 0
     spawnpoint: {fileID: 0}
     parented: 1
     followRotation: 1
@@ -573,6 +574,22 @@ MonoBehaviour:
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   rb: {fileID: 1642459170912960868}
   cooldown: {fileID: 1109364968870284027}
+  attackEvents:
+    WindUp:
+      m_PersistentCalls:
+        m_Calls: []
+    ReleaseStart:
+      m_PersistentCalls:
+        m_Calls: []
+    ReleaseEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    Recover:
+      m_PersistentCalls:
+        m_Calls: []
+    Cancel:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &1109364968870284027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -802,6 +819,7 @@ MonoBehaviour:
     hurtboxPrefab:
       prefab: {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24,
         type: 3}
+      hideInHierarchy: 0
       spawnpoint: {fileID: 3111472536248378137}
       parented: 1
       followRotation: 1
@@ -811,6 +829,7 @@ MonoBehaviour:
     hurtboxPrefab:
       prefab: {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79,
         type: 3}
+      hideInHierarchy: 0
       spawnpoint: {fileID: 4072668483182548298}
       parented: 1
       followRotation: 1
@@ -820,6 +839,7 @@ MonoBehaviour:
     hurtboxPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
+      hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
@@ -1412,6 +1432,7 @@ MonoBehaviour:
     hurtboxPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
+      hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1
@@ -2231,6 +2252,7 @@ MonoBehaviour:
     hurtboxPrefab:
       prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
         type: 3}
+      hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
       parented: 1
       followRotation: 1

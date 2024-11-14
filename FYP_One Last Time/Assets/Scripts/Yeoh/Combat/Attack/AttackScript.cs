@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AttackScript : BaseAction
 {
@@ -46,6 +47,8 @@ public class AttackScript : BaseAction
         Dash(attackSO.dashOnWindUpForce, attackSO.dashOnWindUpDir);
 
         EventM.OnAttackWindedUp(owner, attackSO);
+
+        attackEvents.WindUp?.Invoke($"{attackSO.Name} Wind Up");
     }  
     // Anim Event
     public override void OnAnimReleaseStart()
@@ -56,11 +59,15 @@ public class AttackScript : BaseAction
         SpawnHurtbox();
 
         EventM.OnAttackReleased(owner, attackSO);
+
+        attackEvents.ReleaseStart?.Invoke($"{attackSO.Name} Release Start");
     }
     // Anim Event
     public override void OnAnimReleaseEnd()
     {
         DespawnHurtbox();
+
+        attackEvents.ReleaseEnd?.Invoke($"{attackSO.Name} Release End");
     }
     // Anim Event
     public override void OnAnimRecover()
@@ -68,6 +75,8 @@ public class AttackScript : BaseAction
         DoCooldown();
 
         DespawnHurtbox();
+
+        attackEvents.Recover?.Invoke($"{attackSO.Name} Recover");
     }  
 
     // ============================================================================
@@ -138,5 +147,21 @@ public class AttackScript : BaseAction
         CancelAnim();
 
         EventM.OnAttackCancelled(owner);
+
+        attackEvents.Cancel?.Invoke($"{attackSO.Name} Cancel");
     }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct AttackEvents
+    {
+        public UnityEvent<string> WindUp;
+        public UnityEvent<string> ReleaseStart;
+        public UnityEvent<string> ReleaseEnd;
+        public UnityEvent<string> Recover;
+        public UnityEvent<string> Cancel;
+    }
+    [Space]
+    public AttackEvents attackEvents;
 }
