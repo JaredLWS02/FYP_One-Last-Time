@@ -36,9 +36,10 @@ public class Singleton : MonoBehaviour
 
     // ============================================================================
 
-    public GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rot, Transform parent)
+    public GameObject Spawn(GameObject prefab, Vector3 pos, Quaternion rot, Transform parent, bool hideInHierarchy=false)
     {
         GameObject spawned = Instantiate(prefab, pos, rot);
+        if(hideInHierarchy) spawned.hideFlags = HideFlags.HideInHierarchy;
 
         if(parent) spawned.transform.parent = parent;
 
@@ -47,4 +48,5 @@ public class Singleton : MonoBehaviour
         return spawned;
     }
 
+    public void Despawn(GameObject obj, float delay=0) => Destroy(obj, delay);
 }
