@@ -460,6 +460,13 @@ MonoBehaviour:
   mpM: {fileID: 7058722310484815464}
   abilityList: {fileID: 11400000, guid: 20654795a73aa1546b842d07d69881d9, type: 2}
   abilitySO: {fileID: 0}
+  castingEvents:
+    CastingStart:
+      m_PersistentCalls:
+        m_Calls: []
+    CastingStop:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &7975362184149562795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2452,7 +2459,7 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
   ground: {fileID: 773448853722404963}
-  jumpForce: 15
+  jumpForce: 23
   jumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   jumpCutMult: 0.5
   extraJumps: 1
@@ -2460,6 +2467,13 @@ MonoBehaviour:
   coyoteTime: 0.2
   cooldown: {fileID: 1874970261637118981}
   cooldownTime: 0.2
+  jumpEvents:
+    Jump:
+      m_PersistentCalls:
+        m_Calls: []
+    ExtraJump:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &1874970261637118981
 MonoBehaviour:
   m_ObjectHideFlags: 0
