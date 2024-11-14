@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AttackScript : BaseAction
 {
@@ -15,6 +16,8 @@ public class AttackScript : BaseAction
     void OnDisable()
     {
         EventM.CancelAttackEvent -= OnCancelAttack;
+
+        DespawnHurtbox();
     }
 
     // ============================================================================
@@ -22,7 +25,7 @@ public class AttackScript : BaseAction
     [Header("On Attack")]
     public AttackSO attackSO;
     [Space]
-    public PrefabPreset attackPrefab;
+    public PrefabPreset hurtboxPrefab;
     
     public void TryAttack()
     {
@@ -44,6 +47,8 @@ public class AttackScript : BaseAction
         Dash(attackSO.dashOnWindUpForce, attackSO.dashOnWindUpDir);
 
         EventM.OnAttackWindedUp(owner, attackSO);
+
+        attackEvents.WindUp?.Invoke($"{attackSO.Name} Wind Up");
     }  
     // Anim Event
     public override void OnAnimReleaseStart()
@@ -51,23 +56,38 @@ public class AttackScript : BaseAction
         if(attackSO.dashOnRelease)
         Dash(attackSO.dashOnReleaseForce, attackSO.dashOnReleaseDir);
 
-        SpawnAttack();
+        SpawnHurtbox();
 
         EventM.OnAttackReleased(owner, attackSO);
+
+        attackEvents.ReleaseStart?.Invoke($"{attackSO.Name} Release Start");
+    }
+    // Anim Event
+    public override void OnAnimReleaseEnd()
+    {
+        DespawnHurtbox();
+
+        attackEvents.ReleaseEnd?.Invoke($"{attackSO.Name} Release End");
     }
     // Anim Event
     public override void OnAnimRecover()
     {
         DoCooldown();
+
+        DespawnHurtbox();
+
+        attackEvents.Recover?.Invoke($"{attackSO.Name} Recover");
     }  
 
     // ============================================================================
 
-    public void SpawnAttack()
-    {
-        GameObject spawned = attackPrefab.Spawn();
+    GameObject hurtbox;
 
-        TryAssignHurtboxOwner(spawned);
+    public void SpawnHurtbox()
+    {
+        hurtbox = hurtboxPrefab.Spawn();
+
+        TryAssignHurtboxOwner(hurtbox);
     }
 
     void TryAssignHurtboxOwner(GameObject target)
@@ -80,6 +100,11 @@ public class AttackScript : BaseAction
         {
             e_hurtbox.owner = owner;
         }
+    }
+
+    void DespawnHurtbox()
+    {
+        if(hurtbox) Destroy(hurtbox);
     }
 
     // ============================================================================
@@ -122,5 +147,21 @@ public class AttackScript : BaseAction
         CancelAnim();
 
         EventM.OnAttackCancelled(owner);
+
+        attackEvents.Cancel?.Invoke($"{attackSO.Name} Cancel");
     }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct AttackEvents
+    {
+        public UnityEvent<string> WindUp;
+        public UnityEvent<string> ReleaseStart;
+        public UnityEvent<string> ReleaseEnd;
+        public UnityEvent<string> Recover;
+        public UnityEvent<string> Cancel;
+    }
+    [Space]
+    public AttackEvents attackEvents;
 }

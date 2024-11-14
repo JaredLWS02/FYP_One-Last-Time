@@ -130,7 +130,8 @@ public class EnemyActions : MonoBehaviour
 
         if(!AllowHurt) return;
 
-        EventM.OnTryParry(owner, attacker, hurtbox, contactPoint);
+        //EventM.OnTryParry(owner, attacker, hurtbox, contactPoint);
+        EventM.OnHurt(owner, attacker, hurtbox, contactPoint);
     }
 
     // ============================================================================

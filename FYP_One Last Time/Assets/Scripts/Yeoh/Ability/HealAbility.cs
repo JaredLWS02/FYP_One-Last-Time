@@ -20,14 +20,16 @@ public class HealAbility : BaseAbility
 
     // Move to vfx manager later ============================================================================
 
+    [Header("Temp")]
+    public GameObject vfx_target;
+
     void TempVFX()
     {
         // flash green
-        SpriteManager.Current.FlashColor(owner, -1, 1, -1);
-        ModelManager.Current.FlashColor(owner, -1, 1, -1);
+        SpriteManager.Current.FlashColor(vfx_target, -1, 1, -1);
+        ModelManager.Current.FlashColor(vfx_target, -1, 1, -1);
 
-        Vector3 top = ColliderManager.Current.GetTop(owner);
-
+        Vector3 top = ColliderManager.Current.GetTop(vfx_target);
         // pop up text
         VFXManager.Current.SpawnPopUpText(top, $"+{abilitySO.magnitude}", Color.green);
 

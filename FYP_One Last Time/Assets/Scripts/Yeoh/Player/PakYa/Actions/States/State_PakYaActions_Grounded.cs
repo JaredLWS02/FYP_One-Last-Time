@@ -35,7 +35,6 @@ public class State_PakYaActions_Grounded : BaseState
         action.AllowDash = toggle;
         action.AllowAttack = toggle;
         action.AllowParry = toggle;
-        action.AllowCast = toggle;
         action.AllowHurt = toggle;
         action.AllowStun = toggle;
     }

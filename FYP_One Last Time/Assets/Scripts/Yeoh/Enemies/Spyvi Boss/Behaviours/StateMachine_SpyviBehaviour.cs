@@ -6,8 +6,7 @@ using UnityEngine;
 
 public class StateMachine_SpyviBehaviour : MonoBehaviour
 {
-    [HideInInspector]
-    public SpyviActions spyvi;
+    public SpyviActions spyvi {get; private set;}
 
     void Awake()
     {
