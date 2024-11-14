@@ -52,7 +52,7 @@ public class AudioSpawner : MonoBehaviour
     public class AudioLoopGroup
     {
         public string groupName;
-        
+        [Space]
         public string loopInName;
         public string loopName;
         public string loopOutName;
