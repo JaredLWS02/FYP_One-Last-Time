@@ -76,7 +76,10 @@ public class Hurtbox : MonoBehaviour
     void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contantPoint)
     {
         if(owner != attacker) return;
-        if(hurtboxSO != hurtbox) return;
+        // this.hurtboxSO is NOT an instance
+        // hurtbox param is an instance (clone)
+        // they are different
+        if(hurtboxSO.Name != hurtbox.Name) return;
 
         // decrease first, then check
         if(--hurtbox.pierceCount <= 0)
