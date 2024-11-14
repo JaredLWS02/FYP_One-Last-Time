@@ -48,6 +48,38 @@ public class AudioSpawner : MonoBehaviour
 
     // ============================================================================
 
+    [System.Serializable]
+    public class AudioLoopGroup
+    {
+        public string groupName;
+        
+        public string loopInName;
+        public string loopName;
+        public string loopOutName;
+    }
+
+    public List<AudioLoopGroup> loopGroups = new();
+
+    public AudioLoopGroup GetLoopGroup(string group_name)
+    {
+        if(string.IsNullOrEmpty(group_name))
+        {
+            Debug.LogWarning("Group name is null or empty.");
+            return null;
+        }
+        
+        AudioLoopGroup loopGroup = loopGroups.Find(group => group.groupName == group_name);
+        
+        if(loopGroup==null)
+        {
+            Debug.LogWarning($"Audio Group Name '{group_name}' not found.");
+        }
+
+        return loopGroup;
+    }
+
+    // ============================================================================
+    
     public void StartLoop(string loop_in_name, string loop_name)
     {
         AudioSource source = PlayAndReturn(loop_in_name);
@@ -56,16 +88,31 @@ public class AudioSpawner : MonoBehaviour
         StartCoroutine(StartingLoop(loop_name, source.clip.length));
     }
 
+    public void StartLoopGroup(string group_name)
+    {
+        AudioLoopGroup loopGroup = GetLoopGroup(group_name);
+        if(loopGroup==null) return;
+        StartLoop(loopGroup.loopInName, loopGroup.loopName);
+    }
+
     IEnumerator StartingLoop(string loop_name, float delay)
     {
         yield return new WaitForSeconds(delay);
         Play(loop_name);
     }
-    
-    public void StopLoop(string loop_name, string loop_out_name)
+
+    public void StopLoop(string loop_in_name, string loop_name, string loop_out_name)
     {
+        Stop(loop_in_name);
         Stop(loop_name);
         Play(loop_out_name);
+    }
+
+    public void StopLoopGroup(string group_name)
+    {
+        AudioLoopGroup loopGroup = GetLoopGroup(group_name);
+        if(loopGroup==null) return;
+        StopLoop(loopGroup.loopInName, loopGroup.loopName, loopGroup.loopOutName);
     }
 
     // ============================================================================
