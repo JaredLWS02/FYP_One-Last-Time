@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class JumpScript : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class JumpScript : MonoBehaviour
         {
             Jump();
             jumpAnim?.Play(owner);
+            
+            jumpEvents.Jump?.Invoke();
         }
         else
         {
@@ -113,6 +116,8 @@ public class JumpScript : MonoBehaviour
         extraJumpsLeft--;
         Jump();
         extraJumpAnim?.Play(owner);
+
+        jumpEvents.ExtraJump?.Invoke();
     }
 
     // ============================================================================
@@ -155,4 +160,14 @@ public class JumpScript : MonoBehaviour
         return true;
     }
 
+    // ============================================================================
+
+    [System.Serializable]
+    public struct JumpEvents
+    {
+        public UnityEvent Jump;
+        public UnityEvent ExtraJump;
+    }
+    [Space]
+    public JumpEvents jumpEvents;
 }
