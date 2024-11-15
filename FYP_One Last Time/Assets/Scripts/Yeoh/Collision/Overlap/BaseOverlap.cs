@@ -12,6 +12,7 @@ public class BaseOverlap : SlowUpdate
 
     // ============================================================================
 
+    //[Header("Debug")]
     List<GameObject> previous_colliders = new();
     List<GameObject> current_colliders = new();
 
@@ -39,20 +40,24 @@ public class BaseOverlap : SlowUpdate
             if(onlyRigidbodies && !rb) continue;
 
             GameObject obj = rb ? rb.gameObject : coll.gameObject;
-
+            
             current_colliders.Add(obj);
 
             // if present in current but missing in previous
             if(!previous_colliders.Contains(obj))
             {
-                OnOverlapFirstEnter(obj);
-                OverlapFirstEnterEvent?.Invoke(obj);
-                uEvents.OverlapFirstEnter?.Invoke(obj);
-            }
+                // if none previously, this is the first
+                if(previous_colliders.Count==0)
+                {
+                    OnOverlapFirstEnter(obj);
+                    OverlapFirstEnterEvent?.Invoke(obj);
+                    uEvents.OverlapFirstEnter?.Invoke(obj);
+                }
 
-            OnOverlapEnter(obj);
-            OverlapEnterEvent?.Invoke(obj);
-            uEvents.OverlapEnter?.Invoke(obj);
+                OnOverlapEnter(obj);
+                OverlapEnterEvent?.Invoke(obj);
+                uEvents.OverlapEnter?.Invoke(obj);
+            }
         }
     }
 
