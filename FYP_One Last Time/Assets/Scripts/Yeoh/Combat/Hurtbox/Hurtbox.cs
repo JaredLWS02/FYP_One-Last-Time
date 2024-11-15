@@ -81,8 +81,8 @@ public class Hurtbox : MonoBehaviour
         // they are different
         if(hurtboxSO.Name != hurtbox.Name) return;
 
-        // decrease first, then check
-        if(--hurtbox.pierceCount <= 0)
+        hurtbox.pierceCount--;
+        if(hurtbox.pierceCount <= 0)
         ToggleColl(false); 
 
         uEvents.Hurt?.Invoke();
