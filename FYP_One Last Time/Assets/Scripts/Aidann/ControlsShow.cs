@@ -18,7 +18,7 @@ public class ControlsShow : MonoBehaviour
 
             if (controlsVisible)
             {
-                controlsText.text = "- WASD/Arrow Keys to Move\r\n- Space/A to Jump\r\n- C/B to Dash\r\n- Z/X to Light Attack\r\n- X/Y to Heavy Attack\r\n- Q/LB to Parry\r\n- E+Z/RB+Y to Heal\r\n|P| <b>Hide<b>";
+                controlsText.text = "- WASD/Arrow Keys to Move\r\n- Space/A to Jump\r\n- Shift/B to Dash\r\n- Left Mouse/X to Light Attack\r\n- Right Mouse/Y to Heavy Attack\r\n- Q/LB to Parry\r\n- E+Z/RB+Y to Heal\r\n|P| <b>Hide<b>";
             }
             else
             {
