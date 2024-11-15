@@ -755,6 +755,15 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: a5c288c54caf30d4aaea401866c3070f, type: 2}
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 6939342611757571533}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: 8bf889c8e3dd15141ac043b3c77a3ac3, type: 2}
   audioEvents:
     EnableEvent:
       m_PersistentCalls:
@@ -2016,7 +2025,7 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 6939342611757571533}
-    parented: 1
+    parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
@@ -2938,7 +2947,7 @@ PrefabInstance:
     - target: {fileID: 5261146206814944013, guid: b398c4e05e3911d4c839b6fbca22b838,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6415192565362938597, guid: b398c4e05e3911d4c839b6fbca22b838,
         type: 3}
@@ -3399,7 +3408,7 @@ PrefabInstance:
     - target: {fileID: 8082436314912178447, guid: 2b7ee016883403344815e89e42a00748,
         type: 3}
       propertyPath: jumpEvents.ExtraJump.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Pak Yah Jump
+      value: Pak Yah Double Jump
       objectReference: {fileID: 0}
     - target: {fileID: 8082436314912178447, guid: 2b7ee016883403344815e89e42a00748,
         type: 3}
