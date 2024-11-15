@@ -8,9 +8,9 @@ public class BoxRaycast : BaseRaycast
     public Vector3 size = Vector3.one;
     Vector3 base_size;
 
-    public override bool HasHitTarget(out GameObject target)
+    public override bool RayHit(out GameObject target)
     {
-        if(Physics.BoxCast(rayOrigin.position, size*.5f, GetRayDir(), out rayHit, rayOrigin.rotation, range, hitLayers, QueryTriggerInteraction.Ignore))
+        if(Physics.BoxCast(origin.position, size*.5f, GetRayDir(), out rayHit, origin.rotation, range, hitLayers, QueryTriggerInteraction.Ignore))
         {
             if(IsHitValid(out var hitObj))
             {
@@ -38,10 +38,10 @@ public class BoxRaycast : BaseRaycast
         
     public override void OnBaseDrawGizmos(Vector3 start, Vector3 end)
     {
-        Gizmos.matrix = Matrix4x4.TRS(start, rayOrigin.rotation, Vector3.one);
+        Gizmos.matrix = Matrix4x4.TRS(start, origin.rotation, Vector3.one);
         Gizmos.DrawWireCube(Vector3.zero, size);
 
-        Gizmos.matrix = Matrix4x4.TRS(end, rayOrigin.rotation, Vector3.one);
+        Gizmos.matrix = Matrix4x4.TRS(end, origin.rotation, Vector3.one);
         Gizmos.DrawWireCube(Vector3.zero, size);
 
         // Reset the Gizmo matrix to default

@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 2133405159958436095}
   - component: {fileID: 4398210535468763715}
   - component: {fileID: 2569137203683378439}
+  - component: {fileID: -3057080778021283140}
   m_Layer: 7
   m_Name: SlashL Hurtbox
   m_TagString: Untagged
@@ -111,7 +112,19 @@ MonoBehaviour:
         m_Calls: []
     Hurt:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: -3057080778021283140}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Ya hit enemy
+            m_BoolArgument: 0
+          m_CallState: 2
   destroyOnHit: 0
   destroyOnHurt: 0
 --- !u!114 &2569137203683378439
@@ -133,3 +146,32 @@ MonoBehaviour:
   shrinkTo: {x: 0, y: 0, z: 0}
   shrinkTime: 0
   ignoreTimescale: 0
+--- !u!114 &-3057080778021283140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6110048730885984798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 5047775211774635753}
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: be313155c29b7d840ba2cffc336c245e, type: 2}
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentVerticalMove : MonoBehaviour
+public class AgentVerticalMove : SlowUpdate
 {
+    [Header("Vertical")]
     public GameObject owner;
     public AgentVehicle vehicle;
 
@@ -14,27 +15,17 @@ public class AgentVerticalMove : MonoBehaviour
     void OnEnable()
     {
         EventM = EventManager.Current;
-        
-        StartCoroutine(CheckingHeight());
     }
 
     // ============================================================================
     
-    [Header("Vertical")]
-    public float checkInterval=.25f;
-
-    IEnumerator CheckingHeight()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(checkInterval);
-            CheckHeight(vehicle.goal.position);
-        }
-    }
-
-    // ============================================================================
-    
+    [Header("Check")]
     public float checkHeight=2.5f;
+
+    public override void OnSlowUpdate()
+    {
+        CheckHeight(vehicle.goal.position);
+    }
 
     void CheckHeight(Vector3 target_pos)
     {
