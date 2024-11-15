@@ -59,7 +59,23 @@ MonoBehaviour:
   allowKnockback: 1
   knockbackMult: 1
   iframeOnDeath: 1
-  destroyOnDeath: 0
+  destroyOnDeath: 1
+  hurtEvents:
+    OnDeath:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3318535268997628051}
+          m_TargetAssemblyTypeName: PakYa, Assembly-CSharp
+          m_MethodName: ReloadScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1866404577720983535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3009,7 +3025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   hpMax: 100
-  regen: 0
+  regen: 1
   regenWhenEmpty: 0
   regenHp: 0.2
   regenInterval: 0.1
