@@ -24,4 +24,10 @@ public class PakYa : MonoBehaviour
         EventM.OnSpawned(gameObject);
     }
     
+    // ============================================================================
+
+    public void ReloadScene()
+    {
+        ScenesManager.Current.ReloadScene();
+    }
 }

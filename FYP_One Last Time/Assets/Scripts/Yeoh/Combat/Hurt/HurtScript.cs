@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HurtScript : MonoBehaviour
 {
@@ -231,7 +232,19 @@ public class HurtScript : MonoBehaviour
 
         RevertColor(owner);
 
+        hurtEvents.OnDeath?.Invoke();
+
         if(destroyOnDeath)
         Destroy(owner);
     }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct HurtEvents
+    {
+        public UnityEvent OnDeath;
+    }
+    [Header("Hurt Events")]
+    public HurtEvents hurtEvents;
 }
