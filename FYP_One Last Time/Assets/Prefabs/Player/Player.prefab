@@ -2747,7 +2747,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Pak Yah Jump
+            m_StringArgument: Pak Yah Double Jump
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &1874970261637118981
@@ -2786,6 +2786,15 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: a5c288c54caf30d4aaea401866c3070f, type: 2}
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: 8bf889c8e3dd15141ac043b3c77a3ac3, type: 2}
   loopGroups: []
   audioEvents:
     EnableEvent:
