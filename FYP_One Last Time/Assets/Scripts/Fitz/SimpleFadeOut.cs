@@ -9,6 +9,10 @@ public class SimpleFadeOut : MonoBehaviour
     CanvasGroup canvas;
     bool fadedOut = false;
     float deltaTime = 0f;
+
+    public float waitDuration=3;
+    public float fadeDuration=2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +24,9 @@ public class SimpleFadeOut : MonoBehaviour
     {
         deltaTime += Time.deltaTime;
 
-        if (!fadedOut && deltaTime > 3f)
+        if (!fadedOut && deltaTime > waitDuration)
         {
-            StartCoroutine(IncreaseAlphaOverTime(canvas, 1f, 0f, 2f));
+            StartCoroutine(IncreaseAlphaOverTime(canvas, 1f, 0f, fadeDuration));
 
             fadedOut = true;
         }

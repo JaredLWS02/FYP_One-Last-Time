@@ -31,7 +31,6 @@ public class State_PakYaActions_Dashing : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        action.AllowParry = toggle;
         action.AllowHurt = toggle;
         action.AllowStun = toggle;
     }

@@ -7,9 +7,8 @@ public enum Scenes // must be in the same order as in the build settings, and ca
 {
     Intro,
     MainMenu,
-    Yeoh1,
-    LoseScene,
-    WinScene
+    IntroText,
+    TestArea,
 }
 
 public class ScenesManager : MonoBehaviour
