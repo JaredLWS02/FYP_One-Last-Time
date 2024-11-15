@@ -2305,6 +2305,7 @@ GameObject:
   - component: {fileID: 2472299377499092817}
   - component: {fileID: 1401727047894497609}
   - component: {fileID: 1234111061507024434}
+  - component: {fileID: 1894536892237456442}
   m_Layer: 6
   m_Name: Small Tikus
   m_TagString: Enemy
@@ -2374,6 +2375,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 6995670659757724566}
   currentPilot: 2
+--- !u!114 &1894536892237456442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995670659757724566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919037066caba8e4b8f7e8a939aa372e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkInterval: 0.2
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  owner: {fileID: 6995670659757724566}
+  ground: {fileID: 6364306906685696337}
+  minY: -20
 --- !u!1 &7021269989712493573
 GameObject:
   m_ObjectHideFlags: 0
