@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 98971669180264664}
   - component: {fileID: 1410335126641825925}
   - component: {fileID: 7975362184149562795}
+  - component: {fileID: 2859457414168349167}
   m_Layer: 3
   m_Name: Abilities
   m_TagString: Untagged
@@ -463,10 +464,34 @@ MonoBehaviour:
   castingEvents:
     CastingStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 2859457414168349167}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Ya Casting
+            m_BoolArgument: 0
+          m_CallState: 2
     CastingStop:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 2859457414168349167}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Stop
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Ya Casting
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &7975362184149562795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,7 +513,19 @@ MonoBehaviour:
         m_Calls: []
     ReleaseStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 2859457414168349167}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Anaya Heal
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls: []
@@ -503,6 +540,45 @@ MonoBehaviour:
   mpM: {fileID: 7058722310484815464}
   hpM: {fileID: 1861734953551003033}
   vfx_target: {fileID: 8987163089559660572}
+--- !u!114 &2859457414168349167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756698445312053699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 8437002372998797620}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: 5acf4d6b9b75d3c48a64318797c028e2, type: 2}
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 8437002372998797620}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: 00abb9bdee24b954c8aef1d4a95d3a01, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &2941172494308309934
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +590,7 @@ GameObject:
   - component: {fileID: 2968421400926582619}
   - component: {fileID: 7022457898630109682}
   - component: {fileID: 1109364968870284027}
+  - component: {fileID: 7407755151823912840}
   m_Layer: 3
   m_Name: Attacks
   m_TagString: Untagged
@@ -587,7 +664,19 @@ MonoBehaviour:
         m_Calls: []
     ReleaseStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7407755151823912840}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls: []
@@ -611,6 +700,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &7407755151823912840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2941172494308309934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: d45b68080e018ed4f821d1a431798bad, type: 2}
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: a0c76c469d1d642479b2737679547845, type: 2}
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: ccf8d6656725c2243af89bfc383ba4c5, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &2948484968028016200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1162,6 +1299,7 @@ GameObject:
   - component: {fileID: 6281709897807071656}
   - component: {fileID: 2575847150646626897}
   - component: {fileID: 3177311551941944144}
+  - component: {fileID: 118276988135510132}
   m_Layer: 3
   m_Name: Dash
   m_TagString: Untagged
@@ -1205,7 +1343,19 @@ MonoBehaviour:
         m_Calls: []
     ReleaseStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 118276988135510132}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Ya Dash
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls: []
@@ -1256,6 +1406,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &118276988135510132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5918945628297077924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: cb080bd8e024051479c824f425f0f2d8, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &6177494582529698581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,6 +2633,7 @@ GameObject:
   - component: {fileID: 823738866486078077}
   - component: {fileID: 8082436314912178447}
   - component: {fileID: 1874970261637118981}
+  - component: {fileID: 3504386022006822260}
   m_Layer: 3
   m_Name: Jump
   m_TagString: Untagged
@@ -2501,10 +2682,34 @@ MonoBehaviour:
   jumpEvents:
     Jump:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3504386022006822260}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Yah Jump
+            m_BoolArgument: 0
+          m_CallState: 2
     ExtraJump:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3504386022006822260}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Yah Jump
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1874970261637118981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2519,6 +2724,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &3504386022006822260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966764484049088294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: a5c288c54caf30d4aaea401866c3070f, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &8067178139141326649
 GameObject:
   m_ObjectHideFlags: 0
