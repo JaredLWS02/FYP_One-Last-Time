@@ -2184,7 +2184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1469413945
 Transform:
   m_ObjectHideFlags: 0
@@ -2583,7 +2583,6 @@ MonoBehaviour:
   owner: {fileID: 1683362766}
   currentState: 0
   anim: {fileID: 0}
-  actionCounter: 0
   uEvents:
     WindUp:
       m_PersistentCalls:
@@ -2600,6 +2599,7 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
+  actionCounter: 0
   phases:
   - phaseName: Phase1
     loop:
@@ -3572,16 +3572,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1861734953551003033, guid: 2b7ee016883403344815e89e42a00748,
-        type: 3}
-      propertyPath: hp
-      value: 99999
-      objectReference: {fileID: 0}
-    - target: {fileID: 1861734953551003033, guid: 2b7ee016883403344815e89e42a00748,
-        type: 3}
-      propertyPath: hpMax
-      value: 99999
-      objectReference: {fileID: 0}
     - target: {fileID: 3244643148724226296, guid: 2b7ee016883403344815e89e42a00748,
         type: 3}
       propertyPath: m_AnchorMax.x
