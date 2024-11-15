@@ -8,9 +8,9 @@ public class SphereRaycast : BaseRaycast
     public float radius=1;
     float base_radius;
 
-    public override bool HasHitTarget(out GameObject target)
+    public override bool RayHit(out GameObject target)
     {
-        if(Physics.SphereCast(rayOrigin.position, radius, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
+        if(Physics.SphereCast(origin.position, radius, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
         {
             if(IsHitValid(out var hitObj))
             {

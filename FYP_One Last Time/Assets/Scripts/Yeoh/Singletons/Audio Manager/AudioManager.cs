@@ -59,5 +59,20 @@ public class AudioManager : MonoBehaviour
         
         if(time>0) volumeTweens[source] = Tween.AudioVolume(source, to, time, Ease.InOutSine, useUnscaledTime: true);
         else source.volume = to;
-    }    
+    }
+
+    // ==================================================================================================================
+
+    [Header("Play Audio")]
+    public AudioSpawner audioSpawner;
+
+    public void PlayAudio(AudioPrefab audio, Vector3 pos)
+    {
+        audio.spawnpoint = null;
+        audio.spawnPos = pos;
+        
+        PlayAudio(audio);
+    }
+
+    public void PlayAudio(AudioPrefab audio) => audioSpawner.PlayAudio(audio);
 }

@@ -21,13 +21,27 @@ public class AgentAttack : MonoBehaviour
 
     public void Attack()
     {
-        if(CanSeeTarget())
+        if(!IsGroundCheckValid()) return;
+        if(!CanSeeTarget()) return;
+
         EventM.OnAgentTryAttack(owner, attackName);
     }
 
     // ============================================================================
     
-    [Header("Sight")]
+    [Header("Optional")]
+    public GroundCheck ground;
+    public bool allowGrounded=true;
+    public bool allowMidAir=true;
+
+    public bool IsGroundCheckValid()
+    {
+        if(!ground) return true;
+
+        return (allowGrounded && ground.IsGrounded()) ||
+                (allowMidAir && !ground.IsGrounded());
+    }
+
     public BaseRaycast sight;
     public bool CanSeeTarget() => sight?.IsHitting() ?? true;
 

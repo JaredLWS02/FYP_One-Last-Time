@@ -13,10 +13,12 @@ public class SFXManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////////////////
 
+    AudioManager AudioM;
     EventManager EventM;
 
     void OnEnable()
     {
+        AudioM = AudioManager.Current;
         EventM = EventManager.Current;
         
         // EventM.SpawnEvent += OnSpawn;
@@ -123,11 +125,11 @@ public class SFXManager : MonoBehaviour
     // public AudioClip[] sfxHitFlesh;
     // public AudioClip[] voiceAlexHurt;
 
-    [Header("Main Menu UI")]
-    public AudioClip[] sfxUISelectButton;
-    public AudioClip[] sfxUIHoverButton;
+    // [Header("Main Menu UI")]
+    // public AudioClip[] sfxUISelectButton;
+    // public AudioClip[] sfxUIHoverButton;
 
-    Dictionary<GameObject, AudioSource> soundLoops = new();
+    // Dictionary<GameObject, AudioSource> soundLoops = new();
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -136,7 +138,7 @@ public class SFXManager : MonoBehaviour
     //     if(spawned.TryGetComponent(out Enemy enemy))
     //     {
     //         if(Random.Range(0,5)==0)
-    //         AudioManager.Current.PlaySFX(sfxSpawnEnemy, spawned.transform.position);
+    //         AudioM.PlaySFX(sfxSpawnEnemy, spawned.transform.position);
     //     }
     // }
 
@@ -146,9 +148,9 @@ public class SFXManager : MonoBehaviour
     //     {
     //         switch(enemy.enemyName)
     //         {
-    //             case EnemyName.Zombie: AudioManager.Current.PlayVoice(enemy.voicebox, voiceZombieIdle); break;
-    //             case EnemyName.Spider: AudioManager.Current.PlayVoice(enemy.voicebox, voiceSpiderSay); break;
-    //             case EnemyName.Skeleton: AudioManager.Current.PlayVoice(enemy.voicebox, voiceSkeletonIdle); break;
+    //             case EnemyName.Zombie: AudioM.PlayVoice(enemy.voicebox, voiceZombieIdle); break;
+    //             case EnemyName.Spider: AudioM.PlayVoice(enemy.voicebox, voiceSpiderSay); break;
+    //             case EnemyName.Skeleton: AudioM.PlayVoice(enemy.voicebox, voiceSkeletonIdle); break;
     //         }
     //     }
     // }
@@ -157,24 +159,24 @@ public class SFXManager : MonoBehaviour
     // {
     //     if(victim.TryGetComponent(out Steve steve))
     //     {
-    //         AudioManager.Current.PlaySFX(sfxHitNpc, victim.transform.position);
+    //         AudioM.PlaySFX(sfxHitNpc, victim.transform.position);
 
     //         switch(steve.npcName)
     //         {
-    //             case NPCName.Steve: AudioManager.Current.PlayVoice(steve.voicebox, voiceSteveHurt); break;
-    //             case NPCName.Alex: AudioManager.Current.PlayVoice(steve.voicebox, voiceAlexHurt); break;
+    //             case NPCName.Steve: AudioM.PlayVoice(steve.voicebox, voiceSteveHurt); break;
+    //             case NPCName.Alex: AudioM.PlayVoice(steve.voicebox, voiceAlexHurt); break;
     //         }
     //     }
 
     //     else if(victim.TryGetComponent(out Enemy enemy))
     //     {
-    //         if(enemy.enemyName!=EnemyName.Skeleton) AudioManager.Current.PlaySFX(sfxHitFlesh, victim.transform.position);
+    //         if(enemy.enemyName!=EnemyName.Skeleton) AudioM.PlaySFX(sfxHitFlesh, victim.transform.position);
 
     //         switch(enemy.enemyName)
     //         {
-    //             case EnemyName.Zombie: AudioManager.Current.PlayVoice(enemy.voicebox, voiceZombieHurt); break;
-    //             case EnemyName.Spider: AudioManager.Current.PlayVoice(enemy.voicebox, voiceSpiderSay); break;
-    //             case EnemyName.Skeleton: AudioManager.Current.PlayVoice(enemy.voicebox, voiceSkeletonHurt); break;
+    //             case EnemyName.Zombie: AudioM.PlayVoice(enemy.voicebox, voiceZombieHurt); break;
+    //             case EnemyName.Spider: AudioM.PlayVoice(enemy.voicebox, voiceSpiderSay); break;
+    //             case EnemyName.Skeleton: AudioM.PlayVoice(enemy.voicebox, voiceSkeletonHurt); break;
     //         }
     //     }
 
@@ -184,19 +186,19 @@ public class SFXManager : MonoBehaviour
     //         {
     //             case Item.WoodLog:
     //             {
-    //                 AudioManager.Current.PlaySFX(sfxHitWood, victim.transform.position);
-    //                 AudioManager.Current.PlaySFX(sfxHitWood2, victim.transform.position);
+    //                 AudioM.PlaySFX(sfxHitWood, victim.transform.position);
+    //                 AudioM.PlaySFX(sfxHitWood2, victim.transform.position);
     //             } break;
 
     //             case Item.Stone:
     //             {
-    //                 AudioManager.Current.PlaySFX(sfxHitStone, victim.transform.position);
-    //                 AudioManager.Current.PlaySFX(sfxHitStone2, victim.transform.position);
+    //                 AudioM.PlaySFX(sfxHitStone, victim.transform.position);
+    //                 AudioM.PlaySFX(sfxHitStone2, victim.transform.position);
     //             } break;
 
-    //             case Item.CoalOre: AudioManager.Current.PlaySFX(sfxHitStone, victim.transform.position); break;
-    //             case Item.IronOre: AudioManager.Current.PlaySFX(sfxHitStone, victim.transform.position); break;
-    //             case Item.Diamond: AudioManager.Current.PlaySFX(sfxHitStone, victim.transform.position); break;
+    //             case Item.CoalOre: AudioM.PlaySFX(sfxHitStone, victim.transform.position); break;
+    //             case Item.IronOre: AudioM.PlaySFX(sfxHitStone, victim.transform.position); break;
+    //             case Item.Diamond: AudioM.PlaySFX(sfxHitStone, victim.transform.position); break;
     //         }
     //     }
     // }
@@ -205,18 +207,18 @@ public class SFXManager : MonoBehaviour
     // {
     //     if(victim.TryGetComponent(out Steve steve))
     //     {
-    //         AudioManager.Current.PlaySFX(sfxDeathNpc, victim.transform.position, false);
+    //         AudioM.PlaySFX(sfxDeathNpc, victim.transform.position, false);
     //     }
 
     //     else if(victim.TryGetComponent(out Enemy enemy))
     //     {
-    //         if(enemy.enemyName!=EnemyName.Skeleton) AudioManager.Current.PlaySFX(sfxDeathEnemy, victim.transform.position);
+    //         if(enemy.enemyName!=EnemyName.Skeleton) AudioM.PlaySFX(sfxDeathEnemy, victim.transform.position);
 
     //         switch(enemy.enemyName)
     //         {
-    //             case EnemyName.Zombie: AudioManager.Current.PlaySFX(voiceZombieDeath, victim.transform.position); break;
-    //             case EnemyName.Spider: AudioManager.Current.PlaySFX(voiceSpiderDeath, victim.transform.position); break;
-    //             case EnemyName.Skeleton: AudioManager.Current.PlaySFX(voiceSkeletonDeath, victim.transform.position); break;
+    //             case EnemyName.Zombie: AudioM.PlaySFX(voiceZombieDeath, victim.transform.position); break;
+    //             case EnemyName.Spider: AudioM.PlaySFX(voiceSpiderDeath, victim.transform.position); break;
+    //             case EnemyName.Skeleton: AudioM.PlaySFX(voiceSkeletonDeath, victim.transform.position); break;
     //         }
     //     }
 
@@ -224,11 +226,11 @@ public class SFXManager : MonoBehaviour
     //     {
     //         switch(resource.type)
     //         {
-    //             case Item.WoodLog: AudioManager.Current.PlaySFX(sfxBreakWood, victim.transform.position); break;
-    //             case Item.Stone: AudioManager.Current.PlaySFX(sfxBreakStone, victim.transform.position); break;
-    //             case Item.CoalOre: AudioManager.Current.PlaySFX(sfxBreakStone, victim.transform.position); break;
-    //             case Item.IronOre: AudioManager.Current.PlaySFX(sfxBreakStone, victim.transform.position); break;
-    //             case Item.Diamond: AudioManager.Current.PlaySFX(sfxBreakDiamond, victim.transform.position); break;
+    //             case Item.WoodLog: AudioM.PlaySFX(sfxBreakWood, victim.transform.position); break;
+    //             case Item.Stone: AudioM.PlaySFX(sfxBreakStone, victim.transform.position); break;
+    //             case Item.CoalOre: AudioM.PlaySFX(sfxBreakStone, victim.transform.position); break;
+    //             case Item.IronOre: AudioM.PlaySFX(sfxBreakStone, victim.transform.position); break;
+    //             case Item.Diamond: AudioM.PlaySFX(sfxBreakDiamond, victim.transform.position); break;
     //         }
     //     }
     // }    
@@ -237,18 +239,18 @@ public class SFXManager : MonoBehaviour
 
     // public void OnLoot(GameObject looter, GameObject loot, LootInfo lootInfo)
     // {
-    //     AudioManager.Current.PlaySFX(sfxLoot, looter.transform.position);
+    //     AudioM.PlaySFX(sfxLoot, looter.transform.position);
 
     //     if(lootInfo.item==Item.DiamondBlock)
     //     {
-    //         AudioManager.Current.PlaySFX(sfxLootDiamondBlock, looter.transform.position);
+    //         AudioM.PlaySFX(sfxLootDiamondBlock, looter.transform.position);
     //     }
 
     //     ItemFood food = ItemManager.Current.GetFood(lootInfo.item);
 
     //     if(food!=null)
     //     {
-    //         AudioManager.Current.PlaySFX(sfxLootFood, looter.transform.position);
+    //         AudioM.PlaySFX(sfxLootFood, looter.transform.position);
     //         return;
     //     }
         
@@ -256,7 +258,7 @@ public class SFXManager : MonoBehaviour
 
     //     if(potion!=null)
     //     {
-    //         AudioManager.Current.PlaySFX(sfxLootDrink, looter.transform.position);
+    //         AudioM.PlaySFX(sfxLootDrink, looter.transform.position);
     //     }
     // }
 
@@ -264,20 +266,20 @@ public class SFXManager : MonoBehaviour
     // {
     //     if(newBuff==Buff.Speed)
     //     {
-    //         AudioManager.Current.PlaySFX(sfxLootSpeed, target.transform.position);
+    //         AudioM.PlaySFX(sfxLootSpeed, target.transform.position);
     //     }
     // }
 
     // void OnEnderPearl(GameObject teleporter, float teleportTime, Vector3 from, Vector3 to)
     // {
-    //     AudioManager.Current.PlaySFX(sfxPearl, from);
-    //     AudioManager.Current.PlaySFX(sfxPearl, to);
+    //     AudioM.PlaySFX(sfxPearl, from);
+    //     AudioM.PlaySFX(sfxPearl, to);
     // }
 
     // void OnMaceSlam(GameObject mace)
     // {
-    //     AudioManager.Current.PlaySFX(sfxMaceSlam, mace.transform.position);
-    //     AudioManager.Current.PlaySFX(sfxMaceSlam2, mace.transform.position);
+    //     AudioM.PlaySFX(sfxMaceSlam, mace.transform.position);
+    //     AudioM.PlaySFX(sfxMaceSlam2, mace.transform.position);
     // }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -292,18 +294,18 @@ public class SFXManager : MonoBehaviour
 
     //         if(recipe.craftingStation==StationType.CraftingTable)
     //         {
-    //             AudioManager.Current.PlaySFX(sfxCraftLoop, station.transform.position);
+    //             AudioM.PlaySFX(sfxCraftLoop, station.transform.position);
 
-    //             soundLoops[station] = AudioManager.Current.LoopSFX(station, sfxCraftLoop);
+    //             soundLoops[station] = AudioM.LoopSFX(station, sfxCraftLoop);
     //         }
 
     //         else if(recipe.craftingStation==StationType.Furnace)
     //         {
-    //             AudioManager.Current.PlaySFX(sfxFireIgnite, station.transform.position);
-    //             AudioManager.Current.PlaySFX(sfxFireIgnite2, station.transform.position);
-    //             AudioManager.Current.PlaySFX(sfxFurnace, station.transform.position);
+    //             AudioM.PlaySFX(sfxFireIgnite, station.transform.position);
+    //             AudioM.PlaySFX(sfxFireIgnite2, station.transform.position);
+    //             AudioM.PlaySFX(sfxFurnace, station.transform.position);
 
-    //             soundLoops[station] = AudioManager.Current.LoopSFX(station, sfxFireLoop);
+    //             soundLoops[station] = AudioM.LoopSFX(station, sfxFireLoop);
     //         }
     //     }
     // }
@@ -317,21 +319,21 @@ public class SFXManager : MonoBehaviour
             
     //         if(recipe.craftingStation==StationType.Furnace)
     //         {
-    //             AudioManager.Current.PlaySFX(sfxFireIgnite, station.transform.position);
-    //             AudioManager.Current.PlaySFX(sfxFireIgnite2, station.transform.position);
+    //             AudioM.PlaySFX(sfxFireIgnite, station.transform.position);
+    //             AudioM.PlaySFX(sfxFireIgnite2, station.transform.position);
     //         }
     //     }
 
     //     if(soundLoops.ContainsKey(station) && soundLoops[station])
     //     {
-    //         AudioManager.Current.StopLoop(soundLoops[station]);
+    //         AudioM.StopLoop(soundLoops[station]);
     //         soundLoops.Remove(station);
     //     }
     // }
 
     // void OnCrafted(GameObject crafter, GameObject station, Recipe recipe)
     // {
-    //     AudioManager.Current.PlaySFX(sfxCraftFinish, station.transform.position);
-    //     AudioManager.Current.PlaySFX(sfxUICraft, station.transform.position);
+    //     AudioM.PlaySFX(sfxCraftFinish, station.transform.position);
+    //     AudioM.PlaySFX(sfxUICraft, station.transform.position);
     // }
 }
