@@ -375,7 +375,7 @@
                 {
                     "name": "",
                     "id": "f090da58-cd47-47bc-8791-e51aa1bfb43d",
-                    "path": "<Keyboard>/z",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -441,7 +441,7 @@
                 {
                     "name": "",
                     "id": "4eef7e5b-85c7-4db5-a845-9ebcde2168cc",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -1272,6 +1272,11 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>/{Back}",
                     "isOptional": false,
                     "isOR": false
                 }
