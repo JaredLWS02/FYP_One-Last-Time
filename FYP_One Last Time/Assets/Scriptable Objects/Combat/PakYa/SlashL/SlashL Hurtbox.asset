@@ -14,17 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: PakYa SlashL Hurtbox
   description: 
-  damage: 25
-  knockback: 25
+  damage: 15
+  knockback: 40
   blockDamage: 25
   blockKnockback: 25
-  pierceCount: 1
+  pierceCount: 3
   isParryable: 1
   parryStunsOwner: 1
   canStun: 1
-  stunAnim:
-    names:
-    - Stun1
-    layer: 1
-    blendTime: 0
-    cancelName: Cancel
+  customStunAnim: {fileID: 0}
