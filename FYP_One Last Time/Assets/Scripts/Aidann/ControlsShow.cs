@@ -6,15 +6,8 @@ using TMPro;
 public class ControlsShow : MonoBehaviour
 {
     public TextMeshProUGUI controlsText;
-    public TextMeshProUGUI hideShowText;
 
-    private Vector3 originalPosition;
     private bool controlsVisible = true;
-
-    void Start()
-    {
-        originalPosition = hideShowText.transform.position;
-    }
 
     // Update is called once per frame
     void Update()
@@ -22,17 +15,14 @@ public class ControlsShow : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             controlsVisible = !controlsVisible;
-            controlsText.enabled = controlsVisible;
 
             if (controlsVisible)
             {
-                hideShowText.transform.position = originalPosition;
-                hideShowText.text = "| P | <b> Hide <b>";
+                controlsText.text = "- WASD/Arrow Keys to Move\r\n- Space/A to Jump\r\n- Shift/B to Dash\r\n- Left Mouse/X to Light Attack\r\n- Right Mouse/Y to Heavy Attack\r\n- Q/LB to Parry\r\n- E+Z/RB+Y to Heal\r\n|P| <b>Hide<b>";
             }
             else
             {
-                hideShowText.transform.position = controlsText.transform.position;
-                hideShowText.text = "| P | <b> Show <b>";
+                controlsText.text = "| P | <b> Show<b>";
             }
         }
     }
