@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3cbd62398e00b46a8bf50f5797d997, type: 3}
   m_Name: Slam
   m_EditorClassIdentifier: 
-  Name: Tikus Slam
+  Name: Slam
   description: 
   anim: {fileID: 11400000, guid: a9788db745739f14a8c21c2175519fb1, type: 2}
   dashOnWindUp: 0
@@ -21,8 +21,5 @@ MonoBehaviour:
   dashOnRelease: 0
   dashOnReleaseForce: 0
   dashOnReleaseDir: {x: 0, y: 0, z: 1}
-  dashOnRecover: 0
-  dashOnRecoverForce: 0
-  dashOnRecoverDir: {x: 0, y: 0, z: 1}
   localDir: 1
-  cooldownTime: 1
+  cooldownTime: 0

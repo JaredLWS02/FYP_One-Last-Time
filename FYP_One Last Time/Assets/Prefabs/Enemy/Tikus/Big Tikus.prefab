@@ -132,7 +132,7 @@ Transform:
   m_GameObject: {fileID: 498133114978186384}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.89, z: -0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -181,8 +181,8 @@ MonoBehaviour:
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  fov: {x: 0, y: 180}
-  rays: {x: 1, y: 40}
+  fov: {x: 0, y: 330}
+  rays: {x: 1, y: 50}
 --- !u!1 &507965927288791515
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 7246694524904160894}
   - component: {fileID: 747716922801805443}
   m_Layer: 6
-  m_Name: Normal Combo
+  m_Name: Slam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,6 +216,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6955758431937353321}
+  - {fileID: 8395798843393759297}
   m_Father: {fileID: 8449358400114368154}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3962663419828832351
@@ -232,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
   attack: {fileID: 6861530176262365675}
-  comboName: Normal Combo
+  comboName: Slam
   comboSteps:
   - attackSO: {fileID: 11400000, guid: 8db0e5daa15601340821c312ff964fc0, type: 2}
     hurtboxPrefab:
@@ -246,9 +247,9 @@ MonoBehaviour:
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
   randomCombo: 0
   comboResetTimer: {fileID: 7246694524904160894}
-  comboResetTime: 0.25
+  comboResetTime: 0.5
   cooldown: {fileID: 747716922801805443}
-  comboCooldownTime: 0.25
+  comboCooldownTime: 0.5
 --- !u!114 &7246694524904160894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,11 +406,118 @@ MonoBehaviour:
   sight: {fileID: 1219722450071829959}
   expandRadarRangeMult: 1.5
   move: {fileID: 5446114617604419300}
-  targetArrivalRange: 5.5
+  targetArrivalRange: 7
   flee: {fileID: 3971028520478048224}
   returner: {fileID: 8569300168571094313}
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
+--- !u!1 &1405063517788493023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8395798843393759297}
+  - component: {fileID: 4415285324967952806}
+  - component: {fileID: 7299535099910438180}
+  m_Layer: 6
+  m_Name: Detection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8395798843393759297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405063517788493023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.08, z: 5.38}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3071236275463930265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4415285324967952806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405063517788493023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkInterval: 0.5
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  uEvents:
+    OverlapFirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OverlapEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OverlapStay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7299535099910438180}
+          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
+          m_MethodName: Attack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OverlapExit:
+      m_PersistentCalls:
+        m_Calls: []
+    OverlapLastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 8395798843393759297}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 8
+  range: 1.76
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
+--- !u!114 &7299535099910438180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405063517788493023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  attackName: Slam
+  ground: {fileID: 4037544487675790279}
+  allowGrounded: 1
+  allowMidAir: 0
+  sight: {fileID: 1219722450071829959}
 --- !u!1 &1611157070665987421
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +598,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1772463966900613630}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.46
+  m_Radius: 1.96
   m_Speed: 0
   m_Acceleration: 0
   avoidancePriority: 50
@@ -499,7 +607,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2.34
+  m_Height: 2.59
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -525,7 +633,7 @@ MonoBehaviour:
   returner: {fileID: 8569300168571094313}
   randomSeekBehaviour: {fileID: 1218149885779216908}
   hpM: {fileID: 704049436961937626}
-  fleeHPPercent: 25
+  fleeHPPercent: 10
   randomFleeBehaviour: {fileID: 8370244478339295556}
 --- !u!114 &3731827293064252220
 MonoBehaviour:
@@ -665,7 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkInterval: 0.5
+  checkInterval: 1
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
@@ -673,7 +781,7 @@ MonoBehaviour:
         m_Calls: []
   options:
   - name: Flee
-    weight: 10
+    weight: 5
   - name: Wander
     weight: 1
   currentOption: Flee
@@ -806,9 +914,9 @@ MonoBehaviour:
   turn: {fileID: 8663946442160230497}
   goal: {fileID: 0}
   arrival: 1
-  stoppingRange: 5.5
+  stoppingRange: 1
   slowingRangeOffset: 3
-  maintainRange: 4.5
+  maintainRange: 5
   selfStoppingRange: 0.5
   showGizmos: 0
   showStoppingRangeGizmo: 1
@@ -851,9 +959,9 @@ MonoBehaviour:
         m_Calls: []
   owner: {fileID: 5261146206814944013}
   vehicle: {fileID: 293840219241273385}
-  checkHeight: 2.5
-  checkRange: 6
-  showGizmos: 0
+  checkHeight: 2
+  checkRange: 8
+  showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
 --- !u!1 &2647459806633737789
 GameObject:
@@ -966,7 +1074,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 97bb9088f33bcb641b86b91a8a90b999, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9f47a809964e79d44b26be8c88fb2439, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -987,7 +1095,7 @@ Animator:
   m_GameObject: {fileID: 2719329177920231827}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f0465bb6b57acff438c073458844f872, type: 2}
+  m_Controller: {fileID: 9100000, guid: cece37819a5fd5946938275c07013fa6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1224,8 +1332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60717865382c15e43a9c331af53c04b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  hpMax: 100
+  hp: 200
+  hpMax: 200
   regen: 0
   regenWhenEmpty: 0
   regenHp: 0.2
@@ -1287,10 +1395,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6955758431937353321}
-  - component: {fileID: 2866308342831164494}
-  - component: {fileID: 3342305840274279284}
   m_Layer: 6
-  m_Name: Slam Firepoint
+  m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1305,86 +1411,12 @@ Transform:
   m_GameObject: {fileID: 3625512440802626329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 4.29}
+  m_LocalPosition: {x: 0, y: 1.05, z: 5.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3071236275463930265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2866308342831164494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3625512440802626329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkInterval: 0.5
-  fixedUpdate: 1
-  uEvents_su:
-    SlowUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-  ignoreTriggers: 1
-  onlyRigidbodies: 1
-  uEvents:
-    OverlapFirstEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapStay:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3342305840274279284}
-          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
-          m_MethodName: Attack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OverlapExit:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapLastExit:
-      m_PersistentCalls:
-        m_Calls: []
-  origin: {fileID: 6955758431937353321}
-  posOffset: {x: 0, y: 0, z: 0}
-  layers:
-    serializedVersion: 2
-    m_Bits: 8
-  range: 2.02
-  showGizmos: 1
-  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
---- !u!114 &3342305840274279284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3625512440802626329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 5261146206814944013}
-  attackName: Normal Combo
-  ground: {fileID: 4037544487675790279}
-  allowGrounded: 1
-  allowMidAir: 0
-  sight: {fileID: 1219722450071829959}
 --- !u!1 &4345753957651105915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,7 +1718,7 @@ Transform:
   m_GameObject: {fileID: 5701653159739410106}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.886, z: 0}
+  m_LocalPosition: {x: -0, y: 1.101, z: 0.121}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1714,8 +1746,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.95
-  m_Height: 2.7
+  m_Radius: 1.11
+  m_Height: 3.16
   m_Direction: 2
   m_Center: {x: -8.077936e-28, y: 0, z: -0.00000023841858}
 --- !u!1 &5939665830983807460
@@ -2032,7 +2064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkInterval: 0.5
+  checkInterval: 1
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
@@ -2040,7 +2072,7 @@ MonoBehaviour:
         m_Calls: []
   options:
   - name: Seek
-    weight: 10
+    weight: 5
   - name: Wander (disabled)
     weight: 1
   - name: Flee (disabled)
@@ -2164,7 +2196,7 @@ Transform:
   m_GameObject: {fileID: 8814332884574839046}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071064, y: -0, z: -0.000000029802319, w: 0.70710725}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.782, z: 0.014}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2225,8 +2257,8 @@ MonoBehaviour:
     OverlapLastExit:
       m_PersistentCalls:
         m_Calls: []
-  origin: {fileID: 6415192565362938597}
-  posOffset: {x: 0, y: 0.32, z: 0}
+  origin: {fileID: 4716324709663154297}
+  posOffset: {x: 0, y: 0, z: 0}
   layers:
     serializedVersion: 2
     m_Bits: 1
@@ -2315,8 +2347,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.11
-  m_Height: 3.16
+  m_Radius: 1.23
+  m_Height: 3.51
   m_Direction: 2
   m_Center: {x: -8.077936e-28, y: 0, z: -0.00000023841858}
 --- !u!114 &7177113454662804550
@@ -2358,6 +2390,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120729493074696334, guid: d119cb62d002a1746a1e43a91218f354,
+        type: 3}
+      propertyPath: m_text
+      value: RAAAAT
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120729493074696334, guid: d119cb62d002a1746a1e43a91218f354,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 62.65
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
@@ -2442,7 +2484,7 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.8
+      value: 3.49
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
