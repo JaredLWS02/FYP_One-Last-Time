@@ -27,23 +27,26 @@ public class AudioSpawner : MonoBehaviour
 
     // ============================================================================
 
-    AudioSource PlayAndReturn(string audio_name)
-    {
-        AudioPrefab audio = GetAudioPrefab(audio_name);
-        if(audio==null) return null;
-        return audio.SpawnAudio();
-    }
+    public AudioSource Play(AudioPrefab audio) => audio?.SpawnAudio();
+    public void Stop(AudioPrefab audio) => audio?.DespawnAudio();
+
+    // ============================================================================
 
     public void Play(string audio_name)
     {
         PlayAndReturn(audio_name);
     }
 
+    AudioSource PlayAndReturn(string audio_name)
+    {
+        AudioPrefab audio = GetAudioPrefab(audio_name);
+        return Play(audio);
+    }
+
     public void Stop(string audio_name)
     {
         AudioPrefab audio = GetAudioPrefab(audio_name);
-        if(audio==null) return;
-        audio.DespawnAudio();
+        Stop(audio);
     }
 
     // ============================================================================
@@ -80,19 +83,21 @@ public class AudioSpawner : MonoBehaviour
 
     // ============================================================================
     
-    public void StartLoop(string loop_in_name, string loop_name)
-    {
-        AudioSource source = PlayAndReturn(loop_in_name);
-        if(!source) return;
-        // wait for loop in to finish
-        StartCoroutine(StartingLoop(loop_name, source.clip.length));
-    }
-
     public void StartLoopGroup(string group_name)
     {
         AudioLoopGroup loopGroup = GetLoopGroup(group_name);
         if(loopGroup==null) return;
+
         StartLoop(loopGroup.loopInName, loopGroup.loopName);
+    }
+
+    public void StartLoop(string loop_in_name, string loop_name)
+    {
+        AudioSource source = PlayAndReturn(loop_in_name);
+        // wait for loop in to finish, if there is one
+        float delay = source ? source.clip.length : 0;
+
+        StartCoroutine(StartingLoop(loop_name, delay));
     }
 
     IEnumerator StartingLoop(string loop_name, float delay)
@@ -101,18 +106,19 @@ public class AudioSpawner : MonoBehaviour
         Play(loop_name);
     }
 
+    public void StopLoopGroup(string group_name)
+    {
+        AudioLoopGroup loopGroup = GetLoopGroup(group_name);
+        if(loopGroup==null) return;
+        
+        StopLoop(loopGroup.loopInName, loopGroup.loopName, loopGroup.loopOutName);
+    }
+
     public void StopLoop(string loop_in_name, string loop_name, string loop_out_name)
     {
         Stop(loop_in_name);
         Stop(loop_name);
         Play(loop_out_name);
-    }
-
-    public void StopLoopGroup(string group_name)
-    {
-        AudioLoopGroup loopGroup = GetLoopGroup(group_name);
-        if(loopGroup==null) return;
-        StopLoop(loopGroup.loopInName, loopGroup.loopName, loopGroup.loopOutName);
     }
 
     // ============================================================================

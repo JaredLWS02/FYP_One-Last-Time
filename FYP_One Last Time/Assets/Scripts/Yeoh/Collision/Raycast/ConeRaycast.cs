@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class ConeRaycast : BaseRaycast
 {
-    [Header("Cone Cast")]
-    public Vector2 fov = new(90,90);
-    public Vector2Int rays = new(10,10);
-
-    public override bool HasHitTarget(out GameObject target)
+    public override bool RayHit(out GameObject target)
     {
-        foreach(var dir in GetConeDirs())
+        foreach(var dir in GetConeDirs(GetRayDir()))
         {
-            if(Physics.Raycast(rayOrigin.position, dir, out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
+            if(Physics.Raycast(origin.position, dir, out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
             {
                 if(IsHitValid(out var hitObj))
                 {
@@ -25,13 +21,17 @@ public class ConeRaycast : BaseRaycast
         return false;
     }
 
-    List<Vector3> GetConeDirs()
+    // ============================================================================
+
+    [Header("Cone Cast")]
+    public Vector2 fov = new(90,90);
+    public Vector2Int rays = new(10,10);
+
+    List<Vector3> GetConeDirs(Vector3 main_dir)
     {
         List<Vector3> dirs = new();
 
         if (rays.x <= 0 || rays.y <= 0) return dirs;
-
-        Vector3 ray_dir = GetRayDir();
 
         Vector2 half_fov = fov*.5f;
 
@@ -61,13 +61,13 @@ public class ConeRaycast : BaseRaycast
                 Vector3 local_dir = new Vector3(x, y, z).normalized;
 
                 // Apply world rotation based on the ray's rotation
-                Vector3 dir = Quaternion.LookRotation(ray_dir) * local_dir;
+                Vector3 dir = Quaternion.LookRotation(main_dir) * local_dir;
                 
                 dirs.Add(dir);
             }
         }
 
-        dirs.Add(ray_dir); // center ray
+        dirs.Add(main_dir); // center ray
 
         return dirs;
     }
@@ -90,7 +90,7 @@ public class ConeRaycast : BaseRaycast
         
     public override void OnBaseDrawGizmos(Vector3 start, Vector3 end)
     {
-        foreach(var dir in GetConeDirs())
+        foreach(var dir in GetConeDirs(GetRayDir()))
         {
             Vector3 cone_end = start + dir * range;
             Gizmos.DrawLine(start, cone_end);

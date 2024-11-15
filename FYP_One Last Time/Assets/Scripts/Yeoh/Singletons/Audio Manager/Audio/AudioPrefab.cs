@@ -10,12 +10,12 @@ public class AudioPrefab : PrefabPreset
 
     // ==================================================================================================================
     
-    AudioSource audioSource;
+    List<AudioSource> audioSources = new();
 
     public AudioSource SpawnAudio()
     {   
         GameObject spawned = Spawn();
-        audioSource = spawned.GetComponent<AudioSource>();
+        AudioSource audioSource = spawned.GetComponent<AudioSource>();
 
         if(!audioSource)
         {
@@ -29,15 +29,30 @@ public class AudioPrefab : PrefabPreset
         if(!audioSource.loop)
         Despawn(spawned, audioSource.clip.length);
 
+        audioSources.Add(audioSource);
+
         return audioSource;
+    }
+
+    public void DespawnAudio(AudioSource source)
+    {
+        if(!audioSources.Contains(source)) return;
+        if(!source) return;
+
+        source.Stop();
+        Despawn(source.gameObject);
+        audioSources.Remove(source);
     }
 
     public void DespawnAudio()
     {
-        if(audioSource)
+        // temp duplicate list to iterate through
+        // because original list is changing each time 
+        List<AudioSource> sources = new(audioSources);
+
+        foreach(var source in sources)
         {
-            audioSource.Stop();
-            Despawn(audioSource.gameObject);
+            DespawnAudio(source);
         }
     }
 }

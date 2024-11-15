@@ -10,10 +10,10 @@ public class CapsuleRaycast : BaseRaycast
     public float height=1;
     float base_height;
 
-    public override bool HasHitTarget(out GameObject target)
+    public override bool RayHit(out GameObject target)
     {
-        GetCapsule(rayOrigin.position, out var top, out var bottom);
-
+        GetCapsule(origin.position, out var top, out var bottom);
+        
         if(Physics.CapsuleCast(top, bottom, radius, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
         {
             if(IsHitValid(out var hitObj))
@@ -28,8 +28,8 @@ public class CapsuleRaycast : BaseRaycast
 
     void GetCapsule(Vector3 pos, out Vector3 top, out Vector3 bottom)
     {
-        top = pos + rayOrigin.up * height*.5f;
-        bottom = pos + -rayOrigin.up * height*.5f;
+        top = pos + origin.up * height*.5f;
+        bottom = pos + -origin.up * height*.5f;
     }
 
     // ============================================================================

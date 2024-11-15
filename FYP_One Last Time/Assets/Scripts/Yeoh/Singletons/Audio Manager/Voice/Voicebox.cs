@@ -12,7 +12,22 @@ public class Voicebox : MonoBehaviour
     public List<AudioSO> voices = new();
 
     public AudioSO GetVoice(string voice_name)
-        => voices.Find(voice => voice.Name == voice_name);
+    {
+        if(string.IsNullOrEmpty(voice_name))
+        {
+            Debug.LogWarning("Voice name is null or empty.");
+            return null;
+        }
+        
+        AudioSO audioSO = voices.Find(voice => voice.Name == voice_name);
+        
+        if(audioSO==null)
+        {
+            Debug.LogWarning($"Voice AudioSO with name '{voice_name}' not found.");
+        }
+
+        return audioSO;
+    }
 
     // ==================================================================================================================
 
