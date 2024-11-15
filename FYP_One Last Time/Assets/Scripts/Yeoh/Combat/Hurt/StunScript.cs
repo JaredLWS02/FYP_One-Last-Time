@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StunScript : BaseAction
 {
+    [Header("Stun script")]
     public AnimSO defaultStunAnim;
     AnimSO currentStunAnim;
 
@@ -40,6 +41,8 @@ public class StunScript : BaseAction
         EventM.OnCancelAttack(owner);
         EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
+
+        actionCounter++;
 
         currentStunAnim = hurtbox.customStunAnim ?
             hurtbox.customStunAnim : defaultStunAnim;
