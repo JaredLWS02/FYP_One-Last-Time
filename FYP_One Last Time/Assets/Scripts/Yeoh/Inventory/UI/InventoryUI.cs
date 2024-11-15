@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class InventoryUI : MonoBehaviour
 {
@@ -41,8 +44,11 @@ public class InventoryUI : MonoBehaviour
         for(int i=0; i < maxUiSlots; i++)
         {
             InventoryUISlot newSlot = Instantiate(inventoryUiSlotPrefab, transform);
+            
+            #if UNITY_EDITOR
             // record to be able to undo (ctrl z)
             Undo.RegisterCreatedObjectUndo(newSlot.gameObject, "Spawn Inventory UI Slot");
+            #endif
         }
         AssignSlots();
     }

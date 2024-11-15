@@ -33,6 +33,8 @@ public class State_PakYaActions_MidAir : BaseState
     {
         action.AllowJump = toggle;
         action.AllowDash = toggle;
+        action.AllowAttack = toggle;
+        action.AllowParry = toggle;
         action.AllowHurt = toggle;
         action.AllowStun = toggle;
     }

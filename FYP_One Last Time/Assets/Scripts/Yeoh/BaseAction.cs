@@ -89,11 +89,18 @@ public class BaseAction : MonoBehaviour
     // Anim Event
     public void Anim4_Recover()
     {
-        currentState = State.None;
+        actionCounter--;
 
-        OnAnimRecover();
-        RecoverEvent?.Invoke();
-        uEvents.Recover?.Invoke();
+        if(actionCounter<=0)
+        {
+            actionCounter=0;
+
+            currentState = State.None;
+
+            OnAnimRecover();
+            RecoverEvent?.Invoke();
+            uEvents.Recover?.Invoke();
+        }
     }  
     // Note: DO NOT PLAY/CANCEL ANY ANIMATIONS IN ON EXIT
     // OTHER ANIMATIONS MIGHT TRY TO TAKE OVER, THUS TRIGGERING ON EXIT,
@@ -105,6 +112,8 @@ public class BaseAction : MonoBehaviour
     {
         if(!IsPerforming()) return;
 
+        actionCounter=0;
+        
         Anim3_ReleaseEnd();
         Anim4_Recover();
 
@@ -142,6 +151,11 @@ public class BaseAction : MonoBehaviour
         public UnityEvent Recover;
         public UnityEvent Cancel;
     }
-    
+    [Space]
     public UEvents uEvents;
+
+    // ============================================================================
+
+    [Header("Debug")]
+    public int actionCounter=0;
 }
