@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7299040025794515727}
   - component: {fileID: 6892551064611265885}
   - component: {fileID: 1866404577720983535}
+  - component: {fileID: 9139493631820300163}
   m_Layer: 3
   m_Name: Hurt
   m_TagString: Untagged
@@ -90,7 +91,24 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
+  actionCounter: 0
   defaultStunAnim: {fileID: 11400000, guid: 8f5f6b470198d004fab04f404f4051e1, type: 2}
+  cooldown: {fileID: 9139493631820300163}
+  cooldownTime: 0.5
+--- !u!114 &9139493631820300163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
 --- !u!1 &404301175344531863
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +476,7 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
+  actionCounter: 0
   mpM: {fileID: 7058722310484815464}
   abilityList: {fileID: 11400000, guid: 20654795a73aa1546b842d07d69881d9, type: 2}
   abilitySO: {fileID: 0}
@@ -535,6 +554,7 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
+  actionCounter: 0
   caster: {fileID: 1410335126641825925}
   abilitySO: {fileID: 11400000, guid: 289d739c06a77ac4f91862671cfa2768, type: 2}
   mpM: {fileID: 7058722310484815464}
@@ -647,6 +667,7 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
+  actionCounter: 0
   attackSO: {fileID: 0}
   hurtboxPrefab:
     prefab: {fileID: 0}
@@ -1365,6 +1386,7 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
+  actionCounter: 0
   rb: {fileID: 1642459170912960868}
   dashAnim: {fileID: 11400000, guid: 41c4e92d9d632d742b05a9b8b97e6b57, type: 2}
   dashingTimer: {fileID: 2575847150646626897}
@@ -1724,6 +1746,7 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
+  actionCounter: 0
   raiseParryAnim: {fileID: 11400000, guid: fe4e54c57f9cf884eaf0a32272a960e2, type: 2}
   cooldown: {fileID: 2189189842004329316}
   cooldownTime: 0.3
@@ -1774,6 +1797,7 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
+  actionCounter: 0
   parryAnim: {fileID: 11400000, guid: e0f653934f89a0d488ef3b1dafebaa6d, type: 2}
   counterStun: 1
   counterKnockback: 1

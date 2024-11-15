@@ -36,6 +36,8 @@ public class StunScript : BaseAction
     {
         if(victim!=owner) return;
 
+        if(IsCooling()) return;
+
         // action cancelling
         EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
@@ -52,6 +54,24 @@ public class StunScript : BaseAction
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
     }
+
+    // ============================================================================
+
+    // Anim Event
+    public override void OnAnimRecover()
+    {
+        DoCooldown();
+    }
+
+    // ============================================================================
+    
+    [Header("After Recover")]
+    public Timer cooldown;
+    public float cooldownTime=.5f;
+
+    void DoCooldown() => cooldown?.StartTimer(cooldownTime);
+    bool IsCooling() => cooldown?.IsTicking() ?? false;
+    void CancelCooldown() => cooldown?.FinishTimer();
 
     // Cancel ============================================================================
 
