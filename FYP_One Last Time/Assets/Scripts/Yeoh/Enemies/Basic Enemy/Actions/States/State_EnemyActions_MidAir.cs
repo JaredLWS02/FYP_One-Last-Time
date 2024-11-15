@@ -32,6 +32,7 @@ public class State_EnemyActions_MidAir : BaseState
     void ToggleAllow(bool toggle)
     {
         action.AllowJump = toggle;
+        action.AllowAttack = toggle;
         action.AllowHurt = toggle;
         action.AllowStun = toggle;
     }

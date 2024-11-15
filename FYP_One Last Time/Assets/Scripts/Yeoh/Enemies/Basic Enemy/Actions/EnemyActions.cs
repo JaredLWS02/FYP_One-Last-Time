@@ -162,4 +162,11 @@ public class EnemyActions : MonoBehaviour
     
     public StunScript stun;
     public bool IsStunned() => stun?.IsPerforming() ?? false;
+
+    // ============================================================================
+
+    public void TryJump()
+    {
+        EventM.OnAgentTryJump(owner);
+    }
 }
