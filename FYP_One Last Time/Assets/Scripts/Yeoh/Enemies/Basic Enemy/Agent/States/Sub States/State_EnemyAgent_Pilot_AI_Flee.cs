@@ -16,11 +16,13 @@ public class State_EnemyAgent_Pilot_AI_Flee : BaseState
         Debug.Log($"{agent.owner.name} SubState: {Name}");
 
         ToggleAllow(true);
+
+        agent.targeting.ExpandRadar();
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        string behaviour = agent.GetRandomFleeBehaviour();
+        string behaviour = agent.randomFleeBehaviour.currentOption;
 
         switch(behaviour)
         {
@@ -33,18 +35,20 @@ public class State_EnemyAgent_Pilot_AI_Flee : BaseState
     void Wander()
     {
         agent.wander.SetGoalToWander();
-        agent.FaceTarget();
+        agent.targeting.FaceTarget();
     }
 
     void Flee()
     {
-        agent.SetThreatToTarget();
+        agent.targeting.SetThreatToTarget();
         agent.move.FaceMoveDir();
     }
 
     protected override void OnExit()
     {
         ToggleAllow(false);
+
+        agent.targeting.RevertRadar();
     }
 
     void ToggleAllow(bool toggle)

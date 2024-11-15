@@ -30,7 +30,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 agent.wander &&
-                !agent.CanSeeTarget() //&&
+                !agent.targeting.target //&&
                 //!agent.ShouldReturn() //&&
             ){
                 return true;
@@ -41,7 +41,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         idle.AddTransition(seek, (timeInState) =>
         {
             if(
-                agent.CanSeeTarget() &&
+                agent.targeting.CanSeeTarget() &&
                 !agent.ShouldFlee() //&&
                 //!agent.ShouldReturn() //&&
             ){
@@ -54,7 +54,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 agent.flee &&
-                agent.CanSeeTarget() &&
+                agent.targeting.target &&
                 agent.ShouldFlee() //&&
             ){
                 return true;
@@ -67,7 +67,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
             if(
                 agent.returner &&
                 !agent.ShouldFlee() //&&
-                //agent.ShouldReturn() //&&
+                //agent.targeting.ShouldReturn() //&&
             ){
                 return true;
             }
@@ -81,7 +81,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 !agent.wander ||
-                agent.CanSeeTarget() //||
+                agent.targeting.CanSeeTarget() //||
                 //agent.ShouldReturn() //||
             ){
                 return true;
@@ -92,7 +92,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         seek.AddTransition(idle, (timeInState) =>
         {
             if(
-                !agent.CanSeeTarget() ||
+                !agent.targeting.target ||
                 agent.ShouldFlee() //||
                 //agent.ShouldReturn() //||
             ){
@@ -105,7 +105,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 !agent.flee ||
-                !agent.CanSeeTarget() ||
+                !agent.targeting.target ||
                 !agent.ShouldFlee() //||
             ){
                 return true;
@@ -118,7 +118,7 @@ public class State_EnemyAgent_Pilot_AI : BaseState
             if(
                 !agent.returner ||
                 agent.ShouldFlee() //||
-                //agent.IsAtSpawnpoint() //||
+                //agent.returner.IsAtSpawnpoint() //||
             ){
                 return true;
             }

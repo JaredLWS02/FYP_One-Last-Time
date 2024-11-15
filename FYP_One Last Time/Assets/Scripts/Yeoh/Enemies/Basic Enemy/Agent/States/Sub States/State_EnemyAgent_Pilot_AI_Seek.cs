@@ -17,12 +17,12 @@ public class State_EnemyAgent_Pilot_AI_Seek : BaseState
 
         ToggleAllow(true);
 
-        agent.radar.MultiplyRadarRange(agent.expandRadarRangeMult);
+        agent.targeting.ExpandRadar();
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-        string behaviour = agent.GetRandomSeekBehaviour();
+        string behaviour = agent.randomSeekBehaviour.currentOption;
 
         switch(behaviour)
         {
@@ -32,18 +32,18 @@ public class State_EnemyAgent_Pilot_AI_Seek : BaseState
             default: Seek(); break;
         }
 
-        agent.FaceTarget();
+        agent.targeting.FaceTarget();
     }
 
     void Seek()
     {
-        if(agent.IsTargetTooClose())
+        if(agent.targeting.IsTargetTooClose())
         {
-            agent.SetThreatToTarget();
+            agent.targeting.SetThreatToTarget();
         }
         else
         {
-            agent.SetGoalToTarget();
+            agent.targeting.SetGoalToTarget();
         }
     }
 
@@ -54,14 +54,14 @@ public class State_EnemyAgent_Pilot_AI_Seek : BaseState
 
     void Flee()
     {
-        agent.SetThreatToTarget();
+        agent.targeting.SetThreatToTarget();
     }
 
     protected override void OnExit()
     {
         ToggleAllow(false);
 
-        agent.radar.RevertRadarRange();
+        agent.targeting.RevertRadar();
     }
 
     void ToggleAllow(bool toggle)

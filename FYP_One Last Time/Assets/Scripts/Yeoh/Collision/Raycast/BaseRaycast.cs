@@ -9,12 +9,12 @@ public class BaseRaycast : SlowUpdate
     [Header("Base Raycast")]
     public Transform origin;
     [Header("Optional")]
-    public Transform target;
+    public Transform lookAt;
     
     public Vector3 GetRayDir()
     {
-        return target ?
-            (target.position - origin.position).normalized :
+        return lookAt ?
+            (lookAt.position - origin.position).normalized :
             origin.forward;
     }
 

@@ -27,8 +27,8 @@ public class AudioSpawner : MonoBehaviour
 
     // ============================================================================
 
-    public AudioSource Play(AudioPrefab audio) => audio?.SpawnAudio();
-    public void Stop(AudioPrefab audio) => audio?.DespawnAudio();
+    public AudioSource PlayAudio(AudioPrefab audio) => audio?.SpawnAudio();
+    public void StopAudio(AudioPrefab audio) => audio?.DespawnAudio();
 
     // ============================================================================
 
@@ -40,13 +40,13 @@ public class AudioSpawner : MonoBehaviour
     AudioSource PlayAndReturn(string audio_name)
     {
         AudioPrefab audio = GetAudioPrefab(audio_name);
-        return Play(audio);
+        return PlayAudio(audio);
     }
 
     public void Stop(string audio_name)
     {
         AudioPrefab audio = GetAudioPrefab(audio_name);
-        Stop(audio);
+        StopAudio(audio);
     }
 
     // ============================================================================

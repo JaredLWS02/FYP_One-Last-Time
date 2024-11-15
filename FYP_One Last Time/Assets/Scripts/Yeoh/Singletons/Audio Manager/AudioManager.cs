@@ -74,5 +74,5 @@ public class AudioManager : MonoBehaviour
         PlayAudio(audio);
     }
 
-    public void PlayAudio(AudioPrefab audio) => audioSpawner.Play(audio);
+    public void PlayAudio(AudioPrefab audio) => audioSpawner.PlayAudio(audio);
 }

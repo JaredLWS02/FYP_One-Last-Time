@@ -1771,6 +1771,7 @@ GameObject:
   - component: {fileID: 345509100620316827}
   - component: {fileID: 6876849668752172755}
   - component: {fileID: 8393169458917718466}
+  - component: {fileID: 5627988560184055650}
   m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
@@ -2205,6 +2206,36 @@ MonoBehaviour:
   - scaleTo: {x: 1, y: 1, z: 1}
     seconds: 0.1
     ease: 3
+--- !u!114 &5627988560184055650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274980459159228368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: 809ad7db10ef1114f8172c6c6effb441, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7275348868363192476
 GameObject:
   m_ObjectHideFlags: 0

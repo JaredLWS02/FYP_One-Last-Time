@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomPicker : MonoBehaviour
+public class RandomPicker : SlowUpdate
 {
     [System.Serializable]
     public class Option
@@ -11,70 +11,17 @@ public class RandomPicker : MonoBehaviour
         public float weight=1;
     }
 
+    [Header("Random Picker")]
     public List<Option> options = new();
 
     public string currentOption;
 
     // ============================================================================
-
-    [Header("Randomize")]
-    public Vector2 randomInterval = new(0.25f, 3);
-    float currentInterval;
-
-    void RandomizeInterval()
-    {
-        currentInterval = Random.Range(randomInterval.x, randomInterval.y);
-    }
-
-    // ============================================================================
     
-    public bool enableTimerOnAwake=true;
-
-    void OnEnable()
+    public override void OnSlowUpdate()
     {
-        RandomizeInterval();
-
-        if(enableTimerOnAwake)
-        StartCoroutine(Randomizing());
+        RandomizeOption();
     }
-
-    IEnumerator Randomizing()
-    {
-        while(true)
-        {
-            RandomizeOption();
-
-            currentInterval = Random.Range(randomInterval.x, randomInterval.y);
-
-            yield return new WaitForSeconds(currentInterval);
-        }
-    }
-
-    // ============================================================================
-
-    float manualCheck=0;
-    
-    public void UpdateManualTimer()
-    {
-        if(enableTimerOnAwake)
-        {
-            Debug.LogWarning($"{gameObject.name}: Turn off enableTimerOnAwake if updating manual timer");
-            return;
-        }
-
-        manualCheck += Time.deltaTime;
-
-        if(manualCheck >= currentInterval)
-        {
-            manualCheck=0;
-
-            RandomizeInterval();
-
-            RandomizeOption();
-        }
-    }
-
-    // ============================================================================
 
     [ContextMenu("Randomize")]
     void RandomizeOption()
