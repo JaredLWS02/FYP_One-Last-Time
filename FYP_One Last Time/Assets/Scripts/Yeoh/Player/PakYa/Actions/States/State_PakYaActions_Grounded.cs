@@ -22,6 +22,7 @@ public class State_PakYaActions_Grounded : BaseState
     {
         action.AllowMoveX = true;
         action.AllowMoveY = true;
+        action.AllowFlip = true;
     }
 
     protected override void OnExit()

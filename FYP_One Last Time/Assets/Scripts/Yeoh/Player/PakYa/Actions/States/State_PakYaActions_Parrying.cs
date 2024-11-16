@@ -22,6 +22,7 @@ public class State_PakYaActions_Parrying : BaseState
     {
         action.AllowMoveX = false;
         action.AllowMoveY = false;
+        action.AllowFlip = false;
     }
 
     protected override void OnExit()

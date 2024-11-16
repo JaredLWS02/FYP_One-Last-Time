@@ -11,6 +11,7 @@ public class PakYaActions : MonoBehaviour
     [Header("Hold Toggles")]
     public bool AllowMoveX;
     public bool AllowMoveY;
+    public bool AllowFlip;
     
     [Header("Toggles")]
     public bool AllowJump;
@@ -69,7 +70,7 @@ public class PakYaActions : MonoBehaviour
     {
         if(who!=owner) return;
 
-        if(!AllowMoveX) return;
+        if(!AllowFlip) return;
 
         EventM.OnFlip(owner, input_x);
     }

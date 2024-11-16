@@ -20,8 +20,9 @@ public class State_PakYaActions_AttackWindingUp : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        action.AllowMoveX = false;
-        action.AllowMoveY = false;
+        action.AllowMoveX = true; //false;
+        action.AllowMoveY = true; //false;
+        action.AllowFlip = false;
     }
 
     protected override void OnExit()
