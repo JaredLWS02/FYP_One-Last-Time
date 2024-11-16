@@ -1078,6 +1078,7 @@ GameObject:
   - component: {fileID: 5126354924728155001}
   - component: {fileID: 6038629428757452036}
   - component: {fileID: 487080187957441441}
+  - component: {fileID: 7486432265876577913}
   - component: {fileID: 432400339528515489}
   m_Layer: 3
   m_Name: Hurt
@@ -1177,8 +1178,22 @@ MonoBehaviour:
         m_Calls: []
   actionCounter: 0
   defaultStunAnim: {fileID: 11400000, guid: 1327778698f6d5c45884b7f09e3fc0fa, type: 2}
-  cooldown: {fileID: 0}
+  cooldown: {fileID: 7486432265876577913}
   cooldownTime: 0.5
+--- !u!114 &7486432265876577913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693418600857933463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
 --- !u!114 &432400339528515489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1194,6 +1209,7 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   gibs:
   - {fileID: 4638265214066637242, guid: a0e8c029a72545e4db78fe82ffd1cde4, type: 3}
+  gibsKnockback: 1
 --- !u!1 &2894371733990359339
 GameObject:
   m_ObjectHideFlags: 0

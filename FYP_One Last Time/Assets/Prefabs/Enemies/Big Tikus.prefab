@@ -2120,6 +2120,7 @@ GameObject:
   - component: {fileID: 1099085624676017755}
   - component: {fileID: 8086872793515778956}
   - component: {fileID: 5138522953899574682}
+  - component: {fileID: 4655900734958021284}
   - component: {fileID: 5015490617387641940}
   m_Layer: 3
   m_Name: Hurt
@@ -2219,8 +2220,22 @@ MonoBehaviour:
         m_Calls: []
   actionCounter: 0
   defaultStunAnim: {fileID: 11400000, guid: f29e74e3b3e53164eaf9604423201c6d, type: 2}
-  cooldown: {fileID: 0}
+  cooldown: {fileID: 4655900734958021284}
   cooldownTime: 0.5
+--- !u!114 &4655900734958021284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460407787441312423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
 --- !u!114 &5015490617387641940
 MonoBehaviour:
   m_ObjectHideFlags: 0

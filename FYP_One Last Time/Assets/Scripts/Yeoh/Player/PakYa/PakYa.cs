@@ -26,6 +26,7 @@ public class PakYa : MonoBehaviour
     
     // ============================================================================
 
+    // death
     public void ReloadScene()
     {
         ScenesManager.Current.ReloadScene();
