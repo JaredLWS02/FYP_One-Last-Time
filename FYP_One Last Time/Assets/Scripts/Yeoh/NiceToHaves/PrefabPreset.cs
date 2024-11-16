@@ -9,6 +9,13 @@ public class PrefabPreset
     public bool hideInHierarchy;
     [Space]
     public Transform spawnpoint;
+
+    [Header("Offsets")]
+    public Vector3 posOffset;
+    public Vector3 angleOffset;
+    public float scaleMult=1;
+
+    [Header("Parent")]
     public bool parented=true;
     public bool followRotation=true;
 
@@ -22,6 +29,20 @@ public class PrefabPreset
 
     public GameObject Spawn()
     {
+        if(!prefab)
+        {
+            Debug.LogError($"PrefabPreset: Woiii, where prefab, brother?");
+            return null;
+        }
+
+        Singleton singleton = Singleton.Current;
+
+        if(!singleton)
+        {
+            Debug.LogError($"PrefabPreset: can't spawn {prefab.name} because Singleton is null. PS: Singleton won't be available on Awake");
+            return null;
+        }
+
         Vector3 pos;
         Quaternion rot;
         Transform parent=null;
@@ -39,7 +60,14 @@ public class PrefabPreset
             parent = null;
         }
 
-        return Singleton.Current.Spawn(prefab, pos, rot, parent, hideInHierarchy);
+        pos += posOffset;
+        rot.eulerAngles += angleOffset;
+
+        GameObject spawned = singleton.Spawn(prefab, pos, rot, parent, hideInHierarchy);
+
+        spawned.transform.localScale *= scaleMult;
+
+        return spawned;
     }
 
     public void Despawn(GameObject obj, float delay=0) => Singleton.Current.Despawn(obj, delay);

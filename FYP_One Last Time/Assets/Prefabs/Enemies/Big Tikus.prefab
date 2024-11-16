@@ -241,6 +241,9 @@ MonoBehaviour:
         type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 6955758431937353321}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
       parented: 1
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
@@ -1489,6 +1492,9 @@ MonoBehaviour:
     prefab: {fileID: 0}
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
@@ -2112,7 +2118,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5442243828401948624}
   - component: {fileID: 1099085624676017755}
+  - component: {fileID: 8086872793515778956}
   - component: {fileID: 5138522953899574682}
+  - component: {fileID: 5015490617387641940}
   m_Layer: 3
   m_Name: Hurt
   m_TagString: Untagged
@@ -2156,15 +2164,28 @@ MonoBehaviour:
   poise: 50
   allowStun: 1
   poiseRegenDelay: 3
-  rb: {fileID: 8915720888079556032}
-  allowKnockback: 1
-  knockbackMult: 0.5
   iframeOnDeath: 1
   destroyOnDeath: 1
   hurtEvents:
     OnDeath:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &8086872793515778956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460407787441312423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc547ef378c2c447aadc0e6aba08c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  rb: {fileID: 8915720888079556032}
+  allowKnockback: 1
+  knockbackMult: 0.5
 --- !u!114 &5138522953899574682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,6 +2221,22 @@ MonoBehaviour:
   defaultStunAnim: {fileID: 11400000, guid: f29e74e3b3e53164eaf9604423201c6d, type: 2}
   cooldown: {fileID: 0}
   cooldownTime: 0.5
+--- !u!114 &5015490617387641940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460407787441312423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246fd0db064dc7d40b63f018d5c0c4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  gibs:
+  - {fileID: 283657642964731862, guid: 31e40b0a0c54f9645944ec29721fc632, type: 3}
+  gibsKnockback: 1
 --- !u!1 &8814332884574839046
 GameObject:
   m_ObjectHideFlags: 0

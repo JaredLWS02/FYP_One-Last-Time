@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7299040025794515727}
   - component: {fileID: 6892551064611265885}
+  - component: {fileID: 5493900238891019743}
   - component: {fileID: 1866404577720983535}
   - component: {fileID: 9139493631820300163}
+  - component: {fileID: 8995939786167268597}
   m_Layer: 3
   m_Name: Hurt
   m_TagString: Untagged
@@ -55,9 +57,6 @@ MonoBehaviour:
   poise: 0
   allowStun: 1
   poiseRegenDelay: 3
-  rb: {fileID: 1642459170912960868}
-  allowKnockback: 1
-  knockbackMult: 1
   iframeOnDeath: 1
   destroyOnDeath: 1
   hurtEvents:
@@ -76,6 +75,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5493900238891019743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdc547ef378c2c447aadc0e6aba08c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
+  allowKnockback: 1
+  knockbackMult: 1
 --- !u!114 &1866404577720983535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +140,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &8995939786167268597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246fd0db064dc7d40b63f018d5c0c4d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  gibs:
+  - {fileID: 4950790189361472255, guid: 2bd1b88e60499e84c8483021da0aeceb, type: 3}
+  gibsKnockback: 1
 --- !u!1 &404301175344531863
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,6 +625,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 8437002372998797620}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
@@ -603,6 +637,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 8437002372998797620}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
@@ -690,6 +727,9 @@ MonoBehaviour:
     prefab: {fileID: 0}
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
@@ -755,6 +795,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
@@ -764,6 +807,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
@@ -773,6 +819,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
@@ -1003,6 +1052,9 @@ MonoBehaviour:
         type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 3111472536248378137}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
       parented: 1
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
@@ -1013,6 +1065,9 @@ MonoBehaviour:
         type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4072668483182548298}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
       parented: 1
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
@@ -1023,6 +1078,9 @@ MonoBehaviour:
         type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
       parented: 1
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
@@ -1462,6 +1520,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
@@ -1660,6 +1721,9 @@ MonoBehaviour:
         type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
       parented: 1
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
@@ -2444,6 +2508,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
@@ -2513,6 +2580,9 @@ MonoBehaviour:
         type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
       parented: 1
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
@@ -2638,6 +2708,7 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   AllowMoveX: 0
   AllowMoveY: 0
+  AllowFlip: 0
   AllowJump: 0
   AllowDash: 0
   AllowAttack: 0
@@ -2782,6 +2853,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
@@ -2791,6 +2865,9 @@ MonoBehaviour:
       type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
     parented: 1
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}

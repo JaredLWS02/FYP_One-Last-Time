@@ -24,14 +24,12 @@ public class HurtScript : MonoBehaviour
         
         EventM.HurtEvent += OnHurt;
         EventM.TryIFrameEvent += OnTryIFrame;
-        EventM.TryKnockbackEvent += OnTryKnockback;
         EventM.DeathEvent += OnDeath;
     }
     void OnDisable()
     {
         EventM.HurtEvent -= OnHurt;
         EventM.TryIFrameEvent -= OnTryIFrame;
-        EventM.TryKnockbackEvent -= OnTryKnockback;
         EventM.DeathEvent -= OnDeath;
     }
 
@@ -187,31 +185,6 @@ public class HurtScript : MonoBehaviour
             // instant fill instead of slowly regen
             poise = maxPoise;
         }
-    }
-
-    // ============================================================================
-
-    [Header("Knockback")]
-    public Rigidbody rb;
-    public bool allowKnockback=true;
-    public float knockbackMult=1;
-
-    public void OnTryKnockback(GameObject who, float force, Vector3 contactPoint)
-    {
-        if(who!=owner) return;
-
-        if(!allowKnockback) return;
-        if(knockbackMult==0) return;
-
-        if(rb.isKinematic) return;
-
-        Vector3 kb_dir = (rb.transform.position - contactPoint).normalized;
-
-        if(knockbackMult!=1)
-        force *= knockbackMult;
-
-        rb.velocity = Vector3.zero;
-        rb.AddForce(kb_dir * force, ForceMode.Impulse);
     }
 
     // ============================================================================
