@@ -32,5 +32,6 @@ public class State_EnemyActions_AttackReleasing : BaseState
     void ToggleAllow(bool toggle)
     {
         action.AllowHurt = toggle;
+        action.AllowStun = toggle;
     }
 }

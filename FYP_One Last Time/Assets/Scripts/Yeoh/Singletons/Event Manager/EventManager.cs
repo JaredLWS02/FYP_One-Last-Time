@@ -382,7 +382,7 @@ public class EventManager : MonoBehaviour
     {
         HurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }
-    public void OnPoiseBreak(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    public void OnPoiseBroke(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         PoiseBreakEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }

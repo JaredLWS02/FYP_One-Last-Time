@@ -1788,6 +1788,7 @@ GameObject:
   - component: {fileID: 8037787176530487218}
   - component: {fileID: 2189189842004329316}
   - component: {fileID: 2557109480970711812}
+  - component: {fileID: 6448011714125791377}
   m_Layer: 3
   m_Name: Parry
   m_TagString: Untagged
@@ -1886,7 +1887,19 @@ MonoBehaviour:
         m_Calls: []
     ReleaseEnd:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 6448011714125791377}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     Recover:
       m_PersistentCalls:
         m_Calls: []
@@ -1895,10 +1908,34 @@ MonoBehaviour:
         m_Calls: []
   actionCounter: 0
   parryAnim: {fileID: 11400000, guid: e0f653934f89a0d488ef3b1dafebaa6d, type: 2}
-  counterStun: 1
-  counterKnockback: 1
+  counterStun: 0
+  counterKnockback: 0
   selfKnockback: 1
   parryCustomStunAnim: {fileID: 0}
+--- !u!114 &6448011714125791377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793569088056600768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preset:
+    prefab: {fileID: 1242880141507026177, guid: a68a9ccccbe10c7408a324ea252afa97,
+      type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 1.78, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &7026635337664250044
 GameObject:
   m_ObjectHideFlags: 0

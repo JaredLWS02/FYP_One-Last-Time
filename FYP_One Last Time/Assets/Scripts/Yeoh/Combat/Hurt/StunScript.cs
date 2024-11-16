@@ -5,12 +5,13 @@ using UnityEngine;
 public class StunScript : BaseAction
 {
     [Header("Stun script")]
+    public bool allowStun=true;
     public AnimSO defaultStunAnim;
-    AnimSO currentStunAnim;
+    AnimSO stunAnim;
 
     void Awake()
     {
-        currentStunAnim = defaultStunAnim;
+        stunAnim = defaultStunAnim;
     }
 
     // ============================================================================
@@ -35,7 +36,7 @@ public class StunScript : BaseAction
     void OnStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
-
+        if(!hurtbox.canStun) return;
         if(IsCooling()) return;
 
         // action cancelling
@@ -47,10 +48,12 @@ public class StunScript : BaseAction
 
         actionCounter++;
 
-        currentStunAnim = hurtbox.customStunAnim ?
+        stunAnim = hurtbox.customStunAnim ?
             hurtbox.customStunAnim : defaultStunAnim;
 
-        Perform(currentStunAnim);
+        Perform(stunAnim);
+
+        if(stunAnim)
         Anim3_ReleaseEnd();
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);

@@ -61,7 +61,7 @@ public class HurtScript : MonoBehaviour
         {
             EventM.OnTryIFrame(owner, iframeSeconds);
 
-            HurtPoise(attacker, hurtbox, contactPoint);
+            TryHurtPoise(attacker, hurtbox, contactPoint);
         }
         else
         {
@@ -149,25 +149,30 @@ public class HurtScript : MonoBehaviour
     public float poise;
     float maxPoise;
 
-    public bool allowStun=true;
-
-    public void HurtPoise(GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    void TryHurtPoise(GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
+        if(hurtbox.ignorePoise)
+        {
+            BreakPoise(attacker, hurtbox, contactPoint);
+            return;
+        }
+
         poise -= hurtbox.damage;
 
         lastPoiseDmgTime = Time.time;
 
         if(poise<=0)
         {
+            BreakPoise(attacker, hurtbox, contactPoint);
             poise = maxPoise; // reset poise
-
-            if(allowStun && hurtbox.canStun)
-            EventM.OnTryStun(owner, attacker, hurtbox, contactPoint);
-
-            EventM.OnPoiseBreak(owner, attacker, hurtbox, contactPoint);
-
-            EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
         }
+    }
+
+    void BreakPoise(GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        EventM.OnTryStun(owner, attacker, hurtbox, contactPoint);
+        EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
+        EventM.OnPoiseBroke(owner, attacker, hurtbox, contactPoint);
     }
 
     float lastPoiseDmgTime;

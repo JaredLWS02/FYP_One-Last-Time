@@ -46,6 +46,7 @@ public class OnParryScript : BaseAction
 
             EventM.OnStun(attacker, owner, hurtbox, contactPoint);
         }
+        else EventM.OnCancelAttack(attacker);
 
         if(counterKnockback)
         CounterKnockback(attacker, hurtbox, contactPoint);
