@@ -30,6 +30,8 @@ public class InputManager : MonoBehaviour
     InputAction ability2;
     InputAction ability3;
     InputAction pullVines;
+    InputAction reloadScene;
+    InputAction mainMenuScene;
 
     void SetupInputActions()
     {
@@ -45,6 +47,8 @@ public class InputManager : MonoBehaviour
         ability2 = playerInput.actions["Ability 2"];
         ability3 = playerInput.actions["Ability 3"];
         pullVines = playerInput.actions["Pull Vines"];
+        reloadScene = playerInput.actions["Reload Scene"];
+        mainMenuScene = playerInput.actions["MainMenu Scene"];
     }
 
     // ============================================================================
@@ -60,6 +64,8 @@ public class InputManager : MonoBehaviour
     public bool ability2KeyDown {get; private set;}
     public bool ability3KeyDown {get; private set;}
     public bool pullVinesKeyDown {get; private set;}
+    public bool reloadSceneKeyDown {get; private set;}
+    public bool mainMenuSceneKeyDown {get; private set;}
 
     void Update()
     {
@@ -74,5 +80,7 @@ public class InputManager : MonoBehaviour
         ability2KeyDown = ability2.WasPressedThisFrame();
         ability3KeyDown = ability3.WasPressedThisFrame();
         pullVinesKeyDown = pullVines.WasPressedThisFrame();
+        reloadSceneKeyDown = reloadScene.WasPressedThisFrame();
+        mainMenuSceneKeyDown = mainMenuScene.WasPressedThisFrame();
     }
 }
