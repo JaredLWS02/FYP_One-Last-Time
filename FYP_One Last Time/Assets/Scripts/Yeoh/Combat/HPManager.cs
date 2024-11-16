@@ -48,6 +48,8 @@ public class HPManager : MonoBehaviour
     public float regenHp=.2f;
     public float regenInterval=.1f;
 
+    public float regenPercent=100;
+
     public float defaultRegenHp {get; private set;}
     public float defaultRegenInterval {get; private set;}
     float prevRegenInterval;
@@ -73,6 +75,8 @@ public class HPManager : MonoBehaviour
 
             if(hp<hpMax && (hp>0 || regenWhenEmpty) )
             {
+                if(GetHPPercent()>regenPercent) continue;
+
                 if(regen) Add(regenHp);
             }
         }
