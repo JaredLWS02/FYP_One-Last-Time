@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2080831364828353911}
   - component: {fileID: 8663946442160230497}
   - component: {fileID: 3558659497958859496}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 2623606231955308900}
   - component: {fileID: 4300309323571415192}
   - component: {fileID: 2847565093712370024}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Auto Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +799,7 @@ GameObject:
   - component: {fileID: 2846529412029525313}
   - component: {fileID: 7657051605166975154}
   - component: {fileID: 1753302679769948049}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1029,7 +1029,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2719329177920231827}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.092295945, y: -0.70105743, z: 0.092295945, w: 0.70105743}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1543,7 +1543,7 @@ GameObject:
   - component: {fileID: 2035220173655765757}
   - component: {fileID: 2005189343605618808}
   - component: {fileID: 3422312068734313863}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Actions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2002,7 +2002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8029086614708960714}
   - component: {fileID: 3056104320120214010}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Slope Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2122,7 +2122,7 @@ GameObject:
   - component: {fileID: 5138522953899574682}
   - component: {fileID: 4655900734958021284}
   - component: {fileID: 5015490617387641940}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Hurt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2263,7 +2263,7 @@ GameObject:
   - component: {fileID: 4716324709663154297}
   - component: {fileID: 4037544487675790279}
   - component: {fileID: 5128331210462455546}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2542,22 +2542,22 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.70105743
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.092295945
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: -0.70105743
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.092295945
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1168953982317478414}
   - component: {fileID: 5318526711802374849}
   - component: {fileID: 5633158490581605300}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Auto Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +1080,7 @@ GameObject:
   - component: {fileID: 487080187957441441}
   - component: {fileID: 7486432265876577913}
   - component: {fileID: 432400339528515489}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Hurt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1221,7 +1221,7 @@ GameObject:
   - component: {fileID: 2238703069631649952}
   - component: {fileID: 6364306906685696337}
   - component: {fileID: 7661163715559834557}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Ground Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1599,7 +1599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6386830336416491352}
   - component: {fileID: 4312500313611420060}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Slope Check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,7 +1678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5081407622737716327}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.092295945, y: -0.70105743, z: 0.092295945, w: 0.70105743}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2569,7 +2569,7 @@ GameObject:
   - component: {fileID: 7738766412446040994}
   - component: {fileID: 8347385689802315276}
   - component: {fileID: 4324277547785806005}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2754,7 +2754,7 @@ GameObject:
   - component: {fileID: 2251303111040982871}
   - component: {fileID: 8627083544392464877}
   - component: {fileID: 1266521353049660919}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Actions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2843,7 +2843,7 @@ GameObject:
   - component: {fileID: 1047126221560195232}
   - component: {fileID: 7721746531743297066}
   - component: {fileID: 5868287124297005098}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3088,22 +3088,22 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.70105743
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.092295945
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: -0.70105743
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.092295945
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
