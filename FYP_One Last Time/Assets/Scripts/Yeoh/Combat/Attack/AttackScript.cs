@@ -132,7 +132,7 @@ public class AttackScript : BaseAction
     [Header("After Attack")]
     public Timer cooldown;
 
-    void DoCooldown() => cooldown?.StartTimer(attackSO.cooldownTime);
+    void DoCooldown() => cooldown?.StartTimer(attackSO.GetRandomCooldown());
     bool IsCooling() => cooldown?.IsTicking() ?? false;
     void CancelCooldown() => cooldown?.FinishTimer();
 

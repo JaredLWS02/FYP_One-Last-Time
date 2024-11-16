@@ -25,7 +25,9 @@ public class AttackSO : ScriptableObject
     public bool localDir = true;
 
     [Header("Optional")]
-    public float cooldownTime = 0;
+    [SerializeField]
+    Vector2 cooldownTime = new(0, .1f);
+    public float GetRandomCooldown() => Random.Range(cooldownTime.x, cooldownTime.y);
 
     // ============================================================================
     
