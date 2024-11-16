@@ -35,7 +35,11 @@ public class SpriteManager : MonoBehaviour
 
         foreach(var sr in GetSpriteRenderers(target))
         {
-            originalColors[sr] = sr.color;
+            // Only record if not already recorded
+            if(!originalColors.ContainsKey(sr))
+            {
+                originalColors[sr] = sr.color;
+            }
         }
     }
 

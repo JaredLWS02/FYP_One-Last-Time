@@ -26,8 +26,8 @@ public class HealAbility : BaseAbility
     void TempVFX()
     {
         // flash green
-        SpriteManager.Current.FlashColor(vfx_target, -1, 1, -1);
-        ModelManager.Current.FlashColor(vfx_target, -1, 1, -1);
+        SpriteManager.Current?.FlashColor(vfx_target, -1, 1, -1);
+        ModelManager.Current?.FlashColor(vfx_target, -1, 1, -1);
 
         Vector3 top = ColliderManager.Current.GetTop(vfx_target);
         // pop up text
