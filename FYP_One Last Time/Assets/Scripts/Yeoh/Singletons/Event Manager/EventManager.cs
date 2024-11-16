@@ -155,6 +155,8 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, Vector3> AutoJumpEvent;
     public event Action<GameObject, Vector3> AutoJumpingEvent;
     public event Action<GameObject, Vector3> AutoJumpedEvent;
+    public event Action<GameObject> CancelAutoJumpEvent;
+    public event Action<GameObject> AutoJumpCancelledEvent;
 
     public void OnTryAutoJump(GameObject jumper, Vector3 jump_dir)
     {
@@ -171,6 +173,14 @@ public class EventManager : MonoBehaviour
     public void OnAutoJumped(GameObject jumper, Vector3 jump_dir)
     {
         AutoJumpedEvent?.Invoke(jumper, jump_dir);
+    }
+    public void OnCancelAutoJump(GameObject jumper)
+    {
+        CancelAutoJumpEvent?.Invoke(jumper);
+    }    
+    public void OnAutoJumpCancelled(GameObject jumper)
+    {
+        AutoJumpCancelledEvent?.Invoke(jumper);
     }    
     
     public event Action<GameObject> FastFallStartEvent;

@@ -335,6 +335,7 @@ MonoBehaviour:
   cooldownTime: 0.5
   rb: {fileID: 8915720888079556032}
   ground: {fileID: 4037544487675790279}
+  toggler: {fileID: 3477742860679495246}
 --- !u!114 &2847565093712370024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,7 +1030,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2719329177920231827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.092295945, y: -0.70105743, z: 0.092295945, w: 0.70105743}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1732,6 +1733,7 @@ GameObject:
   m_Component:
   - component: {fileID: 231061859104957208}
   - component: {fileID: 3188788791223888934}
+  - component: {fileID: 3477742860679495246}
   m_Layer: 6
   m_Name: Collider
   m_TagString: Untagged
@@ -1780,6 +1782,24 @@ CapsuleCollider:
   m_Height: 3.16
   m_Direction: 2
   m_Center: {x: -8.077936e-28, y: 0, z: -0.00000023841858}
+--- !u!114 &3477742860679495246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5701653159739410106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders:
+  - {fileID: 3188788791223888934}
+  - {fileID: 6133948626742609180}
+  toggledLayerNames:
+  - Player
+  - PlayerStopbox
 --- !u!1 &5939665830983807460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,22 +2562,22 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70105743
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.092295945
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70105743
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.092295945
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}

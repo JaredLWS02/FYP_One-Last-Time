@@ -39,6 +39,7 @@ public class StunScript : BaseAction
         if(IsCooling()) return;
 
         // action cancelling
+        EventM.OnCancelAutoJump(owner);
         EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
         EventM.OnCancelParry(owner);

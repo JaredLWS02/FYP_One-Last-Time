@@ -32,5 +32,6 @@ public class State_SpyviActions_AutoJumping : BaseState
     void ToggleAllow(bool toggle)
     {
         action.AllowHurt = toggle;
+        action.AllowStun = toggle;
     }
 }

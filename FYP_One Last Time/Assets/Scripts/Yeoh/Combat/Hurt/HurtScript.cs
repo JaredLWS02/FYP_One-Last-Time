@@ -161,12 +161,12 @@ public class HurtScript : MonoBehaviour
         {
             poise = maxPoise; // reset poise
 
-            EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
-
             if(allowStun && hurtbox.canStun)
             EventM.OnTryStun(owner, attacker, hurtbox, contactPoint);
 
             EventM.OnPoiseBreak(owner, attacker, hurtbox, contactPoint);
+
+            EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
         }
     }
 

@@ -51,10 +51,12 @@ public class AgentAutoJump : MonoBehaviour
         EventM = EventManager.Current;
 
         EventM.AutoJumpEvent += OnAutoJump;
+        EventM.CancelAutoJumpEvent += OnCancelAutoJump;
     }
     void OnDisable()
     {
         EventM.AutoJumpEvent -= OnAutoJump;
+        EventM.CancelAutoJumpEvent -= OnCancelAutoJump;
     }
 
     // ============================================================================
@@ -98,6 +100,8 @@ public class AgentAutoJump : MonoBehaviour
 
         jumpAnim?.Play(owner);
 
+        toggler?.ToggleIgnoreLayers(true);
+
         EventM.OnJumped(owner);
         EventM.OnAutoJumped(owner, GetJumpDir());
     }
@@ -125,6 +129,8 @@ public class AgentAutoJump : MonoBehaviour
     public float jumpSeconds=.8f;
     public AnimSO jumpAnim;
 
+    Vector3 jumpProgressPos;
+
     void UpdateJumpSpline()
     {
         if(!isJumping) return;
@@ -137,9 +143,11 @@ public class AgentAutoJump : MonoBehaviour
         lerp01 = isReversed ? 1-lerp01 : lerp01;
 
         // move owner along spline
-        owner.transform.position = isReversed
+        jumpProgressPos = isReversed
             ? spline.CalcPosFromEnd(lerp01, startPos)
             : spline.CalcPosFromStart(lerp01, startPos);
+
+        owner.transform.position = jumpProgressPos;
 
         EventM.OnAutoJumping(owner, GetJumpDir());
 
@@ -164,6 +172,8 @@ public class AgentAutoJump : MonoBehaviour
         agent.CompleteOffMeshLink();
 
         landAnim?.Play(owner);
+
+        toggler?.ToggleIgnoreLayers(false);
         
         EventM.OnLandGround(owner);
 
@@ -181,10 +191,24 @@ public class AgentAutoJump : MonoBehaviour
     void CancelCooldown() => cooldown?.FinishTimer();
 
     // ============================================================================
+
+    void OnCancelAutoJump(GameObject who)
+    {
+        if(who!=owner) return;
+        if(!isJumping) return;
+
+        FinishJump();
+        owner.transform.position = jumpProgressPos;
+
+        EventM.OnAutoJumpCancelled(owner);
+    }
+
+    // ============================================================================
     
     [Header("Optional")]
     public Rigidbody rb;
     public GroundCheck ground;
+    public ColliderLayerToggler toggler;
 }
 
 // Tutorial by SunnyValleyStudio YouTube
