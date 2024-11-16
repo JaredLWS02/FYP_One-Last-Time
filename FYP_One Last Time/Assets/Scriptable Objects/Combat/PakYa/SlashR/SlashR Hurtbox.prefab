@@ -86,7 +86,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.67
+  m_Radius: 0.94
   m_Height: 2.79
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
@@ -168,6 +168,7 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: be313155c29b7d840ba2cffc336c245e, type: 2}
+  loopGroups: []
   audioEvents:
     EnableEvent:
       m_PersistentCalls:
