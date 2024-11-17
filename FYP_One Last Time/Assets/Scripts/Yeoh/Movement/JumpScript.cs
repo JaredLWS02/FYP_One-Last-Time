@@ -36,8 +36,7 @@ public class JumpScript : MonoBehaviour
     {
         if(who!=owner) return;
         
-        // do not check cooling here
-        // won't cooldown if got jump buffer for some reason
+        if(IsCooling()) return;
 
         if(HasCoyoteTime())
         {
@@ -54,7 +53,6 @@ public class JumpScript : MonoBehaviour
 
     void Jump()
     {
-        if(IsCooling()) return;
         DoCooldown();
 
         ResetCoyoteTime();
