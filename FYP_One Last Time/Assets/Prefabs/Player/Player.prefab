@@ -55,7 +55,6 @@ MonoBehaviour:
   rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
   colorFlickerInterval: 0.05
   poise: 0
-  allowStun: 1
   poiseRegenDelay: 3
   iframeOnDeath: 1
   destroyOnDeath: 1
@@ -123,6 +122,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   actionCounter: 0
+  allowStun: 1
   defaultStunAnim: {fileID: 11400000, guid: 8f5f6b470198d004fab04f404f4051e1, type: 2}
   cooldown: {fileID: 9139493631820300163}
   cooldownTime: 0.5
@@ -2842,7 +2842,7 @@ MonoBehaviour:
   extraJumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   coyoteTime: 0.2
   cooldown: {fileID: 1874970261637118981}
-  cooldownTime: 0.2
+  cooldownTime: 0.4
   jumpEvents:
     Jump:
       m_PersistentCalls:
