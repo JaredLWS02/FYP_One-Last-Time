@@ -9,7 +9,8 @@ public class HealAbility : BaseAbility
     
     // ============================================================================
     
-    public override void OnAnimReleaseStart()
+    // Anim Event
+    public override void OnBaseAbilityReleaseStart()
     {
         hpM.Add(abilitySO.magnitude);
 

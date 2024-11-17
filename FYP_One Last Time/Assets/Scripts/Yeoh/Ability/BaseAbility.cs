@@ -50,8 +50,8 @@ public class BaseAbility : BaseAction
 
     // ============================================================================
     
-    public HPManager mpM;
-
+    public AbilitySlot abilitySlot;
+    
     void OnCast(GameObject caster, AbilitySlot slot)
     {
         if(caster!=owner) return;
@@ -59,13 +59,27 @@ public class BaseAbility : BaseAction
         if(slot.ability != abilitySO) return;
 
         if(IsPerforming()) return;
-        // mp cost
-        mpM.Deplete(slot.ability.mpCost);
-
-        slot.DoCooldown();
+        
+        abilitySlot = slot;
 
         Perform(slot.ability.castAnim);
     }
+
+    // ============================================================================
+
+    public HPManager mpM;
+
+    // Anim Event
+    public override void OnAnimReleaseStart()
+    {
+        mpM.Deplete(abilitySO.mpCost);
+
+        abilitySlot.DoCooldown();
+
+        OnBaseAbilityReleaseStart();
+    }
+
+    public virtual void OnBaseAbilityReleaseStart(){}
 
     // Cancel ============================================================================
     
