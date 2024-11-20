@@ -74,6 +74,19 @@ public class PakYaActions : MonoBehaviour
 
         EventM.OnFlip(owner, input_x);
     }
+
+    void Update()
+    {
+        if(
+            IsDashing() ||
+            IsWindingUpAttack() ||
+            IsReleasingAttack() ||
+            IsTryingToParry() ||
+            IsParrying() ||
+            IsRiposteActive() //||
+        )
+        EventM.OnCancelFlipDelay(owner);
+    }
     
     // ============================================================================
 
@@ -103,8 +116,6 @@ public class PakYaActions : MonoBehaviour
 
         if(!AllowDash) return;
 
-        EventM.OnCancelFlipDelay(owner);
-
         EventM.OnDash(owner);
     }
     
@@ -118,8 +129,6 @@ public class PakYaActions : MonoBehaviour
 
         if(IsRiposteActive()) return;
 
-        EventM.OnCancelFlipDelay(owner);
-
         EventM.OnCombo(owner, combo_name);
     }
 
@@ -131,8 +140,6 @@ public class PakYaActions : MonoBehaviour
 
         if(!IsRiposteActive()) return;
 
-        EventM.OnCancelFlipDelay(owner);
-
         EventM.OnCombo(owner, combo_name);
     }  
 
@@ -143,8 +150,6 @@ public class PakYaActions : MonoBehaviour
         if(who!=owner) return;
 
         if(!AllowParry) return;
-
-        EventM.OnCancelFlipDelay(owner);
 
         EventM.OnRaiseParry(owner);
     }
