@@ -89,6 +89,7 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
   allowKnockback: 1
+  knockbackAxis: {x: 1, y: 0, z: 1}
   knockbackMult: 1
 --- !u!114 &1866404577720983535
 MonoBehaviour:
@@ -620,6 +621,8 @@ MonoBehaviour:
   actionCounter: 0
   caster: {fileID: 1410335126641825925}
   abilitySO: {fileID: 11400000, guid: 289d739c06a77ac4f91862671cfa2768, type: 2}
+  abilitySlot:
+    ability: {fileID: 0}
   mpM: {fileID: 7058722310484815464}
   hpM: {fileID: 1861734953551003033}
   vfx_target: {fileID: 8987163089559660572}
@@ -3118,6 +3121,7 @@ MonoBehaviour:
   toggledLayerNames:
   - Enemy
   - EnemyStopbox
+  ignoringLayers: 0
 --- !u!1 &8511508794433670427
 GameObject:
   m_ObjectHideFlags: 0

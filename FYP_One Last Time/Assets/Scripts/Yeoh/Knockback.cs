@@ -25,6 +25,7 @@ public class Knockback : MonoBehaviour
 
     public Rigidbody rb;
     public bool allowKnockback=true;
+    public Vector3Int knockbackAxis = new(1,0,1);
     public float knockbackMult=1;
 
     public void OnTryKnockback(GameObject who, float force, Vector3 contactPoint)
@@ -33,10 +34,15 @@ public class Knockback : MonoBehaviour
 
         if(!allowKnockback) return;
         if(knockbackMult==0) return;
-
         if(rb.isKinematic) return;
 
-        Vector3 kb_dir = (rb.transform.position - contactPoint).normalized;
+        Vector3 center = ColliderManager.Current.GetCenter(owner);
+
+        Vector3 kb_dir = center - contactPoint;
+        if(knockbackAxis.x<=0) kb_dir.x=0;
+        if(knockbackAxis.y<=0) kb_dir.y=0;
+        if(knockbackAxis.z<=0) kb_dir.z=0;
+        kb_dir = kb_dir.normalized;
 
         if(knockbackMult!=1)
         force *= knockbackMult;

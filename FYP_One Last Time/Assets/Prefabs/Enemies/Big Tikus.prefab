@@ -158,6 +158,7 @@ MonoBehaviour:
         m_Calls: []
   origin: {fileID: 3358378769095232100}
   lookAt: {fileID: 0}
+  lookAtOffset: {x: 0, y: 0, z: 0}
   range: 100
   hitLayers:
     serializedVersion: 2
@@ -167,7 +168,6 @@ MonoBehaviour:
     m_Bits: 8
   ignoreTriggers: 1
   onlyRigidbodies: 0
-  reverseDoubleCheck: 1
   raycastEvents:
     OnHitEnter:
       m_PersistentCalls:
@@ -1800,6 +1800,7 @@ MonoBehaviour:
   toggledLayerNames:
   - Player
   - PlayerStopbox
+  ignoringLayers: 0
 --- !u!1 &5939665830983807460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,7 +2184,6 @@ MonoBehaviour:
   rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
   colorFlickerInterval: 0.05
   poise: 50
-  allowStun: 1
   poiseRegenDelay: 3
   iframeOnDeath: 1
   destroyOnDeath: 1
@@ -2206,6 +2206,7 @@ MonoBehaviour:
   owner: {fileID: 5261146206814944013}
   rb: {fileID: 8915720888079556032}
   allowKnockback: 1
+  knockbackAxis: {x: 1, y: 0, z: 1}
   knockbackMult: 0.5
 --- !u!114 &5138522953899574682
 MonoBehaviour:
@@ -2239,6 +2240,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   actionCounter: 0
+  allowStun: 1
   defaultStunAnim: {fileID: 11400000, guid: f29e74e3b3e53164eaf9604423201c6d, type: 2}
   cooldown: {fileID: 4655900734958021284}
   cooldownTime: 0.5

@@ -87,7 +87,7 @@ CapsuleCollider:
   m_Radius: 0.32
   m_Height: 1.53
   m_Direction: 1
-  m_Center: {x: 0.15, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &8927791873901636086
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -170,6 +170,7 @@ MonoBehaviour:
   owner: {fileID: 226488502472220791}
   rb: {fileID: 2434920184928964055}
   allowKnockback: 1
+  knockbackAxis: {x: 1, y: 0, z: 1}
   knockbackMult: 0.35
 --- !u!114 &4087993480903057497
 MonoBehaviour:
