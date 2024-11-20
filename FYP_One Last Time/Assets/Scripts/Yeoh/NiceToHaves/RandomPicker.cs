@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomPicker : SlowUpdate
+public class RandomPicker : RandomUpdate
 {
     [System.Serializable]
     public class Option
@@ -18,7 +18,7 @@ public class RandomPicker : SlowUpdate
 
     // ============================================================================
     
-    public override void OnSlowUpdate()
+    public override void OnRandomUpdate()
     {
         RandomizeOption();
     }
