@@ -8,6 +8,8 @@ public class ColliderLayerToggler : MonoBehaviour
 
     public List<string> toggledLayerNames = new();
 
+    // ============================================================================
+
     public void ToggleIgnoreLayers(bool toggle)
     {
         foreach(var coll in colliders)
@@ -26,5 +28,11 @@ public class ColliderLayerToggler : MonoBehaviour
     void IgnoreLayer(Collider coll, int layer, bool toggle)
     {
         Physics.IgnoreLayerCollision(coll.gameObject.layer, layer, toggle);
+        ignoringLayers = toggle;
     }
+
+    // ============================================================================
+
+    [Header("Debug")]
+    public bool ignoringLayers;
 }

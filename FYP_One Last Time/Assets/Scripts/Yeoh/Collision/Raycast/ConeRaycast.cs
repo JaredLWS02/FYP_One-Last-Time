@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class ConeRaycast : BaseRaycast
 {
-    public override bool RayHit(out GameObject target)
+    public override bool IsRayHit(out GameObject ray_obj)
     {
-        foreach(var dir in GetConeDirs(GetRayDir()))
+        foreach(var dir in GetConeDirs(origin.forward))
         {
-            if(Physics.Raycast(origin.position, dir, out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
+            if(Physics.Raycast(origin.position, dir, out var hit, range, hitLayers, QueryTriggerInteraction.Ignore))
             {
-                if(IsHitValid(out var hitObj))
+                if(IsColliderValid(hit.collider, out ray_obj))
                 {
-                    target = hitObj;
+                    rayHit = GetRayHit(hit);
                     return true;
                 }
             }
         }
-        target=null;
+        ray_obj=null;
         return false;
     }
 
@@ -81,16 +81,16 @@ public class ConeRaycast : BaseRaycast
         base_fov = fov;
     }
 
-    public override void OnSetDefault()
+    public override void OnBaseSetDefault()
     {
         fov = base_fov;
     }
 
     // ============================================================================
         
-    public override void OnBaseDrawGizmos(Vector3 start, Vector3 end)
+    public override void OnBaseDrawRayGizmos(Vector3 start, Vector3 end)
     {
-        foreach(var dir in GetConeDirs(GetRayDir()))
+        foreach(var dir in GetConeDirs(origin.forward))
         {
             Vector3 cone_end = start + dir * range;
             Gizmos.DrawLine(start, cone_end);

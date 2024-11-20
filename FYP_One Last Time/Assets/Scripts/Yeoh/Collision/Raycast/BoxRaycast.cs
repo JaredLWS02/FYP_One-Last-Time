@@ -8,17 +8,21 @@ public class BoxRaycast : BaseRaycast
     public Vector3 size = Vector3.one;
     Vector3 base_size;
 
-    public override bool RayHit(out GameObject target)
+    public override bool IsOriginHit(out Collider[] overlaps)
     {
-        if(Physics.BoxCast(origin.position, size*.5f, GetRayDir(), out rayHit, origin.rotation, range, hitLayers, QueryTriggerInteraction.Ignore))
+        overlaps = Physics.OverlapBox(origin.position, size*.5f, origin.rotation, hitLayers, QueryTriggerInteraction.Ignore);
+        return overlaps.Length>0;
+    }
+
+    public override bool IsRayHit(out GameObject ray_obj)
+    {
+        if(Physics.BoxCast(origin.position, size*.5f, origin.forward, out var hit, origin.rotation, range, hitLayers, QueryTriggerInteraction.Ignore))
         {
-            if(IsHitValid(out var hitObj))
-            {
-                target = hitObj;
-                return true;
-            }
+            rayHit = GetRayHit(hit);
+            
+            return IsColliderValid(rayHit.collider, out ray_obj);
         }
-        target=null;
+        ray_obj=null;
         return false;
     }
 
@@ -29,14 +33,14 @@ public class BoxRaycast : BaseRaycast
         base_size = size;
     }
 
-    public override void OnSetDefault()
+    public override void OnBaseSetDefault()
     {
         size = base_size;
     }
 
     // ============================================================================
         
-    public override void OnBaseDrawGizmos(Vector3 start, Vector3 end)
+    public override void OnBaseDrawRayGizmos(Vector3 start, Vector3 end)
     {
         Gizmos.matrix = Matrix4x4.TRS(start, origin.rotation, Vector3.one);
         Gizmos.DrawWireCube(Vector3.zero, size);
@@ -48,4 +52,6 @@ public class BoxRaycast : BaseRaycast
         // (to avoid affecting other gizmos)
         Gizmos.matrix = Matrix4x4.identity;
     }
+
+    public override void OnBaseDrawOriginGizmos(Vector3 origin){}
 }

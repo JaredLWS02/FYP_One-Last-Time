@@ -4,48 +4,118 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+[ExecuteInEditMode]
 public class BaseRaycast : SlowUpdate
 {
     [Header("Base Raycast")]
     public Transform origin;
+
+    // ============================================================================
+
     [Header("Optional")]
     public Transform lookAt;
-    
-    public Vector3 GetRayDir()
+    public Vector3 lookAtOffset;
+
+    void LookAt()
     {
-        return lookAt ?
-            (lookAt.position - origin.position).normalized :
-            origin.forward;
+        if(lookAt)
+        origin.LookAt(lookAt.position + lookAtOffset);
+    }
+
+#if UNITY_EDITOR
+    void OnEnable()
+    {
+        EditorApplication.update += EditorUpdate;
+    }
+    void OnDisable()
+    {
+        EditorApplication.update -= EditorUpdate;
+    }
+
+    void EditorUpdate()
+    {
+        if(!Application.isPlaying) LookAt();
+    }
+#endif
+
+    public override void OnFixedUpdate_su()
+    {
+        if(Application.isPlaying) LookAt();
     }
 
     // ============================================================================
 
-    [Header("Cast")]
-    public float range=5;
+    public struct RayHit
+    {
+        public Collider collider;
+        public Vector3 point;
+        public Vector3 normal;
+        public float distance;
+    }
+    
+    public RayHit rayHit {get; protected set;}
 
-    public Vector3 GetEndPos(Vector3 startPos, Vector3 dir) => startPos + dir * range;
-    public Vector3 GetEndPos(Vector3 startPos) => GetEndPos(startPos, GetRayDir());
-    public Vector3 GetEndPos() => GetEndPos(origin.position);
+    protected RayHit GetRayHit(RaycastHit hit)
+    {
+        return new RayHit
+        {
+            collider = hit.collider,
+            point = hit.point,
+            normal = hit.normal,
+            distance = hit.distance,
+        };
+    }
 
     // ============================================================================
-    
-    protected RaycastHit rayHit;
-    
-    public virtual bool RayHit(out GameObject target)
+
+    float originRadius=.01f;
+
+    public virtual bool IsOriginHit(out Collider[] overlaps)
     {
-        if(Physics.Raycast(origin.position, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
+        overlaps = Physics.OverlapSphere(origin.position, originRadius, hitLayers, QueryTriggerInteraction.Ignore);
+        return overlaps.Length>0;
+    }
+
+    [Header("Ray")]
+    public float range=5;
+
+    public virtual bool IsRayHit(out GameObject ray_obj)
+    {
+        if(Physics.Raycast(origin.position, origin.forward, out var hit, range, hitLayers, QueryTriggerInteraction.Ignore))
         {
-            if(IsHitValid(out var hitObj))
-            {
-                target = hitObj;
-                return true;
-            }
+            rayHit = GetRayHit(hit);
+
+            return IsColliderValid(rayHit.collider, out ray_obj);
         }
-        target=null;
+        ray_obj=null;
         return false;
     }
 
-    bool RayHit() => RayHit(out var target);
+    bool IsHit(out GameObject hitobj)
+    {
+        if(IsOriginHit(out var overlaps))
+        {
+            Collider overlap = overlaps[0];
+            Vector3 closestPoint = overlap.ClosestPoint(origin.position);
+
+            rayHit = new RayHit
+            {
+                collider = overlap,
+                point = closestPoint,
+                normal = (origin.position - closestPoint).normalized,
+                distance = Vector3.Distance(origin.position, closestPoint),
+            };
+
+            return IsColliderValid(overlap, out hitobj);
+        }
+        else return IsRayHit(out hitobj);
+    }
+
+    bool IsHit() => IsHit(out var hitobj);
 
     // ============================================================================
 
@@ -53,9 +123,9 @@ public class BaseRaycast : SlowUpdate
     public LayerMask hitLayers;
     public LayerMask targetLayers;
 
-    public bool IsInTargetLayer(GameObject obj)
+    public bool IsInTargetLayer(GameObject who)
     {
-        return (targetLayers & (1 << obj.layer)) != 0;
+        return (targetLayers & (1 << who.layer)) != 0;
     }
 
     // ============================================================================
@@ -63,15 +133,12 @@ public class BaseRaycast : SlowUpdate
     [Header("Check")]
     public bool ignoreTriggers=true;
     public bool onlyRigidbodies;
-    public bool reverseDoubleCheck=true;
     
-    protected bool IsHitValid(RaycastHit hit, out GameObject hitObj)
+    protected bool IsColliderValid(Collider coll, out GameObject coll_obj)
     {
-        Collider coll = hit.collider;
-
         if(ignoreTriggers && coll.isTrigger)
         {
-            hitObj=null;
+            coll_obj=null;
             return false;
         }
 
@@ -79,7 +146,7 @@ public class BaseRaycast : SlowUpdate
 
         if(onlyRigidbodies && !rb)
         {
-            hitObj=null;
+            coll_obj=null;
             return false;
         }
 
@@ -87,36 +154,12 @@ public class BaseRaycast : SlowUpdate
 
         if(!IsInTargetLayer(obj))
         {
-            hitObj=null;
+            coll_obj=null;
             return false;
         }
 
-        // double check forward cast using a reverse cast
-        if(reverseDoubleCheck)
-        {
-            // if it hits, then the ray origin is inside a collider, getting blocked
-            if(ReverseDoubleCheckHit())
-            {
-                hitObj=null;
-                return false;
-            }
-        }
-
-        hitObj=obj;
+        coll_obj=obj;
         return true;
-    }
-
-    protected bool IsHitValid(out GameObject hitObj) => IsHitValid(rayHit, out hitObj);
-
-    // ============================================================================
-
-    bool ReverseDoubleCheckHit()
-    {
-        Vector3 start = rayHit.point;
-        Vector3 dir = (origin.position - rayHit.point).normalized;
-        float range = Vector3.Distance(origin.position, rayHit.point);
-
-        return Physics.Raycast(start, dir, range, hitLayers, QueryTriggerInteraction.Ignore);
     }
 
     // ============================================================================
@@ -141,16 +184,15 @@ public class BaseRaycast : SlowUpdate
         if(!origin) return;
         if(range<=0) return;
 
-        if(!RayHit(out var target)) return;
+        if(!IsHit(out var hitobj)) return;
 
-        current_hit = target;
+        current_hit = hitobj;
 
         if(previous_hit != current_hit)
         {
-            OnHitEnter(target, rayHit);
-            HitEnterEvent?.Invoke(target, rayHit);
-            raycastEvents.OnHitEnter?.Invoke(target, rayHit);
-            //Debug.Log("Hit Enter");
+            OnHitEnter(current_hit, rayHit);
+            HitEnterEvent?.Invoke(current_hit, rayHit);
+            raycastEvents.OnHitEnter?.Invoke(current_hit, rayHit);
 
             hasExited=false;
         }
@@ -170,7 +212,6 @@ public class BaseRaycast : SlowUpdate
             OnHitStay(current_hit, rayHit);
             HitStayEvent?.Invoke(current_hit, rayHit);
             raycastEvents.OnHitStay?.Invoke(current_hit, rayHit);
-            //Debug.Log("Hit Stay");
         }
     }
 
@@ -183,33 +224,32 @@ public class BaseRaycast : SlowUpdate
             OnHitExit(previous_hit, rayHit);
             HitExitEvent?.Invoke(previous_hit, rayHit);
             raycastEvents.OnHitExit?.Invoke(previous_hit, rayHit);
-            //Debug.Log("Hit Exit");
         }
     }
 
     // ============================================================================
 
-    public virtual void OnHitEnter(GameObject target, RaycastHit rayHit){}
-    public virtual void OnHitStay(GameObject target, RaycastHit rayHit){}
-    public virtual void OnHitExit(GameObject target, RaycastHit rayHit){}
+    public virtual void OnHitEnter(GameObject target, RayHit rayHit){}
+    public virtual void OnHitStay(GameObject target, RayHit rayHit){}
+    public virtual void OnHitExit(GameObject target, RayHit rayHit){}
 
     // ============================================================================
 
-    public event Action<GameObject, RaycastHit> HitEnterEvent;
-    public event Action<GameObject, RaycastHit> HitStayEvent;
-    public event Action<GameObject, RaycastHit> HitExitEvent;
+    public event Action<GameObject, RayHit> HitEnterEvent;
+    public event Action<GameObject, RayHit> HitStayEvent;
+    public event Action<GameObject, RayHit> HitExitEvent;
 
     // ============================================================================
 
     [Serializable]
     public struct RaycastEvents
     {
-        public UnityEvent<GameObject, RaycastHit> OnHitEnter;
-        public UnityEvent<GameObject, RaycastHit> OnHitStay;
-        public UnityEvent<GameObject, RaycastHit> OnHitExit;
+        public UnityEvent<GameObject, RayHit> OnHitEnter;
+        public UnityEvent<GameObject, RayHit> OnHitStay;
+        public UnityEvent<GameObject, RayHit> OnHitExit;
     }
     [Header("Raycast Events")]
-    public RaycastEvents raycastEvents;
+    public RaycastEvents raycastEvents = new();
 
     // ============================================================================
 
@@ -226,10 +266,10 @@ public class BaseRaycast : SlowUpdate
     public void SetDefault()
     {
         range = base_range;
-        OnSetDefault();
+        OnBaseSetDefault();
     }
     
-    public virtual void OnSetDefault(){}
+    public virtual void OnBaseSetDefault(){}
     
     // ============================================================================
     
@@ -244,14 +284,21 @@ public class BaseRaycast : SlowUpdate
         if(!origin) return;
 
         Vector3 start = origin.position;
-        Vector3 end = start + GetRayDir() * range;
+        Vector3 end = start + origin.forward * range;
 
-        Gizmos.color = RayHit() ? gizmoHitColor : gizmoColor;
+        Gizmos.color = IsHit() ? gizmoHitColor : gizmoColor;
         Gizmos.DrawLine(start, end);
-
-        OnBaseDrawGizmos(start, end);
+        Gizmos.DrawLine(rayHit.point, rayHit.point + rayHit.normal*.5f);
+        
+        OnBaseDrawRayGizmos(start, end);
+        OnBaseDrawOriginGizmos(start);
     }
 
-    public virtual void OnBaseDrawGizmos(Vector3 start, Vector3 end){}
+    public virtual void OnBaseDrawRayGizmos(Vector3 start, Vector3 end){}
+
+    public virtual void OnBaseDrawOriginGizmos(Vector3 origin)
+    {
+        Gizmos.DrawSphere(origin, originRadius);
+    }
 
 }

@@ -12,6 +12,8 @@ public class SlowUpdate : MonoBehaviour
 
     void Update()
     {
+        OnUpdate_su();
+
         if(fixedUpdate) return;
 
         if(HasInterval()) return;
@@ -19,14 +21,20 @@ public class SlowUpdate : MonoBehaviour
         DoSlowUpdate();
     }
 
+    public virtual void OnUpdate_su(){}
+
     void FixedUpdate()
     {
+        OnFixedUpdate_su();
+        
         if(!fixedUpdate) return;
 
         if(HasInterval()) return;
         
         DoSlowUpdate();
     }
+
+    public virtual void OnFixedUpdate_su(){}
 
     // ============================================================================
 

@@ -10,19 +10,25 @@ public class CapsuleRaycast : BaseRaycast
     public float height=1;
     float base_height;
 
-    public override bool RayHit(out GameObject target)
+    public override bool IsOriginHit(out Collider[] overlaps)
+    {
+        GetCapsule(origin.position, out var top, out var bottom);
+
+        overlaps = Physics.OverlapCapsule(top, bottom, radius, hitLayers, QueryTriggerInteraction.Ignore);
+        return overlaps.Length>0;
+    }
+
+    public override bool IsRayHit(out GameObject ray_obj)
     {
         GetCapsule(origin.position, out var top, out var bottom);
         
-        if(Physics.CapsuleCast(top, bottom, radius, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
+        if(Physics.CapsuleCast(top, bottom, radius, origin.forward, out var hit, range, hitLayers, QueryTriggerInteraction.Ignore))
         {
-            if(IsHitValid(out var hitObj))
-            {
-                target = hitObj;
-                return true;
-            }
+            rayHit = GetRayHit(hit);
+
+            return IsColliderValid(rayHit.collider, out ray_obj);
         }
-        target=null;
+        ray_obj=null;
         return false;
     }
 
@@ -40,7 +46,7 @@ public class CapsuleRaycast : BaseRaycast
         base_height = height;
     }
 
-    public override void OnSetDefault()
+    public override void OnBaseSetDefault()
     {
         radius = base_radius;
         height = base_height;
@@ -48,7 +54,7 @@ public class CapsuleRaycast : BaseRaycast
 
     // ============================================================================
         
-    public override void OnBaseDrawGizmos(Vector3 start, Vector3 end)
+    public override void OnBaseDrawRayGizmos(Vector3 start, Vector3 end)
     {
         DrawWireCapsule(start);
         DrawWireCapsule(end);
@@ -67,4 +73,6 @@ public class CapsuleRaycast : BaseRaycast
         Gizmos.DrawWireSphere(bottom, radius);
         Gizmos.DrawLine(top, bottom);
     }
+
+    public override void OnBaseDrawOriginGizmos(Vector3 origin){}
 }

@@ -143,9 +143,9 @@ public class AgentAutoJump : MonoBehaviour
         lerp01 = isReversed ? 1-lerp01 : lerp01;
 
         // move owner along spline
-        jumpProgressPos = isReversed
-            ? spline.CalcPosFromEnd(lerp01, startPos)
-            : spline.CalcPosFromStart(lerp01, startPos);
+        jumpProgressPos = isReversed ?
+            spline.CalcPosFromEnd(lerp01, startPos) :
+            spline.CalcPosFromStart(lerp01, startPos);
 
         owner.transform.position = jumpProgressPos;
 

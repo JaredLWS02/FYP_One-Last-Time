@@ -8,17 +8,21 @@ public class SphereRaycast : BaseRaycast
     public float radius=1;
     float base_radius;
 
-    public override bool RayHit(out GameObject target)
+    public override bool IsOriginHit(out Collider[] overlaps)
     {
-        if(Physics.SphereCast(origin.position, radius, GetRayDir(), out rayHit, range, hitLayers, QueryTriggerInteraction.Ignore))
+        overlaps = Physics.OverlapSphere(origin.position, radius, hitLayers, QueryTriggerInteraction.Ignore);
+        return overlaps.Length>0;
+    }
+
+    public override bool IsRayHit(out GameObject ray_obj)
+    {
+        if(Physics.SphereCast(origin.position, radius, origin.forward, out var hit, range, hitLayers, QueryTriggerInteraction.Ignore))
         {
-            if(IsHitValid(out var hitObj))
-            {
-                target = hitObj;
-                return true;
-            }
+            rayHit = GetRayHit(hit);
+            
+            return IsColliderValid(rayHit.collider, out ray_obj);
         }
-        target=null;
+        ray_obj=null;
         return false;
     }
 
@@ -29,16 +33,18 @@ public class SphereRaycast : BaseRaycast
         base_radius = radius;
     }
 
-    public override void OnSetDefault()
+    public override void OnBaseSetDefault()
     {
         radius = base_radius;
     }
 
     // ============================================================================
         
-    public override void OnBaseDrawGizmos(Vector3 start, Vector3 end)
+    public override void OnBaseDrawRayGizmos(Vector3 start, Vector3 end)
     {
         Gizmos.DrawWireSphere(start, radius);
         Gizmos.DrawWireSphere(end, radius);
     }
+
+    public override void OnBaseDrawOriginGizmos(Vector3 origin){}
 }
