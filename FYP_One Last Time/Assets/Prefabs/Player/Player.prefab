@@ -1486,7 +1486,7 @@ MonoBehaviour:
   dashingSeconds: 0.2
   dashVelocity: 50
   accelTime: 0
-  decelTime: 1
+  decelTime: 0.5
   dashDir: {x: 0, y: 0.02, z: 1}
   localDir: 1
   dashRecoverAnim: {fileID: 11400000, guid: 56297a705dec634498ea3fee6483cad5, type: 2}
@@ -3237,7 +3237,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 1
+  m_CollisionDetection: 3
 --- !u!114 &4572757513184181502
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -78,7 +78,7 @@ public class DashScript : BaseAction
     
     public float dashVelocity=50;
     public float accelTime=0;
-    public float decelTime=1;
+    public float decelTime=.5f;
     
     public Vector3 dashDir = new(0, .02f, 1);
     public bool localDir=true;
@@ -169,6 +169,7 @@ public class DashScript : BaseAction
         if(!IsDashing()) return;
 
         CancelDashing();
+        OnDashingFinished();
 
         CancelAnim();
 

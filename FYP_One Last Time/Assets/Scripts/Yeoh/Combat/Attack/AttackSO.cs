@@ -26,8 +26,8 @@ public class AttackSO : ScriptableObject
 
     [Header("Optional")]
     [SerializeField]
-    Vector2 cooldownTime = new(0, .1f);
-    public float GetRandomCooldown() => Random.Range(cooldownTime.x, cooldownTime.y);
+    Vector2 cooldown = new(0, .1f);
+    public float GetRandomCooldown() => Random.Range(cooldown.x, cooldown.y);
 
     // ============================================================================
     

@@ -100,7 +100,7 @@ public class AgentAutoJump : MonoBehaviour
 
         jumpAnim?.Play(owner);
 
-        toggler?.ToggleIgnoreLayers(true);
+        //toggler?.ToggleIgnoreLayers(true);
 
         EventM.OnJumped(owner);
         EventM.OnAutoJumped(owner, GetJumpDir());
@@ -173,7 +173,7 @@ public class AgentAutoJump : MonoBehaviour
 
         landAnim?.Play(owner);
 
-        toggler?.ToggleIgnoreLayers(false);
+        //toggler?.ToggleIgnoreLayers(false);
         
         EventM.OnLandGround(owner);
 

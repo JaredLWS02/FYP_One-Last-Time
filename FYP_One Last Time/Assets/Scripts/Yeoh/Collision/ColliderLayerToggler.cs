@@ -12,14 +12,14 @@ public class ColliderLayerToggler : MonoBehaviour
 
     public void ToggleIgnoreLayers(bool toggle)
     {
-        foreach(var coll in colliders)
+        foreach(var layer_name in toggledLayerNames)
         {
-            foreach(var layer_name in toggledLayerNames)
-            {
-                int layer = LayerMask.NameToLayer(layer_name);
-                // skip if layer not found
-                if(layer==-1) continue;
+            int layer = LayerMask.NameToLayer(layer_name);
+            // skip if layer not found
+            if(layer==-1) continue;
 
+            foreach(var coll in colliders)
+            {
                 IgnoreLayer(coll, layer, toggle);
             }
         }
