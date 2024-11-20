@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 
 public class DashScript : BaseAction
@@ -49,6 +50,8 @@ public class DashScript : BaseAction
         EventM.OnCancelAttack(owner);
         //EventM.OnCancelCast(owner);
 
+        TweenDashVelocity(dashVelocity, accelTime);
+
         toggler?.ToggleIgnoreLayers(true);
 
         if(ground) dashesLeft--;
@@ -74,7 +77,10 @@ public class DashScript : BaseAction
     // ============================================================================
     
     public float dashVelocity=50;
-    public Vector3 dashDir = Vector3.forward;
+    public float accelTime=0;
+    public float decelTime=1;
+    
+    public Vector3 dashDir = new(0, .02f, 1);
     public bool localDir=true;
 
     void FixedUpdate()
@@ -83,21 +89,26 @@ public class DashScript : BaseAction
         UpdateGroundCheck();
     }
     
+    float currentDashVelocity;
+
     void UpdateDashing()
     {
-        if(!IsDashing()) return;
-
-        if(dashVelocity==0) return;
+        if(currentDashVelocity==0) return;
         if(dashDir==Vector3.zero) return;
 
         Vector3 direction = dashDir.normalized;
-
         if(localDir)
-        direction = transform.TransformDirection(direction);
+        direction = owner.transform.TransformDirection(direction);
 
-        rb.velocity = direction * dashVelocity;
         // setting velocity instead of using AddForce
-        // to make sure its not affected by gravity
+        // to takeover gravity
+        rb.velocity = new
+        (
+            direction.x * currentDashVelocity,
+            // only no gravity when full velocity
+            currentDashVelocity >= dashVelocity ? direction.y * currentDashVelocity : rb.velocity.y,
+            direction.z * currentDashVelocity
+        );
     }
 
     // ============================================================================
@@ -116,6 +127,19 @@ public class DashScript : BaseAction
             Perform(dashRecoverAnim);
         }
         else OnAnimRecover();
+
+        TweenDashVelocity(0, decelTime);
+    }
+
+    // ============================================================================
+
+    Tween dashVelocityTween;
+
+    void TweenDashVelocity(float to, float time)
+    {
+        dashVelocityTween.Stop();
+        if(time>0) dashVelocityTween = Tween.Custom(currentDashVelocity, to, time, onValueChange: newVal => currentDashVelocity=newVal, Ease.OutSine);
+        else currentDashVelocity = to;
     }
     
     // ============================================================================
@@ -144,6 +168,8 @@ public class DashScript : BaseAction
 
         if(!IsDashing()) return;
 
+        CancelDashing();
+
         CancelAnim();
 
         EventM.OnDashCancelled(owner);
@@ -166,8 +192,8 @@ public class DashScript : BaseAction
     void UpdateGroundCheck()
     {
         if(!ground) return;
-        // Only replenish if grounded and not cooling
-        if(ground.IsGrounded() && !IsCooling())
+        // Only replenish if grounded
+        if(ground.IsGrounded())// && !IsCooling())
         {
             dashesLeft = dashCount;
         }

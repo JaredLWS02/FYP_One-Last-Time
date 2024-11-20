@@ -1450,7 +1450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   currentState: 0
-  anim: {fileID: 0}
+  anim: {fileID: 11400000, guid: 56297a705dec634498ea3fee6483cad5, type: 2}
   uEvents:
     WindUp:
       m_PersistentCalls:
@@ -1485,7 +1485,9 @@ MonoBehaviour:
   dashingTimer: {fileID: 2575847150646626897}
   dashingSeconds: 0.2
   dashVelocity: 50
-  dashDir: {x: 0, y: 0, z: 1}
+  accelTime: 0
+  decelTime: 1
+  dashDir: {x: 0, y: 0.02, z: 1}
   localDir: 1
   dashRecoverAnim: {fileID: 11400000, guid: 56297a705dec634498ea3fee6483cad5, type: 2}
   cooldown: {fileID: 3177311551941944144}
