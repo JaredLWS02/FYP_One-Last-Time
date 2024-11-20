@@ -38,6 +38,7 @@ public class StunScript : BaseAction
         if(victim!=owner) return;
         if(!hurtbox.canStun) return;
         if(IsCooling()) return;
+        DoCooldown();
 
         // action cancelling
         EventM.OnCancelAutoJump(owner);
@@ -60,18 +61,15 @@ public class StunScript : BaseAction
     }
 
     // ============================================================================
-
-    // Anim Event
-    public override void OnAnimRecover()
-    {
-        DoCooldown();
-    }
-
-    // ============================================================================
     
     [Header("After Recover")]
     public Timer cooldown;
     public float cooldownTime=.5f;
+
+    void Update()
+    {
+        cooldown.canTick = !IsPerforming();
+    }
 
     void DoCooldown() => cooldown?.StartTimer(cooldownTime);
     bool IsCooling() => cooldown?.IsTicking() ?? false;

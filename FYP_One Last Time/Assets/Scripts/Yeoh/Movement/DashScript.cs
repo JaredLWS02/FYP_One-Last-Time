@@ -39,13 +39,14 @@ public class DashScript : BaseAction
 
         if(ground && dashesLeft<=0) return;
 
-        if(IsCooling()) return;
-
         Dash();
     }
 
     void Dash()
     {
+        if(IsCooling()) return;
+        DoCooldown();
+        
         // action cancelling
         EventM.OnCancelAttack(owner);
         //EventM.OnCancelCast(owner);
@@ -141,20 +142,17 @@ public class DashScript : BaseAction
         if(time>0) dashVelocityTween = Tween.Custom(currentDashVelocity, to, time, onValueChange: newVal => currentDashVelocity=newVal, Ease.OutSine);
         else currentDashVelocity = to;
     }
-    
-    // ============================================================================
-
-    // Anim Event
-    public override void OnAnimRecover()
-    {
-        DoCooldown();
-    }
-    
+        
     // ============================================================================
     
     [Header("After Recover")]
     public Timer cooldown;
     public float cooldownTime=.5f;
+
+    void Update()
+    {
+        cooldown.canTick = !IsPerforming();
+    }
 
     void DoCooldown() => cooldown?.StartTimer(cooldownTime);
     bool IsCooling() => cooldown?.IsTicking() ?? false;
