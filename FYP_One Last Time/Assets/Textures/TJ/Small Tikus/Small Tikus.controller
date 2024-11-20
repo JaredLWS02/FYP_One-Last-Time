@@ -51,6 +51,7 @@ AnimatorState:
   - {fileID: 6603625283236599844}
   m_StateMachineBehaviours:
   - {fileID: -5249117281922313123}
+  - {fileID: -5320849358733685737}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -96,7 +97,7 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &-5249117281922313123
+--- !u!114 &-6080394026478151512
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,6 +112,36 @@ MonoBehaviour:
   eventName: StunRecover
   triggerTime: 0.9
   triggerOnExit: 1
+--- !u!114 &-5320849358733685737
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: StunRecover
+  triggerTime: 0.9
+  triggerOnExit: 1
+--- !u!114 &-5249117281922313123
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: StunReleaseEnd
+  triggerTime: 0
+  triggerOnExit: 0
 --- !u!1102 &-4836734819809947834
 AnimatorState:
   serializedVersion: 6
@@ -125,6 +156,7 @@ AnimatorState:
   - {fileID: -3416075480925289945}
   m_StateMachineBehaviours:
   - {fileID: 8778761854286307284}
+  - {fileID: -6080394026478151512}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -497,6 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: StunRecover
-  triggerTime: 0.9
-  triggerOnExit: 1
+  eventName: StunReleaseEnd
+  triggerTime: 0
+  triggerOnExit: 0

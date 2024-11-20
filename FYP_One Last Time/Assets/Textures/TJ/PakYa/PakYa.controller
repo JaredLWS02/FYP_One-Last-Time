@@ -74,6 +74,21 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-7511878058238305390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: StunRecover
+  triggerTime: 0.9
+  triggerOnExit: 1
 --- !u!1102 &-6922735887124666313
 AnimatorState:
   serializedVersion: 6
@@ -932,6 +947,7 @@ AnimatorState:
   - {fileID: -1626594570410079659}
   m_StateMachineBehaviours:
   - {fileID: 3413680884303977211}
+  - {fileID: -7511878058238305390}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1075,9 +1091,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventName: StunRecover
-  triggerTime: 0.9
-  triggerOnExit: 1
+  eventName: StunReleaseEnd
+  triggerTime: 0
+  triggerOnExit: 0
 --- !u!114 &3792049537745841569
 MonoBehaviour:
   m_ObjectHideFlags: 1

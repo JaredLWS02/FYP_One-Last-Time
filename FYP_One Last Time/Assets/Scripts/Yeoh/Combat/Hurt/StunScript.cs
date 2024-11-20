@@ -37,7 +37,7 @@ public class StunScript : BaseAction
     {
         if(victim!=owner) return;
         if(!hurtbox.canStun) return;
-        if(IsCooling()) return;
+        if(IsCooling() && !hurtbox.ignoreStunCooldown) return;
         DoCooldown();
 
         // action cancelling
@@ -53,9 +53,6 @@ public class StunScript : BaseAction
             hurtbox.customStunAnim : defaultStunAnim;
 
         Perform(stunAnim);
-
-        if(stunAnim)
-        Anim3_ReleaseEnd();
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
     }

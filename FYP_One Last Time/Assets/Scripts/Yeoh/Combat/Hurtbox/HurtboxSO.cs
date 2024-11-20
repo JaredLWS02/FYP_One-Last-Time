@@ -17,6 +17,7 @@ public class HurtboxSO : ScriptableObject
     public float blockKnockback=25;
     [Min(1)]
     public int pierceCount=1;
+    public bool ignoreIFrame;
     
     [Header("Parry")]
     public bool isParryable=true;
@@ -26,6 +27,7 @@ public class HurtboxSO : ScriptableObject
     public bool canStun=true;
     public AnimSO customStunAnim;
     public bool ignorePoise;
+    public bool ignoreStunCooldown;
 
     // ============================================================================
 
@@ -40,11 +42,13 @@ public class HurtboxSO : ScriptableObject
         new_SO.blockDamage = so.blockDamage;
         new_SO.blockKnockback = so.blockKnockback;
         new_SO.pierceCount = so.pierceCount;
+        new_SO.ignoreIFrame = so.ignoreIFrame;
         new_SO.isParryable = so.isParryable;
         new_SO.parryStunsOwner = so.parryStunsOwner;
         new_SO.canStun = so.canStun;
         new_SO.customStunAnim = so.customStunAnim;
         new_SO.ignorePoise = so.ignorePoise;
+        new_SO.ignoreStunCooldown = so.ignoreStunCooldown;
 
         return new_SO;
     }
