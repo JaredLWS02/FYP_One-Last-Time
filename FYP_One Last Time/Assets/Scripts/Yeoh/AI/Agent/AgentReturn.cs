@@ -116,6 +116,7 @@ public class AgentReturn : MonoBehaviour
 
     void OnDestroy()
     {
+        if(spawnpoint)
         Destroy(spawnpoint.gameObject);
     }
 

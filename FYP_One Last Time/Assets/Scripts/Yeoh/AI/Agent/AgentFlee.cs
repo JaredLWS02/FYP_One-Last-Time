@@ -112,6 +112,7 @@ public class AgentFlee : MonoBehaviour
 
     void OnDestroy()
     {
+        if(fleeGoal)
         Destroy(fleeGoal.gameObject);
     }
 

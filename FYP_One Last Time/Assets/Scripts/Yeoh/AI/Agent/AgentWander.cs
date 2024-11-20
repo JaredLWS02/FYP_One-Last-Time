@@ -154,6 +154,7 @@ public class AgentWander : MonoBehaviour
 
     void OnDestroy()
     {
+        if(wanderGoal)
         Destroy(wanderGoal.gameObject);
     }
     
