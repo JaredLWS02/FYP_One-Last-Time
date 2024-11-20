@@ -114,6 +114,13 @@ public class AgentReturn : MonoBehaviour
     
     // ============================================================================
 
+    void OnDestroy()
+    {
+        Destroy(spawnpoint.gameObject);
+    }
+
+    // ============================================================================
+
     [Header("Debug")]
     public bool showGizmos;
 

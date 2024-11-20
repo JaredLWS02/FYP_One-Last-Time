@@ -47,7 +47,7 @@ public class StunScript : BaseAction
         EventM.OnCancelParry(owner);
         EventM.OnCancelCast(owner);
 
-        actionCounter++;
+        //actionCounter++;
 
         stunAnim = hurtbox.customStunAnim ?
             hurtbox.customStunAnim : defaultStunAnim;

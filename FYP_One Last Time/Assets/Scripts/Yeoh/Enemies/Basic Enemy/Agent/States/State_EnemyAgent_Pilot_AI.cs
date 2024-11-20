@@ -66,8 +66,8 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 agent.returner &&
-                !agent.ShouldFlee() //&&
-                //agent.targeting.ShouldReturn() //&&
+                !agent.ShouldFlee() &&
+                agent.targeting.ShouldReturn() //&&
             ){
                 return true;
             }
@@ -81,8 +81,8 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 !agent.wander ||
-                agent.targeting.CanSeeTarget() //||
-                //agent.ShouldReturn() //||
+                agent.targeting.CanSeeTarget() ||
+                agent.targeting.ShouldReturn() //||
             ){
                 return true;
             }
@@ -93,8 +93,8 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 !agent.targeting.target ||
-                agent.ShouldFlee() //||
-                //agent.ShouldReturn() //||
+                agent.ShouldFlee() ||
+                agent.targeting.ShouldReturn() //||
             ){
                 return true;
             }
@@ -117,8 +117,8 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         {
             if(
                 !agent.returner ||
-                agent.ShouldFlee() //||
-                //agent.returner.IsAtSpawnpoint() //||
+                agent.ShouldFlee() ||
+                agent.returner.IsAtSpawnpoint() //||
             ){
                 return true;
             }

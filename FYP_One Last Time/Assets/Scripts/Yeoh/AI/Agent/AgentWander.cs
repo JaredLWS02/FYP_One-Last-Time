@@ -149,6 +149,13 @@ public class AgentWander : MonoBehaviour
         vehicle.SetRange(wanderArrivalRange);
         vehicle.SetGoal(wanderGoal);
     }
+
+    // ============================================================================
+
+    void OnDestroy()
+    {
+        Destroy(wanderGoal.gameObject);
+    }
     
     // ============================================================================
 

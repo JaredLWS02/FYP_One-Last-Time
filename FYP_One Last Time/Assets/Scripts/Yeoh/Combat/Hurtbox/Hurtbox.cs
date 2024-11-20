@@ -59,13 +59,13 @@ public class Hurtbox : MonoBehaviour
     {
         EventM = EventManager.Current;
         
-        EventM.HurtEvent += OnHurt;
+        EventM.HurtedEvent += OnHurted;
 
         EventM.AttackCancelledEvent += OnAttackCancelled;
     }
     void OnDisable()
     {
-        EventM.HurtEvent -= OnHurt;
+        EventM.HurtedEvent -= OnHurted;
 
         EventM.AttackCancelledEvent -= OnAttackCancelled;
     }
@@ -73,9 +73,10 @@ public class Hurtbox : MonoBehaviour
     // ============================================================================
 
     // on successful hit
-    void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contantPoint)
+    void OnHurted(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contantPoint)
     {
         if(owner != attacker) return;
+        if(owner == victim) return;
         // this.hurtboxSO is NOT an instance
         // hurtbox param is an instance (clone)
         // they are different

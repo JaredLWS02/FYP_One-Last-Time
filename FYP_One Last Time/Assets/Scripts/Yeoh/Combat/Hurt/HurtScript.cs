@@ -53,10 +53,12 @@ public class HurtScript : MonoBehaviour
     void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
-        
+
         if(iframe && !hurtbox.ignoreIFrame) return;
 
         hp.Deplete(hurtbox.damage);
+
+        EventM.OnHurted(owner, attacker, hurtbox, contactPoint);
 
         if(hp.hp>0) // if still alive
         {

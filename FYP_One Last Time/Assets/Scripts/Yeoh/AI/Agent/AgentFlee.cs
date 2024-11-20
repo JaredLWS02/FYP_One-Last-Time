@@ -109,6 +109,13 @@ public class AgentFlee : MonoBehaviour
     }
         
     // ============================================================================
+
+    void OnDestroy()
+    {
+        Destroy(fleeGoal.gameObject);
+    }
+
+    // ============================================================================
     
     [Header("Debug")]
     public bool showGizmos;

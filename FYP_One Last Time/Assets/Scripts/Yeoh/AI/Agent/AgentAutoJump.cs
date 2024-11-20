@@ -33,7 +33,30 @@ public class AgentAutoJump : MonoBehaviour
         if(!agent.isOnOffMeshLink) return;
         if(isJumping) return;
 
+        GetLinkData(out var link, out var start, out var end, out var dist_to_start, out var dist_to_end);
+
+        // Ensure the agent is near the correct side for a non-bidirectional link
+        // Check if it's bidirectional or agent is on the correct side
+        if(!link.bidirectional && dist_to_start > dist_to_end)
+        {
+            // Agent is on the wrong side of a one-way link
+            return;
+        }
+
         EventM.OnAgentTryAutoJump(owner, GetJumpDir());
+    }
+
+    void GetLinkData(out NavMeshLink link, out Vector3 start, out Vector3 end, out float dist_to_start, out float dist_to_end)
+    {
+        link = (NavMeshLink) agent.navMeshOwner;
+
+        // world positions
+        start = link.transform.TransformPoint(link.startPoint);
+        end = link.transform.TransformPoint(link.endPoint);
+
+        // distances
+        dist_to_start = Vector3.Distance(owner.transform.position, start);
+        dist_to_end = Vector3.Distance(owner.transform.position, end);
     }
 
     Vector3 GetJumpDir()
@@ -41,7 +64,7 @@ public class AgentAutoJump : MonoBehaviour
         Vector3 end_pos = agent.currentOffMeshLinkData.endPos;
         return (end_pos - owner.transform.position).normalized;
     }
-
+    
     // ============================================================================
 
     EventManager EventM;
@@ -96,7 +119,7 @@ public class AgentAutoJump : MonoBehaviour
 
         startPos = owner.transform.position;
 
-        isReversed = IsJumpReversed(link);
+        isReversed = IsJumpReversed();
 
         jumpAnim?.Play(owner);
 
@@ -108,18 +131,15 @@ public class AgentAutoJump : MonoBehaviour
 
     // ============================================================================
     
-    bool IsJumpReversed(NavMeshLink link)
+    bool IsJumpReversed()
     {
-        // world positions
-        Vector3 start_pos = link.transform.TransformPoint(link.startPoint);
-        Vector3 end_pos = link.transform.TransformPoint(link.endPoint);
+        GetLinkData(out var link, out var start, out var end, out var dist_to_start, out var dist_to_end);
 
-        // distances
-        float owner_to_start = Vector3.Distance(owner.transform.position, start_pos);
-        float owner_to_end = Vector3.Distance(owner.transform.position, end_pos);
+        // Only consider reversal for bidirectional links
+        if(!link.bidirectional) return false;
 
         // if closer to end point than start point
-        return owner_to_end < owner_to_start;
+        return dist_to_end < dist_to_start;
     }
 
     // ============================================================================

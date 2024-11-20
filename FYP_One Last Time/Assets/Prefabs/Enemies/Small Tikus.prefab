@@ -1701,7 +1701,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5081407622737716327}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.092295945, y: -0.70105743, z: 0.092295945, w: 0.70105743}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2060,7 +2060,7 @@ MonoBehaviour:
   wander: {fileID: 6229778957021930974}
   targeting: {fileID: 7451444391906730433}
   flee: {fileID: 5627483028069982993}
-  returner: {fileID: 8437037779557254025}
+  returner: {fileID: 0}
   randomSeekBehaviour: {fileID: 1971569532230939617}
   hpM: {fileID: 2608293525865954382}
   fleeHPPercent: 25
@@ -3128,22 +3128,22 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70105743
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.092295945
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70105743
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.092295945
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}

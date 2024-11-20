@@ -369,7 +369,8 @@ public class EventManager : MonoBehaviour
     // Hurt ==================================================================================================================
     
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryHurtEvent; // ignores iframe/block/parry
-    public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent; // respects iframe/block/parry
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtEvent;
+    public event Action<GameObject, GameObject, HurtboxSO, Vector3> HurtedEvent; // respects iframe/block/parry
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> PoiseBreakEvent;
     public event Action<GameObject, float, Vector3> TryKnockbackEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> DeathEvent;
@@ -381,6 +382,10 @@ public class EventManager : MonoBehaviour
     public void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         HurtEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
+    public void OnHurted(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        HurtedEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
     }
     public void OnPoiseBroke(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
