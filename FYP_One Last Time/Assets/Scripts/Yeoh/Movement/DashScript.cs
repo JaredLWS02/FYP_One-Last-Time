@@ -52,7 +52,7 @@ public class DashScript : BaseAction
         EventM.OnCancelAttack(owner);
         //EventM.OnCancelCast(owner);
 
-        TweenDashVelocity(dashVelocity, accelTime);
+        TweenDashSpeed(dashSpeed, accelTime);
 
         foreach(var toggler in togglers)
         {
@@ -81,10 +81,12 @@ public class DashScript : BaseAction
 
     // ============================================================================
     
-    public float dashVelocity=50;
+    public float dashSpeed=50;
+    float currentDashSpeed;
+    [Space]
     public float accelTime=0;
     public float decelTime=.5f;
-    
+    [Space]
     public Vector3 dashDir = new(0, .02f, 1);
     public bool localDir=true;
 
@@ -94,26 +96,22 @@ public class DashScript : BaseAction
         UpdateGroundCheck();
     }
     
-    float currentDashVelocity;
-
     void UpdateDashing()
     {
-        if(currentDashVelocity==0) return;
+        if(dashSpeed==0) return;
+        if(currentDashSpeed==0) return;
         if(dashDir==Vector3.zero) return;
 
-        Vector3 direction = dashDir.normalized;
-        if(localDir)
-        direction = owner.transform.TransformDirection(direction);
+        Vector3 dash_dir = localDir ? owner.transform.TransformDirection(dashDir.normalized) : dashDir.normalized;
 
-        // setting velocity instead of using AddForce
-        // to takeover gravity
-        rb.velocity = new
-        (
-            direction.x * currentDashVelocity,
-            // only no gravity when full velocity
-            currentDashVelocity >= dashVelocity ? direction.y * currentDashVelocity : rb.velocity.y,
-            direction.z * currentDashVelocity
-        );
+        Vector3 dash_velocity = currentDashSpeed * dash_dir;
+
+        bool isFullSpeed = currentDashSpeed >= dashSpeed;
+
+        dash_velocity.y = isFullSpeed ? dash_velocity.y : rb.velocity.y;
+
+        // setting velocity instead of using AddForce to takeover gravity
+        rb.velocity = dash_velocity;
     }
 
     // ============================================================================
@@ -136,18 +134,18 @@ public class DashScript : BaseAction
         }
         else OnAnimRecover();
 
-        TweenDashVelocity(0, decelTime);
+        TweenDashSpeed(0, decelTime);
     }
 
     // ============================================================================
 
-    Tween dashVelocityTween;
+    Tween dashSpeedTween;
 
-    void TweenDashVelocity(float to, float time)
+    void TweenDashSpeed(float to, float time)
     {
-        dashVelocityTween.Stop();
-        if(time>0) dashVelocityTween = Tween.Custom(currentDashVelocity, to, time, onValueChange: newVal => currentDashVelocity=newVal, Ease.OutSine);
-        else currentDashVelocity = to;
+        dashSpeedTween.Stop();
+        if(time>0) dashSpeedTween = Tween.Custom(currentDashSpeed, to, time, onValueChange: newVal => currentDashSpeed=newVal, Ease.OutSine);
+        else currentDashSpeed = to;
     }
         
     // ============================================================================
