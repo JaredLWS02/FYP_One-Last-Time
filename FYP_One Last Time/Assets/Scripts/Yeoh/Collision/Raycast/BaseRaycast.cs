@@ -170,6 +170,11 @@ public class BaseRaycast : SlowUpdate
         
     public override void OnSlowUpdate()
     {
+        Shoot();
+    }
+
+    public void Shoot()
+    {
         current_hit = null;
 
         CheckHitEnter();

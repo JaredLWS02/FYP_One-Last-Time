@@ -33,6 +33,8 @@ public class AttackScript : BaseAction
 
         if(IsCooling()) return;
 
+        EventM.OnCancelFlipDelay(owner);
+
         Perform(attackSO.anim);
 
         EventM.OnAttacked(owner, attackSO);
@@ -40,11 +42,17 @@ public class AttackScript : BaseAction
 
     // ============================================================================
 
+    [Header("Attack Move")]
+    public RangeAssist rangeAssist;
+
     // Anim Event
     public override void OnAnimWindUp()
     {
         if(attackSO.dashOnWindUp)
         Dash(attackSO.dashOnWindUpForce, attackSO.dashOnWindUpDir);
+
+        if(attackSO.windUpRangeAssist)
+        rangeAssist?.CheckRange(attackSO.rangeAssistCfg);
 
         EventM.OnAttackWindedUp(owner, attackSO);
 
@@ -55,6 +63,9 @@ public class AttackScript : BaseAction
     {
         if(attackSO.dashOnRelease)
         Dash(attackSO.dashOnReleaseForce, attackSO.dashOnReleaseDir);
+
+        if(attackSO.releaseRangeAssist)
+        rangeAssist?.CheckRange(attackSO.rangeAssistCfg);
 
         SpawnHurtbox();
 

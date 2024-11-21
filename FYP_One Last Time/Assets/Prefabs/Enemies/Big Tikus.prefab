@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399375bcd228ccf4789d0809f72e9035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -396,6 +397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5978083e23d86fd4d933812020ca11af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -424,8 +426,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8395798843393759297}
-  - component: {fileID: 4415285324967952806}
   - component: {fileID: 7299535099910438180}
+  - component: {fileID: 7737800786266869010}
   m_Layer: 6
   m_Name: Detection
   m_TagString: Untagged
@@ -442,68 +444,12 @@ Transform:
   m_GameObject: {fileID: 1405063517788493023}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.08, z: 5.38}
+  m_LocalPosition: {x: -0, y: 1.08, z: 3.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3071236275463930265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4415285324967952806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405063517788493023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkInterval: 0.5
-  fixedUpdate: 1
-  uEvents_su:
-    SlowUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-  ignoreTriggers: 1
-  onlyRigidbodies: 1
-  uEvents:
-    OverlapFirstEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapStay:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7299535099910438180}
-          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
-          m_MethodName: Attack
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OverlapExit:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapLastExit:
-      m_PersistentCalls:
-        m_Calls: []
-  origin: {fileID: 8395798843393759297}
-  posOffset: {x: 0, y: 0, z: 0}
-  layers:
-    serializedVersion: 2
-    m_Bits: 8
-  range: 1.76
-  showGizmos: 1
-  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!114 &7299535099910438180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,8 +466,66 @@ MonoBehaviour:
   attackName: Slam
   ground: {fileID: 4037544487675790279}
   allowGrounded: 1
-  allowMidAir: 0
+  allowMidAir: 1
   sight: {fileID: 1219722450071829959}
+--- !u!114 &7737800786266869010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405063517788493023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61af27b7844e24d48823176f10680f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0.2
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 8395798843393759297}
+  lookAt: {fileID: 0}
+  lookAtOffset: {x: 0, y: 0, z: 0}
+  range: 2.64
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+  raycastEvents:
+    OnHitEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHitStay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7299535099910438180}
+          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
+          m_MethodName: Attack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnHitExit:
+      m_PersistentCalls:
+        m_Calls: []
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
+  gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
+  radius: 1.5
+  height: 0
 --- !u!1 &1611157070665987421
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,6 +781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 1
   fixedUpdate: 1
   uEvents_su:
@@ -956,6 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3522842e4e1187244a9c40ad6ed6121a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 0.25
   fixedUpdate: 1
   uEvents_su:
@@ -1470,6 +1476,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7018626630257047408}
   - {fileID: 3071236275463930265}
   m_Father: {fileID: 2961089990564272037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1517,6 +1524,7 @@ MonoBehaviour:
     followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  rangeAssist: {fileID: 8390285650855487920}
   rb: {fileID: 8915720888079556032}
   cooldown: {fileID: 8399864931548892809}
   attackEvents:
@@ -1731,6 +1739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919037066caba8e4b8f7e8a939aa372e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 0.2
   fixedUpdate: 1
   uEvents_su:
@@ -1935,6 +1944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -1998,6 +2008,110 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8469022149745135095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7358368386525155462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7018626630257047408}
+  - component: {fileID: 8390285650855487920}
+  - component: {fileID: 6858612872670115443}
+  m_Layer: 3
+  m_Name: Range Assist
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7018626630257047408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7358368386525155462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8449358400114368154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8390285650855487920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7358368386525155462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f45d508a7dc7941adfe99c76e79616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  rb: {fileID: 8915720888079556032}
+  ray: {fileID: 6858612872670115443}
+  defaultCfg:
+    moveSeconds: 0.2
+    maxMoveDistance: 3
+    alwaysMove: 0
+    ease: 3
+    reach: 2.5
+  showGizmos: 1
+  gizmo1Color: {r: 1, g: 1, b: 1, a: 0.5}
+  gizmo2Color: {r: 1, g: 1, b: 0, a: 0.5}
+  gizmoSize: 0.2
+--- !u!114 &6858612872670115443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7358368386525155462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61af27b7844e24d48823176f10680f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 0
+  checkInterval: 0.2
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 7018626630257047408}
+  lookAt: {fileID: 0}
+  lookAtOffset: {x: 0, y: 0, z: 0}
+  range: 10
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 9
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 9
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+  raycastEvents:
+    OnHitEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHitStay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHitExit:
+      m_PersistentCalls:
+        m_Calls: []
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
+  gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
+  radius: 0.7
+  height: 0
 --- !u!1 &7372970645232360581
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,6 +2246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 1
   fixedUpdate: 1
   uEvents_su:
@@ -2356,6 +2471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e808f13da413cd4daed6a759ff438a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 0
   fixedUpdate: 1
   uEvents_su:

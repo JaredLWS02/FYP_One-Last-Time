@@ -18,8 +18,16 @@ MonoBehaviour:
   dashOnWindUp: 0
   dashOnWindUpForce: 30
   dashOnWindUpDir: {x: 0, y: 0, z: 1}
-  dashOnRelease: 1
+  dashOnRelease: 0
   dashOnReleaseForce: 30
   dashOnReleaseDir: {x: 0, y: 0, z: 1}
   localDir: 1
-  cooldownTime: {x: 0, y: 0}
+  rangeAssistCfg:
+    moveSeconds: 0.3
+    maxMoveDistance: 3.4
+    alwaysMove: 1
+    ease: 4
+    reach: 1.7
+  windUpRangeAssist: 1
+  releaseRangeAssist: 0
+  cooldown: {x: 0, y: 0.1}

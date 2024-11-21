@@ -44,6 +44,7 @@ public class TryParryScript : BaseAction
     void RaiseParry()
     {
         // action cancelling
+        EventM.OnCancelFlipDelay(owner);
         EventM.OnCancelDash(owner);
         EventM.OnCancelAttack(owner);
         //EventM.OnCancelCast(owner);
@@ -52,6 +53,14 @@ public class TryParryScript : BaseAction
         Perform(raiseParryAnim);
         
         EventM.OnRaisedParry(owner);
+    }
+
+    // ============================================================================
+
+    void Update()
+    {
+        if(IsPerforming())
+        EventM.OnCancelFlipDelay(owner);
     }
 
     // ============================================================================

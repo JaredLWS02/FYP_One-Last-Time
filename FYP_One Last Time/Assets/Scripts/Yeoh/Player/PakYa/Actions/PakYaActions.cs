@@ -74,19 +74,6 @@ public class PakYaActions : MonoBehaviour
 
         EventM.OnFlip(owner, input_x);
     }
-
-    void Update()
-    {
-        if(
-            IsDashing() ||
-            IsWindingUpAttack() ||
-            IsReleasingAttack() ||
-            IsTryingToParry() ||
-            IsParrying() ||
-            IsRiposteActive() //||
-        )
-        EventM.OnCancelFlipDelay(owner);
-    }
     
     // ============================================================================
 

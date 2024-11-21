@@ -22,4 +22,12 @@ MonoBehaviour:
   dashOnReleaseForce: 0
   dashOnReleaseDir: {x: 0, y: 0, z: 1}
   localDir: 1
-  cooldownTime: {x: 0, y: 0.1}
+  rangeAssistCfg:
+    moveSeconds: 0.3
+    maxMoveDistance: 6.5
+    alwaysMove: 1
+    ease: 4
+    reach: 6.5
+  windUpRangeAssist: 1
+  releaseRangeAssist: 0
+  cooldown: {x: 0, y: 0.2}

@@ -48,6 +48,7 @@ public class DashScript : BaseAction
         DoCooldown();
         
         // action cancelling
+        EventM.OnCancelFlipDelay(owner);
         EventM.OnCancelAttack(owner);
         //EventM.OnCancelCast(owner);
 

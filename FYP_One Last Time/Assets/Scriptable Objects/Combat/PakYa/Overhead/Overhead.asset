@@ -15,11 +15,19 @@ MonoBehaviour:
   Name: PakYa Overhead
   description: 
   anim: {fileID: 11400000, guid: dde3fc598837a18489f2dc79e81d3143, type: 2}
-  dashOnWindUp: 1
+  dashOnWindUp: 0
   dashOnWindUpForce: 30
   dashOnWindUpDir: {x: 0, y: 0, z: 1}
   dashOnRelease: 0
   dashOnReleaseForce: 30
   dashOnReleaseDir: {x: 0, y: 0, z: 1}
   localDir: 1
-  cooldownTime: {x: 0, y: 0}
+  rangeAssistCfg:
+    moveSeconds: 0.3
+    maxMoveDistance: 5
+    alwaysMove: 1
+    ease: 4
+    reach: 2.5
+  windUpRangeAssist: 1
+  releaseRangeAssist: 0
+  cooldown: {x: 0, y: 0.1}

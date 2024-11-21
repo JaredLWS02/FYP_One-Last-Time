@@ -10,10 +10,10 @@ public class AttackSO : ScriptableObject
     [TextArea]
     public string description;
 
-    [Header("Anim")]
+    [Header("Attack Anim")]
     public AnimSO anim;
 
-    [Header("Dash")]
+    [Header("Attack Dash")]
     public bool dashOnWindUp = false;
     public float dashOnWindUpForce = 30;
     public Vector3 dashOnWindUpDir = Vector3.forward;
@@ -23,6 +23,11 @@ public class AttackSO : ScriptableObject
     public Vector3 dashOnReleaseDir = Vector3.forward;
     [Space]
     public bool localDir = true;
+
+    [Header("Attack Move")]
+    public RangeAssistCfg rangeAssistCfg;
+    public bool windUpRangeAssist=true;
+    public bool releaseRangeAssist;
 
     [Header("Optional")]
     [SerializeField]

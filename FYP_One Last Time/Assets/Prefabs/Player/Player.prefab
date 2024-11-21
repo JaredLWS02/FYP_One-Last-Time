@@ -475,6 +475,110 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anaya: {fileID: 1475748435622140236}
   player: {fileID: 8987163089559660572}
+--- !u!1 &1699134499720375290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7646375859309582628}
+  - component: {fileID: 2270107276636531569}
+  - component: {fileID: 6080351587773628695}
+  m_Layer: 3
+  m_Name: Range Assist
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7646375859309582628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699134499720375290}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2968421400926582619}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2270107276636531569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699134499720375290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f45d508a7dc7941adfe99c76e79616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
+  ray: {fileID: 6080351587773628695}
+  defaultCfg:
+    moveSeconds: 0.2
+    maxMoveDistance: 3
+    alwaysMove: 0
+    ease: 3
+    reach: 2.5
+  showGizmos: 0
+  gizmo1Color: {r: 1, g: 1, b: 1, a: 0.5}
+  gizmo2Color: {r: 1, g: 1, b: 0, a: 0.5}
+  gizmoSize: 0.2
+--- !u!114 &6080351587773628695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699134499720375290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61af27b7844e24d48823176f10680f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 0
+  checkInterval: 0.2
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 7646375859309582628}
+  lookAt: {fileID: 0}
+  lookAtOffset: {x: 0, y: 0, z: 0}
+  range: 10
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 65
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 65
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+  raycastEvents:
+    OnHitEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHitStay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHitExit:
+      m_PersistentCalls:
+        m_Calls: []
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
+  gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
+  radius: 0.5
+  height: 1
 --- !u!1 &2756698445312053699
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +788,7 @@ GameObject:
   - component: {fileID: 1109364968870284027}
   - component: {fileID: 7407755151823912840}
   m_Layer: 3
-  m_Name: Attacks
+  m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -703,6 +807,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7646375859309582628}
   - {fileID: 3988350149641666891}
   - {fileID: 6705404227923167189}
   - {fileID: 3441330446162689485}
@@ -752,6 +857,7 @@ MonoBehaviour:
     followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  rangeAssist: {fileID: 2270107276636531569}
   rb: {fileID: 1642459170912960868}
   cooldown: {fileID: 1109364968870284027}
   attackEvents:
@@ -816,7 +922,7 @@ MonoBehaviour:
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
+    parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
@@ -828,7 +934,7 @@ MonoBehaviour:
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
+    parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
@@ -840,7 +946,7 @@ MonoBehaviour:
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
+    parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
@@ -1620,6 +1726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 0
   fixedUpdate: 1
   uEvents_su:
@@ -3280,6 +3387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919037066caba8e4b8f7e8a939aa372e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
   checkInterval: 0.2
   fixedUpdate: 1
   uEvents_su:
