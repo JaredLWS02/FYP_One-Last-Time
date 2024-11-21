@@ -54,6 +54,12 @@ public class SideFlip : TurnScript
 
     [Header("Delay")]
     public Vector2 flipDelay = new(0,.2f);
+    Vector2 currentFlipDelay;
+
+    protected override void OnBaseAwake()
+    {
+        currentFlipDelay = flipDelay;
+    }
 
     void StartFlipDelay()
     {
@@ -69,7 +75,7 @@ public class SideFlip : TurnScript
     {
         isFlipDelaying=true;
 
-        float t = Random.Range(flipDelay.x, flipDelay.y);
+        float t = Random.Range(currentFlipDelay.x, currentFlipDelay.y);
         yield return new WaitForSeconds(t);
         Flip();
 
@@ -90,6 +96,11 @@ public class SideFlip : TurnScript
 
         isFlipDelaying=false;
     }
+
+    // ============================================================================
+
+    public void SetFlipDelay(Vector2 to) => currentFlipDelay = to;
+    public void RevertFlipDelay() => currentFlipDelay = flipDelay;
 
     // ============================================================================
 

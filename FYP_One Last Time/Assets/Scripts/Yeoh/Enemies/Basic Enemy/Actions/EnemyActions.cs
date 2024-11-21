@@ -117,8 +117,6 @@ public class EnemyActions : MonoBehaviour
 
         if(!AllowAttack) return;
 
-        EventM.OnCancelFlipDelay(owner);
-
         EventM.OnCombo(owner, combo_name);
     }
 

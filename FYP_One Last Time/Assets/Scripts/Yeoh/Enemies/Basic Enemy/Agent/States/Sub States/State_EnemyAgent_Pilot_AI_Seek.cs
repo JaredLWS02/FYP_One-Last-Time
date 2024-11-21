@@ -18,6 +18,8 @@ public class State_EnemyAgent_Pilot_AI_Seek : BaseState
         ToggleAllow(true);
 
         agent.targeting.ExpandRadar();
+
+        agent.flip?.SetFlipDelay(agent.seekFlipDelay);
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -62,6 +64,8 @@ public class State_EnemyAgent_Pilot_AI_Seek : BaseState
         ToggleAllow(false);
 
         agent.targeting.RevertRadar();
+
+        agent.flip?.RevertFlipDelay();
     }
 
     void ToggleAllow(bool toggle)

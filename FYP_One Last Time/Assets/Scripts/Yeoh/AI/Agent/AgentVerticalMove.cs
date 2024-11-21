@@ -33,16 +33,18 @@ public class AgentVerticalMove : SlowUpdate
 
         if(!InRange(target_pos)) return;
 
-        float target_height = target_pos.y - owner.transform.position.y;
+        float y_dist = Mathf.Abs(target_pos.y - owner.transform.position.y);
 
-        // is above
-        if(target_height > checkHeight)
+        if(y_dist < checkHeight) return;
+
+        bool isAbove = target_pos.y > owner.transform.position.y;
+
+        if(isAbove)
         {
             EventM.OnAgentTryJump(owner); // jump duh
             EventM.OnAgentTryMove(owner, Vector2.up); // press up
         }
-        // is below
-        else if(target_height < -checkHeight)
+        else
         {
             EventM.OnAgentTryJumpCut(owner); // jumpcut
             EventM.OnAgentTryMove(owner, Vector2.down); // press down

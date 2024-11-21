@@ -16,7 +16,10 @@ public class TurnScript : MonoBehaviour
     void Awake()
     {
         baseTurnSpeed = turnSpeed;
+        OnBaseAwake();
     }
+
+    protected virtual void OnBaseAwake(){}
 
     // ============================================================================
 

@@ -30,6 +30,8 @@ public class EnemyAgent : MonoBehaviour
     // ============================================================================
     
     [Header("Seek")]
+    public SideFlip flip;
+    public Vector2 seekFlipDelay = new(.4f, .6f);
     public RandomPicker randomSeekBehaviour;
     
     // ============================================================================

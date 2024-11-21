@@ -78,7 +78,7 @@ public class EnemyActionInputs : MonoBehaviour
 
         if(who!=owner) return;
 
-        EventM.OnTryJump(owner);
+        EventM.OnTryJumpCut(owner);
     }
 
     void OnAgentTryAutoJump(GameObject who, Vector3 dir)

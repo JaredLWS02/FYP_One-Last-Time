@@ -94,6 +94,8 @@ public class AgentAutoJump : MonoBehaviour
 
         if(ground && !ground.IsGrounded()) return;
 
+        EventM.OnCancelFlipDelay(owner);
+
         StartJump();
     }
 
@@ -102,8 +104,10 @@ public class AgentAutoJump : MonoBehaviour
     public bool isJumping {get; private set;}
     float jumpProgress=0;
 
-    Vector3 startPos;
     Spline spline;
+    NavMeshLinkSpline navMeshLinkSpline;
+
+    Vector3 startPos;
     bool isReversed;
 
     void StartJump()
@@ -116,6 +120,9 @@ public class AgentAutoJump : MonoBehaviour
         NavMeshLink link = (NavMeshLink) agent.navMeshOwner;
 
         spline = link.GetComponent<Spline>();
+        navMeshLinkSpline = link.GetComponent<NavMeshLinkSpline>();
+
+        currentJumpSeconds = navMeshLinkSpline.jumpSeconds;
 
         startPos = owner.transform.position;
 
@@ -144,18 +151,17 @@ public class AgentAutoJump : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Jump")]
-    [Min(.01f)]
-    public float jumpSeconds=.8f;
+    [Header("Anim")]
     public AnimSO jumpAnim;
 
+    float currentJumpSeconds;
     Vector3 jumpProgressPos;
 
     void UpdateJumpSpline()
     {
         if(!isJumping) return;
 
-        jumpProgress += Time.fixedDeltaTime / jumpSeconds;
+        jumpProgress += Time.fixedDeltaTime / currentJumpSeconds;
 
         float lerp01 = Mathf.Clamp01(jumpProgress);
 
@@ -179,7 +185,6 @@ public class AgentAutoJump : MonoBehaviour
     
     // ============================================================================
 
-    [Header("Land")]
     public AnimSO landAnim;
 
     void FinishJump()
