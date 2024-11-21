@@ -123,7 +123,7 @@ public class AgentAutoJump : MonoBehaviour
 
         jumpAnim?.Play(owner);
 
-        //toggler?.ToggleIgnoreLayers(true);
+        toggler?.ToggleIgnoreLayers(true);
 
         EventM.OnJumped(owner);
         EventM.OnAutoJumped(owner, GetJumpDir());
@@ -193,7 +193,7 @@ public class AgentAutoJump : MonoBehaviour
 
         landAnim?.Play(owner);
 
-        //toggler?.ToggleIgnoreLayers(false);
+        toggler?.ToggleIgnoreLayers(false);
         
         EventM.OnLandGround(owner);
 
@@ -228,7 +228,7 @@ public class AgentAutoJump : MonoBehaviour
     [Header("Optional")]
     public Rigidbody rb;
     public GroundCheck ground;
-    public ColliderLayerToggler toggler;
+    public CollisionToggler toggler;
 }
 
 // Tutorial by SunnyValleyStudio YouTube

@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1168953982317478414}
   - component: {fileID: 5318526711802374849}
+  - component: {fileID: 7530034618285244420}
   - component: {fileID: 5633158490581605300}
   m_Layer: 6
   m_Name: Auto Jump
@@ -86,7 +87,25 @@ MonoBehaviour:
   cooldownTime: 0.5
   rb: {fileID: 1401727047894497609}
   ground: {fileID: 6364306906685696337}
-  toggler: {fileID: 6185348622820334622}
+  toggler: {fileID: 7530034618285244420}
+--- !u!114 &7530034618285244420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331851488794867522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5f22e23122c554dbd5a166d23f57f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myColliders:
+  - {fileID: 7212206103626484725}
+  - {fileID: 516678816966381711}
+  layerNamesToToggle:
+  - Player
+  - PlayerStopbox
 --- !u!114 &5633158490581605300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,13 +693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 7212206103626484725}
-  - {fileID: 516678816966381711}
-  toggledLayerNames:
-  - Player
-  - PlayerStopbox
-  ignoringLayers: 0
+  layerNames1: []
+  layerNames2: []
 --- !u!1 &1942763244818008925
 GameObject:
   m_ObjectHideFlags: 0
@@ -2616,6 +2630,8 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   ground: {fileID: 6364306906685696337}
   minY: -20
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!1 &7021269989712493573
 GameObject:
   m_ObjectHideFlags: 0

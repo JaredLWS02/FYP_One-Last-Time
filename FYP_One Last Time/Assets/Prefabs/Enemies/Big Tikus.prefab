@@ -292,6 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2623606231955308900}
   - component: {fileID: 4300309323571415192}
+  - component: {fileID: 4404759368139431838}
   - component: {fileID: 2847565093712370024}
   m_Layer: 6
   m_Name: Auto Jump
@@ -336,7 +337,25 @@ MonoBehaviour:
   cooldownTime: 0.5
   rb: {fileID: 8915720888079556032}
   ground: {fileID: 4037544487675790279}
-  toggler: {fileID: 3477742860679495246}
+  toggler: {fileID: 4404759368139431838}
+--- !u!114 &4404759368139431838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204780436780658593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5f22e23122c554dbd5a166d23f57f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myColliders:
+  - {fileID: 3188788791223888934}
+  - {fileID: 6133948626742609180}
+  layerNamesToToggle:
+  - Player
+  - PlayerStopbox
 --- !u!114 &2847565093712370024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +540,7 @@ MonoBehaviour:
     OnHitExit:
       m_PersistentCalls:
         m_Calls: []
-  showGizmos: 1
+  showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
   radius: 1.5
@@ -972,7 +991,7 @@ MonoBehaviour:
   vehicle: {fileID: 293840219241273385}
   checkHeight: 2
   checkRange: 8
-  showGizmos: 1
+  showGizmos: 0
   gizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
 --- !u!1 &2647459806633737789
 GameObject:
@@ -1749,6 +1768,8 @@ MonoBehaviour:
   owner: {fileID: 5261146206814944013}
   ground: {fileID: 4037544487675790279}
   minY: -20
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!1 &5701653159739410106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,13 +1841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 3188788791223888934}
-  - {fileID: 6133948626742609180}
-  toggledLayerNames:
-  - Player
-  - PlayerStopbox
-  ignoringLayers: 0
+  layerNames1: []
+  layerNames2: []
 --- !u!1 &5939665830983807460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,7 +2078,7 @@ MonoBehaviour:
     alwaysMove: 0
     ease: 3
     reach: 2.5
-  showGizmos: 1
+  showGizmos: 0
   gizmo1Color: {r: 1, g: 1, b: 1, a: 0.5}
   gizmo2Color: {r: 1, g: 1, b: 0, a: 0.5}
   gizmoSize: 0.2
@@ -2107,7 +2123,7 @@ MonoBehaviour:
     OnHitExit:
       m_PersistentCalls:
         m_Calls: []
-  showGizmos: 1
+  showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
   radius: 0.7

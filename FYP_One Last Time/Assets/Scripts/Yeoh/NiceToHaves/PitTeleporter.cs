@@ -48,4 +48,27 @@ public class PitTeleporter : SlowUpdate
         }
         return owner.transform.position;
     }
+
+    // ============================================================================
+    
+    [Header("Debug")]
+    public bool showGizmos = true;
+    public Color gizmoColor = new(1, 0, 0, .5f);
+
+    void OnDrawGizmosSelected()
+    {
+        if(!showGizmos) return;
+        if(!owner) return;
+
+        Vector3 start = owner.transform.position;
+        Vector3 end = new
+        (
+            owner.transform.position.x,
+            minY,
+            owner.transform.position.z
+        );
+
+        Gizmos.color = gizmoColor;
+        Gizmos.DrawLine(start, end);
+    }
 }

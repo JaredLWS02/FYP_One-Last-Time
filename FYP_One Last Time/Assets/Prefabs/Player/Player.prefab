@@ -1517,6 +1517,8 @@ GameObject:
   m_Component:
   - component: {fileID: 87823280794277385}
   - component: {fileID: 6281709897807071656}
+  - component: {fileID: 5262417445514003396}
+  - component: {fileID: 5607446443472334089}
   - component: {fileID: 2575847150646626897}
   - component: {fileID: 3177311551941944144}
   - component: {fileID: 118276988135510132}
@@ -1598,9 +1600,45 @@ MonoBehaviour:
   dashRecoverAnim: {fileID: 11400000, guid: 56297a705dec634498ea3fee6483cad5, type: 2}
   cooldown: {fileID: 3177311551941944144}
   cooldownTime: 0.5
-  toggler: {fileID: 7935989673976965938}
+  togglers:
+  - {fileID: 5262417445514003396}
+  - {fileID: 5607446443472334089}
   ground: {fileID: 773448853722404963}
   dashCount: 1
+--- !u!114 &5262417445514003396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5918945628297077924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerNames1:
+  - Player
+  - PlayerStopbox
+  layerNames2:
+  - Enemy
+  - EnemyStopbox
+--- !u!114 &5607446443472334089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5918945628297077924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerNames1:
+  - Player
+  layerNames2:
+  - EnemyHurtbox
 --- !u!114 &2575847150646626897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3179,7 +3217,6 @@ GameObject:
   m_Component:
   - component: {fileID: 123463650881099154}
   - component: {fileID: 5812872954807716688}
-  - component: {fileID: 7935989673976965938}
   m_Layer: 3
   m_Name: Collider
   m_TagString: Untagged
@@ -3228,25 +3265,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7935989673976965938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8132836240672146080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab2a78f51802f34ca545976d77027b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliders:
-  - {fileID: 5812872954807716688}
-  - {fileID: 4751762620593248465}
-  toggledLayerNames:
-  - Enemy
-  - EnemyStopbox
-  ignoringLayers: 0
 --- !u!1 &8511508794433670427
 GameObject:
   m_ObjectHideFlags: 0
@@ -3397,6 +3415,8 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   ground: {fileID: 773448853722404963}
   minY: -20
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!1 &9161674605968897696
 GameObject:
   m_ObjectHideFlags: 0
