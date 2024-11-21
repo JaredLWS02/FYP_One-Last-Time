@@ -22,6 +22,14 @@ public class AttackScript : BaseAction
 
     // ============================================================================
     
+    void Update()
+    {
+        if(IsPerforming())
+        EventM.OnCancelFlipDelay(owner);
+    }
+    
+    // ============================================================================
+    
     [Header("On Attack")]
     public AttackSO attackSO;
     [Space]

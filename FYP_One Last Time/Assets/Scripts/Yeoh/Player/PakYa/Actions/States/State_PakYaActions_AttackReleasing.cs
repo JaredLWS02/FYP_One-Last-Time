@@ -20,8 +20,8 @@ public class State_PakYaActions_AttackReleasing : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        action.AllowMoveX = true; //false;
-        action.AllowMoveY = true; //false;
+        action.AllowMoveX = false;
+        action.AllowMoveY = false;
         action.AllowFlip = false;
     }
 

@@ -36,7 +36,7 @@ public class RiposteScript : MonoBehaviour
     
     [Header("Riposte Window")]
     public Timer riposteTimer;
-    public float riposteTime=.5f;
+    public float riposteTime=1;
 
     void StartRiposte() => riposteTimer.StartTimer(riposteTime);
     public bool IsRiposteActive() => riposteTimer.IsTicking();

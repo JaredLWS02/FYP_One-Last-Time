@@ -26,8 +26,8 @@ public class AttackSO : ScriptableObject
 
     [Header("Attack Move")]
     public RangeAssistCfg rangeAssistCfg;
-    public bool windUpRangeAssist=true;
-    public bool releaseRangeAssist;
+    public bool windUpRangeAssist;
+    public bool releaseRangeAssist=true;
 
     [Header("Optional")]
     [SerializeField]
