@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StepUpCheck : MonoBehaviour
 {
     public GameObject owner;
+    public Rigidbody rb;
 
     // ============================================================================
 
@@ -15,24 +17,35 @@ public class StepUpCheck : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.MoveEvent += OnMove;
+        EventM.DeplatformEvent += OnDeplatform;
     }
     void OnDisable()
     {
         EventM.MoveEvent -= OnMove;
+        EventM.DeplatformEvent -= OnDeplatform;
     }
 
     // ============================================================================
 
     Vector2 moveInput;
 
-    void OnMove(GameObject mover, Vector2 input)
+    void OnMove(GameObject who, Vector2 input)
     {
-        if(owner!=mover) return;
+        if(who!=owner) return;
 
         moveInput = input;
     }
 
     bool IsMoving() => moveInput != Vector2.zero;
+
+    // ============================================================================
+
+    void OnDeplatform(GameObject who, Collider platform, bool toggle)
+    {
+        if(who!=owner) return;
+
+        isDeplatforming = toggle;
+    }
 
     // ============================================================================
     
@@ -46,9 +59,10 @@ public class StepUpCheck : MonoBehaviour
     public float downRayRange=1;
     public LayerMask hitLayers;
     
-    [Header("Force")]
-    public Rigidbody rb;
-    public float upForce=50;
+    [Header("Step Up")]
+    public bool doStepUp=true;
+    public float upSpeed=5;
+    bool isDeplatforming;
 
     [Header("Optional")]
     public SlopeCheck slope;
@@ -59,7 +73,7 @@ public class StepUpCheck : MonoBehaviour
     void FixedUpdate()
     {
         UpdateMoveDir();
-        TryPushUp();
+        TryStepUp();
     }
 
     void UpdateMoveDir()
@@ -74,8 +88,10 @@ public class StepUpCheck : MonoBehaviour
         moveDirection.forward = moveDir.normalized;
     }
     
-    void TryPushUp()
+    void TryStepUp()
     {
+        if(!doStepUp) return;
+        if(isDeplatforming) return;
         if(!IsMoving()) return;
 
         if(ground && !ground.IsGrounded()) return;
@@ -83,9 +99,12 @@ public class StepUpCheck : MonoBehaviour
         if(!IsUpRayValid()) return;
         if(!IsDownRayValid()) return;
 
-        rb.velocity = Vector3.zero;
-        rb.AddForce(owner.transform.up * upForce*10);
-    }    
+        //rb.velocity = new(rb.velocity.x, 0, rb.velocity.z);
+        if(rb.velocity.magnitude < upSpeed)
+        rb.AddForce(upRayOrigin.up * upSpeed*10);
+
+        stepUpEvents.StepUpUpdateEvent?.Invoke();
+    }
 
     bool IsUpRayValid()
     {
@@ -133,4 +152,14 @@ public class StepUpCheck : MonoBehaviour
         Vector3 end = start + dir * range;
         Gizmos.DrawLine(start, end);
     }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct StepUpEvents
+    {
+        public UnityEvent StepUpUpdateEvent;
+    }
+    [Space]
+    public StepUpEvents stepUpEvents;
 }

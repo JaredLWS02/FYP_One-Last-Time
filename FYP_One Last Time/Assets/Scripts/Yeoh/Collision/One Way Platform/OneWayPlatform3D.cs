@@ -38,50 +38,57 @@ public class OneWayPlatform3D : MonoBehaviour
 
     void OnMove(GameObject mover, Vector2 input)
     {
+        // must press down
         if(input.y > -0.7f) return;
         // ignore if mover is not any passenger
         if(!carrier.IsPassenger(mover, out var passenger)) return;
 
-        Collider coll = passenger.coll;
+        Collider target_coll = passenger.coll;
 
-        TryStopCoroutine(coll);
+        TryStopCoroutine(target_coll);
 
-        ignoringColl_crts[coll] = StartCoroutine(IgnoringColl(coll));
+        ignoringColl_crts[target_coll] = StartCoroutine(IgnoringColl(target_coll, passenger.gameObject));
     }
 
     // ============================================================================
 
     Dictionary<Collider, Coroutine> ignoringColl_crts = new();
 
-    void TryStopCoroutine(Collider coll)
+    void TryStopCoroutine(Collider target_coll)
     {
-        if(ignoringColl_crts.TryGetValue(coll, out var crt))
+        if(ignoringColl_crts.TryGetValue(target_coll, out var crt))
         {
             if(crt!=null) StopCoroutine(crt);
         }
     }
 
-    IEnumerator IgnoringColl(Collider coll)
+    public float deplatformSeconds=.5f;
+
+    IEnumerator IgnoringColl(Collider target_coll, GameObject deplatformer)
     {
-        if(coll)
+        if(target_coll)
         {
-            effector.TryAddColliderToIgnore(coll);
+            effector.TryAddColliderToIgnore(target_coll);
             
-            IgnoreColl(coll, true);
+            IgnoreColl(target_coll, true);
+
+            EventM.OnDeplatform(deplatformer, coll, true);
         }
         
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(deplatformSeconds);
 
-        if(coll)
+        if(target_coll)
         {
-            IgnoreColl(coll, false);
+            IgnoreColl(target_coll, false);
 
-            effector.TryRemoveColliderToIgnore(coll);
+            effector.TryRemoveColliderToIgnore(target_coll);
+
+            EventM.OnDeplatform(deplatformer, coll, false);
         }
     }
 
-    void IgnoreColl(Collider targetColl, bool toggle)
+    void IgnoreColl(Collider target_coll, bool toggle)
     {
-        Physics.IgnoreCollision(targetColl, coll, toggle);
+        Physics.IgnoreCollision(target_coll, coll, toggle);
     }
 }

@@ -207,6 +207,15 @@ public class EventManager : MonoBehaviour
         LeaveGroundEvent?.Invoke(who);
     }    
 
+    // One Way Platform ==================================================================================================================
+
+    public event Action<GameObject, Collider, bool> DeplatformEvent;
+
+    public void OnDeplatform(GameObject who, Collider platform, bool toggle)
+    {
+        DeplatformEvent?.Invoke(who, platform, toggle);
+    }
+
     // Dash ==================================================================================================================
     
     public event Action<GameObject> TryDashEvent;
