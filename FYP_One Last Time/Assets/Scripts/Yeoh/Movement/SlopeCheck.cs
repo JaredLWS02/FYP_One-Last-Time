@@ -28,7 +28,7 @@ public class SlopeCheck : MonoBehaviour
         {
             GetSlope(rayHit.normal, out float angle, out bool is_slope, out bool is_too_steep, out Vector3 slope_dir);
 
-            onSlope = is_slope;
+            onSlope = ground.IsGrounded() && is_slope;
             isTooSteep = is_too_steep;
             slopeDir = slope_dir;
         }
@@ -43,7 +43,7 @@ public class SlopeCheck : MonoBehaviour
     }
 
     public float GetSlopeAngle(Vector3 normal) => Vector3.Angle(Vector3.up, normal);
-    public bool IsSlope(float angle) => ground.IsGrounded() && angle!=0;
+    public bool IsSlope(float angle) => angle!=0;
     public bool IsTooSteep(float angle) => angle > maxSlopeAngle;
     public Vector3 GetSlopeDir(Vector3 normal) => Vector3.Cross(normal, Vector3.Cross(Vector3.up, normal));
 
