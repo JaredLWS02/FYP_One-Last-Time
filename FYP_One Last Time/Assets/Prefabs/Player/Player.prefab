@@ -2915,23 +2915,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
   moveDirection: {fileID: 2298312609927150873}
-  upRayOrigin: {fileID: 2177579545335493061}
-  upRayRange: 2.8
-  downRayOrigin: {fileID: 2177579545335493061}
-  downRayRange: 1.3
+  rayOrigin: {fileID: 2177579545335493061}
+  rayRange: 1.33
+  minHeightSpaceAboveStep: 3
   hitLayers:
     serializedVersion: 2
     m_Bits: 1
-  rb: {fileID: 1642459170912960868}
-  upForce: 5
+  doStepUp: 1
+  upSpeed: 5
   slope: {fileID: 714563234870328098}
   ground: {fileID: 0}
   showGizmos: 1
-  upRayInvalidColor: {r: 1, g: 0, b: 0, a: 0.5}
-  upRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
   downRayInvalidColor: {r: 1, g: 1, b: 1, a: 0.5}
   downRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  stepUpEvents:
+    StepUpUpdateEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7744259096066021052
 GameObject:
   m_ObjectHideFlags: 0

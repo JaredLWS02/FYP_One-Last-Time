@@ -52,15 +52,14 @@ public class StepUpCheck : MonoBehaviour
     [Header("Parent")]
     public Transform moveDirection;
 
-    [Header("Rays")]
-    public Transform upRayOrigin;
-    public float upRayRange=2;
-    public Transform downRayOrigin;
-    public float downRayRange=1;
+    [Header("Ray")]
+    public Transform rayOrigin;
+    public float rayRange=1;
+    public float minHeightSpaceAboveStep=2;
     public LayerMask hitLayers;
     
     [Header("Step Up")]
-    public bool doStepUp=true;
+    public bool doStepUpMove=true;
     public float upSpeed=5;
     bool isDeplatforming;
 
@@ -90,31 +89,31 @@ public class StepUpCheck : MonoBehaviour
     
     void TryStepUp()
     {
-        if(!doStepUp) return;
         if(isDeplatforming) return;
         if(!IsMoving()) return;
 
         if(ground && !ground.IsGrounded()) return;
         
-        if(!IsUpRayValid()) return;
-        if(!IsDownRayValid()) return;
-
-        //rb.velocity = new(rb.velocity.x, 0, rb.velocity.z);
-        if(rb.velocity.magnitude < upSpeed)
-        rb.AddForce(upRayOrigin.up * upSpeed*10);
+        if(!CanStepUp()) return;
 
         stepUpEvents.StepUpUpdateEvent?.Invoke();
-    }
 
-    bool IsUpRayValid()
-    {
-        return !Physics.Raycast(upRayOrigin.position, upRayOrigin.up, upRayRange, hitLayers, QueryTriggerInteraction.Ignore);
-    }
-
-    bool IsDownRayValid()
-    {
-        if(Physics.Raycast(downRayOrigin.position, -downRayOrigin.up, out RaycastHit hit, downRayRange, hitLayers, QueryTriggerInteraction.Ignore))
+        if(doStepUpMove)
         {
+            //rb.velocity = new(rb.velocity.x, 0, rb.velocity.z);
+            if(rb.velocity.magnitude < upSpeed)
+            rb.AddForce(owner.transform.up * upSpeed*10);
+        }
+    }
+
+    RaycastHit hit;
+
+    bool CanStepUp()
+    {
+        if(Physics.Raycast(rayOrigin.position, -rayOrigin.up, out hit, rayRange, hitLayers, QueryTriggerInteraction.Ignore))
+        {
+            if(!HasSpaceAbove(hit.point)) return false;
+
             if(!slope) return true;
 
             float angle = slope.GetSlopeAngle(hit.normal);
@@ -122,29 +121,34 @@ public class StepUpCheck : MonoBehaviour
         }
         return false;
     }
+
+    bool HasSpaceAbove(Vector3 pos)
+    {
+        return !Physics.Raycast(pos, rayOrigin.up, minHeightSpaceAboveStep, hitLayers, QueryTriggerInteraction.Ignore);
+    }
     
     // ============================================================================
     
     [Header("Debug")]
     public bool showGizmos = true;
-
-    public Color upRayInvalidColor = new(1,0,0, .5f);
-    public Color upRayValidColor = new(0,1,0, .5f);
-
-    public Color downRayInvalidColor = new(1,1,1, .5f);
-    public Color downRayValidColor = new(0,1,0, .5f);
+    public Color rayColor = new(1,1,1, .5f);
+    public Color rayValidColor = new(0,1,0, .5f);
+    public Color rayInvalidColor = new(1,0,0, .5f);
 
     void OnDrawGizmosSelected()
     {
         if(!showGizmos) return;
-        if(!upRayOrigin) return;
-        if(!downRayOrigin) return;
+        if(!rayOrigin) return;
         
-        Gizmos.color = IsUpRayValid() ? upRayValidColor : upRayInvalidColor;
-        DrawRayGizmo(upRayOrigin.position, upRayOrigin.up, upRayRange);
+        bool canStepUp = CanStepUp();
 
-        Gizmos.color = IsDownRayValid() ? downRayValidColor : downRayInvalidColor;
-        DrawRayGizmo(downRayOrigin.position, -downRayOrigin.up, downRayRange);
+        Gizmos.color = canStepUp ? rayValidColor : rayColor;
+        DrawRayGizmo(rayOrigin.position, -rayOrigin.up, rayRange);
+
+        if(!canStepUp) return;
+
+        Gizmos.color = HasSpaceAbove(hit.point) ? rayColor : rayInvalidColor;
+        DrawRayGizmo(hit.point, rayOrigin.up, minHeightSpaceAboveStep);
     }
 
     void DrawRayGizmo(Vector3 start, Vector3 dir, float range)

@@ -1138,6 +1138,83 @@ MonoBehaviour:
   range: 10
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
+--- !u!1 &2331810159870700479
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3210067724137585524}
+  - component: {fileID: 2320247082597636935}
+  m_Layer: 3
+  m_Name: Jump Up Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3210067724137585524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2331810159870700479}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8011064840606379974}
+  m_Father: {fileID: 8016398935337583029}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2320247082597636935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2331810159870700479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9978f4f6708544045b6f0bc155796a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6995670659757724566}
+  rb: {fileID: 1401727047894497609}
+  moveDirection: {fileID: 3210067724137585524}
+  rayOrigin: {fileID: 8011064840606379974}
+  rayRange: 3.19
+  minHeightSpaceAboveStep: 1.53
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  doStepUpMove: 0
+  upSpeed: 5
+  slope: {fileID: 4312500313611420060}
+  ground: {fileID: 0}
+  showGizmos: 1
+  downRayInvalidColor: {r: 1, g: 1, b: 1, a: 0.5}
+  downRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  stepUpEvents:
+    StepUpUpdateEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8627083544392464877}
+          m_TargetAssemblyTypeName: EnemyActions, Assembly-CSharp
+          m_MethodName: TryJump
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2693418600857933463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,23 +1568,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 6995670659757724566}
+  rb: {fileID: 1401727047894497609}
   moveDirection: {fileID: 4065490232821354761}
-  upRayOrigin: {fileID: 9137949818302096211}
-  upRayRange: 1.5
-  downRayOrigin: {fileID: 9137949818302096211}
-  downRayRange: 0.69
+  rayOrigin: {fileID: 9137949818302096211}
+  rayRange: 0.64
+  minHeightSpaceAboveStep: 1.53
   hitLayers:
     serializedVersion: 2
     m_Bits: 1
-  rb: {fileID: 1401727047894497609}
-  upForce: 50
+  doStepUpMove: 1
+  upSpeed: 5
   slope: {fileID: 4312500313611420060}
   ground: {fileID: 0}
   showGizmos: 1
-  upRayInvalidColor: {r: 1, g: 0, b: 0, a: 0.5}
-  upRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
   downRayInvalidColor: {r: 1, g: 1, b: 1, a: 0.5}
   downRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  stepUpEvents:
+    StepUpUpdateEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &4761921378866670156
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,6 +2905,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!1 &7062099112191331318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8011064840606379974}
+  m_Layer: 3
+  m_Name: Ray Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8011064840606379974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7062099112191331318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 3.95, z: 0.54}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3210067724137585524}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7606574879609327656
 GameObject:
   m_ObjectHideFlags: 0
@@ -3045,6 +3155,7 @@ Transform:
   m_Children:
   - {fileID: 1638000971579537777}
   - {fileID: 7738766412446040994}
+  - {fileID: 3210067724137585524}
   - {fileID: 1168953982317478414}
   - {fileID: 7776404038038796983}
   - {fileID: 510932770829757082}

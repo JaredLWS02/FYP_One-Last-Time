@@ -282,6 +282,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!1 &976320020075826602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8044125347021919912}
+  m_Layer: 3
+  m_Name: Ray Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8044125347021919912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976320020075826602}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 5.33, z: 1.86}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4554591259262152614}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1204780436780658593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1642,6 +1673,7 @@ Transform:
   m_Children:
   - {fileID: 7253250639220862154}
   - {fileID: 2846529412029525313}
+  - {fileID: 4554591259262152614}
   - {fileID: 2623606231955308900}
   - {fileID: 8449358400114368154}
   - {fileID: 5442243828401948624}
@@ -2026,6 +2058,84 @@ MonoBehaviour:
   range: 10
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
+--- !u!1 &6676704115839947431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4554591259262152614}
+  - component: {fileID: 7387270926270410713}
+  m_Layer: 3
+  m_Name: Jump Up Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4554591259262152614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6676704115839947431}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8044125347021919912}
+  m_Father: {fileID: 2961089990564272037}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7387270926270410713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6676704115839947431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9978f4f6708544045b6f0bc155796a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  rb: {fileID: 8915720888079556032}
+  moveDirection: {fileID: 4554591259262152614}
+  rayOrigin: {fileID: 8044125347021919912}
+  rayRange: 3.98
+  minHeightSpaceAboveStep: 2.22
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  doStepUpMove: 0
+  upSpeed: 5
+  slope: {fileID: 0}
+  ground: {fileID: 0}
+  showGizmos: 1
+  rayColor: {r: 1, g: 1, b: 1, a: 0.5}
+  rayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayInvalidColor: {r: 1, g: 0, b: 0, a: 0.5}
+  stepUpEvents:
+    StepUpUpdateEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2005189343605618808}
+          m_TargetAssemblyTypeName: EnemyActions, Assembly-CSharp
+          m_MethodName: TryJump
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7244821877251971682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,23 +2349,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 5261146206814944013}
+  rb: {fileID: 8915720888079556032}
   moveDirection: {fileID: 2466772764998479678}
-  upRayOrigin: {fileID: 6271899513586249873}
-  upRayRange: 2
-  downRayOrigin: {fileID: 6271899513586249873}
-  downRayRange: 0.97
+  rayOrigin: {fileID: 6271899513586249873}
+  rayRange: 1
+  minHeightSpaceAboveStep: 2.22
   hitLayers:
     serializedVersion: 2
     m_Bits: 1
-  rb: {fileID: 8915720888079556032}
-  upForce: 50
+  doStepUpMove: 1
+  upSpeed: 5
   slope: {fileID: 3056104320120214010}
   ground: {fileID: 0}
   showGizmos: 1
-  upRayInvalidColor: {r: 1, g: 0, b: 0, a: 0.5}
-  upRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
-  downRayInvalidColor: {r: 1, g: 1, b: 1, a: 0.5}
-  downRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayColor: {r: 1, g: 1, b: 1, a: 0.5}
+  rayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayInvalidColor: {r: 1, g: 0, b: 0, a: 0.5}
+  stepUpEvents:
+    StepUpUpdateEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &8387206739802261977
 GameObject:
   m_ObjectHideFlags: 0
