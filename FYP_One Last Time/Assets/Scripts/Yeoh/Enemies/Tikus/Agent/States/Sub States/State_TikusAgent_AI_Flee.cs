@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_EnemyAgent_Pilot_AI_Flee : BaseState
+public class State_TikusAgent_AI_Flee : BaseState
 {
     public override string Name => "AI Flee";
 
-    EnemyAgent agent;
+    TikusAgent agent;
 
-    public State_EnemyAgent_Pilot_AI_Flee(StateMachine_EnemyAgent_Pilot sm)
+    public State_TikusAgent_AI_Flee(StateMachine_TikusAgent sm)
     {
         agent = sm.agent;
     }

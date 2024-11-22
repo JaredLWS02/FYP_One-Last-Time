@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_EnemyAgent_Pilot_AI_Idle : BaseState
+public class State_TikusAgent_AI_Return : BaseState
 {
-    public override string Name => "AI Idle";
+    public override string Name => "AI Return";
 
-    EnemyAgent agent;
+    TikusAgent agent;
 
-    public State_EnemyAgent_Pilot_AI_Idle(StateMachine_EnemyAgent_Pilot sm)
+    public State_TikusAgent_AI_Return(StateMachine_TikusAgent sm)
     {
         agent = sm.agent;
     }
@@ -20,8 +20,8 @@ public class State_EnemyAgent_Pilot_AI_Idle : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        agent.vehicle.SetGoalToSelf();
-
+        agent.returner.SetGoalToReturn();
+        
         agent.move.FaceMoveDir();
     }
 

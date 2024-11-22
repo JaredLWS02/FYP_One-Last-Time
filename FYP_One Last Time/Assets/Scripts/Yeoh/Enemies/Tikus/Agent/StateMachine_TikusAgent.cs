@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAgent))]
+[RequireComponent(typeof(TikusAgent))]
 
-public class StateMachine_EnemyAgent_Pilot : MonoBehaviour
+public class StateMachine_TikusAgent : MonoBehaviour
 {
     [HideInInspector]
-    public EnemyAgent agent;
+    public TikusAgent agent;
 
     void Awake()
     {
-        agent = GetComponent<EnemyAgent>();
+        agent = GetComponent<TikusAgent>();
 
         Initialize();
     }
@@ -28,7 +28,7 @@ public class StateMachine_EnemyAgent_Pilot : MonoBehaviour
         // STATES ================================================================================
 
         State_Hub hub = new();
-        State_EnemyAgent_Pilot_AI ai = new(this);
+        State_TikusAgent_AI ai = new(this);
 
         // HUB TRANSITIONS ================================================================================
 

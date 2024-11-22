@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class State_EnemyAgent_Pilot_AI : BaseState
+public class State_TikusAgent_AI : BaseState
 {
-    public override string Name => "AI Pilot";
+    public override string Name => "AI Active";
 
-    EnemyAgent agent;
+    TikusAgent agent;
 
     // SUB STATE MACHINE ================================================================================
 
     BaseState defaultSubState;
 
-    public State_EnemyAgent_Pilot_AI(StateMachine_EnemyAgent_Pilot sm)
+    public State_TikusAgent_AI(StateMachine_TikusAgent sm)
     {
         agent = sm.agent;
 
@@ -18,11 +18,11 @@ public class State_EnemyAgent_Pilot_AI : BaseState
         
         // SUB STATES ================================================================================
 
-        State_EnemyAgent_Pilot_AI_Idle idle = new(sm);
-        State_EnemyAgent_Pilot_AI_Wander wander = new(sm);
-        State_EnemyAgent_Pilot_AI_Seek seek = new(sm);
-        State_EnemyAgent_Pilot_AI_Flee flee = new(sm);
-        State_EnemyAgent_Pilot_AI_Return returnn = new(sm);
+        State_TikusAgent_AI_Idle idle = new(sm);
+        State_TikusAgent_AI_Wander wander = new(sm);
+        State_TikusAgent_AI_Seek seek = new(sm);
+        State_TikusAgent_AI_Flee flee = new(sm);
+        State_TikusAgent_AI_Return returnn = new(sm);
 
         // HUB TRANSITIONS ================================================================================
 
@@ -145,6 +145,8 @@ public class State_EnemyAgent_Pilot_AI : BaseState
 
     protected override void OnExit()
     {
+        Debug.Log($"{agent.owner.name} State: AI Inactive");
+
         ToggleAllow(false);
     }
 

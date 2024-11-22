@@ -160,11 +160,7 @@ public class PlatformEffector3D : MonoBehaviour
         Rigidbody rb = other.attachedRigidbody;
         if(!rb) return;
 
-        Vector3 rb_dir = rb.velocity.normalized;
-
-        float dot = Vector3.Dot(PassthroughDirection(), rb_dir);
-
-        bool shouldPass = dot > 0;
+        bool shouldPass = CanPass(rb); // && !HasPassed(rb.gameObject);
 
         Physics.IgnoreCollision(myColl, other, shouldPass);
     }
@@ -182,6 +178,34 @@ public class PlatformEffector3D : MonoBehaviour
             entryDirection.normalized;
     }
 
+    bool CanPass(Rigidbody passer_rb)
+    {
+        Vector3 rb_dir = passer_rb.velocity.normalized;
+
+        float dot = Vector3.Dot(rb_dir, PassthroughDirection());
+
+        return dot>0;
+    }
+
+    bool HasPassed(GameObject passer)
+    {
+        Vector3 center = myColl.bounds.center;
+        Vector3 passer_center = ColliderManager.Current.GetCenter(passer);
+
+        Vector3 dir_to_passer = (passer_center - center).normalized;
+
+        float dot = Vector3.Dot(dir_to_passer, PassthroughDirection());
+
+        return dot>0;
+    }
+
+    // ============================================================================
+
+    void OnDrawGizmosSelected()
+    {
+        DrayEntryGizmos();
+    }
+
     void DrayEntryGizmos()
     {
         if(!myColl) return;
@@ -193,12 +217,5 @@ public class PlatformEffector3D : MonoBehaviour
         Gizmos.DrawRay(center, ray_length);
         Gizmos.color = Color.green;
         Gizmos.DrawRay(center, -ray_length);
-    }
-
-    // ============================================================================
-
-    void OnDrawGizmosSelected()
-    {
-        DrayEntryGizmos();
     }
 }

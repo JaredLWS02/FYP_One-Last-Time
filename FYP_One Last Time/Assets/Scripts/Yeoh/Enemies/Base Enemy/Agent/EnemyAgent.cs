@@ -9,7 +9,7 @@ public class EnemyAgent : MonoBehaviour
 
     // ============================================================================
 
-    EventManager EventM;
+    protected EventManager EventM;
 
     void OnEnable()
     {
@@ -32,14 +32,5 @@ public class EnemyAgent : MonoBehaviour
     [Header("Seek")]
     public SideFlip flip;
     public Vector2 seekFlipDelay = new(.4f, .6f);
-    public RandomPicker randomSeekBehaviour;
     
-    // ============================================================================
-    
-    [Header("Flee")]
-    public HPManager hpM;
-    public float fleeHPPercent=25;
-    public bool ShouldFlee() => hpM.GetHPPercent() <= fleeHPPercent;
-
-    public RandomPicker randomFleeBehaviour;
 }
