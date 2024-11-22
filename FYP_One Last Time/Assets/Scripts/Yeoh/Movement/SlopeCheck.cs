@@ -26,15 +26,26 @@ public class SlopeCheck : MonoBehaviour
     {
         if(Physics.Raycast(rayOrigin.position, -rayOrigin.up, out rayHit, rayLength, layers))
         {
-            float angle = Vector3.Angle(Vector3.up, rayHit.normal);
-            
-            onSlope = angle!=0 && ground.IsGrounded();
-            
-            isTooSteep = angle > maxSlopeAngle;
+            GetSlope(rayHit.normal, out float angle, out bool is_slope, out bool is_too_steep, out Vector3 slope_dir);
 
-            slopeDir = Vector3.Cross(rayHit.normal, Vector3.Cross(Vector3.up, rayHit.normal));
+            onSlope = is_slope;
+            isTooSteep = is_too_steep;
+            slopeDir = slope_dir;
         }
     }
+
+    public void GetSlope(Vector3 normal, out float angle, out bool is_slope, out bool is_too_steep, out Vector3 slope_dir)
+    {
+        angle = GetSlopeAngle(normal);
+        is_slope = IsSlope(angle);
+        is_too_steep = IsTooSteep(angle);
+        slope_dir = GetSlopeDir(normal);
+    }
+
+    public float GetSlopeAngle(Vector3 normal) => Vector3.Angle(Vector3.up, normal);
+    public bool IsSlope(float angle) => ground.IsGrounded() && angle!=0;
+    public bool IsTooSteep(float angle) => angle > maxSlopeAngle;
+    public Vector3 GetSlopeDir(Vector3 normal) => Vector3.Cross(normal, Vector3.Cross(Vector3.up, normal));
 
     // ============================================================================
     
