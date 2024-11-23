@@ -34,17 +34,6 @@ public class HurtScript : MonoBehaviour
     }
 
     // ============================================================================
-    
-    ModelManager ModelM;
-    SpriteManager SpriteM;
-
-    void Start()
-    {
-        ModelM = ModelManager.Current;
-        SpriteM = SpriteManager.Current;
-    }
-
-    // ============================================================================
 
     public HPManager hp;
 
@@ -95,9 +84,6 @@ public class HurtScript : MonoBehaviour
     {
         iframe=true;
 
-        if(colorFlicker)
-        ToggleColorFlicker(true);
-
         EventM.OnIFrameToggle(owner, true);
         hurtEvents.OnIFrameToggle?.Invoke(true);
 
@@ -105,49 +91,8 @@ public class HurtScript : MonoBehaviour
 
         iframe=false;
 
-        ToggleColorFlicker(false);
-
         EventM.OnIFrameToggle(owner, false);
         hurtEvents.OnIFrameToggle?.Invoke(false);
-    }
-
-    // ============================================================================
-    
-    public bool colorFlicker=true;
-    public Vector3 rgbOffset = new(.75f, -.75f, -.75f); // red
-    public float colorFlickerInterval=.05f;
-
-    void ToggleColorFlicker(bool toggle)
-    {
-        if(colorFlickering_crt!=null) StopCoroutine(colorFlickering_crt);
-
-        if(toggle) colorFlickering_crt = StartCoroutine(ColorFlickering());
-
-        else RevertColor(owner);
-    }
-
-    Coroutine colorFlickering_crt;
-
-    IEnumerator ColorFlickering()
-    {
-        while(true)
-        {
-            OffsetColor(owner, rgbOffset.x, rgbOffset.y, rgbOffset.z);
-            yield return new WaitForSecondsRealtime(colorFlickerInterval);
-            RevertColor(owner);
-            yield return new WaitForSecondsRealtime(colorFlickerInterval);
-        }
-    }
-
-    void OffsetColor(GameObject target, float r, float g, float b)
-    {
-        if(ModelM) ModelM.OffsetColor(target, r, g, b);
-        if(SpriteM) SpriteM.OffsetColor(target, r, g, b);
-    }
-    void RevertColor(GameObject target)
-    {
-        if(ModelM) ModelM.RevertColor(target);
-        if(SpriteM) SpriteM.RevertColor(target);
     }
     
     // ============================================================================
@@ -214,8 +159,6 @@ public class HurtScript : MonoBehaviour
         EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
 
         iframe = iframeOnDeath;
-
-        RevertColor(owner);
 
         hurtEvents.OnDeath?.Invoke(contactPoint);
 

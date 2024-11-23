@@ -24,6 +24,7 @@ public class VFXManager : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.HurtedEvent += OnHurted;
+        EventM.HealEvent += OnHeal;
         // EventM.DeathEvent += OnDeath;
         // EventM.LootEvent += OnLoot;
         // EventM.AddBuffEvent += OnAddBuff;
@@ -34,6 +35,7 @@ public class VFXManager : MonoBehaviour
     void OnDisable()
     {
         EventM.HurtedEvent -= OnHurted;
+        EventM.HealEvent -= OnHeal;
         // EventM.DeathEvent -= OnDeath;
         // EventM.LootEvent -= OnLoot;
         // EventM.AddBuffEvent -= OnAddBuff;
@@ -70,6 +72,11 @@ public class VFXManager : MonoBehaviour
 
         //     SpawnRedImpact(contactPoint);
         // }
+    }
+
+    void OnHeal(GameObject who, GameObject healer, float amount)
+    {
+        SpawnPopUpText(CollM.GetTop(who), $"{Round(amount)}", Color.green);
     }
     
     // [Header("Resource")]
@@ -178,7 +185,7 @@ public class VFXManager : MonoBehaviour
 
         TextMeshProUGUI[] tmps = popUp.GetComponentsInChildren<TextMeshProUGUI>();
 
-        foreach(TextMeshProUGUI tmp in tmps)
+        foreach(var tmp in tmps)
         {
             tmp.text = text;
             tmp.color = color;
@@ -411,15 +418,8 @@ public class VFXManager : MonoBehaviour
         // if(Input.GetKeyDown(KeyCode.KeypadDivide)) SpawnChi(ModelManager.Current.GetColliderCenter(FindPlayer()), Vector3.one*5);
     }
 
-    GameObject FindPlayer()
-    {
-        return GameObject.FindGameObjectWithTag("Player");
-    }
-
-    // Vector3 PlayerTop()
-    // {
-    //     return ModelManager.Current.GetColliderTop(FindPlayer());
-    // }
+    GameObject FindPlayer() => GameObject.FindGameObjectWithTag("Player");
+    Vector3 PlayerTop() => CollM.GetTop(FindPlayer());
 
     void ExpandAnim(GameObject obj, float time=.15f)
     {

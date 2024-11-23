@@ -247,6 +247,7 @@ GameObject:
   - component: {fileID: 5500637588816224525}
   - component: {fileID: 5319706839787744477}
   - component: {fileID: 5821905264687698104}
+  - component: {fileID: 4250589424126804282}
   m_Layer: 5
   m_Name: Pop Up Text
   m_TagString: Untagged
@@ -314,3 +315,18 @@ MonoBehaviour:
   outTime: 0.5
   ignoreTime: 1
   destroyOnFinish: 1
+--- !u!114 &4250589424126804282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4640091990393059759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbbf2327ec550b64593b75cce4d23a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableBillboard: 1
+  fixedUpdate: 1
+  rotateAxis: {x: 1, y: 1, z: 0}

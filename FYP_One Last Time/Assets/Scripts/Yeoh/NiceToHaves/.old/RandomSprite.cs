@@ -10,9 +10,9 @@ public class RandomSprite : MonoBehaviour
     void Start()
     {
         if(offsetColor!=Vector4.zero)
-        SpriteManager.Current.RandomOffsetColor(gameObject, offsetColor.x, offsetColor.y, offsetColor.z, offsetColor.w);
+        SpritesManager.Current.RandomOffsetColor(gameObject, offsetColor.x, offsetColor.y, offsetColor.z, offsetColor.w);
 
         if(randomFlip!=Vector2.zero)
-        SpriteManager.Current.RandomFlip(gameObject, randomFlip.y!=0, randomFlip.x!=0);
+        SpritesManager.Current.RandomFlip(gameObject, randomFlip.y!=0, randomFlip.x!=0);
     }
 }
