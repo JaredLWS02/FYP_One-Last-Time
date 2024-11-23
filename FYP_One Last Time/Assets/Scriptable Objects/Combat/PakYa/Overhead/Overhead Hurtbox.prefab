@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4014294989942184369}
   - component: {fileID: 4483064678518147200}
   - component: {fileID: 4477666097286210611}
-  - component: {fileID: 8782049835207013567}
   - component: {fileID: 8375644196373531894}
+  - component: {fileID: 8782049835207013567}
   m_Layer: 7
   m_Name: Overhead Hurtbox
   m_TagString: Untagged
@@ -72,20 +72,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  enabledOnAwake: 1
   hurtboxSO: {fileID: 11400000, guid: cc094eae19979a745a1fa714abe01144, type: 2}
-  hurtboxOrigin: {fileID: 8241207935512812364}
-  uEvents:
-    Hit:
+  hurtboxEvents:
+    OnTryHit:
       m_PersistentCalls:
         m_Calls: []
-    Hurt:
+    OnHitSuccess:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8375644196373531894}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: GetAudioPrefab
           m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Hit
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8375644196373531894}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: SetSpawnPos
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Ya hit enemy
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8375644196373531894}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: Play
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -96,6 +118,48 @@ MonoBehaviour:
           m_CallState: 2
   destroyOnHit: 0
   destroyOnHurt: 0
+  myColl: {fileID: 4483064678518147200}
+  enabledOnAwake: 1
+  hitMethod: 1
+  triggerTimer: {fileID: 0}
+  triggerStayInterval: 0.1
+  hurtboxOrigin: {fileID: 8241207935512812364}
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+--- !u!114 &8375644196373531894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Hit
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: be313155c29b7d840ba2cffc336c245e, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8782049835207013567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,35 +179,6 @@ MonoBehaviour:
   shrinkTo: {x: 0, y: 0, z: 0}
   shrinkTime: 0
   ignoreTimescale: 0
---- !u!114 &8375644196373531894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242880141507026177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioPrefabs:
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
-    hideInHierarchy: 0
-    spawnpoint: {fileID: 4014294989942184369}
-    parented: 0
-    followRotation: 0
-    spawnPos: {x: 0, y: 0, z: 0}
-    spawnRot: {x: 0, y: 0, z: 0, w: 0}
-    audioSO: {fileID: 11400000, guid: be313155c29b7d840ba2cffc336c245e, type: 2}
-  audioEvents:
-    EnableEvent:
-      m_PersistentCalls:
-        m_Calls: []
-    DisableEvent:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1992008462738508319
 GameObject:
   m_ObjectHideFlags: 0

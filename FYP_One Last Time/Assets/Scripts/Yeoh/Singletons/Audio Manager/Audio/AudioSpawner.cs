@@ -3,50 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class AudioPrefab : PrefabPreset
+{
+    [Header("Audio")]
+    public AudioSO audioSO;
+    
+    public AudioSource SpawnAudio()
+    {   
+        GameObject spawned = Spawn();
+        AudioSource audioSource = spawned.GetComponent<AudioSource>();
+
+        if(!audioSource)
+        {
+            Debug.LogError($"AudioPrefab: {prefabName} must have Audio Source!");
+            Despawn(spawned);
+            return null;
+        }
+
+        audioSO.Play(audioSource);
+
+        if(!audioSource.loop)
+        Despawn(spawned, audioSource.clip.length);
+
+        return audioSource;
+    }
+}
+
+// ==================================================================================================================
+
 public class AudioSpawner : MonoBehaviour
 {    
     public List<AudioPrefab> audioPrefabs = new();
 
-    public AudioPrefab GetAudioPrefab(string audio_name)
+    AudioPrefab currentAudioPrefab;
+
+    public void GetAudioPrefab(string audio_name)
     {
         if(string.IsNullOrEmpty(audio_name))
         {
             Debug.LogWarning("Audio name is null or empty.");
-            return null;
+            currentAudioPrefab = null;
+            return;
         }
         
-        AudioPrefab audioPrefab = audioPrefabs.Find(audioPrefab => audioPrefab.audioSO.Name == audio_name);
+        currentAudioPrefab = audioPrefabs.Find(audioPrefab => audioPrefab.prefabName == audio_name);
         
-        if(audioPrefab==null)
-        {
-            Debug.LogWarning($"AudioSO with name '{audio_name}' not found.");
-        }
-
-        return audioPrefab;
+        if(currentAudioPrefab==null) Debug.LogWarning($"AudioSO with name '{audio_name}' not found.");
     }
+
+    // ============================================================================
+
+    public void SetSpawnPos(Vector3 pos) => currentAudioPrefab.spawnPos = pos;
 
     // ============================================================================
 
     public AudioSource PlayAudio(AudioPrefab audio) => audio?.SpawnAudio();
-    public void StopAudio(AudioPrefab audio) => audio?.DespawnAudio();
 
-    // ============================================================================
-
-    public void Play(string audio_name)
-    {
-        PlayAndReturn(audio_name);
-    }
+    public void Play() => PlayAudio(currentAudioPrefab);
 
     AudioSource PlayAndReturn(string audio_name)
     {
-        AudioPrefab audio = GetAudioPrefab(audio_name);
-        return PlayAudio(audio);
+        GetAudioPrefab(audio_name);
+        return PlayAudio(currentAudioPrefab);
     }
 
+    public void PlayName(string audio_name) => PlayAndReturn(audio_name);
+
+    // ============================================================================
+    
+    public void StopAudio(AudioPrefab audio) => audio?.Despawn();
+
+    public void Stop() => StopAudio(currentAudioPrefab);
+    
     public void Stop(string audio_name)
     {
-        AudioPrefab audio = GetAudioPrefab(audio_name);
-        StopAudio(audio);
+        GetAudioPrefab(audio_name);
+        Stop();
     }
 
     // ============================================================================
@@ -103,8 +136,10 @@ public class AudioSpawner : MonoBehaviour
     IEnumerator StartingLoop(string loop_name, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Play(loop_name);
+        PlayName(loop_name);
     }
+
+    // ============================================================================
 
     public void StopLoopGroup(string group_name)
     {
@@ -118,7 +153,7 @@ public class AudioSpawner : MonoBehaviour
     {
         Stop(loop_in_name);
         Stop(loop_name);
-        Play(loop_out_name);
+        PlayName(loop_out_name);
     }
 
     // ============================================================================
@@ -132,12 +167,6 @@ public class AudioSpawner : MonoBehaviour
     [Space]
     public AudioEvents audioEvents;
 
-    void OnEnable()
-    {
-        audioEvents.EnableEvent?.Invoke();
-    }   
-    void OnDisable()
-    {
-        audioEvents.DisableEvent?.Invoke();
-    }   
+    void OnEnable() => audioEvents.EnableEvent?.Invoke();
+    void OnDisable() => audioEvents.DisableEvent?.Invoke();
 }

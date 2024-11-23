@@ -31,7 +31,7 @@ public class GroundCheck : MonoBehaviour
     public AnimSO landAnim;
     //public float minLandVelocity = -1;
 
-    void OnFirstEnter(GameObject who)
+    void OnFirstEnter(OverlapHit overlap)
     {
         // going down only
         //if(rb.velocity.y <= minLandVelocity)
@@ -43,7 +43,7 @@ public class GroundCheck : MonoBehaviour
         }
     }
 
-    void OnLastExit(GameObject who)
+    void OnLastExit(OverlapHit overlap)
     {
         EventM.OnLeaveGround(owner);
     }

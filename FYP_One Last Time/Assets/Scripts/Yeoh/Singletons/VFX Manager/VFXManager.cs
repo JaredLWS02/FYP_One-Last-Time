@@ -13,15 +13,17 @@ public class VFXManager : MonoBehaviour
         if(!Current) Current=this;
     }
     
-    // Event Manager ============================================================================
+    // ============================================================================
 
+    ColliderManager CollM;
     EventManager EventM;
 
     void OnEnable()
     {
+        CollM = ColliderManager.Current;
         EventM = EventManager.Current;
         
-        // EventM.HurtEvent += OnHurt;
+        EventM.HurtedEvent += OnHurted;
         // EventM.DeathEvent += OnDeath;
         // EventM.LootEvent += OnLoot;
         // EventM.AddBuffEvent += OnAddBuff;
@@ -31,7 +33,7 @@ public class VFXManager : MonoBehaviour
     }
     void OnDisable()
     {
-        // EventM.HurtEvent -= OnHurt;
+        EventM.HurtedEvent -= OnHurted;
         // EventM.DeathEvent -= OnDeath;
         // EventM.LootEvent -= OnLoot;
         // EventM.AddBuffEvent -= OnAddBuff;
@@ -40,44 +42,35 @@ public class VFXManager : MonoBehaviour
         // EventM.MaceSlamEvent -= OnMaceSlam;
     }
 
-    // Events ============================================================================
+    // ============================================================================
     
-    // void OnHurt(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
-    // {
-    //     HurtActor(victim, attacker, hurtInfo);
+    void OnHurted(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        Color color = victim.CompareTag("Player") ? Color.red : Color.white;
 
-    //     HurtResource(victim, attacker, hurtInfo);
-    // }
+        SpawnPopUpText(CollM.GetTop(victim), $"{Round(hurtbox.damage)}", color);
 
-    // void HurtActor(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
-    // {
-    //     if(victim.TryGetComponent(out Resource resource)) return; // not resource
+        SpawnHitmarker(contactPoint, color);
 
-    //     Color color = victim.tag=="NPC" ? Color.red : Color.white;
+        // if(victim.TryGetComponent(out Enemy enemy))
+        // {
+        //     SpawnImpact(hurtInfo.contactPoint);
 
-    //     SpawnPopUpText(SpriteManager.Current.GetColliderTop(victim), $"{Round(hurtInfo.dmg)}", color);
+        //     SpawnMcCrit(hurtInfo.contactPoint);
 
-    //     SpawnHitmarker(hurtInfo.contactPoint, color);
+        //     switch(enemy.enemyName)
+        //     {
+        //         case EnemyName.Zombie: SpawnGreenBlood(contactPoint); break;
+        //         case EnemyName.Spider: SpawnPurpleBlood(contactPoint); break;
+        //     }
+        // }
+        // else
+        // {
+        //     SpawnBlood(contactPoint);
 
-    //     if(victim.TryGetComponent(out Enemy enemy))
-    //     {
-    //         SpawnImpact(hurtInfo.contactPoint);
-
-    //         SpawnMcCrit(hurtInfo.contactPoint);
-
-    //         switch(enemy.enemyName)
-    //         {
-    //             case EnemyName.Zombie: SpawnGreenBlood(hurtInfo.contactPoint); break;
-    //             case EnemyName.Spider: SpawnPurpleBlood(hurtInfo.contactPoint); break;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         SpawnBlood(hurtInfo.contactPoint);
-
-    //         SpawnRedImpact(hurtInfo.contactPoint);
-    //     }
-    // }
+        //     SpawnRedImpact(contactPoint);
+        // }
+    }
     
     // [Header("Resource")]
     // public Color woodColor;

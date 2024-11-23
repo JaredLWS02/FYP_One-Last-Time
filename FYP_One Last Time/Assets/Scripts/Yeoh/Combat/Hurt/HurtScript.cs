@@ -59,6 +59,7 @@ public class HurtScript : MonoBehaviour
         hp.Deplete(hurtbox.damage);
 
         EventM.OnHurted(owner, attacker, hurtbox, contactPoint);
+        hurtEvents.OnHurted?.Invoke(contactPoint);
 
         if(hp.hp>0) // if still alive
         {
@@ -97,14 +98,17 @@ public class HurtScript : MonoBehaviour
         if(colorFlicker)
         ToggleColorFlicker(true);
 
-        EventM.OnIFrameStart(owner);
+        EventM.OnIFrameToggle(owner, true);
+        hurtEvents.OnIFrameToggle?.Invoke(true);
 
         yield return new WaitForSeconds(t);
 
         iframe=false;
+
         ToggleColorFlicker(false);
 
-        EventM.OnIFrameEnd(owner);
+        EventM.OnIFrameToggle(owner, false);
+        hurtEvents.OnIFrameToggle?.Invoke(false);
     }
 
     // ============================================================================
@@ -213,7 +217,7 @@ public class HurtScript : MonoBehaviour
 
         RevertColor(owner);
 
-        hurtEvents.OnDeath?.Invoke();
+        hurtEvents.OnDeath?.Invoke(contactPoint);
 
         if(destroyOnDeath)
         Destroy(owner);
@@ -224,8 +228,10 @@ public class HurtScript : MonoBehaviour
     [System.Serializable]
     public struct HurtEvents
     {
-        public UnityEvent OnDeath;
+        public UnityEvent<Vector3> OnHurted;
+        public UnityEvent<bool> OnIFrameToggle;
+        public UnityEvent<Vector3> OnDeath;
     }
-    [Header("Hurt Events")]
+    [Space]
     public HurtEvents hurtEvents;
 }

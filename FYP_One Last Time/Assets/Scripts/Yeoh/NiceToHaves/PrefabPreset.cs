@@ -5,7 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class PrefabPreset
 {
-    public GameObject prefab;
+    public string prefabName;
+
+    [SerializeField]
+    List<GameObject> randomPrefabs = new();
+    public GameObject GetRandomPrefab() => randomPrefabs[Random.Range(0,randomPrefabs.Count)];
+
+    protected List<GameObject> spawns = new();
+
     public bool hideInHierarchy;
     [Space]
     public Transform spawnpoint;
@@ -29,7 +36,9 @@ public class PrefabPreset
 
     public GameObject Spawn()
     {
-        if(!prefab)
+        RemoveNulls();
+
+        if(randomPrefabs.Count<=0)
         {
             Debug.LogError($"PrefabPreset: Woiii, where prefab, brother?");
             return null;
@@ -39,7 +48,7 @@ public class PrefabPreset
 
         if(!singleton)
         {
-            Debug.LogError($"PrefabPreset: can't spawn {prefab.name} because Singleton is null. PS: Singleton won't be available on Awake");
+            Debug.LogError($"PrefabPreset: can't spawn {prefabName} because Singleton is null. PS: Singleton won't be available on Awake");
             return null;
         }
 
@@ -63,12 +72,41 @@ public class PrefabPreset
         pos += posOffset;
         rot.eulerAngles += angleOffset;
 
-        GameObject spawned = singleton.Spawn(prefab, pos, rot, parent, hideInHierarchy);
+        GameObject spawned = singleton.Spawn(GetRandomPrefab(), pos, rot, parent, hideInHierarchy);
 
         spawned.transform.localScale *= scaleMult;
+
+        spawns.Add(spawned);
 
         return spawned;
     }
 
-    public void Despawn(GameObject obj, float delay=0) => Singleton.Current.Despawn(obj, delay);
+    // ============================================================================
+
+    public void Despawn(GameObject obj, float delay=0)
+    {
+        if(!obj) return;
+        if(!spawns.Contains(obj)) return;
+
+        spawns.Remove(obj);
+        Singleton.Current.Despawn(obj, delay);
+    }
+
+    public void Despawn(float delay=0)
+    {
+        RemoveNulls();
+
+        // temp duplicate list to iterate through
+        // because original list is changing each time 
+        List<GameObject> spawns_copy = new(spawns);
+
+        foreach(var spawned in spawns_copy)
+        {
+            Despawn(spawned, delay);
+        }
+    }
+
+    // ============================================================================
+
+    void RemoveNulls() => spawns.RemoveAll(item => item == null);
 }

@@ -797,7 +797,8 @@ MonoBehaviour:
   actionCounter: 0
   attackSO: {fileID: 0}
   hurtboxPrefab:
-    prefab: {fileID: 0}
+    prefabName: 
+    randomPrefabs: []
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
     posOffset: {x: 0, y: 0, z: 0}
@@ -894,8 +895,9 @@ MonoBehaviour:
   comboSteps:
   - attackSO: {fileID: 11400000, guid: da6d8e46cd157184cb14eebb7e800d2c, type: 2}
     hurtboxPrefab:
-      prefab: {fileID: 1242880141507026177, guid: e0c2b35ca4c02b84b96dc63714a3a6f2,
-        type: 3}
+      prefabName: 
+      randomPrefabs:
+      - {fileID: 1242880141507026177, guid: e0c2b35ca4c02b84b96dc63714a3a6f2, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4332652203663591339}
       posOffset: {x: 0, y: 0, z: 0}
@@ -1112,29 +1114,29 @@ MonoBehaviour:
     SlowUpdate:
       m_PersistentCalls:
         m_Calls: []
-  ignoreTriggers: 1
-  onlyRigidbodies: 1
-  uEvents:
-    OverlapFirstEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapStay:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapExit:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapLastExit:
-      m_PersistentCalls:
-        m_Calls: []
   origin: {fileID: 2472299377499092817}
   posOffset: {x: 0, y: 0.68, z: 0}
   layers:
     serializedVersion: 2
     m_Bits: 8
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
   range: 10
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
@@ -1197,8 +1199,9 @@ MonoBehaviour:
   slope: {fileID: 4312500313611420060}
   ground: {fileID: 0}
   showGizmos: 1
-  downRayInvalidColor: {r: 1, g: 1, b: 1, a: 0.5}
-  downRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayColor: {r: 1, g: 1, b: 1, a: 0.5}
+  rayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayInvalidColor: {r: 1, g: 0, b: 0, a: 0.5}
   stepUpEvents:
     StepUpUpdateEvent:
       m_PersistentCalls:
@@ -1228,6 +1231,7 @@ GameObject:
   - component: {fileID: 6038629428757452036}
   - component: {fileID: 487080187957441441}
   - component: {fileID: 7486432265876577913}
+  - component: {fileID: 8124836258800321144}
   - component: {fileID: 432400339528515489}
   m_Layer: 6
   m_Name: Hurt
@@ -1274,6 +1278,48 @@ MonoBehaviour:
   iframeOnDeath: 1
   destroyOnDeath: 1
   hurtEvents:
+    OnHurted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8124836258800321144}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: GetPrefab
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blood
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8124836258800321144}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SetSpawnPos
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blood
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8124836258800321144}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blood
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnIFrameToggle:
+      m_PersistentCalls:
+        m_Calls: []
     OnDeath:
       m_PersistentCalls:
         m_Calls: []
@@ -1329,7 +1375,7 @@ MonoBehaviour:
   allowStun: 1
   defaultStunAnim: {fileID: 11400000, guid: 1327778698f6d5c45884b7f09e3fc0fa, type: 2}
   cooldown: {fileID: 7486432265876577913}
-  cooldownTime: 0.5
+  cooldownTime: 0
 --- !u!114 &7486432265876577913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,6 +1390,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &8124836258800321144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693418600857933463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Blood
+    randomPrefabs:
+    - {fileID: 5800512631994957167, guid: 007b20aff061a2946a21d4513a1be031, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &432400339528515489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1431,29 +1509,29 @@ MonoBehaviour:
     SlowUpdate:
       m_PersistentCalls:
         m_Calls: []
-  ignoreTriggers: 1
-  onlyRigidbodies: 0
-  uEvents:
-    OverlapFirstEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapStay:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapExit:
-      m_PersistentCalls:
-        m_Calls: []
-    OverlapLastExit:
-      m_PersistentCalls:
-        m_Calls: []
   origin: {fileID: 2238703069631649952}
   posOffset: {x: 0, y: 0, z: 0}
   layers:
     serializedVersion: 2
     m_Bits: 1
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
   orientation: {fileID: 2238703069631649952}
   radius: 0.17
   height: 0.22
@@ -1581,8 +1659,9 @@ MonoBehaviour:
   slope: {fileID: 4312500313611420060}
   ground: {fileID: 0}
   showGizmos: 1
-  downRayInvalidColor: {r: 1, g: 1, b: 1, a: 0.5}
-  downRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayColor: {r: 1, g: 1, b: 1, a: 0.5}
+  rayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayInvalidColor: {r: 1, g: 0, b: 0, a: 0.5}
   stepUpEvents:
     StepUpUpdateEvent:
       m_PersistentCalls:
@@ -2463,8 +2542,9 @@ MonoBehaviour:
   comboSteps:
   - attackSO: {fileID: 11400000, guid: ae4580dc7d4dd0b4f892e6e7de143e8f, type: 2}
     hurtboxPrefab:
-      prefab: {fileID: 1242880141507026177, guid: 9cf432e1e684f7a47934455c5c0df832,
-        type: 3}
+      prefabName: 
+      randomPrefabs:
+      - {fileID: 1242880141507026177, guid: 9cf432e1e684f7a47934455c5c0df832, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 5056193132602644811}
       posOffset: {x: 0, y: 0, z: 0}
@@ -2861,8 +2941,9 @@ MonoBehaviour:
   comboSteps:
   - attackSO: {fileID: 11400000, guid: 175d28b3e1f35cd42b0b66802e5159f5, type: 2}
     hurtboxPrefab:
-      prefab: {fileID: 1242880141507026177, guid: 9b30a8b05c8e9fb46b67430ed14945a3,
-        type: 3}
+      prefabName: 
+      randomPrefabs:
+      - {fileID: 1242880141507026177, guid: 9b30a8b05c8e9fb46b67430ed14945a3, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 896823592600123119}
       posOffset: {x: 0, y: 0, z: 0}

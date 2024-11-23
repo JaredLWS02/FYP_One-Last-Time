@@ -111,13 +111,9 @@ public class AttackScript : BaseAction
 
     void TryAssignHurtboxOwner(GameObject target)
     {
-        if(target.TryGetComponent<Hurtbox>(out var hurtbox))
+        if(target.TryGetComponent(out BaseHurtbox hurtbox))
         {
             hurtbox.owner = owner;
-        }
-        if(target.TryGetComponent<ExplosionHurtbox>(out var e_hurtbox))
-        {
-            e_hurtbox.owner = owner;
         }
     }
 

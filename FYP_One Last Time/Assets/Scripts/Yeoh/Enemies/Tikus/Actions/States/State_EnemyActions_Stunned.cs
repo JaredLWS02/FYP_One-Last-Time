@@ -32,6 +32,6 @@ public class State_EnemyActions_Stunned : BaseState
     void ToggleAllow(bool toggle)
     {
         action.AllowHurt = toggle;
-        //action.AllowStun = toggle;
+        action.AllowStun = toggle;
     }
 }

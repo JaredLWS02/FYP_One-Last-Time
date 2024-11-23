@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SphereCastOverlap : BaseOverlap
 {
+    [Header("SphereCast Overlap")]
     public Transform orientation;
 
     public float radius=.5f;

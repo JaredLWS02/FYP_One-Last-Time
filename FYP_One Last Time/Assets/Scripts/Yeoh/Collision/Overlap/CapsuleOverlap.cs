@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CapsuleOverlap : BaseOverlap
 {
+    [Header("Capsule Overlap")]
     public Transform orientation;
 
     public float radius=.5f;
