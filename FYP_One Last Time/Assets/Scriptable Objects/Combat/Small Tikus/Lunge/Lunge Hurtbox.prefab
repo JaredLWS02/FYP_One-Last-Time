@@ -71,18 +71,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  enabledOnAwake: 1
   hurtboxSO: {fileID: 11400000, guid: 2abe4b2f15bdad641915853ec0c5b0b6, type: 2}
-  hurtboxOrigin: {fileID: 8241207935512812364}
-  uEvents:
-    Hit:
+  hurtboxEvents:
+    OnTryHit:
       m_PersistentCalls:
         m_Calls: []
-    Hurt:
+    OnHitSuccess:
       m_PersistentCalls:
         m_Calls: []
   destroyOnHit: 0
   destroyOnHurt: 0
+  myColl: {fileID: 4483064678518147200}
+  enabledOnAwake: 1
+  hitMethod: 1
+  triggerTimer: {fileID: 0}
+  triggerStayInterval: 0.1
+  hurtboxOrigin: {fileID: 8241207935512812364}
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
 --- !u!114 &8782049835207013567
 MonoBehaviour:
   m_ObjectHideFlags: 0

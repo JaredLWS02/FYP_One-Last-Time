@@ -7,13 +7,6 @@ using UnityEngine.Audio;
 
 public class AudioSO : ScriptableObject
 {
-    public string Name;
-    [TextArea]
-    public string description;
-    [Space]
-
-    // ============================================================================
-
     [SerializeField]
     List<AudioClip> randomClips = new();
     public AudioClip GetRandomClip() => randomClips[Random.Range(0,randomClips.Count)];

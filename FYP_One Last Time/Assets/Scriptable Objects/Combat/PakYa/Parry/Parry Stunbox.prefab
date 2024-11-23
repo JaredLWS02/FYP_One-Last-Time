@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4014294989942184369}
-  - component: {fileID: 4483064678518147200}
-  - component: {fileID: 4477666097286210611}
+  - component: {fileID: -7964435744107127267}
+  - component: {fileID: -58329807658630753}
   - component: {fileID: 8782049835207013567}
   m_Layer: 7
   m_Name: Parry Stunbox
@@ -36,30 +36,7 @@ Transform:
   - {fileID: 2962529394258238055}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4483064678518147200
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242880141507026177}
-  m_Material: {fileID: 13400000, guid: edae1f7d20673ce43a4ab1d96238699b, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4477666097286210611
+--- !u!114 &-7964435744107127267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,22 +45,68 @@ MonoBehaviour:
   m_GameObject: {fileID: 1242880141507026177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b0e50ac4e5d4d947af6c03178394b6d, type: 3}
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 8241207935512812364}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 64
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  range: 5
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
+--- !u!114 &-58329807658630753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a53b8395921be4586c296e84b14e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  enabledOnAwake: 1
   hurtboxSO: {fileID: 11400000, guid: a9e0a849dce3d6449b11de7ffa01a761, type: 2}
-  hurtboxOrigin: {fileID: 8241207935512812364}
-  uEvents:
-    Hit:
+  hurtboxEvents:
+    OnTryHit:
       m_PersistentCalls:
         m_Calls: []
-    Hurt:
+    OnHitSuccess:
       m_PersistentCalls:
         m_Calls: []
   destroyOnHit: 0
   destroyOnHurt: 0
+  overlap: {fileID: -7964435744107127267}
+  hitMethod: 0
+  hurtboxOrigin: {fileID: 8241207935512812364}
 --- !u!114 &8782049835207013567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDestroyDelayOnEnable: 1
-  destroyDelay: {x: 0.2, y: 0.2}
+  destroyDelay: {x: 0.3, y: 0.3}
   shrinkObjects:
   - {fileID: 1242880141507026177}
   shrinkTo: {x: 0, y: 0, z: 0}
@@ -161,6 +184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shockwave
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676686982502810466, guid: ea6229c0fe2831d40adc0c242073c463,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
         type: 3}

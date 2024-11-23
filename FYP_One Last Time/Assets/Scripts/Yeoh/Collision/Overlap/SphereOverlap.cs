@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SphereOverlap : BaseOverlap
 {
+    [Header("Sphere Overlap")]
     public float range=.5f;
 
     public override Collider[] GetOverlap()

@@ -293,7 +293,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2349882396357479476}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: PlayName
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -321,7 +321,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2349882396357479476}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: PlayName
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -344,10 +344,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPrefabs:
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: Click
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
-    spawnpoint: {fileID: 0}
+    spawnpoint: {fileID: 470076238131378727}
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
@@ -356,10 +357,11 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: Hover
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
-    spawnpoint: {fileID: 0}
+    spawnpoint: {fileID: 470076238131378727}
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1

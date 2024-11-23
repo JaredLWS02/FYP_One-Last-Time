@@ -110,7 +110,8 @@ public class TryParryScript : BaseAction
 
         if(hurt.iframe) return;
 
-        if(CanParry(contactPoint) && hurtbox.isParryable)
+        //CanParry(contactPoint)
+        if(CanParry(attacker.transform.position) && hurtbox.isParryable)
         {
             EventM.OnParry(owner, attacker, hurtbox, contactPoint);
         }

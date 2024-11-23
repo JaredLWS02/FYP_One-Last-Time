@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BoxOverlap : BaseOverlap
 {
+    [Header("Box Overlap")]
     public Vector3 boxSize = Vector3.one;
 
     public override Collider[] GetOverlap()

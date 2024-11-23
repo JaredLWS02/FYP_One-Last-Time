@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class OnParryScript : BaseAction
 {
@@ -23,13 +24,12 @@ public class OnParryScript : BaseAction
 
     [Header("On Parry")]
     public AnimSO parryAnim;
-
-    public bool counterStun=true;
-    public bool counterKnockback=true;
+    public bool parryIFrame=true;
+    public float iframeSeconds=.5f;
     public bool selfKnockback=true;
 
-    [Header("Optional")]
-    public AnimSO parryCustomStunAnim;
+    [Header("Parry Counter")]
+    public bool cancelAttackersAttack=true;
 
     void OnParry(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -38,30 +38,47 @@ public class OnParryScript : BaseAction
         Perform(parryAnim);
         Anim3_ReleaseEnd();
 
-        if(counterStun && hurtbox.parryStunsOwner)
-        {
-            // choose the parry's unique stun anim
-            if(parryCustomStunAnim)
-            hurtbox.customStunAnim = parryCustomStunAnim;
-
-            EventM.OnStun(attacker, owner, hurtbox, contactPoint);
-        }
-        else EventM.OnCancelAttack(attacker);
-
-        if(counterKnockback)
-        CounterKnockback(attacker, hurtbox, contactPoint);
+        if(parryIFrame)
+        EventM.OnTryIFrame(owner, iframeSeconds);
 
         if(selfKnockback)
         EventM.OnTryKnockback(owner, hurtbox.blockKnockback, contactPoint);
+
+        if(cancelAttackersAttack)
+        EventM.OnCancelAttack(attacker);
+
+        SpawnStunbox(contactPoint);
+
+        parryEvents.OnParry?.Invoke(contactPoint);
     }
 
-    void CounterKnockback(GameObject who, HurtboxSO hurtbox, Vector3 contactPoint)
+    // ============================================================================
+
+    public bool spawnStunbox=true;
+    public PrefabPreset parryStunbox;
+    GameObject stunbox;
+
+    void SpawnStunbox(Vector3 pos)
     {
-        float counter_knockback = hurtbox.knockback - hurtbox.blockKnockback;
+        if(!spawnStunbox) return;
 
-        counter_knockback = Mathf.Max(counter_knockback, hurtbox.blockKnockback);
+        parryStunbox.spawnPos = pos;
+        stunbox = parryStunbox.Spawn();
 
-        EventM.OnTryKnockback(who, counter_knockback, contactPoint);
+        TryAssignHurtboxOwner(stunbox);
+    }
+
+    void TryAssignHurtboxOwner(GameObject target)
+    {
+        if(target.TryGetComponent(out BaseHurtbox hurtbox))
+        {
+            hurtbox.owner = owner;
+        }
+    }
+
+    void DespawnStunbox()
+    {
+        if(stunbox) Destroy(stunbox);
     }
 
     // Cancel ============================================================================
@@ -74,6 +91,18 @@ public class OnParryScript : BaseAction
 
         CancelAnim();
 
+        DespawnStunbox();
+
         EventM.OnParryCancelled(owner);
     }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct ParryEvents
+    {
+        public UnityEvent<Vector3> OnParry;
+    }
+    [Space]
+    public ParryEvents parryEvents;
 }

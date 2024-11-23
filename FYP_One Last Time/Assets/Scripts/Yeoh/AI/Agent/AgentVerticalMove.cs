@@ -24,6 +24,7 @@ public class AgentVerticalMove : SlowUpdate
 
     public override void OnSlowUpdate()
     {
+        if(vehicle.goal)
         CheckHeight(vehicle.goal.position);
     }
 

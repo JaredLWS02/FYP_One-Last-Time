@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5493900238891019743}
   - component: {fileID: 1866404577720983535}
   - component: {fileID: 9139493631820300163}
+  - component: {fileID: 1228213871802777503}
   - component: {fileID: 8995939786167268597}
   m_Layer: 3
   m_Name: Hurt
@@ -59,6 +60,48 @@ MonoBehaviour:
   iframeOnDeath: 1
   destroyOnDeath: 1
   hurtEvents:
+    OnHurted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1228213871802777503}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: GetPrefab
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blood
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1228213871802777503}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SetSpawnPos
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blood
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1228213871802777503}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blood
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnIFrameToggle:
+      m_PersistentCalls:
+        m_Calls: []
     OnDeath:
       m_PersistentCalls:
         m_Calls:
@@ -141,6 +184,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &1228213871802777503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Blood
+    randomPrefabs:
+    - {fileID: 5800512631994957167, guid: 007b20aff061a2946a21d4513a1be031, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8995939786167268597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,14 +729,14 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2859457414168349167}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: PlayName
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Pak Ya Casting
+            m_StringArgument: Anaya Casting
             m_BoolArgument: 0
           m_CallState: 2
     CastingStop:
@@ -676,7 +751,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Pak Ya Casting
+            m_StringArgument: Anaya Casting
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &7975362184149562795
@@ -703,7 +778,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2859457414168349167}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: PlayName
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -743,8 +818,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPrefabs:
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: Anaya Casting
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 8437002372998797620}
     posOffset: {x: 0, y: 0, z: 0}
@@ -755,14 +831,15 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: 5acf4d6b9b75d3c48a64318797c028e2, type: 2}
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: Anaya Heal
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 8437002372998797620}
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
+    parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
@@ -847,7 +924,8 @@ MonoBehaviour:
   actionCounter: 0
   attackSO: {fileID: 0}
   hurtboxPrefab:
-    prefab: {fileID: 0}
+    prefabName: 
+    randomPrefabs: []
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
     posOffset: {x: 0, y: 0, z: 0}
@@ -869,7 +947,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 7407755151823912840}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: PlayName
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -915,8 +993,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPrefabs:
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: PakYa Overhead Release Start
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
     posOffset: {x: 0, y: 0, z: 0}
@@ -927,8 +1006,9 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: d45b68080e018ed4f821d1a431798bad, type: 2}
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: PakYa SlashL Release Start
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
     posOffset: {x: 0, y: 0, z: 0}
@@ -939,8 +1019,9 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: a0c76c469d1d642479b2737679547845, type: 2}
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: PakYa SlashR Release Start
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
     posOffset: {x: 0, y: 0, z: 0}
@@ -1172,8 +1253,9 @@ MonoBehaviour:
   comboSteps:
   - attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
     hurtboxPrefab:
-      prefab: {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24,
-        type: 3}
+      prefabName: 
+      randomPrefabs:
+      - {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 3111472536248378137}
       posOffset: {x: 0, y: 0, z: 0}
@@ -1185,8 +1267,9 @@ MonoBehaviour:
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
   - attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
     hurtboxPrefab:
-      prefab: {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79,
-        type: 3}
+      prefabName: 
+      randomPrefabs:
+      - {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4072668483182548298}
       posOffset: {x: 0, y: 0, z: 0}
@@ -1198,8 +1281,9 @@ MonoBehaviour:
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     hurtboxPrefab:
-      prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
-        type: 3}
+      prefabName: 
+      randomPrefabs:
+      - {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
       posOffset: {x: 0, y: 0, z: 0}
@@ -1568,7 +1652,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 118276988135510132}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: PlayName
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1680,8 +1764,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPrefabs:
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: Pak Ya Dash
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
     posOffset: {x: 0, y: 0, z: 0}
@@ -1913,8 +1998,9 @@ MonoBehaviour:
   comboSteps:
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     hurtboxPrefab:
-      prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
-        type: 3}
+      prefabName: 
+      randomPrefabs:
+      - {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
       posOffset: {x: 0, y: 0, z: 0}
@@ -1969,7 +2055,6 @@ GameObject:
   - component: {fileID: 8037787176530487218}
   - component: {fileID: 2189189842004329316}
   - component: {fileID: 2557109480970711812}
-  - component: {fileID: 6448011714125791377}
   m_Layer: 3
   m_Name: Parry
   m_TagString: Untagged
@@ -2028,7 +2113,7 @@ MonoBehaviour:
   raiseParryAnim: {fileID: 11400000, guid: fe4e54c57f9cf884eaf0a32272a960e2, type: 2}
   cooldown: {fileID: 2189189842004329316}
   cooldownTime: 0.3
-  minParryDot: 0.2
+  minParryDot: 0
   hurt: {fileID: 6892551064611265885}
 --- !u!114 &2189189842004329316
 MonoBehaviour:
@@ -2069,7 +2154,7 @@ MonoBehaviour:
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 6448011714125791377}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
           m_MethodName: Spawn
           m_Mode: 1
@@ -2089,34 +2174,28 @@ MonoBehaviour:
         m_Calls: []
   actionCounter: 0
   parryAnim: {fileID: 11400000, guid: e0f653934f89a0d488ef3b1dafebaa6d, type: 2}
-  counterStun: 0
-  counterKnockback: 0
+  parryIFrame: 1
+  iframeSeconds: 0.5
   selfKnockback: 1
-  parryCustomStunAnim: {fileID: 0}
---- !u!114 &6448011714125791377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6793569088056600768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preset:
-    prefab: {fileID: 1242880141507026177, guid: a68a9ccccbe10c7408a324ea252afa97,
-      type: 3}
+  cancelAttackersAttack: 1
+  spawnStunbox: 1
+  parryStunbox:
+    prefabName: 
+    randomPrefabs:
+    - {fileID: 1242880141507026177, guid: a68a9ccccbe10c7408a324ea252afa97, type: 3}
     hideInHierarchy: 0
-    spawnpoint: {fileID: 4032536735459076646}
-    posOffset: {x: 0, y: 1.78, z: 0}
+    spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
     parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  parryEvents:
+    OnParry:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7026635337664250044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,8 +2832,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPrefabs:
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: Footstep
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
     posOffset: {x: 0, y: 0, z: 0}
@@ -2825,8 +2905,9 @@ MonoBehaviour:
   comboSteps:
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     hurtboxPrefab:
-      prefab: {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00,
-        type: 3}
+      prefabName: 
+      randomPrefabs:
+      - {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4164968904663650128}
       posOffset: {x: 0, y: 0, z: 0}
@@ -2923,13 +3004,14 @@ MonoBehaviour:
   hitLayers:
     serializedVersion: 2
     m_Bits: 1
-  doStepUp: 1
+  doStepUpMove: 1
   upSpeed: 5
   slope: {fileID: 714563234870328098}
   ground: {fileID: 0}
   showGizmos: 1
-  downRayInvalidColor: {r: 1, g: 1, b: 1, a: 0.5}
-  downRayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayColor: {r: 1, g: 1, b: 1, a: 0.5}
+  rayValidColor: {r: 0, g: 1, b: 0, a: 0.5}
+  rayInvalidColor: {r: 1, g: 0, b: 0, a: 0.5}
   stepUpEvents:
     StepUpUpdateEvent:
       m_PersistentCalls:
@@ -3111,14 +3193,14 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 3504386022006822260}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: PlayName
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Pak Yah Jump
+            m_StringArgument: Jump
             m_BoolArgument: 0
           m_CallState: 2
     ExtraJump:
@@ -3126,14 +3208,14 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 3504386022006822260}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: Play
+          m_MethodName: PlayName
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Pak Yah Double Jump
+            m_StringArgument: Jump2
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &1874970261637118981
@@ -3163,26 +3245,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioPrefabs:
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: Jump
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
+    parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: a5c288c54caf30d4aaea401866c3070f, type: 2}
-  - prefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-      type: 3}
+  - prefabName: Jump2
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4032536735459076646}
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
+    parented: 0
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}

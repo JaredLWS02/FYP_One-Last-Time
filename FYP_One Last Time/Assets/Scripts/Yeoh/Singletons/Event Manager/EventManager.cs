@@ -436,20 +436,15 @@ public class EventManager : MonoBehaviour
     // iframe ==================================================================================================================
 
     public event Action<GameObject, float> TryIFrameEvent;
-    public event Action<GameObject> IFrameStartEvent;
-    public event Action<GameObject> IFrameEndEvent;
+    public event Action<GameObject, bool> IFrameToggleEvent;
 
     public void OnTryIFrame(GameObject who, float duration)
     {
         TryIFrameEvent?.Invoke(who, duration);
     }
-    public void OnIFrameStart(GameObject who)
+    public void OnIFrameToggle(GameObject who, bool toggle)
     {
-        IFrameStartEvent?.Invoke(who);
-    } 
-    public void OnIFrameEnd(GameObject who)
-    {
-        IFrameEndEvent?.Invoke(who);
+        IFrameToggleEvent?.Invoke(who, toggle);
     } 
 
     // Animator ==================================================================================================================
