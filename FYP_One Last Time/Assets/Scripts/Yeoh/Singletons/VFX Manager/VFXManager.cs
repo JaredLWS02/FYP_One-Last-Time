@@ -24,7 +24,7 @@ public class VFXManager : MonoBehaviour
         EventM = EventManager.Current;
         
         EventM.HurtedEvent += OnHurted;
-        EventM.HealEvent += OnHeal;
+        //EventM.HealEvent += OnHeal;
         // EventM.DeathEvent += OnDeath;
         // EventM.LootEvent += OnLoot;
         // EventM.AddBuffEvent += OnAddBuff;
@@ -35,7 +35,7 @@ public class VFXManager : MonoBehaviour
     void OnDisable()
     {
         EventM.HurtedEvent -= OnHurted;
-        EventM.HealEvent -= OnHeal;
+        //EventM.HealEvent -= OnHeal;
         // EventM.DeathEvent -= OnDeath;
         // EventM.LootEvent -= OnLoot;
         // EventM.AddBuffEvent -= OnAddBuff;
@@ -50,7 +50,7 @@ public class VFXManager : MonoBehaviour
     {
         Color color = victim.CompareTag("Player") ? Color.red : Color.white;
 
-        SpawnPopUpText(CollM.GetTop(victim), $"{Round(hurtbox.damage)}", color);
+        //SpawnPopUpText(CollM.GetTop(victim), $"{Round(hurtbox.damage)}", color);
 
         SpawnHitmarker(contactPoint, color);
 
@@ -74,10 +74,10 @@ public class VFXManager : MonoBehaviour
         // }
     }
 
-    void OnHeal(GameObject who, GameObject healer, float amount)
-    {
-        SpawnPopUpText(CollM.GetTop(who), $"+{Round(amount)}", Color.green);
-    }
+    // void OnHeal(GameObject who, GameObject healer, float amount)
+    // {
+    //     SpawnPopUpText(CollM.GetTop(who), $"+{Round(amount)}", Color.green);
+    // }
     
     // [Header("Resource")]
     // public Color woodColor;

@@ -67,11 +67,26 @@ public class RangeAssist : MonoBehaviour
 
     // ============================================================================
 
+    [Space]
+    public LayerMask obstacleLayers;
+
     Tween posTween;
 
     void TweenPos(Vector3 to, RangeAssistCfg cfg)
     {
         if(rb) rb.velocity = Vector3.zero;
+
+        if (owner.transform.position == to) return;
+        
+        Vector3 move_vector = to - owner.transform.position;
+        Vector3 move_direction = move_vector.normalized;
+        float move_distance = move_vector.magnitude;
+
+        // if got obstacles in the way, move to hit.point instead
+        if(Physics.Raycast(owner.transform.position, move_direction, out RaycastHit hit, move_distance, obstacleLayers, QueryTriggerInteraction.Ignore))
+        {
+            to = hit.point;
+        }
 
         posTween.Stop();
         if(cfg.moveSeconds>0)
