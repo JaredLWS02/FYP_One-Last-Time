@@ -3,6 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class AttackPreset
+{
+    public AttackSO attackSO;
+    [Space]
+    public PrefabPreset hurtboxPrefab;
+    [Space]
+    public RangeAssist rangeAssist;
+}
+
+// ============================================================================
+
 public class AttackScript : BaseAction
 {
     EventManager EventM;
@@ -31,9 +43,7 @@ public class AttackScript : BaseAction
     // ============================================================================
     
     [Header("On Attack")]
-    public AttackSO attackSO;
-    [Space]
-    public PrefabPreset hurtboxPrefab;
+    public AttackPreset attackPreset;
     
     public void TryAttack()
     {
@@ -43,50 +53,53 @@ public class AttackScript : BaseAction
 
         EventM.OnCancelFlipDelay(owner);
 
-        Perform(attackSO.anim);
+        Perform(attackPreset.attackSO.anim);
 
-        EventM.OnAttacked(owner, attackSO);
+        EventM.OnAttacked(owner, attackPreset.attackSO);
     }
 
     // ============================================================================
 
-    [Header("Attack Move")]
-    public RangeAssist rangeAssist;
-
     // Anim Event
     public override void OnAnimWindUp()
     {
-        if(attackSO.dashOnWindUp)
-        Dash(attackSO.dashOnWindUpForce, attackSO.dashOnWindUpDir);
+        AttackSO atk = attackPreset.attackSO;
 
-        if(attackSO.windUpRangeAssist)
-        rangeAssist?.CheckRange(attackSO.rangeAssistCfg);
+        if (atk.dashOnWindUp)
+        Dash(atk.dashOnWindUpForce, atk.dashOnWindUpDir);
 
-        EventM.OnAttackWindedUp(owner, attackSO);
+        if(atk.windUpRangeAssist)
+        attackPreset.rangeAssist?.CheckRange(atk.rangeAssistCfg);
 
-        attackEvents.WindUp?.Invoke($"{attackSO.Name} Wind Up");
+        EventM.OnAttackWindedUp(owner, atk);
+
+        attackEvents.WindUp?.Invoke($"{atk.Name} Wind Up");
     }  
     // Anim Event
     public override void OnAnimReleaseStart()
     {
-        if(attackSO.dashOnRelease)
-        Dash(attackSO.dashOnReleaseForce, attackSO.dashOnReleaseDir);
+        AttackSO atk = attackPreset.attackSO;
 
-        if(attackSO.releaseRangeAssist)
-        rangeAssist?.CheckRange(attackSO.rangeAssistCfg);
+        if(atk.dashOnRelease)
+        Dash(atk.dashOnReleaseForce, atk.dashOnReleaseDir);
+
+        if(atk.releaseRangeAssist)
+        attackPreset.rangeAssist?.CheckRange(atk.rangeAssistCfg);
 
         SpawnHurtbox();
 
-        EventM.OnAttackReleased(owner, attackSO);
+        EventM.OnAttackReleased(owner, atk);
 
-        attackEvents.ReleaseStart?.Invoke($"{attackSO.Name} Release Start");
+        attackEvents.ReleaseStart?.Invoke($"{atk.Name} Release Start");
     }
     // Anim Event
     public override void OnAnimReleaseEnd()
     {
         DespawnHurtbox();
 
-        attackEvents.ReleaseEnd?.Invoke($"{attackSO.Name} Release End");
+        AttackSO atk = attackPreset.attackSO;
+
+        attackEvents.ReleaseEnd?.Invoke($"{atk.Name} Release End");
     }
     // Anim Event
     public override void OnAnimRecover()
@@ -95,7 +108,9 @@ public class AttackScript : BaseAction
 
         DespawnHurtbox();
 
-        attackEvents.Recover?.Invoke($"{attackSO.Name} Recover");
+        AttackSO atk = attackPreset.attackSO;
+
+        attackEvents.Recover?.Invoke($"{atk.Name} Recover");
     }  
 
     // ============================================================================
@@ -104,7 +119,7 @@ public class AttackScript : BaseAction
 
     public void SpawnHurtbox()
     {
-        hurtbox = hurtboxPrefab.Spawn();
+        hurtbox = attackPreset.hurtboxPrefab.Spawn();
 
         TryAssignHurtboxOwner(hurtbox);
     }
@@ -136,8 +151,10 @@ public class AttackScript : BaseAction
 
         Vector3 direction = dir.normalized;
 
-        if(attackSO.localDir)
-        direction = transform.TransformDirection(direction);
+        AttackSO atk = attackPreset.attackSO;
+
+        if(atk.localDir)
+        direction = owner.transform.TransformDirection(direction);
 
         rb.AddForce(force * direction, ForceMode.Impulse);
     }
@@ -147,7 +164,7 @@ public class AttackScript : BaseAction
     [Header("After Attack")]
     public Timer cooldown;
 
-    void DoCooldown() => cooldown?.StartTimer(attackSO.GetRandomCooldown());
+    void DoCooldown() => cooldown?.StartTimer(attackPreset.attackSO.GetRandomCooldown());
     bool IsCooling() => cooldown?.IsTicking() ?? false;
     void CancelCooldown() => cooldown?.FinishTimer();
 
@@ -163,7 +180,9 @@ public class AttackScript : BaseAction
 
         EventM.OnAttackCancelled(owner);
 
-        attackEvents.Cancel?.Invoke($"{attackSO.Name} Cancel");
+        AttackSO atk = attackPreset.attackSO;
+
+        attackEvents.Cancel?.Invoke($"{atk.Name} Cancel");
     }
 
     // ============================================================================

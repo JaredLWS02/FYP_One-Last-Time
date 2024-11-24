@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 5047775211774635753}
   - component: {fileID: 2133405159958436095}
   - component: {fileID: 4398210535468763715}
+  - component: {fileID: 2903599447721690786}
   - component: {fileID: 7693882113705033794}
   - component: {fileID: 2569137203683378439}
   m_Layer: 7
@@ -147,6 +148,42 @@ MonoBehaviour:
             m_StringArgument: Pak Ya hit enemy
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2903599447721690786}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: GetPrefab
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2903599447721690786}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SetSpawnPos
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2903599447721690786}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
   destroyOnHit: 0
   destroyOnHurt: 0
   myColl: {fileID: 2133405159958436095}
@@ -157,6 +194,38 @@ MonoBehaviour:
   hurtboxOrigin: {fileID: 3518109613385436397}
   ignoreTriggers: 1
   onlyRigidbodies: 1
+--- !u!114 &2903599447721690786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6110048730885984798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Impact
+    randomPrefabs:
+    - {fileID: 2681149345799792399, guid: 07a6101ad784d2a4fac224b5a95b86b1, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &7693882113705033794
 MonoBehaviour:
   m_ObjectHideFlags: 0

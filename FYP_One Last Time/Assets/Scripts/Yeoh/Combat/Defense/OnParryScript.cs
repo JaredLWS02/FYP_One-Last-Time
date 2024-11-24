@@ -38,6 +38,8 @@ public class OnParryScript : BaseAction
         Perform(parryAnim);
         Anim3_ReleaseEnd();
 
+        parryEvents.OnParry?.Invoke(contactPoint);
+
         if(parryIFrame)
         EventM.OnTryIFrame(owner, iframeSeconds);
 
@@ -48,8 +50,6 @@ public class OnParryScript : BaseAction
         EventM.OnCancelAttack(attacker);
 
         SpawnStunbox(contactPoint);
-
-        parryEvents.OnParry?.Invoke(contactPoint);
     }
 
     // ============================================================================

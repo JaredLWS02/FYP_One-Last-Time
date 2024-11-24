@@ -23,7 +23,7 @@ public class PrefabPreset
     public float scaleMult=1;
 
     [Header("Parent")]
-    public bool parented=true;
+    public bool parented;
     public bool followRotation=true;
 
     // optional

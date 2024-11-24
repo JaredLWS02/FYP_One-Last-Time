@@ -10,11 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7299040025794515727}
   - component: {fileID: 6892551064611265885}
+  - component: {fileID: 1192961784150752979}
+  - component: {fileID: 1065384539507284376}
   - component: {fileID: 5493900238891019743}
   - component: {fileID: 1866404577720983535}
   - component: {fileID: 9139493631820300163}
-  - component: {fileID: 1228213871802777503}
   - component: {fileID: 304534908967816856}
+  - component: {fileID: 1228213871802777503}
   - component: {fileID: 8995939786167268597}
   m_Layer: 3
   m_Name: Hurt
@@ -51,16 +53,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
-  hp: {fileID: 1861734953551003033}
-  iframeSeconds: 0.5
-  poise: 0
-  poiseRegenDelay: 3
-  iframeOnDeath: 1
+  hpM: {fileID: 1861734953551003033}
+  iframe: {fileID: 1192961784150752979}
+  poise: {fileID: 1065384539507284376}
   destroyOnDeath: 1
   hurtEvents:
     OnHurted:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 304534908967816856}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: GetRgbOffsetCfg
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Red
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 1228213871802777503}
           m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
           m_MethodName: GetPrefab
@@ -97,21 +109,6 @@ MonoBehaviour:
             m_StringArgument: Blood
             m_BoolArgument: 0
           m_CallState: 2
-    OnIFrameToggle:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 304534908967816856}
-          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
-          m_MethodName: ToggleColorFlicker
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
     OnDeath:
       m_PersistentCalls:
         m_Calls:
@@ -139,6 +136,56 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1192961784150752979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879589b8eaff15548b2468a986d66b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  seconds: 0.5
+  iframeOnDeath: 1
+  iframeEvents:
+    OnIFrameToggle:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 304534908967816856}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: ToggleColorFlicker
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1065384539507284376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3a842c10b06c74f9400d20adbeee94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  poise: 0
+  poiseRegenDelay: 3
+  poiseEvents:
+    OnPoiseBreak:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &5493900238891019743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +253,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &304534908967816856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  srs:
+  - {fileID: 4466723156777370603}
+  - {fileID: 3256731903790810545}
+  rgbOffsetCfgs:
+  - color_name: Red
+    rgb_offset: {x: 0.75, y: -0.75, z: -0.75}
+  - color_name: Green
+    rgb_offset: {x: -1, y: 1, z: -1}
+  colorFlickerInterval: 0.05
+  randomStartColor: 0
+  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
+  randomStartFlip: 0
+  randomFlipY: 0
+  randomFlipX: 0
 --- !u!114 &1228213871802777503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,29 +312,6 @@ MonoBehaviour:
     OnDisable:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &304534908967816856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90390728429658038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
-  srs:
-  - {fileID: 4466723156777370603}
-  - {fileID: 3256731903790810545}
-  rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
-  colorFlickerInterval: 0.05
-  randomStartColor: 0
-  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
-  randomStartFlip: 0
-  randomFlipY: 0
-  randomFlipX: 0
 --- !u!114 &8995939786167268597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,8 +672,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699134499720375290}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0.25}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.25000012}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -836,6 +887,18 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 3596767571345983897}
           m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: GetRgbOffsetCfg
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: Green
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3596767571345983897}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
           m_MethodName: FlashColors
           m_Mode: 4
           m_Arguments:
@@ -926,7 +989,9 @@ MonoBehaviour:
   srs:
   - {fileID: 4466723156777370603}
   - {fileID: 3256731903790810545}
-  rgbOffset: {x: -1, y: 1, z: -1}
+  rgbOffsetCfgs:
+  - color_name: Green
+    rgb_offset: {x: -1, y: 1, z: -1}
   colorFlickerInterval: 0.05
   randomStartColor: 0
   randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
@@ -1003,20 +1068,21 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   actionCounter: 0
-  attackSO: {fileID: 0}
-  hurtboxPrefab:
-    prefabName: 
-    randomPrefabs: []
-    hideInHierarchy: 0
-    spawnpoint: {fileID: 0}
-    posOffset: {x: 0, y: 0, z: 0}
-    angleOffset: {x: 0, y: 0, z: 0}
-    scaleMult: 1
-    parented: 1
-    followRotation: 1
-    spawnPos: {x: 0, y: 0, z: 0}
-    spawnRot: {x: 0, y: 0, z: 0, w: 1}
-  rangeAssist: {fileID: 2270107276636531569}
+  attackPreset:
+    attackSO: {fileID: 0}
+    hurtboxPrefab:
+      prefabName: 
+      randomPrefabs: []
+      hideInHierarchy: 0
+      spawnpoint: {fileID: 0}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
+      parented: 1
+      followRotation: 1
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    rangeAssist: {fileID: 0}
   rb: {fileID: 1642459170912960868}
   cooldown: {fileID: 1109364968870284027}
   attackEvents:
@@ -1329,12 +1395,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
-  attack: {fileID: 7022457898630109682}
+  atk: {fileID: 7022457898630109682}
   comboName: Light Combo
   comboSteps:
   - attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
     hurtboxPrefab:
-      prefabName: 
+      prefabName: SlashR
       randomPrefabs:
       - {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24, type: 3}
       hideInHierarchy: 0
@@ -1346,9 +1412,10 @@ MonoBehaviour:
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    rangeAssist: {fileID: 2270107276636531569}
   - attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
     hurtboxPrefab:
-      prefabName: 
+      prefabName: SlashL
       randomPrefabs:
       - {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79, type: 3}
       hideInHierarchy: 0
@@ -1360,9 +1427,10 @@ MonoBehaviour:
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    rangeAssist: {fileID: 2270107276636531569}
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     hurtboxPrefab:
-      prefabName: 
+      prefabName: Overhead
       randomPrefabs:
       - {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00, type: 3}
       hideInHierarchy: 0
@@ -1374,11 +1442,12 @@ MonoBehaviour:
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    rangeAssist: {fileID: 2270107276636531569}
   randomCombo: 0
   comboResetTimer: {fileID: 9106477853489237606}
-  comboResetTime: 0.2
+  comboResetTime: 0.5
   cooldown: {fileID: 6346528579907133377}
-  comboCooldownTime: 0.2
+  comboCooldownTime: 0.5
 --- !u!114 &9106477853489237606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,6 +1537,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1958770147790217897}
   - component: {fileID: 3256731903790810545}
+  - component: {fileID: 4462413214325602873}
   - component: {fileID: 5933852779896050999}
   - component: {fileID: 9130844052380860690}
   - component: {fileID: 6520234710877406988}
@@ -1545,6 +1615,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4462413214325602873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630794860410328865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &5933852779896050999
 Animator:
   serializedVersion: 5
@@ -2074,12 +2156,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
-  attack: {fileID: 7022457898630109682}
+  atk: {fileID: 7022457898630109682}
   comboName: Heavy Combo
   comboSteps:
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     hurtboxPrefab:
-      prefabName: 
+      prefabName: Heavy
       randomPrefabs:
       - {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00, type: 3}
       hideInHierarchy: 0
@@ -2091,11 +2173,12 @@ MonoBehaviour:
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    rangeAssist: {fileID: 2270107276636531569}
   randomCombo: 0
   comboResetTimer: {fileID: 1817858224624087572}
-  comboResetTime: 0.2
+  comboResetTime: 0.5
   cooldown: {fileID: 2618534069815914215}
-  comboCooldownTime: 0.2
+  comboCooldownTime: 0.5
 --- !u!114 &1817858224624087572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2136,6 +2219,7 @@ GameObject:
   - component: {fileID: 8037787176530487218}
   - component: {fileID: 2189189842004329316}
   - component: {fileID: 2557109480970711812}
+  - component: {fileID: 6880144158370058344}
   m_Layer: 3
   m_Name: Parry
   m_TagString: Untagged
@@ -2195,7 +2279,7 @@ MonoBehaviour:
   cooldown: {fileID: 2189189842004329316}
   cooldownTime: 0.3
   minParryDot: 0
-  hurt: {fileID: 6892551064611265885}
+  iframe: {fileID: 1192961784150752979}
 --- !u!114 &2189189842004329316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2275,6 +2359,86 @@ MonoBehaviour:
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   parryEvents:
     OnParry:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 304534908967816856}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: GetRgbOffsetCfg
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Green
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6880144158370058344}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: GetPrefab
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sparks
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6880144158370058344}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SetSpawnPos
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sparks
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6880144158370058344}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sparks
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &6880144158370058344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793569088056600768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Sparks
+    randomPrefabs:
+    - {fileID: 1847320368029984545, guid: 5664121a1e74d754fa32553e09e386ab, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
       m_PersistentCalls:
         m_Calls: []
 --- !u!1 &7026635337664250044
@@ -2442,6 +2606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5128954705973869421}
   - component: {fileID: 4466723156777370603}
+  - component: {fileID: 3663033604576056142}
   - component: {fileID: 4004871874835498188}
   - component: {fileID: 8324220026941984535}
   - component: {fileID: 4728252470638691548}
@@ -2525,6 +2690,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3663033604576056142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274980459159228368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &4004871874835498188
 Animator:
   serializedVersion: 5
@@ -2981,12 +3158,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
-  attack: {fileID: 7022457898630109682}
+  atk: {fileID: 7022457898630109682}
   comboName: Riposte Combo
   comboSteps:
   - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
     hurtboxPrefab:
-      prefabName: 
+      prefabName: Riposte
       randomPrefabs:
       - {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00, type: 3}
       hideInHierarchy: 0
@@ -2998,11 +3175,12 @@ MonoBehaviour:
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    rangeAssist: {fileID: 2270107276636531569}
   randomCombo: 0
   comboResetTimer: {fileID: 3657491780530729279}
-  comboResetTime: 0.2
+  comboResetTime: 0.5
   cooldown: {fileID: 2393890916728694324}
-  comboCooldownTime: 0.2
+  comboCooldownTime: 0.5
 --- !u!114 &3657491780530729279
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -36,6 +36,10 @@ public class AudioSpawner : MonoBehaviour
 {    
     public List<AudioPrefab> audioPrefabs = new();
 
+    void Reset() => audioPrefabs = new() { new AudioPrefab() };
+
+    // ==================================================================================================================
+
     AudioPrefab currentAudioPrefab;
 
     public void GetAudioPrefab(string audio_name)
