@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Audio;
+//using UnityEngine.UI.Extensions;
+using Unity.VisualScripting;
 
 public class Settings : MonoBehaviour
 {
@@ -33,6 +35,7 @@ public class Settings : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResoID;
         resolutionDropdown.RefreshShownValue();
+        DropdownAutoscroll autoScroll = resolutionDropdown.transform.Find("Template").AddComponent<DropdownAutoscroll>();
     }
 
     public void SetQuality (int qualityID)
