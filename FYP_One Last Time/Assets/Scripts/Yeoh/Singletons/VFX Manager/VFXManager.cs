@@ -76,7 +76,7 @@ public class VFXManager : MonoBehaviour
 
     void OnHeal(GameObject who, GameObject healer, float amount)
     {
-        SpawnPopUpText(CollM.GetTop(who), $"{Round(amount)}", Color.green);
+        SpawnPopUpText(CollM.GetTop(who), $"+{Round(amount)}", Color.green);
     }
     
     // [Header("Resource")]
