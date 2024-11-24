@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5519860091971493935}
+  - component: {fileID: 875244263395892669}
   m_Layer: 11
   m_Name: Big Tikus Ragdoll
   m_TagString: Untagged
@@ -34,6 +35,25 @@ Transform:
   - {fileID: 2141445192349168777}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &875244263395892669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283657642964731862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26fb29979e03b5408c372e0f76f81d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDestroyDelayOnEnable: 1
+  destroyDelay: {x: 60, y: 60}
+  shrinkObjects:
+  - {fileID: 283657642964731862}
+  shrinkTo: {x: 0, y: 0, z: 0}
+  shrinkTime: 0
+  ignoreTimescale: 0
 --- !u!1001 &262690947231417076
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46,6 +66,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ragdoll Part (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027297362016294335, guid: c8ae7c7440bf83b4badd101447b55e91,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5583618879067294199, guid: c8ae7c7440bf83b4badd101447b55e91,
         type: 3}
