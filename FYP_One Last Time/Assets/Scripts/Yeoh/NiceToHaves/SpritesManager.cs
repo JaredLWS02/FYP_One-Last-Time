@@ -48,8 +48,32 @@ public class SpritesManager : MonoBehaviour
 
     // ============================================================================
 
+    [System.Serializable]
+    public class RgbOffsetCfg
+    {
+        public string color_name = "Red";
+        public Vector3 rgb_offset = new(.75f, -.75f, -.75f);
+    }
     [Header("Offset")]
-    public Vector3 rgbOffset = new(.75f, -.75f, -.75f); // red
+    public List<RgbOffsetCfg> rgbOffsetCfgs = new();
+
+    RgbOffsetCfg currentRgbOffsetCfg;
+
+    public void GetRgbOffsetCfg(string color_name)
+    {
+        if(string.IsNullOrEmpty(color_name))
+        {
+            Debug.LogWarning("RgbOffsetCfg.color_name is null or empty.");
+            currentRgbOffsetCfg = null;
+            return;
+        }
+        
+        currentRgbOffsetCfg = rgbOffsetCfgs.Find(item => item.color_name == color_name);
+        
+        if(currentRgbOffsetCfg==null) Debug.LogWarning($"RgbOffsetCfg with name '{color_name}' not found.");
+    }
+
+    // ============================================================================
 
     public void OffsetColors(Vector3 rgb_offset)
     {
@@ -63,7 +87,7 @@ public class SpritesManager : MonoBehaviour
         }
     }
 
-    public void OffsetColors() => OffsetColors(rgbOffset);
+    public void OffsetColors() => OffsetColors(currentRgbOffsetCfg.rgb_offset);
 
     // ============================================================================
 
@@ -86,7 +110,7 @@ public class SpritesManager : MonoBehaviour
         flashing_crt = StartCoroutine(FlashingColors(rgb_offset, seconds));
     }
 
-    public void FlashColors(float seconds) => FlashColors(rgbOffset, seconds);
+    public void FlashColors(float seconds) => FlashColors(currentRgbOffsetCfg.rgb_offset, seconds);
 
     Coroutine flashing_crt;
 

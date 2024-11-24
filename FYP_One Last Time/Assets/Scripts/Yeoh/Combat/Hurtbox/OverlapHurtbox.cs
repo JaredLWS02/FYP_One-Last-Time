@@ -33,38 +33,42 @@ public class OverlapHurtbox : BaseHurtbox
     [Header("OnHit")]
     public HitMethod hitMethod = HitMethod.OnStay;
 
-    void OnOverlapEnter(OverlapHit overlap)
+    void OnOverlapEnter(GameObject obj, Collider coll)
     {
         if(hitMethod != HitMethod.OnEnter) return;
 
-        Overlap(overlap);
+        Overlap(obj, coll);
     }
     
-    void OnOverlapStay(List<OverlapHit> overlaps)
+    void OnOverlapStay(Dictionary<GameObject, Collider> dict)
     {
         if(hitMethod != HitMethod.OnStay) return;
 
-        foreach(var overlap in overlaps)
+        foreach(var obj in dict.Keys)
         {
-            Overlap(overlap);
+            Collider coll = dict[obj];
+
+            Overlap(obj, coll);
         }
     }
     
-    void OnOverlapExit(OverlapHit overlap)
+    void OnOverlapExit(GameObject obj, Collider coll)
     {
         if(hitMethod != HitMethod.OnExit) return;
 
-        Overlap(overlap);
+        Overlap(obj, coll);
     }
 
     // ============================================================================
     
     public Transform hurtboxOrigin;
 
-    void Overlap(OverlapHit overlap)
+    void Overlap(GameObject obj, Collider coll)
     {
-        contactPoint = overlap.coll.ClosestPoint(hurtboxOrigin.position);
+        if(!obj) return;
+        if(!coll) return;
 
-        Hit(overlap.obj);
+        contactPoint = coll.ClosestPoint(hurtboxOrigin.position);
+        Hit(obj);
     }
 }

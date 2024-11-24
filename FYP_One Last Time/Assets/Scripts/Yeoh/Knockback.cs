@@ -8,10 +8,12 @@ public class Knockback : MonoBehaviour
 
     // ============================================================================
 
+    ColliderManager CollM;
     EventManager EventM;
 
     void OnEnable()
     {
+        CollM = ColliderManager.Current;
         EventM = EventManager.Current;
         
         EventM.TryKnockbackEvent += OnTryKnockback;
@@ -36,7 +38,7 @@ public class Knockback : MonoBehaviour
         if(knockbackMult==0) return;
         if(rb.isKinematic) return;
 
-        Vector3 center = ColliderManager.Current.GetCenter(owner);
+        Vector3 center = CollM.GetCenter(owner);
 
         Vector3 kb_dir = center - contactPoint;
         if(knockbackAxis.x<=0) kb_dir.x=0;

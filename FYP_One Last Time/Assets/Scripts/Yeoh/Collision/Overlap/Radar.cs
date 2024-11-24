@@ -21,24 +21,24 @@ public class Radar : MonoBehaviour
 
     public List<GameObject> targets = new();
 
-    void OnOverlapEnter(OverlapHit overlap)
+    void OnOverlapEnter(GameObject obj, Collider coll)
     {
-        if(!overlap.obj) return;
+        if(!obj) return;
         
-        if(targets.Contains(overlap.obj)) return;
+        if(targets.Contains(obj)) return;
 
-        targets.Add(overlap.obj);
+        targets.Add(obj);
     }
 
-    void OnOverlapExit(OverlapHit overlap)
+    void OnOverlapExit(GameObject obj, Collider coll)
     {
-        if(!overlap.obj) return;
+        if(!obj) return;
 
-        if(!targets.Contains(overlap.obj)) return;
+        if(!targets.Contains(obj)) return;
 
-        targets.Remove(overlap.obj);
+        targets.Remove(obj);
 
-        if(overlap.obj==closest) closest=null;
+        if(obj==closest) closest=null;
     }
 
     // ============================================================================

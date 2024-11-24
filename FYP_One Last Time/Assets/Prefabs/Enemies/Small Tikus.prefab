@@ -1228,9 +1228,12 @@ GameObject:
   m_Component:
   - component: {fileID: 510932770829757082}
   - component: {fileID: 5126354924728155001}
+  - component: {fileID: 2211101070558187119}
+  - component: {fileID: 2317455873715353602}
   - component: {fileID: 6038629428757452036}
   - component: {fileID: 487080187957441441}
   - component: {fileID: 7486432265876577913}
+  - component: {fileID: 945224895468745339}
   - component: {fileID: 8124836258800321144}
   - component: {fileID: 432400339528515489}
   m_Layer: 6
@@ -1268,19 +1271,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 6995670659757724566}
-  hp: {fileID: 2608293525865954382}
-  iframeSeconds: 0.25
-  colorFlicker: 1
-  rgbOffset: {x: 0.75, y: -0.75, z: -0.75}
-  colorFlickerInterval: 0.05
-  poise: 0
-  poiseRegenDelay: 3
-  iframeOnDeath: 1
+  hpM: {fileID: 2608293525865954382}
+  iframe: {fileID: 2211101070558187119}
+  poise: {fileID: 2317455873715353602}
   destroyOnDeath: 1
   hurtEvents:
     OnHurted:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 945224895468745339}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: GetRgbOffsetCfg
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Red
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 8124836258800321144}
           m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
           m_MethodName: GetPrefab
@@ -1317,10 +1327,57 @@ MonoBehaviour:
             m_StringArgument: Blood
             m_BoolArgument: 0
           m_CallState: 2
-    OnIFrameToggle:
+    OnDeath:
       m_PersistentCalls:
         m_Calls: []
-    OnDeath:
+--- !u!114 &2211101070558187119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693418600857933463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879589b8eaff15548b2468a986d66b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6995670659757724566}
+  seconds: 0.5
+  iframeOnDeath: 1
+  iframeEvents:
+    OnIFrameToggle:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 945224895468745339}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: ToggleColorFlicker
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &2317455873715353602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693418600857933463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3a842c10b06c74f9400d20adbeee94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6995670659757724566}
+  poise: 0
+  poiseRegenDelay: 3
+  poiseEvents:
+    OnPoiseBreak:
       m_PersistentCalls:
         m_Calls: []
 --- !u!114 &6038629428757452036
@@ -1390,6 +1447,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &945224895468745339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693418600857933463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6995670659757724566}
+  srs:
+  - {fileID: 5575052531342034989}
+  rgbOffsetCfgs:
+  - color_name: Red
+    rgb_offset: {x: 0.75, y: -0.75, z: -0.75}
+  colorFlickerInterval: 0.05
+  randomStartColor: 0
+  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
+  randomStartFlip: 0
+  randomFlipY: 0
+  randomFlipX: 0
 --- !u!114 &8124836258800321144
 MonoBehaviour:
   m_ObjectHideFlags: 0

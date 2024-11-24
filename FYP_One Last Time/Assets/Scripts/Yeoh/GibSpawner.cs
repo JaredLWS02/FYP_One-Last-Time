@@ -32,7 +32,7 @@ public class GibSpawner : MonoBehaviour
 
     // ============================================================================
 
-    public List<GameObject> gibs;
+    public List<GameObject> gibs = new();
     public bool gibsKnockback=true;
 
     void Spawn(float force, Vector3 contactPoint)

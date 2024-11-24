@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 1182973736780740228}
   - component: {fileID: 1551295466625918726}
   - component: {fileID: 4087993480903057497}
-  - component: {fileID: 6145323815428536933}
   m_Layer: 11
   m_Name: Ragdoll Part
   m_TagString: Untagged
@@ -171,7 +170,7 @@ MonoBehaviour:
   rb: {fileID: 2434920184928964055}
   allowKnockback: 1
   knockbackAxis: {x: 1, y: 0, z: 1}
-  knockbackMult: 0.35
+  knockbackMult: 0.5
 --- !u!114 &4087993480903057497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,18 +190,3 @@ MonoBehaviour:
   shrinkTo: {x: 0, y: 0, z: 0}
   shrinkTime: 0.5
   ignoreTimescale: 0
---- !u!114 &6145323815428536933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226488502472220791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80277d9a21dd3124ca2b95117858bf38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sr: {fileID: 8927791873901636086}
-  flipX: 1
-  flipY: 0
