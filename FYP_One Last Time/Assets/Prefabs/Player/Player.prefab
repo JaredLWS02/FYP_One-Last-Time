@@ -2219,6 +2219,7 @@ GameObject:
   - component: {fileID: 8037787176530487218}
   - component: {fileID: 2189189842004329316}
   - component: {fileID: 2557109480970711812}
+  - component: {fileID: 6880144158370058344}
   m_Layer: 3
   m_Name: Parry
   m_TagString: Untagged
@@ -2372,6 +2373,74 @@ MonoBehaviour:
             m_StringArgument: Green
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 6880144158370058344}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: GetPrefab
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sparks
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6880144158370058344}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SetSpawnPos
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sparks
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6880144158370058344}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sparks
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &6880144158370058344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793569088056600768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Sparks
+    randomPrefabs:
+    - {fileID: 1847320368029984545, guid: 5664121a1e74d754fa32553e09e386ab, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7026635337664250044
 GameObject:
   m_ObjectHideFlags: 0

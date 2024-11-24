@@ -5,7 +5,11 @@ using UnityEngine.Events;
 
 public class PrefabSpawner : MonoBehaviour
 {    
-    public List<PrefabPreset> prefabs;
+    public List<PrefabPreset> prefabs = new();
+
+    void Reset() => prefabs = new() { new PrefabPreset() };
+
+    // ============================================================================
 
     PrefabPreset currentPrefab;
 
