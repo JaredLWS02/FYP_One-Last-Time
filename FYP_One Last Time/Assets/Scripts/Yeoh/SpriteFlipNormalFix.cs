@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SpriteFlipNormalFix : MonoBehaviour
 {
-    private SpriteRenderer sr;
-    private MaterialPropertyBlock propertyBlock;
+    SpriteRenderer sr;
+    MaterialPropertyBlock propertyBlock;
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        
+
         propertyBlock = new MaterialPropertyBlock();
     }
 
