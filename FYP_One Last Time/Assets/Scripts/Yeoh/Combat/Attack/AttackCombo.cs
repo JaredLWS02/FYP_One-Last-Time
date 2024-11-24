@@ -5,21 +5,13 @@ using UnityEngine;
 public class AttackCombo : MonoBehaviour
 {
     public GameObject owner;
-    public AttackScript attack;
+    public AttackScript atk;
     public string comboName = "Normal Combo";
 
     // ============================================================================
 
-    [System.Serializable]
-    public class ComboStep
-    {
-        public AttackSO attackSO;
-        [Space]
-        public PrefabPreset hurtboxPrefab;
-    }
-
     [Space]
-    public List<ComboStep> comboSteps = new();
+    public List<AttackPreset> comboSteps = new();
 
     // ============================================================================
 
@@ -68,20 +60,14 @@ public class AttackCombo : MonoBehaviour
         else
         ChooseCombo(comboIndex);
 
-        attack.TryAttack();
+        atk.TryAttack();
     }
 
-    void ChooseCombo(int i)
-    {
-        ComboStep step = comboSteps[i];
-
-        attack.attackSO = step.attackSO;
-        attack.hurtboxPrefab = step.hurtboxPrefab;
-    }
+    void ChooseCombo(int i) => atk.attackPreset = comboSteps[i];
     
     // ============================================================================
     
-    bool IsAttacking() => attack.IsPerforming();
+    bool IsAttacking() => atk.IsPerforming();
 
     // During Combo ============================================================================
 
