@@ -45,11 +45,24 @@ public class WallCling : MonoBehaviour
 
     // ============================================================================
 
+    public bool allowWallCling=true;
+
+    void FixedUpdate()
+    {
+        CheckIsClinging();
+        CheckCling();
+        SetAnimator();
+    }
+
+    // ============================================================================
+
+    public float minYVelocityToCling=10;
+
     public bool isClinging=false;
 
-    bool IsClinging()
+    void CheckIsClinging()
     {
-        bool clinging = !ground.IsGrounded() && IsMovingToWall(); // && rb.velocity.y<=0;
+        bool clinging = !ground.IsGrounded() && IsMovingToWall() && rb.velocity.y<=minYVelocityToCling;
 
         if(clinging)
         {
@@ -67,7 +80,6 @@ public class WallCling : MonoBehaviour
                 ToggleCling(false);
             }
         }
-        return clinging;
     }
 
     public bool instantBrake=true;
@@ -82,23 +94,16 @@ public class WallCling : MonoBehaviour
 
     // ============================================================================
 
-    public bool allowWallCling=true;
-    
     public float wallSlideSpeed = -2.5f;
-
-    void FixedUpdate()
-    {
-        CheckCling();
-        SetAnimator();
-    }
 
     void CheckCling()
     {
         if(!allowWallCling) return;
-        if(!IsClinging()) return;
+        if(!isClinging) return;
 
         EventM.OnCancelDash(owner);
 
+        if(rb.velocity.y < wallSlideSpeed)
         rb.velocity = new(rb.velocity.x, wallSlideSpeed, rb.velocity.z);
     }
 
