@@ -179,7 +179,7 @@ public class PakYaActions : MonoBehaviour
     public bool IsGrounded() => ground.IsGrounded();
 
     public WallCling cling;
-    public bool IsClinging() => cling.IsClinging();
+    public bool IsClinging() => cling.isClinging;
 
     public DashScript dash;
     public bool IsDashing() => dash.IsPerforming();

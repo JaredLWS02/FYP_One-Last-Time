@@ -3492,9 +3492,9 @@ MonoBehaviour:
   jumpForce: 23
   jumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   jumpCutMult: 1
-  extraJumps: 1
-  extraJumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   coyoteTime: 0.2
+  extraJumps: 0
+  extraJumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   cooldown: {fileID: 1874970261637118981}
   cooldownTime: 0.4
   jumpEvents:
@@ -3815,8 +3815,9 @@ GameObject:
   - component: {fileID: 3271505819681114862}
   - component: {fileID: 3885140822300902856}
   - component: {fileID: 116061596474317705}
+  - component: {fileID: 5609146893333419746}
   m_Layer: 3
-  m_Name: Wall Cling
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3853,6 +3854,7 @@ MonoBehaviour:
   ray: {fileID: 116061596474317705}
   ground: {fileID: 773448853722404963}
   rb: {fileID: 1642459170912960868}
+  isClinging: 0
   instantBrake: 1
   allowWallCling: 1
   wallSlideSpeed: -2.5
@@ -3906,6 +3908,62 @@ MonoBehaviour:
   showGizmos: 1
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &5609146893333419746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800096562145649671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e839e795f48e6429902455ab863f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
+  ground: {fileID: 773448853722404963}
+  jumpForce: 23
+  jumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
+  jumpCutMult: 1
+  coyoteTime: 0.2
+  extraJumps: 0
+  extraJumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
+  cooldown: {fileID: 1874970261637118981}
+  cooldownTime: 0.4
+  jumpEvents:
+    Jump:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3504386022006822260}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Jump
+            m_BoolArgument: 0
+          m_CallState: 2
+    ExtraJump:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3504386022006822260}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Jump2
+            m_BoolArgument: 0
+          m_CallState: 2
+  cling: {fileID: 3885140822300902856}
+  jumpAwayForce: 50
 --- !u!1 &8987163089559660572
 GameObject:
   m_ObjectHideFlags: 0

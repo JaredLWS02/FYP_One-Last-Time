@@ -45,29 +45,29 @@ public class WallCling : MonoBehaviour
 
     // ============================================================================
 
-    bool currentlyClinging=false;
+    public bool isClinging=false;
 
-    public bool IsClinging()
+    bool IsClinging()
     {
-        bool isClinging = !ground.IsGrounded() && IsMovingToWall() && rb.velocity.y<=0;
+        bool clinging = !ground.IsGrounded() && IsMovingToWall(); // && rb.velocity.y<=0;
 
-        if(isClinging)
+        if(clinging)
         {
-            if(!currentlyClinging)
+            if(!isClinging)
             {
-                currentlyClinging=true;
+                isClinging=true;
                 ToggleCling(true);
             }
         }
         else
         {
-            if(currentlyClinging)
+            if(isClinging)
             {
-                currentlyClinging=false;
+                isClinging=false;
                 ToggleCling(false);
             }
         }
-        return isClinging;
+        return clinging;
     }
 
     public bool instantBrake=true;
@@ -110,7 +110,7 @@ public class WallCling : MonoBehaviour
 
     void SetAnimator()
     {
-        anim?.SetBool(clingingBoolName, currentlyClinging);
+        anim?.SetBool(clingingBoolName, isClinging);
     }
 
     // ============================================================================

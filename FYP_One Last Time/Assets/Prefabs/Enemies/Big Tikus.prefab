@@ -98,11 +98,8 @@ MonoBehaviour:
   minFastFallVelocity: -1
   fastFallForce: -30
   maxFallVelocity: -50
-  uEvents:
-    FastFallStart:
-      m_PersistentCalls:
-        m_Calls: []
-    FastFallEnd:
+  fallEvents:
+    ToggleFastFall:
       m_PersistentCalls:
         m_Calls: []
   y_velocity: 0
@@ -899,9 +896,9 @@ MonoBehaviour:
   jumpForce: 20
   jumpAnim: {fileID: 0}
   jumpCutMult: 0.5
+  coyoteTime: 0.2
   extraJumps: 0
   extraJumpAnim: {fileID: 0}
-  coyoteTime: 0.2
   cooldown: {fileID: 1753302679769948049}
   cooldownTime: 0.2
   jumpEvents:
@@ -1076,6 +1073,7 @@ GameObject:
   - component: {fileID: 418708997891478844}
   - component: {fileID: 1477388138496825184}
   - component: {fileID: 412968695723508853}
+  - component: {fileID: 4405043119144846678}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -1091,7 +1089,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2719329177920231827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.092295945, y: -0.70105743, z: 0.092295945, w: 0.70105743}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1381,6 +1379,28 @@ MonoBehaviour:
   - scaleTo: {x: 1, y: 1, z: 1}
     seconds: 0.1
     ease: 3
+--- !u!114 &4405043119144846678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719329177920231827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  srs:
+  - {fileID: 3716319433280079349}
+  rgbOffsetCfgs: []
+  colorFlickerInterval: 0.05
+  randomStartColor: 1
+  randomRgbOffset: {x: 0.25, y: 0.25, z: 0.25}
+  randomStartFlip: 0
+  randomFlipY: 0
+  randomFlipX: 0
 --- !u!1 &3273843157058653885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,22 +3119,22 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.70105743
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.092295945
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.70105743
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.092295945
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}

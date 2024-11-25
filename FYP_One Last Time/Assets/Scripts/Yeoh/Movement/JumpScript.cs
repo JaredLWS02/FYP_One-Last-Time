@@ -62,8 +62,12 @@ public class JumpScript : MonoBehaviour
         
         rb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
 
+        OnBaseJump();
+
         EventM.OnJumped(owner);
     }
+
+    protected virtual void OnBaseJump(){}
 
     // Jump Cut ============================================================================
 
@@ -87,9 +91,29 @@ public class JumpScript : MonoBehaviour
     
     void Update()
     {
-        UpdateExtraJumps();
         UpdateCoyoteTime();
+        UpdateExtraJumps();
     }
+
+    // ============================================================================
+
+    [Header("Coyote")]
+    public float coyoteTime=.2f;
+    float coyoteTimeLeft;
+
+    void UpdateCoyoteTime()
+    {
+        coyoteTimeLeft -= Time.deltaTime;
+
+        // Only replenish coyote time if grounded and jump not cooling
+        if(IsGrounded() && !IsCooling())
+        {
+            coyoteTimeLeft = coyoteTime;
+        }
+    }
+
+    bool HasCoyoteTime()=> coyoteTimeLeft>0;
+    void ResetCoyoteTime() => coyoteTimeLeft=0;
 
     // ============================================================================
 
@@ -101,7 +125,7 @@ public class JumpScript : MonoBehaviour
     void UpdateExtraJumps()
     {
         // Only replenish extra jumps if grounded and jump not cooling
-        if(ground.IsGrounded() && !IsCooling())
+        if(IsGrounded() && !IsCooling())
         {
             extraJumpsLeft = extraJumps;
         }
@@ -117,27 +141,6 @@ public class JumpScript : MonoBehaviour
 
         jumpEvents.ExtraJump?.Invoke();
     }
-
-    // ============================================================================
-
-    [Header("Coyote")]
-    public float coyoteTime=.2f;
-    float coyoteTimeLeft;
-
-    void UpdateCoyoteTime()
-    {
-        coyoteTimeLeft -= Time.deltaTime;
-
-        // Only replenish coyote time if grounded and jump not cooling
-        if(ground.IsGrounded() && !IsCooling())
-        {
-            coyoteTimeLeft = coyoteTime;
-        }
-    }
-
-    bool HasCoyoteTime()=> coyoteTimeLeft>0;
-
-    void ResetCoyoteTime() => coyoteTimeLeft=0;
     
     // ============================================================================
 
@@ -150,11 +153,14 @@ public class JumpScript : MonoBehaviour
     void CancelCooldown() => cooldown?.FinishTimer();
 
     // ============================================================================
+
+    protected virtual bool IsGrounded() => ground.IsGrounded();
     
-    bool CanJump()
+    bool CanJump() // unused i guess
     {
         if(IsCooling()) return false;
         if(extraJumpsLeft<=0) return false;
+        if(!IsGrounded()) return false;
         return true;
     }
 
