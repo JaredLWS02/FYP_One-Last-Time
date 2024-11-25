@@ -89,6 +89,7 @@ public class WallCling : MonoBehaviour
     void FixedUpdate()
     {
         CheckCling();
+        SetAnimator();
     }
 
     void CheckCling()
@@ -99,6 +100,17 @@ public class WallCling : MonoBehaviour
         EventM.OnCancelDash(owner);
 
         rb.velocity = new(rb.velocity.x, wallSlideSpeed, rb.velocity.z);
+    }
+
+    // ============================================================================
+
+    [Header("Animator")]
+    public Animator anim;
+    public string clingingBoolName = "IsClinging";
+
+    void SetAnimator()
+    {
+        anim?.SetBool(clingingBoolName, currentlyClinging);
     }
 
     // ============================================================================
