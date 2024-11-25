@@ -23,6 +23,7 @@ public class State_PakYaActions_AttackWindingUp : BaseState
         action.AllowMoveX = false;
         action.AllowMoveY = false;
         action.AllowFlip = true;
+        action.AllowWallCling = false;
     }
 
     protected override void OnExit()

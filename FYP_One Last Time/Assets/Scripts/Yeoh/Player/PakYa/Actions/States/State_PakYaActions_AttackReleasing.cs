@@ -23,6 +23,7 @@ public class State_PakYaActions_AttackReleasing : BaseState
         action.AllowMoveX = false;
         action.AllowMoveY = false;
         action.AllowFlip = false;
+        action.AllowWallCling = false;
     }
 
     protected override void OnExit()

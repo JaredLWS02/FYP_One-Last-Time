@@ -22,7 +22,6 @@ public class FallScript : MonoBehaviour
     void FixedUpdate()
     {
         UpdateFastFalling();
-        UpdateFastFallCheck();
         UpdateMaxFall();
 
         UpdateDebug();
@@ -31,47 +30,47 @@ public class FallScript : MonoBehaviour
     // ============================================================================
 
     [Header("Fast Falling")]
-    public bool fastFall = true;
+    public bool fastFall=true;
     public float minFastFallVelocity = -1;
     public float fastFallForce = -30;
-    bool fastFallStarted;
 
-    bool IsFalling()
-    {
-        return rb.velocity.y<0;
-    }
+    bool currentlyFastFalling=false;
+
+    bool IsFalling() => rb.velocity.y<0;
 
     bool IsFastFalling()
     {
         if(!IsFalling()) return false;
 
-        return rb.velocity.y < minFastFallVelocity;
+        bool isFastFalling = rb.velocity.y < minFastFallVelocity;
+
+        if(isFastFalling)
+        {
+            if(!currentlyFastFalling)
+            {
+                currentlyFastFalling=true;
+                fallEvents.ToggleFastFall?.Invoke(true);
+                EventM.OnToggleFastFall(owner, true);
+            }
+        }
+        else
+        {
+            if(currentlyFastFalling)
+            {
+                currentlyFastFalling=false;
+                fallEvents.ToggleFastFall?.Invoke(false);
+                EventM.OnToggleFastFall(owner, false);
+            }
+        }
+        return isFastFalling;
     }
 
     void UpdateFastFalling()
     {
         if(!fastFall) return;
-        
-        if(IsFastFalling())
-        {
-            rb.AddForce(Vector3.up * fastFallForce);
-        }
-    }
+        if(!IsFastFalling()) return;
 
-    void UpdateFastFallCheck()
-    {
-        if(!fastFallStarted && IsFastFalling())
-        {
-            fastFallStarted=true;
-            uEvents.FastFallStart?.Invoke();
-            EventM.OnFastFallStart(owner);
-        }
-        else if(fastFallStarted && !IsFalling())
-        {
-            fastFallStarted=false;
-            uEvents.FastFallEnd?.Invoke();
-            EventM.OnFastFallEnd(owner);
-        }
+        rb.AddForce(Vector3.up * fastFallForce);
     }
 
     // ============================================================================
@@ -92,14 +91,13 @@ public class FallScript : MonoBehaviour
     // ============================================================================
     
     [System.Serializable]
-    public struct UEvents
+    public struct FallEvents
     {
-        public UnityEvent FastFallStart;
-        public UnityEvent FastFallEnd;
+        public UnityEvent<bool> ToggleFastFall;
     }
     
     [Header("Unity Events")]
-    public UEvents uEvents;
+    public FallEvents fallEvents;
 
     // ============================================================================
 

@@ -183,17 +183,12 @@ public class EventManager : MonoBehaviour
         AutoJumpCancelledEvent?.Invoke(jumper);
     }    
     
-    public event Action<GameObject> FastFallStartEvent;
-    public event Action<GameObject> FastFallEndEvent;
+    public event Action<GameObject, bool> ToggleFastFallEvent;
 
-    public void OnFastFallStart(GameObject who)
+    public void OnToggleFastFall(GameObject who, bool toggle)
     {
-        FastFallStartEvent?.Invoke(who);
+        ToggleFastFallEvent?.Invoke(who, toggle);
     }
-    public void OnFastFallEnd(GameObject who)
-    {
-        FastFallEndEvent?.Invoke(who);
-    }    
 
     public event Action<GameObject> LandGroundEvent;
     public event Action<GameObject> LeaveGroundEvent;

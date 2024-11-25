@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_PakYaActions_MidAir : BaseState
+public class State_PakYaActions_WallClinging : BaseState
 {
-    public override string Name => "MidAir";
+    public override string Name => "Wall Clinging";
 
     PakYaActions action;
 
-    public State_PakYaActions_MidAir(StateMachine_PakYaActions sm)
+    public State_PakYaActions_WallClinging(StateMachine_PakYaActions sm)
     {
         action = sm.action;
     }
@@ -34,9 +34,6 @@ public class State_PakYaActions_MidAir : BaseState
     void ToggleAllow(bool toggle)
     {
         action.AllowJump = toggle;
-        action.AllowDash = toggle;
-        action.AllowAttack = toggle;
-        action.AllowParry = toggle;
         action.AllowHurt = toggle;
         action.AllowStun = toggle;
     }

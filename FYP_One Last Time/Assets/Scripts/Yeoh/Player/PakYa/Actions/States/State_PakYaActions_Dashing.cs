@@ -23,6 +23,7 @@ public class State_PakYaActions_Dashing : BaseState
         action.AllowMoveX = false;
         action.AllowMoveY = false;
         action.AllowFlip = false;
+        action.AllowWallCling = true;
     }
 
     protected override void OnExit()

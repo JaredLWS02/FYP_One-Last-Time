@@ -8,21 +8,6 @@ public class PakYaActions : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Hold Toggles")]
-    public bool AllowMoveX;
-    public bool AllowMoveY;
-    public bool AllowFlip;
-    
-    [Header("Toggles")]
-    public bool AllowJump;
-    public bool AllowDash;
-    public bool AllowAttack;
-    public bool AllowParry;
-    public bool AllowHurt;
-    public bool AllowStun;
-
-    // ============================================================================
-
     EventManager EventM;
 
     void OnEnable()
@@ -52,6 +37,29 @@ public class PakYaActions : MonoBehaviour
         EventM.TryRiposteComboEvent -= OnTryRiposteCombo;
         EventM.TryHurtEvent -= OnTryHurt;
         EventM.TryStunEvent -= OnTryStun;
+    }
+
+    // ============================================================================
+
+    [Header("Hold Toggles")]
+    public bool AllowMoveX;
+    public bool AllowMoveY;
+    public bool AllowFlip;
+    public bool AllowWallCling;
+    
+    [Header("Toggles")]
+    public bool AllowJump;
+    public bool AllowDash;
+    public bool AllowAttack;
+    public bool AllowParry;
+    public bool AllowHurt;
+    public bool AllowStun;
+
+    // ============================================================================
+
+    void Update()
+    {
+        cling.allowWallCling = AllowWallCling;
     }
 
     // ============================================================================
@@ -166,27 +174,29 @@ public class PakYaActions : MonoBehaviour
     // ============================================================================
 
     [Header("Check Action States")]
-    // ?? operator means that if null, it will choose the other option
-    // in this case, if null, choose false
+
     public GroundCheck ground;
-    public bool IsGrounded() => ground?.IsGrounded() ?? false;
+    public bool IsGrounded() => ground.IsGrounded();
+
+    public WallCling cling;
+    public bool IsClinging() => cling.IsClinging();
 
     public DashScript dash;
-    public bool IsDashing() => dash?.IsPerforming() ?? false;
+    public bool IsDashing() => dash.IsPerforming();
     
     public AttackScript attack;
-    public bool IsWindingUpAttack() => attack?.IsWindingUp() ?? false;
-    public bool IsReleasingAttack() => attack?.HasReleased() ?? false;
+    public bool IsWindingUpAttack() => attack.IsWindingUp();
+    public bool IsReleasingAttack() => attack.HasReleased();
     
     public TryParryScript tryParry;
-    public bool IsTryingToParry() => tryParry?.IsPerforming() ?? false;
+    public bool IsTryingToParry() => tryParry.IsPerforming();
 
     public OnParryScript onParry;
-    public bool IsParrying() => onParry?.IsPerforming() ?? false;
+    public bool IsParrying() => onParry.IsPerforming();
 
     public RiposteScript riposte;
-    public bool IsRiposteActive() => riposte?.IsRiposteActive() ?? false;
+    public bool IsRiposteActive() => riposte.IsRiposteActive();
     
     public StunScript stun;
-    public bool IsStunned() => stun?.IsPerforming() ?? false;
+    public bool IsStunned() => stun.IsPerforming();
 }

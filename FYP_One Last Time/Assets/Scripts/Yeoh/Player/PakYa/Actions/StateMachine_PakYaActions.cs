@@ -29,6 +29,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         State_Hub hub = new();
         State_PakYaActions_Grounded grounded = new(this);
         State_PakYaActions_MidAir midAir = new(this);
+        State_PakYaActions_WallClinging clinging = new(this);
         State_PakYaActions_Dashing dashing = new(this);
         State_PakYaActions_AttackWindingUp attackWindingUp = new(this);
         State_PakYaActions_AttackReleasing attackReleasing = new(this);
@@ -42,6 +43,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         {
             if(
                 action.IsGrounded() &&
+                !action.IsClinging() &&
                 !action.IsDashing() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
@@ -58,6 +60,23 @@ public class StateMachine_PakYaActions : MonoBehaviour
         {
             if(
                 !action.IsGrounded() &&
+                !action.IsClinging() &&
+                !action.IsDashing() &&
+                !action.IsWindingUpAttack() &&
+                !action.IsReleasingAttack() &&
+                !action.IsTryingToParry() &&
+                !action.IsParrying() &&
+                !action.IsStunned() //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+        
+        hub.AddTransition(clinging, (timeInState) =>
+        {
+            if(
+                action.IsClinging() &&
                 !action.IsDashing() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
@@ -73,6 +92,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         hub.AddTransition(dashing, (timeInState) =>
         {
             if(
+                !action.IsClinging() &&
                 action.IsDashing() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
@@ -88,6 +108,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         hub.AddTransition(attackWindingUp, (timeInState) =>
         {
             if(
+                !action.IsClinging() &&
                 !action.IsDashing() &&
                 action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
@@ -103,6 +124,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         hub.AddTransition(attackReleasing, (timeInState) =>
         {
             if(
+                !action.IsClinging() &&
                 !action.IsDashing() &&
                 !action.IsWindingUpAttack() &&
                 action.IsReleasingAttack() &&
@@ -118,6 +140,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         hub.AddTransition(tryingToParry, (timeInState) =>
         {
             if(
+                !action.IsClinging() &&
                 !action.IsDashing() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
@@ -133,6 +156,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         hub.AddTransition(parrying, (timeInState) =>
         {
             if(
+                !action.IsClinging() &&
                 !action.IsDashing() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
@@ -148,6 +172,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         hub.AddTransition(stunned, (timeInState) =>
         {
             if(
+                !action.IsClinging() &&
                 !action.IsDashing() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
@@ -166,6 +191,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         {
             if(
                 !action.IsGrounded() ||
+                action.IsClinging() ||
                 action.IsDashing() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
@@ -182,6 +208,23 @@ public class StateMachine_PakYaActions : MonoBehaviour
         {
             if(
                 action.IsGrounded() ||
+                action.IsClinging() ||
+                action.IsDashing() ||
+                action.IsWindingUpAttack() ||
+                action.IsReleasingAttack() ||
+                action.IsTryingToParry() ||
+                action.IsParrying() ||
+                action.IsStunned() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        clinging.AddTransition(hub, (timeInState) =>
+        {
+            if(
+                !action.IsClinging() ||
                 action.IsDashing() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
@@ -197,6 +240,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         dashing.AddTransition(hub, (timeInState) =>
         {
             if(
+                action.IsClinging() ||
                 !action.IsDashing() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
@@ -212,6 +256,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         attackWindingUp.AddTransition(hub, (timeInState) =>
         {
             if(
+                action.IsClinging() ||
                 action.IsDashing() ||
                 !action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
@@ -227,6 +272,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         attackReleasing.AddTransition(hub, (timeInState) =>
         {
             if(
+                action.IsClinging() ||
                 action.IsDashing() ||
                 action.IsWindingUpAttack() ||
                 !action.IsReleasingAttack() ||
@@ -242,6 +288,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         tryingToParry.AddTransition(hub, (timeInState) =>
         {
             if(
+                action.IsClinging() ||
                 action.IsDashing() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
@@ -257,6 +304,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         parrying.AddTransition(hub, (timeInState) =>
         {
             if(
+                action.IsClinging() ||
                 action.IsDashing() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
@@ -272,6 +320,7 @@ public class StateMachine_PakYaActions : MonoBehaviour
         stunned.AddTransition(hub, (timeInState) =>
         {
             if(
+                action.IsClinging() ||
                 action.IsDashing() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||

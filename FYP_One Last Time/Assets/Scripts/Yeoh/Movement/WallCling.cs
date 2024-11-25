@@ -1,0 +1,113 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class WallCling : MonoBehaviour
+{
+    public GameObject owner;
+    public BaseRaycast ray;
+    public GroundCheck ground;
+    public Rigidbody rb;
+
+    // ============================================================================
+
+    InputManager InputM;
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        InputM = InputManager.Current;
+        EventM = EventManager.Current;
+    }
+
+    // ============================================================================
+
+    bool IsMovingToWall()
+    {
+        if(!ray.IsHitting()) return false;
+
+        Vector2 move_input = InputM.moveAxis;
+        if(move_input == Vector2.zero) return false;
+
+        // y input for the z axis
+        Vector3 move_dir = new(move_input.x, 0, move_input.y);
+        move_dir = move_dir.normalized;
+
+        // move dir based on camera orientation
+        Vector3 cam_move_dir = Camera.main.transform.TransformDirection(move_dir).normalized;
+
+        Vector3 dir_to_wall = (ray.rayHit.point - owner.transform.position).normalized;
+
+        float dot = Vector3.Dot(cam_move_dir, dir_to_wall);
+        return dot>0;
+    }
+
+    // ============================================================================
+
+    bool currentlyClinging=false;
+
+    public bool IsClinging()
+    {
+        bool isClinging = !ground.IsGrounded() && IsMovingToWall() && rb.velocity.y<=0;
+
+        if(isClinging)
+        {
+            if(!currentlyClinging)
+            {
+                currentlyClinging=true;
+                ToggleCling(true);
+            }
+        }
+        else
+        {
+            if(currentlyClinging)
+            {
+                currentlyClinging=false;
+                ToggleCling(false);
+            }
+        }
+        return isClinging;
+    }
+
+    public bool instantBrake=true;
+
+    void ToggleCling(bool toggle)
+    {
+        if(toggle && instantBrake)
+        rb.velocity = new(rb.velocity.x, 0, rb.velocity.z);
+
+        wallClingEvents.OnToggleCling?.Invoke(toggle);
+    }
+
+    // ============================================================================
+
+    public bool allowWallCling=true;
+    
+    public float wallSlideSpeed = -2.5f;
+
+    void FixedUpdate()
+    {
+        CheckCling();
+    }
+
+    void CheckCling()
+    {
+        if(!allowWallCling) return;
+        if(!IsClinging()) return;
+
+        EventM.OnCancelDash(owner);
+
+        rb.velocity = new(rb.velocity.x, wallSlideSpeed, rb.velocity.z);
+    }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct WallClingEvents
+    {
+        public UnityEvent<bool> OnToggleCling;
+    }
+    [Space]
+    public WallClingEvents wallClingEvents;
+}

@@ -168,8 +168,7 @@ public class DashScript : BaseAction
     void OnCancelDash(GameObject who)
     {
         if(who!=owner) return;
-
-        if(!IsDashing()) return;
+        if(!IsPerforming()) return;
 
         CancelDashing();
         OnDashingFinished();
