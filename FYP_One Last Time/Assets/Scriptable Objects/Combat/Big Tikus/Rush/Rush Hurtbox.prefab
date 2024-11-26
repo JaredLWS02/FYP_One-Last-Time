@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 489435474446966603}
   - component: {fileID: 8782049835207013567}
   m_Layer: 8
-  m_Name: Slam Hurtbox
+  m_Name: Rush Hurtbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.33
-  m_Height: 4.31
+  m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4609305043628110655
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  hurtboxSO: {fileID: 11400000, guid: 9851d4c565cbb464c8ba8abc1aac326d, type: 2}
+  hurtboxSO: {fileID: 11400000, guid: 8c5320ca6f1d72d4981ae85c2a3e309e, type: 2}
   hurtboxEvents:
     OnTryHit:
       m_PersistentCalls:
@@ -116,6 +116,42 @@ MonoBehaviour:
             m_StringArgument: Impact
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 489435474446966603}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: GetPrefab
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Hit Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 489435474446966603}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SetSpawnPos
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 489435474446966603}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
   destroyOnHit: 0
   destroyOnHurt: 0
   myColl: {fileID: 243087061737523062}
@@ -139,11 +175,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - prefabName: Shockwave
+  - prefabName: Rush Shockwave
     randomPrefabs:
-    - {fileID: 419085589674771820, guid: a2baa7846a5c50f42b6f2f1308c72994, type: 3}
+    - {fileID: 5676686982502810466, guid: ea6229c0fe2831d40adc0c242073c463, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 4014294989942184369}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  - prefabName: Impact
+    randomPrefabs:
+    - {fileID: 5367450259600531064, guid: 172a7347461ce994aa8326b1fe0c5484, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
@@ -151,9 +199,9 @@ MonoBehaviour:
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
-  - prefabName: Impact
+  - prefabName: Hit Shockwave
     randomPrefabs:
-    - {fileID: 5367450259600531064, guid: 172a7347461ce994aa8326b1fe0c5484, type: 3}
+    - {fileID: 419085589674771820, guid: a2baa7846a5c50f42b6f2f1308c72994, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
     posOffset: {x: 0, y: 0, z: 0}
@@ -176,7 +224,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Shockwave
+            m_StringArgument: Rush Shockwave
             m_BoolArgument: 0
           m_CallState: 2
     OnDisable:
@@ -225,8 +273,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3321845459215446752}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.11, z: -2.26}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: -1.321}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
