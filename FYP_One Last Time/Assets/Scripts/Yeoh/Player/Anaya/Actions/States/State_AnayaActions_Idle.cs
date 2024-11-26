@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_AnayaActions_Idle : BaseState
 {
-    public override string Name => "Idle";
+    public override string stateName => "Idle";
 
     AnayaActions action;
 
@@ -13,7 +13,7 @@ public class State_AnayaActions_Idle : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

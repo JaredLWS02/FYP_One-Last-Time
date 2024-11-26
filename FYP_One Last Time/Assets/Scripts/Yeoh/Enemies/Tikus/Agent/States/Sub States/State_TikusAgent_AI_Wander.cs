@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_TikusAgent_AI_Wander : BaseState
 {
-    public override string Name => "AI Wander";
+    public override string stateName => "AI Wander";
 
     TikusAgent agent;
 
@@ -13,7 +13,7 @@ public class State_TikusAgent_AI_Wander : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{agent.owner.name} SubState: {Name}");
+        Debug.Log($"{agent.owner.name} SubState: {stateName}");
 
         ToggleAllow(true);
     }

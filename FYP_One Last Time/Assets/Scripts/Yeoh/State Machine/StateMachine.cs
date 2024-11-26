@@ -6,20 +6,22 @@ public class StateMachine
 {
     public BaseState currentState;
 
-    private bool initialized = false;
+    bool initialized = false;
 
-    public void SetInitialState(BaseState s)
+    public void SetInitialState(BaseState state)
     {
-        currentState = s;
+        currentState = state;
         currentState.Enter();
         initialized = true;
     }
 
-    public void SetState(BaseState s)
+    public void SetState(BaseState state)
     {
-        currentState = s;
+        currentState = state;
         currentState.Enter();
     }
+
+    // ============================================================================
 
     public void Tick(float deltaTime)
     {
@@ -31,24 +33,34 @@ public class StateMachine
 
         currentState.Update(deltaTime);
 
+        if(currentState.IsMetastate())
+        {
+            if(currentState.subsm.currentState.TryGetNextTransition(out BaseState next_substate))
+            {
+                currentState.subsm.currentState.Exit(next_substate);
+                currentState.subsm.SetState(next_substate);
+                return;
+            }
+        }
+
+        // else exit and change current state
         if(currentState.TryGetNextTransition(out BaseState next))
         {
             currentState.Exit();
-            currentState = next;
-            currentState.Enter();
+            SetState(next);
         }
     }
 }
+
+// ============================================================================
 
 // This is like the trigger you see in the Animator for transitions
 public class Trigger
 {
     bool triggered;
 
-    public void Enable()
-    {
-        triggered=true;
-    }
+    public void Enable() => triggered=true;
+
     public bool Check()
     {
         if(triggered)

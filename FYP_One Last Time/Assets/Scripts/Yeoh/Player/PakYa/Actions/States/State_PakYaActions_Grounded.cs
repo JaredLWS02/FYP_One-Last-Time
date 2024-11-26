@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_PakYaActions_Grounded : BaseState
 {
-    public override string Name => "Grounded";
+    public override string stateName => "Grounded";
 
     PakYaActions action;
 
@@ -13,7 +13,7 @@ public class State_PakYaActions_Grounded : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

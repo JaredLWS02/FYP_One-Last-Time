@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_AnayaActions_HealAbility : BaseState
 {
-    public override string Name => "Heal Ability";
+    public override string stateName => "Heal Ability";
 
     AnayaActions action;
 
@@ -13,7 +13,7 @@ public class State_AnayaActions_HealAbility : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

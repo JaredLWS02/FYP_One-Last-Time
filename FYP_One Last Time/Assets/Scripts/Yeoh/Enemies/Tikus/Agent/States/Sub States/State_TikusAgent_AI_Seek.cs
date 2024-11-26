@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_TikusAgent_AI_Seek : BaseState
 {
-    public override string Name => "AI Seek";
+    public override string stateName => "AI Seek";
 
     TikusAgent agent;
 
@@ -13,13 +13,15 @@ public class State_TikusAgent_AI_Seek : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{agent.owner.name} SubState: {Name}");
+        Debug.Log($"{agent.owner.name} SubState: {stateName}");
 
         ToggleAllow(true);
 
         agent.targeting.ExpandRadar();
 
         agent.flip?.SetFlipDelay(agent.seekFlipDelay);
+
+        agent.RegisterEnemyCombat();
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -66,6 +68,8 @@ public class State_TikusAgent_AI_Seek : BaseState
         agent.targeting.RevertRadar();
 
         agent.flip?.RevertFlipDelay();
+
+        agent.UnregisterEnemyCombat();
     }
 
     void ToggleAllow(bool toggle)

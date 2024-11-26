@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_PakYaActions_Dashing : BaseState
 {
-    public override string Name => "Dashing";
+    public override string stateName => "Dashing";
 
     PakYaActions action;
 
@@ -13,7 +13,7 @@ public class State_PakYaActions_Dashing : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_EnemyActions_AttackWindingUp : BaseState
 {
-    public override string Name => "Attack Winding Up";
+    public override string stateName => "Attack Winding Up";
 
     EnemyActions action;
 
@@ -13,7 +13,7 @@ public class State_EnemyActions_AttackWindingUp : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

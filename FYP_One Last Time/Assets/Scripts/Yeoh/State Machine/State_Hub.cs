@@ -1,7 +1,7 @@
 
 public class State_Hub : BaseState
 {
-    public override string Name => "Hub";
+    public override string stateName => "Hub";
 
     // this state is where all states can return to and switch to another
 

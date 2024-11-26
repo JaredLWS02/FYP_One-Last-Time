@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_PakYaActions_Parrying : BaseState
 {
-    public override string Name => "Parrying";
+    public override string stateName => "Parrying";
 
     PakYaActions action;
 
@@ -13,7 +13,7 @@ public class State_PakYaActions_Parrying : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

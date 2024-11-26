@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_SpyviActions_Phasing : BaseState
 {
-    public override string Name => "Phasing";
+    public override string stateName => "Phasing";
 
     SpyviActions action;
 
@@ -13,7 +13,7 @@ public class State_SpyviActions_Phasing : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

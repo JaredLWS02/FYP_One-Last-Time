@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_SpyviActions_Stunned : BaseState
 {
-    public override string Name => "Stunned";
+    public override string stateName => "Stunned";
 
     SpyviActions action;
 
@@ -13,7 +13,7 @@ public class State_SpyviActions_Stunned : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

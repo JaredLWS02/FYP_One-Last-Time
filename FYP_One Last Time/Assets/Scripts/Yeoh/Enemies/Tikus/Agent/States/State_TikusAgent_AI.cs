@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_TikusAgent_AI : BaseState
 {
-    public override string Name => "AI Active";
+    public override string stateName => "AI Active";
 
     TikusAgent agent;
 
@@ -134,9 +134,11 @@ public class State_TikusAgent_AI : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{agent.owner.name} State: {Name}");
+        Debug.Log($"{agent.owner.name} State: {stateName}");
 
         ToggleAllow(true);
+
+        agent.RegisterEnemy();
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -148,6 +150,8 @@ public class State_TikusAgent_AI : BaseState
         Debug.Log($"{agent.owner.name} State: AI Inactive");
 
         ToggleAllow(false);
+
+        agent.UnregisterEnemy();
     }
 
     void ToggleAllow(bool toggle)

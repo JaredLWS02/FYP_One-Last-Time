@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_PakYaActions_WallClinging : BaseState
 {
-    public override string Name => "Wall Clinging";
+    public override string stateName => "Wall Clinging";
 
     PakYaActions action;
 
@@ -13,7 +13,7 @@ public class State_PakYaActions_WallClinging : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }
