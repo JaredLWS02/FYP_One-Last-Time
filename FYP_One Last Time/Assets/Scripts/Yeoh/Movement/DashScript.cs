@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DashScript : BaseAction
 {
+    [Header("Dash Script")]
     public Rigidbody rb;
 
     // ============================================================================

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentAttack : MonoBehaviour
+public class AgentAttack : RandomPicker
 {
+    [Header("Agent Attack")]
     public GameObject owner;
 
     // ============================================================================
@@ -17,14 +18,12 @@ public class AgentAttack : MonoBehaviour
 
     // ============================================================================
 
-    public string attackName = "Normal Combo";
-
     public void Attack()
     {
         if(!IsGroundCheckValid()) return;
         if(!CanSeeTarget()) return;
 
-        EventM.OnAgentTryAttack(owner, attackName);
+        EventM.OnAgentTryAttack(owner, currentOption);
     }
 
     // ============================================================================

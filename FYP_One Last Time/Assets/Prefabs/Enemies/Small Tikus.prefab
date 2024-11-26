@@ -476,8 +476,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7615011877315059424}
   - component: {fileID: 1973161142838726918}
-  - component: {fileID: 7894197541819062297}
   - component: {fileID: 4690002153563524249}
+  - component: {fileID: 7894197541819062297}
   m_Layer: 6
   m_Name: Detection
   m_TagString: Untagged
@@ -557,24 +557,6 @@ MonoBehaviour:
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
   radius: 0.31
---- !u!114 &7894197541819062297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119412302706147938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 6995670659757724566}
-  attackName: Lunge
-  ground: {fileID: 6364306906685696337}
-  allowGrounded: 0
-  allowMidAir: 1
-  sight: {fileID: 8255484749663550365}
 --- !u!114 &4690002153563524249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,6 +603,35 @@ MonoBehaviour:
           m_CallState: 2
     delay: 0.3
   canInterrupt: 0
+--- !u!114 &7894197541819062297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119412302706147938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0.5
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  randomInterval: {x: 0.25, y: 1}
+  options:
+  - name: Lunge
+    weight: 1
+  currentOption: 
+  owner: {fileID: 6995670659757724566}
+  ground: {fileID: 6364306906685696337}
+  allowGrounded: 0
+  allowMidAir: 1
+  sight: {fileID: 8255484749663550365}
 --- !u!1 &1390348875773342422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,8 +1893,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0.5
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  randomInterval: {x: 0.25, y: 1}
+  options:
+  - name: Overhead
+    weight: 1
+  currentOption: 
   owner: {fileID: 6995670659757724566}
-  attackName: Overhead
   ground: {fileID: 6364306906685696337}
   allowGrounded: 0
   allowMidAir: 1
@@ -3320,8 +3342,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0.5
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  randomInterval: {x: 0.25, y: 1}
+  options:
+  - name: Stab
+    weight: 1
+  currentOption: 
   owner: {fileID: 6995670659757724566}
-  attackName: Stab
   ground: {fileID: 6364306906685696337}
   allowGrounded: 1
   allowMidAir: 0

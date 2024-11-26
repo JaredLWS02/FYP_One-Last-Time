@@ -129,6 +129,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab80c224a8318244ab580724fb5dce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies: []
+  enemiesInCombat: []
+  enemyMEvents:
+    OnEnemyFirstEnterCombat:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 375754055234982070}
+          m_TargetAssemblyTypeName: SceneMusic, Assembly-CSharp
+          m_MethodName: ChangeToLayerName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Combat
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnEnemyLastExitCombat:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 375754055234982070}
+          m_TargetAssemblyTypeName: SceneMusic, Assembly-CSharp
+          m_MethodName: ChangeToDefaultLayer
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &2935693718174057515
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -192,6 +225,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
+        type: 3}
+      propertyPath: musicLayers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
+        type: 3}
+      propertyPath: musicLayers.Array.data[0].layerName
+      value: Default
+      objectReference: {fileID: 0}
+    - target: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
+        type: 3}
+      propertyPath: musicLayers.Array.data[1].layerName
+      value: Combat
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -203,6 +251,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2935693718174057515}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &375754055234982070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
+    type: 3}
+  m_PrefabInstance: {fileID: 2935693718174057515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932e2233be5f8c84ca4c7548f848b2b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5612120016773218842
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -259,6 +319,11 @@ PrefabInstance:
     - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926492160201479093, guid: ceeb4a310774f264c8fd7b339a974777,
+        type: 3}
+      propertyPath: enableSlowUpdate
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4276176736393226172, guid: ceeb4a310774f264c8fd7b339a974777,

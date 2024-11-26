@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -34,13 +35,23 @@ public class EnemyManager : MonoBehaviour
     public void RegisterEnemyCombat(GameObject who)
     {
         if(!enemiesInCombat.Contains(who))
-        enemiesInCombat.Add(who);
+        {
+            if(enemiesInCombat.Count<=0)
+            enemyMEvents.OnEnemyFirstEnterCombat?.Invoke();
+
+            enemiesInCombat.Add(who);
+        }
     }
 
     public void UnregisterEnemyCombat(GameObject who)
     {
         if(enemiesInCombat.Contains(who))
-        enemiesInCombat.Remove(who);
+        {
+            enemiesInCombat.Remove(who);
+
+            if(enemiesInCombat.Count<=0)
+            enemyMEvents.OnEnemyLastExitCombat?.Invoke();
+        }
     }
 
     // ============================================================================
@@ -56,4 +67,14 @@ public class EnemyManager : MonoBehaviour
         list.RemoveAll(item => item == null);
     }
 
+    // ============================================================================
+
+    [System.Serializable]
+    public struct EnemyMEvents
+    {
+        public UnityEvent OnEnemyFirstEnterCombat;
+        public UnityEvent OnEnemyLastExitCombat;
+    }
+    [Space]
+    public EnemyMEvents enemyMEvents;
 }
