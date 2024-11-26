@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4014294989942184369}
   - component: {fileID: -7964435744107127267}
   - component: {fileID: -58329807658630753}
+  - component: {fileID: 3835658456935814243}
   - component: {fileID: 8782049835207013567}
   m_Layer: 7
   m_Name: Parry Stunbox
@@ -33,7 +34,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8241207935512812364}
-  - {fileID: 2962529394258238055}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-7964435744107127267
@@ -107,6 +107,50 @@ MonoBehaviour:
   overlap: {fileID: -7964435744107127267}
   hitMethod: 1
   hurtboxOrigin: {fileID: 8241207935512812364}
+--- !u!114 &3835658456935814243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Shockwave
+    randomPrefabs:
+    - {fileID: 8725716151169460468, guid: 7a080ea5473398e4fa98100efd91c902, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4014294989942184369}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3835658456935814243}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8782049835207013567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,97 +201,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4014294989942184369}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &8408611677712361015
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 4014294989942184369}
-    m_Modifications:
-    - target: {fileID: 5191043015889898778, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.34953758
-      objectReference: {fileID: 0}
-    - target: {fileID: 5191043015889898778, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5191043015889898778, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.2971698
-      objectReference: {fileID: 0}
-    - target: {fileID: 5676686982502810466, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_Name
-      value: Shockwave
-      objectReference: {fileID: 0}
-    - target: {fileID: 5676686982502810466, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ea6229c0fe2831d40adc0c242073c463, type: 3}
---- !u!4 &2962529394258238055 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6749883245398424656, guid: ea6229c0fe2831d40adc0c242073c463,
-    type: 3}
-  m_PrefabInstance: {fileID: 8408611677712361015}
-  m_PrefabAsset: {fileID: 0}

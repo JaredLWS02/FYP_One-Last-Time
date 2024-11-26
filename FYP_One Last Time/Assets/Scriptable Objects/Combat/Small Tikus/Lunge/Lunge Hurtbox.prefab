@@ -151,10 +151,34 @@ MonoBehaviour:
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  - prefabName: Shockwave
+    randomPrefabs:
+    - {fileID: 5676686982502810466, guid: ea6229c0fe2831d40adc0c242073c463, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4014294989942184369}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
   spawnEvents:
     OnEnable:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 5461337030095026782}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDisable:
       m_PersistentCalls:
         m_Calls: []
