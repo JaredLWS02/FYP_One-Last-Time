@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_SpyviActions_AutoJumping : BaseState
 {
-    public override string Name => "AutoJumping";
+    public override string stateName => "AutoJumping";
 
     SpyviActions action;
 
@@ -13,7 +13,7 @@ public class State_SpyviActions_AutoJumping : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

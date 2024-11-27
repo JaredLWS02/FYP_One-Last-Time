@@ -9,14 +9,24 @@ public class EnemyAgent : MonoBehaviour
 
     // ============================================================================
 
+    EnemyManager EnemyM;
     protected EventManager EventM;
 
     void OnEnable()
     {
+        EnemyM = EnemyManager.Current;
         EventM = EventManager.Current;
 
         EventM.OnSpawned(owner);
     }
+
+    // ============================================================================
+
+    public void RegisterEnemy() => EnemyM.RegisterEnemy(owner);
+    public void UnregisterEnemy() => EnemyM.UnregisterEnemy(owner);
+    
+    public void RegisterEnemyCombat() => EnemyM.RegisterEnemyCombat(owner);
+    public void UnregisterEnemyCombat() => EnemyM.UnregisterEnemyCombat(owner);
     
     // ============================================================================
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_SpyviBehaviour_Rush : BaseState
 {
-    public override string Name => "Behaviour Rush";
+    public override string stateName => "Behaviour Rush";
 
     SpyviActions spyvi;
 
@@ -13,7 +13,7 @@ public class State_SpyviBehaviour_Rush : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{spyvi.owner.name} State: {Name}");
+        Debug.Log($"{spyvi.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }

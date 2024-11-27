@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_PakYaActions_AttackReleasing : BaseState
 {
-    public override string Name => "Attack Releasing";
+    public override string stateName => "Attack Releasing";
 
     PakYaActions action;
 
@@ -13,7 +13,7 @@ public class State_PakYaActions_AttackReleasing : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }
@@ -23,6 +23,7 @@ public class State_PakYaActions_AttackReleasing : BaseState
         action.AllowMoveX = false;
         action.AllowMoveY = false;
         action.AllowFlip = false;
+        action.AllowWallCling = false;
     }
 
     protected override void OnExit()

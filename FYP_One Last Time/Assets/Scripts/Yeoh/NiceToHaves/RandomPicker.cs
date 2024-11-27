@@ -14,6 +14,8 @@ public class RandomPicker : RandomUpdate
     [Header("Random Picker")]
     public List<Option> options = new();
 
+    void Reset() => options = new() { new Option() };
+
     public string currentOption;
 
     // ============================================================================

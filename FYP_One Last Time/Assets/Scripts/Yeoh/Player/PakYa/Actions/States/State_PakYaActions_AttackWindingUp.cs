@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_PakYaActions_AttackWindingUp : BaseState
 {
-    public override string Name => "Winding Up Attack";
+    public override string stateName => "Winding Up Attack";
 
     PakYaActions action;
 
@@ -13,7 +13,7 @@ public class State_PakYaActions_AttackWindingUp : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }
@@ -23,6 +23,7 @@ public class State_PakYaActions_AttackWindingUp : BaseState
         action.AllowMoveX = false;
         action.AllowMoveY = false;
         action.AllowFlip = true;
+        action.AllowWallCling = false;
     }
 
     protected override void OnExit()

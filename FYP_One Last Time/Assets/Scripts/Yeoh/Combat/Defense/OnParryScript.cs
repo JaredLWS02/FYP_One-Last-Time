@@ -49,7 +49,7 @@ public class OnParryScript : BaseAction
         if(cancelAttackersAttack)
         EventM.OnCancelAttack(attacker);
 
-        SpawnStunbox(contactPoint);
+        SpawnStunbox(hurtbox, contactPoint);
     }
 
     // ============================================================================
@@ -58,11 +58,12 @@ public class OnParryScript : BaseAction
     public PrefabPreset parryStunbox;
     GameObject stunbox;
 
-    void SpawnStunbox(Vector3 pos)
+    void SpawnStunbox(HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(!spawnStunbox) return;
+        if(!hurtbox.parryStunsOwner) return;
 
-        parryStunbox.spawnPos = pos;
+        parryStunbox.spawnPos = contactPoint;
         stunbox = parryStunbox.Spawn();
 
         TryAssignHurtboxOwner(stunbox);

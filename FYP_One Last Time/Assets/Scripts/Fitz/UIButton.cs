@@ -13,17 +13,13 @@ public class UIButton : MonoBehaviour
         buttonComp = GetComponent<Button>();
     }
 
-    // public void OnClick()
-    // {
-    //     AudioManager.Current.PlaySFX(SFXManager.Current.sfxUISelectButton, transform.position, false);
-    // }
-
     public void OnHover()
     {
-        if(buttonComp.interactable)
-        buttonEvents.hoverEvent?.Invoke();
-
-        //AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIHoverButton, transform.position, false);
+        if (buttonComp.interactable)
+        {
+            buttonEvents.hoverEvent?.Invoke();
+            buttonComp.Select();
+        }
     }
 
     public void OnQuit()

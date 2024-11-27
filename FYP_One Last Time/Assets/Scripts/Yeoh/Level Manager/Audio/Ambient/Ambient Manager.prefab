@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1071395121850703831}
   - component: {fileID: 2926492160201479093}
   - component: {fileID: 3604358985725882646}
+  - component: {fileID: 9157872473305338808}
   m_Layer: 0
   m_Name: Ambient Manager
   m_TagString: Untagged
@@ -45,11 +46,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31227e43cbae3d044b387e2bf41c0942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ambEnabled: 1
-  ambLong: []
-  ambShortEnabled: 1
-  ambShort: []
-  ambShortInterval: {x: 2, y: 10}
+  enableSlowUpdate: 1
+  checkInterval: 0.5
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9157872473305338808}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Amb
+            m_BoolArgument: 0
+          m_CallState: 2
+  randomInterval: {x: 2, y: 10}
+  ambLoopEnabled: 1
+  defaultLoopClips: []
 --- !u!82 &3604358985725882646
 AudioSource:
   m_ObjectHideFlags: 0
@@ -59,7 +77,8 @@ AudioSource:
   m_GameObject: {fileID: 4276176736393226172}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -1775126937349135684, guid: fbf0ac9f190fb3e448002736bcdca631, type: 2}
+  OutputAudioMixerGroup: {fileID: -1775126937349135684, guid: fbf0ac9f190fb3e448002736bcdca631,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -146,3 +165,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9157872473305338808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276176736393226172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Amb
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 0}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []

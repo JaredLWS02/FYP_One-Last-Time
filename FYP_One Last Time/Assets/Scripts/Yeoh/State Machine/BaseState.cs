@@ -16,25 +16,23 @@ public class TransitionPair
 
 public abstract class BaseState
 {
-    public abstract string Name { get; }
+    public abstract string stateName { get; }
 
-    protected List<TransitionPair> Transitions = new List<TransitionPair>();
+    protected List<TransitionPair> transitions = new();
 
-    private float timeEnteredState = -1f;
-    private float timeInState = 0f;
+    public float timeEnteredState {get; private set;} = -1f;
+    public float timeInState {get; private set;} = 0f;
 
-    // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members
-    // Even more lazier way to write get Property!
-    // The compiler will expand the code below to proper code
-    public float TimeEnteredState => timeEnteredState;
+    // ============================================================================
 
-    public float TimeInState => timeInState;
+    public StateMachine subsm;
 
-    protected StateMachine subsm;
+    public bool IsMetastate() => subsm!=null && subsm.currentState!=null;
+
+    // ============================================================================
 
     public void Enter()
     {
-        //Debug.Log($"Entering {Name}");
         timeEnteredState = Time.time;
         OnEnter();
 
@@ -56,19 +54,26 @@ public abstract class BaseState
         OnUpdate(deltaTime);
     }
 
-    public void Exit()
+    public void Exit(BaseState nextState = null)
     {
-        //Debug.Log($"Exiting {Name}");
-        OnExit();
+        if(IsMetastate())
+        {
+            subsm.currentState.Exit(nextState);
+        }
         
-        // only if got sub sm
-        if(subsm!=null)
-        subsm.currentState.Exit();
+        // Don't exit the metastate if the next state is its own substate
+        if(nextState!=null && subsm!=null && subsm.currentState==nextState)
+        return;
+
+        // else exit itself
+        OnExit();
     }
+
+    // ============================================================================
 
     public void AddTransition(BaseState to, Func<float, bool> predicate)
     {
-        Transitions.Add(new TransitionPair { nextState = to, predicate = predicate });
+        transitions.Add(new TransitionPair { nextState = to, predicate = predicate });
     }
 
     // Following the style of Dictionary.TryGetValue
@@ -76,8 +81,7 @@ public abstract class BaseState
     // when true/success, the out variable should be assigned to something that is not null or default.
     public bool TryGetNextTransition(out BaseState state)
     {
-        // only if got sub sm
-        if(subsm!=null)
+        if(IsMetastate())
         {
             if(subsm.currentState.TryGetNextTransition(out state))
             {
@@ -85,7 +89,8 @@ public abstract class BaseState
             }
         }
 
-        foreach (var t in Transitions)
+        // else check transitions for current state
+        foreach(var t in transitions)
         {
             // This is the Func<float, bool> predicate in TransitionPair
             if (t.predicate(timeInState))
@@ -99,6 +104,8 @@ public abstract class BaseState
         state = null;
         return false;
     }
+
+    // ============================================================================
 
     // These are overridable by subclasses ====================================
     // Why virtual and not abstract?
@@ -117,6 +124,5 @@ public abstract class BaseState
     protected virtual void OnExit()
     { }
 
-    // ========================================================================
 }
 

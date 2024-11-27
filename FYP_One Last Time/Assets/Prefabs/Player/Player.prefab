@@ -700,6 +700,9 @@ MonoBehaviour:
     alwaysMove: 0
     ease: 3
     reach: 2.5
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 1
   showGizmos: 0
   gizmo1Color: {r: 1, g: 1, b: 1, a: 0.5}
   gizmo2Color: {r: 1, g: 1, b: 0, a: 0.5}
@@ -761,8 +764,9 @@ GameObject:
   - component: {fileID: 98971669180264664}
   - component: {fileID: 1410335126641825925}
   - component: {fileID: 7975362184149562795}
-  - component: {fileID: 2859457414168349167}
   - component: {fileID: 3596767571345983897}
+  - component: {fileID: 3796256092420723281}
+  - component: {fileID: 2859457414168349167}
   m_Layer: 3
   m_Name: Abilities
   m_TagString: Untagged
@@ -873,18 +877,6 @@ MonoBehaviour:
     ReleaseStart:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2859457414168349167}
-          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: PlayName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Anaya Heal
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 3596767571345983897}
           m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
           m_MethodName: GetRgbOffsetCfg
@@ -909,6 +901,30 @@ MonoBehaviour:
             m_StringArgument: Anaya Heal
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2859457414168349167}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Anaya Heal
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3796256092420723281}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls: []
@@ -926,6 +942,63 @@ MonoBehaviour:
   mpM: {fileID: 7058722310484815464}
   player: {fileID: 8987163089559660572}
   hpM: {fileID: 1861734953551003033}
+--- !u!114 &3596767571345983897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756698445312053699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  srs:
+  - {fileID: 4466723156777370603}
+  - {fileID: 3256731903790810545}
+  rgbOffsetCfgs:
+  - color_name: Green
+    rgb_offset: {x: -1, y: 1, z: -1}
+  colorFlickerInterval: 0.05
+  randomStartColor: 0
+  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
+  randomStartFlip: 0
+  randomFlipY: 0
+  randomFlipX: 0
+--- !u!114 &3796256092420723281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756698445312053699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Impact
+    randomPrefabs:
+    - {fileID: 5367450259600531064, guid: 3d0121f66cdc1fd459d956fc9062aa6a, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 123463650881099154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &2859457414168349167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,31 +1046,6 @@ MonoBehaviour:
     DisableEvent:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &3596767571345983897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756698445312053699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
-  srs:
-  - {fileID: 4466723156777370603}
-  - {fileID: 3256731903790810545}
-  rgbOffsetCfgs:
-  - color_name: Green
-    rgb_offset: {x: -1, y: 1, z: -1}
-  colorFlickerInterval: 0.05
-  randomStartColor: 0
-  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
-  randomStartFlip: 0
-  randomFlipY: 0
-  randomFlipX: 0
 --- !u!1 &2941172494308309934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3310,6 +3358,7 @@ Transform:
   m_Children:
   - {fileID: 5563852249811132488}
   - {fileID: 823738866486078077}
+  - {fileID: 3271505819681114862}
   - {fileID: 87823280794277385}
   - {fileID: 2968421400926582619}
   - {fileID: 8242738573827697512}
@@ -3364,6 +3413,7 @@ MonoBehaviour:
   AllowMoveX: 0
   AllowMoveY: 0
   AllowFlip: 0
+  AllowWallCling: 0
   AllowJump: 0
   AllowDash: 0
   AllowAttack: 0
@@ -3371,6 +3421,7 @@ MonoBehaviour:
   AllowHurt: 0
   AllowStun: 0
   ground: {fileID: 773448853722404963}
+  cling: {fileID: 3885140822300902856}
   dash: {fileID: 6281709897807071656}
   attack: {fileID: 7022457898630109682}
   tryParry: {fileID: 8037787176530487218}
@@ -3441,9 +3492,9 @@ MonoBehaviour:
   jumpForce: 23
   jumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   jumpCutMult: 1
-  extraJumps: 1
-  extraJumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   coyoteTime: 0.2
+  extraJumps: 0
+  extraJumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   cooldown: {fileID: 1874970261637118981}
   cooldownTime: 0.4
   jumpEvents:
@@ -3638,11 +3689,8 @@ MonoBehaviour:
   minFastFallVelocity: -1
   fastFallForce: -30
   maxFallVelocity: -50
-  uEvents:
-    FastFallStart:
-      m_PersistentCalls:
-        m_Calls: []
-    FastFallEnd:
+  fallEvents:
+    ToggleFastFall:
       m_PersistentCalls:
         m_Calls: []
   y_velocity: 0
@@ -3756,6 +3804,166 @@ MonoBehaviour:
   regenHp: 0.2
   regenInterval: 0.1
   regenPercent: 100
+--- !u!1 &8800096562145649671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3271505819681114862}
+  - component: {fileID: 3885140822300902856}
+  - component: {fileID: 116061596474317705}
+  - component: {fileID: 5609146893333419746}
+  m_Layer: 3
+  m_Name: Wall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3271505819681114862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800096562145649671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.18, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5568401318979574577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3885140822300902856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800096562145649671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d2c0e7694f7364f8fd2881e1503947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  ray: {fileID: 116061596474317705}
+  ground: {fileID: 773448853722404963}
+  rb: {fileID: 1642459170912960868}
+  allowWallCling: 1
+  isClinging: 0
+  instantBrake: 0
+  wallSlideSpeed: -2.5
+  anim: {fileID: 4004871874835498188}
+  clingingBoolName: IsClinging
+  wallClingEvents:
+    OnToggleCling:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &116061596474317705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800096562145649671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538dbb15be3c79d4cb2c6a7430efb846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 3271505819681114862}
+  lookAt: {fileID: 0}
+  lookAtOffset: {x: 0, y: 0, z: 0}
+  range: 0.8
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+  raycastEvents:
+    OnHitEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHitStay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnHitExit:
+      m_PersistentCalls:
+        m_Calls: []
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
+  gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
+--- !u!114 &5609146893333419746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800096562145649671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46e839e795f48e6429902455ab863f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  rb: {fileID: 1642459170912960868}
+  ground: {fileID: 773448853722404963}
+  jumpForce: 23
+  jumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
+  jumpCutMult: 1
+  coyoteTime: 0.2
+  extraJumps: 0
+  extraJumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
+  cooldown: {fileID: 1874970261637118981}
+  cooldownTime: 0.4
+  jumpEvents:
+    Jump:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3504386022006822260}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Jump
+            m_BoolArgument: 0
+          m_CallState: 2
+    ExtraJump:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3504386022006822260}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Jump2
+            m_BoolArgument: 0
+          m_CallState: 2
+  cling: {fileID: 3885140822300902856}
+  jumpAwayForce: 50
 --- !u!1 &8987163089559660572
 GameObject:
   m_ObjectHideFlags: 0

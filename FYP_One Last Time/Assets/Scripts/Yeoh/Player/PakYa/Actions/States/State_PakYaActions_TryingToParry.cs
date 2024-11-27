@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class State_PakYaActions_TryingToParry : BaseState
 {
-    public override string Name => "Trying To Parry";
+    public override string stateName => "Trying To Parry";
 
     PakYaActions action;
 
@@ -13,7 +13,7 @@ public class State_PakYaActions_TryingToParry : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{action.owner.name} State: {Name}");
+        Debug.Log($"{action.owner.name} State: {stateName}");
 
         ToggleAllow(true);
     }
@@ -23,6 +23,7 @@ public class State_PakYaActions_TryingToParry : BaseState
         action.AllowMoveX = false;
         action.AllowMoveY = false;
         action.AllowFlip = true;
+        action.AllowWallCling = false;
     }
 
     protected override void OnExit()
