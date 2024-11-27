@@ -2938,6 +2938,8 @@ GameObject:
   - component: {fileID: 2472299377499092817}
   - component: {fileID: 1401727047894497609}
   - component: {fileID: 1234111061507024434}
+  - component: {fileID: 5999157726931825191}
+  - component: {fileID: 780967974793306540}
   - component: {fileID: 1894536892237456442}
   m_Layer: 6
   m_Name: Small Tikus
@@ -3008,6 +3010,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 6995670659757724566}
   currentPilot: 2
+--- !u!114 &5999157726931825191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995670659757724566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b10b7bcb68fafec4ab1f5b67bd850868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0.05
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  owner: {fileID: 6995670659757724566}
+  sprites:
+  - {fileID: 5575052531342034989}
+  echoPosOffset: {x: 0, y: 0, z: 0.1}
+  echoLifetime: 0.25
+  velM: {fileID: 780967974793306540}
+  minSpeed: 15
+  maxSpeed: 25
+  echoAlphaMin: 0.1
+  echoAlphaMax: 0.75
+--- !u!114 &780967974793306540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995670659757724566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa35f300255dfd4381049e0411b9943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6995670659757724566}
+  velocity: {x: 0, y: 0, z: 0}
+  velocityMagnitude: 0
+  velocityDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1894536892237456442
 MonoBehaviour:
   m_ObjectHideFlags: 0
