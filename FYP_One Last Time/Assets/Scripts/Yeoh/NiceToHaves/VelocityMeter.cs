@@ -15,7 +15,7 @@ public class VelocityMeter : MonoBehaviour
 
     void FixedUpdate()
     {
-        velocity = (owner.transform.position - prevPos) / Time.deltaTime;
+        velocity = (owner.transform.position - prevPos) / Time.fixedDeltaTime;
         velocityMagnitude = velocity.magnitude;
         velocityDirection = velocity.normalized;
 
