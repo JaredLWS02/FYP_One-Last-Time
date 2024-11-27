@@ -9,8 +9,8 @@ public class DropTable : MonoBehaviour
     {
         public ItemSO item;
         public Vector2Int quantity = new(1, 1);
-        public bool stacked=false;
         public float percent=100;
+        public bool stacked=false;
     }
 
     // ============================================================================

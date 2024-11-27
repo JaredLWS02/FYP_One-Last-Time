@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class TurnScript : MonoBehaviour
 {
+    public GameObject owner;
+
+    // ============================================================================
+    
+    [Header("Turn")]
     public float turnSpeed=10;
     [HideInInspector]
     public float baseTurnSpeed;
@@ -11,7 +16,10 @@ public class TurnScript : MonoBehaviour
     void Awake()
     {
         baseTurnSpeed = turnSpeed;
+        OnBaseAwake();
     }
+
+    protected virtual void OnBaseAwake(){}
 
     // ============================================================================
 
@@ -33,8 +41,8 @@ public class TurnScript : MonoBehaviour
             turnAxis.y>0 ? lookRotation.eulerAngles.y : 0,
             turnAxis.z>0 ? lookRotation.eulerAngles.z : 0);
 
-        transform.rotation = linearTurn ?
-            Quaternion.Lerp(transform.rotation, lookRotation, turnSpeed * Time.deltaTime) : // linearly face the direction
-            Quaternion.Slerp(transform.rotation, lookRotation, turnSpeed * Time.deltaTime); // smoothly face the direction
+        owner.transform.rotation = linearTurn ?
+            Quaternion.Lerp(owner.transform.rotation, lookRotation, turnSpeed * Time.deltaTime) : // linearly face the direction
+            Quaternion.Slerp(owner.transform.rotation, lookRotation, turnSpeed * Time.deltaTime); // smoothly face the direction
     }
 }

@@ -3,220 +3,85 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class HurtScript : MonoBehaviour
 {
-    Rigidbody rb;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        maxPoise=poise;
-    }
+    public GameObject owner;
 
     // ============================================================================
+
+    EventManager EventM;
 
     void OnEnable()
     {
-        EventManager.Current.HurtEvent += OnHurt;
-        EventManager.Current.KnockbackEvent += OnKnockback;
-        EventManager.Current.DeathEvent += OnDeath;
+        EventM = EventManager.Current;
+        
+        EventM.HurtEvent += OnHurt;
+        EventM.DeathEvent += OnDeath;
     }
     void OnDisable()
     {
-        EventManager.Current.HurtEvent -= OnHurt;
-        EventManager.Current.KnockbackEvent -= OnKnockback;
-        EventManager.Current.DeathEvent -= OnDeath;
-    }
-
-    // ============================================================================
-    
-    ModelManager ModelM;
-    SpriteManager SpriteM;
-
-    void Start()
-    {
-        ModelM = ModelManager.Current;
-        SpriteM = SpriteManager.Current;
+        EventM.HurtEvent -= OnHurt;
+        EventM.DeathEvent -= OnDeath;
     }
 
     // ============================================================================
 
-    public HPManager hp;
+    public HPManager hpM;
+    public IFrame iframe;
+    public Poise poise;
 
     // check block/parry first before hurting
 
-    public void OnHurt(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
+    void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        if(victim!=gameObject) return;
-        if(iframe) return;
+        if(victim!=owner) return;
 
-        hp.Hurt(attack.damage);
+        if(iframe.isActive && !hurtbox.ignoreIFrame) return;
 
-        EventManager.Current.OnHurt(gameObject, attacker, attack, contactPoint);
+        hpM.Deplete(hurtbox.damage);
 
-        OnHurtt.Invoke();
+        EventM.OnHurted(owner, attacker, hurtbox, contactPoint);
+        hurtEvents.OnHurted?.Invoke(contactPoint);
 
-        if(hp.hp>0) // if still alive
+        if(hpM.hp>0) // if still alive
         {
-            DoIFraming(iframeSeconds);
+            EventM.OnTryIFrame(owner, iframe.seconds);
 
-            HurtPoise(attacker, attack, contactPoint);
+            poise.TryHurtPoise(attacker, hurtbox, contactPoint);
         }
         else
         {
-            EventManager.Current.OnKnockback(gameObject, attacker, attack, contactPoint);
-            
-            EventManager.Current.OnDeath(gameObject, attacker, attack, contactPoint);
+            EventM.OnDeath(owner, attacker, hurtbox, contactPoint);
         }
-    }
-
-    // ============================================================================
-
-    [Header("iFrame")]
-    public float iframeSeconds=.5f;
-    [HideInInspector]
-    public bool iframe;
-
-    public void DoIFraming(float t)
-    {
-        if(iframing_crt!=null) StopCoroutine(iframing_crt);
-        iframing_crt = StartCoroutine(IFraming(t));
-    }
-
-    Coroutine iframing_crt;
-    
-    IEnumerator IFraming(float t)
-    {
-        iframe=true;
-
-        if(colorFlicker)
-        ToggleColorFlicker(true);
-
-        yield return new WaitForSeconds(t);
-
-        iframe=false;
-        ToggleColorFlicker(false);
-
-        OnIFrameEnd.Invoke();
-    }
-
-    // ============================================================================
-    
-    public bool colorFlicker=true;
-    public Vector3 rgbOffset = new(.75f, -.75f, -.75f); // red
-    public float colorFlickerInterval=.05f;
-
-    void ToggleColorFlicker(bool toggle)
-    {
-        if(colorFlickeringRt!=null) StopCoroutine(colorFlickeringRt);
-
-        if(toggle) colorFlickeringRt = StartCoroutine(ColorFlickering());
-
-        else RevertColor(gameObject);
-    }
-
-    Coroutine colorFlickeringRt;
-
-    IEnumerator ColorFlickering()
-    {
-        while(true)
-        {
-            OffsetColor(gameObject, rgbOffset.x, rgbOffset.y, rgbOffset.z);
-            yield return new WaitForSecondsRealtime(colorFlickerInterval);
-            RevertColor(gameObject);
-            yield return new WaitForSecondsRealtime(colorFlickerInterval);
-        }
-    }
-
-    void OffsetColor(GameObject target, float r, float g, float b)
-    {
-        if(ModelM) ModelM.OffsetColor(target, r, g, b);
-        if(SpriteM) SpriteM.OffsetColor(target, r, g, b);
-    }
-    void RevertColor(GameObject target)
-    {
-        if(ModelM) ModelM.RevertColor(target);
-        if(SpriteM) SpriteM.RevertColor(target);
-    }
-    
-    // ============================================================================
-
-    [Header("Poise")]
-    public float poise;
-    float maxPoise;
-
-    public void HurtPoise(GameObject attacker, AttackSO attack, Vector3 contactPoint)
-    {
-        poise -= attack.damage;
-
-        lastPoiseDmgTime = Time.time;
-
-        if(poise<=0)
-        {
-            poise = maxPoise; // reset poise
-
-            EventManager.Current.OnKnockback(gameObject, attacker, attack, contactPoint);
-
-            OnPoiseBreak.Invoke();
-
-            //EventManager.Current.OnStun(gameObject, attacker, hurtInfo);
-        }
-    }
-
-    float lastPoiseDmgTime;
-    public float poiseRegenDelay=3;
-    
-    void Update()
-    {
-        CheckPoiseRegen();
-    }
-
-    void CheckPoiseRegen()
-    {
-        if(Time.time-lastPoiseDmgTime > poiseRegenDelay)
-        {
-            // instant fill instead of slowly regen
-            poise = maxPoise;
-        }
-    }
-
-    // ============================================================================
-
-    public void OnKnockback(GameObject victim, GameObject attacker, AttackSO attack, Vector3 contactPoint)
-    {
-        if(victim!=gameObject) return;
-
-        Vector3 kb_dir = (rb.transform.position - contactPoint).normalized;
-
-        rb.velocity = Vector3.zero;
-        rb.AddForce(kb_dir * attack.knockback, ForceMode.Impulse);
-    }
+    }    
 
     // ============================================================================
 
     [Header("Die")]
-    public bool iframeOnDeath=true;
+    public bool destroyOnDeath;
 
-    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        if(victim!=gameObject) return;
+        if(victim!=owner) return;
 
         StopAllCoroutines();
 
-        iframe = iframeOnDeath;
+        EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
 
-        RevertColor(gameObject);
-        
-        OnDeathh.Invoke();
+        hurtEvents.OnDeath?.Invoke(contactPoint);
+
+        if(destroyOnDeath)
+        Destroy(owner);
     }
 
     // ============================================================================
 
-    [Header("Events")]
-    public UnityEvent OnHurtt;
-    public UnityEvent OnPoiseBreak;
-    public UnityEvent OnIFrameEnd;
-    public UnityEvent OnDeathh;
+    [System.Serializable]
+    public struct HurtEvents
+    {
+        public UnityEvent<Vector3> OnHurted;
+        public UnityEvent<Vector3> OnDeath;
+    }
+    [Space]
+    public HurtEvents hurtEvents;
 }

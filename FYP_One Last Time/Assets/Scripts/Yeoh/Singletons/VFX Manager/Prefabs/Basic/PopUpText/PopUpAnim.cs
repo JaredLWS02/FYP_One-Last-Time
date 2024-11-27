@@ -39,6 +39,13 @@ public class PopUpAnim : MonoBehaviour
 
     // ==================================================================================================================
 
+    void FixedUpdate()
+    {
+        rb.gameObject.transform.up = rb.velocity.normalized;
+    }
+
+    // ==================================================================================================================
+
     Tween animTween;
 
     Coroutine animating_crt;
@@ -67,8 +74,7 @@ public class PopUpAnim : MonoBehaviour
 
     public void Push(Vector3 force)
     {
-        Vector3 randForce = new Vector3
-        (
+        Vector3 randForce = new(
             Random.Range(-force.x, force.x),
             Random.Range(force.y*.5f, force.y),
             Random.Range(-force.z, force.z)

@@ -1,60 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(GroundCheck))]
+using UnityEngine.Events;
 
 public class JumpScript : MonoBehaviour
 {
-    Rigidbody rb;
-    GroundCheck ground;
-
-    void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        ground = GetComponent<GroundCheck>();
-    }
+    public GameObject owner;
+    public Rigidbody rb;
+    public GroundCheck ground;
     
     // ============================================================================
 
-    public void OnJump(float input)
+    EventManager EventM;
+
+    void OnEnable()
     {
-        if(input>0) //press
-        {
-            JumpBuffer();
-        }
-        else //release
-        {
-            JumpCut();
-        }
+        EventM = EventManager.Current;
+
+        EventM.JumpEvent += OnJump;
+        EventM.JumpCutEvent += OnJumpCut;
+    }
+    void OnDisable()
+    {
+        EventM.JumpEvent -= OnJump;
+        EventM.JumpCutEvent -= OnJumpCut;
     }
 
     // ============================================================================
     
-    void Update()
-    {
-        UpdateExtraJumps();
-        UpdateJumpBuffer();
-        UpdateCoyoteTime();
-        
-        TryJump();
-    }    
-
-    // ============================================================================
-    
-    public bool canJump=true;
+    [Header("Jump")]
     public float jumpForce=10;
+    public AnimSO jumpAnim;
 
-    void TryJump()
+    void OnJump(GameObject who)
     {
-        if(!canJump) return;
-
-        if(!HasJumpBuffer()) return;
+        if(who!=owner) return;
+        
+        if(IsCooling()) return;
 
         if(HasCoyoteTime())
         {
-            Jump();            
+            Jump();
+            jumpAnim?.Play(owner);
+            
+            jumpEvents.Jump?.Invoke();
         }
         else
         {
@@ -64,39 +53,79 @@ public class JumpScript : MonoBehaviour
 
     void Jump()
     {
-        if(isJumpCooling) return;
-        StartCoroutine(JumpCooling());
+        DoCooldown();
+
+        ResetCoyoteTime();
 
         if(!rb.isKinematic)
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         
         rb.AddForce(Vector3.up*jumpForce, ForceMode.Impulse);
 
-        jumpBufferLeft = -1;
-        coyoteTimeLeft = -1;
+        OnBaseJump();
+
+        EventM.OnJumped(owner);
     }
 
-    // Cooldown ============================================================================
+    protected virtual void OnBaseJump(){}
 
-    public float jumpCooldown=.2f;
-    bool isJumpCooling;
+    // Jump Cut ============================================================================
 
-    IEnumerator JumpCooling()
+    [Space]
+    public float jumpCutMult=.5f;
+
+    void OnJumpCut(GameObject who)
     {
-        isJumpCooling=true;
-        yield return new WaitForSeconds(jumpCooldown);
-        isJumpCooling=false;
+        if(who!=owner) return;
+
+        // only if going up
+        if(rb.velocity.y>0)
+        {
+            rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
+
+            EventM.OnJumpCutted(owner);
+        }
     }
 
-    // Extra Jump ============================================================================
+    // ============================================================================
+    
+    void Update()
+    {
+        UpdateCoyoteTime();
+        UpdateExtraJumps();
+    }
 
+    // ============================================================================
+
+    [Header("Coyote")]
+    public float coyoteTime=.2f;
+    float coyoteTimeLeft;
+
+    void UpdateCoyoteTime()
+    {
+        coyoteTimeLeft -= Time.deltaTime;
+
+        // Only replenish coyote time if grounded and jump not cooling
+        if(IsGrounded() && !IsCooling())
+        {
+            coyoteTimeLeft = coyoteTime;
+        }
+    }
+
+    bool HasCoyoteTime()=> coyoteTimeLeft>0;
+    void ResetCoyoteTime() => coyoteTimeLeft=0;
+
+    // ============================================================================
+
+    [Header("Extra")]
     public int extraJumps=1;
     int extraJumpsLeft;
+    public AnimSO extraJumpAnim;
 
     void UpdateExtraJumps()
     {
         // Only replenish extra jumps if grounded and jump not cooling
-        if(ground.IsGrounded() && !isJumpCooling)
+        if(IsGrounded() && !IsCooling())
         {
             extraJumpsLeft = extraJumps;
         }
@@ -108,60 +137,41 @@ public class JumpScript : MonoBehaviour
 
         extraJumpsLeft--;
         Jump();
+        extraJumpAnim?.Play(owner);
+
+        jumpEvents.ExtraJump?.Invoke();
+    }
+    
+    // ============================================================================
+
+    [Header("After Jump")]
+    public Timer cooldown;
+    public float cooldownTime=.2f;
+
+    void DoCooldown() => cooldown?.StartTimer(cooldownTime);
+    bool IsCooling() => cooldown?.IsTicking() ?? false;
+    void CancelCooldown() => cooldown?.FinishTimer();
+
+    // ============================================================================
+
+    protected virtual bool IsGrounded() => ground.IsGrounded();
+    
+    bool CanJump() // unused i guess
+    {
+        if(IsCooling()) return false;
+        if(extraJumpsLeft<=0) return false;
+        if(!IsGrounded()) return false;
+        return true;
     }
 
-    // Jump Buffer ============================================================================
+    // ============================================================================
 
-    [Header("Assist")]
-    public float jumpBufferTime=.2f;
-    float jumpBufferLeft;
-
-    public void JumpBuffer()
+    [System.Serializable]
+    public struct JumpEvents
     {
-        jumpBufferLeft = jumpBufferTime;
+        public UnityEvent Jump;
+        public UnityEvent ExtraJump;
     }
-
-    void UpdateJumpBuffer()
-    {
-        jumpBufferLeft -= Time.deltaTime;
-    }
-
-    bool HasJumpBuffer()
-    {
-        return jumpBufferLeft>0;
-    }
-
-    // Coyote Time ============================================================================
-
-    public float coyoteTime=.2f;
-    float coyoteTimeLeft;
-
-    void UpdateCoyoteTime()
-    {
-        coyoteTimeLeft -= Time.deltaTime;
-
-        // Only replenish coyote time if grounded and jump not cooling
-        if(ground.IsGrounded() && !isJumpCooling)
-        {
-            coyoteTimeLeft = coyoteTime;
-        }
-    }
-
-    bool HasCoyoteTime()
-    {
-        return coyoteTimeLeft>0;
-    }
-
-    // Jump Cut ============================================================================
-
-    public float jumpCutMult=.5f;
-
-    public void JumpCut()
-    {
-        // only if going up
-        if(rb.velocity.y>0)
-        {
-            rb.AddForce(Vector3.down * rb.velocity.y * (1-jumpCutMult), ForceMode.Impulse);
-        }
-    }    
+    [Space]
+    public JumpEvents jumpEvents;
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8126222912621256578}
   - component: {fileID: 2195503525731924951}
+  - component: {fileID: 5767140220447986317}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -48,6 +49,25 @@ MonoBehaviour:
   masterVolume: 1
   musicVolume: 1
   sfxVolume: 1
-  SFXObjectPrefab: {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f,
-    type: 3}
-  hideInHierarchy: 1
+  audioSpawner: {fileID: 5767140220447986317}
+--- !u!114 &5767140220447986317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6478440965081349862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs: []
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []

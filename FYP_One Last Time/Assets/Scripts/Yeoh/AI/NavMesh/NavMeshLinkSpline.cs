@@ -7,7 +7,6 @@ using Unity.AI.Navigation;
 [RequireComponent(typeof(Spline))]
 
 [ExecuteInEditMode]
-
 public class NavMeshLinkSpline : MonoBehaviour
 {
     NavMeshLink navMeshLink;
@@ -48,6 +47,12 @@ public class NavMeshLinkSpline : MonoBehaviour
     }
 
 #endif
+
+    // ============================================================================
+
+    [Header("Jump")]
+    [Min(.01f)]
+    public float jumpSeconds=.8f;
 
 }
 

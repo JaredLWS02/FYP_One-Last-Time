@@ -13,7 +13,16 @@ public class MusicManager : MonoBehaviour
         SetupLayers();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
+    
+    AudioManager AudioM;
+
+    void OnEnable()
+    {
+        AudioM = AudioManager.Current;
+    }
+
+    // ============================================================================
 
     [Header("Music")]
     public bool musicEnabled=true;
@@ -21,10 +30,10 @@ public class MusicManager : MonoBehaviour
     public GameObject musicLayerPrefab;
     public int numberOfLayers=5;
 
-    List<AudioSource> layers = new List<AudioSource>();
-    Dictionary<AudioSource, AudioClip[]> layerClips = new Dictionary<AudioSource, AudioClip[]>();
+    List<AudioSource> layers = new();
+    Dictionary<AudioSource, AudioClip[]> layerClips = new();
     
-    Dictionary<AudioSource, float> defaultLayerVolumes = new Dictionary<AudioSource, float>();
+    Dictionary<AudioSource, float> defaultLayerVolumes = new();
 
     public AudioSource currentLayer;
     public int currentLayerIndex;
@@ -44,7 +53,7 @@ public class MusicManager : MonoBehaviour
         }
     }
         
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     void Update()
     {
@@ -65,7 +74,7 @@ public class MusicManager : MonoBehaviour
         }
     }
     
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     public void ChangeMusic(AudioSource source, AudioClip[] clips, float fadeOutTime=3)
     {
@@ -84,11 +93,11 @@ public class MusicManager : MonoBehaviour
         ChangeMusic(layers[layerIndex], clips, fadeOutTime);
     }
     
-    Dictionary<AudioSource, Coroutine> changingMusicRts = new Dictionary<AudioSource, Coroutine>();
+    Dictionary<AudioSource, Coroutine> changingMusicRts = new();
 
     IEnumerator ChangingMusic(AudioSource source, AudioClip[] clips, float outTime)
     {
-        AudioManager.Current.TweenVolume(source, 0, outTime);
+        AudioM.TweenVolume(source, 0, outTime);
 
         if(outTime>0) yield return new WaitForSecondsRealtime(outTime);
 
@@ -112,9 +121,9 @@ public class MusicManager : MonoBehaviour
         source.Play();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
     
-    public void ChangeLayer(int layerIndex, float outTime=2, float waitTime=0, float inTime=2)
+    public void ChangeLayer(int layerIndex, float outTime=3, float waitTime=0, float inTime=3)
     {
         if(currentLayer==layers[layerIndex]) return;
 
@@ -127,21 +136,21 @@ public class MusicManager : MonoBehaviour
         crossfadingLayerRts[layerIndex] = StartCoroutine(CrossfadingLayer(layerIndex, outTime, waitTime, inTime));
     }
 
-    Dictionary<int, Coroutine> crossfadingLayerRts = new Dictionary<int, Coroutine>();
+    Dictionary<int, Coroutine> crossfadingLayerRts = new();
 
     IEnumerator CrossfadingLayer(int layerIndex, float outTime, float waitTime, float inTime)
     {
-        if(currentLayer) AudioManager.Current.TweenVolume(currentLayer, 0, outTime);
+        if(currentLayer) AudioM.TweenVolume(currentLayer, 0, outTime);
 
         currentLayer = layers[layerIndex];
         currentLayerIndex = layerIndex;
 
         if(waitTime>0) yield return new WaitForSecondsRealtime(waitTime);
 
-        AudioManager.Current.TweenVolume(currentLayer, defaultLayerVolumes[currentLayer], inTime);
+        AudioM.TweenVolume(currentLayer, defaultLayerVolumes[currentLayer], inTime);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
     
     public bool HasClips(AudioClip[] clips)
     {
@@ -152,7 +161,7 @@ public class MusicManager : MonoBehaviour
         return HasClips(clips.ToArray());
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
     void ResetLayerVolume(AudioSource layer)
     {

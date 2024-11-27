@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 0.3}
+  m_SizeDelta: {x: 5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6437526496073394687
 CanvasRenderer:
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.25
+  m_fontSize: 0.4
   m_fontSizeBase: 26.39
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -193,7 +193,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -1707029521
+  m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &7611636563908208589
@@ -247,6 +247,7 @@ GameObject:
   - component: {fileID: 5500637588816224525}
   - component: {fileID: 5319706839787744477}
   - component: {fileID: 5821905264687698104}
+  - component: {fileID: 4250589424126804282}
   m_Layer: 5
   m_Name: Pop Up Text
   m_TagString: Untagged
@@ -314,3 +315,18 @@ MonoBehaviour:
   outTime: 0.5
   ignoreTime: 1
   destroyOnFinish: 1
+--- !u!114 &4250589424126804282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4640091990393059759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbbf2327ec550b64593b75cce4d23a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableBillboard: 1
+  fixedUpdate: 1
+  rotateAxis: {x: 1, y: 1, z: 0}

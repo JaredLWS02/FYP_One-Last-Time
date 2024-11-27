@@ -56,11 +56,17 @@ public class SpriteBillboard : MonoBehaviour
     {
         if(!enableBillboard) return;
 
-        Vector3 camera_angles = Camera.main.transform.rotation.eulerAngles;
+        if(!Camera.main) return;
 
-        transform.rotation = Quaternion.Euler(
-            rotateAxis.x>0 ? camera_angles.x : 0,
-            rotateAxis.y>0 ? camera_angles.y : 0,
-            rotateAxis.z>0 ? camera_angles.z : 0);
+        Vector3 camera_angles = Camera.main.transform.eulerAngles;
+
+        if(!transform) return;
+
+        transform.rotation = Quaternion.Euler
+        (
+            rotateAxis.x>0 ? camera_angles.x : transform.eulerAngles.x,
+            rotateAxis.y>0 ? camera_angles.y : transform.eulerAngles.y,
+            rotateAxis.z>0 ? camera_angles.z : transform.eulerAngles.z
+        );
     }
 }

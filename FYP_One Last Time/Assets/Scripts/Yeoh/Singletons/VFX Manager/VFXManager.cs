@@ -13,66 +13,70 @@ public class VFXManager : MonoBehaviour
         if(!Current) Current=this;
     }
     
-    // Event Manager ============================================================================
+    // ============================================================================
+
+    ColliderManager CollM;
+    EventManager EventM;
 
     void OnEnable()
     {
-        // EventManager.Current.HurtEvent += OnHurt;
-        // EventManager.Current.DeathEvent += OnDeath;
-        // EventManager.Current.LootEvent += OnLoot;
-        // EventManager.Current.AddBuffEvent += OnAddBuff;
-        // EventManager.Current.RemoveBuffEvent += OnRemoveBuff;
-        // EventManager.Current.EnderPearlEvent += OnEnderPearl;
-        // EventManager.Current.MaceSlamEvent += OnMaceSlam;
+        CollM = ColliderManager.Current;
+        EventM = EventManager.Current;
+        
+        EventM.HurtedEvent += OnHurted;
+        //EventM.HealEvent += OnHeal;
+        // EventM.DeathEvent += OnDeath;
+        // EventM.LootEvent += OnLoot;
+        // EventM.AddBuffEvent += OnAddBuff;
+        // EventM.RemoveBuffEvent += OnRemoveBuff;
+        // EventM.EnderPearlEvent += OnEnderPearl;
+        // EventM.MaceSlamEvent += OnMaceSlam;
     }
     void OnDisable()
     {
-        // EventManager.Current.HurtEvent -= OnHurt;
-        // EventManager.Current.DeathEvent -= OnDeath;
-        // EventManager.Current.LootEvent -= OnLoot;
-        // EventManager.Current.AddBuffEvent -= OnAddBuff;
-        // EventManager.Current.RemoveBuffEvent -= OnRemoveBuff;
-        // EventManager.Current.EnderPearlEvent -= OnEnderPearl;
-        // EventManager.Current.MaceSlamEvent -= OnMaceSlam;
+        EventM.HurtedEvent -= OnHurted;
+        //EventM.HealEvent -= OnHeal;
+        // EventM.DeathEvent -= OnDeath;
+        // EventM.LootEvent -= OnLoot;
+        // EventM.AddBuffEvent -= OnAddBuff;
+        // EventM.RemoveBuffEvent -= OnRemoveBuff;
+        // EventM.EnderPearlEvent -= OnEnderPearl;
+        // EventM.MaceSlamEvent -= OnMaceSlam;
     }
 
-    // Events ============================================================================
+    // ============================================================================
     
-    // void OnHurt(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
+    void OnHurted(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    {
+        Color color = victim.CompareTag("Player") ? Color.red : Color.white;
+
+        //SpawnPopUpText(CollM.GetTop(victim), $"{Round(hurtbox.damage)}", color);
+
+        SpawnHitmarker(contactPoint, color);
+
+        // if(victim.TryGetComponent(out Enemy enemy))
+        // {
+        //     SpawnImpact(hurtInfo.contactPoint);
+
+        //     SpawnMcCrit(hurtInfo.contactPoint);
+
+        //     switch(enemy.enemyName)
+        //     {
+        //         case EnemyName.Zombie: SpawnGreenBlood(contactPoint); break;
+        //         case EnemyName.Spider: SpawnPurpleBlood(contactPoint); break;
+        //     }
+        // }
+        // else
+        // {
+        //     SpawnBlood(contactPoint);
+
+        //     SpawnRedImpact(contactPoint);
+        // }
+    }
+
+    // void OnHeal(GameObject who, GameObject healer, float amount)
     // {
-    //     HurtActor(victim, attacker, hurtInfo);
-
-    //     HurtResource(victim, attacker, hurtInfo);
-    // }
-
-    // void HurtActor(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
-    // {
-    //     if(victim.TryGetComponent(out Resource resource)) return; // not resource
-
-    //     Color color = victim.tag=="NPC" ? Color.red : Color.white;
-
-    //     SpawnPopUpText(SpriteManager.Current.GetColliderTop(victim), $"{Round(hurtInfo.dmg)}", color);
-
-    //     SpawnHitmarker(hurtInfo.contactPoint, color);
-
-    //     if(victim.TryGetComponent(out Enemy enemy))
-    //     {
-    //         SpawnImpact(hurtInfo.contactPoint);
-
-    //         SpawnMcCrit(hurtInfo.contactPoint);
-
-    //         switch(enemy.enemyName)
-    //         {
-    //             case EnemyName.Zombie: SpawnGreenBlood(hurtInfo.contactPoint); break;
-    //             case EnemyName.Spider: SpawnPurpleBlood(hurtInfo.contactPoint); break;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         SpawnBlood(hurtInfo.contactPoint);
-
-    //         SpawnRedImpact(hurtInfo.contactPoint);
-    //     }
+    //     SpawnPopUpText(CollM.GetTop(who), $"+{Round(amount)}", Color.green);
     // }
     
     // [Header("Resource")]
@@ -181,7 +185,7 @@ public class VFXManager : MonoBehaviour
 
         TextMeshProUGUI[] tmps = popUp.GetComponentsInChildren<TextMeshProUGUI>();
 
-        foreach(TextMeshProUGUI tmp in tmps)
+        foreach(var tmp in tmps)
         {
             tmp.text = text;
             tmp.color = color;
@@ -414,15 +418,8 @@ public class VFXManager : MonoBehaviour
         // if(Input.GetKeyDown(KeyCode.KeypadDivide)) SpawnChi(ModelManager.Current.GetColliderCenter(FindPlayer()), Vector3.one*5);
     }
 
-    GameObject FindPlayer()
-    {
-        return GameObject.FindGameObjectWithTag("Player");
-    }
-
-    // Vector3 PlayerTop()
-    // {
-    //     return ModelManager.Current.GetColliderTop(FindPlayer());
-    // }
+    GameObject FindPlayer() => GameObject.FindGameObjectWithTag("Player");
+    Vector3 PlayerTop() => CollM.GetTop(FindPlayer());
 
     void ExpandAnim(GameObject obj, float time=.15f)
     {

@@ -13,6 +13,15 @@ public class MouseManager : MonoBehaviour
     }
         
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public Vector2 mousePos;
 
@@ -56,13 +65,13 @@ public class MouseManager : MonoBehaviour
 
             if(swipeDistance<minSwipeDistance && Time.time-lastClickedTime < minSwipeTime) // if not swipe
             {
-                EventManager.Current.OnClick2D(mousePos);
+                EventM.OnClick2D(mousePos);
                 DoSphereCast();
             }
             else // if swipe
             {
                 Vector2 swipeDirection = (endClickPos-startClickPos).normalized;
-                EventManager.Current.OnSwipe2D(startClickPos, swipeDistance, swipeDirection, endClickPos);
+                EventM.OnSwipe2D(startClickPos, swipeDistance, swipeDirection, endClickPos);
             }
         }
     }
@@ -98,7 +107,7 @@ public class MouseManager : MonoBehaviour
             
             Rigidbody otherRb = other.attachedRigidbody;
 
-            if(otherRb) EventManager.Current.OnClickObject(otherRb.gameObject);
+            if(otherRb) EventM.OnClickObject(otherRb.gameObject);
         }
     }
 

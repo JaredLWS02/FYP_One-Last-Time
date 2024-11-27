@@ -28,7 +28,7 @@ public class RandomDoughnut2D : MonoBehaviour
     // ============================================================================
 
     [Header("Debug")]
-    public bool showGizmos = true;
+    public bool showGizmos;
     public Color gizmoColor = Color.cyan;
 
     void OnDrawGizmosSelected()

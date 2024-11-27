@@ -10,34 +10,32 @@ public class AttackSO : ScriptableObject
     [TextArea]
     public string description;
 
-    [Header("Damage")]
-    public float damage=10;
-    public float knockback=5;
+    [Header("Attack Anim")]
+    public AnimSO anim;
 
-    [Header("Extra")]
-    public float damageBlock=5;
-    public bool parryable=true;
-    [Min(1)]
-    public int pierceCount=1;
+    [Header("Attack Dash")]
+    public bool dashOnWindUp = false;
+    public float dashOnWindUpForce = 30;
+    public Vector3 dashOnWindUpDir = Vector3.forward;
+    [Space]
+    public bool dashOnRelease = true;
+    public float dashOnReleaseForce = 30;
+    public Vector3 dashOnReleaseDir = Vector3.forward;
+    [Space]
+    public bool localDir = true;
 
-    [Header("Stun")]
-    public float stunSeconds=1;
-    public float stunSpeedMult=.3f;      
+    [Header("Attack Move")]
+    public RangeAssistCfg rangeAssistCfg;
+    public bool windUpRangeAssist;
+    public bool releaseRangeAssist=true;
 
-    // ctor
-    public AttackSO(AttackSO so)
-    {
-        Name = so.Name;
-        description = so.description;
-        damage = so.damage;
-        knockback = so.knockback;
-        damageBlock = so.damageBlock;
-        parryable = so.parryable;
-        pierceCount = so.pierceCount;
-        stunSeconds = so.stunSeconds;
-        stunSpeedMult = so.stunSpeedMult;
-    }
+    [Header("Optional")]
+    [SerializeField]
+    Vector2 cooldown = new(0, .1f);
+    public float GetRandomCooldown() => Random.Range(cooldown.x, cooldown.y);
 
+    // ============================================================================
+    
     [HideInInspector]
     public int ID => GetInstanceID();
 }

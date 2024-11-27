@@ -5,21 +5,14 @@ using UnityEngine.SceneManagement;
 
 public enum Scenes // must be in the same order as in the build settings, and case sensitive
 {
-    Yeoh1,
-    LoseScene,
-    WinScene,
+    Intro,
     MainMenu,
+    IntroText,
+    TestArea,
 }
 
 public class ScenesManager : MonoBehaviour
 {
-    public Animator transitionAnimator;
-    public GameObject transitionCanvas;
-    public CanvasGroup transitionCanvasGroup;
-
-    public bool isTransitioning;
-    int transitionTypes=1;
-
     public static ScenesManager Current;
 
     void Awake()
@@ -27,8 +20,14 @@ public class ScenesManager : MonoBehaviour
         if(!Current) Current=this;
     }
 
+    // ============================================================================
+
+    InputManager InputM;
+
     void OnEnable()
     {
+        InputM = InputManager.Current;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
     void OnDisable()
@@ -41,12 +40,24 @@ public class ScenesManager : MonoBehaviour
         PlayTransitionIn();
     }
     
+    // ============================================================================
+    
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R)) ReloadScene();
+        if(InputM.reloadSceneKeyDown) ReloadScene();
+        if(InputM.mainMenuSceneKeyDown) LoadMainMenu();
         // if(Input.GetKeyDown(KeyCode.KeypadPlus)) LoadNextScene();
         // if(Input.GetKeyDown(KeyCode.KeypadMinus)) LoadPrevScene();
     }
+
+    // ============================================================================
+
+    public Animator transitionAnimator;
+    public GameObject transitionCanvas;
+    public CanvasGroup transitionCanvasGroup;
+
+    public bool isTransitioning;
+    int transitionTypes=1;
 
     public void PlayTransition(string type, int i, bool quit=false)
     {
@@ -90,6 +101,8 @@ public class ScenesManager : MonoBehaviour
         }
     }
 
+    // ============================================================================
+
     public void TransitionTo(Scenes scene, bool anim=true)
     {
         int sceneIndex = (int)scene;
@@ -114,6 +127,8 @@ public class ScenesManager : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
+    // ============================================================================
+
     public void ShowTransition(bool toggle)
     {
         if(!toggle) CancelTransition();
@@ -131,6 +146,8 @@ public class ScenesManager : MonoBehaviour
         if(playingTransitionRt!=null) StopCoroutine(playingTransitionRt);
         transitionAnimator.Play("cancel", 0);
     }
+
+    // ============================================================================
 
     public void LoadNextScene()
     {
@@ -152,6 +169,8 @@ public class ScenesManager : MonoBehaviour
         }
     }
 
+    // ============================================================================
+
     public void ReloadScene()
     {
         if(!IsSceneMainMenu())
@@ -163,6 +182,8 @@ public class ScenesManager : MonoBehaviour
         if(!IsSceneMainMenu())
         TransitionTo(Scenes.MainMenu);
     }
+
+    // ============================================================================
 
     public bool IsSceneMainMenu()
     {
@@ -178,6 +199,8 @@ public class ScenesManager : MonoBehaviour
     {
         return transitionAnimator.GetCurrentAnimatorStateInfo(layer).length;
     }
+
+    // ============================================================================
 
     public void Quit(bool anim=true)
     {

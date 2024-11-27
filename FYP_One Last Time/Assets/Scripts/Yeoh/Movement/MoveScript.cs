@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using PrimeTween;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-
 public class MoveScript : MonoBehaviour
 {
-    Rigidbody rb;
+    public GameObject owner;
+    public Rigidbody rb;
+    
+    // ============================================================================
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         baseSpeed = clamp = speed;
     }
 
@@ -19,9 +19,9 @@ public class MoveScript : MonoBehaviour
 
     [Header("Move")]
     public float speed=10;
+    public float clamp=10;
     [HideInInspector]
     public float baseSpeed;
-    float clamp;
 
     public float acceleration=10;
     public float deceleration=10;
@@ -61,6 +61,9 @@ public class MoveScript : MonoBehaviour
     
     void Move(float speed, Vector3 direction)
     {
+        if(!IsGrounded()) return;
+        if(IsTooSteep()) return;
+
         direction.Normalize();
 
         float accelRate = Mathf.Abs(speed)>0 ? acceleration : deceleration; // use decelerate value if no input, and vice versa
@@ -101,13 +104,18 @@ public class MoveScript : MonoBehaviour
         if(to>=baseSpeed)
         {
             TweenSpeed(to, tweenTime);
-            TweenClamp(baseSpeed, tweenTime);
         }
         else
         {
             TweenSpeed(baseSpeed, tweenTime);
-            TweenClamp(to, tweenTime);
         }
+        
+        TweenClamp(to, tweenTime);
+    }
+
+    public void SetSpeedMult(float mult, float tweenTime=.25f)
+    {
+        SetSpeed(baseSpeed*mult, tweenTime);
     }
 
     public void ResetSpeed(float tweenTime=.25f)
@@ -125,10 +133,19 @@ public class MoveScript : MonoBehaviour
 
     // ============================================================================
 
+    [Header("Optional")]
+    public GroundCheck ground;
+    bool IsGrounded() => ground?.IsGrounded() ?? true;
+
+    public SlopeCheck slope;
+    bool IsTooSteep() => slope?.isTooSteep ?? false;
+
+    // ============================================================================
+
     [Header("Debug")]
     public float velocity;
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         velocity = Round(rb.velocity.magnitude, 2);
     }

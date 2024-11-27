@@ -11,7 +11,7 @@ public class ColliderManager : MonoBehaviour
         if(!Current) Current=this;
     }
 
-    // Getters ============================================================================
+    // Getter ============================================================================
 
     public List<Collider> GetColliders(GameObject target)
     {
@@ -32,28 +32,7 @@ public class ColliderManager : MonoBehaviour
         return colliders;
     }
 
-    public Vector3 GetTop(GameObject target)
-    {
-        List<Collider> colliders = GetColliders(target);
-        
-        if(colliders.Count==0)
-        {
-            Debug.LogError($"{name}: Couldn't find any Collider on {target.name}");
-            return Vector3.zero;
-        }
-
-        float highestPoint = float.MinValue;
-
-        foreach(var coll in colliders)
-        {
-            Vector3 topPoint = coll.bounds.max;
-
-            if(highestPoint < topPoint.y)
-                highestPoint = topPoint.y;
-        }
-
-        return new Vector3(target.transform.position.x, highestPoint, target.transform.position.z);
-    }
+    // ============================================================================
 
     public Vector3 GetCenter(GameObject target)
     {
@@ -72,6 +51,50 @@ public class ColliderManager : MonoBehaviour
         return center;
     }
 
-    // Bounding Box ============================================================================
+    public Vector3 GetTop(GameObject target)
+    {
+        List<Collider> colliders = GetColliders(target);
+        
+        if(colliders.Count==0)
+        {
+            Debug.LogError($"{name}: Couldn't find any Collider on {target.name}");
+            return Vector3.zero;
+        }
+
+        float highestY = float.MinValue;
+
+        foreach(var coll in colliders)
+        {
+            Vector3 top = coll.bounds.max;
+
+            if(top.y > highestY)
+                highestY = top.y;
+        }
+
+        return new(target.transform.position.x, highestY, target.transform.position.z);
+    }
+
+    public Vector3 GetBottom(GameObject target)
+    {
+        List<Collider> colliders = GetColliders(target);
+        
+        if(colliders.Count==0)
+        {
+            Debug.LogError($"{name}: Couldn't find any Collider on {target.name}");
+            return Vector3.zero;
+        }
+
+        float lowestY = float.MaxValue;
+
+        foreach(var coll in colliders)
+        {
+            Vector3 bottom = coll.bounds.min;
+
+            if(bottom.y < lowestY)
+                lowestY = bottom.y;
+        }
+
+        return new(target.transform.position.x, lowestY, target.transform.position.z);
+    }
 
 }

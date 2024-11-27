@@ -1,117 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GroundCheck : MonoBehaviour
 {
-    public Vector3 boxSize = new(.5f, .05f, .5f);
-    public Vector3 boxOffset = Vector3.zero;
-
-    public LayerMask groundLayer;
-
-    Collider[] GetOverlap()
-    {
-        return Physics.OverlapBox(transform.position + boxOffset, boxSize, transform.rotation, groundLayer);
-    }
+    public GameObject owner;
+    public Rigidbody rb;
 
     // ============================================================================
-
-    List<Collider> previous_colliders = new();
-    List<Collider> current_colliders = new();
-
-    void FixedUpdate()
-    {
-        Check();
-    }
-
-    void Check()
-    {
-        current_colliders.Clear();
-
-        Collider[] colliders = GetOverlap();
-
-        // Check OnEnter
-        foreach(var coll in colliders)
-        {
-            // must not be trigger
-            if(coll.isTrigger) continue;
-
-            current_colliders.Add(coll);
-
-            // if present in current but missing in previous
-            if(!previous_colliders.Contains(coll))
-            {
-                OnBoxEnter(coll);
-            }   
-        }
-        
-        // Check OnExit
-        foreach(var coll in previous_colliders)
-        {
-            // if present in previous but missing in current
-            if(!current_colliders.Contains(coll))
-            {
-                OnBoxExit(coll);
-            }
-        }
-
-        // Update old to new to prepare for the next round
-        previous_colliders = new(current_colliders);
-    }    
-
-    // ============================================================================
-
-    void OnBoxEnter(Collider other)
-    {
-        if(previous_colliders.Count==0 && current_colliders.Count > 0)
-        {
-            EventManager.Current.OnLandGround(gameObject);
-            OnLandGround.Invoke();
-        }
-    }
     
-    void OnBoxExit(Collider other)
+    EventManager EventM;
+    public BaseOverlap overlap;
+
+    void OnEnable()
     {
-        if(previous_colliders.Count > 0 && current_colliders.Count==0)
+        EventM = EventManager.Current;
+
+        overlap.OverlapFirstEnterEvent += OnFirstEnter;
+        overlap.OverlapLastExitEvent += OnLastExit;
+    }
+    void OnDisable()
+    {
+        overlap.OverlapFirstEnterEvent -= OnFirstEnter;
+        overlap.OverlapLastExitEvent -= OnLastExit;
+    }
+
+    // ============================================================================
+    
+    [Header("Land")]
+    public AnimSO landAnim;
+    //public float minLandVelocity = -1;
+
+    void OnFirstEnter(GameObject obj, Collider coll)
+    {
+        // going down only
+        //if(rb.velocity.y <= minLandVelocity)
+        if(rb.velocity.y <= 0)
         {
-            EventManager.Current.OnLeaveGround(gameObject);
-            OnLeaveGround.Invoke();
+            landAnim?.Play(owner);
+
+            EventM.OnLandGround(owner);
         }
+    }
+
+    void OnLastExit(GameObject obj, Collider coll)
+    {
+        EventM.OnLeaveGround(owner);
     }
 
     // ============================================================================
 
     public bool IsGrounded()
     {
-        return current_colliders.Count > 0;
+        bool isOverlapping = overlap.IsOverlapping();
+
+        if(slope)
+        {
+            return isOverlapping && !slope.isTooSteep;
+        }
+        return isOverlapping;
     }
 
     // ============================================================================
 
-    [Header("Debug")]
-    public bool showGizmos = true;
-    public Color gizmoColor = Color.blue;
+    [Header("Animator")]
+    public Animator anim;
+    public string groundedBoolName = "IsGrounded";
 
-    void OnDrawGizmosSelected()
+    void FixedUpdate()
     {
-        if(!showGizmos) return;
-        
-        Gizmos.color = gizmoColor;
-
-        Vector3 boxCenter = transform.position + boxOffset;
-
-        Gizmos.matrix = Matrix4x4.TRS(boxCenter, transform.rotation, Vector3.one);
-
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
-
-        // Reset the Gizmos matrix to default
-        Gizmos.matrix = Matrix4x4.identity;
+        anim?.SetBool(groundedBoolName, IsGrounded());
     }
 
     // ============================================================================
-    
-    [Header("Events")]
-    public UnityEvent OnLandGround;
-    public UnityEvent OnLeaveGround;
+
+    [Header("Optional")]
+    public SlopeCheck slope;
 }

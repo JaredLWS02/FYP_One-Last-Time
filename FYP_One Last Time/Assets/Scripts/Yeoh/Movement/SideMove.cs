@@ -2,34 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MoveScript))]
+public class SideMove : MoveScript
+{    
+    EventManager EventM;
 
-public class SideMove : MonoBehaviour
-{
-    MoveScript move;
-
-    void Awake()
+    void OnEnable()
     {
-        move = GetComponent<MoveScript>();
+        EventM = EventManager.Current;
+        
+        EventM.MoveEvent += OnMove;
     }
-    
-    // ============================================================================
-
-    public Vector3 sideAxis = Vector3.right;
-
-    void FixedUpdate()
+    void OnDisable()
     {
-        dirX = move.Round(dirX, 1);
-
-        move.UpdateMoveMult(dirX, sideAxis);
+        EventM.MoveEvent -= OnMove;
     }
 
     // ============================================================================
 
     float dirX;
 
-    public void UpdateMove(float input_x)
+    void OnMove(GameObject who, Vector2 input)
     {
-        dirX = input_x;
+        if(who!=owner) return;
+
+        dirX = input.x;
+    }
+    
+    // ============================================================================
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+
+        dirX = Round(dirX, 1);
+
+        UpdateMoveMult(dirX, Vector3.right);
     }
 }

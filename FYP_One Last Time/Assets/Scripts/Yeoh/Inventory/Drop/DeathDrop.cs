@@ -16,18 +16,22 @@ public class DeathDrop : MonoBehaviour
 
     // ============================================================================
     
+    EventManager EventM;
+
     void OnEnable()
     {
-        EventManager.Current.DeathEvent += OnDeath;
+        EventM = EventManager.Current;
+        
+        EventM.DeathEvent += OnDeath;
     }
     void OnDisable()
     {
-        EventManager.Current.DeathEvent -= OnDeath;
+        EventM.DeathEvent -= OnDeath;
     }
     
     // ============================================================================
 
-    void OnDeath(GameObject victim, GameObject killer, AttackSO attack, Vector3 contactPoint)
+    void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=gameObject) return;
 

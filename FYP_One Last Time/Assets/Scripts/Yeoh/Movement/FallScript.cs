@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[RequireComponent(typeof(Rigidbody))]
+using UnityEngine.Events;
 
 public class FallScript : MonoBehaviour
 {
-    Rigidbody rb;
+    public GameObject owner;
+    public Rigidbody rb;
+    
+    // ============================================================================
 
-    void Awake()
+    EventManager EventM;
+
+    void OnEnable()
     {
-        rb = GetComponent<Rigidbody>();
+        EventM = EventManager.Current;
     }
+
+    // ============================================================================
 
     void FixedUpdate()
     {
@@ -23,35 +29,75 @@ public class FallScript : MonoBehaviour
 
     // ============================================================================
 
-    public float maxFallVelocity = -30;
-
-    void UpdateMaxFall()
-    {
-        if(rb.velocity.y < maxFallVelocity)
-        {
-            rb.velocity = new(rb.velocity.x, maxFallVelocity, rb.velocity.z);
-            return;
-        }
-    }
-
-    // ============================================================================
-
     [Header("Fast Falling")]
-    public bool fastFall = true;
-    public float minVelocityBeforeFastFall = -.1f;
-    public float fastFallForce = -15;
+    public bool fastFall=true;
+    public float minFastFallVelocity = -1;
+    public float fastFallForce = -30;
+
+    bool currentlyFastFalling=false;
+
+    bool IsFalling() => rb.velocity.y<0;
+
+    bool IsFastFalling()
+    {
+        if(!IsFalling()) return false;
+
+        bool isFastFalling = rb.velocity.y < minFastFallVelocity;
+
+        if(isFastFalling)
+        {
+            if(!currentlyFastFalling)
+            {
+                currentlyFastFalling=true;
+                fallEvents.ToggleFastFall?.Invoke(true);
+                EventM.OnToggleFastFall(owner, true);
+            }
+        }
+        else
+        {
+            if(currentlyFastFalling)
+            {
+                currentlyFastFalling=false;
+                fallEvents.ToggleFastFall?.Invoke(false);
+                EventM.OnToggleFastFall(owner, false);
+            }
+        }
+        return isFastFalling;
+    }
 
     void UpdateFastFalling()
     {
         if(!fastFall) return;
-        // ignore if going up
-        if(rb.velocity.y>=0) return;
+        if(!IsFastFalling()) return;
+
+        rb.AddForce(Vector3.up * fastFallForce);
+    }
+
+    // ============================================================================
+
+    [Header("Max Velocity")]
+    public float maxFallVelocity = -50;
+    
+    void UpdateMaxFall()
+    {
+        if(!IsFalling()) return;
         
-        if(rb.velocity.y < minVelocityBeforeFastFall)
+        if(rb.velocity.y < maxFallVelocity)
         {
-            rb.AddForce(Vector3.up * fastFallForce);
+            rb.velocity = new(rb.velocity.x, maxFallVelocity, rb.velocity.z);
         }
     }
+
+    // ============================================================================
+    
+    [System.Serializable]
+    public struct FallEvents
+    {
+        public UnityEvent<bool> ToggleFastFall;
+    }
+    
+    [Header("Unity Events")]
+    public FallEvents fallEvents;
 
     // ============================================================================
 
@@ -71,7 +117,6 @@ public class FallScript : MonoBehaviour
         {
             factor *= 10;
         }
-
         return Mathf.Round(num * factor) / factor;
     }
 }

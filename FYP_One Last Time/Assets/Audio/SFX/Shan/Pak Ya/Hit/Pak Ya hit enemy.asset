@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e94da9a5c25f394794684b2f92dacb5, type: 3}
+  m_Name: Pak Ya hit enemy
+  m_EditorClassIdentifier: 
+  Name: Pak Ya hit enemy
+  description: 
+  randomClips:
+  - {fileID: 8300000, guid: 97015dd97f2728142aef0fe345db9ed5, type: 3}
+  - {fileID: 8300000, guid: 5b4ae28d908f03942b0a38cbe61c3c56, type: 3}
+  - {fileID: 8300000, guid: 950bfc69b60413b468b7e1c4c5bd3a72, type: 3}
+  output: {fileID: -1775126937349135684, guid: fbf0ac9f190fb3e448002736bcdca631, type: 2}
+  loop: 0
+  randomVolume: {x: 0.3, y: 0.3}
+  randomPitch: {x: 0.9, y: 1.2}
+  randomStereoPan: {x: 0, y: 0}
+  spatialBlend: 1
+  minDistance: 9
+  maxDistance: 18

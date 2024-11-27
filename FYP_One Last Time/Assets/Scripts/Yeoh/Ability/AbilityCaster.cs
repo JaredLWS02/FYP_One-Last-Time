@@ -1,147 +1,139 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class AbilityCaster : MonoBehaviour
-{
-    public AbilityListSO abilityList;
-
-    public HPManager MP_Manager;
-
-    [HideInInspector]
-    public bool isCasting;
-
-    // Event Manager ============================================================================
+public class AbilityCaster : BaseAction
+{   
+    EventManager EventM;
 
     void OnEnable()
     {
-        abilityList.ResetCooldowns();
+        EventM = EventManager.Current;
 
-        EventManager.Current.CastingEvent += OnCasting;
-        EventManager.Current.CastWindUpEvent += OnCastWindUp;
-        EventManager.Current.CastReleaseEvent += OnCastRelease;
-        EventManager.Current.CastFinishEvent += OnCastFinish;
-        EventManager.Current.CastCancelEvent += OnCastCancel;
+        EventM.CancelCastEvent += OnCancelCast;
+
+        abilityList.CancelCooldowns();
     }
     void OnDisable()
     {
-        abilityList.ResetCooldowns();
+        EventM.CancelCastEvent -= OnCancelCast;
 
-        EventManager.Current.CastingEvent -= OnCasting;
-        EventManager.Current.CastWindUpEvent -= OnCastWindUp;
-        EventManager.Current.CastReleaseEvent -= OnCastRelease;
-        EventManager.Current.CastFinishEvent -= OnCastFinish;
-        EventManager.Current.CastCancelEvent -= OnCastCancel;
+        abilityList.CancelCooldowns();
     }
 
-    // Start Here ============================================================================
-    
-    public void StartCast(string ability_name)
-    {
-        if(isCasting) return;
-
-        AbilitySlot abilitySlot = abilityList.GetAbility(ability_name);
-
-        // if dont have that ability
-        if(abilitySlot==null) return;
-
-        // not on cooldown
-        if(abilitySlot.IsCooling()) return;
-
-        // not enough mp
-        if(MP_Manager.hp < abilitySlot.ability.cost) return;
-
-        EventManager.Current.OnCasting(gameObject, abilitySlot);
-    }
-
-    // Casting ============================================================================
-
-    void OnCasting(GameObject caster, AbilitySlot abilitySlot)
-    {
-        if(caster!=gameObject) return;
-
-        castingRt = StartCoroutine(Casting(abilitySlot));
-    }
-
-    Coroutine castingRt;
-    IEnumerator Casting(AbilitySlot abilitySlot)
-    {
-        isCasting=true;
-
-        //sfxCastingLoop = AudioManager.Current.LoopSFX(gameObject, SFXManager.Current.sfxCastingLoop);
-
-        yield return new WaitForSeconds(abilitySlot.ability.castingTime);
-
-        EventManager.Current.OnCastWindUp(gameObject, abilitySlot);
-
-        //if(sfxCastingLoop) AudioManager.Current.StopLoop(sfxCastingLoop);
-    }
-
-    // Done ============================================================================
-
-    void OnCastWindUp(GameObject caster, AbilitySlot abilitySlot)
-    {
-        if(caster!=gameObject) return;
-
-        // play ability.anim or something
-        // it must have anim event to trigger EventManager.Current.OnCastRelease
-    }
-    
-    // Release ============================================================================
-
-    void OnCastRelease(GameObject caster, AbilitySlot abilitySlot)
-    {
-        if(caster!=gameObject) return;
-
-        // mp cost
-        MP_Manager.Hurt(abilitySlot.ability.cost);
-
-        abilitySlot.DoCooldown();
-    }
-
-    // Finish ============================================================================
-
-    void OnCastFinish(GameObject caster)
-    {
-        if(caster!=gameObject) return;
-
-        isCasting=false;
-    }
-
-    // Cancel ============================================================================
-
-    public void Cancel()
-    {
-        EventManager.Current.OnCastCancel(gameObject);
-    }
-
-    void OnCastCancel(GameObject caster)
-    {
-        if(caster!=gameObject) return;
-
-        if(!isCasting) return;
-        isCasting=false;
-
-        if(castingRt!=null) StopCoroutine(castingRt);
-
-        //if(sfxCastingLoop) AudioManager.Current.StopLoop(sfxCastingLoop);
-    }
-
-    // Misc ============================================================================
+    // ============================================================================
 
     void Update()
     {
+        UpdateProgress();
+
         abilityList.UpdateCooldowns();
         abilityList.CleanUp();
     }
 
-    /*
-    //AudioSource sfxCastingLoop;
+    // ============================================================================
 
-    public void OnDeath()
+    public HPManager mpM;
+    public AbilityListSO abilityList;
+    AbilitySlot currentSlot;
+
+    public AbilitySO abilitySO;
+
+    public void TryStartCasting()
     {
-        Cancel();
+        if(IsPerforming()) return;
+
+        if(!abilityList.HasAbility(abilitySO, out var slot)) return;
+
+        if(!abilitySO.CanAfford(mpM.hp)) return;
+
+        if(slot.IsCooling()) return;
+
+        currentSlot = slot;
+
+        StartCasting();
     }
 
-    */
+    //AudioSource sfxCastingLoop;
+
+    void StartCasting()
+    {
+        ResetProgress();
+
+        Perform(abilitySO.castingAnim);
+        Anim1_WindUp();
+
+        EventM.OnCasting(owner, abilitySO);
+
+        castingEvents.CastingStart?.Invoke($"{abilitySO.Name} Casting Start");
+        //sfxCastingLoop = AudioM.LoopSFX(owner, SFXManager.Current.sfxCastingLoop);
+    }
+
+    // Progress ============================================================================
+
+    public float progress {get; private set;}
+    
+    void ResetProgress()
+    {
+        progress=0;
+
+        EventM.OnUIBarUpdate(gameObject, progress, abilitySO.castingTime);
+    }
+
+    void UpdateProgress()
+    {
+        if(!IsPerforming()) return;
+
+        progress += Time.deltaTime;
+
+        progress = Mathf.Clamp(progress, 0, abilitySO.castingTime);
+
+        EventM.OnUIBarUpdate(gameObject, progress, abilitySO.castingTime);
+
+        if(IsProgressDone())
+        {
+            StopCasting();
+            
+            EventM.OnCast(owner, currentSlot);
+        }
+    }
+
+    bool IsProgressDone() => progress >= abilitySO.castingTime;
+
+    // ============================================================================
+    
+    void StopCasting()
+    {
+        ResetProgress();
+
+        CancelAnim();
+
+        castingEvents.CastingStop?.Invoke($"{abilitySO.Name} Casting Stop");
+        //if(sfxCastingLoop) AudioM.StopLoop(sfxCastingLoop);
+    }
+    
+    // Cancel ============================================================================
+    
+    void OnCancelCast(GameObject who)
+    {
+        if(who!=owner) return;
+
+        if(!IsPerforming()) return;
+
+        StopCasting();
+        
+        EventM.OnCastCancelled(owner);
+    }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct CastingEvents
+    {
+        public UnityEvent<string> CastingStart;
+        public UnityEvent<string> CastingStop;
+    }
+    [Space]
+    public CastingEvents castingEvents;
 }

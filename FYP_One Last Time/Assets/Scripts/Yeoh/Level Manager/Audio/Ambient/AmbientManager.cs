@@ -2,149 +2,99 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmbientManager : MonoBehaviour
+public class AmbientManager : RandomUpdate
 {
     AudioSource ambSource;
-    float defVolume;
+    float defaultVolume;
 
     void Awake()
     {
         ambSource = GetComponent<AudioSource>();
-        defVolume = ambSource.volume;
-        ambSource.loop=false;
+        defaultVolume = ambSource.volume;
+        ambSource.loop=false; // no loop because need to detect if done to change clip
     }
 
-    [Header("Ambient")]
-    public bool ambEnabled=true;
-    public AudioClip[] ambLong;
+    // ============================================================================
 
-    List<AudioClip> currentClips = new List<AudioClip>();
+    [Header("Ambient Manager")]
+    public bool ambLoopEnabled=true;
+    public AudioClip[] defaultLoopClips;
 
     void Start()
     {
-        if(HasClips(ambLong)) SwapAmb(ambLong);
+        if(HasClips(defaultLoopClips))
+            SwapAmbLoop(defaultLoopClips);
     }
 
-    void RestartAmb()
-    {
-        if(currentClips.Count>0)
-        {
-            ambSource.volume = defVolume;
-            ambSource.clip = currentClips[Random.Range(0, currentClips.Count)];
-            ambSource.Play();
-        }
-    }
+    // ============================================================================
 
-    public void SwapAmb(AudioClip[] clips)
+    List<AudioClip> currentLoopClips = new();
+
+    public void SwapAmbLoop(AudioClip[] clips)
     {
-        if(currentClips.Count>0)
-        {
-            currentClips.Clear();
-        }
+        if(currentLoopClips.Count>0)
+            currentLoopClips.Clear();
         
-        if(HasClips(clips))
-        {
-            currentClips.AddRange(ambLong);
-            RestartAmb();
-        }
+        if(!HasClips(clips)) return;
+
+        currentLoopClips.AddRange(clips);
+        RestartAmbLoop();
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    void RestartAmbLoop()
+    {
+        if(currentLoopClips.Count<=0)
+        {
+            ambSource.Stop();
+            return;
+        }
+
+        ambSource.volume = defaultVolume;
+        ambSource.clip = currentLoopClips[Random.Range(0, currentLoopClips.Count)];
+        ambSource.Play();
+    }
+
+    // ============================================================================
 
     void Update()
     {
-        if(ambEnabled) UpdateShuffleMusic();
+        if(!ambLoopEnabled) return;
+        if(ambSource.isPlaying) return;
+
+        RestartAmbLoop();
     }
 
-    void UpdateShuffleMusic()
+    // ============================================================================
+
+    public void ChangeAmbLoop(AudioClip[] clips, float fadeOutTime=3)
     {
-        if(!ambSource.isPlaying) RestartAmb();
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public void ChangeAmb(AudioClip[] clips, float fadeOutTime=3)
-    {
-        AudioManager.Current.TweenVolume(ambSource, 0, fadeOutTime);
-
-        if(changingAmbRt!=null) StopCoroutine(changingAmbRt);
-        changingAmbRt = StartCoroutine(ChangingAmb(clips, fadeOutTime));
+        if(changingAmb_crt!=null) StopCoroutine(changingAmb_crt);
+        changingAmb_crt = StartCoroutine(ChangingAmbLoop(clips, fadeOutTime));
     }
     
-    Coroutine changingAmbRt;
-    IEnumerator ChangingAmb(AudioClip[] clips, float fadeOutTime)
+    Coroutine changingAmb_crt;
+
+    IEnumerator ChangingAmbLoop(AudioClip[] clips, float fadeOutTime)
     {
-        if(fadeOutTime>0) yield return new WaitForSecondsRealtime(fadeOutTime);
-        if(HasClips(clips)) SwapAmb(clips);
+        AudioManager.Current.TweenVolume(ambSource, 0, fadeOutTime);
+        yield return new WaitForSecondsRealtime(fadeOutTime);
+        if(HasClips(clips)) SwapAmbLoop(clips);
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // ============================================================================
 
-    public void PlayAmb(AudioClip[] clips)
+    public void ToggleAmbLoop(bool toggle, float fadeTime=3)
     {
-        ChangeAmb(clips, 0);
+        ambLoopEnabled = toggle;
+
+        AudioClip[] clips = toggle ? defaultLoopClips : null;
+
+        ChangeAmbLoop(clips, fadeTime);
     }
 
-    public void StopAmb(float fadeOutTime=3)
-    {
-        ChangeAmb(null, fadeOutTime);
+    public void ToggleAmbShort(bool toggle) => enableSlowUpdate=toggle;
 
-        if(currentClips.Count>0)
-        {
-            currentClips.Clear();
-        }
-    }
+    // ============================================================================
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
-
-    [Header("Short Ambient")]
-    public bool ambShortEnabled=true;
-    public AudioClip[] ambShort;
-    public Vector2 ambShortInterval = new Vector2(2, 10);
-
-    void OnEnable()
-    {
-        StartShortAmb();
-    }
-
-    public void StartShortAmb()
-    {
-        randAmbRt = StartCoroutine(RandAmb());
-    }
-
-    Coroutine randAmbRt;
-    IEnumerator RandAmb()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(Random.Range(ambShortInterval.x, ambShortInterval.y));
-
-            if(ambShortEnabled)
-            {
-                for(int i=0; i<Random.Range(1, 3); i++)
-                {   
-                    PlayShortAmb(ambShort);
-                }
-            }
-        }
-    }
-
-    public void PlayShortAmb(AudioClip[] clips)
-    {
-        if(clips.Length==0) return;
-        
-        AudioManager.Current.PlaySFX(clips, transform.position, false, true, Random.Range(-1f, 1f), Random.Range(.1f, 1));
-    }
-
-    public void StopShortAmb()
-    {
-        if(randAmbRt!=null) StopCoroutine(randAmbRt);
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public bool HasClips(AudioClip[] clips)
-    {
-        return clips!=null && clips.Length>0;
-    }
+    public bool HasClips(AudioClip[] clips) => clips!=null && clips.Length>0;
 }
