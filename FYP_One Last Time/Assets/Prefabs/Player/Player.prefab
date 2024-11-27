@@ -925,6 +925,18 @@ MonoBehaviour:
             m_StringArgument: Impact
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 3796256092420723281}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls: []
@@ -983,6 +995,18 @@ MonoBehaviour:
   - prefabName: Impact
     randomPrefabs:
     - {fileID: 5367450259600531064, guid: 3d0121f66cdc1fd459d956fc9062aa6a, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 123463650881099154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  - prefabName: Shockwave
+    randomPrefabs:
+    - {fileID: 8725716151169460468, guid: 7a080ea5473398e4fa98100efd91c902, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 123463650881099154}
     posOffset: {x: 0, y: 0, z: 0}
@@ -3855,6 +3879,7 @@ MonoBehaviour:
   ground: {fileID: 773448853722404963}
   rb: {fileID: 1642459170912960868}
   allowWallCling: 1
+  minYVelocityToCling: 10
   isClinging: 0
   instantBrake: 0
   wallSlideSpeed: -2.5
