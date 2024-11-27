@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
     InputAction pullVines;
     InputAction reloadScene;
     InputAction mainMenuScene;
+    InputAction pause;
 
     void SetupInputActions()
     {
@@ -49,6 +50,7 @@ public class InputManager : MonoBehaviour
         pullVines = playerInput.actions["Pull Vines"];
         reloadScene = playerInput.actions["Reload Scene"];
         mainMenuScene = playerInput.actions["MainMenu Scene"];
+        pause = playerInput.actions["Pause"];
     }
 
     // ============================================================================
@@ -66,6 +68,7 @@ public class InputManager : MonoBehaviour
     public bool pullVinesKeyDown {get; private set;}
     public bool reloadSceneKeyDown {get; private set;}
     public bool mainMenuSceneKeyDown {get; private set;}
+    public bool pauseKeyDown {get; private set;}
 
     void Update()
     {
@@ -82,5 +85,6 @@ public class InputManager : MonoBehaviour
         pullVinesKeyDown = pullVines.WasPressedThisFrame();
         reloadSceneKeyDown = reloadScene.WasPressedThisFrame();
         mainMenuSceneKeyDown = mainMenuScene.WasPressedThisFrame();
+        pauseKeyDown = pause.WasPressedThisFrame();
     }
 }

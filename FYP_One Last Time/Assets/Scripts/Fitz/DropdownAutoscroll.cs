@@ -70,10 +70,12 @@ public class DropdownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointerE
             {
                 m_ScrollRect.normalizedPosition = new Vector2(0, 1 - (selectedIndex / ((float)m_Selectables.Count - 1)));
                 m_NextScrollPosition = m_ScrollRect.normalizedPosition;
+                Debug.Log("QuickScroll true, next scroll pos: " + m_NextScrollPosition);
             }
             else
             {
                 m_NextScrollPosition = new Vector2(0, 1 - (selectedIndex / ((float)m_Selectables.Count - 1)));
+                Debug.Log("QuickScroll false, next scroll pos: " + m_NextScrollPosition);
             }
         }
     }

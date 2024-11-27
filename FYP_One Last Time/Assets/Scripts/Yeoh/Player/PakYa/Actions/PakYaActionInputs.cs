@@ -18,6 +18,7 @@ public class PakYaActionInputs : MonoBehaviour
 
     void Update()
     {
+        if(Time.timeScale == 0f) return;
         CheckMove();
 
         if(!pilot.IsPlayer()) return;
