@@ -38,22 +38,26 @@ public class Settings : MonoBehaviour
         DropdownAutoscroll autoScroll = resolutionDropdown.transform.Find("Template").AddComponent<DropdownAutoscroll>();
     }
 
+    // ==================== Graphics Quality ========================
     public void SetQuality (int qualityID)
     {
         QualitySettings.SetQualityLevel(qualityID);
     }
 
+    // ==================== Screen Resolution ========================
     public void SetResolution (int resolutionID)
     {
         Resolution resolution = resolutions[resolutionID];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
+    // ==================== Set Fullscreen ========================
     public void SetFullScreen (bool fullScreen)
     {
         Screen.fullScreen = fullScreen;
     }
 
+    // ==================== Audio Stuff ========================
     public void SetMasterVolume (float volume)
     {
         mixer.SetFloat("masterVolume", volume);
@@ -67,5 +71,11 @@ public class Settings : MonoBehaviour
     public void SetSFXVolume (float volume)
     {
         mixer.SetFloat("sfxVolume", volume);
+    }
+
+    // ==================== Pause ========================
+    public void TogglePause(bool toggle)
+    {
+        Time.timeScale = toggle ? 0f : 1f;
     }
 }
