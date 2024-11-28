@@ -70,6 +70,7 @@ public class WallCling : MonoBehaviour
             {
                 isClinging=true;
                 ToggleCling(true);
+                events.OnCling?.Invoke();
             }
         }
         else
@@ -78,6 +79,7 @@ public class WallCling : MonoBehaviour
             {
                 isClinging=false;
                 ToggleCling(false);
+                events.OnUncling?.Invoke();
             }
         }
     }
@@ -89,7 +91,7 @@ public class WallCling : MonoBehaviour
         if(toggle && instantBrake)
         rb.velocity = new(rb.velocity.x, 0, rb.velocity.z);
 
-        wallClingEvents.OnToggleCling?.Invoke(toggle);
+        events.OnToggleCling?.Invoke(toggle);
     }
 
     // ============================================================================
@@ -121,10 +123,12 @@ public class WallCling : MonoBehaviour
     // ============================================================================
 
     [System.Serializable]
-    public struct WallClingEvents
+    public struct Events
     {
         public UnityEvent<bool> OnToggleCling;
+        public UnityEvent OnCling;
+        public UnityEvent OnUncling;
     }
     [Space]
-    public WallClingEvents wallClingEvents;
+    public Events events;
 }
