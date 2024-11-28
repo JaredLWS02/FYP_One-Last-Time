@@ -741,6 +741,7 @@ GameObject:
   - component: {fileID: 8226747434385709057}
   - component: {fileID: 4562433228847125469}
   - component: {fileID: 7234451803491322248}
+  - component: {fileID: 5595787968962781759}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -807,6 +808,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5595787968962781759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106866762967020803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa76d7099fbdba040af825d9772629a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animPos: 0
+  inPos: {x: 0, y: 0, z: 0}
+  outPos: {x: 0, y: 0, z: 0}
+  animRot: 0
+  inRot: {x: 0, y: 0, z: 0}
+  outRot: {x: 0, y: 0, z: 0}
+  animScale: 1
+  inScale: {x: 0, y: 0, z: 0}
+  outScale: {x: 0, y: 0, z: 0}
+  img: {fileID: 0}
+  sr: {fileID: 0}
+  animAlpha: 0
+  inAlpha: 0
+  outAlpha: 0
+  playOnEnable: 1
+  playOnEnableAnimTime: 0.5
+  playOnEnableDelay: 0
 --- !u!1 &1239106722535773225
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +1019,7 @@ GameObject:
   - component: {fileID: 7874548244429601621}
   - component: {fileID: 7751262217942648643}
   - component: {fileID: 8690497321150622033}
+  - component: {fileID: 3475067372092174387}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -1053,6 +1084,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3475067372092174387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457076767094664527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa76d7099fbdba040af825d9772629a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animPos: 0
+  inPos: {x: 0, y: 0, z: 0}
+  outPos: {x: 0, y: 0, z: 0}
+  animRot: 0
+  inRot: {x: 0, y: 0, z: 0}
+  outRot: {x: 0, y: 0, z: 0}
+  animScale: 0
+  inScale: {x: 0, y: 0, z: 0}
+  outScale: {x: 0, y: 0, z: 0}
+  img: {fileID: 8690497321150622033}
+  sr: {fileID: 0}
+  animAlpha: 1
+  inAlpha: 0
+  outAlpha: 0
+  playOnEnable: 1
+  playOnEnableAnimTime: 0.5
+  playOnEnableDelay: 0
 --- !u!1 &1465443859272277316
 GameObject:
   m_ObjectHideFlags: 0
@@ -6823,7 +6883,6 @@ GameObject:
   - component: {fileID: 6060820157478457974}
   - component: {fileID: 3900291365045355302}
   - component: {fileID: 530927204724630276}
-  - component: {fileID: 2575907204700252733}
   m_Layer: 0
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -7058,35 +7117,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
---- !u!114 &2575907204700252733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8869639685822340001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa76d7099fbdba040af825d9772629a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animPos: 0
-  inPos: {x: 0, y: 0, z: 0}
-  outPos: {x: 0, y: 0, z: 0}
-  animRot: 0
-  inRot: {x: 0, y: 0, z: 0}
-  outRot: {x: 0, y: 0, z: 0}
-  animScale: 1
-  inScale: {x: 0, y: 0, z: 0}
-  outScale: {x: 0, y: 0, z: 0}
-  img: {fileID: 0}
-  sr: {fileID: 0}
-  animAlpha: 0
-  inAlpha: 0
-  outAlpha: 0
-  playOnEnable: 1
-  playOnEnableAnimTime: 0.5
-  playOnEnableDelay: 0
 --- !u!1 &8947550597687697092
 GameObject:
   m_ObjectHideFlags: 0
