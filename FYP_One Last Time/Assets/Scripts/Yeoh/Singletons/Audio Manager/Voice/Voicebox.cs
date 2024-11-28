@@ -39,7 +39,7 @@ public class Voicebox : RandomUpdate
 
     public void Play() => currentVoice.audioSO.Play(voiceSource);
 
-    public void Play(string voice_name)
+    public void PlayName(string voice_name)
     {
         GetVoice(voice_name);
         Play();

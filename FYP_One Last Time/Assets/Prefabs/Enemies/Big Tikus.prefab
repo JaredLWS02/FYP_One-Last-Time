@@ -1629,7 +1629,19 @@ MonoBehaviour:
   uEvents:
     WindUp:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1462071564817671206}
+          m_TargetAssemblyTypeName: Voicebox, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Attack
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseStart:
       m_PersistentCalls:
         m_Calls: []
@@ -1920,6 +1932,7 @@ Transform:
   - {fileID: 7959029595139826251}
   - {fileID: 168791646275403679}
   - {fileID: 7778149499531891223}
+  - {fileID: 5796840095932782193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!54 &8915720888079556032
@@ -1982,16 +1995,18 @@ MonoBehaviour:
     SlowUpdate:
       m_PersistentCalls:
         m_Calls: []
-  owner: {fileID: 5261146206814944013}
   sprites:
   - {fileID: 3716319433280079349}
-  echoPosOffset: {x: 0, y: 0, z: 0.1}
-  echoLifetime: 0.25
+  localPos: {x: 0, y: 0, z: 0.1}
+  localAngles: {x: 0, y: 0, z: 0}
+  localScale: {x: 1, y: 1, z: 1}
+  minLifetime: 0.1
+  maxLifetime: 0.25
   velM: {fileID: 3802360353018245933}
   minSpeed: 15
   maxSpeed: 25
-  echoAlphaMin: 0.1
-  echoAlphaMax: 0.75
+  minAlpha: 0.1
+  maxAlpha: 0.5
 --- !u!114 &3802360353018245933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2856,6 +2871,7 @@ GameObject:
   - component: {fileID: 4655900734958021284}
   - component: {fileID: 3349807304327463440}
   - component: {fileID: 4679031899667845874}
+  - component: {fileID: 7022474044783880227}
   - component: {fileID: 5015490617387641940}
   m_Layer: 6
   m_Name: Hurt
@@ -2948,9 +2964,45 @@ MonoBehaviour:
             m_StringArgument: Blood
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 7022474044783880227}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: FleshHit
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDeath:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7022474044783880227}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: FleshKill
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7022474044783880227}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Death
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1841199395382213548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3000,7 +3052,19 @@ MonoBehaviour:
   poiseEvents:
     OnPoiseBreak:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1462071564817671206}
+          m_TargetAssemblyTypeName: Voicebox, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Hurt
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &8086872793515778956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3124,6 +3188,66 @@ MonoBehaviour:
     OnDisable:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &7022474044783880227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460407787441312423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: FleshHit
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 231061859104957208}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 13df9d88431bfe24c81a3edd6b202eb9, type: 2}
+  - prefabName: FleshKill
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 231061859104957208}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 5a76af51fa4b7174a8237bb3e9559c87, type: 2}
+  - prefabName: Death
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 5796840095932782193}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 97b3bb0294073f54d81114dc77633614, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &5015490617387641940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3192,6 +3316,13 @@ MonoBehaviour:
   anim: {fileID: 7786861728038490430}
   groundedBoolName: IsGrounded
   slope: {fileID: 3056104320120214010}
+  events:
+    OnLandGround:
+      m_PersistentCalls:
+        m_Calls: []
+    OnLeaveGround:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &5128331210462455546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3493,4 +3624,128 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
     type: 3}
   m_PrefabInstance: {fileID: 5174078680358092557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8528933065717554639
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6415192565362938597}
+    m_Modifications:
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[0].audioSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c899eba2778ec7742a9da90b7b1606b5,
+        type: 2}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[1].audioSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c34120ff0700e064d85cb09ff1b5edd2,
+        type: 2}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[2].audioSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 97b3bb0294073f54d81114dc77633614,
+        type: 2}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[0].voiceName
+      value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[1].voiceName
+      value: Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[2].voiceName
+      value: Hurt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7703407753706943717, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_Name
+      value: Voicebox
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 276b51b766018c74cb214da150dba723, type: 3}
+--- !u!114 &1462071564817671206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+    type: 3}
+  m_PrefabInstance: {fileID: 8528933065717554639}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86147d7f838765b41ae75e4c20424f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &5796840095932782193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+    type: 3}
+  m_PrefabInstance: {fileID: 8528933065717554639}
   m_PrefabAsset: {fileID: 0}
