@@ -752,7 +752,7 @@ MonoBehaviour:
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
   radius: 0.5
-  height: 1
+  height: 0.25
 --- !u!1 &2756698445312053699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4087,17 +4087,19 @@ MonoBehaviour:
     SlowUpdate:
       m_PersistentCalls:
         m_Calls: []
-  owner: {fileID: 8987163089559660572}
   sprites:
   - {fileID: 4466723156777370603}
   - {fileID: 3256731903790810545}
-  echoPosOffset: {x: 0, y: 0, z: 0.1}
-  echoLifetime: 0.25
+  localPos: {x: 0, y: 0, z: 0.1}
+  localAngles: {x: 0, y: 0, z: 0}
+  localScale: {x: 1, y: 1, z: 1}
+  minLifetime: 0.1
+  maxLifetime: 0.25
   velM: {fileID: 4615221013399892284}
   minSpeed: 15
   maxSpeed: 25
-  echoAlphaMin: 0.1
-  echoAlphaMax: 0.75
+  minAlpha: 0.1
+  maxAlpha: 0.5
 --- !u!114 &4615221013399892284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4111,6 +4113,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
+  velocity: {x: 0, y: 0, z: 0}
+  velocityMagnitude: 0
+  velocityDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &1139876886090150564
 MonoBehaviour:
   m_ObjectHideFlags: 0

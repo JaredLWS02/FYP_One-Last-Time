@@ -5,14 +5,16 @@ using UnityEngine;
 public class SpriteEcho : SlowUpdate
 {
     [Header("SpriteEcho")]
-    public GameObject owner;
     public List<SpriteRenderer> sprites;
 
     // ============================================================================
     
     [Header("Echo")]
-    public Vector3 echoPosOffset = new(0,0,.1f);
-    public float echoLifetime=.25f;
+    public Vector3 localPos = new(0,0,.1f);
+    public Vector3 localAngles = new(0,0,0);
+    public Vector3 localScale = new(1,1,1);
+    public float minLifetime=.1f;
+    public float maxLifetime=.25f;
 
     // ============================================================================
     
@@ -39,9 +41,14 @@ public class SpriteEcho : SlowUpdate
         GameObject clone = new("Echo");
         clone.hideFlags = HideFlags.HideInHierarchy;
 
-        clone.transform.position = sprite_tr.position + echoPosOffset;
-        clone.transform.localScale = Vector3.Scale(sprite_tr.localScale, owner.transform.localScale);
-        clone.transform.rotation = sprite_tr.rotation;
+        // temp parent to match its local transforms
+        clone.transform.parent = sprite_tr;
+
+        clone.transform.localScale = localScale;
+        clone.transform.localEulerAngles = localAngles;
+        clone.transform.localPosition = localPos;
+
+        clone.transform.parent = null;
 
         return clone;
     }
@@ -54,7 +61,7 @@ public class SpriteEcho : SlowUpdate
         sr.material = sr_source.material;
 
         Color color = sr_source.color;
-        color.a = echoCurrentAlpha;
+        color.a = currentAlpha;
         sr.color = color;
 
         sr.flipX = sr_source.flipX;
@@ -65,9 +72,12 @@ public class SpriteEcho : SlowUpdate
 
     void AddFadeAnim(GameObject who)
     {
+        float alpha01 = GetValue01(currentAlpha, minAlpha, maxAlpha);
+        float lifetime = Mathf.Lerp(minLifetime, maxLifetime, alpha01);
+
         FadeAnim fade = who.AddComponent<FadeAnim>();
-        fade.TweenAlpha(0, echoLifetime);
-        Destroy(who, echoLifetime);
+        fade.TweenAlpha(0, lifetime);
+        Destroy(who, lifetime);
     }
 
     // ============================================================================
@@ -78,19 +88,30 @@ public class SpriteEcho : SlowUpdate
     public float maxSpeed=25;
 
     [Header("Opacity")]
-    public float echoAlphaMin=.1f;
-    public float echoAlphaMax=.75f;
-    float echoCurrentAlpha;
+    public float minAlpha=.1f;
+    public float maxAlpha=.5f;
+    float currentAlpha;
 
     public override void OnFixedUpdate_su()
     {
         float speed = velM.velocityMagnitude;
+        float speed01 = GetValue01(speed, minSpeed, maxSpeed);
+        currentAlpha = Mathf.Lerp(minAlpha, maxAlpha, speed01);
+    }
 
-        float speed_range = maxSpeed - minSpeed;
-        float speed_offset = speed - minSpeed;
-        float speed01 = speed_offset / speed_range;
-        speed01 = Mathf.Clamp01(speed01);
+    // ============================================================================
 
-        echoCurrentAlpha = Mathf.Lerp(echoAlphaMin, echoAlphaMax, speed01);
+    float GetValue01(float current, float min, float max)
+    {
+        if(current <= min) return 0;
+        if(current >= max) return 1;
+        
+        float range = max - min;
+        if(range<=0) return 0;
+
+        float offset = current - min;
+        float value01 = offset / range;
+
+        return Mathf.Clamp01(value01);
     }
 }

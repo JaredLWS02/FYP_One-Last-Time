@@ -78,12 +78,12 @@ public class RangeAssist : MonoBehaviour
 
         if (owner.transform.position == to) return;
         
-        Vector3 move_vector = to - owner.transform.position;
+        Vector3 move_vector = to - ray.origin.position;
         Vector3 move_direction = move_vector.normalized;
         float move_distance = move_vector.magnitude;
 
         // if got obstacles in the way, move to hit.point instead
-        if(Physics.Raycast(owner.transform.position, move_direction, out RaycastHit hit, move_distance, obstacleLayers, QueryTriggerInteraction.Ignore))
+        if(Physics.Raycast(ray.origin.position, move_direction, out RaycastHit hit, move_distance, obstacleLayers, QueryTriggerInteraction.Ignore))
         {
             to = hit.point;
         }

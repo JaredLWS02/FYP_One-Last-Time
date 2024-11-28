@@ -1329,6 +1329,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8479933029031988223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3706,6 +3713,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &444969501447763386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4948,7 +4962,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.40392157, g: 1, b: 0.3254902, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -5547,6 +5561,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7031737285888619821
 GameObject:
   m_ObjectHideFlags: 0
@@ -6070,6 +6091,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7611014380859892144
 GameObject:
   m_ObjectHideFlags: 0
@@ -6794,6 +6822,7 @@ GameObject:
   - component: {fileID: 2344152068951455360}
   - component: {fileID: 6060820157478457974}
   - component: {fileID: 3900291365045355302}
+  - component: {fileID: 530927204724630276}
   m_Layer: 0
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -6978,6 +7007,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &530927204724630276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869639685822340001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c21b29337088d4999df09dc02e894e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 530927204724630276}
+          m_TargetAssemblyTypeName: MouseLockToggler, Assembly-CSharp
+          m_MethodName: ToggleMouseLock
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 530927204724630276}
+          m_TargetAssemblyTypeName: MouseLockToggler, Assembly-CSharp
+          m_MethodName: ToggleMouseLock
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &8947550597687697092
 GameObject:
   m_ObjectHideFlags: 0
@@ -10595,6 +10674,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &6727501887249110907
 MonoBehaviour:
   m_ObjectHideFlags: 0
