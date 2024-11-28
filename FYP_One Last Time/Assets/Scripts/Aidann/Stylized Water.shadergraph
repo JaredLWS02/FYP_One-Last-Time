@@ -42,6 +42,15 @@
     "m_CategoryData": [
         {
             "m_Id": "fca82a6d95ae4758ae645218135017fd"
+        },
+        {
+            "m_Id": "75d9cf2cd061490da67865e3e11e6862"
+        },
+        {
+            "m_Id": "6e05035354c445d18d2f9ec5449cf192"
+        },
+        {
+            "m_Id": "82caa093241c459ab515fb4c940e9e3a"
         }
     ],
     "m_Nodes": [
@@ -945,9 +954,9 @@
     "m_Hidden": false,
     "m_Value": {
         "r": 0.0,
-        "g": 0.3598189353942871,
-        "b": 1.0,
-        "a": 1.0
+        "g": 1.0,
+        "b": 0.9529411792755127,
+        "a": 0.19607843458652497
     },
     "isMainColor": false,
     "m_ColorMode": 0
@@ -2431,6 +2440,24 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "6e05035354c445d18d2f9ec5449cf192",
+    "m_Name": "Refraction Variables",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "9bd40d3f33624c50b8a710bb4342a2ce"
+        },
+        {
+            "m_Id": "2156f7eb245449bc9ab863fca96958e1"
+        },
+        {
+            "m_Id": "f34ab56dbe7f42b5bdb0a88245477c71"
+        }
+    ]
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.GroupData",
     "m_ObjectId": "6e90ec0af1f94cccac541b11b66bb958",
     "m_Title": "Water Colour",
@@ -2484,6 +2511,24 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "75d9cf2cd061490da67865e3e11e6862",
+    "m_Name": "Water Variables",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "14d3a3c4b1284bd883f46ae7080791f4"
+        },
+        {
+            "m_Id": "ae7b74dda6374d2dabe06a2aa5798353"
+        },
+        {
+            "m_Id": "117df0fb59ec4268a526e25c4eed5505"
+        }
+    ]
 }
 
 {
@@ -2857,6 +2902,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "82caa093241c459ab515fb4c940e9e3a",
+    "m_Name": "Foam Variables",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "a9439f75e9e1429f9d95413f3938cbb8"
+        },
+        {
+            "m_Id": "f0f52154b75b41a480c2920a89f1d8cd"
+        },
+        {
+            "m_Id": "f98de449652e4bd78a3ec8c0c19af742"
+        },
+        {
+            "m_Id": "27baea38d3d045b08336a25056fd7c15"
+        },
+        {
+            "m_Id": "f5a5a8983b744ea6a2bc984a7d7dc913"
+        }
+    ]
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.NormalMaterialSlot",
     "m_ObjectId": "857a6885524945b8a923707ebbdb9c96",
     "m_Id": 0,
@@ -3193,10 +3262,10 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.0,
-        "g": 0.911196231842041,
+        "r": 0.7882353067398071,
+        "g": 0.9725490212440491,
         "b": 1.0,
-        "a": 1.0
+        "a": 0.09803921729326248
     },
     "isMainColor": false,
     "m_ColorMode": 0
@@ -4082,7 +4151,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 1.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -4168,7 +4237,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 1.0,
+    "m_Value": 1.100000023841858,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -4205,41 +4274,7 @@
     "m_Type": "UnityEditor.ShaderGraph.CategoryData",
     "m_ObjectId": "fca82a6d95ae4758ae645218135017fd",
     "m_Name": "",
-    "m_ChildObjectList": [
-        {
-            "m_Id": "14d3a3c4b1284bd883f46ae7080791f4"
-        },
-        {
-            "m_Id": "ae7b74dda6374d2dabe06a2aa5798353"
-        },
-        {
-            "m_Id": "117df0fb59ec4268a526e25c4eed5505"
-        },
-        {
-            "m_Id": "9bd40d3f33624c50b8a710bb4342a2ce"
-        },
-        {
-            "m_Id": "2156f7eb245449bc9ab863fca96958e1"
-        },
-        {
-            "m_Id": "f34ab56dbe7f42b5bdb0a88245477c71"
-        },
-        {
-            "m_Id": "a9439f75e9e1429f9d95413f3938cbb8"
-        },
-        {
-            "m_Id": "f0f52154b75b41a480c2920a89f1d8cd"
-        },
-        {
-            "m_Id": "f98de449652e4bd78a3ec8c0c19af742"
-        },
-        {
-            "m_Id": "27baea38d3d045b08336a25056fd7c15"
-        },
-        {
-            "m_Id": "f5a5a8983b744ea6a2bc984a7d7dc913"
-        }
-    ]
+    "m_ChildObjectList": []
 }
 
 {
