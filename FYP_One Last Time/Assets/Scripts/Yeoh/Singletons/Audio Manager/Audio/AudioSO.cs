@@ -9,7 +9,8 @@ public class AudioSO : ScriptableObject
 {
     [SerializeField]
     List<AudioClip> randomClips = new();
-    public AudioClip GetRandomClip() => randomClips[Random.Range(0,randomClips.Count)];
+    public AudioClip GetRandomClip() => HasClips() ? randomClips[Random.Range(0,randomClips.Count)] : null;
+    public bool HasClips() => randomClips.Count>0;
 
     public AudioMixerGroup output;
 
