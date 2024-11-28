@@ -62,7 +62,7 @@ public class WallCling : MonoBehaviour
 
     void CheckIsClinging()
     {
-        bool clinging = !ground.IsGrounded() && IsMovingToWall() && rb.velocity.y<=minYVelocityToCling;
+        bool clinging = allowWallCling && !ground.IsGrounded() && IsMovingToWall() && rb.velocity.y<=minYVelocityToCling;
 
         if(clinging)
         {
@@ -115,7 +115,7 @@ public class WallCling : MonoBehaviour
 
     void SetAnimator()
     {
-        anim?.SetBool(clingingBoolName, isClinging);
+        anim?.SetBool(clingingBoolName, isClinging && allowWallCling);
     }
 
     // ============================================================================

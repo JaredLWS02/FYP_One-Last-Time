@@ -3787,6 +3787,38 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4279784677220219595, guid: 6a4c980ea1766fe4d8501c676b3fc0fc, type: 3}
+--- !u!1 &256133280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256133281}
+  m_Layer: 0
+  m_Name: Audio Triggers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &256133281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256133280}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 263888398}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &261203873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3978,6 +4010,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1420247596}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &263888397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 263888398}
+  m_Layer: 0
+  m_Name: Ambient
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &263888398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263888397}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1007883961}
+  - {fileID: 578071613}
+  m_Father: {fileID: 256133281}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &268307392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7666,6 +7731,118 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1583706029}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &578071612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 578071613}
+  - component: {fileID: 578071615}
+  - component: {fileID: 578071614}
+  m_Layer: 0
+  m_Name: Parking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &578071613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578071612}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 367.6, y: 47.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 263888398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &578071614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578071612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41700d3ac4978e54fb72bbe927a25627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crossfadeOutTime: 5
+  crossfadeWaitTime: 0
+  crossfadeInTime: 5
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &578071615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578071612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c2da22a7a364e4aa3ba3a2b74d7fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 578071613}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 8
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 578071614}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: CrossfadeToLayer
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Parking
+            m_BoolArgument: 0
+          m_CallState: 2
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  boxSize: {x: 5, y: 100, z: 50}
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
 --- !u!1 &579085138
 GameObject:
   m_ObjectHideFlags: 0
@@ -13061,6 +13238,118 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 380759895}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1007883960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007883961}
+  - component: {fileID: 1007883963}
+  - component: {fileID: 1007883962}
+  m_Layer: 0
+  m_Name: Forest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1007883961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007883960}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 361.1, y: 47.8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 263888398}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007883962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007883960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41700d3ac4978e54fb72bbe927a25627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crossfadeOutTime: 5
+  crossfadeWaitTime: 0
+  crossfadeInTime: 5
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1007883963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007883960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c2da22a7a364e4aa3ba3a2b74d7fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 1007883961}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 8
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1007883962}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: CrossfadeToLayer
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Forest
+            m_BoolArgument: 0
+          m_CallState: 2
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  boxSize: {x: 5, y: 100, z: 50}
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
 --- !u!4 &1008897414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5624085934768963061, guid: 371bcd3cc6bcf5741a68d3b39e9f9d3c,
@@ -32956,3 +33245,4 @@ SceneRoots:
   - {fileID: 1989084361}
   - {fileID: 1077574687}
   - {fileID: 786564967}
+  - {fileID: 256133281}

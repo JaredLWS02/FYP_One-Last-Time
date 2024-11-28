@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class AudioLayer
 {
-    public string layerName="Default";
+    public string layerName = "Silent";
     public AudioSO audioSO;
 
     [HideInInspector]

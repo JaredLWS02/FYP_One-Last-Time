@@ -44,46 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdf78918225b2d47b68798e9129a655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crossfadeOutTime: 0
+  crossfadeWaitTime: 0
+  crossfadeInTime: 1
   events:
     OnEnable:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeOutTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeWaitTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeInTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0.5
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 150205284295529548}
           m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
           m_MethodName: CrossfadeToLayer
@@ -93,7 +60,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Default
+            m_StringArgument: Silent
             m_BoolArgument: 0
           m_CallState: 2
     OnDisable:
@@ -143,46 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41700d3ac4978e54fb72bbe927a25627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crossfadeOutTime: 0
+  crossfadeWaitTime: 0
+  crossfadeInTime: 5
   events:
     OnEnable:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4256851700179553483}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeOutTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 4256851700179553483}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeWaitTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 4256851700179553483}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeInTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 2
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 4256851700179553483}
           m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
           m_MethodName: CrossfadeToLayer
@@ -472,7 +406,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Default
+            m_StringArgument: Silent
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1001 &3338021967153544469

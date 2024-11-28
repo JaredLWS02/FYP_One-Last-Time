@@ -80,6 +80,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioLayers:
+  - layerName: Silent
+    audioSO: {fileID: 0}
+    source: {fileID: 0}
+    defaultVolume: 1
   - layerName: Forest
     audioSO: {fileID: 11400000, guid: d7f4d6cf83fcd70408d2d8f074ecad31, type: 2}
     source: {fileID: 0}

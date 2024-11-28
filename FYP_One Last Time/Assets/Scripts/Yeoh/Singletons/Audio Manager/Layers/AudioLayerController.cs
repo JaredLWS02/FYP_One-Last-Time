@@ -38,9 +38,9 @@ public class AudioLayerController : MonoBehaviour
 
     // ============================================================================
 
-    float crossfadeOutTime=3;
-    float crossfadeWaitTime=1;
-    float crossfadeInTime=3;
+    public float crossfadeOutTime=3;
+    public float crossfadeWaitTime=1;
+    public float crossfadeInTime=3;
 
     public void SetCrossfadeOutTime(float t) => crossfadeOutTime = t;
     public void SetCrossfadeWaitTime(float t) => crossfadeWaitTime = t;
