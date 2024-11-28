@@ -32,6 +32,11 @@ public class UIButton : MonoBehaviour
         ScenesManager.Current.LoadNextScene();
     }
 
+    public void GoMainMenu()
+    {
+        ScenesManager.Current.LoadMainMenu();
+    }
+
     // ============================================================================
 
     [System.Serializable]
