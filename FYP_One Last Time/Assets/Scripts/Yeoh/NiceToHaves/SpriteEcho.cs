@@ -12,14 +12,14 @@ public class SpriteEcho : SlowUpdate
     
     [Header("Echo")]
     public Vector3 echoPosOffset = new(0,0,.1f);
-    public float echoLifetime=.2f;
+    public float echoLifetime=.25f;
 
     // ============================================================================
     
     public override void OnSlowUpdate()
     {
-        float speed = rb.velocity.magnitude;
-
+        float speed = velM.velocityMagnitude;
+        
         if(speed >= minSpeed)
             SpawnEchos();
     }
@@ -57,6 +57,9 @@ public class SpriteEcho : SlowUpdate
         color.a = echoCurrentAlpha;
         sr.color = color;
 
+        sr.flipX = sr_source.flipX;
+        sr.flipY = sr_source.flipY;
+
         sr.sortingOrder = sr_source.sortingOrder-2;
     }
 
@@ -70,18 +73,18 @@ public class SpriteEcho : SlowUpdate
     // ============================================================================
 
     [Header("Speed Check")]
-    public Rigidbody rb;
-    public float minSpeed=11;
-    public float maxSpeed=50;
+    public VelocityMeter velM;
+    public float minSpeed=15;
+    public float maxSpeed=25;
 
     [Header("Opacity")]
-    public float echoAlphaMin=0;
-    public float echoAlphaMax=.1f;
+    public float echoAlphaMin=.1f;
+    public float echoAlphaMax=.75f;
     float echoCurrentAlpha;
 
-    void FixedUpdate()
+    public override void OnFixedUpdate_su()
     {
-        float speed = rb.velocity.magnitude;
+        float speed = velM.velocityMagnitude;
 
         float speed_range = maxSpeed - minSpeed;
         float speed_offset = speed - minSpeed;

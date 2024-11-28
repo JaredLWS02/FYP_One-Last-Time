@@ -4001,6 +4001,7 @@ GameObject:
   - component: {fileID: 1642459170912960868}
   - component: {fileID: 4572757513184181502}
   - component: {fileID: 4667395710466492252}
+  - component: {fileID: 4615221013399892284}
   - component: {fileID: 1139876886090150564}
   m_Layer: 3
   m_Name: Player
@@ -4080,7 +4081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableSlowUpdate: 1
-  checkInterval: 0.1
+  checkInterval: 0.05
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
@@ -4091,12 +4092,25 @@ MonoBehaviour:
   - {fileID: 4466723156777370603}
   - {fileID: 3256731903790810545}
   echoPosOffset: {x: 0, y: 0, z: 0.1}
-  echoLifetime: 0.2
-  rb: {fileID: 1642459170912960868}
-  minSpeed: 11
-  maxSpeed: 50
-  echoAlphaMin: 0
-  echoAlphaMax: 0.1
+  echoLifetime: 0.25
+  velM: {fileID: 4615221013399892284}
+  minSpeed: 15
+  maxSpeed: 25
+  echoAlphaMin: 0.1
+  echoAlphaMax: 0.75
+--- !u!114 &4615221013399892284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa35f300255dfd4381049e0411b9943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
 --- !u!114 &1139876886090150564
 MonoBehaviour:
   m_ObjectHideFlags: 0
