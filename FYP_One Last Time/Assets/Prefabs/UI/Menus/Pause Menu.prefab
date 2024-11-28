@@ -6823,6 +6823,7 @@ GameObject:
   - component: {fileID: 6060820157478457974}
   - component: {fileID: 3900291365045355302}
   - component: {fileID: 530927204724630276}
+  - component: {fileID: 2575907204700252733}
   m_Layer: 0
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -7057,6 +7058,35 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+--- !u!114 &2575907204700252733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869639685822340001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa76d7099fbdba040af825d9772629a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animPos: 0
+  inPos: {x: 0, y: 0, z: 0}
+  outPos: {x: 0, y: 0, z: 0}
+  animRot: 0
+  inRot: {x: 0, y: 0, z: 0}
+  outRot: {x: 0, y: 0, z: 0}
+  animScale: 1
+  inScale: {x: 0, y: 0, z: 0}
+  outScale: {x: 0, y: 0, z: 0}
+  img: {fileID: 0}
+  sr: {fileID: 0}
+  animAlpha: 0
+  inAlpha: 0
+  outAlpha: 0
+  playOnEnable: 1
+  playOnEnableAnimTime: 0.5
+  playOnEnableDelay: 0
 --- !u!1 &8947550597687697092
 GameObject:
   m_ObjectHideFlags: 0
