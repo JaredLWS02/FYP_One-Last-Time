@@ -147,7 +147,7 @@ public class AudioLayerManager : MonoBehaviour
     {
         AudioM.TweenVolume(audioLayer.source, 0, outTime);
 
-        if(outTime>0) yield return new WaitForSecondsRealtime(outTime);
+        yield return new WaitForSecondsRealtime(outTime);
 
         audioLayer.audioSO = newSO;
 
@@ -174,7 +174,7 @@ public class AudioLayerManager : MonoBehaviour
 
         SetCurrentLayer(layer_name);
 
-        if(waitTime>0) yield return new WaitForSecondsRealtime(waitTime);
+        yield return new WaitForSecondsRealtime(waitTime);
 
         AudioM.TweenVolume(currentLayer.source, currentLayer.defaultVolume, inTime);
     }

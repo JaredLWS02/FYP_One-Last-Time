@@ -6,7 +6,7 @@ public class MusicController : AudioLayerController
 {
     MusicManager MusicM;
 
-    void OnEnable()
+    protected override void OnBaseEnable()
     {
         MusicM = MusicManager.Current;
         layerM = MusicM.layerM;

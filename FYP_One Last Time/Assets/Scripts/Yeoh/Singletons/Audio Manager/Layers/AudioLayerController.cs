@@ -9,8 +9,12 @@ public class AudioLayerController : MonoBehaviour
 
     void OnEnable()
     {
+        OnBaseEnable();
+
         events.OnEnable?.Invoke();
     }
+
+    protected virtual void OnBaseEnable(){}
 
     void OnDisable() => events.OnDisable?.Invoke();
 

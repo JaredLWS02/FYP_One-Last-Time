@@ -6,7 +6,7 @@ public class AmbientController : AudioLayerController
 {
     AmbientManager AmbM;
 
-    void OnEnable()
+    protected override void OnBaseEnable()
     {
         AmbM = AmbientManager.Current;
         layerM = AmbM.layerM;

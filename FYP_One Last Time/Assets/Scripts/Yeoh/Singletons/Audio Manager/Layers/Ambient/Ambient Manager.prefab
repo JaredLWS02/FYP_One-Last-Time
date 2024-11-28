@@ -80,8 +80,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioLayers:
-  - layerName: Default
-    audioSO: {fileID: 0}
+  - layerName: Forest
+    audioSO: {fileID: 11400000, guid: d7f4d6cf83fcd70408d2d8f074ecad31, type: 2}
+    source: {fileID: 0}
+    defaultVolume: 1
+  - layerName: Parking
+    audioSO: {fileID: 11400000, guid: 4835683a2f8688c418315944890e3249, type: 2}
     source: {fileID: 0}
     defaultVolume: 1
   audioLayerPrefab: {fileID: 5419342769272204380, guid: 32596e8e1ce4f9d4d80be05fec392b24,
