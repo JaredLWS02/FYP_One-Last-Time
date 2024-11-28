@@ -6,11 +6,11 @@ using UnityEngine.Events;
 
 public class CameraController : MonoBehaviour
 {
-    CameraManager camM;
+    CameraManager CamM;
 
     void OnEnable()
     {
-        camM = CameraManager.Current;
+        CamM = CameraManager.Current;
 
         events.OnEnable?.Invoke();
     }
@@ -22,17 +22,17 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera selectedCam;
 
     public void SelectCameraName(string cam_name)
-        => selectedCam = camM.GetCameraByName(cam_name);
+        => selectedCam = CamM.GetCameraByName(cam_name);
 
     // ============================================================================
     
-    public void ChangeCameraToSelected() => camM.ChangeCamera(selectedCam);
+    public void ChangeCameraToSelected() => CamM.ChangeCamera(selectedCam);
 
     // ============================================================================
     
-    public void SetDefaultCameraToSelected() => camM.SetDefaultCamera(selectedCam);
+    public void SetDefaultCameraToSelected() => CamM.SetDefaultCamera(selectedCam);
 
-    public void ChangeCameraToDefault() => camM.ChangeCameraToDefault();
+    public void ChangeCameraToDefault() => CamM.ChangeCameraToDefault();
     
     // ============================================================================
 
@@ -45,17 +45,17 @@ public class CameraController : MonoBehaviour
     public void SetShakeAmp(float amp) => amplitud=amp;
     public void SetShakeFreq(float freq) => frequency=freq;
 
-    public void Shake() => camM.Shake(shakeTime, amplitud, frequency);
+    public void Shake() => CamM.Shake(shakeTime, amplitud, frequency);
 
     public void ToggleShake(bool toggle)
     {
         if(toggle)
-        camM.EnableShake(amplitud, frequency);
+        CamM.EnableShake(amplitud, frequency);
         else
-        camM.DisableShake();
+        CamM.DisableShake();
     }
 
-    public void CancelShake() => camM.CancelShake();
+    public void CancelShake() => CamM.CancelShake();
 
     // ============================================================================
     
@@ -64,13 +64,13 @@ public class CameraController : MonoBehaviour
     public float dutchIn=.025f;
     public float dutchOut=.1f;
 
-    public void ValveDutch() => camM.ValveDutch(angle, dutchIn, dutchOut);
+    public void ValveDutch() => CamM.ValveDutch(angle, dutchIn, dutchOut);
 
-    public void CancelValveDutch() => camM.CancelValveDutch();
+    public void CancelValveDutch() => CamM.CancelValveDutch();
     
     // ============================================================================
     
-    public void ToggleHaptics(bool toggle) => camM.haptics=toggle;
+    public void ToggleHaptics(bool toggle) => CamM.haptics=toggle;
     
     // ============================================================================
 

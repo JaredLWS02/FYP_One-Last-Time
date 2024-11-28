@@ -33,7 +33,7 @@ public class TimescaleManager : MonoBehaviour
 
     Tween timeTween;
     
-    public void TweenTime(float to, float time=.01f)
+    public void TweenTime(float to, float time=.2f)
     {
         if(to<0) to=0;
 
@@ -44,7 +44,7 @@ public class TimescaleManager : MonoBehaviour
 
     // ============================================================================
 
-    public void HitStop(float fadeIn=.01f, float wait=.005f, float fadeOut=.25f)
+    public void HitStop(float fadeIn=.1f, float wait=.01f, float fadeOut=.25f)
     {
         if(Time.timeScale<1) return;
 

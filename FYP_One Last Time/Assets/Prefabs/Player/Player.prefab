@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 304534908967816856}
   - component: {fileID: 1228213871802777503}
   - component: {fileID: 1700653241713930827}
+  - component: {fileID: 7715047191772894443}
+  - component: {fileID: 2984863347428207744}
   - component: {fileID: 8995939786167268597}
   m_Layer: 3
   m_Name: Hurt
@@ -149,6 +151,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2984863347428207744}
+          m_TargetAssemblyTypeName: TimescaleController, Assembly-CSharp
+          m_MethodName: HitStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1192961784150752979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +212,19 @@ MonoBehaviour:
   poiseEvents:
     OnPoiseBreak:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7715047191772894443}
+          m_TargetAssemblyTypeName: TimescaleController, Assembly-CSharp
+          m_MethodName: HitStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &5493900238891019743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +370,52 @@ MonoBehaviour:
   angle: 2
   dutchIn: 0.025
   dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &7715047191772894443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71763e629d88b7145ada7a9441ef8a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.2
+  hitstopIn_: 0.1
+  hitstopWait_: 0.01
+  hitstopOut: 0.25
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &2984863347428207744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71763e629d88b7145ada7a9441ef8a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.2
+  hitstopIn_: 0.1
+  hitstopWait_: 0.01
+  hitstopOut: 0.75
   events:
     OnEnable:
       m_PersistentCalls:

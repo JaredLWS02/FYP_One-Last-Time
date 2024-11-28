@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3835658456935814243}
   - component: {fileID: 8782049835207013567}
   - component: {fileID: -1220712888356604406}
+  - component: {fileID: 1366884479165541793}
   m_Layer: 7
   m_Name: Parry Stunbox
   m_TagString: Untagged
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCam: {fileID: 0}
   shakeTime: 0.2
-  amplitude: 1
+  amplitud: 2
   frequency: 2
   angle: 2
   dutchIn: 0.025
@@ -197,6 +198,41 @@ MonoBehaviour:
         - m_Target: {fileID: -1220712888356604406}
           m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
           m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1366884479165541793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71763e629d88b7145ada7a9441ef8a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.2
+  hitstopIn_: 0.1
+  hitstopWait_: 0.01
+  hitstopOut: 0.65
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1366884479165541793}
+          m_TargetAssemblyTypeName: TimescaleController, Assembly-CSharp
+          m_MethodName: HitStop
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
