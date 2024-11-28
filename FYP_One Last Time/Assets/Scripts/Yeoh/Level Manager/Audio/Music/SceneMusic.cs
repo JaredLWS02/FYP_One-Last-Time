@@ -13,6 +13,24 @@ public class MusicLayer
 
 public class SceneMusic : MonoBehaviour
 {
+    public static SceneMusic Current;
+
+    void Awake()
+    {
+        if(!Current) Current=this;
+    }
+
+    // ============================================================================
+
+    MusicManager MusicM;
+
+    void OnEnable()
+    {
+        MusicM = MusicManager.Current;
+    }
+
+    // ============================================================================
+
     public List<MusicLayer> musicLayers = new();
 
     void Reset() => musicLayers = new() { new MusicLayer() };
@@ -41,23 +59,32 @@ public class SceneMusic : MonoBehaviour
 
     void Start()
     {
-        for(int i=0; i<musicLayers.Count && i<MusicManager.Current.numberOfLayers; i++)
+        for(int i=0; i<musicLayers.Count && i<MusicM.numberOfLayers; i++)
         {
             //if(!MusicManager.Current.DoesLayerHaveSameClips(i, musicLayers[i].clips))
-            MusicManager.Current.ChangeMusic(i, musicLayers[i].clips, startFadeIn);
+            MusicM.ChangeMusic(i, musicLayers[i].clips, startFadeIn);
         }
 
         ChangeToDefaultLayer();
     }
 
     public int defaultLayerIndex=0;
-    public void ChangeToDefaultLayer() => MusicManager.Current.ChangeLayer(defaultLayerIndex);
+
+    public void SetDefaultLayer(int to) => defaultLayerIndex = to;
+
+    public void SetDefaultLayer(string layer_name)
+    {
+        GetLayerIndex(layer_name);
+        SetDefaultLayer(currentLayerIndex);
+    }
+
+    public void ChangeToDefaultLayer() => MusicM.ChangeLayer(defaultLayerIndex);
 
     // ============================================================================
 
     public void ChangeToLayerName(string layer_name)
     {
         GetLayerIndex(layer_name);
-        MusicManager.Current.ChangeLayer(currentLayerIndex);
+        MusicM.ChangeLayer(currentLayerIndex);
     }
 }
