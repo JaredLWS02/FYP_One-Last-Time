@@ -91,9 +91,12 @@ public class ScenesManager : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(.1f);
             
-            // FadeAudio(ambSource, true, GetTransitionLength(), 0);
-
-            if(quit) MusicManager.Current.ChangeMusic(MusicManager.Current.currentLayerIndex, null, GetTransitionLength());
+            if(quit)
+            {
+                AudioLayer currentLayer = MusicManager.Current.layerM.currentLayer;
+                if(currentLayer!=null)
+                AudioManager.Current.TweenVolume(currentLayer.source, 0, GetTransitionLength());
+            }
             
             yield return new WaitForSecondsRealtime(GetTransitionLength());
 

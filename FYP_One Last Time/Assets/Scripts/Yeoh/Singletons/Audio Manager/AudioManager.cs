@@ -50,14 +50,14 @@ public class AudioManager : MonoBehaviour
 
     Dictionary<AudioSource, Tween> volumeTweens = new();
     
-    public void TweenVolume(AudioSource source, float to, float time=3)
+    public void TweenVolume(AudioSource source, float to, float time=3, bool ignoreTimescale=true)
     {
         if(volumeTweens.ContainsKey(source))
         {
             volumeTweens[source].Stop();
         }
         
-        if(time>0) volumeTweens[source] = Tween.AudioVolume(source, to, time, Ease.InOutSine, useUnscaledTime: true);
+        if(time>0) volumeTweens[source] = Tween.AudioVolume(source, to, time, Ease.InOutSine, useUnscaledTime: ignoreTimescale);
         else source.volume = to;
     }
 

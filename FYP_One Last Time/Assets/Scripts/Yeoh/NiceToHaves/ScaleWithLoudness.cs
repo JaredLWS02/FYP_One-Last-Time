@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class ScaleWithLoudness : MonoBehaviour
 {
-    MusicManager musicManager;
+    MusicManager MusicM;
 
     void GetMusicManager()
     {
-        if(!musicManager) musicManager = MusicManager.Current;
+        if(!MusicM) MusicM = MusicManager.Current;
     }
 
     void Update()
     {
         GetMusicManager();
 
-        if(!musicManager) return;
+        if(!MusicM) return;
 
         UpdateLoudness();
 
@@ -31,7 +31,13 @@ public class ScaleWithLoudness : MonoBehaviour
 
     void UpdateLoudness()
     {
-        loudness = GetLoudness(musicManager.currentLayer.timeSamples, musicManager.currentLayer.clip) * loudnessSensibility;
+        AudioLayer currentLayer = MusicM.layerM.currentLayer;
+        if(currentLayer==null) return;
+
+        AudioSource source = currentLayer.source;
+        if(!source) return;
+
+        loudness = GetLoudness(source.timeSamples, source.clip) * loudnessSensibility;
 
         if(loudness<threshold) loudness=0;
     }
