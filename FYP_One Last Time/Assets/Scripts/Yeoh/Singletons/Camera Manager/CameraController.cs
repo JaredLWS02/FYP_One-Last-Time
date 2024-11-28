@@ -38,19 +38,19 @@ public class CameraController : MonoBehaviour
 
     [Header("Shake")]
     public float shakeTime=.2f;
-    public float amplitude=1;
+    public float amplitud=2;
     public float frequency=2;
 
     public void SetShakeTime(float t) => shakeTime=t;
-    public void SetShakeAmp(float amp) => amplitude=amp;
+    public void SetShakeAmp(float amp) => amplitud=amp;
     public void SetShakeFreq(float freq) => frequency=freq;
 
-    public void Shake() => camM.Shake(shakeTime, amplitude, frequency);
+    public void Shake() => camM.Shake(shakeTime, amplitud, frequency);
 
     public void ToggleShake(bool toggle)
     {
         if(toggle)
-        camM.EnableShake(amplitude, frequency);
+        camM.EnableShake(amplitud, frequency);
         else
         camM.DisableShake();
     }

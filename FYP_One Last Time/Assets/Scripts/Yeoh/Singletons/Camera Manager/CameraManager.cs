@@ -163,7 +163,7 @@ public class CameraManager : MonoBehaviour
             || freq < currentShake.z;
     }
 
-    public void Shake(float time=.2f, float amp=1, float freq=2)
+    public void Shake(float time=.2f, float amp=2, float freq=2)
     {
         if(IsCurrentShakeWeaker(time, amp, freq)) return;
 

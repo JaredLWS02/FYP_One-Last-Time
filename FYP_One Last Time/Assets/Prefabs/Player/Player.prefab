@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 9139493631820300163}
   - component: {fileID: 304534908967816856}
   - component: {fileID: 1228213871802777503}
+  - component: {fileID: 1700653241713930827}
   - component: {fileID: 8995939786167268597}
   m_Layer: 3
   m_Name: Hurt
@@ -100,6 +101,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1228213871802777503}
           m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
           m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blood
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1700653241713930827}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -306,6 +319,32 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
   spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1700653241713930827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
     OnEnable:
       m_PersistentCalls:
         m_Calls: []
@@ -2182,7 +2221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCam: {fileID: 0}
   shakeTime: 0.2
-  amplitude: 1
+  amplitud: 2
   frequency: 2
   angle: 2
   dutchIn: 0.025
@@ -4068,7 +4107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCam: {fileID: 0}
   shakeTime: 0.2
-  amplitude: 1
+  amplitud: 2
   frequency: 2
   angle: 2
   dutchIn: 0.025

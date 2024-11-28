@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -6299274878268098870}
   - component: {fileID: 8375644196373531894}
   - component: {fileID: 8782049835207013567}
+  - component: {fileID: 2179853108043544454}
   m_Layer: 7
   m_Name: Overhead Hurtbox
   m_TagString: Untagged
@@ -153,6 +154,18 @@ MonoBehaviour:
             m_StringArgument: Impact
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2179853108043544454}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
   destroyOnHit: 0
   destroyOnHurt: 0
   myColl: {fileID: 4483064678518147200}
@@ -248,6 +261,32 @@ MonoBehaviour:
   shrinkTo: {x: 0, y: 0, z: 0}
   shrinkTime: 0
   ignoreTimescale: 0
+--- !u!114 &2179853108043544454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitude: 1
+  frequency: 2
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1992008462738508319
 GameObject:
   m_ObjectHideFlags: 0
