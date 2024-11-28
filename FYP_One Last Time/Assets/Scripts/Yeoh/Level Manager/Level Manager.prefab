@@ -1,5 +1,137 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &36637879313129921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 357416395872153488}
+  - component: {fileID: 150205284295529548}
+  m_Layer: 0
+  m_Name: Music Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &357416395872153488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36637879313129921}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2380899006992272944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &150205284295529548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36637879313129921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdf78918225b2d47b68798e9129a655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crossfadeOutTime: 0
+  crossfadeWaitTime: 0
+  crossfadeInTime: 1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: CrossfadeToLayer
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Silent
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!1 &438146184196598946
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232771132142732625}
+  - component: {fileID: 4256851700179553483}
+  m_Layer: 0
+  m_Name: Ambient Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &232771132142732625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438146184196598946}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2380899006992272944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4256851700179553483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438146184196598946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41700d3ac4978e54fb72bbe927a25627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crossfadeOutTime: 0
+  crossfadeWaitTime: 0
+  crossfadeInTime: 5
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4256851700179553483}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: CrossfadeToLayer
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Forest
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &934585364345623904
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +225,7 @@ Transform:
   - {fileID: 3122226454488551449}
   - {fileID: 5947541124973108052}
   - {fileID: 357416395872153488}
-  - {fileID: 4844779477430951373}
+  - {fileID: 232771132142732625}
   - {fileID: 244165916913360235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -138,7 +270,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5947541124973108052}
   - component: {fileID: 2644356565013767624}
-  - component: {fileID: 9140772997468253726}
   m_Layer: 0
   m_Name: Enemy Manager
   m_TagString: Untagged
@@ -179,9 +310,45 @@ MonoBehaviour:
     OnEnemyFirstEnterCombat:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 9140772997468253726}
-          m_TargetAssemblyTypeName: SceneMusic, Assembly-CSharp
-          m_MethodName: ChangeToLayerName
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: SetCrossfadeOutTime
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 3
+            m_StringArgument: Default
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: SetCrossfadeWaitTime
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: Default
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: SetCrossfadeInTime
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 3
+            m_StringArgument: Default
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: CrossfadeToLayer
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -194,129 +361,54 @@ MonoBehaviour:
     OnEnemyLastExitCombat:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 9140772997468253726}
-          m_TargetAssemblyTypeName: SceneMusic, Assembly-CSharp
-          m_MethodName: ChangeToDefaultLayer
-          m_Mode: 1
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: SetCrossfadeOutTime
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 3
+            m_StringArgument: Default
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: SetCrossfadeWaitTime
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 1
+            m_StringArgument: Default
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: SetCrossfadeInTime
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 3
+            m_StringArgument: Default
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 150205284295529548}
+          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+          m_MethodName: CrossfadeToLayer
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: Silent
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &9140772997468253726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3311132664264677286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acdf78918225b2d47b68798e9129a655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1001 &2935693718174057515
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2380899006992272944}
-    m_Modifications:
-    - target: {fileID: 2900181910725862890, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_Name
-      value: Scene Music
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: musicLayers.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: musicLayers.Array.data[0].layerName
-      value: Default
-      objectReference: {fileID: 0}
-    - target: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: musicLayers.Array.data[1].layerName
-      value: Combat
-      objectReference: {fileID: 0}
-    - target: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: musicLayers.Array.data[1].clips.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3281821977755374749, guid: 52cde099eea62834bbfe6563863eab46,
-        type: 3}
-      propertyPath: musicLayers.Array.data[1].clips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 62ccff98b853bd14296771e1dba7bda8, type: 3}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 52cde099eea62834bbfe6563863eab46, type: 3}
---- !u!4 &357416395872153488 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3190907746576788411, guid: 52cde099eea62834bbfe6563863eab46,
-    type: 3}
-  m_PrefabInstance: {fileID: 2935693718174057515}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3338021967153544469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -491,85 +583,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8869639685822340001, guid: 51469f81ecafe7d45a8be0069a01234c,
     type: 3}
   m_PrefabInstance: {fileID: 3338021967153544469}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5612120016773218842
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2380899006992272944}
-    m_Modifications:
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926492160201479093, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: enableSlowUpdate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4276176736393226172, guid: ceeb4a310774f264c8fd7b339a974777,
-        type: 3}
-      propertyPath: m_Name
-      value: Ambient Manager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ceeb4a310774f264c8fd7b339a974777, type: 3}
---- !u!4 &4844779477430951373 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1071395121850703831, guid: ceeb4a310774f264c8fd7b339a974777,
-    type: 3}
-  m_PrefabInstance: {fileID: 5612120016773218842}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6987267939746723069
 PrefabInstance:
