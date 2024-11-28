@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2380899006992272944}
-  - component: {fileID: 4004155345886088897}
+  - component: {fileID: 603220692534078651}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -97,7 +97,7 @@ Transform:
   - {fileID: 244165916913360235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4004155345886088897
+--- !u!114 &603220692534078651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,32 +106,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 3139016363553785320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57bcd03b4140ce4d86cff57112fa9af, type: 3}
+  m_Script: {fileID: 11500000, guid: 15c21b29337088d4999df09dc02e894e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uEvents:
-    Awake:
-      m_PersistentCalls:
-        m_Calls: []
+  events:
     OnEnable:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 603220692534078651}
+          m_TargetAssemblyTypeName: MouseLockToggler, Assembly-CSharp
+          m_MethodName: ToggleMouseLock
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
     OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-    Start:
-      m_PersistentCalls:
-        m_Calls: []
-    Update:
-      m_PersistentCalls:
-        m_Calls: []
-    FixedUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    LateUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    Destroy:
       m_PersistentCalls:
         m_Calls: []
 --- !u!1 &3311132664264677286

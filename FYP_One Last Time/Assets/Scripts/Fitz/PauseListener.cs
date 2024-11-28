@@ -8,11 +8,6 @@ public class PauseListener : MonoBehaviour
     public UnityEvent<bool> onPause;
     bool isPaused;
 
-    void Start()
-    {
-        MouseManager.Current.LockMouse(!isPaused);
-    }
-
     void Update()
     {
         if(InputManager.Current.pauseKeyDown)
@@ -22,8 +17,7 @@ public class PauseListener : MonoBehaviour
             if (isPaused) isPaused = false;
             else isPaused = true;
 
-            onPause.Invoke(isPaused);
-            MouseManager.Current.LockMouse(!isPaused);
+            onPause?.Invoke(isPaused);
         }
     }
 }
