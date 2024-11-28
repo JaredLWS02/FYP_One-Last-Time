@@ -14,17 +14,22 @@ public class VignetteHealth : MonoBehaviour
 
     // ============================================================================
 
+    [Header("HP")]
     public HPManager hpM;
+    public float minHpPercent_=0;
+    public float maxHpPercent=50;
+
+    [Header("Vignette")]
     public Color vignetteColor = Color.red;
-    public float minAlpha=0;
-    public float maxAlpha_=.75f;
+    public float minAlpha_=0;
+    public float maxAlpha_=1;
     
     void Update()
     {
         if(!hpM) return;
 
-        float hp01 = GetValue01(hpM.hp, 0, hpM.hpMax);
-        vignetteColor.a = Mathf.Lerp(minAlpha, maxAlpha_, 1-hp01);
+        float hp01 = GetValue01(hpM.hp, minHpPercent_, maxHpPercent);
+        vignetteColor.a = Mathf.Lerp(minAlpha_, maxAlpha_, 1-hp01);
 
         vignette.color = vignetteColor;
     }
