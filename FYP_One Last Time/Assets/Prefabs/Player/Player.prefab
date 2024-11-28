@@ -17,6 +17,9 @@ GameObject:
   - component: {fileID: 9139493631820300163}
   - component: {fileID: 304534908967816856}
   - component: {fileID: 1228213871802777503}
+  - component: {fileID: 1700653241713930827}
+  - component: {fileID: 7715047191772894443}
+  - component: {fileID: 2984863347428207744}
   - component: {fileID: 8995939786167268597}
   m_Layer: 3
   m_Name: Hurt
@@ -109,6 +112,18 @@ MonoBehaviour:
             m_StringArgument: Blood
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1700653241713930827}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blood
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDeath:
       m_PersistentCalls:
         m_Calls:
@@ -127,6 +142,18 @@ MonoBehaviour:
         - m_Target: {fileID: 304534908967816856}
           m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
           m_MethodName: RevertColors
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2984863347428207744}
+          m_TargetAssemblyTypeName: TimescaleController, Assembly-CSharp
+          m_MethodName: HitStop
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -185,7 +212,19 @@ MonoBehaviour:
   poiseEvents:
     OnPoiseBreak:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7715047191772894443}
+          m_TargetAssemblyTypeName: TimescaleController, Assembly-CSharp
+          m_MethodName: HitStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &5493900238891019743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,6 +345,78 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
   spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1700653241713930827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &7715047191772894443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71763e629d88b7145ada7a9441ef8a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.2
+  hitstopIn_: 0.1
+  hitstopWait_: 0.01
+  hitstopOut: 0.25
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &2984863347428207744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71763e629d88b7145ada7a9441ef8a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.2
+  hitstopIn_: 0.1
+  hitstopWait_: 0.01
+  hitstopOut: 0.75
+  events:
     OnEnable:
       m_PersistentCalls:
         m_Calls: []
@@ -2062,6 +2173,7 @@ GameObject:
   - component: {fileID: 6120017875126648429}
   - component: {fileID: 773448853722404963}
   - component: {fileID: 5989547761167805548}
+  - component: {fileID: 2883123100902392680}
   m_Layer: 3
   m_Name: Ground Check
   m_TagString: Untagged
@@ -2103,6 +2215,25 @@ MonoBehaviour:
   anim: {fileID: 4004871874835498188}
   groundedBoolName: IsGrounded
   slope: {fileID: 714563234870328098}
+  events:
+    OnLandGround:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2883123100902392680}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: ValveDutch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnLeaveGround:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &5989547761167805548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2148,6 +2279,32 @@ MonoBehaviour:
   range: 0.4
   showGizmos: 1
   gizmoColor: {r: 0, g: 0.083981514, b: 1, a: 0.5}
+--- !u!114 &2883123100902392680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177494582529698581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &6585861224708232795
 GameObject:
   m_ObjectHideFlags: 0
@@ -3840,6 +3997,7 @@ GameObject:
   - component: {fileID: 3885140822300902856}
   - component: {fileID: 116061596474317705}
   - component: {fileID: 5609146893333419746}
+  - component: {fileID: 6699693383596816827}
   m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
@@ -3885,8 +4043,26 @@ MonoBehaviour:
   wallSlideSpeed: -2.5
   anim: {fileID: 4004871874835498188}
   clingingBoolName: IsClinging
-  wallClingEvents:
+  events:
     OnToggleCling:
+      m_PersistentCalls:
+        m_Calls: []
+    OnCling:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6699693383596816827}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: ValveDutch
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnUncling:
       m_PersistentCalls:
         m_Calls: []
 --- !u!114 &116061596474317705
@@ -3989,6 +4165,32 @@ MonoBehaviour:
           m_CallState: 2
   cling: {fileID: 3885140822300902856}
   jumpAwayForce: 50
+--- !u!114 &6699693383596816827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8800096562145649671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &8987163089559660572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4096,8 +4298,8 @@ MonoBehaviour:
   minLifetime: 0.1
   maxLifetime: 0.25
   velM: {fileID: 4615221013399892284}
-  minSpeed: 15
-  maxSpeed: 25
+  minSpeed: 25
+  maxSpeed: 30
   minAlpha: 0.1
   maxAlpha: 0.5
 --- !u!114 &4615221013399892284

@@ -2770,6 +2770,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &4216897291915043762
 GameObject:
   m_ObjectHideFlags: 0
@@ -4218,6 +4225,7 @@ GameObject:
   - component: {fileID: 7463546124065126565}
   - component: {fileID: 5075735477650840520}
   - component: {fileID: 4534678494288153976}
+  - component: {fileID: 3924333368649628086}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -4282,6 +4290,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3924333368649628086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5769938089334403513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa76d7099fbdba040af825d9772629a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animPos: 0
+  inPos: {x: 0, y: 0, z: 0}
+  outPos: {x: 0, y: 0, z: 0}
+  animRot: 0
+  inRot: {x: 0, y: 0, z: 0}
+  outRot: {x: 0, y: 0, z: 0}
+  animScale: 0
+  inScale: {x: 0, y: 0, z: 0}
+  outScale: {x: 0, y: 0, z: 0}
+  img: {fileID: 4534678494288153976}
+  sr: {fileID: 0}
+  animAlpha: 1
+  inAlpha: 0
+  outAlpha: 0
+  playOnEnable: 1
+  playOnEnableAnimTime: 0.5
+  playOnEnableDelay: 0
 --- !u!1 &5904755657964520733
 GameObject:
   m_ObjectHideFlags: 0
@@ -4392,6 +4429,7 @@ GameObject:
   - component: {fileID: 1233089357187371690}
   - component: {fileID: 7881758760372596469}
   - component: {fileID: 4196873626115718460}
+  - component: {fileID: 8626224379487119968}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -4461,6 +4499,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8626224379487119968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125433948382142283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa76d7099fbdba040af825d9772629a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animPos: 0
+  inPos: {x: 0, y: 0, z: 0}
+  outPos: {x: 0, y: 0, z: 0}
+  animRot: 0
+  inRot: {x: 0, y: 0, z: 0}
+  outRot: {x: 0, y: 0, z: 0}
+  animScale: 1
+  inScale: {x: 0, y: 0, z: 0}
+  outScale: {x: 0, y: 0, z: 0}
+  img: {fileID: 0}
+  sr: {fileID: 0}
+  animAlpha: 0
+  inAlpha: 0
+  outAlpha: 0
+  playOnEnable: 1
+  playOnEnableAnimTime: 0.5
+  playOnEnableDelay: 0
 --- !u!1 &6275420531135096734
 GameObject:
   m_ObjectHideFlags: 0
@@ -5467,6 +5534,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &3915216001319827066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5568,6 +5642,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &6896210315944384350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9379,6 +9460,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &180288765730300292
 MonoBehaviour:
   m_ObjectHideFlags: 0

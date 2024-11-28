@@ -40,29 +40,38 @@ public class CameraManager : MonoBehaviour
 
     public List<CinemachineVirtualCamera> allCameras = new();
 
-    public void RefreshAllCameras()
-    {
-        allCameras.Clear();
-        allCameras = GetAllCameras();
-    }
+    public void RefreshAllCameras() => allCameras = GetAllCameras();
 
-    public List<CinemachineVirtualCamera> GetAllCameras()
-    {
-        List<CinemachineVirtualCamera> camerasList = new(FindObjectsOfType<CinemachineVirtualCamera>());
+    public List<CinemachineVirtualCamera> GetAllCameras() => new(FindObjectsOfType<CinemachineVirtualCamera>());
 
-        return camerasList;
+    public CinemachineVirtualCamera GetCameraByName(string cam_name)
+    {
+        if(string.IsNullOrEmpty(cam_name))
+        {
+            Debug.LogWarning("Camera name is null or empty.");
+            return null;
+        }
+        
+        var cam = allCameras.Find(item => item.gameObject.name == cam_name);
+        
+        if(cam==null) Debug.LogWarning($"Camera with name '{cam_name}' not found.");
+        return cam;
     }
     
     // ==================================================================================================================
     
     public CinemachineVirtualCamera defaultCamera = null;
 
+    public void SetDefaultCamera(CinemachineVirtualCamera cam) => defaultCamera=cam;
+
     public void SetDefaultCamera()
     {
-        if(!Camera.main) return;
-        if(!Camera.main.transform.parent) return;
+        Camera cam = Camera.main;
+        if(!cam) return;
+        Transform cam_parent = cam.transform.parent;
+        if(!cam_parent) return;
 
-        CinemachineVirtualCamera virtualCamera = Camera.main.transform.parent.GetComponent<CinemachineVirtualCamera>();
+        var virtualCamera = cam_parent.GetComponent<CinemachineVirtualCamera>();
         
         if(virtualCamera)
         {
@@ -70,8 +79,7 @@ public class CameraManager : MonoBehaviour
         }
         else // if Camera.main is in a freelook camera instead
         {
-            CinemachineFreeLook freelook = Camera.main.transform.parent.GetComponent<CinemachineFreeLook>();
-
+            var freelook = cam_parent.GetComponent<CinemachineFreeLook>();
             if(!freelook) return;
             
             defaultCamera = freelook.GetRig(1);
@@ -80,15 +88,9 @@ public class CameraManager : MonoBehaviour
         ChangeCameraToDefault();
     }
 
-    public void ChangeCameraToDefault()
-    {
-        ChangeCamera(defaultCamera);
-    }
+    public void ChangeCameraToDefault() => ChangeCamera(defaultCamera);
 
-    public bool IsDefaultCamera(CinemachineVirtualCamera camera)
-    {
-        return defaultCamera==camera;
-    }
+    public bool IsDefaultCamera(CinemachineVirtualCamera camera) => defaultCamera==camera;
 
     // ==================================================================================================================
     
@@ -98,7 +100,7 @@ public class CameraManager : MonoBehaviour
     {
         camera.Priority = 10;
 
-        CinemachineFreeLook freelook = GetFreeLookCamera(camera);
+        var freelook = GetFreeLookCamera(camera);
         if(freelook) freelook.Priority = 10;
 
         StopAllAnimations();
@@ -117,10 +119,7 @@ public class CameraManager : MonoBehaviour
         // else Invoke("EnableCamPanSfx", 1);
     }
 
-    public bool IsCurrentCamera(CinemachineVirtualCamera camera)
-    {
-        return currentCamera==camera;
-    }
+    public bool IsCurrentCamera(CinemachineVirtualCamera camera) => currentCamera==camera;
 
     // bool CamPanSfx;
 
@@ -131,11 +130,7 @@ public class CameraManager : MonoBehaviour
 
     // ==================================================================================================================
     
-    public CinemachineFreeLook GetFreeLookCamera(CinemachineVirtualCamera camera)
-    {
-        CinemachineFreeLook freeLookParent = camera.ParentCamera as CinemachineFreeLook;
-        return freeLookParent;
-    }
+    public CinemachineFreeLook GetFreeLookCamera(CinemachineVirtualCamera camera) => camera.ParentCamera as CinemachineFreeLook;
 
     // ==================================================================================================================
 
@@ -145,17 +140,9 @@ public class CameraManager : MonoBehaviour
     Dictionary<CinemachineBasicMultiChannelPerlin, Vector2> defaultAmpFreqDict = new();
     // amp will be x, freq will be y
 
-    public void RefreshAllNoises()
-    {
-        allNoises.Clear();
-        allNoises = GetAllNoises();
-    }
+    public void RefreshAllNoises() => allNoises = GetAllNoises();
 
-    public List<CinemachineBasicMultiChannelPerlin> GetAllNoises()
-    {
-        List<CinemachineBasicMultiChannelPerlin> noisesList = new(FindObjectsOfType<CinemachineBasicMultiChannelPerlin>());
-        return noisesList;
-    }
+    public List<CinemachineBasicMultiChannelPerlin> GetAllNoises() => new(FindObjectsOfType<CinemachineBasicMultiChannelPerlin>());
 
     public void RecordDefaultNoises()
     {
@@ -169,9 +156,16 @@ public class CameraManager : MonoBehaviour
 
     Vector3 currentShake;
 
-    public void Shake(float time=.2f, float amp=1, float freq=2)
+    bool IsCurrentShakeWeaker(float time, float amp, float freq)
     {
-        if(time<currentShake.x || amp<currentShake.y || freq<currentShake.z) return;
+        return time < currentShake.x
+            || amp < currentShake.y
+            || freq < currentShake.z;
+    }
+
+    public void Shake(float time=.2f, float amp=2, float freq=2)
+    {
+        if(IsCurrentShakeWeaker(time, amp, freq)) return;
 
         if(haptics) Vibrator.Vibrate();
 
@@ -233,11 +227,10 @@ public class CameraManager : MonoBehaviour
         // else Invoke("EnableCamPanSfx", 1);
     }
 
-    public void CancelFOVTween()
-    {
-        fovTween.Complete();
-    }
+    public void CancelFOVTween() => fovTween.Complete();
     
+    // ==================================================================================================================
+
     Tween orthoTween;
 
     public void TweenOrthoSize(float to, float time)
@@ -250,10 +243,7 @@ public class CameraManager : MonoBehaviour
         // else Invoke("EnableCamPanSfx", 1);
     }
 
-    public void CancelOrthoTween()
-    {
-        orthoTween.Complete();
-    }
+    public void CancelOrthoTween() => orthoTween.Complete();
         
     // ==================================================================================================================
 
@@ -266,21 +256,19 @@ public class CameraManager : MonoBehaviour
         else currentCamera.m_Lens.Dutch = angle;
     }
 
-    public void ValveDutch(float angle=10, float tweenIn=.1f, float tweenOut=.5f)
+    public void CancelDutchTween() => dutchTween.Complete();
+
+    public void ValveDutch(float angle=2, float dutch_in=.025f, float dutch_out=.1f)
     {
         if(valveDutching_crt!=null) StopCoroutine(valveDutching_crt);
-        valveDutching_crt = StartCoroutine(ValveDutching(angle, tweenIn, tweenOut));
-    }
-
-    public void CancelDutchTween()
-    {
-        dutchTween.Complete();
+        valveDutching_crt = StartCoroutine(ValveDutching(angle, dutch_in, dutch_out));
     }
 
     Coroutine valveDutching_crt;
 
     IEnumerator ValveDutching(float angle, float tweenIn, float tweenOut)
     {
+        angle = Random.Range(0, 2)==0 ? angle : -angle;
         TweenDutch(angle, tweenIn);
         yield return new WaitForSeconds(tweenIn);
         TweenDutch(0, tweenOut);
@@ -310,8 +298,5 @@ public class CameraManager : MonoBehaviour
 
     public bool haptics=true;
 
-    void OnToggleHaptics(bool toggle)
-    {
-        haptics=toggle;
-    }
+    void OnToggleHaptics(bool toggle) => haptics=toggle;
 }   

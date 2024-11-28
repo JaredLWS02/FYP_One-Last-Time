@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GroundCheck : MonoBehaviour
 {
@@ -40,12 +41,14 @@ public class GroundCheck : MonoBehaviour
             landAnim?.Play(owner);
 
             EventM.OnLandGround(owner);
+            events.OnLandGround?.Invoke();
         }
     }
 
     void OnLastExit(GameObject obj, Collider coll)
     {
         EventM.OnLeaveGround(owner);
+        events.OnLeaveGround?.Invoke();
     }
 
     // ============================================================================
@@ -76,4 +79,15 @@ public class GroundCheck : MonoBehaviour
 
     [Header("Optional")]
     public SlopeCheck slope;
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct Events
+    {
+        public UnityEvent OnLandGround;
+        public UnityEvent OnLeaveGround;
+    }
+    [Space]
+    public Events events;
 }
