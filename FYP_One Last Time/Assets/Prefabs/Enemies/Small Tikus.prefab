@@ -2965,15 +2965,15 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   rb: {fileID: 1401727047894497609}
   ray: {fileID: 797935118429853278}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 1
   defaultCfg:
     moveSeconds: 0.2
     maxMoveDistance: 6
     alwaysMove: 0
     ease: 3
     reach: 1.1
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 1
   showGizmos: 0
   gizmo1Color: {r: 1, g: 1, b: 1, a: 0.5}
   gizmo2Color: {r: 1, g: 1, b: 0, a: 0.5}
@@ -3069,6 +3069,7 @@ GameObject:
   - component: {fileID: 5999157726931825191}
   - component: {fileID: 780967974793306540}
   - component: {fileID: 1894536892237456442}
+  - component: {fileID: 8205563423093595248}
   m_Layer: 6
   m_Name: Small Tikus
   m_TagString: Enemy
@@ -3210,6 +3211,30 @@ MonoBehaviour:
   minY: -20
   showGizmos: 0
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
+--- !u!114 &8205563423093595248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995670659757724566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44190e91fbb6de1469c1a6b46db8f866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 1
+  fixedUpdate: 0
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  owner: {fileID: 6995670659757724566}
+  lockAxis:
+    localPosition: {x: 0, y: 0, z: 1}
+    localEulerAngles: {x: 0, y: 0, z: 0}
+    localScale: {x: 0, y: 0, z: 0}
 --- !u!1 &7021269989712493573
 GameObject:
   m_ObjectHideFlags: 0
