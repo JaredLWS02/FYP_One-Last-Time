@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransformLocker : SlowUpdate
+public class TransformResetter : SlowUpdate
 {
-    [Header("TransformLocker")]
+    [Header("TransformResetter")]
     public GameObject owner;
 
     // ============================================================================
@@ -30,14 +30,14 @@ public class TransformLocker : SlowUpdate
     // ============================================================================
 
     [System.Serializable]
-    public struct LockAxis
+    public struct ResetAxis
     {
         public Vector3Int localPosition;
         public Vector3Int localEulerAngles;
         public Vector3Int localScale;
     };
 
-    public LockAxis lockAxis;
+    public ResetAxis resetAxis;
 
     public override void OnSlowUpdate()
     {
@@ -45,23 +45,23 @@ public class TransformLocker : SlowUpdate
 
         tr.localPosition = new Vector3
         (
-            lockAxis.localPosition.x > 0 ? defaults.localPosition.x : tr.localPosition.x,
-            lockAxis.localPosition.y > 0 ? defaults.localPosition.y : tr.localPosition.y,
-            lockAxis.localPosition.z > 0 ? defaults.localPosition.z : tr.localPosition.z
+            resetAxis.localPosition.x > 0 ? defaults.localPosition.x : tr.localPosition.x,
+            resetAxis.localPosition.y > 0 ? defaults.localPosition.y : tr.localPosition.y,
+            resetAxis.localPosition.z > 0 ? defaults.localPosition.z : tr.localPosition.z
         );
 
         tr.localEulerAngles = new Vector3
         (
-            lockAxis.localEulerAngles.x > 0 ? defaults.localEulerAngles.x : tr.localEulerAngles.x,
-            lockAxis.localEulerAngles.y > 0 ? defaults.localEulerAngles.y : tr.localEulerAngles.y,
-            lockAxis.localEulerAngles.z > 0 ? defaults.localEulerAngles.z : tr.localEulerAngles.z
+            resetAxis.localEulerAngles.x > 0 ? defaults.localEulerAngles.x : tr.localEulerAngles.x,
+            resetAxis.localEulerAngles.y > 0 ? defaults.localEulerAngles.y : tr.localEulerAngles.y,
+            resetAxis.localEulerAngles.z > 0 ? defaults.localEulerAngles.z : tr.localEulerAngles.z
         );
 
         tr.localScale = new Vector3
         (
-            lockAxis.localScale.x > 0 ? defaults.localScale.x : tr.localScale.x,
-            lockAxis.localScale.y > 0 ? defaults.localScale.y : tr.localScale.y,
-            lockAxis.localScale.z > 0 ? defaults.localScale.z : tr.localScale.z
+            resetAxis.localScale.x > 0 ? defaults.localScale.x : tr.localScale.x,
+            resetAxis.localScale.y > 0 ? defaults.localScale.y : tr.localScale.y,
+            resetAxis.localScale.z > 0 ? defaults.localScale.z : tr.localScale.z
         );
     }
 }
