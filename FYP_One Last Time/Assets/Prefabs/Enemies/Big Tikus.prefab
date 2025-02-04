@@ -458,7 +458,7 @@ MonoBehaviour:
   radar: {fileID: 801440721258214197}
   targetTag: Player
   sight: {fileID: 1219722450071829959}
-  expandRadarRangeMult: 1.5
+  expandRadarRangeMult: 2
   move: {fileID: 5446114617604419300}
   targetArrivalRange: 7
   flee: {fileID: 3971028520478048224}
@@ -702,10 +702,10 @@ MonoBehaviour:
   returner: {fileID: 0}
   flip: {fileID: 8663946442160230497}
   seekFlipDelay: {x: 0.4, y: 0.6}
-  randomSeekBehaviour: {fileID: 1218149885779216908}
+  randomSeekBehaviour: {fileID: 0}
   hpM: {fileID: 704049436961937626}
   fleeHPPercent: 10
-  randomFleeBehaviour: {fileID: 8370244478339295556}
+  randomFleeBehaviour: {fileID: 0}
 --- !u!114 &3731827293064252220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035270443671090063}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
@@ -2413,7 +2413,7 @@ MonoBehaviour:
     LastExit:
       m_PersistentCalls:
         m_Calls: []
-  range: 10
+  range: 20
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
 --- !u!1 &6676704115839947431
@@ -2858,7 +2858,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8401221159546054650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
