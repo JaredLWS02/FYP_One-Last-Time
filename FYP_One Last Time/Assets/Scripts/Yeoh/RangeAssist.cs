@@ -19,9 +19,14 @@ public class RangeAssist : MonoBehaviour
 {
     public GameObject owner;
     public Rigidbody rb;
+
     public BaseRaycast ray;
-    
+    public LayerMask obstacleLayers;
+
+    [Header("Range Assist Config")]
     public RangeAssistCfg defaultCfg;
+
+    // ============================================================================
 
     public void CheckRange(RangeAssistCfg cfg)
     {
@@ -43,12 +48,13 @@ public class RangeAssist : MonoBehaviour
 
         Vector3 reach_point = ray.rayHit.point + (-ray.origin.forward * cfg.reach);
 
-        float ownerY = owner.transform.position.y; // feet level
-        float rayhitY = ray.rayHit.point.y; // hit.point height
+        float owner_y = owner.transform.position.y; // feet level
+        float rayhit_y = ray.rayHit.point.y; // hit.point height
+
         // difference between them
-        float offsetY = ownerY - rayhitY; 
-        // offset the reach point
-        reach_point.y += offsetY;
+        float offset_y = owner_y - rayhit_y; 
+        // offset the reach point height
+        reach_point.y += offset_y;
 
         TweenPos(reach_point, cfg);
     }
@@ -66,9 +72,6 @@ public class RangeAssist : MonoBehaviour
     }
 
     // ============================================================================
-
-    [Space]
-    public LayerMask obstacleLayers;
 
     Tween posTween;
 
