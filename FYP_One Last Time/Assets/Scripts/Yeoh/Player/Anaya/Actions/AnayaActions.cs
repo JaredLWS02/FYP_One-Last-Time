@@ -46,4 +46,12 @@ public class AnayaActions : MonoBehaviour
 
     public HealAbility heal;
     public bool IsHealing() => heal?.IsPerforming() ?? false;
+
+    public ForcePullAbility pull;
+    public bool IsForcePulling() => pull?.IsPerforming() ?? false;
+
+    public ForcePushAbility push;
+    public bool IsForcePushing() => push?.IsPerforming() ?? false;
+
+    public bool IsDoingAbility() => IsHealing() || IsForcePulling() || IsForcePushing();
 }

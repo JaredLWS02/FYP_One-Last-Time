@@ -71,9 +71,9 @@ public class AnayaActionInputs : MonoBehaviour
         {
             case "Ability1": EventM.OnTryAbility(owner, "Anaya Heal"); break;
 
-            case "Ability2": EventM.OnTryAbility(owner, "Anaya Heal"); break;
+            case "Ability2": EventM.OnTryAbility(owner, "Anaya Force Pull"); break;
 
-            case "Ability3": EventM.OnTryAbility(owner, "Anaya Heal"); break;
+            case "Ability3": EventM.OnTryAbility(owner, "Anaya Force Push"); break;
         }
     }
 

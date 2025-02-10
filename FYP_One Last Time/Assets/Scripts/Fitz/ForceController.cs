@@ -12,51 +12,50 @@ public class ForceController : MonoBehaviour
     public float range;
     public float radius;
 
-    public Collider[] targetObj;
-
-    public Transform holdPos;
+    public Collider[] targetColls;
 
     public HurtboxSO stunboxSO;
 
     // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            Force(true);
-        }
+    // void Update()
+    // {
+    //     if(Input.GetKeyDown(KeyCode.G))
+    //     {
+    //         Force(true);
+    //     }
 
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            Force(false);
-        }
+    //     if(Input.GetKeyDown(KeyCode.F))
+    //     {
+    //         Force(false);
+    //     }
 
-        DrawRaycastAndRadius();
-    }
+    //     DrawRaycastAndRadius();
+    // }
 
     public void GetObjects()
     {
-        targetObj = null;
+        targetColls = null;
         RaycastHit hit;
-        if(Physics.Raycast(holdPos.position, holdPos.TransformDirection(Vector3.forward), out hit, range))
+        if(Physics.Raycast(owner.transform.position, owner.transform.forward, out hit, range))
         {
-            targetObj = Physics.OverlapSphere(hit.point, radius);
+            targetColls = Physics.OverlapSphere(hit.point, radius);
         }
     }
 
     public void Force(bool pull)
     {
         GetObjects();
-        if (targetObj != null && targetObj.Length > 0)
+
+        if (targetColls != null && targetColls.Length > 0)
         {
-            foreach(Collider col in targetObj)
+            foreach(var coll in targetColls)
             {
-                var other_rb = col.attachedRigidbody;
+                var other_rb = coll.attachedRigidbody;
                 if (!other_rb) continue;
 
                 int mult = pull ? 1 : -1;
 
-                Vector3 direction = (holdPos.position - other_rb.transform.position).normalized;
+                Vector3 direction = (owner.transform.position - other_rb.transform.position).normalized;
 
                 Debug.Log("Object Tag: " + other_rb.gameObject.tag);
 
@@ -64,9 +63,10 @@ public class ForceController : MonoBehaviour
                 { 
                     Debug.Log("Force applied");
                     // Do Tikus stuff here
-                    EventManager.Current.OnTryStun(other_rb.gameObject, owner, stunboxSO, holdPos.position);
+                    EventManager.Current.OnTryStun(other_rb.gameObject, owner, stunboxSO, owner.transform.position);
                     // End tikus stuff
-                    other_rb.velocity = direction * strength * mult * Time.deltaTime;
+                    //other_rb.velocity = direction * strength * mult * Time.deltaTime;
+                    other_rb.AddForce(direction * strength * mult, ForceMode.Impulse);
                 }
             }
         }
@@ -75,6 +75,6 @@ public class ForceController : MonoBehaviour
     private void DrawRaycastAndRadius()
     {
         // Draw the ray in the scene view
-        Debug.DrawRay(holdPos.position, holdPos.TransformDirection(Vector3.forward) * range, Color.green);
+        Debug.DrawRay(owner.transform.position, owner.transform.forward * range, Color.green);
     }
 }
