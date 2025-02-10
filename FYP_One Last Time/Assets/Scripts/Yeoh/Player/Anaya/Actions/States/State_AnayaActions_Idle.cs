@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class State_AnayaActions_Idle : BaseState
@@ -15,18 +16,32 @@ public class State_AnayaActions_Idle : BaseState
     {
         Debug.Log($"{action.owner.name} State: {stateName}");
 
-        ToggleAllow(true);
+        aaa_crt = action.StartCoroutine(aaaaaa());
     }
 
     protected override void OnUpdate(float deltaTime)
     {
+        // because a 1 frame gap where this will be true
+        //if(timeInState>0.1f)
+        //ToggleAllow(true);
+    }
 
+    Coroutine aaa_crt;
+
+    IEnumerator aaaaaa()
+    {
+        yield return new WaitForSeconds(.1f);
+        ToggleAllow(true);
     }
 
     protected override void OnExit()
     {
         ToggleAllow(false);
+
+        action.StopCoroutine(aaa_crt);
     }
+
+    // ================================================================================
 
     void ToggleAllow(bool toggle)
     {
