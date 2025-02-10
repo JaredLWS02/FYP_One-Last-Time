@@ -22,7 +22,29 @@ public class State_TikusAgent_AI_Flee : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        string behaviour = agent.randomFleeBehaviour.currentOption;
+        CheckBehaviour();
+    }
+
+    protected override void OnExit()
+    {
+        ToggleAllow(false);
+
+        agent.targeting.RevertRadar();
+    }
+
+    void ToggleAllow(bool toggle)
+    {
+
+    }
+
+    // ============================================================================
+
+    void CheckBehaviour()
+    {
+        string behaviour = "Flee";
+
+        RandomPicker random_picker = agent.randomFleeBehaviour;
+        if(random_picker) behaviour = random_picker.currentOption;
 
         switch(behaviour)
         {
@@ -42,17 +64,5 @@ public class State_TikusAgent_AI_Flee : BaseState
     {
         agent.targeting.SetThreatToTarget();
         agent.move.FaceMoveDir();
-    }
-
-    protected override void OnExit()
-    {
-        ToggleAllow(false);
-
-        agent.targeting.RevertRadar();
-    }
-
-    void ToggleAllow(bool toggle)
-    {
-
     }
 }

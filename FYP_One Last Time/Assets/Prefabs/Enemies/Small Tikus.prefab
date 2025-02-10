@@ -195,8 +195,8 @@ MonoBehaviour:
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  fov: {x: 0, y: 340}
-  rays: {x: 1, y: 50}
+  fov: {x: 0, y: 350}
+  rays: {x: 1, y: 60}
 --- !u!1 &782954881204329140
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +459,7 @@ MonoBehaviour:
   radar: {fileID: 2952939796052320822}
   targetTag: Player
   sight: {fileID: 8255484749663550365}
-  expandRadarRangeMult: 1.5
+  expandRadarRangeMult: 2
   move: {fileID: 1540304312175946697}
   targetArrivalRange: 4.13
   flee: {fileID: 5627483028069982993}
@@ -1162,7 +1162,7 @@ MonoBehaviour:
     LastExit:
       m_PersistentCalls:
         m_Calls: []
-  range: 10
+  range: 15
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
 --- !u!1 &2331810159870700479
@@ -2101,12 +2101,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4799253879353152561}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
+  enableSlowUpdate: 0
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -2607,10 +2607,10 @@ MonoBehaviour:
   returner: {fileID: 0}
   flip: {fileID: 7721746531743297066}
   seekFlipDelay: {x: 0.4, y: 0.6}
-  randomSeekBehaviour: {fileID: 1971569532230939617}
+  randomSeekBehaviour: {fileID: 0}
   hpM: {fileID: 2608293525865954382}
   fleeHPPercent: 25
-  randomFleeBehaviour: {fileID: 1624721283226069543}
+  randomFleeBehaviour: {fileID: 0}
 --- !u!114 &882407172222910880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2896,12 +2896,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6168783330197092899}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
+  enableSlowUpdate: 0
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -2965,15 +2965,15 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   rb: {fileID: 1401727047894497609}
   ray: {fileID: 797935118429853278}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 1
   defaultCfg:
     moveSeconds: 0.2
     maxMoveDistance: 6
     alwaysMove: 0
     ease: 3
     reach: 1.1
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 1
   showGizmos: 0
   gizmo1Color: {r: 1, g: 1, b: 1, a: 0.5}
   gizmo2Color: {r: 1, g: 1, b: 0, a: 0.5}
@@ -3069,6 +3069,7 @@ GameObject:
   - component: {fileID: 5999157726931825191}
   - component: {fileID: 780967974793306540}
   - component: {fileID: 1894536892237456442}
+  - component: {fileID: 8205563423093595248}
   m_Layer: 6
   m_Name: Small Tikus
   m_TagString: Enemy
@@ -3210,6 +3211,30 @@ MonoBehaviour:
   minY: -20
   showGizmos: 0
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
+--- !u!114 &8205563423093595248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995670659757724566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44190e91fbb6de1469c1a6b46db8f866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 1
+  fixedUpdate: 0
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  owner: {fileID: 6995670659757724566}
+  resetAxis:
+    localPosition: {x: 0, y: 0, z: 1}
+    localEulerAngles: {x: 0, y: 0, z: 0}
+    localScale: {x: 0, y: 0, z: 0}
 --- !u!1 &7021269989712493573
 GameObject:
   m_ObjectHideFlags: 0

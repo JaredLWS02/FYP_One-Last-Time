@@ -26,7 +26,35 @@ public class State_TikusAgent_AI_Seek : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        string behaviour = agent.randomSeekBehaviour.currentOption;
+        agent.targeting.FaceTarget();
+
+        CheckBehaviour();
+    }
+    
+    protected override void OnExit()
+    {
+        ToggleAllow(false);
+
+        agent.targeting.RevertRadar();
+
+        agent.flip?.RevertFlipDelay();
+
+        agent.UnregisterEnemyCombat();
+    }
+
+    void ToggleAllow(bool toggle)
+    {
+
+    }
+
+    // ============================================================================
+
+    void CheckBehaviour()
+    {
+        string behaviour = "Seek";
+
+        RandomPicker random_picker = agent.randomSeekBehaviour;
+        if(random_picker) behaviour = random_picker.currentOption;
 
         switch(behaviour)
         {
@@ -35,8 +63,6 @@ public class State_TikusAgent_AI_Seek : BaseState
             case "Flee": Flee(); break;
             default: Seek(); break;
         }
-
-        agent.targeting.FaceTarget();
     }
 
     void Seek()
@@ -59,21 +85,5 @@ public class State_TikusAgent_AI_Seek : BaseState
     void Flee()
     {
         agent.targeting.SetThreatToTarget();
-    }
-
-    protected override void OnExit()
-    {
-        ToggleAllow(false);
-
-        agent.targeting.RevertRadar();
-
-        agent.flip?.RevertFlipDelay();
-
-        agent.UnregisterEnemyCombat();
-    }
-
-    void ToggleAllow(bool toggle)
-    {
-
     }
 }
