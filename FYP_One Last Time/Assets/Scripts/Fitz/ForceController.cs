@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ForceController : MonoBehaviour
 {
+    public GameObject owner;
+
     public bool pull;
     public float strength;
     public float range;
@@ -13,6 +15,8 @@ public class ForceController : MonoBehaviour
     public Collider[] targetObj;
 
     public Transform holdPos;
+
+    public HurtboxSO stunboxSO;
 
     // Update is called once per frame
     void Update()
@@ -60,7 +64,7 @@ public class ForceController : MonoBehaviour
                 { 
                     Debug.Log("Force applied");
                     // Do Tikus stuff here
-
+                    EventManager.Current.OnTryStun(other_rb.gameObject, owner, stunboxSO, holdPos.position);
                     // End tikus stuff
                     other_rb.velocity = direction * strength * mult * Time.deltaTime;
                 }
