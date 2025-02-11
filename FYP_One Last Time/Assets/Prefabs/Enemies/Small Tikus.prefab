@@ -573,9 +573,9 @@ MonoBehaviour:
   - uEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8627083544392464877}
-          m_TargetAssemblyTypeName: EnemyActions, Assembly-CSharp
-          m_MethodName: TryJump
+        - m_Target: {fileID: 7894197541819062297}
+          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
+          m_MethodName: Attack
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -589,9 +589,9 @@ MonoBehaviour:
   - uEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7894197541819062297}
-          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
-          m_MethodName: Attack
+        - m_Target: {fileID: 8627083544392464877}
+          m_TargetAssemblyTypeName: EnemyActions, Assembly-CSharp
+          m_MethodName: TryJump
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -601,7 +601,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    delay: 0.3
+    delay: 0.15
   canInterrupt: 0
 --- !u!114 &7894197541819062297
 MonoBehaviour:
@@ -629,7 +629,7 @@ MonoBehaviour:
   currentOption: 
   owner: {fileID: 6995670659757724566}
   ground: {fileID: 6364306906685696337}
-  allowGrounded: 0
+  allowGrounded: 1
   allowMidAir: 1
   sight: {fileID: 8255484749663550365}
 --- !u!1 &1390348875773342422
