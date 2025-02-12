@@ -805,15 +805,15 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
   ray: {fileID: 6080351587773628695}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 1
   defaultCfg:
     moveSeconds: 0.2
     maxMoveDistance: 3
     alwaysMove: 0
     ease: 3
     reach: 2.5
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 1
   showGizmos: 0
   gizmo1Color: {r: 1, g: 1, b: 1, a: 0.5}
   gizmo2Color: {r: 1, g: 1, b: 0, a: 0.5}
@@ -3671,7 +3671,7 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   rb: {fileID: 1642459170912960868}
   ground: {fileID: 773448853722404963}
-  jumpForce: 23
+  jumpForce: 22
   jumpAnim: {fileID: 11400000, guid: 180a2f12792339645a546ed86f395bdd, type: 2}
   jumpCutMult: 1
   coyoteTime: 0.2
@@ -4206,6 +4206,7 @@ GameObject:
   - component: {fileID: 4667395710466492252}
   - component: {fileID: 4615221013399892284}
   - component: {fileID: 1139876886090150564}
+  - component: {fileID: 3393573027621743275}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -4343,6 +4344,30 @@ MonoBehaviour:
   minY: -20
   showGizmos: 0
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
+--- !u!114 &3393573027621743275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44190e91fbb6de1469c1a6b46db8f866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 1
+  fixedUpdate: 0
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  owner: {fileID: 8987163089559660572}
+  resetAxis:
+    localPosition: {x: 0, y: 0, z: 1}
+    localEulerAngles: {x: 0, y: 0, z: 0}
+    localScale: {x: 0, y: 0, z: 0}
 --- !u!1 &9161674605968897696
 GameObject:
   m_ObjectHideFlags: 0
