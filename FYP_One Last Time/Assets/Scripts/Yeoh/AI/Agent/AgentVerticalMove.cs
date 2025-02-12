@@ -31,11 +31,9 @@ public class AgentVerticalMove : SlowUpdate
     void CheckHeight(Vector3 target_pos)
     {
         if(!vehicle.goal) return;
-
         if(!InRange(target_pos)) return;
 
         float y_dist = Mathf.Abs(target_pos.y - owner.transform.position.y);
-
         if(y_dist < checkHeight) return;
 
         bool isAbove = target_pos.y > owner.transform.position.y;

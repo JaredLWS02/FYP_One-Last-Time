@@ -494,7 +494,7 @@ Transform:
   m_GameObject: {fileID: 1119412302706147938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: 4.06}
+  m_LocalPosition: {x: -0, y: 0.79, z: 5.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -522,7 +522,7 @@ MonoBehaviour:
   origin: {fileID: 7615011877315059424}
   lookAt: {fileID: 0}
   lookAtOffset: {x: 0, y: 0, z: 0}
-  range: 3
+  range: 2
   hitLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -553,10 +553,10 @@ MonoBehaviour:
     OnHitExit:
       m_PersistentCalls:
         m_Calls: []
-  showGizmos: 0
+  showGizmos: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  radius: 0.31
+  radius: 0.68
 --- !u!114 &4690002153563524249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2005,7 +2005,7 @@ MonoBehaviour:
     OnHitExit:
       m_PersistentCalls:
         m_Calls: []
-  showGizmos: 0
+  showGizmos: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
   radius: 0.68
@@ -2548,7 +2548,7 @@ MonoBehaviour:
   rgbOffsetCfgs: []
   colorFlickerInterval: 0.05
   randomStartColor: 1
-  randomRgbOffset: {x: 0.25, y: 0.25, z: 0.25}
+  randomRgbOffset: {x: 0.1, y: 0.1, z: 0.1}
   randomStartFlip: 0
   randomFlipY: 0
   randomFlipX: 0
@@ -3499,7 +3499,7 @@ Transform:
   m_GameObject: {fileID: 7999669192996397785}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: 0.62}
+  m_LocalPosition: {x: 0, y: 0.79, z: 0.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3527,7 +3527,7 @@ MonoBehaviour:
   origin: {fileID: 2755627915568556016}
   lookAt: {fileID: 0}
   lookAtOffset: {x: 0, y: 0, z: 0}
-  range: 3.4
+  range: 3.05
   hitLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -3558,10 +3558,10 @@ MonoBehaviour:
     OnHitExit:
       m_PersistentCalls:
         m_Calls: []
-  showGizmos: 0
+  showGizmos: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  radius: 0.22
+  radius: 0.68
 --- !u!114 &484633875573823089
 MonoBehaviour:
   m_ObjectHideFlags: 0
