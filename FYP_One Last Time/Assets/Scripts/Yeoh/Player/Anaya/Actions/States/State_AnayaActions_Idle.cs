@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class State_AnayaActions_Idle : BaseState
@@ -14,19 +15,20 @@ public class State_AnayaActions_Idle : BaseState
     protected override void OnEnter()
     {
         Debug.Log($"{action.owner.name} State: {stateName}");
-
-        ToggleAllow(true);
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-
+        // because of a 1 frame gap where this will be true when going from casting to doing ability
+        if(timeInState > .1f) ToggleAllow(true);
     }
 
     protected override void OnExit()
     {
         ToggleAllow(false);
     }
+
+    // ================================================================================
 
     void ToggleAllow(bool toggle)
     {

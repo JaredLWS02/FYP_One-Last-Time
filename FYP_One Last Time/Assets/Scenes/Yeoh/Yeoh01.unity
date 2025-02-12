@@ -130,11 +130,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 81055926}
     m_Modifications:
-    - target: {fileID: 1401727047894497609, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2472299377499092817, guid: 0bbcfbce780811b448b9423f4a98fc2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -185,50 +180,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6430875174503635808, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6430875174503635808, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6430875174503635808, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6430875174503635808, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
     - target: {fileID: 6995670659757724566, guid: 0bbcfbce780811b448b9423f4a98fc2d,
         type: 3}
       propertyPath: m_Name
       value: Small Tikus (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7640200264283122413, guid: 0bbcfbce780811b448b9423f4a98fc2d,
+    - target: {fileID: 6995670659757724566, guid: 0bbcfbce780811b448b9423f4a98fc2d,
         type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640200264283122413, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640200264283122413, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640200264283122413, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1803,6 +1763,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Tikus
       objectReference: {fileID: 0}
+    - target: {fileID: 5261146206814944013, guid: b398c4e05e3911d4c839b6fbca22b838,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6415192565362938597, guid: b398c4e05e3911d4c839b6fbca22b838,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2040,7 +2005,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: c5b1c8c384e9b264ca485df0a7eb0e09,
+      objectReference: {fileID: 23800000, guid: a4c3ac5e877558f4aafcf86c32867c90,
         type: 2}
     - target: {fileID: 1446827633456694545, guid: 80c2b7df0af16784e9ac777083ebe251,
         type: 3}
@@ -2811,6 +2776,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Block (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4176686320952594754, guid: 86a178c46ef1bb945a8a4dcdd3f27e9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3312,7 +3282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1848015491
 Transform:
   m_ObjectHideFlags: 0
@@ -3425,11 +3395,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 81055926}
     m_Modifications:
-    - target: {fileID: 1401727047894497609, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2472299377499092817, guid: 0bbcfbce780811b448b9423f4a98fc2d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3480,50 +3445,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6430875174503635808, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6430875174503635808, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6430875174503635808, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 6430875174503635808, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
     - target: {fileID: 6995670659757724566, guid: 0bbcfbce780811b448b9423f4a98fc2d,
         type: 3}
       propertyPath: m_Name
       value: Small Tikus
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640200264283122413, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640200264283122413, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640200264283122413, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 7640200264283122413, guid: 0bbcfbce780811b448b9423f4a98fc2d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3747,6 +3672,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Block (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4176686320952594754, guid: 86a178c46ef1bb945a8a4dcdd3f27e9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

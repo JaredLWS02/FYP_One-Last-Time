@@ -30,6 +30,6 @@ public class State_AnayaActions_Casting : BaseState
 
     void ToggleAllow(bool toggle)
     {
-
+        //action.AllowAbility = !toggle;
     }
 }
