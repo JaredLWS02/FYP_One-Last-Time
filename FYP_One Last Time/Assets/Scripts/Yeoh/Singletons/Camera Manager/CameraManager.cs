@@ -8,11 +8,28 @@ using PrimeTween;
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Current;
+    private CinemachineVirtualCamera _curCam;
+    private CinemachineFramingTransposer _framingTransposer;
 
-    void Awake()
-    {
-        if(!Current) Current=this;        
-    }
+    private Coroutine _panCamCoroutine;
+    private Vector2 _startingTrackedObjectOffset;
+
+        void Awake()
+        {
+            if (Current == null)
+                Current = this;
+
+            _curCam = Camera.main?.GetComponentInParent<CinemachineVirtualCamera>();
+
+            if (_curCam == null)
+            {
+                Debug.LogError("No CinemachineVirtualCamera found on the main camera.");
+                return;
+            }
+
+            _framingTransposer = _curCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+            _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
+        }
 
     void OnEnable()
     {
@@ -35,8 +52,64 @@ public class CameraManager : MonoBehaviour
         RecordDefaultNoises();
         SetDefaultCamera();
     }
-    
+
     // ==================================================================================================================
+
+    #region Pan Camera
+
+    public void PanCameraOnContact(float panDistance, float panTime, PanDirection panDirection, bool panToStartingPos)
+    {
+        if (_panCamCoroutine != null) StopCoroutine(_panCamCoroutine);
+        _panCamCoroutine = StartCoroutine(PanCamera(panDistance, panTime, panDirection, panToStartingPos));
+    }
+
+
+    private IEnumerator PanCamera(float panDistance, float panTime, PanDirection panDirection, bool panToStartingPos)
+    {
+        Vector2 endPos = Vector2.zero;
+        Vector2 startingPos = Vector2.zero;
+
+        if (!panToStartingPos)
+        {
+            switch (panDirection)
+            {
+                case PanDirection.Up:
+                    endPos = Vector2.up;
+                    break;
+                case PanDirection.Down:
+                    endPos = Vector2.down;
+                    break;
+                case PanDirection.Left:
+                    endPos = Vector2.right;
+                    break;
+                case PanDirection.Right:
+                    endPos = Vector2.left;
+                    break;
+                default:
+                    break;
+            }
+            endPos *= panDistance;
+            startingPos = _startingTrackedObjectOffset;
+            endPos += startingPos;
+        }
+        else
+        {
+            startingPos = _framingTransposer.m_TrackedObjectOffset;
+            endPos = _startingTrackedObjectOffset;
+        }
+
+        float elapsedTime = 0f;
+        while (elapsedTime < panTime)
+        {
+            elapsedTime += Time.deltaTime;
+            Vector3 panLerp = Vector3.Lerp(startingPos, endPos, (elapsedTime / panTime));
+            _framingTransposer.m_TrackedObjectOffset = panLerp;
+
+            yield return null;
+        }
+    }
+
+    #endregion
 
     public List<CinemachineVirtualCamera> allCameras = new();
 

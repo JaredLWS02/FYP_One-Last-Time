@@ -28,26 +28,25 @@ public class StateMachine_AnayaActions : MonoBehaviour
 
         State_AnayaActions_Idle idle = new(this);
         State_AnayaActions_Casting casting = new(this);
-        State_AnayaActions_HealAbility healAbility = new(this);
-
+        State_AnayaActions_Ability ability = new(this);
+        
         // HUB TRANSITIONS ================================================================================
                 
         idle.AddTransition(casting, (timeInState) =>
         {
             if(
                 action.IsCasting() &&
-                !action.IsHealing() //&&
+                !action.IsDoingAbility() //&&
             ){
                 return true;
             }
             return false;
         });
                 
-        idle.AddTransition(healAbility, (timeInState) =>
+        idle.AddTransition(ability, (timeInState) =>
         {
             if(
-                !action.IsCasting() &&
-                action.IsHealing() //&&
+                action.IsDoingAbility() //&&
             ){
                 return true;
             }
@@ -60,18 +59,17 @@ public class StateMachine_AnayaActions : MonoBehaviour
         {
             if(
                 !action.IsCasting() ||
-                action.IsHealing() //||
+                action.IsDoingAbility() //||
             ){
                 return true;
             }
             return false;
         });
 
-        healAbility.AddTransition(idle, (timeInState) =>
+        ability.AddTransition(idle, (timeInState) =>
         {
             if(
-                action.IsCasting() ||
-                !action.IsHealing() //||
+                !action.IsDoingAbility() //||
             ){
                 return true;
             }

@@ -195,8 +195,8 @@ MonoBehaviour:
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  fov: {x: 0, y: 340}
-  rays: {x: 1, y: 50}
+  fov: {x: 0, y: 350}
+  rays: {x: 1, y: 60}
 --- !u!1 &782954881204329140
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,7 +459,7 @@ MonoBehaviour:
   radar: {fileID: 2952939796052320822}
   targetTag: Player
   sight: {fileID: 8255484749663550365}
-  expandRadarRangeMult: 1.5
+  expandRadarRangeMult: 2
   move: {fileID: 1540304312175946697}
   targetArrivalRange: 4.13
   flee: {fileID: 5627483028069982993}
@@ -494,7 +494,7 @@ Transform:
   m_GameObject: {fileID: 1119412302706147938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: 4.06}
+  m_LocalPosition: {x: -0, y: 0.79, z: 5.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -522,7 +522,7 @@ MonoBehaviour:
   origin: {fileID: 7615011877315059424}
   lookAt: {fileID: 0}
   lookAtOffset: {x: 0, y: 0, z: 0}
-  range: 3
+  range: 2
   hitLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -553,10 +553,10 @@ MonoBehaviour:
     OnHitExit:
       m_PersistentCalls:
         m_Calls: []
-  showGizmos: 0
+  showGizmos: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  radius: 0.31
+  radius: 0.68
 --- !u!114 &4690002153563524249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,9 +573,9 @@ MonoBehaviour:
   - uEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8627083544392464877}
-          m_TargetAssemblyTypeName: EnemyActions, Assembly-CSharp
-          m_MethodName: TryJump
+        - m_Target: {fileID: 7894197541819062297}
+          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
+          m_MethodName: Attack
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -589,9 +589,9 @@ MonoBehaviour:
   - uEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7894197541819062297}
-          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
-          m_MethodName: Attack
+        - m_Target: {fileID: 8627083544392464877}
+          m_TargetAssemblyTypeName: EnemyActions, Assembly-CSharp
+          m_MethodName: TryJump
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -601,7 +601,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    delay: 0.3
+    delay: 0.15
   canInterrupt: 0
 --- !u!114 &7894197541819062297
 MonoBehaviour:
@@ -629,7 +629,7 @@ MonoBehaviour:
   currentOption: 
   owner: {fileID: 6995670659757724566}
   ground: {fileID: 6364306906685696337}
-  allowGrounded: 0
+  allowGrounded: 1
   allowMidAir: 1
   sight: {fileID: 8255484749663550365}
 --- !u!1 &1390348875773342422
@@ -1162,7 +1162,7 @@ MonoBehaviour:
     LastExit:
       m_PersistentCalls:
         m_Calls: []
-  range: 10
+  range: 15
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 1, a: 0.5}
 --- !u!1 &2331810159870700479
@@ -2005,7 +2005,7 @@ MonoBehaviour:
     OnHitExit:
       m_PersistentCalls:
         m_Calls: []
-  showGizmos: 0
+  showGizmos: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
   radius: 0.68
@@ -2101,12 +2101,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4799253879353152561}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
+  enableSlowUpdate: 0
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -2190,6 +2190,7 @@ GameObject:
   - component: {fileID: 5575052531342034989}
   - component: {fileID: 468407208565657733}
   - component: {fileID: 1698828358808159481}
+  - component: {fileID: 6592782549986517896}
   - component: {fileID: 359268306373659021}
   - component: {fileID: 608287442499479247}
   - component: {fileID: 2638087628415255175}
@@ -2259,7 +2260,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b48c2b492c79d3a4899d5a45da033c94, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a608d46486d1b3f44b1ef2ec988d6c24, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2303,6 +2304,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6592782549986517896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081407622737716327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47f20291ddc1d54f97f17bfcc4c81f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1698828358808159481}
+  rb: {fileID: 1401727047894497609}
+  move: {fileID: 1047126221560195232}
+  checkVelocity: 1
+  velXParamName: VelocityX
+  velYParamName: VelocityY
+  velZParamName: VelocityZ
+  baseSpeedMult: 1
+  checkForward: 1
+  forwardParamName: ForwardRatio
+  checkRight: 0
+  rightParamName: RightRatio
+  checkUp: 0
+  upParamName: UpRatio
+  changeBlendTreeSpeed: 1
+  speedParamName: VelocityRatio
 --- !u!114 &359268306373659021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2519,7 +2548,7 @@ MonoBehaviour:
   rgbOffsetCfgs: []
   colorFlickerInterval: 0.05
   randomStartColor: 1
-  randomRgbOffset: {x: 0.25, y: 0.25, z: 0.25}
+  randomRgbOffset: {x: 0.1, y: 0.1, z: 0.1}
   randomStartFlip: 0
   randomFlipY: 0
   randomFlipX: 0
@@ -2607,10 +2636,10 @@ MonoBehaviour:
   returner: {fileID: 0}
   flip: {fileID: 7721746531743297066}
   seekFlipDelay: {x: 0.4, y: 0.6}
-  randomSeekBehaviour: {fileID: 1971569532230939617}
+  randomSeekBehaviour: {fileID: 0}
   hpM: {fileID: 2608293525865954382}
   fleeHPPercent: 25
-  randomFleeBehaviour: {fileID: 1624721283226069543}
+  randomFleeBehaviour: {fileID: 0}
 --- !u!114 &882407172222910880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2896,12 +2925,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6168783330197092899}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
+  enableSlowUpdate: 0
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -2965,15 +2994,15 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   rb: {fileID: 1401727047894497609}
   ray: {fileID: 797935118429853278}
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 1
   defaultCfg:
     moveSeconds: 0.2
     maxMoveDistance: 6
     alwaysMove: 0
     ease: 3
     reach: 1.1
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 1
   showGizmos: 0
   gizmo1Color: {r: 1, g: 1, b: 1, a: 0.5}
   gizmo2Color: {r: 1, g: 1, b: 0, a: 0.5}
@@ -3069,6 +3098,7 @@ GameObject:
   - component: {fileID: 5999157726931825191}
   - component: {fileID: 780967974793306540}
   - component: {fileID: 1894536892237456442}
+  - component: {fileID: 8205563423093595248}
   m_Layer: 6
   m_Name: Small Tikus
   m_TagString: Enemy
@@ -3210,6 +3240,30 @@ MonoBehaviour:
   minY: -20
   showGizmos: 0
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
+--- !u!114 &8205563423093595248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995670659757724566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44190e91fbb6de1469c1a6b46db8f866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 1
+  fixedUpdate: 0
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  owner: {fileID: 6995670659757724566}
+  resetAxis:
+    localPosition: {x: 0, y: 0, z: 1}
+    localEulerAngles: {x: 0, y: 0, z: 0}
+    localScale: {x: 0, y: 0, z: 0}
 --- !u!1 &7021269989712493573
 GameObject:
   m_ObjectHideFlags: 0
@@ -3445,7 +3499,7 @@ Transform:
   m_GameObject: {fileID: 7999669192996397785}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: 0.62}
+  m_LocalPosition: {x: 0, y: 0.79, z: 0.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3473,7 +3527,7 @@ MonoBehaviour:
   origin: {fileID: 2755627915568556016}
   lookAt: {fileID: 0}
   lookAtOffset: {x: 0, y: 0, z: 0}
-  range: 3.4
+  range: 3.05
   hitLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -3504,10 +3558,10 @@ MonoBehaviour:
     OnHitExit:
       m_PersistentCalls:
         m_Calls: []
-  showGizmos: 0
+  showGizmos: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  radius: 0.22
+  radius: 0.68
 --- !u!114 &484633875573823089
 MonoBehaviour:
   m_ObjectHideFlags: 0
