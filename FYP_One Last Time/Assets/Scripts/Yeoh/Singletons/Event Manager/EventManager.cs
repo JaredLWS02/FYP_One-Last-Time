@@ -536,6 +536,13 @@ public class EventManager : MonoBehaviour
     {
         CameraLookAtEvent?.Invoke(target);
     }
+
+    public event Action<Vector3> CinemachineOffsetMoveEvent;
+
+    public void OnCinemachineOffsetMove(Vector3 to)
+    {
+        CinemachineOffsetMoveEvent?.Invoke(to);
+    }
     
     // Old ==================================================================================================================
 

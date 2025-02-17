@@ -15,9 +15,6 @@ public class PakYaActionInputs : MonoBehaviour
     public float attackBuffer=.2f;
     public float parryBuffer=.2f;
 
-    [Header("Camera")]
-    public UnityEvent<Vector3> cameraLookAtMoveEvent;
-
     // ============================================================================
 
     void Update()
@@ -48,7 +45,7 @@ public class PakYaActionInputs : MonoBehaviour
     {
         Vector2 axis = pilot.IsNone() ? Vector2.zero : InputM.cameraLookAtMoveAxis;
 
-        cameraLookAtMoveEvent?.Invoke(axis);
+        EventM.OnCinemachineOffsetMove(axis);
     }
 
     void CheckJump()
