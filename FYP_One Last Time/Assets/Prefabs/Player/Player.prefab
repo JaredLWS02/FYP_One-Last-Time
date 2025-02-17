@@ -2876,9 +2876,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2133356880764225202}
+  - component: {fileID: 2794552877781763932}
   - component: {fileID: 3413660590334377350}
   m_Layer: 3
-  m_Name: LookAt
+  m_Name: Camera Follow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2899,6 +2900,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4032536735459076646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2794552877781763932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897313326109121864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6beb9728da7506541a067eef8c17ea2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  follow: {fileID: 2133356880764225202}
+  lookAt: {fileID: 0}
 --- !u!114 &3413660590334377350
 MonoBehaviour:
   m_ObjectHideFlags: 0
