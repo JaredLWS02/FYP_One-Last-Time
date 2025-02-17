@@ -523,6 +523,20 @@ public class EventManager : MonoBehaviour
         IdleVoiceEvent?.Invoke(subject);
     }
 
+    // Camera ==================================================================================================================
+
+    public event Action<Transform> CameraFollowEvent;
+    public event Action<Transform> CameraLookAtEvent;
+    
+    public void OnCameraFollow(Transform target)
+    {
+        CameraFollowEvent?.Invoke(target);
+    }
+    public void OnCameraLookAt(Transform target)
+    {
+        CameraLookAtEvent?.Invoke(target);
+    }
+    
     // Old ==================================================================================================================
 
     public event Action<GameObject> TrySwitchEvent;
@@ -530,5 +544,6 @@ public class EventManager : MonoBehaviour
     public void OnTrySwitch(GameObject switcher)
     {
         TrySwitchEvent?.Invoke(switcher);
-    }  
+    }
+    
 }
