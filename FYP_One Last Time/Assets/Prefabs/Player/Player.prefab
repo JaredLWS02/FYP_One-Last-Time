@@ -3010,7 +3010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
   riposteTimer: {fileID: 8935098647223567951}
-  riposteTime: 1
+  riposteTime: 0.5
 --- !u!114 &8935098647223567951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3590,13 +3590,13 @@ MonoBehaviour:
   atk: {fileID: 7022457898630109682}
   comboName: Riposte Combo
   comboSteps:
-  - attackSO: {fileID: 11400000, guid: c5e8bd96fbbb74047972e120b49a57d2, type: 2}
+  - attackSO: {fileID: 11400000, guid: bd02e24c4d4071c41be500d6c86f4b0f, type: 2}
     hurtboxPrefab:
-      prefabName: Riposte
+      prefabName: Stab
       randomPrefabs:
-      - {fileID: 1242880141507026177, guid: 7aa5a5f85d95f154a82ef2c953671e00, type: 3}
+      - {fileID: 1242880141507026177, guid: d95d826444300f641a148c76922242c6, type: 3}
       hideInHierarchy: 0
-      spawnpoint: {fileID: 4164968904663650128}
+      spawnpoint: {fileID: 1274828576130776307}
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
@@ -3604,7 +3604,7 @@ MonoBehaviour:
       followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
-    rangeAssist: {fileID: 2270107276636531569}
+    rangeAssist: {fileID: 0}
   randomCombo: 0
   comboResetTimer: {fileID: 3657491780530729279}
   comboResetTime: 0.5
