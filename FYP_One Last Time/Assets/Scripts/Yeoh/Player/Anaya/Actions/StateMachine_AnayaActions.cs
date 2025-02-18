@@ -29,6 +29,7 @@ public class StateMachine_AnayaActions : MonoBehaviour
         State_AnayaActions_Idle idle = new(this);
         State_AnayaActions_Casting casting = new(this);
         State_AnayaActions_Ability ability = new(this);
+        State_AnayaActions_Stunned stunned = new(this);
         
         // HUB TRANSITIONS ================================================================================
                 
@@ -36,7 +37,8 @@ public class StateMachine_AnayaActions : MonoBehaviour
         {
             if(
                 action.IsCasting() &&
-                !action.IsDoingAbility() //&&
+                !action.IsDoingAbility() &&
+                !action.IsStunned() //&&
             ){
                 return true;
             }
@@ -46,7 +48,18 @@ public class StateMachine_AnayaActions : MonoBehaviour
         idle.AddTransition(ability, (timeInState) =>
         {
             if(
-                action.IsDoingAbility() //&&
+                action.IsDoingAbility() &&
+                !action.IsStunned() //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+                
+        idle.AddTransition(stunned, (timeInState) =>
+        {
+            if(
+                action.IsStunned() //&&
             ){
                 return true;
             }
@@ -59,7 +72,8 @@ public class StateMachine_AnayaActions : MonoBehaviour
         {
             if(
                 !action.IsCasting() ||
-                action.IsDoingAbility() //||
+                action.IsDoingAbility() ||
+                action.IsStunned() //||
             ){
                 return true;
             }
@@ -69,7 +83,18 @@ public class StateMachine_AnayaActions : MonoBehaviour
         ability.AddTransition(idle, (timeInState) =>
         {
             if(
-                !action.IsDoingAbility() //||
+                !action.IsDoingAbility() ||
+                action.IsStunned() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        stunned.AddTransition(idle, (timeInState) =>
+        {
+            if(
+                !action.IsStunned() //||
             ){
                 return true;
             }
