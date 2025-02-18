@@ -1462,6 +1462,19 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccf8d6656725c2243af89bfc383ba4c5, type: 2}
+  - prefabName: PakYa Overhead Release Start
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4032536735459076646}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: d45b68080e018ed4f821d1a431798bad, type: 2}
   loopGroups: []
   audioEvents:
     EnableEvent:
@@ -2193,6 +2206,30 @@ MonoBehaviour:
     ReleaseStart:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 5262417445514003396}
+          m_TargetAssemblyTypeName: GlobalLayerCollisionToggler, Assembly-CSharp
+          m_MethodName: ToggleIgnoreLayers
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Ya Dash
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 5607446443472334089}
+          m_TargetAssemblyTypeName: GlobalLayerCollisionToggler, Assembly-CSharp
+          m_MethodName: ToggleIgnoreLayers
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Pak Ya Dash
+            m_BoolArgument: 1
+          m_CallState: 2
         - m_Target: {fileID: 118276988135510132}
           m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
           m_MethodName: PlayName
@@ -2210,7 +2247,31 @@ MonoBehaviour:
         m_Calls: []
     Recover:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 5262417445514003396}
+          m_TargetAssemblyTypeName: GlobalLayerCollisionToggler, Assembly-CSharp
+          m_MethodName: ToggleIgnoreLayers
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 5607446443472334089}
+          m_TargetAssemblyTypeName: GlobalLayerCollisionToggler, Assembly-CSharp
+          m_MethodName: ToggleIgnoreLayers
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     Cancel:
       m_PersistentCalls:
         m_Calls: []
@@ -2218,7 +2279,7 @@ MonoBehaviour:
   rb: {fileID: 1642459170912960868}
   dashAnim: {fileID: 11400000, guid: 41c4e92d9d632d742b05a9b8b97e6b57, type: 2}
   dashingTimer: {fileID: 2575847150646626897}
-  dashingSeconds: 0.1
+  dashingSeconds: 0.05
   dashSpeed: 50
   accelTime: 0
   decelTime: 0.5
@@ -2226,10 +2287,7 @@ MonoBehaviour:
   localDir: 1
   dashRecoverAnim: {fileID: 11400000, guid: 56297a705dec634498ea3fee6483cad5, type: 2}
   cooldown: {fileID: 3177311551941944144}
-  cooldownTime: 0.5
-  togglers:
-  - {fileID: 5262417445514003396}
-  - {fileID: 5607446443472334089}
+  cooldownTime: 0.75
   ground: {fileID: 773448853722404963}
   dashCount: 1
 --- !u!114 &5262417445514003396
