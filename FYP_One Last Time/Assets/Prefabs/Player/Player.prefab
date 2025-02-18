@@ -2218,7 +2218,7 @@ MonoBehaviour:
   rb: {fileID: 1642459170912960868}
   dashAnim: {fileID: 11400000, guid: 41c4e92d9d632d742b05a9b8b97e6b57, type: 2}
   dashingTimer: {fileID: 2575847150646626897}
-  dashingSeconds: 0.2
+  dashingSeconds: 0.1
   dashSpeed: 50
   accelTime: 0
   decelTime: 0.5
@@ -3058,7 +3058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7274980459159228368}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.00000002229198, y: -0.7071068, z: 0.000000022291976, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4405,6 +4405,7 @@ GameObject:
   - component: {fileID: 4615221013399892284}
   - component: {fileID: 1139876886090150564}
   - component: {fileID: 3393573027621743275}
+  - component: {fileID: 8570887325040046891}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -4566,6 +4567,20 @@ MonoBehaviour:
     localPosition: {x: 0, y: 0, z: 1}
     localEulerAngles: {x: 0, y: 0, z: 0}
     localScale: {x: 0, y: 0, z: 0}
+--- !u!114 &8570887325040046891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987163089559660572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6beb9728da7506541a067eef8c17ea2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  follow: {fileID: 4032536735459076646}
+  lookAt: {fileID: 0}
 --- !u!1 &9161674605968897696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4720,7 +4735,7 @@ PrefabInstance:
     - target: {fileID: 8748587039050659660, guid: 3be13b654dc63584d88befb44e243220,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.000000031525616
       objectReference: {fileID: 0}
     - target: {fileID: 8748587039050659660, guid: 3be13b654dc63584d88befb44e243220,
         type: 3}
@@ -4730,7 +4745,7 @@ PrefabInstance:
     - target: {fileID: 8748587039050659660, guid: 3be13b654dc63584d88befb44e243220,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -3.5527133e-15
       objectReference: {fileID: 0}
     - target: {fileID: 8748587039050659660, guid: 3be13b654dc63584d88befb44e243220,
         type: 3}

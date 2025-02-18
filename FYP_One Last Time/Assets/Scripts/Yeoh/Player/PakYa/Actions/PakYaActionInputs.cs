@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PakYaActionInputs : MonoBehaviour
 {
@@ -19,7 +20,9 @@ public class PakYaActionInputs : MonoBehaviour
     void Update()
     {
         if(Time.timeScale == 0f) return;
+
         CheckMove();
+        CheckCameraLookAtMove();
 
         if(!pilot.IsPlayer()) return;
 
@@ -36,6 +39,13 @@ public class PakYaActionInputs : MonoBehaviour
 
         EventM.OnTryMove(owner, moveAxis);
         EventM.OnTryFlip(owner, moveAxis.x);
+    }
+
+    void CheckCameraLookAtMove()
+    {
+        Vector2 axis = pilot.IsNone() ? Vector2.zero : InputM.cameraLookAtMoveAxis;
+
+        EventM.OnCinemachineOffsetMove(axis);
     }
 
     void CheckJump()
