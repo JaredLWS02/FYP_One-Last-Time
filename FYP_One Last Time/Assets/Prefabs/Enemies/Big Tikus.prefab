@@ -1102,7 +1102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2719329177920231827}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.000000022291978, y: -0.7071068, z: 0.000000022291978, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1410,7 +1410,7 @@ MonoBehaviour:
   rgbOffsetCfgs: []
   colorFlickerInterval: 0.05
   randomStartColor: 1
-  randomRgbOffset: {x: 0.25, y: 0.25, z: 0.25}
+  randomRgbOffset: {x: 0.1, y: 0.1, z: 0.1}
   randomStartFlip: 0
   randomFlipY: 0
   randomFlipX: 0
@@ -1544,6 +1544,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3071236275463930265}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3631787300232892887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2454786662058533154}
+  m_Layer: 6
+  m_Name: Sparkle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2454786662058533154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3631787300232892887}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8449358400114368154}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4054843889046639969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,6 +1617,7 @@ GameObject:
   - component: {fileID: 8449358400114368154}
   - component: {fileID: 6861530176262365675}
   - component: {fileID: 8399864931548892809}
+  - component: {fileID: 1405673648338651218}
   m_Layer: 6
   m_Name: Attacks
   m_TagString: Untagged
@@ -1609,6 +1641,7 @@ Transform:
   - {fileID: 7018626630257047408}
   - {fileID: 3071236275463930265}
   - {fileID: 6163594383749842401}
+  - {fileID: 2454786662058533154}
   m_Father: {fileID: 2961089990564272037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6861530176262365675
@@ -1675,7 +1708,19 @@ MonoBehaviour:
   attackEvents:
     WindUp:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1405673648338651218}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseStart:
       m_PersistentCalls:
         m_Calls: []
@@ -1702,6 +1747,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &1405673648338651218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345753957651105915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Slam Wind Up
+    randomPrefabs:
+    - {fileID: 5311859234721833831, guid: ab80bba881f7b2547a282652beb60fde, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 2454786662058533154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  - prefabName: Rush Wind Up
+    randomPrefabs:
+    - {fileID: 5311859234721833831, guid: acc794604cada3c47a930c50e77dba71, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 2454786662058533154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &4725129758288447381
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,7 +3681,7 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.000000022291978
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
@@ -3602,7 +3691,7 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.000000022291978
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
