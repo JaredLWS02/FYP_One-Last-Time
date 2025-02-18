@@ -44,7 +44,7 @@ public class OnParryScript : BaseAction
         EventM.OnTryIFrame(owner, iframeSeconds);
 
         if(selfKnockback)
-        EventM.OnTryKnockback(owner, hurtbox.blockKnockback, contactPoint);
+        EventM.OnTryKnockback(owner, hurtbox.blockKnockback, contactPoint, hurtbox.killsMomentum);
 
         if(cancelAttackersAttack)
         EventM.OnCancelAttack(attacker);

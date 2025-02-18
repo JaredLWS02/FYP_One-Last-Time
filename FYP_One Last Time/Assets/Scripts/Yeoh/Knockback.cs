@@ -30,7 +30,7 @@ public class Knockback : MonoBehaviour
     public Vector3Int knockbackAxis = new(1,0,1);
     public float knockbackMult=1;
 
-    public void OnTryKnockback(GameObject who, float force, Vector3 contactPoint)
+    public void OnTryKnockback(GameObject who, float force, Vector3 contactPoint, bool kill_momentum)
     {
         if(who!=owner) return;
 
@@ -49,7 +49,9 @@ public class Knockback : MonoBehaviour
         if(knockbackMult!=1)
         force *= knockbackMult;
 
+        if(kill_momentum)
         rb.velocity = Vector3.zero;
+        
         rb.AddForce(kb_dir * force, ForceMode.Impulse);
     }
 }
