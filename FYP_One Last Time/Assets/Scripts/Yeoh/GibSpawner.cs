@@ -44,11 +44,11 @@ public class GibSpawner : MonoBehaviour
 
             if(!gibsKnockback) return;
 
-            EventM.OnTryKnockback(spawned, force, contactPoint);
+            EventM.OnTryKnockback(spawned, force, contactPoint, true);
 
             foreach(Transform child in spawned.transform)
             {
-                EventM.OnTryKnockback(child.gameObject, force, contactPoint);
+                EventM.OnTryKnockback(child.gameObject, force, contactPoint, true);
             }
         }
     }

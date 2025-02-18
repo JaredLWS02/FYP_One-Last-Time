@@ -48,7 +48,7 @@ public class Poise : MonoBehaviour
     void BreakPoise(GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         EventM.OnTryStun(owner, attacker, hurtbox, contactPoint);
-        EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
+        EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint, hurtbox.killsMomentum);
         EventM.OnPoiseBroke(owner, attacker, hurtbox, contactPoint);
 
         poiseEvents.OnPoiseBreak?.Invoke();

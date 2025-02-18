@@ -66,7 +66,7 @@ public class HurtScript : MonoBehaviour
 
         StopAllCoroutines();
 
-        EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint);
+        EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint, hurtbox.killsMomentum);
 
         hurtEvents.OnDeath?.Invoke(contactPoint);
 

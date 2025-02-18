@@ -54,4 +54,7 @@ public class AnayaActions : MonoBehaviour
     public bool IsForcePushing() => push?.IsPerforming() ?? false;
 
     public bool IsDoingAbility() => IsHealing() || IsForcePulling() || IsForcePushing();
+
+    public PakYaActions pakyaActions;
+    public bool IsStunned() => pakyaActions?.IsStunned() ?? false;
 }

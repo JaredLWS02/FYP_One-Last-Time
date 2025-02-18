@@ -367,6 +367,7 @@ MonoBehaviour:
   shakeTime: 0.2
   amplitud: 2
   frequency: 2
+  tweenFovTime: 0.5
   angle: 2
   dutchIn: 0.025
   dutchOut: 0.1
@@ -881,6 +882,7 @@ GameObject:
   - component: {fileID: 5402544422226357994}
   - component: {fileID: 3265152939051952596}
   - component: {fileID: 7706037653307297120}
+  - component: {fileID: 4122467532049000028}
   m_Layer: 3
   m_Name: Abilities
   m_TagString: Untagged
@@ -1130,6 +1132,30 @@ MonoBehaviour:
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  - prefabName: Shockwave Pull
+    randomPrefabs:
+    - {fileID: 419085589674771820, guid: a5a5db9437680634a9b19020a1aa49ce, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 123463650881099154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  - prefabName: Shockwave Push
+    randomPrefabs:
+    - {fileID: 419085589674771820, guid: e41803e1375f37b4cbb64811ab6fdf89, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 123463650881099154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
   spawnEvents:
     OnEnable:
       m_PersistentCalls:
@@ -1205,7 +1231,31 @@ MonoBehaviour:
         m_Calls: []
     ReleaseStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 4122467532049000028}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave Pull
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3796256092420723281}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave Pull
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls: []
@@ -1244,7 +1294,31 @@ MonoBehaviour:
         m_Calls: []
     ReleaseStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 4122467532049000028}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave Push
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3796256092420723281}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave Push
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls: []
@@ -1281,6 +1355,33 @@ MonoBehaviour:
   radius: 10
   targetColls: []
   stunboxSO: {fileID: 11400000, guid: 000be396255b6b040bb500464e2ff26a, type: 2}
+--- !u!114 &4122467532049000028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2756698445312053699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  tweenFovTime: 0.5
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &2941172494308309934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2550,6 +2651,7 @@ MonoBehaviour:
   shakeTime: 0.2
   amplitud: 2
   frequency: 2
+  tweenFovTime: 0.5
   angle: 2
   dutchIn: 0.025
   dutchOut: 0.1
@@ -3009,6 +3111,7 @@ MonoBehaviour:
   heal: {fileID: 7975362184149562795}
   pull: {fileID: 5402544422226357994}
   push: {fileID: 3265152939051952596}
+  pakyaActions: {fileID: 4583146008036901521}
 --- !u!114 &6210519420762547229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4470,6 +4573,7 @@ MonoBehaviour:
   shakeTime: 0.2
   amplitud: 2
   frequency: 2
+  tweenFovTime: 0.5
   angle: 2
   dutchIn: 0.025
   dutchOut: 0.1

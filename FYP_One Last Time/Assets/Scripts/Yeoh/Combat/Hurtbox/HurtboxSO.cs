@@ -12,12 +12,15 @@ public class HurtboxSO : ScriptableObject
 
     [Header("Hit")]
     public float damage=25;
-    public float knockback=25;
     public float blockDamage=25;
-    public float blockKnockback=25;
     [Min(1)]
     public int pierceCount=1;
     public bool ignoreIFrame;
+
+    [Header("Knockback")]
+    public float knockback=25;
+    public float blockKnockback=25;
+    public bool killsMomentum=true;
     
     [Header("Parry")]
     public bool isParryable=true;
