@@ -24,6 +24,8 @@ public class CameraController : MonoBehaviour
     public void SelectCameraName(string cam_name)
         => selectedCam = CamM.GetCameraByName(cam_name);
 
+    public void SelectDefaultCamera() => selectedCam = CamM.defaultCamera;
+
     // ============================================================================
     
     public void ChangeCameraToSelected() => CamM.ChangeCamera(selectedCam);
@@ -56,6 +58,18 @@ public class CameraController : MonoBehaviour
     }
 
     public void CancelShake() => CamM.CancelShake();
+
+    // ============================================================================
+
+    [Header("FOV")]
+    public float tweenFovTime=.5f;
+    public void SetTweenFOVTime(float t) => tweenFovTime=t;
+
+    public void TweenFOV(float to) => CamM.TweenFOV(selectedCam, to, tweenFovTime);
+
+    public void TweenDefaultFOV() => CamM.TweenDefaultFOV(selectedCam, tweenFovTime);
+
+    public void CancelFOVTween() => CamM.CancelFOVTween();
 
     // ============================================================================
     
