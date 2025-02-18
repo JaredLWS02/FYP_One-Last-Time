@@ -21,7 +21,12 @@ public class cameraPan : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Player"))
+        var other_rb = col.attachedRigidbody;
+
+        if (!other_rb)
+            return;
+
+        if (other_rb.gameObject.CompareTag("Player"))
         {
             if (customInspectorObjects.panCameraOnContact)
             {
@@ -33,7 +38,12 @@ public class cameraPan : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        if (col.CompareTag("Player"))
+        var other_rb = col.attachedRigidbody;
+
+        if (!other_rb)
+            return;
+
+        if (other_rb.gameObject.CompareTag("Player"))
         {
             if (customInspectorObjects.panCameraOnContact)
             {
