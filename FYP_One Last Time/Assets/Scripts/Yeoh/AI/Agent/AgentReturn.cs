@@ -80,7 +80,7 @@ public class AgentReturn : MonoBehaviour
 
     public bool IsAtSpawnpoint()
     {
-        return IsInRange(spawnpoint.position, owner.transform.position, vehicle.stoppingRange);
+        return IsInRange(spawnpoint.position, owner.transform.position, vehicle.arrivalRange);
     }
 
     // ============================================================================

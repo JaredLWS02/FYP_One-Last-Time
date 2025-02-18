@@ -270,6 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5947541124973108052}
   - component: {fileID: 2644356565013767624}
+  - component: {fileID: 2817243736959203965}
   m_Layer: 0
   m_Name: Enemy Manager
   m_TagString: Untagged
@@ -358,6 +359,30 @@ MonoBehaviour:
             m_StringArgument: Combat
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2817243736959203965}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: SelectDefaultCamera
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Combat
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2817243736959203965}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: TweenFOV
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 50
+            m_StringArgument: Combat
+            m_BoolArgument: 0
+          m_CallState: 2
     OnEnemyLastExitCombat:
       m_PersistentCalls:
         m_Calls:
@@ -409,6 +434,57 @@ MonoBehaviour:
             m_StringArgument: Silent
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2817243736959203965}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: SelectDefaultCamera
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Silent
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2817243736959203965}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: TweenDefaultFOV
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Silent
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &2817243736959203965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3311132664264677286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  tweenFovTime: 0.5
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1001 &3338021967153544469
 PrefabInstance:
   m_ObjectHideFlags: 0

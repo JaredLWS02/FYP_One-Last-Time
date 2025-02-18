@@ -12,6 +12,8 @@ public class AbilitySlot
     // ============================================================================
 
     float cooldownLeft;
+
+    public float GetCooldown() => cooldownLeft;
     
     public void DoCooldown() => cooldownLeft = ability.cooldownTime;
 

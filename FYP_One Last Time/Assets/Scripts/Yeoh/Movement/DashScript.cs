@@ -55,11 +55,6 @@ public class DashScript : BaseAction
 
         TweenDashSpeed(dashSpeed, accelTime);
 
-        foreach(var toggler in togglers)
-        {
-            toggler.ToggleIgnoreLayers(true);
-        }
-
         if(ground) dashesLeft--;
 
         DoDashing();
@@ -122,11 +117,6 @@ public class DashScript : BaseAction
     
     void OnDashingFinished()
     {
-        foreach(var toggler in togglers)
-        {
-            toggler.ToggleIgnoreLayers(false);
-        }
-
         Anim3_ReleaseEnd();
 
         if(dashRecoverAnim)
@@ -182,8 +172,6 @@ public class DashScript : BaseAction
     // ============================================================================
     
     [Header("Optional")]
-    public List<GlobalLayerCollisionToggler> togglers = new();
-
     public GroundCheck ground;
     public int dashCount=1;
     int dashesLeft;

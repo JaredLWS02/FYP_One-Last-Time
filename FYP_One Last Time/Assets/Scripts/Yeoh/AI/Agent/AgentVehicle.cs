@@ -14,7 +14,7 @@ public class AgentVehicle : MonoBehaviour
 
     void Awake()
     {
-        def_stoppingRange = stoppingRange;
+        defaultArrivalRange = arrivalRange;
     }
 
     // ============================================================================
@@ -27,7 +27,7 @@ public class AgentVehicle : MonoBehaviour
         agent.speed = move.speed;
         agent.acceleration = move.acceleration;
         agent.angularSpeed = turn.turnSpeed;
-        agent.stoppingDistance = stoppingRange;        
+        agent.stoppingDistance = arrivalRange;        
     }
 
     // ============================================================================
@@ -40,7 +40,7 @@ public class AgentVehicle : MonoBehaviour
 
         agent.destination = goal.position;
 
-        velocity = GetArrivalVelocity(agent.desiredVelocity);
+        velocity = GetVelocity();
 
         // set agent virtual pos to rigidbody pos
         agent.nextPosition = owner.transform.position;
@@ -48,32 +48,49 @@ public class AgentVehicle : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Arrival")]
     public Transform goal;
-    public bool arrival=true;
-    public float stoppingRange=1;
-    float def_stoppingRange;
-    public float slowingRangeOffset=3;
 
-    Vector3 GetArrivalVelocity(Vector3 velocity)
+    [Header("Arrival")]
+    public bool arrival=true;
+    public float arrivalRange=1;
+    float defaultArrivalRange;
+    public float arrivalSlowingRangeOffset=3;
+
+    // ============================================================================
+    
+    Vector3 GetVelocity()
     {
         if(!goal) return Vector3.zero;
 
-        if(!arrival) return velocity;
+        float distance = Vector3.Distance(goal.position, owner.transform.position);
 
-        float distance = Mathf.Abs(goal.position.x - owner.transform.position.x);
+        float speed = GetArrivalSpeed(distance);
 
-        if(distance <= stoppingRange) return Vector3.zero;
+        Vector3 dir = agent.desiredVelocity.normalized;
 
-        float max_speed = velocity.magnitude;
+        return speed * dir;
+    }
 
-        float ramped_speed = max_speed * distance / (stoppingRange+slowingRangeOffset);
+    // ============================================================================
+    
+    float GetArrivalSpeed(float distance)
+    {    
+        float max_speed = agent.desiredVelocity.magnitude;
+        
+        if(!arrival) return max_speed;
+
+        if(distance <= arrivalRange) return 0;
+
+        if(arrivalSlowingRangeOffset == 0)
+            arrivalSlowingRangeOffset = Mathf.Epsilon;
+
+        float ramped_speed = max_speed * (distance - arrivalRange) / arrivalSlowingRangeOffset;
 
         float clipped_speed = Mathf.Min(ramped_speed, max_speed);
 
-        return velocity.normalized * clipped_speed;
+        return clipped_speed;
     }
-
+    
     // ============================================================================
 
     public GameObject GetCurrentGoal() => goal.gameObject;
@@ -94,11 +111,11 @@ public class AgentVehicle : MonoBehaviour
 
     // ============================================================================
     
-    public float GetCurrentRange() => stoppingRange;
+    public float GetCurrentRange() => arrivalRange;
 
-    public void SetRange(float to) => stoppingRange = to;
+    public void SetRange(float to) => arrivalRange = to;
 
-    public void RevertRange() => stoppingRange = def_stoppingRange;
+    public void RevertRange() => arrivalRange = defaultArrivalRange;
 
     public bool InRange(Vector3 from, Vector3 target, float range)
     {
@@ -156,13 +173,13 @@ public class AgentVehicle : MonoBehaviour
         if(showStoppingRangeGizmo)
         {
             Gizmos.color = stoppingRangeGizmoColor;
-            Gizmos.DrawWireSphere(owner.transform.position, stoppingRange);
+            Gizmos.DrawWireSphere(owner.transform.position, arrivalRange);
         }
 
         if(showSlowingRangeGizmo)
         {
             Gizmos.color = slowingRangeGizmoColor;
-            Gizmos.DrawWireSphere(owner.transform.position, stoppingRange+slowingRangeOffset);
+            Gizmos.DrawWireSphere(owner.transform.position, arrivalRange+arrivalSlowingRangeOffset);
         }
 
         if(showMaintainRangeGizmo)

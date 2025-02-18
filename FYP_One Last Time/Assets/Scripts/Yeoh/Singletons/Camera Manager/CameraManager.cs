@@ -51,6 +51,7 @@ public class CameraManager : MonoBehaviour
         RefreshAllNoises();
         RecordDefaultNoises();
         SetDefaultCamera();
+        RecordDefaultFovs();
     }
 
     // ==================================================================================================================
@@ -288,17 +289,33 @@ public class CameraManager : MonoBehaviour
 
     // ==================================================================================================================
 
+    Dictionary<CinemachineVirtualCamera, float> defaultFovs = new();
+
+    public void RecordDefaultFovs()
+    {
+        foreach(var cam in allCameras)
+        {
+            defaultFovs[cam] = cam.m_Lens.FieldOfView;
+        }
+    }
+
     Tween fovTween;
 
-    public void TweenFOV(float to, float time)
+    public void TweenFOV(CinemachineVirtualCamera cam, float to, float time)
     {
         fovTween.Stop();
-        if(time>0) fovTween = Tween.Custom(currentCamera.m_Lens.FieldOfView, to, time, onValueChange: newVal => currentCamera.m_Lens.FieldOfView=newVal, Ease.InOutSine);
-        else currentCamera.m_Lens.FieldOfView = to;
+        if(time>0) fovTween = Tween.Custom(cam.m_Lens.FieldOfView, to, time, onValueChange: newVal => cam.m_Lens.FieldOfView=newVal, Ease.InOutSine);
+        else cam.m_Lens.FieldOfView = to;
 
         // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
         // else Invoke("EnableCamPanSfx", 1);
     }
+
+    public void TweenFOV(float to, float time) => TweenFOV(currentCamera, to, time);
+
+    public void TweenDefaultFOV(CinemachineVirtualCamera cam, float time) => TweenFOV(cam, defaultFovs[cam], time);
+
+    public void TweenDefaultFOV(float time) => TweenFOV(currentCamera, defaultFovs[currentCamera], time);
 
     public void CancelFOVTween() => fovTween.Complete();
     
