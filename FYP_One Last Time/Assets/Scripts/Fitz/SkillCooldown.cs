@@ -13,7 +13,7 @@ public class SkillCooldown : MonoBehaviour
     void Start()
     {
         image = this.GetComponent<Image>();
-        slot = GetAbilitySlot();
+        slot = abilityList.GetAbility(ability);
     }
 
     // Update is called once per frame
@@ -23,17 +23,5 @@ public class SkillCooldown : MonoBehaviour
             image.fillAmount = 0;
         else
             image.fillAmount = slot.GetCooldown() / ability.cooldownTime;
-    }
-
-    AbilitySlot GetAbilitySlot()
-    {
-        foreach (var slot in abilityList.abilitySlots)
-        {
-            if (slot.ability == ability)
-            {
-                return slot;
-            }
-        }
-        return null;
     }
 }

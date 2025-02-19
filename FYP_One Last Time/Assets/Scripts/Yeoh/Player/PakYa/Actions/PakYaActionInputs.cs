@@ -43,7 +43,7 @@ public class PakYaActionInputs : MonoBehaviour
 
     void CheckCameraLookAtMove()
     {
-        Vector2 axis = pilot.IsNone() ? Vector2.zero : InputM.cameraLookAtMoveAxis;
+        Vector2 axis = pilot.IsNone() ? Vector2.zero : InputM.cameraOffsetMoveAxis;
 
         EventM.OnCinemachineOffsetMove(axis);
     }

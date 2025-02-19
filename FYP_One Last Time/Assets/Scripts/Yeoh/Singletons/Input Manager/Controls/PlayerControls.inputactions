@@ -123,7 +123,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Camera LookAt Move",
+                    "name": "Camera Offset Move",
                     "type": "Value",
                     "id": "720f28f5-db87-4e85-8a1f-ec29ecefcf78",
                     "expectedControlType": "Vector2",
@@ -312,7 +312,7 @@
                 {
                     "name": "binding",
                     "id": "48d2b817-33ae-4a73-a1c1-cd0428dce3b5",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Console",
@@ -345,7 +345,7 @@
                 {
                     "name": "binding",
                     "id": "6ace5f3b-f7eb-47c3-922e-520c7b8b4962",
-                    "path": "<HID::Logitech Logitech Dual Action>/trigger",
+                    "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Console",
@@ -378,7 +378,7 @@
                 {
                     "name": "",
                     "id": "1cceef3d-a29c-4b1c-ad83-d39341405471",
-                    "path": "<HID::Logitech Logitech Dual Action>/trigger",
+                    "path": "<Joystick>/trigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Console",
@@ -433,7 +433,7 @@
                 {
                     "name": "",
                     "id": "b0841a5d-1ec0-4ead-93fd-2921459d4302",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Console",
@@ -543,7 +543,7 @@
                 {
                     "name": "binding",
                     "id": "5e816a83-08dc-4196-8486-4b978e740b24",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Console",
@@ -708,7 +708,7 @@
                 {
                     "name": "",
                     "id": "02da92d1-4c75-4f0c-89a5-90212a40d593",
-                    "path": "<Keyboard>/f",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
@@ -827,13 +827,24 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "7069c085-a1a3-4129-aeca-e413ec46cbf4",
+                    "path": "<HID::Logitech Logitech Dual Action>/button10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Console",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "Keyboard Arrows",
                     "id": "6dbbbfbb-ea6f-41ee-a811-059be07d805b",
                     "path": "Dpad",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Camera LookAt Move",
+                    "action": "Camera Offset Move",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -844,7 +855,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Camera LookAt Move",
+                    "action": "Camera Offset Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -855,7 +866,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Camera LookAt Move",
+                    "action": "Camera Offset Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -866,7 +877,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Camera LookAt Move",
+                    "action": "Camera Offset Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -877,7 +888,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Camera LookAt Move",
+                    "action": "Camera Offset Move",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -888,7 +899,18 @@
                     "interactions": "",
                     "processors": "StickDeadzone",
                     "groups": "Console",
-                    "action": "Camera LookAt Move",
+                    "action": "Camera Offset Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fbc3d5ac-7b39-4c2b-a73c-f93b29a64dec",
+                    "path": "<HID::Logitech Logitech Dual Action>/hat",
+                    "interactions": "",
+                    "processors": "StickDeadzone",
+                    "groups": "Console",
+                    "action": "Camera Offset Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

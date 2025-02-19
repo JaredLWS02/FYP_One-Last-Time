@@ -33,7 +33,7 @@ public class InputManager : MonoBehaviour
     InputAction reloadScene;
     InputAction mainMenuScene;
     InputAction pause;
-    InputAction cameraLookAtMove;
+    InputAction cameraOffsetMove;
 
     void SetupInputActions()
     {
@@ -52,7 +52,7 @@ public class InputManager : MonoBehaviour
         reloadScene = playerInput.actions["Reload Scene"];
         mainMenuScene = playerInput.actions["MainMenu Scene"];
         pause = playerInput.actions["Pause"];
-        cameraLookAtMove = playerInput.actions["Camera LookAt Move"];
+        cameraOffsetMove = playerInput.actions["Camera Offset Move"];
     }
 
     // ============================================================================
@@ -71,7 +71,7 @@ public class InputManager : MonoBehaviour
     public bool reloadSceneKeyDown {get; private set;}
     public bool mainMenuSceneKeyDown {get; private set;}
     public bool pauseKeyDown {get; private set;}
-    public Vector2 cameraLookAtMoveAxis {get; private set;}
+    public Vector2 cameraOffsetMoveAxis {get; private set;}
 
     void Update()
     {
@@ -89,6 +89,6 @@ public class InputManager : MonoBehaviour
         reloadSceneKeyDown = reloadScene.WasPressedThisFrame();
         mainMenuSceneKeyDown = mainMenuScene.WasPressedThisFrame();
         pauseKeyDown = pause.WasPressedThisFrame();
-        cameraLookAtMoveAxis = cameraLookAtMove.ReadValue<Vector2>();
+        cameraOffsetMoveAxis = cameraOffsetMove.ReadValue<Vector2>();
     }
 }
