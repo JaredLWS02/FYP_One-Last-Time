@@ -75,6 +75,8 @@ public enum PanDirection
     Right
 }
 
+#if UNITY_EDITOR
+
 [CustomEditor(typeof(cameraPan))]
 public class MyScriptEditor : Editor
 {
@@ -113,3 +115,5 @@ public class MyScriptEditor : Editor
         }
     }
 }
+
+#endif
