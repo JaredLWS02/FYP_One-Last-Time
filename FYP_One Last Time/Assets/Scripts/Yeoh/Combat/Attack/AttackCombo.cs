@@ -63,7 +63,7 @@ public class AttackCombo : MonoBehaviour
         atk.TryAttack();
     }
 
-    void ChooseCombo(int i) => atk.attackPreset = comboSteps[i];
+    void ChooseCombo(int i) => atk.ChoosePreset(comboSteps[i]);
     
     // ============================================================================
     

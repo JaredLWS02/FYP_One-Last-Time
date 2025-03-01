@@ -273,7 +273,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   allowStun: 1
   defaultStunAnim: {fileID: 11400000, guid: 8f5f6b470198d004fab04f404f4051e1, type: 2}
   cooldown: {fileID: 9139493631820300163}
@@ -702,7 +701,7 @@ MonoBehaviour:
   rayLength: 2
   layers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4097
   maxSlopeAngle: 35
   climbCounterForce: 500
   slideCounterForce: 60
@@ -936,7 +935,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   mpM: {fileID: 7058722310484815464}
   abilityList: {fileID: 11400000, guid: 20654795a73aa1546b842d07d69881d9, type: 2}
   abilitySO: {fileID: 0}
@@ -1062,7 +1060,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   caster: {fileID: 1410335126641825925}
   abilitySO: {fileID: 11400000, guid: 289d739c06a77ac4f91862671cfa2768, type: 2}
   abilitySlot:
@@ -1265,7 +1262,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   caster: {fileID: 1410335126641825925}
   abilitySO: {fileID: 11400000, guid: 67dcf62b48eb20b4986474141ff216e1, type: 2}
   abilitySlot:
@@ -1328,7 +1324,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   caster: {fileID: 1410335126641825925}
   abilitySO: {fileID: 11400000, guid: 4724d2a4b0ad72347abf4a066a9cea14, type: 2}
   abilitySlot:
@@ -1451,7 +1446,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   attackPreset:
     attackSO: {fileID: 0}
     hurtboxPrefab:
@@ -1467,6 +1461,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   rb: {fileID: 1642459170912960868}
   cooldown: {fileID: 1109364968870284027}
   attackEvents:
@@ -1811,6 +1821,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 2270107276636531569}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   - attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
     hurtboxPrefab:
       prefabName: SlashL
@@ -1826,6 +1852,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 2270107276636531569}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   - attackSO: {fileID: 11400000, guid: bd02e24c4d4071c41be500d6c86f4b0f, type: 2}
     hurtboxPrefab:
       prefabName: Stab
@@ -1841,6 +1883,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 9106477853489237606}
   comboResetTime: 0.5
@@ -2376,7 +2434,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   rb: {fileID: 1642459170912960868}
   dashAnim: {fileID: 11400000, guid: 41c4e92d9d632d742b05a9b8b97e6b57, type: 2}
   dashingTimer: {fileID: 2575847150646626897}
@@ -2613,7 +2670,7 @@ MonoBehaviour:
   posOffset: {x: 0, y: 0.3, z: 0}
   layers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4097
   ignoreTriggers: 1
   onlyRigidbodies: 0
   overlapEvents:
@@ -2761,6 +2818,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 2270107276636531569}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 1817858224624087572}
   comboResetTime: 0.5
@@ -2861,7 +2934,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   raiseParryAnim: {fileID: 11400000, guid: fe4e54c57f9cf884eaf0a32272a960e2, type: 2}
   cooldown: {fileID: 2189189842004329316}
   cooldownTime: 0.3
@@ -2905,26 +2977,13 @@ MonoBehaviour:
         m_Calls: []
     ReleaseEnd:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
-          m_MethodName: Spawn
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     Recover:
       m_PersistentCalls:
         m_Calls: []
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   parryAnim: {fileID: 11400000, guid: e0f653934f89a0d488ef3b1dafebaa6d, type: 2}
   parryIFrame: 1
   iframeSeconds: 0.5
@@ -3766,6 +3825,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 3657491780530729279}
   comboResetTime: 0.5

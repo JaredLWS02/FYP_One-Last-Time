@@ -127,6 +127,10 @@ public class BaseOverlap : SlowUpdate
 
     // ============================================================================
 
+    public bool IsOverlappingWho(GameObject who) => current_overlaps.ContainsKey(who);
+    
+    // ============================================================================
+
     public virtual void OnOverlapFirstEnter(GameObject obj, Collider coll){}
     public virtual void OnOverlapEnter(GameObject obj, Collider coll){}
     public virtual void OnOverlapStay(Dictionary<GameObject, Collider> dict){}

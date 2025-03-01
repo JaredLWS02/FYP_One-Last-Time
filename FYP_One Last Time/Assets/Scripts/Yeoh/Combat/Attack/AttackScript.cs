@@ -3,6 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// ============================================================================
+
+[System.Serializable]
+public struct AttackPresetEvents
+{
+    public UnityEvent WindUp;
+    public UnityEvent ReleaseStart;
+    public UnityEvent ReleaseEnd;
+    public UnityEvent Recover;
+    public UnityEvent Cancel;
+}
+
+// ============================================================================
+
 [System.Serializable]
 public class AttackPreset
 {
@@ -11,6 +25,8 @@ public class AttackPreset
     public PrefabPreset hurtboxPrefab;
     [Space]
     public RangeAssist rangeAssist;
+    [Space]
+    public AttackPresetEvents events;
 }
 
 // ============================================================================
@@ -44,6 +60,8 @@ public class AttackScript : BaseAction
     
     [Header("On Attack")]
     public AttackPreset attackPreset;
+
+    public void ChoosePreset(AttackPreset preset) => attackPreset = preset;
     
     public void TryAttack()
     {
@@ -74,6 +92,7 @@ public class AttackScript : BaseAction
         EventM.OnAttackWindedUp(owner, atk);
 
         attackEvents.WindUp?.Invoke($"{atk.Name} Wind Up");
+        attackPreset.events.WindUp?.Invoke();
     }  
     // Anim Event
     public override void OnAnimReleaseStart()
@@ -91,6 +110,7 @@ public class AttackScript : BaseAction
         EventM.OnAttackReleased(owner, atk);
 
         attackEvents.ReleaseStart?.Invoke($"{atk.Name} Release Start");
+        attackPreset.events.ReleaseStart?.Invoke();
     }
     // Anim Event
     public override void OnAnimReleaseEnd()
@@ -100,6 +120,7 @@ public class AttackScript : BaseAction
         AttackSO atk = attackPreset.attackSO;
 
         attackEvents.ReleaseEnd?.Invoke($"{atk.Name} Release End");
+        attackPreset.events.ReleaseEnd?.Invoke();
     }
     // Anim Event
     public override void OnAnimRecover()
@@ -111,6 +132,7 @@ public class AttackScript : BaseAction
         AttackSO atk = attackPreset.attackSO;
 
         attackEvents.Recover?.Invoke($"{atk.Name} Recover");
+        attackPreset.events.Recover?.Invoke();
     }  
 
     // ============================================================================
@@ -183,6 +205,7 @@ public class AttackScript : BaseAction
         AttackSO atk = attackPreset.attackSO;
 
         attackEvents.Cancel?.Invoke($"{atk.Name} Cancel");
+        attackPreset.events.Cancel?.Invoke();
     }
 
     // ============================================================================

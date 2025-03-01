@@ -248,6 +248,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 8390285650855487920}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 7246694524904160894}
   comboResetTime: 0.5
@@ -454,7 +470,7 @@ MonoBehaviour:
         m_Calls: []
   owner: {fileID: 5261146206814944013}
   vehicle: {fileID: 293840219241273385}
-  defaultTarget: {fileID: 0}
+  forceTarget: {fileID: 0}
   radar: {fileID: 801440721258214197}
   targetTag: Player
   sight: {fileID: 1219722450071829959}
@@ -702,6 +718,7 @@ MonoBehaviour:
   returner: {fileID: 0}
   flip: {fileID: 8663946442160230497}
   seekFlipDelay: {x: 0.4, y: 0.6}
+  combatSlotNum: 0
   randomSeekBehaviour: {fileID: 0}
   hpM: {fileID: 704049436961937626}
   fleeHPPercent: 10
@@ -987,8 +1004,8 @@ MonoBehaviour:
   turn: {fileID: 8663946442160230497}
   goal: {fileID: 0}
   arrival: 1
-  stoppingRange: 1
-  slowingRangeOffset: 3
+  arrivalRange: 1
+  arrivalSlowingRangeOffset: 3
   maintainRange: 5
   selfStoppingRange: 0.5
   showGizmos: 0
@@ -1034,9 +1051,15 @@ MonoBehaviour:
   owner: {fileID: 5261146206814944013}
   vehicle: {fileID: 293840219241273385}
   checkHeight: 2
-  checkRange: 8
-  showGizmos: 0
-  gizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
+  checkRange: 100
+  debug:
+    showGizmos: 0
+    rangeGizmo:
+      show: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+    heightGizmo:
+      show: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2647459806633737789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,7 +1710,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   attackPreset:
     attackSO: {fileID: 0}
     hurtboxPrefab:
@@ -1703,6 +1725,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   rb: {fileID: 8915720888079556032}
   cooldown: {fileID: 8399864931548892809}
   attackEvents:
@@ -1858,6 +1896,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 6924317339209216897}
   comboResetTime: 0.5
@@ -2901,7 +2955,7 @@ MonoBehaviour:
   rayLength: 2
   layers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4097
   maxSlopeAngle: 45
   climbCounterForce: 500
   slideCounterForce: 60
@@ -3227,7 +3281,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   allowStun: 1
   defaultStunAnim: {fileID: 11400000, guid: f29e74e3b3e53164eaf9604423201c6d, type: 2}
   cooldown: {fileID: 4655900734958021284}
@@ -3460,7 +3513,7 @@ MonoBehaviour:
   posOffset: {x: 0, y: 0, z: 0}
   layers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4097
   ignoreTriggers: 1
   onlyRigidbodies: 0
   overlapEvents:

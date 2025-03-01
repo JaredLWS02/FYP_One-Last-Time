@@ -66,6 +66,8 @@ public class Radar : MonoBehaviour
         return closest;
     }
 
+    // ============================================================================
+
     List<GameObject> matches = new();
 
     public List<GameObject> GetTargetsWithTag(string tag)
@@ -81,6 +83,8 @@ public class Radar : MonoBehaviour
         }
         return matches;
     }
+
+    // ============================================================================
 
     public GameObject GetClosestTargetWithTag(string tag)
     {

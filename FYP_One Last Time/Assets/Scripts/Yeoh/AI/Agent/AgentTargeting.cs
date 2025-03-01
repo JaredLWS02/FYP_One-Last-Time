@@ -11,13 +11,15 @@ public class AgentTargeting : SlowUpdate
     // ============================================================================
     
     [Header("Target")]
-    public GameObject defaultTarget;
+    public GameObject forceTarget;
     public GameObject target {get; private set;}
 
-    void Awake()
+    public override void OnUpdate_su()
     {
-        target = defaultTarget;
+        if(forceTarget) target = forceTarget;
     }
+
+    public void ForceTarget(GameObject who) => forceTarget = who;
 
     // ============================================================================
     
@@ -27,7 +29,10 @@ public class AgentTargeting : SlowUpdate
 
     public override void OnSlowUpdate()
     {
-        target = defaultTarget ? defaultTarget : radar?.GetClosestTargetWithTag(targetTag);
+        if(forceTarget) return;
+        if(!radar) return;
+
+        target = radar.GetClosestTargetWithTag(targetTag);
     }
 
     // ============================================================================

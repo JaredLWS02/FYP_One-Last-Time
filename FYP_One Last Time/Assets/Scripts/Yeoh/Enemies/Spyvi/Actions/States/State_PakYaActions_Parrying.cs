@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class State_SpyviActions_Parrying : BaseState
+{
+    public override string stateName => "Parrying";
+
+    SpyviActions action;
+
+    public State_SpyviActions_Parrying(StateMachine_SpyviActions sm)
+    {
+        action = sm.action;
+    }
+
+    protected override void OnEnter()
+    {
+        Debug.Log($"{action.owner.name} State: {stateName}");
+
+        ToggleAllow(true);
+    }
+
+    protected override void OnUpdate(float deltaTime)
+    {
+        action.AllowMoveX = false;
+        action.AllowMoveY = false;
+        //action.AllowFlip = false;
+    }
+
+    protected override void OnExit()
+    {
+        ToggleAllow(false);
+    }
+
+    void ToggleAllow(bool toggle)
+    {
+        action.AllowAttack = toggle;
+        action.AllowParry = toggle;
+    }
+}

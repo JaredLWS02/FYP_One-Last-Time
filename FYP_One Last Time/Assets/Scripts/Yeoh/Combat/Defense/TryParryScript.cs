@@ -28,9 +28,7 @@ public class TryParryScript : BaseAction
     void OnRaiseParry(GameObject who)
     {
         if(who!=owner) return;
-
         if(IsPerforming()) return;
-
         if(IsCooling()) return;
 
         RaiseParry();
@@ -104,10 +102,9 @@ public class TryParryScript : BaseAction
     public IFrame iframe;
 
     // on hit parry
-    void OnTryParry(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    void OnTryParry(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        if(victim!=owner) return;
-
+        if(defender!=owner) return;
         if(iframe.isActive) return;
 
         //CanParry(contactPoint)

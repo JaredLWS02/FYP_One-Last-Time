@@ -156,6 +156,6 @@ public class BaseAction : MonoBehaviour
 
     // ============================================================================
 
-    [Header("Debug")]
-    public int actionCounter=0;
+    //[Header("Debug")]
+    int actionCounter=0;
 }

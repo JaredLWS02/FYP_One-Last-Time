@@ -19,14 +19,6 @@ public class EnemyAgent : MonoBehaviour
 
         EventM.OnSpawned(owner);
     }
-
-    // ============================================================================
-
-    public void RegisterEnemy() => EnemyM?.RegisterEnemy(owner);
-    public void UnregisterEnemy() => EnemyM?.UnregisterEnemy(owner);
-    
-    public void RegisterEnemyCombat() => EnemyM?.RegisterEnemyCombat(owner);
-    public void UnregisterEnemyCombat() => EnemyM?.UnregisterEnemyCombat(owner);
     
     // ============================================================================
 
@@ -41,6 +33,17 @@ public class EnemyAgent : MonoBehaviour
     
     [Header("Seek")]
     public SideFlip flip;
-    public Vector2 seekFlipDelay = new(.4f, .6f);
+    public Vector2 seekFlipDelay = new(.4f, .6f); 
+
+    // ============================================================================
+
+    [Header("For Enemy Manager")]
+    public int combatSlotNum = 0;
+
+    public void RegisterEnemy() => EnemyM?.RegisterEnemy(owner);
+    public void UnregisterEnemy() => EnemyM?.UnregisterEnemy(owner);
+
+    public void RegisterEnemyCombat() => EnemyM?.RegisterEnemyCombat(owner, combatSlotNum);
+    public void UnregisterEnemyCombat() => EnemyM?.UnregisterEnemyCombat(owner);
     
 }

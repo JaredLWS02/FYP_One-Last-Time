@@ -19,6 +19,8 @@ public class Voicebox : RandomUpdate
 
     public List<Voice> voices = new();
 
+    // ==================================================================================================================
+
     Voice currentVoice;
 
     public void GetVoice(string voice_name)
@@ -37,7 +39,13 @@ public class Voicebox : RandomUpdate
 
     // ==================================================================================================================
 
-    public void Play() => currentVoice.audioSO.Play(voiceSource);
+    public void Play()
+    {
+        if(currentVoice == null) return;
+        if(!currentVoice.audioSO) return;
+        
+        currentVoice.audioSO.Play(voiceSource);
+    }
 
     public void PlayName(string voice_name)
     {
