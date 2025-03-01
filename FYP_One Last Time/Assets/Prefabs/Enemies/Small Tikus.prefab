@@ -455,7 +455,7 @@ MonoBehaviour:
         m_Calls: []
   owner: {fileID: 6995670659757724566}
   vehicle: {fileID: 7884391056595946062}
-  defaultTarget: {fileID: 0}
+  forceTarget: {fileID: 0}
   radar: {fileID: 2952939796052320822}
   targetTag: Player
   sight: {fileID: 8255484749663550365}
@@ -831,7 +831,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   attackPreset:
     attackSO: {fileID: 0}
     hurtboxPrefab:
@@ -847,6 +846,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   rb: {fileID: 1401727047894497609}
   cooldown: {fileID: 2606728909693817489}
   attackEvents:
@@ -978,6 +993,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 4023819593685926287}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 7566969018515993737}
   comboResetTime: 0.25
@@ -1548,7 +1579,6 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  actionCounter: 0
   allowStun: 1
   defaultStunAnim: {fileID: 11400000, guid: 1327778698f6d5c45884b7f09e3fc0fa, type: 2}
   cooldown: {fileID: 7486432265876577913}
@@ -1781,7 +1811,7 @@ MonoBehaviour:
   posOffset: {x: 0, y: 0, z: 0}
   layers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4097
   ignoreTriggers: 1
   onlyRigidbodies: 0
   overlapEvents:
@@ -2217,7 +2247,7 @@ MonoBehaviour:
   rayLength: 2
   layers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 4097
   maxSlopeAngle: 35
   climbCounterForce: 500
   slideCounterForce: 60
@@ -2682,6 +2712,7 @@ MonoBehaviour:
   returner: {fileID: 0}
   flip: {fileID: 7721746531743297066}
   seekFlipDelay: {x: 0.4, y: 0.6}
+  combatSlotNum: 0
   randomSeekBehaviour: {fileID: 0}
   hpM: {fileID: 2608293525865954382}
   fleeHPPercent: 25
@@ -2751,8 +2782,8 @@ MonoBehaviour:
   turn: {fileID: 7721746531743297066}
   goal: {fileID: 0}
   arrival: 1
-  stoppingRange: 1
-  slowingRangeOffset: 3
+  arrivalRange: 1
+  arrivalSlowingRangeOffset: 3
   maintainRange: 3.04
   selfStoppingRange: 0.5
   showGizmos: 0
@@ -2798,9 +2829,15 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   vehicle: {fileID: 7884391056595946062}
   checkHeight: 1.64
-  checkRange: 6
-  showGizmos: 0
-  gizmoColor: {r: 0, g: 1, b: 0, a: 0.25}
+  checkRange: 100
+  debug:
+    showGizmos: 0
+    rangeGizmo:
+      show: 0
+      color: {r: 1, g: 1, b: 1, a: 1}
+    heightGizmo:
+      show: 1
+      color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &6014220146863786974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,6 +2936,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 4023819593685926287}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 6348002234079334290}
   comboResetTime: 0.25
@@ -3377,6 +3430,22 @@ MonoBehaviour:
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 2151136900891364442}
   comboResetTime: 0.25

@@ -77,7 +77,6 @@ public class PakYaActions : MonoBehaviour
     void OnTryFlip(GameObject who, float input_x)
     {
         if(who!=owner) return;
-
         if(!AllowFlip) return;
 
         EventM.OnFlip(owner, input_x);
@@ -88,7 +87,6 @@ public class PakYaActions : MonoBehaviour
     void OnTryJump(GameObject who)
     {
         if(who!=owner) return;
-
         if(!AllowJump) return;
 
         EventM.OnJump(owner);
@@ -97,7 +95,6 @@ public class PakYaActions : MonoBehaviour
     void OnTryJumpCut(GameObject who)
     {
         if(who!=owner) return;
-
         if(!AllowJump) return;
 
         EventM.OnJumpCut(owner);
@@ -108,7 +105,6 @@ public class PakYaActions : MonoBehaviour
     void OnTryDash(GameObject who)
     {
         if(who!=owner) return;
-
         if(!AllowDash) return;
 
         EventM.OnDash(owner);
@@ -119,9 +115,7 @@ public class PakYaActions : MonoBehaviour
     void OnTryCombo(GameObject who, string combo_name)
     {
         if(who!=owner) return;
-
         if(!AllowAttack) return;
-
         if(IsRiposteActive()) return;
 
         EventM.OnCombo(owner, combo_name);
@@ -130,9 +124,7 @@ public class PakYaActions : MonoBehaviour
     void OnTryRiposteCombo(GameObject who, string combo_name)
     {
         if(who!=owner) return;
-
         if(!AllowAttack) return;
-
         if(!IsRiposteActive()) return;
 
         EventM.OnCombo(owner, combo_name);
@@ -143,7 +135,6 @@ public class PakYaActions : MonoBehaviour
     void OnTryRaiseParry(GameObject who)
     {
         if(who!=owner) return;
-
         if(!AllowParry) return;
 
         EventM.OnRaiseParry(owner);
@@ -154,7 +145,6 @@ public class PakYaActions : MonoBehaviour
     void OnTryHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
-
         if(!AllowHurt) return;
 
         EventM.OnTryParry(owner, attacker, hurtbox, contactPoint);
@@ -165,7 +155,6 @@ public class PakYaActions : MonoBehaviour
     void OnTryStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
-
         if(!AllowStun) return;
 
         EventM.OnStun(owner, attacker, hurtbox, contactPoint);

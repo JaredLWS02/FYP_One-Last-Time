@@ -52,7 +52,7 @@ public class AgentVerticalMove : SlowUpdate
     
     // ============================================================================
     
-    public float checkRange=6;
+    public float checkRange=100;
 
     bool InRange(Vector3 pos)
     {
@@ -62,17 +62,39 @@ public class AgentVerticalMove : SlowUpdate
 
     // ============================================================================
 
-    [Header("Debug")]
-    public bool showGizmos;
-    public Color gizmoColor = new(0,1,0,.25f);
+    [System.Serializable]
+    public struct Debug
+    {
+        public bool showGizmos;
+        public Gizmo rangeGizmo;
+        public Gizmo heightGizmo;
+    }
+
+    [System.Serializable]
+    public struct Gizmo
+    {
+        public bool show;
+        public Color color;
+    }
+
+    [Space]
+    public Debug debug;
 
     void OnDrawGizmosSelected()
     {
-        if(!showGizmos) return;
+        if(!debug.showGizmos) return;
 
-        Gizmos.color = gizmoColor;
-        Gizmos.DrawWireSphere(owner.transform.position, checkRange);
-        Gizmos.DrawLine(owner.transform.position, owner.transform.position + Vector3.up * checkHeight);
-        Gizmos.DrawLine(owner.transform.position, owner.transform.position + Vector3.down * checkHeight);
+        if(debug.rangeGizmo.show)
+        {
+            Gizmos.color = debug.rangeGizmo.color;
+            Gizmos.DrawWireSphere(owner.transform.position, checkRange);
+        }
+            
+        if(debug.heightGizmo.show)
+        {
+            Gizmos.color = debug.heightGizmo.color;
+            Gizmos.DrawLine(owner.transform.position, owner.transform.position + Vector3.up * checkHeight);
+            Gizmos.DrawLine(owner.transform.position, owner.transform.position + Vector3.down * checkHeight);
+        }
     }
 }

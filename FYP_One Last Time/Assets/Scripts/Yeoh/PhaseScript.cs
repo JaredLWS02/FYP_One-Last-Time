@@ -9,7 +9,7 @@ public class PhaseScript : BaseAction
     {
         public string phaseName;
         public SequenceLoop loop;
-        public float HPPercent=100;
+        public float hpPercent=100;
         public AnimSO phaseAnim;
     }
 
@@ -38,14 +38,14 @@ public class PhaseScript : BaseAction
     
     SequenceLoop CurrentLoop() => CurrentPhase().loop;
     public string CurrentBehaviour() => CurrentLoop().CurrentOption();
-    void NextBehaviour() => CurrentLoop().Next();
+    public void NextBehaviour() => CurrentLoop().Next();
     
     // ============================================================================
     
-    float GetHPPercent(Phase phase) => phase?.HPPercent ?? float.NaN;
-    float CurrentHPPercent() => GetHPPercent(CurrentPhase());
-    float NextHPPercent() => GetHPPercent(GetNextPhase());
-    float PrevHPPercent() => GetHPPercent(GetPrevPhase());
+    float GetPhaseHPPercent(Phase phase) => phase?.hpPercent ?? float.NaN;
+    float CurrentPhaseHPPercent() => GetPhaseHPPercent(CurrentPhase());
+    float NextPhaseHPPercent() => GetPhaseHPPercent(GetNextPhase());
+    float PrevPhaseHPPercent() => GetPhaseHPPercent(GetPrevPhase());
 
     // ============================================================================
 
@@ -60,39 +60,21 @@ public class PhaseScript : BaseAction
     void OnEnable()
     {
         EventM = EventManager.Current;
-        
-        EventM.ActionCompleteEvent += OnActionComplete;
-        EventM.TryChangePhaseEvent += OnTryChangePhase;
-    }
-    void OnDisable()
-    {
-        EventM.ActionCompleteEvent -= OnActionComplete;
-        EventM.TryChangePhaseEvent -= OnTryChangePhase;
-    }
-
-    // ============================================================================
-
-    void OnActionComplete(GameObject who)
-    {
-        if(who!=owner) return;
-        NextBehaviour();
     }
 
     // ============================================================================
 
     public HPManager hpM;
 
-    void OnTryChangePhase(GameObject who)
+    public void TryChangePhase()
     {
-        if(who!=owner) return;
-        
         float hp = hpM.GetHPPercent();
 
-        if(hp <= NextHPPercent())
+        if(hp <= NextPhaseHPPercent())
         {
             NextPhase();
         }
-        else if(hp > CurrentHPPercent())
+        else if(hp > CurrentPhaseHPPercent())
         {
             PrevPhase();
         }
@@ -100,15 +82,14 @@ public class PhaseScript : BaseAction
 
     // ============================================================================
     
-    int phase_direction = 1;
+    int phaseDirection = 1;
 
     void NextPhase()
     {
         if(IsLastPhase()) return;
-
         if(IsPerforming()) return;
 
-        phase_direction = 1;
+        phaseDirection = 1;
 
         Perform(NextPhaseAnim());
     }
@@ -116,10 +97,9 @@ public class PhaseScript : BaseAction
     void PrevPhase()
     {
         if(IsFirstPhase()) return;
-
         if(IsPerforming()) return;
 
-        phase_direction = -1;
+        phaseDirection = -1;
 
         Perform(PrevPhaseAnim());
     }
@@ -130,7 +110,7 @@ public class PhaseScript : BaseAction
     {
         CurrentLoop().Reset();
 
-        index += phase_direction;
+        index += phaseDirection;
 
         EventM.OnPhaseChanged(owner, CurrentPhase().phaseName);
     }
@@ -140,7 +120,6 @@ public class PhaseScript : BaseAction
     void OnCancelPhaseChange(GameObject who)
     {
         if(who!=owner) return;
-
         if(!IsPerforming()) return;
 
         CancelAnim();

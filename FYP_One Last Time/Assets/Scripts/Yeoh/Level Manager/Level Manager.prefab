@@ -306,158 +306,313 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies: []
-  enemiesInCombat: []
-  enemyMEvents:
-    OnEnemyFirstEnterCombat:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeOutTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 3
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeWaitTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeInTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 3
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: CrossfadeToLayer
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Combat
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2817243736959203965}
-          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-          m_MethodName: SelectDefaultCamera
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Combat
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2817243736959203965}
-          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-          m_MethodName: TweenFOV
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 55
-            m_StringArgument: Combat
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnEnemyLastExitCombat:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeOutTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 3
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeWaitTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 1
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: SetCrossfadeInTime
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 3
-            m_StringArgument: Default
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 150205284295529548}
-          m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
-          m_MethodName: CrossfadeToLayer
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Silent
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2817243736959203965}
-          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-          m_MethodName: SelectDefaultCamera
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Silent
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2817243736959203965}
-          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-          m_MethodName: TweenDefaultFOV
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Silent
-            m_BoolArgument: 0
-          m_CallState: 2
+  enemyCombatSlots:
+  - slotNum: 0
+    enemies: []
+    events:
+      OnEnemyFirstEnterCombat:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeOutTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 3
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeWaitTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 1
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeInTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 3
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: CrossfadeToLayer
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Combat
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2817243736959203965}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: SelectDefaultCamera
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Combat
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2817243736959203965}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: TweenFOV
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 55
+              m_StringArgument: Combat
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnEnemyLastExitCombat:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeOutTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 3
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeWaitTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 1
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeInTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 3
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: CrossfadeToLayer
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Silent
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2817243736959203965}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: SelectDefaultCamera
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Silent
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2817243736959203965}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: TweenDefaultFOV
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Silent
+              m_BoolArgument: 0
+            m_CallState: 2
+  - slotNum: 10
+    enemies: []
+    events:
+      OnEnemyFirstEnterCombat:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeOutTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 3
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeWaitTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 1
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeInTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 3
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: CrossfadeToLayer
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Boss
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2817243736959203965}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: SelectDefaultCamera
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Combat
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2817243736959203965}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: TweenFOV
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 100
+              m_StringArgument: Combat
+              m_BoolArgument: 0
+            m_CallState: 2
+      OnEnemyLastExitCombat:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeOutTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 3
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeWaitTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 1
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: SetCrossfadeInTime
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 3
+              m_StringArgument: Default
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 150205284295529548}
+            m_TargetAssemblyTypeName: AudioLayerController, Assembly-CSharp
+            m_MethodName: CrossfadeToLayer
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Silent
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2817243736959203965}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: SelectDefaultCamera
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Silent
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2817243736959203965}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: TweenDefaultFOV
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Silent
+              m_BoolArgument: 0
+            m_CallState: 2
 --- !u!114 &2817243736959203965
 MonoBehaviour:
   m_ObjectHideFlags: 0
