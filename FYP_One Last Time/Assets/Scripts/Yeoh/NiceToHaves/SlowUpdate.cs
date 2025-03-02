@@ -11,31 +11,32 @@ public class SlowUpdate : MonoBehaviour
     public float checkInterval=.5f;
     public bool fixedUpdate=true;
 
-    void Update()
-    {
-        OnUpdate_su();
+    // ============================================================================
 
+    protected virtual void Update()
+    {
         if(fixedUpdate) return;
-
         if(HasInterval()) return;
         
         DoSlowUpdate();
     }
 
-    public virtual void OnUpdate_su(){}
+    // ============================================================================
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        OnFixedUpdate_su();
-        
         if(!fixedUpdate) return;
-
         if(HasInterval()) return;
         
         DoSlowUpdate();
     }
 
-    public virtual void OnFixedUpdate_su(){}
+    // ============================================================================
+
+    protected virtual void OnDisable()
+    {
+        checking_crt = null;
+    }
 
     // ============================================================================
 
@@ -59,6 +60,8 @@ public class SlowUpdate : MonoBehaviour
             return false;
         }
     }
+
+    // ============================================================================
 
     Coroutine checking_crt;
 
@@ -84,7 +87,7 @@ public class SlowUpdate : MonoBehaviour
     
     // ============================================================================
 
-    public virtual void OnSlowUpdate(){}
+    protected virtual void OnSlowUpdate(){}
 
     // ============================================================================
 

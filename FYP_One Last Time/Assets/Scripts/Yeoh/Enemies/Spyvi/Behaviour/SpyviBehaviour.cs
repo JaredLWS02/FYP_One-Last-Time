@@ -16,15 +16,24 @@ public class SpyviBehaviour : MonoBehaviour
 
     [Header("Keywords")]
     public string rushKeyword="Rush";
+    public string laserKeyword="Laser";
 
     // ============================================================================
 
     [Header("Toggle Triggers")]
     public GameObject rushTrigger;
+    public GameObject laserTrigger;
 
     public void ToggleRushTrigger(bool toggle)
     {
-        if(rushTrigger)
         rushTrigger.SetActive(toggle);
+        laserTrigger.SetActive(!toggle);
     }
+
+    public void ToggleLaserTrigger(bool toggle)
+    {
+        rushTrigger.SetActive(!toggle);
+        laserTrigger.SetActive(toggle);
+    }
+
 }

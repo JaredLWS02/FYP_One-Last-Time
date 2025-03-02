@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class ConeRaycast : BaseRaycast
 {
+    public override bool IsRayBlocked(Vector3 dir, out RaycastHit hit)
+    {
+        return Physics.Raycast(origin.position, dir, out hit, range, hitLayers, QueryTriggerInteraction.Ignore);
+    }
+
     public override bool IsRayHit(out GameObject ray_obj)
     {
         foreach(var dir in GetConeDirs(origin.forward))
         {
-            if(Physics.Raycast(origin.position, dir, out var hit, range, hitLayers, QueryTriggerInteraction.Ignore))
+            if(IsRayBlocked(dir, out var hit))
             {
                 if(IsColliderValid(hit.collider, out ray_obj))
                 {

@@ -14,8 +14,10 @@ public class AgentTargeting : SlowUpdate
     public GameObject forceTarget;
     public GameObject target {get; private set;}
 
-    public override void OnUpdate_su()
+    protected override void Update()
     {
+        base.Update();
+        
         if(forceTarget) target = forceTarget;
     }
 
@@ -27,7 +29,7 @@ public class AgentTargeting : SlowUpdate
     public Radar radar;
     public string targetTag = "Player";
 
-    public override void OnSlowUpdate()
+    protected override void OnSlowUpdate()
     {
         if(forceTarget) return;
         if(!radar) return;

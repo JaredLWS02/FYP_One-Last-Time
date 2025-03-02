@@ -18,11 +18,16 @@ public class CapsuleRaycast : BaseRaycast
         return overlaps.Length>0;
     }
 
-    public override bool IsRayHit(out GameObject ray_obj)
+    public override bool IsRayBlocked(out RaycastHit hit)
     {
         GetCapsule(origin.position, out var top, out var bottom);
-        
-        if(Physics.CapsuleCast(top, bottom, radius, origin.forward, out var hit, range, hitLayers, QueryTriggerInteraction.Ignore))
+
+        return Physics.CapsuleCast(top, bottom, radius, origin.forward, out hit, range, hitLayers, QueryTriggerInteraction.Ignore);
+    }
+
+    public override bool IsRayHit(out GameObject ray_obj)
+    {
+        if(IsRayBlocked(out var hit))
         {
             rayHit = GetRayHit(hit);
 

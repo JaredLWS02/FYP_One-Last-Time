@@ -56,8 +56,10 @@ public class AmbientManager : RandomUpdate
 
     // ============================================================================
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+        
         if(!ambLoopEnabled) return;
         if(ambSource.isPlaying) return;
 

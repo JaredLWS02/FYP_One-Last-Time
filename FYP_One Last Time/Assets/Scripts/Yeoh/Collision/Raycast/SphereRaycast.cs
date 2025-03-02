@@ -14,9 +14,14 @@ public class SphereRaycast : BaseRaycast
         return overlaps.Length>0;
     }
 
+    public override bool IsRayBlocked(out RaycastHit hit)
+    {
+        return Physics.SphereCast(origin.position, radius, origin.forward, out hit, range, hitLayers, QueryTriggerInteraction.Ignore);
+    }
+
     public override bool IsRayHit(out GameObject ray_obj)
     {
-        if(Physics.SphereCast(origin.position, radius, origin.forward, out var hit, range, hitLayers, QueryTriggerInteraction.Ignore))
+        if(IsRayBlocked(out var hit))
         {
             rayHit = GetRayHit(hit);
             

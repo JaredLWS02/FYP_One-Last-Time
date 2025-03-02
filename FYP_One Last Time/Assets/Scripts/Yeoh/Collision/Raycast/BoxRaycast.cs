@@ -14,9 +14,14 @@ public class BoxRaycast : BaseRaycast
         return overlaps.Length>0;
     }
 
+    public override bool IsRayBlocked(out RaycastHit hit)
+    {
+        return Physics.BoxCast(origin.position, size*.5f, origin.forward, out hit, origin.rotation, range, hitLayers, QueryTriggerInteraction.Ignore);
+    }
+
     public override bool IsRayHit(out GameObject ray_obj)
     {
-        if(Physics.BoxCast(origin.position, size*.5f, origin.forward, out var hit, origin.rotation, range, hitLayers, QueryTriggerInteraction.Ignore))
+        if(IsRayBlocked(out var hit))
         {
             rayHit = GetRayHit(hit);
             

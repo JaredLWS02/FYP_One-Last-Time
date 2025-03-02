@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class RandomUpdate : SlowUpdate
 {
+    protected override void Update()
+    {
+        base.Update();
+    }
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+    }
+    
+    // ============================================================================
+
     [Header("RandomUpdate")]
     public Vector2 randomInterval = new(.25f, 1);
 
@@ -14,7 +29,7 @@ public class RandomUpdate : SlowUpdate
         OnRandomUpdate();
     }
 
-    public virtual void OnRandomUpdate(){}
+    protected virtual void OnRandomUpdate(){}
 
     // ============================================================================
 
@@ -23,7 +38,7 @@ public class RandomUpdate : SlowUpdate
         RandomizeInterval();
     }
 
-    public override void OnSlowUpdate()
+    protected override void OnSlowUpdate()
     {
         RandomizeInterval();
     }

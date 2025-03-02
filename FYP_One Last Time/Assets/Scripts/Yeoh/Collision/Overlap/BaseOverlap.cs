@@ -48,7 +48,7 @@ public class BaseOverlap : SlowUpdate
     Dictionary<GameObject, Collider> current_overlaps = new();
     Dictionary<GameObject, Collider> previous_overlaps = new();
 
-    public override void OnSlowUpdate()
+    protected override void OnSlowUpdate()
     {
         current_overlaps = new();
 

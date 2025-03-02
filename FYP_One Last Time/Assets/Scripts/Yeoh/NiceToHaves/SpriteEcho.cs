@@ -18,7 +18,7 @@ public class SpriteEcho : SlowUpdate
 
     // ============================================================================
     
-    public override void OnSlowUpdate()
+    protected override void OnSlowUpdate()
     {
         float speed = velM.velocityMagnitude;
         
@@ -92,8 +92,10 @@ public class SpriteEcho : SlowUpdate
     public float maxAlpha=.5f;
     float currentAlpha;
 
-    public override void OnFixedUpdate_su()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         float speed = velM.velocityMagnitude;
         float speed01 = GetValue01(speed, minSpeed, maxSpeed);
         currentAlpha = Mathf.Lerp(minAlpha, maxAlpha, speed01);

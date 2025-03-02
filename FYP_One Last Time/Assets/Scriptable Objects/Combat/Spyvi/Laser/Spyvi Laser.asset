@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a3cbd62398e00b46a8bf50f5797d997, type: 3}
-  m_Name: Spyvi Melee
+  m_Name: Spyvi Laser
   m_EditorClassIdentifier: 
-  Name: Spyvi Melee
+  Name: Spyvi Laser
   description: 
-  anim: {fileID: 11400000, guid: 9d5f29d95e5d6a749ae172cebcfdb5d4, type: 2}
+  anim: {fileID: 11400000, guid: c04b97b1a356912429e452d9bffa3db8, type: 2}
   dashOnWindUp: 0
   dashOnWindUpForce: 0
   dashOnWindUpDir: {x: 0, y: 0, z: 1}
   dashOnRelease: 1
   dashOnReleaseForce: 40
-  dashOnReleaseDir: {x: 0, y: 0, z: 1}
+  dashOnReleaseDir: {x: 0, y: 0, z: -1}
   localDir: 1
   rangeAssistCfg:
-    moveSeconds: 0.3
-    maxMoveDistance: 6.5
-    alwaysMove: 0
+    moveSeconds: 1
+    maxMoveDistance: 5
+    alwaysMove: 1
     ease: 4
-    reach: 6.5
+    reach: 5
   windUpRangeAssist: 0
   releaseRangeAssist: 0
   cooldown: {x: 0, y: 0.2}

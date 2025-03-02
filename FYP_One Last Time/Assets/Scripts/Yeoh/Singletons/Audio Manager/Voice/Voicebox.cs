@@ -67,7 +67,18 @@ public class Voicebox : RandomUpdate
     [Space]
     public VoiceEvents voiceEvents;
 
-    void OnEnable() => voiceEvents.OnEnable?.Invoke();
-    void OnDisable() => voiceEvents.OnDisable?.Invoke();
-    public override void OnRandomUpdate() => voiceEvents.OnRandomVoice?.Invoke();
+    void OnEnable()
+    {
+        voiceEvents.OnEnable?.Invoke();
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        
+        voiceEvents.OnDisable?.Invoke();
+    }
+    protected override void OnRandomUpdate()
+    {
+        voiceEvents.OnRandomVoice?.Invoke();
+    }
 }

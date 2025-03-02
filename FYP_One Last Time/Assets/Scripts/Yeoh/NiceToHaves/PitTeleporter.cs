@@ -16,7 +16,7 @@ public class PitTeleporter : SlowUpdate
         Record();
     }
 
-    public override void OnSlowUpdate()
+    protected override void OnSlowUpdate()
     {
         if(ground.IsGrounded())
             Record();

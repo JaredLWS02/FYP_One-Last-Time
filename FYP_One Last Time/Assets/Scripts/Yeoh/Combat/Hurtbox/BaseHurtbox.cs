@@ -5,7 +5,9 @@ using UnityEngine.Events;
 
 public class BaseHurtbox : MonoBehaviour
 {
-    [HideInInspector]
+    // [HideInInspector]
+    // would be automatically assigned by attack script
+    // but you can assign it yourself for testing purposes
     public GameObject owner;
 
     // ============================================================================
