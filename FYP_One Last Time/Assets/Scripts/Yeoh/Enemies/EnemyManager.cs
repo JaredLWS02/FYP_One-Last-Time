@@ -144,7 +144,7 @@ public class EnemyManager : MonoBehaviour
     public void RegisterEnemyCombat(GameObject who, int slot_num)
     {
         var slot = GetEnemyCombatSlot(slot_num);
-        if(slot==null) { Debug.LogWarning($"No such Enemy Combat Slot: {slot_num}"); return; }
+        if(slot==null) { Debug.LogError($"No such Enemy Combat Slot: {slot_num}"); return; }
 
         slot.TryAdd(who);
     }
