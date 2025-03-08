@@ -508,7 +508,7 @@ Transform:
   m_GameObject: {fileID: 1405063517788493023}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.08, z: 3.21}
+  m_LocalPosition: {x: -0, y: 1.08, z: 3.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -536,7 +536,7 @@ MonoBehaviour:
   origin: {fileID: 8395798843393759297}
   lookAt: {fileID: 0}
   lookAtOffset: {x: 0, y: 0, z: 0}
-  range: 2.64
+  range: 4.74
   hitLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -570,7 +570,7 @@ MonoBehaviour:
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  radius: 1.5
+  radius: 0.5
   height: 0
 --- !u!114 &7299535099910438180
 MonoBehaviour:
@@ -594,8 +594,6 @@ MonoBehaviour:
   randomInterval: {x: 0.25, y: 1}
   options:
   - name: Slam
-    weight: 10
-  - name: Rush
     weight: 1
   currentOption: 
   owner: {fileID: 5261146206814944013}
@@ -1104,6 +1102,7 @@ GameObject:
   - component: {fileID: 3716319433280079349}
   - component: {fileID: 4053587134213634601}
   - component: {fileID: 7786861728038490430}
+  - component: {fileID: 794376796155900888}
   - component: {fileID: 7114433548222468432}
   - component: {fileID: 3956280804667956790}
   - component: {fileID: 418708997891478844}
@@ -1173,7 +1172,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9f47a809964e79d44b26be8c88fb2439, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36e3d92e0cbff8646be5e8e6134771bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1217,6 +1216,34 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &794376796155900888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719329177920231827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47f20291ddc1d54f97f17bfcc4c81f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 7786861728038490430}
+  rb: {fileID: 8915720888079556032}
+  move: {fileID: 2080831364828353911}
+  checkVelocity: 1
+  velXParamName: VelocityX
+  velYParamName: VelocityY
+  velZParamName: VelocityZ
+  baseSpeedMult: 1
+  checkForward: 1
+  forwardParamName: ForwardRatio
+  checkRight: 0
+  rightParamName: RightRatio
+  checkUp: 0
+  upParamName: UpRatio
+  changeBlendTreeSpeed: 1
+  speedParamName: VelocityRatio
 --- !u!114 &7114433548222468432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1561,7 +1588,7 @@ Transform:
   m_GameObject: {fileID: 3625512440802626329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.05, z: 5.38}
+  m_LocalPosition: {x: 0, y: 1.52, z: 5.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

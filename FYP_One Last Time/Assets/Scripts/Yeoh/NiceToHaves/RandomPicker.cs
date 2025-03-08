@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class RandomPicker : RandomUpdate
 {
+    protected override void Update()
+    {
+        base.Update();
+    }
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+    }
+
+    // ============================================================================
+    
     [System.Serializable]
     public class Option
     {
@@ -20,7 +31,7 @@ public class RandomPicker : RandomUpdate
 
     // ============================================================================
     
-    public override void OnRandomUpdate()
+    protected override void OnRandomUpdate()
     {
         RandomizeOption();
     }

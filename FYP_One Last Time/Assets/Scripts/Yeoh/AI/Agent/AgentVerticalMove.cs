@@ -22,7 +22,7 @@ public class AgentVerticalMove : SlowUpdate
     [Header("Check")]
     public float checkHeight=2.5f;
 
-    public override void OnSlowUpdate()
+    protected override void OnSlowUpdate()
     {
         if(vehicle.goal)
         CheckHeight(vehicle.goal.position);

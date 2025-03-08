@@ -16,6 +16,22 @@ public class BaseRaycast : SlowUpdate
 
     // ============================================================================
 
+    public Vector3 GetStartPoint()
+    {
+        return origin.position;
+    }
+    public Vector3 GetEndPoint()
+    {
+        return origin.forward * range + GetStartPoint();
+    }
+    public Vector3 GetHitEndPoint()
+    {
+        if(IsRayBlocked(out var hit)) return hit.point;
+        return GetEndPoint();
+    }
+
+    // ============================================================================
+
     [Header("Optional")]
     public Transform lookAt;
     public Vector3 lookAtOffset;
@@ -31,8 +47,10 @@ public class BaseRaycast : SlowUpdate
     {
         EditorApplication.update += EditorUpdate;
     }
-    void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+        
         EditorApplication.update -= EditorUpdate;
     }
 
@@ -42,8 +60,10 @@ public class BaseRaycast : SlowUpdate
     }
 #endif
 
-    public override void OnFixedUpdate_su()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         if(Application.isPlaying) LookAt();
     }
 
@@ -83,9 +103,20 @@ public class BaseRaycast : SlowUpdate
     [Header("Ray")]
     public float range=5;
 
+    public virtual bool IsRayBlocked(out RaycastHit hit)
+    {
+        return Physics.Raycast(origin.position, origin.forward, out hit, range, hitLayers, QueryTriggerInteraction.Ignore);
+    }
+
+    // mainly for ConeRaycast
+    public virtual bool IsRayBlocked(Vector3 dir, out RaycastHit hit)
+    {
+        return Physics.Raycast(origin.position, dir, out hit, range, hitLayers, QueryTriggerInteraction.Ignore);
+    }
+
     public virtual bool IsRayHit(out GameObject ray_obj)
     {
-        if(Physics.Raycast(origin.position, origin.forward, out var hit, range, hitLayers, QueryTriggerInteraction.Ignore))
+        if(IsRayBlocked(out var hit))
         {
             rayHit = GetRayHit(hit);
 
@@ -115,7 +146,7 @@ public class BaseRaycast : SlowUpdate
         else return IsRayHit(out hitobj);
     }
 
-    bool IsHit() => IsHit(out var hitobj);
+    public bool IsHit() => IsHit(out var hitobj);
 
     // ============================================================================
 
@@ -168,7 +199,7 @@ public class BaseRaycast : SlowUpdate
     GameObject current_hit = null;
     bool hasExited;
         
-    public override void OnSlowUpdate()
+    protected override void OnSlowUpdate()
     {
         Shoot();
     }

@@ -39,7 +39,7 @@ public class TransformResetter : SlowUpdate
 
     public ResetAxis resetAxis;
 
-    public override void OnSlowUpdate()
+    protected override void OnSlowUpdate()
     {
         Transform tr = owner.transform;
 

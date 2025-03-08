@@ -28,7 +28,7 @@ public class StateMachine_SpyviBehaviour : MonoBehaviour
 
         State_SpyviBehaviour_Idle idle = new(this);
         State_SpyviBehaviour_Rush rush = new(this);
-        //State_SpyviBehaviour_Rush rush = new(this);
+        State_SpyviBehaviour_Laser laser = new(this);
 
         // HUB TRANSITIONS ================================================================================
 
@@ -42,12 +42,32 @@ public class StateMachine_SpyviBehaviour : MonoBehaviour
             return false;
         });
         
+        idle.AddTransition(laser, (timeInState) =>
+        {
+            if(
+                behaviour.CurrentBehaviour() == behaviour.laserKeyword //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+        
         // RETURN TRANSITIONS ================================================================================
 
         rush.AddTransition(idle, (timeInState) =>
         {
             if(
                 behaviour.CurrentBehaviour() != behaviour.rushKeyword //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        laser.AddTransition(idle, (timeInState) =>
+        {
+            if(
+                behaviour.CurrentBehaviour() != behaviour.laserKeyword //||
             ){
                 return true;
             }
