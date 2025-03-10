@@ -26,12 +26,17 @@ public class AgentParry : MonoBehaviour
     
     // ============================================================================
 
+    [Header("Chance")]
+    [Range(0,100)]
+    public float parryChance = 50;
+
     void OnAttackWindedUp(GameObject attacker, AttackSO attackSO)
     {
         if(attacker == owner) return; // ignore if self
-        if(!overlap.IsOverlappingWho(attacker)) return;
         if(!IsGroundCheckValid()) return;
         if(!CanSeeTarget()) return;
+        if(Random.Range(0,100) > parryChance) return;
+        if(!overlap.IsOverlappingWho(attacker)) return;
 
         EventM.OnAgentTryParry(owner);
     }
