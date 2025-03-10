@@ -1966,6 +1966,11 @@ PrefabInstance:
       objectReference: {fileID: 2792400460318699078}
     - target: {fileID: 6336982604409609859, guid: 080ca69929086d0428f8b7c61527c21c,
         type: 3}
+      propertyPath: overlapEvents.Enter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ForceTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336982604409609859, guid: 080ca69929086d0428f8b7c61527c21c,
+        type: 3}
       propertyPath: overlapEvents.Enter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 6939342611757571533}
