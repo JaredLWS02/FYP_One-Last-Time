@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class BaseOverlap : SlowUpdate
-{    
+{   
+    [Header("Base Overlap")]
     public Transform origin;
     public Vector3 posOffset = Vector3.zero;
     public LayerMask layers;
