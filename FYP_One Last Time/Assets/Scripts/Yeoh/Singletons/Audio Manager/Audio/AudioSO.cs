@@ -24,9 +24,21 @@ public class AudioSO : ScriptableObject
     Vector2 randomPitch = new(.9f, 1.1f);
     public float GetRandomPitch() => Random.Range(randomPitch.x,randomPitch.y);
 
-    [SerializeField]
-    Vector2 randomStereoPan = Vector2.zero;
-    public float GetRandomPan() => Random.Range(randomStereoPan.x,randomStereoPan.y);
+    [System.Serializable]
+    public struct StereoPan
+    {
+        [SerializeField]
+        [Range(-1,1)]
+        float min;
+        
+        [SerializeField]
+        [Range(-1,1)]
+        float max;
+
+        public float GetRandom() => Random.Range(min,max);
+    };
+
+    public StereoPan stereoPan;
 
     [Header("3D")]
     [Range(0,1)]
@@ -43,7 +55,7 @@ public class AudioSO : ScriptableObject
         source.loop = loop;
         source.volume = GetRandomVolume();
         source.pitch = GetRandomPitch();
-        source.panStereo = GetRandomPan();
+        source.panStereo = stereoPan.GetRandom();
         // 3D
         source.spatialBlend = spatialBlend;
         source.minDistance = minDistance;
