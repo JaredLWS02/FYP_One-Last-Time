@@ -1806,13 +1806,13 @@ MonoBehaviour:
   atk: {fileID: 7022457898630109682}
   comboName: Light Combo
   comboSteps:
-  - attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
+  - attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
     hurtboxPrefab:
-      prefabName: SlashR
+      prefabName: SlashL
       randomPrefabs:
-      - {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24, type: 3}
+      - {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79, type: 3}
       hideInHierarchy: 0
-      spawnpoint: {fileID: 3111472536248378137}
+      spawnpoint: {fileID: 4072668483182548298}
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
@@ -1837,13 +1837,13 @@ MonoBehaviour:
       Cancel:
         m_PersistentCalls:
           m_Calls: []
-  - attackSO: {fileID: 11400000, guid: fce947f6590b6e04580f38df07bad1e8, type: 2}
+  - attackSO: {fileID: 11400000, guid: 27e372305c5ae8e46b1f4496918dc03d, type: 2}
     hurtboxPrefab:
-      prefabName: SlashL
+      prefabName: SlashR
       randomPrefabs:
-      - {fileID: 6110048730885984798, guid: cbcc5d2ac2a5a71418acd64caa819a79, type: 3}
+      - {fileID: 6110048730885984798, guid: 1051e1721de121e4c9775e4479c6af24, type: 3}
       hideInHierarchy: 0
-      spawnpoint: {fileID: 4072668483182548298}
+      spawnpoint: {fileID: 3111472536248378137}
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
