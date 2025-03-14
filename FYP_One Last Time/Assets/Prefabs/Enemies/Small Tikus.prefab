@@ -2142,10 +2142,10 @@ MonoBehaviour:
     SlowUpdate:
       m_PersistentCalls:
         m_Calls: []
-  randomInterval: {x: 0.25, y: 1}
+  randomInterval: {x: 1, y: 3}
   options:
   - name: Flee
-    weight: 3
+    weight: 4
   - name: Wander
     weight: 1
   currentOption: Flee
@@ -2989,10 +2989,10 @@ MonoBehaviour:
     SlowUpdate:
       m_PersistentCalls:
         m_Calls: []
-  randomInterval: {x: 0.25, y: 1}
+  randomInterval: {x: 1, y: 3}
   options:
   - name: Seek
-    weight: 3
+    weight: 5
   - name: Wander
     weight: 1
   - name: Flee
