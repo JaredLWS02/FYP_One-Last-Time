@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3861977753639729580}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.7}
+  m_LocalPosition: {x: -0, y: 0, z: -1.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -308,6 +308,7 @@ MonoBehaviour:
   shakeTime: 0.2
   amplitud: 2
   frequency: 2
+  tweenFovTime: 0.5
   angle: 2
   dutchIn: 0.025
   dutchOut: 0.1

@@ -15,11 +15,11 @@ MonoBehaviour:
   Name: Lunge
   description: 
   anim: {fileID: 11400000, guid: 39a5edbf17959d54fb4f4f5c257739f0, type: 2}
-  dashOnWindUp: 0
-  dashOnWindUpForce: 60
-  dashOnWindUpDir: {x: 0, y: -0.5, z: 1}
+  dashOnWindUp: 1
+  dashOnWindUpForce: 20
+  dashOnWindUpDir: {x: 0, y: 1, z: 0}
   dashOnRelease: 1
-  dashOnReleaseForce: 60
+  dashOnReleaseForce: 80
   dashOnReleaseDir: {x: 0, y: -0.5, z: 1}
   localDir: 1
   rangeAssistCfg:

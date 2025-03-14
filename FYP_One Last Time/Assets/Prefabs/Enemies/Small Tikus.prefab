@@ -476,7 +476,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7615011877315059424}
   - component: {fileID: 1973161142838726918}
-  - component: {fileID: 4690002153563524249}
   - component: {fileID: 7894197541819062297}
   m_Layer: 6
   m_Name: Detection
@@ -534,43 +533,8 @@ MonoBehaviour:
   raycastEvents:
     OnHitEnter:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4690002153563524249}
-          m_TargetAssemblyTypeName: EventSequence, Assembly-CSharp
-          m_MethodName: PlaySequence
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     OnHitStay:
-      m_PersistentCalls:
-        m_Calls: []
-    OnHitExit:
-      m_PersistentCalls:
-        m_Calls: []
-  showGizmos: 1
-  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
-  gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  radius: 0.68
---- !u!114 &4690002153563524249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119412302706147938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d379e7b838d003942bf8af9c330aa8ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delayedEvents:
-  - uEvent:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 7894197541819062297}
@@ -585,24 +549,13 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    delay: 0
-  - uEvent:
+    OnHitExit:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 8627083544392464877}
-          m_TargetAssemblyTypeName: EnemyActions, Assembly-CSharp
-          m_MethodName: TryJump
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    delay: 0.15
-  canInterrupt: 0
+        m_Calls: []
+  showGizmos: 1
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
+  gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
+  radius: 0.68
 --- !u!114 &7894197541819062297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,7 +583,7 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   ground: {fileID: 6364306906685696337}
   allowGrounded: 1
-  allowMidAir: 1
+  allowMidAir: 0
   sight: {fileID: 8255484749663550365}
 --- !u!1 &1390348875773342422
 GameObject:
@@ -2177,12 +2130,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4799253879353152561}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 0
+  enableSlowUpdate: 1
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -2192,7 +2145,7 @@ MonoBehaviour:
   randomInterval: {x: 0.25, y: 1}
   options:
   - name: Flee
-    weight: 10
+    weight: 3
   - name: Wander
     weight: 1
   currentOption: Flee
@@ -2713,10 +2666,10 @@ MonoBehaviour:
   flip: {fileID: 7721746531743297066}
   seekFlipDelay: {x: 0.4, y: 0.6}
   combatSlotNum: 0
-  randomSeekBehaviour: {fileID: 0}
+  randomSeekBehaviour: {fileID: 1971569532230939617}
   hpM: {fileID: 2608293525865954382}
   fleeHPPercent: 25
-  randomFleeBehaviour: {fileID: 0}
+  randomFleeBehaviour: {fileID: 1624721283226069543}
 --- !u!114 &882407172222910880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3024,12 +2977,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6168783330197092899}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc2ac2f635bbb9546ab2b6c76c9c75a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 0
+  enableSlowUpdate: 1
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -3039,9 +2992,9 @@ MonoBehaviour:
   randomInterval: {x: 0.25, y: 1}
   options:
   - name: Seek
-    weight: 10
+    weight: 3
   - name: Wander
-    weight: 2
+    weight: 1
   - name: Flee
     weight: 1
   currentOption: Seek
@@ -3558,7 +3511,7 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   rb: {fileID: 1401727047894497609}
   ground: {fileID: 6364306906685696337}
-  jumpForce: 20
+  jumpForce: 25
   jumpAnim: {fileID: 0}
   jumpCutMult: 0.5
   coyoteTime: 0.2
