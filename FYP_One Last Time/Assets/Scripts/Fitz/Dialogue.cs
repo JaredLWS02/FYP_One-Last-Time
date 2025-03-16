@@ -6,13 +6,21 @@ using UnityEngine;
 public class Dialogue
 {
     [System.Serializable]
-    public class DialogueLine
+    public class DialogueCharacter
     {
         public string name;
+        public Sprite charSprite;
+    }
+
+    [System.Serializable]
+    public class DialogueLine
+    {
+        public int id;
 
         [TextArea(3, 10)]
         public string sentence;
     }
 
+    public List<DialogueCharacter> character = new List<DialogueCharacter>();
     public List<DialogueLine> lines = new List<DialogueLine>();
 }
