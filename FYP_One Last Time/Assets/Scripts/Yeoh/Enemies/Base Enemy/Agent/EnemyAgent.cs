@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyAgent : MonoBehaviour
 {
@@ -45,5 +46,15 @@ public class EnemyAgent : MonoBehaviour
 
     public void RegisterEnemyCombat() => EnemyM?.RegisterEnemyCombat(owner, combatSlotNum);
     public void UnregisterEnemyCombat() => EnemyM?.UnregisterEnemyCombat(owner);
-    
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct Events
+    {
+        public UnityEvent OnSeekEnter;
+        public UnityEvent OnSeekExit;
+    };
+    [Space]
+    public Events events;
 }
