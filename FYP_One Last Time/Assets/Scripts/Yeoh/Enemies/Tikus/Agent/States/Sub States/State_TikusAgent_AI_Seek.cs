@@ -22,6 +22,8 @@ public class State_TikusAgent_AI_Seek : BaseState
         agent.flip?.SetFlipDelay(agent.seekFlipDelay);
 
         agent.RegisterEnemyCombat();
+
+        agent.events.OnSeekEnter?.Invoke();
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -40,6 +42,8 @@ public class State_TikusAgent_AI_Seek : BaseState
         agent.flip?.RevertFlipDelay();
 
         agent.UnregisterEnemyCombat();
+
+        agent.events.OnSeekExit?.Invoke();
     }
 
     void ToggleAllow(bool toggle)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIBarUpdater : MonoBehaviour
@@ -84,6 +85,8 @@ public class UIBarUpdater : MonoBehaviour
     [Header("Both")]
     public bool ignoreTime=true;
 
+    // ============================================================================
+
     void UpdateCurrentValue()
     {
         float dt = ignoreTime ? Time.unscaledDeltaTime : Time.deltaTime;
@@ -102,6 +105,8 @@ public class UIBarUpdater : MonoBehaviour
         }
 
         roundedValue = Round(currentValue, 2);
+
+        CheckEvents(roundedValue);
     }
 
     // ============================================================================
@@ -139,5 +144,43 @@ public class UIBarUpdater : MonoBehaviour
         if(!filledImage) return;
 
         filledImage.fillAmount = roundedValue;
+    }
+
+    // ============================================================================
+
+    [System.Serializable]
+    public struct Events
+    {
+        public UnityEvent<float> OnFull;
+        public UnityEvent<float> OnPartial;
+        public UnityEvent<float> OnEmpty;
+    };
+    [Space]
+    public Events events;
+
+    // ============================================================================
+
+    bool isFull;
+    bool isPartial;
+    bool isEmpty;
+
+    void CheckEvents(float current_value)
+    {
+        bool was_full = isFull;
+        bool was_partial = isPartial;
+        bool was_empty = isEmpty;
+
+        isFull = current_value >= 1;
+        isPartial = current_value > 0 && current_value < 1;
+        isEmpty = current_value <= 0;
+
+        if(!was_full && isFull)
+            events.OnFull?.Invoke(current_value);
+        
+        if(!was_partial && isPartial)
+            events.OnPartial?.Invoke(current_value);
+        
+        if(!was_empty && isEmpty)
+            events.OnEmpty?.Invoke(current_value);
     }
 }
