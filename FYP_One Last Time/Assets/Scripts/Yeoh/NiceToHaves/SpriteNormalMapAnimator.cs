@@ -52,11 +52,9 @@ public class SpriteNormalMapAnimator : MonoBehaviour
     [HideInInspector]
     public Sprite normalSprite; // use animator to control this
 
-    public float updateInterval=.1f;
-
-    float timer=0;
-
     public bool enable=true;
+    public float updateInterval=.1f;
+    float timer=0;
 
     void UpdateInterval()
     {
@@ -84,15 +82,18 @@ public class SpriteNormalMapAnimator : MonoBehaviour
         SetNormalTex(normal_tex);
     }
 
+    // ============================================================================
+
+    public string normalMapPropertyName = "_MainNormal";
 
     void SetNormalTex(Texture2D normal_tex)
     {
         // create material instances only in play mode
         // cant do that in edit mode because "memory leak"
         if(Application.isPlaying)
-            sr.material.SetTexture("_MainNormal", normal_tex);
+            sr.material.SetTexture(normalMapPropertyName, normal_tex);
         else
-            sr.sharedMaterial.SetTexture("_MainNormal", normal_tex);
+            sr.sharedMaterial.SetTexture(normalMapPropertyName, normal_tex);
     }
 
     // ============================================================================
