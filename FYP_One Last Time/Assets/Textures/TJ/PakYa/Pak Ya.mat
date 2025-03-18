@@ -27,6 +27,9 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHATEST_ON
+  - _NORMALMAP
+  - _OCCLUSIONMAP
+  - _PARALLAXMAP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 2
@@ -119,11 +122,11 @@ Material:
     - _METALLICSPECGLOSSMAP: 0
     - _MainNormalStrength: 0.5
     - _Metallic: 0
-    - _NORMALMAP: 0
+    - _NORMALMAP: 1
     - _NormalStrength: 1
-    - _OCCLUSIONMAP: 0
+    - _OCCLUSIONMAP: 1
     - _OcclusionStrength: 1
-    - _PARALLAXMAP: 0
+    - _PARALLAXMAP: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
