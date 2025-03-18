@@ -1101,6 +1101,7 @@ MonoBehaviour:
         m_Calls: []
   sprites:
   - {fileID: 1123993858437119549}
+  hideInHierarchy: 1
   localPos: {x: 0, y: 0, z: 0.1}
   localAngles: {x: 0, y: 0, z: 0}
   localScale: {x: 1, y: 1, z: 1}
@@ -1387,7 +1388,6 @@ GameObject:
   - component: {fileID: 7767451025279606007}
   - component: {fileID: 5580064014610934646}
   - component: {fileID: 1266417278459489903}
-  - component: {fileID: 6643996540191059917}
   - component: {fileID: 7720956622550147065}
   - component: {fileID: 8086653970862224508}
   m_Layer: 6
@@ -1729,27 +1729,6 @@ MonoBehaviour:
   enableBillboard: 1
   fixedUpdate: 0
   rotateAxis: {x: 1, y: 1, z: 0}
---- !u!114 &6643996540191059917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3265591776346835760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d80f8fa8b5e2b4294ec2575cb34988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sr: {fileID: 1123993858437119549}
-  enable: 1
-  updateInterval: 0.1
-  normalSprite: {fileID: 0}
-  emissionSprite: {fileID: 0}
-  heightSprite: {fileID: 0}
-  normalMapPropertyName: _NormalMap
-  emissionMapPropertyName: _EmissionMap
-  heightMapPropertyName: _ParallaxMap
 --- !u!114 &7720956622550147065
 MonoBehaviour:
   m_ObjectHideFlags: 0

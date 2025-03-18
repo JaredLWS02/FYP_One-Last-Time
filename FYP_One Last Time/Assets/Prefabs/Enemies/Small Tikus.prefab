@@ -2223,7 +2223,6 @@ GameObject:
   - component: {fileID: 359268306373659021}
   - component: {fileID: 608287442499479247}
   - component: {fileID: 2638087628415255175}
-  - component: {fileID: 750695140766837660}
   - component: {fileID: 1633406689114087826}
   - component: {fileID: 9098826713147861330}
   m_Layer: 6
@@ -2312,6 +2311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipXPropertyName: _FlipX
+  flipYPropertyName: _FlipY
 --- !u!95 &1698828358808159481
 Animator:
   serializedVersion: 5
@@ -2499,21 +2500,6 @@ MonoBehaviour:
   enableBillboard: 1
   fixedUpdate: 0
   rotateAxis: {x: 1, y: 1, z: 0}
---- !u!114 &750695140766837660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081407622737716327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d80f8fa8b5e2b4294ec2575cb34988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalSprite: {fileID: 0}
-  updateInterval: 0.1
-  enable: 1
 --- !u!114 &1633406689114087826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2666,6 +2652,13 @@ MonoBehaviour:
   flip: {fileID: 7721746531743297066}
   seekFlipDelay: {x: 0.4, y: 0.6}
   combatSlotNum: 0
+  events:
+    OnSeekEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSeekExit:
+      m_PersistentCalls:
+        m_Calls: []
   randomSeekBehaviour: {fileID: 1971569532230939617}
   hpM: {fileID: 2608293525865954382}
   fleeHPPercent: 25
@@ -3242,6 +3235,7 @@ MonoBehaviour:
         m_Calls: []
   sprites:
   - {fileID: 5575052531342034989}
+  hideInHierarchy: 1
   localPos: {x: 0, y: 0, z: 0.1}
   localAngles: {x: 0, y: 0, z: 0}
   localScale: {x: 1, y: 1, z: 1}
