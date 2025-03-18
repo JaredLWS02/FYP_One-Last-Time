@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 7715047191772894443}
   - component: {fileID: 2984863347428207744}
   - component: {fileID: 8995939786167268597}
+  - component: {fileID: 3067970854123155927}
   m_Layer: 3
   m_Name: Hurt
   m_TagString: Untagged
@@ -163,6 +164,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 3067970854123155927}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Die
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1192961784150752979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +236,18 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 142945242369840139}
+          m_TargetAssemblyTypeName: Voicebox, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Hurt
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &5493900238891019743
@@ -439,6 +464,40 @@ MonoBehaviour:
   gibs:
   - {fileID: 4950790189361472255, guid: 2bd1b88e60499e84c8483021da0aeceb, type: 3}
   gibsKnockback: 1
+--- !u!114 &3067970854123155927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Die
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 5026869296952895068}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 8c9a519a0321cc04a8e5af2469cb9342, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &404301175344531863
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   hpMax: 100
-  regen: 1
+  regen: 0
   regenWhenEmpty: 0
   regenHp: 0.2
   regenInterval: 0.1
@@ -1662,6 +1721,7 @@ Transform:
   - {fileID: 5568401318979574577}
   - {fileID: 205841275096087312}
   - {fileID: 3214518180539662648}
+  - {fileID: 5026869296952895068}
   m_Father: {fileID: 4032536735459076646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3318535268997628051
@@ -2882,6 +2942,7 @@ GameObject:
   - component: {fileID: 2189189842004329316}
   - component: {fileID: 2557109480970711812}
   - component: {fileID: 6880144158370058344}
+  - component: {fileID: 7688322990203298310}
   m_Layer: 3
   m_Name: Parry
   m_TagString: Untagged
@@ -2926,7 +2987,19 @@ MonoBehaviour:
         m_Calls: []
     ReleaseStart:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7688322990203298310}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Raise Parry
+            m_BoolArgument: 0
+          m_CallState: 2
     ReleaseEnd:
       m_PersistentCalls:
         m_Calls: []
@@ -3087,6 +3160,40 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &7688322990203298310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793569088056600768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Raise Parry
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 123463650881099154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 5f5b5a801e05d0443a2b98b7d0b913ed, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
       m_PersistentCalls:
         m_Calls: []
 --- !u!1 &7026635337664250044
@@ -5467,6 +5574,135 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3604829822262713592, guid: 165752fd2026f7f498cd1462bdc11f4f,
     type: 3}
   m_PrefabInstance: {fileID: 6483639892621599796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7200515592721067490
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6708884801155206727}
+    m_Modifications:
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[0].audioSO
+      value: 
+      objectReference: {fileID: 11400000, guid: c141fc6a59d4bb84dacc4f96eb9bdd62,
+        type: 2}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[1].audioSO
+      value: 
+      objectReference: {fileID: 11400000, guid: a570cdf37a58aca4fa9f72717d05c577,
+        type: 2}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[2].audioSO
+      value: 
+      objectReference: {fileID: 11400000, guid: a570cdf37a58aca4fa9f72717d05c577,
+        type: 2}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[0].voiceName
+      value: Hurt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[1].voiceName
+      value: Hurt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[2].voiceName
+      value: Hurt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voiceEvents.OnRandomVoice.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7703407753706943717, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: m_Name
+      value: Voicebox
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 276b51b766018c74cb214da150dba723, type: 3}
+--- !u!114 &142945242369840139 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+    type: 3}
+  m_PrefabInstance: {fileID: 7200515592721067490}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86147d7f838765b41ae75e4c20424f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &5026869296952895068 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2751233411036023742, guid: 276b51b766018c74cb214da150dba723,
+    type: 3}
+  m_PrefabInstance: {fileID: 7200515592721067490}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8400333081549668920
 PrefabInstance:
