@@ -33,6 +33,6 @@ public class State_EnemyActions_AttackWindingUp : BaseState
     {
         //action.AllowJump = toggle;
         action.AllowHurt = toggle;
-        action.AllowStun = toggle;
+        //action.AllowStun = toggle;
     }
 }
