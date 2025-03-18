@@ -844,15 +844,6 @@ MonoBehaviour:
     events:
       WindUp:
         m_PersistentCalls:
-          m_Calls: []
-      ReleaseStart:
-        m_PersistentCalls:
-          m_Calls: []
-      ReleaseEnd:
-        m_PersistentCalls:
-          m_Calls: []
-      Recover:
-        m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 940385467848736309}
             m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
@@ -866,6 +857,15 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
       Cancel:
         m_PersistentCalls:
           m_Calls: []
@@ -1476,6 +1476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipXPropertyName: _FlipX
+  flipYPropertyName: _FlipY
 --- !u!95 &1061523320127218345
 Animator:
   serializedVersion: 5
@@ -1739,9 +1741,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d80f8fa8b5e2b4294ec2575cb34988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 0}
-  updateInterval: 0.1
+  sr: {fileID: 1123993858437119549}
   enable: 1
+  updateInterval: 0.1
+  normalSprite: {fileID: 0}
+  emissionSprite: {fileID: 0}
+  heightSprite: {fileID: 0}
+  normalMapPropertyName: _NormalMap
+  emissionMapPropertyName: _EmissionMap
+  heightMapPropertyName: _ParallaxMap
 --- !u!114 &7720956622550147065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2972,15 +2980,6 @@ MonoBehaviour:
     events:
       WindUp:
         m_PersistentCalls:
-          m_Calls: []
-      ReleaseStart:
-        m_PersistentCalls:
-          m_Calls: []
-      ReleaseEnd:
-        m_PersistentCalls:
-          m_Calls: []
-      Recover:
-        m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 940385467848736309}
             m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
@@ -2994,6 +2993,15 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
       Cancel:
         m_PersistentCalls:
           m_Calls: []
