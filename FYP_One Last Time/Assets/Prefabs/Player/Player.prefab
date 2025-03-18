@@ -3263,7 +3263,6 @@ GameObject:
   - component: {fileID: 4728252470638691548}
   - component: {fileID: 8471822331360070094}
   - component: {fileID: 345509100620316827}
-  - component: {fileID: 6876849668752172755}
   - component: {fileID: 8393169458917718466}
   - component: {fileID: 5627988560184055650}
   m_Layer: 3
@@ -3670,27 +3669,6 @@ MonoBehaviour:
   enableBillboard: 1
   fixedUpdate: 0
   rotateAxis: {x: 1, y: 1, z: 0}
---- !u!114 &6876849668752172755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7274980459159228368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d80f8fa8b5e2b4294ec2575cb34988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sr: {fileID: 4466723156777370603}
-  enable: 1
-  updateInterval: 0.1
-  normalSprite: {fileID: 0}
-  emissionSprite: {fileID: 0}
-  heightSprite: {fileID: 0}
-  normalMapPropertyName: _NormalMap
-  emissionMapPropertyName: _EmissionMap
-  heightMapPropertyName: _ParallaxMap
 --- !u!114 &8393169458917718466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4786,6 +4764,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 4466723156777370603}
   - {fileID: 3256731903790810545}
+  hideInHierarchy: 1
   localPos: {x: 0, y: 0, z: 0.1}
   localAngles: {x: 0, y: 0, z: 0}
   localScale: {x: 1, y: 1, z: 1}
