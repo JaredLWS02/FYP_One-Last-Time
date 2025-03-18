@@ -25035,6 +25035,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 419908686}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1258921953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1258921954}
+  - component: {fileID: 1258921955}
+  - component: {fileID: 1258921956}
+  m_Layer: 0
+  m_Name: throwDetector
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1258921954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258921953}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.309998, y: -2.8500004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1768501361}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1258921955
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258921953}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20, y: 5, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1258921956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258921953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49eef2dd15ab8664aa7fbe8660350116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spear: {fileID: 2928288381925218970, guid: 75520819d8a218440a192ec7bfee64a9, type: 3}
+  throwPoint: {fileID: 1768501361}
+  col: {fileID: 1258921955}
 --- !u!4 &1260818374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3117336312709928816, guid: 6212c791fafa4434aac3b03115af4e87,
@@ -36995,7 +37064,7 @@ GameObject:
   - component: {fileID: 1679953360}
   m_Layer: 0
   m_Name: bigRat roller
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37124,11 +37193,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 56
-  m_CollisionDetection: 0
+  m_Constraints: 124
+  m_CollisionDetection: 1
 --- !u!1 &1681649295
 GameObject:
   m_ObjectHideFlags: 0
@@ -39480,10 +39549,9 @@ GameObject:
   - component: {fileID: 1768501365}
   - component: {fileID: 1768501364}
   - component: {fileID: 1768501363}
-  - component: {fileID: 1768501366}
   m_Layer: 0
   m_Name: small rat Thrower
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39500,7 +39568,8 @@ Transform:
   m_LocalPosition: {x: 23.48639, y: 21.292896, z: -105.44213}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1258921954}
   m_Father: {fileID: 1198500214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1768501363
@@ -39576,18 +39645,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1768501360}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1768501366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768501360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49eef2dd15ab8664aa7fbe8660350116, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1769482263
 GameObject:
   m_ObjectHideFlags: 0

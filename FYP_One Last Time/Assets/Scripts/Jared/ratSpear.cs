@@ -13,6 +13,7 @@ public class ratSpear : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
         force = 10.0f;
+        StartCoroutine(selfDestruct());
 
         if (target != null)
         {
@@ -26,10 +27,16 @@ public class ratSpear : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.transform.root.CompareTag("Player"))
         {
             //deal dmg
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator selfDestruct()
+    {
+        yield return new WaitForSeconds(5.0f);
+        Destroy(gameObject);
     }
 }

@@ -2083,6 +2083,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipXPropertyName: _FlipX
+  flipYPropertyName: _FlipY
 --- !u!95 &5933852779896050999
 Animator:
   serializedVersion: 5
@@ -3327,7 +3329,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 5a8c1107f1d27ea408346caa56f4a93e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3351,6 +3353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipXPropertyName: _FlipX
+  flipYPropertyName: _FlipY
 --- !u!95 &4004871874835498188
 Animator:
   serializedVersion: 5
@@ -3678,9 +3682,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d80f8fa8b5e2b4294ec2575cb34988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSprite: {fileID: 0}
-  updateInterval: 0.1
+  sr: {fileID: 4466723156777370603}
   enable: 1
+  updateInterval: 0.1
+  normalSprite: {fileID: 0}
+  emissionSprite: {fileID: 0}
+  heightSprite: {fileID: 0}
+  normalMapPropertyName: _NormalMap
+  emissionMapPropertyName: _EmissionMap
+  heightMapPropertyName: _ParallaxMap
 --- !u!114 &8393169458917718466
 MonoBehaviour:
   m_ObjectHideFlags: 0
