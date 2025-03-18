@@ -7,6 +7,8 @@ public class SpriteEcho : SlowUpdate
     [Header("SpriteEcho")]
     public List<SpriteRenderer> sprites;
 
+    public bool hideInHierarchy = true;
+
     // ============================================================================
     
     [Header("Echo")]
@@ -39,6 +41,7 @@ public class SpriteEcho : SlowUpdate
     GameObject SpawnClone(Transform sprite_tr)
     {
         GameObject clone = new("Echo");
+        if(hideInHierarchy)
         clone.hideFlags = HideFlags.HideInHierarchy;
 
         // temp parent to match its local transforms
@@ -67,7 +70,7 @@ public class SpriteEcho : SlowUpdate
         sr.flipX = sr_source.flipX;
         sr.flipY = sr_source.flipY;
 
-        sr.sortingOrder = sr_source.sortingOrder-2;
+        sr.sortingOrder = sr_source.sortingOrder-1;
     }
 
     void AddFadeAnim(GameObject who)
