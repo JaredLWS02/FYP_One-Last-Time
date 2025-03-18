@@ -8,23 +8,26 @@ using PrimeTween;
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Current;
-    private CinemachineVirtualCamera _curCam;
-    private CinemachineFramingTransposer _framingTransposer;
-
-    private Coroutine _panCamCoroutine;
-    private Vector2 _startingTrackedObjectOffset;
 
     void Awake()
     {
         if(!Current) Current=this;
 
-        _curCam = Camera.main?.GetComponentInParent<CinemachineVirtualCamera>();
+        AwakeCurCam();
+    }
 
-        if (_curCam == null)
-        {
-            Debug.LogWarning("No CinemachineVirtualCamera found on the main camera.");
-            return;
-        }
+    // ==================================================================================================================
+
+    CinemachineVirtualCamera _curCam;
+    CinemachineFramingTransposer _framingTransposer;
+
+    Coroutine _panCamCoroutine;
+    Vector2 _startingTrackedObjectOffset;
+
+    void AwakeCurCam()
+    {
+        _curCam = Camera.main?.GetComponentInParent<CinemachineVirtualCamera>();
+        if(!_curCam) { Debug.LogWarning("No CinemachineVirtualCamera found on the main camera."); return; }
 
         _framingTransposer = _curCam.GetCinemachineComponent<CinemachineFramingTransposer>();
         _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
@@ -35,13 +38,11 @@ public class CameraManager : MonoBehaviour
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
         //GameEventSystem.Current.ToggleHapticsEvent += OnToggleHaptics;
     }
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-
         //GameEventSystem.Current.ToggleHapticsEvent -= OnToggleHaptics;
     }
 
@@ -112,6 +113,8 @@ public class CameraManager : MonoBehaviour
     }
 
     #endregion
+
+    // ==================================================================================================================
 
     public List<CinemachineVirtualCamera> allCameras = new();
 
