@@ -31,9 +31,9 @@ public class State_SpyviActions_AttackWindingUp : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        action.AllowJump = toggle;
-        //action.AllowParry = toggle;
+        //action.AllowJump = toggle;
+        action.AllowParry = toggle;
         action.AllowHurt = toggle;
-        action.AllowStun = toggle;
+        //action.AllowStun = toggle;
     }
 }
