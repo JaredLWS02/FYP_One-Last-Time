@@ -16,9 +16,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3892dfd881171b2498e5172606495cef, type: 3}
   output: {fileID: -1775126937349135684, guid: fbf0ac9f190fb3e448002736bcdca631, type: 2}
   loop: 0
-  randomVolume: {x: 0.03, y: 0.03}
+  randomVolume: {x: 0.1, y: 0.1}
   randomPitch: {x: 0.9, y: 1.1}
-  randomStereoPan: {x: 0, y: 0}
+  stereoPan:
+    min: 0
+    max: 0
   spatialBlend: 0
   minDistance: 9
   maxDistance: 18
