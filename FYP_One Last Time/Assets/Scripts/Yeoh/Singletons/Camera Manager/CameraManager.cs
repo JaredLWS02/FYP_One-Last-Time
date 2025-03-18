@@ -14,22 +14,23 @@ public class CameraManager : MonoBehaviour
     private Coroutine _panCamCoroutine;
     private Vector2 _startingTrackedObjectOffset;
 
-        void Awake()
+    void Awake()
+    {
+        if(!Current) Current=this;
+
+        _curCam = Camera.main?.GetComponentInParent<CinemachineVirtualCamera>();
+
+        if (_curCam == null)
         {
-            if (Current == null)
-                Current = this;
-
-            _curCam = Camera.main?.GetComponentInParent<CinemachineVirtualCamera>();
-
-            if (_curCam == null)
-            {
-                Debug.LogError("No CinemachineVirtualCamera found on the main camera.");
-                return;
-            }
-
-            _framingTransposer = _curCam.GetCinemachineComponent<CinemachineFramingTransposer>();
-            _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
+            Debug.LogWarning("No CinemachineVirtualCamera found on the main camera.");
+            return;
         }
+
+        _framingTransposer = _curCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
+    }
+
+    // ==================================================================================================================
 
     void OnEnable()
     {
