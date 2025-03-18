@@ -42,11 +42,6 @@ public class RatRoller : MonoBehaviour
             rotz = 30.0f;
             StartCoroutine(Chargingleft());
         }
-
-        if(c.CompareTag("Player"))
-        {
-            //do damage to player
-        }
     }
 
     void faceDir()
