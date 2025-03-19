@@ -716,7 +716,7 @@ MonoBehaviour:
   returner: {fileID: 0}
   flip: {fileID: 8663946442160230497}
   seekFlipDelay: {x: 0.4, y: 0.6}
-  combatSlotNum: 0
+  combatSlotNum: 5
   events:
     OnSeekEnter:
       m_PersistentCalls:
@@ -794,7 +794,7 @@ MonoBehaviour:
   relocateSeconds: {x: 1, y: 4}
   maxRetries: 1000
   axisMult: {x: 1, y: 1, z: 0}
-  maxRangeFromStart: 30
+  maxRangeFromStart: 1
   wanderArrivalRange: 1
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.101960786}
@@ -1501,8 +1501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60717865382c15e43a9c331af53c04b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 200
-  hpMax: 200
+  hp: 500
+  hpMax: 500
   regen: 1
   regenWhenEmpty: 0
   regenHp: 0.2

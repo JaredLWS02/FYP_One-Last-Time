@@ -33,6 +33,7 @@ public class EnemyManager : MonoBehaviour
     [System.Serializable]
     public class EnemyCombatSlot
     {
+        public string slotName = "Default";
         public int slotNum = 0;
         public List<GameObject> enemies;
         public EnemyCombatTypeEvents events;
