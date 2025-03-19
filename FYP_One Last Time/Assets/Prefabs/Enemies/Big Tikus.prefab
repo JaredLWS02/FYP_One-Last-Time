@@ -716,7 +716,14 @@ MonoBehaviour:
   returner: {fileID: 0}
   flip: {fileID: 8663946442160230497}
   seekFlipDelay: {x: 0.4, y: 0.6}
-  combatSlotNum: 0
+  combatSlotNum: 5
+  events:
+    OnSeekEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSeekExit:
+      m_PersistentCalls:
+        m_Calls: []
   randomSeekBehaviour: {fileID: 0}
   hpM: {fileID: 704049436961937626}
   fleeHPPercent: 10
@@ -787,7 +794,7 @@ MonoBehaviour:
   relocateSeconds: {x: 1, y: 4}
   maxRetries: 1000
   axisMult: {x: 1, y: 1, z: 0}
-  maxRangeFromStart: 30
+  maxRangeFromStart: 1
   wanderArrivalRange: 1
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.101960786}
@@ -1106,7 +1113,6 @@ GameObject:
   - component: {fileID: 7114433548222468432}
   - component: {fileID: 3956280804667956790}
   - component: {fileID: 418708997891478844}
-  - component: {fileID: 1477388138496825184}
   - component: {fileID: 412968695723508853}
   - component: {fileID: 4405043119144846678}
   m_Layer: 6
@@ -1195,6 +1201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipXPropertyName: _FlipX
+  flipYPropertyName: _FlipY
 --- !u!95 &7786861728038490430
 Animator:
   serializedVersion: 5
@@ -1382,21 +1390,6 @@ MonoBehaviour:
   enableBillboard: 1
   fixedUpdate: 0
   rotateAxis: {x: 1, y: 1, z: 0}
---- !u!114 &1477388138496825184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2719329177920231827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d80f8fa8b5e2b4294ec2575cb34988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalSprite: {fileID: 0}
-  updateInterval: 0.1
-  enable: 1
 --- !u!114 &412968695723508853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1508,8 +1501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60717865382c15e43a9c331af53c04b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 200
-  hpMax: 200
+  hp: 500
+  hpMax: 500
   regen: 1
   regenWhenEmpty: 0
   regenHp: 0.2
@@ -1667,6 +1660,7 @@ GameObject:
   - component: {fileID: 8449358400114368154}
   - component: {fileID: 6861530176262365675}
   - component: {fileID: 8399864931548892809}
+  - component: {fileID: 1343373971445596552}
   - component: {fileID: 1405673648338651218}
   m_Layer: 6
   m_Name: Attacks
@@ -1770,6 +1764,8 @@ MonoBehaviour:
           m_Calls: []
   rb: {fileID: 8915720888079556032}
   cooldown: {fileID: 8399864931548892809}
+  postInterruptAttackCooldown: 1
+  postInterruptAttackCooldownTimer: {fileID: 1343373971445596552}
   attackEvents:
     WindUp:
       m_PersistentCalls:
@@ -1799,6 +1795,20 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
 --- !u!114 &8399864931548892809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345753957651105915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
+--- !u!114 &1343373971445596552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2168,6 +2178,7 @@ MonoBehaviour:
         m_Calls: []
   sprites:
   - {fileID: 3716319433280079349}
+  hideInHierarchy: 1
   localPos: {x: 0, y: 0, z: 0.1}
   localAngles: {x: 0, y: 0, z: 0}
   localScale: {x: 1, y: 1, z: 1}
@@ -3404,7 +3415,7 @@ MonoBehaviour:
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
     parented: 0
-    followRotation: 1
+    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 13df9d88431bfe24c81a3edd6b202eb9, type: 2}
@@ -3430,10 +3441,10 @@ MonoBehaviour:
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
     parented: 0
-    followRotation: 1
+    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
-    audioSO: {fileID: 11400000, guid: 97b3bb0294073f54d81114dc77633614, type: 2}
+    audioSO: {fileID: 11400000, guid: 3b5453853e403b449a05a046e19ad267, type: 2}
   loopGroups: []
   audioEvents:
     EnableEvent:

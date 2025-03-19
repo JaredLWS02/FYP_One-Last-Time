@@ -14,12 +14,17 @@ public class SpriteFlipNormalFix : MonoBehaviour
         propertyBlock = new MaterialPropertyBlock();
     }
 
+    // ============================================================================
+
+    public string flipXPropertyName = "_FlipX";
+    public string flipYPropertyName = "_FlipY";
+
     void LateUpdate()
     {
         sr.GetPropertyBlock(propertyBlock);
 
-        propertyBlock.SetFloat("_FlipX", sr.flipX ? -1f : 1f);
-        propertyBlock.SetFloat("_FlipY", sr.flipY ? -1f : 1f);
+        propertyBlock.SetFloat(flipXPropertyName, sr.flipX ? -1f : 1f);
+        propertyBlock.SetFloat(flipYPropertyName, sr.flipY ? -1f : 1f);
 
         sr.SetPropertyBlock(propertyBlock);
     }

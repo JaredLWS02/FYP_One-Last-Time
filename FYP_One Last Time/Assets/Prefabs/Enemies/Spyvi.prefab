@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 7682083124440677918}
   - component: {fileID: 4842645491667626223}
   - component: {fileID: 4901763553892497067}
+  - component: {fileID: 3475929289321420560}
   - component: {fileID: 3253657558541823124}
   m_Layer: 6
   m_Name: Attacks
@@ -500,6 +501,8 @@ MonoBehaviour:
           m_Calls: []
   rb: {fileID: 7315561354744783907}
   cooldown: {fileID: 4901763553892497067}
+  postInterruptAttackCooldown: 1
+  postInterruptAttackCooldownTimer: {fileID: 3475929289321420560}
   attackEvents:
     WindUp:
       m_PersistentCalls:
@@ -529,6 +532,20 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
 --- !u!114 &4901763553892497067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257814269893822157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
+--- !u!114 &3475929289321420560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -844,15 +861,6 @@ MonoBehaviour:
     events:
       WindUp:
         m_PersistentCalls:
-          m_Calls: []
-      ReleaseStart:
-        m_PersistentCalls:
-          m_Calls: []
-      ReleaseEnd:
-        m_PersistentCalls:
-          m_Calls: []
-      Recover:
-        m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 940385467848736309}
             m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
@@ -866,6 +874,15 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
       Cancel:
         m_PersistentCalls:
           m_Calls: []
@@ -1101,6 +1118,7 @@ MonoBehaviour:
         m_Calls: []
   sprites:
   - {fileID: 1123993858437119549}
+  hideInHierarchy: 1
   localPos: {x: 0, y: 0, z: 0.1}
   localAngles: {x: 0, y: 0, z: 0}
   localScale: {x: 1, y: 1, z: 1}
@@ -1387,7 +1405,6 @@ GameObject:
   - component: {fileID: 7767451025279606007}
   - component: {fileID: 5580064014610934646}
   - component: {fileID: 1266417278459489903}
-  - component: {fileID: 6643996540191059917}
   - component: {fileID: 7720956622550147065}
   - component: {fileID: 8086653970862224508}
   m_Layer: 6
@@ -1476,6 +1493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipXPropertyName: _FlipX
+  flipYPropertyName: _FlipY
 --- !u!95 &1061523320127218345
 Animator:
   serializedVersion: 5
@@ -1727,21 +1746,6 @@ MonoBehaviour:
   enableBillboard: 1
   fixedUpdate: 0
   rotateAxis: {x: 1, y: 1, z: 0}
---- !u!114 &6643996540191059917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3265591776346835760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93d80f8fa8b5e2b4294ec2575cb34988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalSprite: {fileID: 0}
-  updateInterval: 0.1
-  enable: 1
 --- !u!114 &7720956622550147065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2972,15 +2976,6 @@ MonoBehaviour:
     events:
       WindUp:
         m_PersistentCalls:
-          m_Calls: []
-      ReleaseStart:
-        m_PersistentCalls:
-          m_Calls: []
-      ReleaseEnd:
-        m_PersistentCalls:
-          m_Calls: []
-      Recover:
-        m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 940385467848736309}
             m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
@@ -2994,6 +2989,15 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls: []
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
       Cancel:
         m_PersistentCalls:
           m_Calls: []

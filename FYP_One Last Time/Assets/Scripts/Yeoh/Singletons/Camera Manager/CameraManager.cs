@@ -8,39 +8,41 @@ using PrimeTween;
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager Current;
-    private CinemachineVirtualCamera _curCam;
-    private CinemachineFramingTransposer _framingTransposer;
 
-    private Coroutine _panCamCoroutine;
-    private Vector2 _startingTrackedObjectOffset;
+    void Awake()
+    {
+        if(!Current) Current=this;
 
-        void Awake()
-        {
-            if (Current == null)
-                Current = this;
+        AwakeCurCam();
+    }
 
-            _curCam = Camera.main?.GetComponentInParent<CinemachineVirtualCamera>();
+    // ==================================================================================================================
 
-            if (_curCam == null)
-            {
-                Debug.LogError("No CinemachineVirtualCamera found on the main camera.");
-                return;
-            }
+    CinemachineVirtualCamera _curCam;
+    CinemachineFramingTransposer _framingTransposer;
 
-            _framingTransposer = _curCam.GetCinemachineComponent<CinemachineFramingTransposer>();
-            _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
-        }
+    Coroutine _panCamCoroutine;
+    Vector2 _startingTrackedObjectOffset;
+
+    void AwakeCurCam()
+    {
+        _curCam = Camera.main?.GetComponentInParent<CinemachineVirtualCamera>();
+        if(!_curCam) { Debug.LogWarning("No CinemachineVirtualCamera found on the main camera."); return; }
+
+        _framingTransposer = _curCam.GetCinemachineComponent<CinemachineFramingTransposer>();
+        _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
+    }
+
+    // ==================================================================================================================
 
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-
         //GameEventSystem.Current.ToggleHapticsEvent += OnToggleHaptics;
     }
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-
         //GameEventSystem.Current.ToggleHapticsEvent -= OnToggleHaptics;
     }
 
@@ -111,6 +113,8 @@ public class CameraManager : MonoBehaviour
     }
 
     #endregion
+
+    // ==================================================================================================================
 
     public List<CinemachineVirtualCamera> allCameras = new();
 

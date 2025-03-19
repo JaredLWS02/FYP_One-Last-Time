@@ -15,11 +15,15 @@ MonoBehaviour:
   Name: Stab Hurtbox
   description: 
   damage: 15
-  knockback: 25
   blockDamage: 15
-  blockKnockback: 25
   pierceCount: 1
+  ignoreIFrame: 0
+  knockback: 25
+  blockKnockback: 25
+  killsMomentum: 1
   isParryable: 1
   parryStunsOwner: 1
   canStun: 1
   customStunAnim: {fileID: 0}
+  ignorePoise: 0
+  ignoreStunCooldown: 0

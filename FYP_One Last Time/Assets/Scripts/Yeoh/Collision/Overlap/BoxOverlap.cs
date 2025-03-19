@@ -9,7 +9,7 @@ public class BoxOverlap : BaseOverlap
 
     public override Collider[] GetOverlap()
     {
-        return Physics.OverlapBox(origin.position + posOffset, boxSize, origin.rotation, layers);
+        return Physics.OverlapBox(origin.position + posOffset, boxSize*.5f, origin.rotation, layers);
     }
 
     // ============================================================================
