@@ -40,10 +40,12 @@ public class AttackScript : BaseAction
         EventM = EventManager.Current;
         
         EventM.CancelAttackEvent += OnCancelAttack;
+        EventM.InterruptAttackEvent += OnInterruptAttack;
     }
     void OnDisable()
     {
         EventM.CancelAttackEvent -= OnCancelAttack;
+        EventM.InterruptAttackEvent -= OnInterruptAttack;
 
         DespawnHurtbox();
     }
@@ -68,6 +70,7 @@ public class AttackScript : BaseAction
         if(IsPerforming()) return;
 
         if(IsCooling()) return;
+        if(IsPostInterruptAttackCooling()) return;
 
         EventM.OnCancelFlipDelay(owner);
 
@@ -194,19 +197,33 @@ public class AttackScript : BaseAction
     
     void OnCancelAttack(GameObject who)
     {
-        if(who!=owner) return;
-
+        if(who != owner) return;
         if(!IsPerforming()) return;
 
         CancelAnim();
 
+        // events
         EventM.OnAttackCancelled(owner);
-
         AttackSO atk = attackPreset.attackSO;
-
         attackEvents.Cancel?.Invoke($"{atk.Name} Cancel");
         attackPreset.events.Cancel?.Invoke();
     }
+
+    // ============================================================================
+
+    [Header("After Cancel")]
+    public float postInterruptAttackCooldown = 1;
+    public Timer postInterruptAttackCooldownTimer;
+
+    void OnInterruptAttack(GameObject attacker)
+    {
+        if(attacker != owner) return;
+        DoPostInterruptAttackCooldown();
+    }
+
+    void DoPostInterruptAttackCooldown() => postInterruptAttackCooldownTimer?.StartTimer(postInterruptAttackCooldown);
+    bool IsPostInterruptAttackCooling() => postInterruptAttackCooldownTimer?.IsTicking() ?? false;
+    void CancelPostInterruptAttackCooldown() => postInterruptAttackCooldownTimer?.FinishTimer();
 
     // ============================================================================
 

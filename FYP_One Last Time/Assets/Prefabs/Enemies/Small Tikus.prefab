@@ -701,6 +701,7 @@ GameObject:
   - component: {fileID: 7776404038038796983}
   - component: {fileID: 6326555707911226274}
   - component: {fileID: 2606728909693817489}
+  - component: {fileID: 4229771815078150545}
   - component: {fileID: 748765877545874934}
   m_Layer: 6
   m_Name: Attacks
@@ -817,6 +818,8 @@ MonoBehaviour:
           m_Calls: []
   rb: {fileID: 1401727047894497609}
   cooldown: {fileID: 2606728909693817489}
+  postInterruptAttackCooldown: 1
+  postInterruptAttackCooldownTimer: {fileID: 4229771815078150545}
   attackEvents:
     WindUp:
       m_PersistentCalls:
@@ -834,6 +837,20 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
 --- !u!114 &2606728909693817489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942763244818008925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
+--- !u!114 &4229771815078150545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

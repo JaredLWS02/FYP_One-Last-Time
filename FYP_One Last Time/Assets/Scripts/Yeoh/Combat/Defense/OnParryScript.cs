@@ -47,7 +47,10 @@ public class OnParryScript : BaseAction
         EventM.OnTryKnockback(owner, hurtbox.blockKnockback, contactPoint, hurtbox.killsMomentum);
 
         if(cancelAttackersAttack)
-        EventM.OnCancelAttack(attacker);
+        {
+            EventM.OnCancelAttack(attacker);
+            EventM.OnInterruptAttack(attacker);
+        }
 
         SpawnStunbox(hurtbox, contactPoint);
     }

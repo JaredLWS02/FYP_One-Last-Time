@@ -262,6 +262,7 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, AttackSO> AttackReleasedEvent;
     public event Action<GameObject> CancelAttackEvent;
     public event Action<GameObject> AttackCancelledEvent;
+    public event Action<GameObject> InterruptAttackEvent;
 
     public void OnTryCombo(GameObject attacker, string combo_name)
     {
@@ -290,6 +291,10 @@ public class EventManager : MonoBehaviour
     public void OnAttackCancelled(GameObject attacker)
     {
         AttackCancelledEvent?.Invoke(attacker);
+    }
+    public void OnInterruptAttack(GameObject attacker)
+    {
+        InterruptAttackEvent?.Invoke(attacker);
     }
     
     // Parry and Riposte ==================================================================================================================
