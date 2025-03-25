@@ -61,6 +61,8 @@ public class OnParryScript : BaseAction
     {
         if(!aoeOverlap) return;
 
+        aoeOverlap.Check();
+        
         var other_attackers = aoeOverlap.GetCurrentOverlaps();
 
         foreach(var other_attacker in other_attackers)

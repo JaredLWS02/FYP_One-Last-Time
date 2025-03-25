@@ -51,6 +51,11 @@ public class BaseOverlap : SlowUpdate
 
     protected override void OnSlowUpdate()
     {
+        Check();
+    }
+
+    public void Check()
+    {
         currentOverlaps = new();
 
         CheckOnEnter();

@@ -516,6 +516,10 @@ MonoBehaviour:
   parryStun: 1
   optionalParryStunAnim: {fileID: 0}
   ignoreStunCooldown: 1
+  events:
+    OnParried:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &404301175344531863
 GameObject:
   m_ObjectHideFlags: 0
@@ -4149,8 +4153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
-  checkInterval: 0.25
+  enableSlowUpdate: 0
+  checkInterval: 1
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
@@ -4179,7 +4183,7 @@ MonoBehaviour:
     LastExit:
       m_PersistentCalls:
         m_Calls: []
-  range: 5
+  range: 6
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
 --- !u!1 &7660948935849337692
