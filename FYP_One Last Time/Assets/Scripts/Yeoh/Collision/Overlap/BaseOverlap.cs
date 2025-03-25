@@ -46,19 +46,19 @@ public class BaseOverlap : SlowUpdate
     // ============================================================================
 
     //[Header("Debug")]
-    Dictionary<GameObject, Collider> current_overlaps = new();
-    Dictionary<GameObject, Collider> previous_overlaps = new();
+    Dictionary<GameObject, Collider> currentOverlaps = new();
+    Dictionary<GameObject, Collider> previousOverlaps = new();
 
     protected override void OnSlowUpdate()
     {
-        current_overlaps = new();
+        currentOverlaps = new();
 
         CheckOnEnter();
         CheckOnStay();
         CheckOnExit();
 
         // Update old to new to prepare for the next round
-        previous_overlaps = new(current_overlaps);
+        previousOverlaps = new(currentOverlaps);
     }
 
     void CheckOnEnter()
@@ -70,13 +70,13 @@ public class BaseOverlap : SlowUpdate
             if(!coll) continue;
             if(!IsColliderValid(coll, out var obj)) continue;
             
-            current_overlaps[obj] = coll;
+            currentOverlaps[obj] = coll;
 
             // if present in current but missing in previous
-            if(!previous_overlaps.ContainsKey(obj))
+            if(!previousOverlaps.ContainsKey(obj))
             {
                 // if none previously, this is the first
-                if(previous_overlaps.Count==0)
+                if(previousOverlaps.Count==0)
                 {
                     OnOverlapFirstEnter(obj, coll);
                     OverlapFirstEnterEvent?.Invoke(obj, coll);
@@ -94,29 +94,29 @@ public class BaseOverlap : SlowUpdate
     {
         if(IsOverlapping())
         {
-            OnOverlapStay(current_overlaps);
-            OverlapStayEvent?.Invoke(current_overlaps);
-            overlapEvents.Stay?.Invoke(current_overlaps);
+            OnOverlapStay(currentOverlaps);
+            OverlapStayEvent?.Invoke(currentOverlaps);
+            overlapEvents.Stay?.Invoke(currentOverlaps);
         }
     }
 
-    public bool IsOverlapping() => current_overlaps.Count > 0;
+    public bool IsOverlapping() => currentOverlaps.Count > 0;
 
     void CheckOnExit()
     {
-        foreach(var prev_obj in previous_overlaps.Keys)
+        foreach(var prev_obj in previousOverlaps.Keys)
         {
             // if present in previous but missing in current
             // or its null because got destroyed
-            if(!current_overlaps.ContainsKey(prev_obj) || prev_obj==null)
+            if(!currentOverlaps.ContainsKey(prev_obj) || prev_obj==null)
             {
-                Collider coll = previous_overlaps[prev_obj];
+                Collider coll = previousOverlaps[prev_obj];
 
                 OnOverlapExit(prev_obj, coll);
                 OverlapExitEvent?.Invoke(prev_obj, coll);
                 overlapEvents.Exit?.Invoke(prev_obj, coll);
 
-                if(current_overlaps.Count==0)
+                if(currentOverlaps.Count==0)
                 {
                     OnOverlapLastExit(prev_obj, coll);
                     OverlapLastExitEvent?.Invoke(prev_obj, coll);
@@ -128,8 +128,21 @@ public class BaseOverlap : SlowUpdate
 
     // ============================================================================
 
-    public bool IsOverlappingWho(GameObject who) => current_overlaps.ContainsKey(who);
+    public bool IsOverlappingWho(GameObject who) => currentOverlaps.ContainsKey(who);
     
+    // ============================================================================
+
+    public List<GameObject> GetCurrentOverlaps()
+    {
+        List<GameObject> overlaps = new();
+
+        foreach(var overlap in currentOverlaps.Keys)
+        {
+            overlaps.Add(overlap);
+        }
+        return overlaps;
+    }
+
     // ============================================================================
 
     public virtual void OnOverlapFirstEnter(GameObject obj, Collider coll){}

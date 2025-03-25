@@ -307,6 +307,7 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, string> TryRiposteComboEvent;
     public event Action<GameObject> CancelParryEvent;
     public event Action<GameObject> ParryCancelledEvent;
+    public event Action<GameObject, GameObject, Vector3> ParryCounteredEvent;
 
     public void OnTryRaiseParry(GameObject defender)
     {
@@ -339,6 +340,10 @@ public class EventManager : MonoBehaviour
     public void OnParryCancelled(GameObject defender)
     {
         ParryCancelledEvent?.Invoke(defender);
+    }
+    public void OnParryCountered(GameObject defender, GameObject attacker, Vector3 contactPoint)
+    {
+        ParryCounteredEvent?.Invoke(defender, attacker, contactPoint);
     }
     
     // Ability ==================================================================================================================

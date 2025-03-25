@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 2984863347428207744}
   - component: {fileID: 8995939786167268597}
   - component: {fileID: 3067970854123155927}
+  - component: {fileID: 3102670728491757598}
   m_Layer: 3
   m_Name: Hurt
   m_TagString: Untagged
@@ -498,6 +499,23 @@ MonoBehaviour:
     DisableEvent:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &3102670728491757598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90390728429658038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d1d0c41e7f1ed429ad177ea73367dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  cancelAttack: 1
+  parryStun: 1
+  optionalParryStunAnim: {fileID: 0}
+  ignoreStunCooldown: 1
 --- !u!1 &404301175344531863
 GameObject:
   m_ObjectHideFlags: 0
@@ -2960,6 +2978,8 @@ GameObject:
   - component: {fileID: 2557109480970711812}
   - component: {fileID: 6880144158370058344}
   - component: {fileID: 7688322990203298310}
+  - component: {fileID: 8629186158819471975}
+  - component: {fileID: 4329549551666013980}
   m_Layer: 3
   m_Name: Parry
   m_TagString: Untagged
@@ -2980,6 +3000,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7469252697914586886}
   - {fileID: 9192694566128082422}
   m_Father: {fileID: 5568401318979574577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3080,8 +3101,8 @@ MonoBehaviour:
   parryIFrame: 1
   iframeSeconds: 0.5
   selfKnockback: 1
-  cancelAttackersAttack: 1
-  spawnStunbox: 1
+  aoeOverlap: {fileID: 2648656954865597318}
+  spawnStunbox: 0
   parryStunbox:
     prefabName: 
     randomPrefabs:
@@ -3147,6 +3168,42 @@ MonoBehaviour:
             m_StringArgument: Sparks
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 6880144158370058344}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8629186158819471975}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4329549551666013980}
+          m_TargetAssemblyTypeName: TimescaleController, Assembly-CSharp
+          m_MethodName: HitStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &6880144158370058344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3172,6 +3229,18 @@ MonoBehaviour:
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  - prefabName: Shockwave
+    randomPrefabs:
+    - {fileID: 8725716151169460468, guid: 7a080ea5473398e4fa98100efd91c902, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 7469252697914586886}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
   spawnEvents:
     OnEnable:
       m_PersistentCalls:
@@ -3211,6 +3280,56 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &8629186158819471975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793569088056600768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  tweenFovTime: 0.5
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &4329549551666013980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793569088056600768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71763e629d88b7145ada7a9441ef8a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.2
+  hitstopIn_: 0.1
+  hitstopWait_: 0.01
+  hitstopOut: 0.5
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
       m_PersistentCalls:
         m_Calls: []
 --- !u!1 &7026635337664250044
@@ -3986,6 +4105,83 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!1 &7386130220998829687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7469252697914586886}
+  - component: {fileID: 2648656954865597318}
+  m_Layer: 3
+  m_Name: AOE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7469252697914586886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7386130220998829687}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8242738573827697512}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2648656954865597318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7386130220998829687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0.25
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 7469252697914586886}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 64
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  range: 5
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
 --- !u!1 &7660948935849337692
 GameObject:
   m_ObjectHideFlags: 0
