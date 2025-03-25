@@ -1878,6 +1878,7 @@ GameObject:
   - component: {fileID: 5623201136454167640}
   - component: {fileID: 6924317339209216897}
   - component: {fileID: 8165834065421918735}
+  - component: {fileID: 275230207156901}
   m_Layer: 6
   m_Name: Rush
   m_TagString: Untagged
@@ -1939,10 +1940,34 @@ MonoBehaviour:
           m_Calls: []
       ReleaseStart:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 275230207156901}
+            m_TargetAssemblyTypeName: CollisionToggler, Assembly-CSharp
+            m_MethodName: ToggleIgnoreLayers
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
       ReleaseEnd:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 275230207156901}
+            m_TargetAssemblyTypeName: CollisionToggler, Assembly-CSharp
+            m_MethodName: ToggleIgnoreLayers
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
       Recover:
         m_PersistentCalls:
           m_Calls: []
@@ -1982,6 +2007,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &275230207156901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725129758288447381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5f22e23122c554dbd5a166d23f57f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myColliders:
+  - {fileID: 3188788791223888934}
+  - {fileID: 6133948626742609180}
+  layerNamesToToggle:
+  - Player
+  - PlayerStopbox
 --- !u!1 &4955684307425597312
 GameObject:
   m_ObjectHideFlags: 0
