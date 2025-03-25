@@ -2380,7 +2380,7 @@ MonoBehaviour:
   sight: {fileID: 3129096334348478008}
   expandRadarRangeMult: 2
   move: {fileID: 6946549235541127326}
-  targetArrivalRange: 6
+  targetArrivalRange: 8.5
   flee: {fileID: 571928426790848343}
   returner: {fileID: 0}
   showGizmos: 0
@@ -3776,9 +3776,9 @@ MonoBehaviour:
   turn: {fileID: 4679690703684212994}
   goal: {fileID: 0}
   arrival: 1
-  arrivalRange: 5.18
-  arrivalSlowingRangeOffset: 2.72
-  maintainRange: 4.36
+  arrivalRange: 8.5
+  arrivalSlowingRangeOffset: 5
+  maintainRange: 5.5
   selfStoppingRange: 0.5
   showGizmos: 0
   showStoppingRangeGizmo: 1
@@ -4257,6 +4257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 2034736583873020547}
+  knockback: 1
   cancelAttack: 1
   parryStun: 1
   optionalParryStunAnim: {fileID: 11400000, guid: 7a27ad6aa03d5854c8b584fe81c20e35,

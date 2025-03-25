@@ -38,17 +38,17 @@ public class OnParryScript : BaseAction
         parryEvents.OnParry?.Invoke(contact_point);
 
         if(parryIFrame)
-        EventM.OnTryIFrame(owner, iframeSeconds);
+            EventM.OnTryIFrame(owner, iframeSeconds);
 
         if(selfKnockback)
-        EventM.OnTryKnockback(owner, hurtbox.blockKnockback, contact_point, hurtbox.killsMomentum);
+            EventM.OnTryKnockback(owner, hurtbox.blockKnockback*.5f, contact_point, hurtbox.killsMomentum);
 
         if(hurtbox.parryStunsOwner)
         {
-            EventM.OnParryCountered(defender, attacker, contact_point);
+            EventM.OnParryCountered(defender, attacker, hurtbox, contact_point);
         }
 
-        ParryAOE(defender, attacker);
+        ParryAOE(defender, attacker, hurtbox);
         SpawnStunbox(contact_point);
     }
 
@@ -57,7 +57,7 @@ public class OnParryScript : BaseAction
     [Header("Parry AOE")]
     public BaseOverlap aoeOverlap;
 
-    void ParryAOE(GameObject defender, GameObject main_attacker)
+    void ParryAOE(GameObject defender, GameObject main_attacker, HurtboxSO hurtbox)
     {
         if(!aoeOverlap) return;
 
@@ -69,7 +69,7 @@ public class OnParryScript : BaseAction
         {
             if(other_attacker == main_attacker) continue;
 
-            EventM.OnParryCountered(defender, other_attacker, other_attacker.transform.position);
+            EventM.OnParryCountered(defender, other_attacker, hurtbox, other_attacker.transform.position);
         }
     }
 

@@ -33,7 +33,7 @@ public class State_PakYaActions_Stunned : BaseState
 
     void ToggleAllow(bool toggle)
     {
-        action.AllowParry = toggle;
+        //action.AllowParry = toggle;
         action.AllowHurt = toggle;
         //action.AllowStun = toggle;
     }

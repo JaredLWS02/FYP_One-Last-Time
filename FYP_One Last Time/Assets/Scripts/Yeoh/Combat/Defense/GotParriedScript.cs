@@ -25,14 +25,20 @@ public class GotParriedScript : MonoBehaviour
     // ============================================================================
 
     [Header("When Parried")]
+    public bool knockback=true;
     public bool cancelAttack=true;
     public bool parryStun=true;
     public AnimSO optionalParryStunAnim;
     public bool ignoreStunCooldown=true;
 
-    void OnParryCountered(GameObject defender, GameObject attacker, Vector3 contact_point)
+    void OnParryCountered(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contact_point)
     {
         if(attacker != owner) return;
+
+        if(knockback)
+        {
+            EventM.OnTryKnockback(owner, hurtbox.blockKnockback*.5f, contact_point, hurtbox.killsMomentum);
+        }
 
         if(cancelAttack)
         {
