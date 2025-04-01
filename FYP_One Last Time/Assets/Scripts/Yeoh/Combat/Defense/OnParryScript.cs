@@ -28,43 +28,61 @@ public class OnParryScript : BaseAction
     public float iframeSeconds=.5f;
     public bool selfKnockback=true;
 
-    [Header("Parry Counter")]
-    public bool cancelAttackersAttack=true;
-
-    void OnParry(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
+    void OnParry(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contact_point)
     {
         if(defender!=owner) return;
 
         Perform(parryAnim);
         Anim3_ReleaseEnd();
 
-        parryEvents.OnParry?.Invoke(contactPoint);
+        parryEvents.OnParry?.Invoke(contact_point);
 
         if(parryIFrame)
-        EventM.OnTryIFrame(owner, iframeSeconds);
+            EventM.OnTryIFrame(owner, iframeSeconds);
 
         if(selfKnockback)
-        EventM.OnTryKnockback(owner, hurtbox.blockKnockback, contactPoint, hurtbox.killsMomentum);
+            EventM.OnTryKnockback(owner, hurtbox.blockKnockback*.5f, contact_point, hurtbox.killsMomentum);
 
-        if(cancelAttackersAttack)
+        if(hurtbox.parryStunsOwner)
         {
-            EventM.OnCancelAttack(attacker);
-            EventM.OnInterruptAttack(attacker);
+            EventM.OnParryCountered(defender, attacker, hurtbox, contact_point);
         }
 
-        SpawnStunbox(hurtbox, contactPoint);
+        ParryAOE(defender, attacker, hurtbox);
+        SpawnStunbox(contact_point);
     }
 
     // ============================================================================
 
-    public bool spawnStunbox=true;
+    [Header("Parry AOE")]
+    public BaseOverlap aoeOverlap;
+
+    void ParryAOE(GameObject defender, GameObject main_attacker, HurtboxSO hurtbox)
+    {
+        if(!aoeOverlap) return;
+
+        aoeOverlap.Check();
+        
+        var other_attackers = aoeOverlap.GetCurrentOverlaps();
+
+        foreach(var other_attacker in other_attackers)
+        {
+            if(other_attacker == main_attacker) continue;
+
+            EventM.OnParryCountered(defender, other_attacker, hurtbox, other_attacker.transform.position);
+        }
+    }
+
+    // ============================================================================
+
+    [Header("Parry Hurtbox")]
+    public bool spawnStunbox;
     public PrefabPreset parryStunbox;
     GameObject stunbox;
 
-    void SpawnStunbox(HurtboxSO hurtbox, Vector3 contactPoint)
+    void SpawnStunbox(Vector3 contactPoint)
     {
         if(!spawnStunbox) return;
-        if(!hurtbox.parryStunsOwner) return;
 
         parryStunbox.spawnPos = contactPoint;
         stunbox = parryStunbox.Spawn();
@@ -90,7 +108,6 @@ public class OnParryScript : BaseAction
     void OnCancelParry(GameObject who)
     {
         if(who!=owner) return;
-
         if(!IsPerforming()) return;
 
         CancelAnim();

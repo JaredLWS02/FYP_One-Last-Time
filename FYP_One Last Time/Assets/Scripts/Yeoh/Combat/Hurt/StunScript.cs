@@ -7,12 +7,6 @@ public class StunScript : BaseAction
     [Header("Stun script")]
     public bool allowStun=true;
     public AnimSO defaultStunAnim;
-    AnimSO stunAnim;
-
-    void Awake()
-    {
-        stunAnim = defaultStunAnim;
-    }
 
     // ============================================================================
     
@@ -49,9 +43,7 @@ public class StunScript : BaseAction
 
         //actionCounter++;
 
-        stunAnim = hurtbox.customStunAnim ?
-            hurtbox.customStunAnim : defaultStunAnim;
-
+        AnimSO stunAnim = hurtbox.customStunAnim ? hurtbox.customStunAnim : defaultStunAnim;
         Perform(stunAnim);
 
         EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
