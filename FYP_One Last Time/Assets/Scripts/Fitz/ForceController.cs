@@ -63,7 +63,7 @@ public class ForceController : MonoBehaviour
                 { 
                     Debug.Log("Force applied");
                     // Do Tikus stuff here
-                    EventManager.Current.OnTryStun(other_rb.gameObject, owner, stunboxSO, owner.transform.position);
+                    EventManager.Current.OnStun(other_rb.gameObject, owner, stunboxSO, owner.transform.position);
                     // End tikus stuff
                     //other_rb.velocity = direction * strength * mult * Time.deltaTime;
                     other_rb.AddForce(direction * strength * mult, ForceMode.Impulse);

@@ -201,10 +201,10 @@ public class BaseRaycast : SlowUpdate
         
     protected override void OnSlowUpdate()
     {
-        Shoot();
+        Check();
     }
 
-    public void Shoot()
+    public void Check()
     {
         current_hit = null;
 

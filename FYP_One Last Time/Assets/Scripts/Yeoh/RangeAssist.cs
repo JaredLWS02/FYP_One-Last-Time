@@ -30,7 +30,7 @@ public class RangeAssist : MonoBehaviour
 
     public void CheckRange(RangeAssistCfg cfg)
     {
-        ray.Shoot();
+        ray.Check();
 
         if(!ray.IsHitting())
         {

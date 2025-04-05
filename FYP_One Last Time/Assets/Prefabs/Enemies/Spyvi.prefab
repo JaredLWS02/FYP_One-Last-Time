@@ -63,6 +63,83 @@ Transform:
   - {fileID: 6739150836042430366}
   m_Father: {fileID: 7371522245475262582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &601600017815035853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7742683584217053974}
+  - component: {fileID: 5159676883274506304}
+  m_Layer: 3
+  m_Name: AOE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7742683584217053974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601600017815035853}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6196235632178963309}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5159676883274506304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601600017815035853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 0
+  checkInterval: 1
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 7742683584217053974}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 8
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  range: 8
+  showGizmos: 0
+  gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
 --- !u!1 &655718165275972599
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +167,7 @@ Transform:
   m_GameObject: {fileID: 655718165275972599}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 2.13, z: 6.51}
+  m_LocalPosition: {x: -0, y: 1.96, z: 6.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,8 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c2da22a7a364e4aa3ba3a2b74d7fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
-  checkInterval: 0.1
+  enableSlowUpdate: 0
+  checkInterval: 1
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
@@ -138,7 +215,7 @@ MonoBehaviour:
     LastExit:
       m_PersistentCalls:
         m_Calls: []
-  boxSize: {x: 5, y: 5, z: 5}
+  boxSize: {x: 2, y: 2, z: 5}
   showGizmos: 1
   gizmoColor: {r: 0, g: 1, b: 0.8927181, a: 0.5}
 --- !u!114 &5963031991003090231
@@ -803,6 +880,7 @@ GameObject:
   - component: {fileID: 8049081318801766333}
   - component: {fileID: 5039039371324129960}
   - component: {fileID: 8621582880931202597}
+  - component: {fileID: 8673286697984538169}
   m_Layer: 6
   m_Name: Rush
   m_TagString: Untagged
@@ -876,10 +954,34 @@ MonoBehaviour:
             m_CallState: 2
       ReleaseStart:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 8673286697984538169}
+            m_TargetAssemblyTypeName: CollisionToggler, Assembly-CSharp
+            m_MethodName: ToggleIgnoreLayers
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
       ReleaseEnd:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 8673286697984538169}
+            m_TargetAssemblyTypeName: CollisionToggler, Assembly-CSharp
+            m_MethodName: ToggleIgnoreLayers
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
       Recover:
         m_PersistentCalls:
           m_Calls: []
@@ -919,6 +1021,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &8673286697984538169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806096316584528784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5f22e23122c554dbd5a166d23f57f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myColliders:
+  - {fileID: 7439588395615784160}
+  - {fileID: 4356739565593342871}
+  layerNamesToToggle:
+  - Player
+  - PlayerStopbox
 --- !u!1 &1906808242825841302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,7 +2380,7 @@ MonoBehaviour:
   sight: {fileID: 3129096334348478008}
   expandRadarRangeMult: 2
   move: {fileID: 6946549235541127326}
-  targetArrivalRange: 6
+  targetArrivalRange: 8.5
   flee: {fileID: 571928426790848343}
   returner: {fileID: 0}
   showGizmos: 0
@@ -2905,7 +3025,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10396110c1c65e4f8512fa8681b6580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 10
+  bounceForce: 0
+  slipForce: 3
 --- !u!1 &6474391720063452649
 GameObject:
   m_ObjectHideFlags: 0
@@ -3655,9 +3776,9 @@ MonoBehaviour:
   turn: {fileID: 4679690703684212994}
   goal: {fileID: 0}
   arrival: 1
-  arrivalRange: 5.18
-  arrivalSlowingRangeOffset: 2.72
-  maintainRange: 4.36
+  arrivalRange: 8.5
+  arrivalSlowingRangeOffset: 5
+  maintainRange: 5.5
   selfStoppingRange: 0.5
   showGizmos: 0
   showStoppingRangeGizmo: 1
@@ -3730,6 +3851,7 @@ GameObject:
   - component: {fileID: 443610989915811419}
   - component: {fileID: 5434947828219516077}
   - component: {fileID: 6273186118152826821}
+  - component: {fileID: 6313629022070340172}
   m_Layer: 6
   m_Name: Hurt
   m_TagString: Untagged
@@ -4122,6 +4244,29 @@ MonoBehaviour:
   gibs:
   - {fileID: 283657642964731862, guid: 31e40b0a0c54f9645944ec29721fc632, type: 3}
   gibsKnockback: 1
+--- !u!114 &6313629022070340172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822806667255692092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d1d0c41e7f1ed429ad177ea73367dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 2034736583873020547}
+  knockback: 1
+  cancelAttack: 1
+  parryStun: 1
+  optionalParryStunAnim: {fileID: 11400000, guid: 7a27ad6aa03d5854c8b584fe81c20e35,
+    type: 2}
+  ignoreStunCooldown: 1
+  events:
+    OnParried:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &9071162701696496921
 GameObject:
   m_ObjectHideFlags: 0
@@ -4135,6 +4280,8 @@ GameObject:
   - component: {fileID: 567720381483259767}
   - component: {fileID: 4673598904948326161}
   - component: {fileID: 4101819546182523872}
+  - component: {fileID: 5542335992670538832}
+  - component: {fileID: 4063929859643927181}
   m_Layer: 3
   m_Name: Parry
   m_TagString: Untagged
@@ -4155,6 +4302,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7742683584217053974}
   - {fileID: 2774910251832037511}
   m_Father: {fileID: 8499522341882242809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4243,8 +4391,8 @@ MonoBehaviour:
   parryIFrame: 1
   iframeSeconds: 0.5
   selfKnockback: 1
-  cancelAttackersAttack: 1
-  spawnStunbox: 1
+  aoeOverlap: {fileID: 5159676883274506304}
+  spawnStunbox: 0
   parryStunbox:
     prefabName: Parry Stunbox
     randomPrefabs:
@@ -4310,6 +4458,42 @@ MonoBehaviour:
             m_StringArgument: Sparks
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 4101819546182523872}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 5542335992670538832}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sparks
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4063929859643927181}
+          m_TargetAssemblyTypeName: TimescaleController, Assembly-CSharp
+          m_MethodName: HitStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Sparks
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &4101819546182523872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4335,7 +4519,69 @@ MonoBehaviour:
     followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  - prefabName: Shockwave
+    randomPrefabs:
+    - {fileID: 419085589674771820, guid: a2baa7846a5c50f42b6f2f1308c72994, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 7742683584217053974}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
   spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &5542335992670538832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071162701696496921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  tweenFovTime: 0.5
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &4063929859643927181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071162701696496921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71763e629d88b7145ada7a9441ef8a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.2
+  hitstopIn_: 0.1
+  hitstopWait_: 0.01
+  hitstopOut: 0.65
+  events:
     OnEnable:
       m_PersistentCalls:
         m_Calls: []

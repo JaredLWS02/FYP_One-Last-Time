@@ -726,7 +726,7 @@ MonoBehaviour:
         m_Calls: []
   randomSeekBehaviour: {fileID: 0}
   hpM: {fileID: 704049436961937626}
-  fleeHPPercent: 10
+  fleeHPPercent: 0
   randomFleeBehaviour: {fileID: 0}
 --- !u!114 &3731827293064252220
 MonoBehaviour:
@@ -1878,6 +1878,7 @@ GameObject:
   - component: {fileID: 5623201136454167640}
   - component: {fileID: 6924317339209216897}
   - component: {fileID: 8165834065421918735}
+  - component: {fileID: 275230207156901}
   m_Layer: 6
   m_Name: Rush
   m_TagString: Untagged
@@ -1939,10 +1940,34 @@ MonoBehaviour:
           m_Calls: []
       ReleaseStart:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 275230207156901}
+            m_TargetAssemblyTypeName: CollisionToggler, Assembly-CSharp
+            m_MethodName: ToggleIgnoreLayers
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
       ReleaseEnd:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 275230207156901}
+            m_TargetAssemblyTypeName: CollisionToggler, Assembly-CSharp
+            m_MethodName: ToggleIgnoreLayers
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
       Recover:
         m_PersistentCalls:
           m_Calls: []
@@ -1982,6 +2007,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &275230207156901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725129758288447381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5f22e23122c554dbd5a166d23f57f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myColliders:
+  - {fileID: 3188788791223888934}
+  - {fileID: 6133948626742609180}
+  layerNamesToToggle:
+  - Player
+  - PlayerStopbox
 --- !u!1 &4955684307425597312
 GameObject:
   m_ObjectHideFlags: 0
@@ -3079,6 +3122,7 @@ GameObject:
   - component: {fileID: 4679031899667845874}
   - component: {fileID: 7022474044783880227}
   - component: {fileID: 5015490617387641940}
+  - component: {fileID: 7879907748191033039}
   m_Layer: 6
   m_Name: Hurt
   m_TagString: Untagged
@@ -3469,6 +3513,28 @@ MonoBehaviour:
   gibs:
   - {fileID: 283657642964731862, guid: 31e40b0a0c54f9645944ec29721fc632, type: 3}
   gibsKnockback: 1
+--- !u!114 &7879907748191033039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8460407787441312423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d1d0c41e7f1ed429ad177ea73367dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 5261146206814944013}
+  cancelAttack: 1
+  parryStun: 1
+  optionalParryStunAnim: {fileID: 11400000, guid: 90688d416e22ac043b73a0f157bc4789,
+    type: 2}
+  ignoreStunCooldown: 1
+  events:
+    OnParried:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &8814332884574839046
 GameObject:
   m_ObjectHideFlags: 0
@@ -3671,7 +3737,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10396110c1c65e4f8512fa8681b6580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 10
+  bounceForce: 0
+  slipForce: 3
 --- !u!1001 &5174078680358092557
 PrefabInstance:
   m_ObjectHideFlags: 0
