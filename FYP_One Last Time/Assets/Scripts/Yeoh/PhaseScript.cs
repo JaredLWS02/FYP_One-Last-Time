@@ -66,6 +66,8 @@ public class PhaseScript : BaseAction
 
     public HPManager hpM;
 
+    public bool canReversePhase;
+
     public void TryChangePhase()
     {
         float hp = hpM.GetHPPercent();
@@ -74,7 +76,7 @@ public class PhaseScript : BaseAction
         {
             NextPhase();
         }
-        else if(hp > CurrentPhaseHPPercent())
+        else if(canReversePhase && hp > CurrentPhaseHPPercent())
         {
             PrevPhase();
         }
