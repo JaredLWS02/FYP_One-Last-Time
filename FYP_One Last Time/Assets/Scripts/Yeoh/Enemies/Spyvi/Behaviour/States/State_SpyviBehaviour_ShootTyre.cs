@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_SpyviBehaviour_Idle : BaseState
+public class State_SpyviBehaviour_ShootTyre : BaseState
 {
-    public override string stateName => "Behaviour Idle";
+    public override string stateName => "Behaviour Shoot Tyre";
 
     SpyviBehaviour behaviour;
 
-    public State_SpyviBehaviour_Idle(StateMachine_SpyviBehaviour sm)
+    public State_SpyviBehaviour_ShootTyre(StateMachine_SpyviBehaviour sm)
     {
         behaviour = sm.behaviour;
     }
@@ -32,6 +32,6 @@ public class State_SpyviBehaviour_Idle : BaseState
     {
         behaviour.rushTrigger.SetActive(!toggle);
         behaviour.laserTrigger.SetActive(!toggle);
-        behaviour.shootTyreTrigger.SetActive(!toggle);
+        behaviour.shootTyreTrigger.SetActive(toggle);
     }
 }

@@ -511,6 +511,7 @@ Transform:
   - {fileID: 534361895739486693}
   - {fileID: 8218525566125596968}
   - {fileID: 4517390266738874559}
+  - {fileID: 8597400466676245292}
   - {fileID: 1867098784552257303}
   m_Father: {fileID: 8499522341882242809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -942,14 +943,14 @@ MonoBehaviour:
           m_Calls:
           - m_Target: {fileID: 940385467848736309}
             m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
-            m_MethodName: NextBehaviour
-            m_Mode: 1
+            m_MethodName: NextBehaviourNameCheck
+            m_Mode: 5
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: 
+              m_StringArgument: Rush
               m_BoolArgument: 0
             m_CallState: 2
       ReleaseStart:
@@ -1431,6 +1432,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1704706359686442990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2848604772144379548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1687152699598202001}
+  - component: {fileID: 1782882401783744132}
+  m_Layer: 6
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1687152699598202001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848604772144379548}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000028212997}
+  m_LocalPosition: {x: 0, y: 2.18, z: -2.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8597400466676245292}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1782882401783744132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848604772144379548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d46432b3937b3d4c920956d1d859351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizeOnAwake: 0
+  randomTranslateX: 0
+  randomTranslateY: 0
+  randomTranslateZ: 0
+  minTranslate: -0.1
+  maxTranslate: 0.1
+  randomRotateX: 1
+  randomRotateY: 0
+  randomRotateZ: 0
+  minRotate: -30
+  maxRotate: 30
+  randomScaleX: 0
+  randomScaleY: 0
+  randomScaleZ: 0
+  minScale: 0.9
+  maxScale: 1.1
 --- !u!1 &3128217907810074997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1851,6 +1912,38 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventName: PhaseStart
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 940385467848736309}
+          m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
+          m_MethodName: Anim1_WindUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventName: PhaseEnd
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 940385467848736309}
+          m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
+          m_MethodName: Anim4_Recover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1266417278459489903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2006,12 +2099,39 @@ MonoBehaviour:
   - phaseName: Phase1
     loop:
       options:
-      - Rush
-      - Laser
+      - Melee
       index: 0
     hpPercent: 100
     phaseAnim: {fileID: 11400000, guid: 620738f1e1283734da74afb896145d23, type: 2}
+  - phaseName: Phase2
+    loop:
+      options:
+      - Rush
+      index: 0
+    hpPercent: 90
+    phaseAnim: {fileID: 11400000, guid: 620738f1e1283734da74afb896145d23, type: 2}
+  - phaseName: Phase3
+    loop:
+      options:
+      - Laser
+      - Rush
+      index: 0
+    hpPercent: 75
+    phaseAnim: {fileID: 11400000, guid: 620738f1e1283734da74afb896145d23, type: 2}
+  - phaseName: Phase4
+    loop:
+      options:
+      - Shoot Tyre
+      - Shoot Tyre
+      - Shoot Tyre
+      - Shoot Tyre
+      - Laser
+      - Rush
+      index: 0
+    hpPercent: 50
+    phaseAnim: {fileID: 11400000, guid: 620738f1e1283734da74afb896145d23, type: 2}
   hpM: {fileID: 458364862146153326}
+  canReversePhase: 0
 --- !u!114 &8895727130237804936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2028,8 +2148,10 @@ MonoBehaviour:
   phase: {fileID: 940385467848736309}
   rushKeyword: Rush
   laserKeyword: Laser
+  shootTyreKeyword: Shoot Tyre
   rushTrigger: {fileID: 5529039861147843976}
   laserTrigger: {fileID: 6670003453479258954}
+  shootTyreTrigger: {fileID: 8244715899174001330}
 --- !u!114 &7645777524050901190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2737,7 +2859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
+  enableSlowUpdate: 0
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -2748,7 +2870,7 @@ MonoBehaviour:
   options:
   - name: Rush
     weight: 1
-  currentOption: 
+  currentOption: Rush
   owner: {fileID: 2034736583873020547}
   ground: {fileID: 8992457390770845512}
   allowGrounded: 1
@@ -3100,14 +3222,14 @@ MonoBehaviour:
           m_Calls:
           - m_Target: {fileID: 940385467848736309}
             m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
-            m_MethodName: NextBehaviour
-            m_Mode: 1
+            m_MethodName: NextBehaviourNameCheck
+            m_Mode: 5
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
               m_FloatArgument: 0
-              m_StringArgument: 
+              m_StringArgument: Laser
               m_BoolArgument: 0
             m_CallState: 2
       ReleaseStart:
@@ -3259,7 +3381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
+  enableSlowUpdate: 0
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -3270,7 +3392,7 @@ MonoBehaviour:
   options:
   - name: Laser
     weight: 1
-  currentOption: 
+  currentOption: Laser
   owner: {fileID: 2034736583873020547}
   ground: {fileID: 8992457390770845512}
   allowGrounded: 1
@@ -3461,7 +3583,19 @@ MonoBehaviour:
     events:
       WindUp:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 940385467848736309}
+            m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
+            m_MethodName: NextBehaviourNameCheck
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Melee
+              m_BoolArgument: 0
+            m_CallState: 2
       ReleaseStart:
         m_PersistentCalls:
           m_Calls: []
@@ -3500,6 +3634,182 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7327163681254989884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
+--- !u!1 &7328464586002508898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8597400466676245292}
+  - component: {fileID: 1348687098349164365}
+  - component: {fileID: 5023741552411441994}
+  - component: {fileID: 1961990004682781910}
+  - component: {fileID: 6621549056139548629}
+  m_Layer: 6
+  m_Name: Shoot Tyre
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8597400466676245292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328464586002508898}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8388630249612590179}
+  - {fileID: 1687152699598202001}
+  m_Father: {fileID: 7682083124440677918}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1348687098349164365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328464586002508898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b9937fbcb16984caef12f0190c7b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 1242880141507026177, guid: a3f8982f029ecf744a6c5818a9a9b72a, type: 3}
+  firepoint: {fileID: 1687152699598202001}
+  followRotation: 1
+  force: 20
+  events:
+    OnPreShot:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1782882401783744132}
+          m_TargetAssemblyTypeName: RandomTransform, Assembly-CSharp
+          m_MethodName: RandomRotate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnPostShot:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &5023741552411441994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328464586002508898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 2034736583873020547}
+  atk: {fileID: 4842645491667626223}
+  comboName: Shoot Tyre
+  comboSteps:
+  - attackSO: {fileID: 11400000, guid: 7f196ec9626d4e7458473735de93f742, type: 2}
+    hurtboxPrefab:
+      prefabName: Shoot Tyre
+      randomPrefabs: []
+      hideInHierarchy: 0
+      spawnpoint: {fileID: 1687152699598202001}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
+      parented: 1
+      followRotation: 0
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 940385467848736309}
+            m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
+            m_MethodName: NextBehaviourNameCheck
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Shoot Tyre
+              m_BoolArgument: 0
+            m_CallState: 2
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 1348687098349164365}
+            m_TargetAssemblyTypeName: ProjectileShooter, Assembly-CSharp
+            m_MethodName: Shoot
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
+  randomCombo: 0
+  comboResetTimer: {fileID: 1961990004682781910}
+  comboResetTime: 0.1
+  cooldown: {fileID: 6621549056139548629}
+  comboCooldownTime: 0.1
+--- !u!114 &1961990004682781910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328464586002508898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
+--- !u!114 &6621549056139548629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328464586002508898}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
@@ -3641,7 +3951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableSlowUpdate: 1
+  enableSlowUpdate: 0
   checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
@@ -3652,12 +3962,144 @@ MonoBehaviour:
   options:
   - name: Melee
     weight: 1
-  currentOption: 
+  currentOption: Melee
   owner: {fileID: 2034736583873020547}
   ground: {fileID: 8992457390770845512}
   allowGrounded: 1
   allowMidAir: 1
   sight: {fileID: 3129096334348478008}
+--- !u!1 &8244715899174001330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8388630249612590179}
+  - component: {fileID: 5650827804971551494}
+  - component: {fileID: 2720686288713696060}
+  - component: {fileID: 6402504121255776629}
+  m_Layer: 6
+  m_Name: Detection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8388630249612590179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244715899174001330}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8597400466676245292}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5650827804971551494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244715899174001330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0.25
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 8388630249612590179}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 8
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2720686288713696060}
+          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
+          m_MethodName: Attack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  range: 15
+  showGizmos: 0
+  gizmoColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &2720686288713696060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244715899174001330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 0
+  checkInterval: 0.5
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  randomInterval: {x: 0.25, y: 1}
+  options:
+  - name: Shoot Tyre
+    weight: 1
+  currentOption: Shoot Tyre
+  owner: {fileID: 2034736583873020547}
+  ground: {fileID: 8992457390770845512}
+  allowGrounded: 1
+  allowMidAir: 1
+  sight: {fileID: 3129096334348478008}
+--- !u!114 &6402504121255776629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244715899174001330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b47e615d72a2f945be7a19b13425422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8275479353321426306
 GameObject:
   m_ObjectHideFlags: 0
