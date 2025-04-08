@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class State_SpyviBehaviour_Laser : BaseState
+public class State_SpyviBehaviour_RevUp : BaseState
 {
-    public override string stateName => "Behaviour Laser";
+    public override string stateName => "Behaviour Rev Up";
 
     SpyviBehaviour behaviour;
 
-    public State_SpyviBehaviour_Laser(StateMachine_SpyviBehaviour sm)
+    public State_SpyviBehaviour_RevUp(StateMachine_SpyviBehaviour sm)
     {
         behaviour = sm.behaviour;
     }
@@ -31,8 +31,8 @@ public class State_SpyviBehaviour_Laser : BaseState
     void Toggle(bool toggle)
     {
         behaviour.rushTrigger.SetActive(!toggle);
-        behaviour.laserTrigger.SetActive(toggle);
+        behaviour.laserTrigger.SetActive(!toggle);
         behaviour.shootTyreTrigger.SetActive(!toggle);
-        behaviour.revUpTrigger.SetActive(!toggle);
+        behaviour.revUpTrigger.SetActive(toggle);
     }
 }

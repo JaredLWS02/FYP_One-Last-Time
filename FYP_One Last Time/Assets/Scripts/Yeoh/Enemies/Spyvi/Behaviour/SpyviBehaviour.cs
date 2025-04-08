@@ -18,6 +18,7 @@ public class SpyviBehaviour : MonoBehaviour
     public string rushKeyword="Rush";
     public string laserKeyword="Laser";
     public string shootTyreKeyword="Shoot Tyre";
+    public string revUpKeyword="Rev Up";
 
     // ============================================================================
 
@@ -25,4 +26,5 @@ public class SpyviBehaviour : MonoBehaviour
     public GameObject rushTrigger;
     public GameObject laserTrigger;
     public GameObject shootTyreTrigger;
+    public GameObject revUpTrigger;
 }

@@ -512,6 +512,7 @@ Transform:
   - {fileID: 8218525566125596968}
   - {fileID: 4517390266738874559}
   - {fileID: 8597400466676245292}
+  - {fileID: 3029613186451366184}
   - {fileID: 1867098784552257303}
   m_Father: {fileID: 8499522341882242809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1432,6 +1433,112 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1704706359686442990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2629364610436993604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8418398348910211292}
+  - component: {fileID: 5997763859190413538}
+  - component: {fileID: 323216697120557660}
+  - component: {fileID: 1217906810116889180}
+  m_Layer: 6
+  m_Name: Detection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8418398348910211292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629364610436993604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3029613186451366184}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5997763859190413538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629364610436993604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55a2a5bcc07afa46a14766ba9f332d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 1
+  checkInterval: 0.5
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 323216697120557660}
+          m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
+          m_MethodName: Attack
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &323216697120557660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629364610436993604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9ff71d307ee994fa8b5adb99a9fe71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 0
+  checkInterval: 0.5
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  randomInterval: {x: 0.25, y: 1}
+  options:
+  - name: Rev Up
+    weight: 1
+  currentOption: Rev Up
+  owner: {fileID: 2034736583873020547}
+  ground: {fileID: 8992457390770845512}
+  allowGrounded: 1
+  allowMidAir: 1
+  sight: {fileID: 3129096334348478008}
+--- !u!114 &1217906810116889180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629364610436993604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b47e615d72a2f945be7a19b13425422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2848604772144379548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,6 +1695,7 @@ GameObject:
   - component: {fileID: 1266417278459489903}
   - component: {fileID: 7720956622550147065}
   - component: {fileID: 8086653970862224508}
+  - component: {fileID: 4031275271306419621}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -1607,7 +1715,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1556450414790447576}
   m_Father: {fileID: 7371522245475262582}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!212 &1123993858437119549
@@ -2030,6 +2139,20 @@ MonoBehaviour:
   randomStartFlip: 0
   randomFlipY: 0
   randomFlipX: 0
+--- !u!114 &4031275271306419621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265591776346835760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983edb84712374f4bafd67f72debaae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1061523320127218345}
+  speedPropertyName: Attack Speed
 --- !u!1 &3444000887945973403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2121,6 +2244,7 @@ MonoBehaviour:
   - phaseName: Phase4
     loop:
       options:
+      - Rev Up
       - Shoot Tyre
       - Shoot Tyre
       - Shoot Tyre
@@ -2149,9 +2273,11 @@ MonoBehaviour:
   rushKeyword: Rush
   laserKeyword: Laser
   shootTyreKeyword: Shoot Tyre
+  revUpKeyword: Rev Up
   rushTrigger: {fileID: 5529039861147843976}
   laserTrigger: {fileID: 6670003453479258954}
   shootTyreTrigger: {fileID: 8244715899174001330}
+  revUpTrigger: {fileID: 2629364610436993604}
 --- !u!114 &7645777524050901190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2507,6 +2633,90 @@ MonoBehaviour:
   returner: {fileID: 0}
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.25}
+--- !u!1 &4544671794955190764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1556450414790447576}
+  - component: {fileID: 526142301906405199}
+  - component: {fileID: 6169532158267900478}
+  m_Layer: 6
+  m_Name: Laser Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1556450414790447576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544671794955190764}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.9500012, y: 1.8199999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8163150010487878427}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &526142301906405199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544671794955190764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9fa43216d7c8543a98c6c388a9a795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 526142301906405199}
+          m_TargetAssemblyTypeName: Reparent, Assembly-CSharp
+          m_MethodName: SetParent
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4517390266738874559}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &6169532158267900478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4544671794955190764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13aef11dc0c5da04d8f2b7b3f2aa857d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comment: 'NOTE: This weird reparenting is a workaround because Unity''s Animator
+    can''t animate non-child Transforms.
+
+    So set keyframes here as a child first,
+    then move to another parent on play mode.
+
+    I don''t want this to stay as
+    a child of animator because of the billboard rotating differently'
 --- !u!1 &4842220260494453863
 GameObject:
   m_ObjectHideFlags: 0
@@ -3207,12 +3417,12 @@ MonoBehaviour:
       randomPrefabs:
       - {fileID: 1242880141507026177, guid: ae74496a753e908499ab6567b8db3cf0, type: 3}
       hideInHierarchy: 0
-      spawnpoint: {fileID: 361085745492057944}
+      spawnpoint: {fileID: 1556450414790447576}
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
       parented: 1
-      followRotation: 0
+      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -3810,6 +4020,144 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7328464586002508898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
+--- !u!1 &7600868851066893388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3029613186451366184}
+  - component: {fileID: 983218308027550779}
+  - component: {fileID: 8220801269343507705}
+  - component: {fileID: 4715968135341143369}
+  m_Layer: 6
+  m_Name: Rev Up
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3029613186451366184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600868851066893388}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8418398348910211292}
+  m_Father: {fileID: 7682083124440677918}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &983218308027550779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600868851066893388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb9c6a91ffcf6441bbcdfd55a0b3984, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 2034736583873020547}
+  atk: {fileID: 4842645491667626223}
+  comboName: Rev Up
+  comboSteps:
+  - attackSO: {fileID: 11400000, guid: ee120eb04eca7f241a30f1f88edeae4f, type: 2}
+    hurtboxPrefab:
+      prefabName: Rev Up
+      randomPrefabs: []
+      hideInHierarchy: 0
+      spawnpoint: {fileID: 0}
+      posOffset: {x: 0, y: 0, z: 0}
+      angleOffset: {x: 0, y: 0, z: 0}
+      scaleMult: 1
+      parented: 0
+      followRotation: 0
+      spawnPos: {x: 0, y: 0, z: 0}
+      spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    rangeAssist: {fileID: 0}
+    events:
+      WindUp:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 940385467848736309}
+            m_TargetAssemblyTypeName: PhaseScript, Assembly-CSharp
+            m_MethodName: NextBehaviourNameCheck
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Rev Up
+              m_BoolArgument: 0
+            m_CallState: 2
+      ReleaseStart:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 4031275271306419621}
+            m_TargetAssemblyTypeName: AnimSpeedChanger, Assembly-CSharp
+            m_MethodName: SetAnimSpeed
+            m_Mode: 4
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 1.5
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+      ReleaseEnd:
+        m_PersistentCalls:
+          m_Calls: []
+      Recover:
+        m_PersistentCalls:
+          m_Calls: []
+      Cancel:
+        m_PersistentCalls:
+          m_Calls: []
+  randomCombo: 0
+  comboResetTimer: {fileID: 8220801269343507705}
+  comboResetTime: 3
+  cooldown: {fileID: 4715968135341143369}
+  comboCooldownTime: 3
+--- !u!114 &8220801269343507705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600868851066893388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canTick: 1
+  ignoreTimescale: 0
+--- !u!114 &4715968135341143369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7600868851066893388}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e93630d43ba0ee241b5550f97edc7cd2, type: 3}
@@ -5040,12 +5388,12 @@ GameObject:
   m_Component:
   - component: {fileID: 361085745492057944}
   m_Layer: 6
-  m_Name: Firepoint
+  m_Name: _old Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &361085745492057944
 Transform:
   m_ObjectHideFlags: 0
