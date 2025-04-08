@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3860860845178286023}
   - component: {fileID: 838890335029974682}
   - component: {fileID: 489435474446966603}
-  - component: {fileID: 5133228820803464892}
   - component: {fileID: 8782049835207013567}
   m_Layer: 8
   m_Name: Spyvi Laser Hurtbox
@@ -248,69 +247,6 @@ MonoBehaviour:
     OnDisable:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &5133228820803464892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1242880141507026177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b27cb74780ed02c46b5ea77e879602e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 4014294989942184369}
-  vector3Tweens:
-  - startFromCurrent: 0
-    startValue: {x: 45, y: 0, z: 0}
-    endValue: {x: -45, y: 0, z: 0}
-    settings:
-      duration: 2
-      ease: 4
-      customEase:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-      cycles: 1
-      cycleMode: 0
-      startDelay: 0
-      endDelay: 0
-      useUnscaledTime: 0
-      useFixedUpdate: 0
-  events:
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5133228820803464892}
-          m_TargetAssemblyTypeName: TweenAnim2, Assembly-CSharp
-          m_MethodName: TweenLocalRotation
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5133228820803464892}
-          m_TargetAssemblyTypeName: TweenAnim2, Assembly-CSharp
-          m_MethodName: ReturnToDefaultRotation
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &8782049835207013567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,7 +368,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 96fb59187363f90428433c55e996226b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -458,7 +394,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 50}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2
+    widthMultiplier: 8
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -505,10 +441,10 @@ LineRenderer:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 3
-    numCapVertices: 3
+    numCapVertices: 0
     alignment: 0
-    textureMode: 0
-    textureScale: {x: 1, y: 1}
+    textureMode: 1
+    textureScale: {x: -0.29, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0

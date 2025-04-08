@@ -39,6 +39,14 @@ public class PhaseScript : BaseAction
     SequenceLoop CurrentLoop() => CurrentPhase().loop;
     public string CurrentBehaviour() => CurrentLoop().CurrentOption();
     public void NextBehaviour() => CurrentLoop().Next();
+
+    public void NextBehaviourNameCheck(string behaviour_name)
+    {
+        if(CurrentBehaviour() == behaviour_name)
+        {
+            NextBehaviour();
+        }
+    }
     
     // ============================================================================
     
@@ -65,6 +73,8 @@ public class PhaseScript : BaseAction
     // ============================================================================
 
     public HPManager hpM;
+
+    public bool canReversePhase;
 
     public void TryChangePhase()
     {
@@ -96,6 +106,7 @@ public class PhaseScript : BaseAction
     
     void PrevPhase()
     {
+        if(!canReversePhase) return;
         if(IsFirstPhase()) return;
         if(IsPerforming()) return;
 

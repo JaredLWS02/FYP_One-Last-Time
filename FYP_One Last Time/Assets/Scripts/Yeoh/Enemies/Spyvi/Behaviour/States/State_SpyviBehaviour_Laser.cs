@@ -30,6 +30,9 @@ public class State_SpyviBehaviour_Laser : BaseState
 
     void Toggle(bool toggle)
     {
-        behaviour.ToggleLaserTrigger(toggle);
+        behaviour.rushTrigger.SetActive(!toggle);
+        behaviour.laserTrigger.SetActive(toggle);
+        behaviour.shootTyreTrigger.SetActive(!toggle);
+        behaviour.revUpTrigger.SetActive(!toggle);
     }
 }

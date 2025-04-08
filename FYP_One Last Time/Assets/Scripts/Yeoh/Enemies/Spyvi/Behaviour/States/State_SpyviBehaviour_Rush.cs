@@ -30,6 +30,9 @@ public class State_SpyviBehaviour_Rush : BaseState
 
     void Toggle(bool toggle)
     {
-        behaviour.ToggleRushTrigger(toggle);
+        behaviour.rushTrigger.SetActive(toggle);
+        behaviour.laserTrigger.SetActive(!toggle);
+        behaviour.shootTyreTrigger.SetActive(!toggle);
+        behaviour.revUpTrigger.SetActive(!toggle);
     }
 }

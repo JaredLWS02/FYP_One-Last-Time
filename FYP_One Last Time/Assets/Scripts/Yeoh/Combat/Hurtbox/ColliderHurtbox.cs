@@ -16,6 +16,35 @@ public class ColliderHurtbox : BaseHurtbox
     
     // ============================================================================
     
+    void OnCollisionEnter(Collision other)
+    {
+        OnEnter(other.collider);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        OnEnter(other);
+    }
+
+    void OnCollisionStay(Collision other)
+    {
+        OnStay(other.collider);
+    }
+    void OnTriggerStay(Collider other)
+    {
+        OnStay(other);
+    }
+
+    void OnCollisionExit(Collision other)
+    {
+        OnExit(other.collider);
+    }
+    void OnTriggerExit(Collider other)
+    {
+        OnExit(other);
+    }
+
+    // ============================================================================
+    
     public enum HitMethod
     {
         OnEnter,
@@ -25,17 +54,17 @@ public class ColliderHurtbox : BaseHurtbox
     [Header("OnHit")]
     public HitMethod hitMethod = HitMethod.OnStay;
 
-    void OnTriggerEnter(Collider other)
+    void OnEnter(Collider other)
     {
         if(hitMethod != HitMethod.OnEnter) return;
 
         TryHit(other);
     }
-    
+
     public Timer triggerTimer;
     public float triggerStayInterval=.1f;
 
-    void OnTriggerStay(Collider other)
+    void OnStay(Collider other)
     {
         if(hitMethod != HitMethod.OnStay) return;
         
@@ -48,7 +77,7 @@ public class ColliderHurtbox : BaseHurtbox
         TryHit(other);
     }
     
-    void OnTriggerExit(Collider other)
+    void OnExit(Collider other)
     {
         if(hitMethod != HitMethod.OnExit) return;
 

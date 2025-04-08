@@ -36,6 +36,7 @@ public class AgentParry : MonoBehaviour
         if(!IsGroundCheckValid()) return;
         if(!CanSeeTarget()) return;
         if(Random.Range(0,100) > parryChance) return;
+        overlap.Check();
         if(!overlap.IsOverlappingWho(attacker)) return;
 
         EventM.OnAgentTryParry(owner);

@@ -23,6 +23,7 @@ public class AgentAttack : RandomPicker
         if(!IsGroundCheckValid()) return;
         if(!CanSeeTarget()) return;
 
+        RandomizeOption();
         EventM.OnAgentTryAttack(owner, currentOption);
     }
 
