@@ -9,7 +9,14 @@ public class PrefabPreset
 
     [SerializeField]
     List<GameObject> randomPrefabs = new();
-    public GameObject GetRandomPrefab() => randomPrefabs[Random.Range(0,randomPrefabs.Count)];
+
+    public bool HasPrefabs() => randomPrefabs.Count > 0;
+
+    public GameObject GetRandomPrefab()
+    {
+        if(!HasPrefabs()) return null;
+        return randomPrefabs[Random.Range(0,randomPrefabs.Count)];
+    }
 
     protected List<GameObject> spawns = new();
 
@@ -38,11 +45,8 @@ public class PrefabPreset
     {
         RemoveNulls();
 
-        if(randomPrefabs.Count<=0)
-        {
-            Debug.LogError($"PrefabPreset: Woiii, where prefab, brother?");
-            return null;
-        }
+        var prefab = GetRandomPrefab();
+        if(!prefab) return null;
 
         Singleton singleton = Singleton.Current;
 
@@ -72,7 +76,7 @@ public class PrefabPreset
         pos += posOffset;
         rot.eulerAngles += angleOffset;
 
-        GameObject spawned = singleton.Spawn(GetRandomPrefab(), pos, rot, parent, hideInHierarchy);
+        GameObject spawned = singleton.Spawn(prefab, pos, rot, parent, hideInHierarchy);
 
         spawned.transform.localScale *= scaleMult;
 

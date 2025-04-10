@@ -4,70 +4,123 @@ using UnityEngine;
 
 public class RandomTransform : MonoBehaviour
 {
+    public bool randomizeOnAwake = true;
+
     [Header("Translate")]
     public bool randomTranslateX=false;
     public bool randomTranslateY=false, randomTranslateZ=false;
-    public float minTranslate=-.1f, maxTranslate=.1f; 
+    public float minTranslate=-.1f, maxTranslate=.1f;
+    Vector3 defaultPos;
 
     [Header("Rotate")]
     public bool randomRotateX=false;
     public bool randomRotateY=false, randomRotateZ=false;
     public float minRotate=-180, maxRotate=180;
+    Vector3 defaultRot;
 
     [Header("Scale")]
     public bool randomScaleX=true;
     public bool randomScaleY=true, randomScaleZ=true;
     public float minScale=.9f, maxScale=1.1f;
-    
+    Vector3 defaultScale;
+
     // [Header("Mirror")]
     // public bool randomMirrorX=false;
     // public bool randomMirrorY=false, randomMirrorZ=false;
 
+    // ============================================================================
+
+    void Reset()
+    {
+        RecordDefaults();
+    }
+
     void Awake()
     {
-        Position();
-        Rotation();
-        Scale();
+        RecordDefaults();
+
+        if(!randomizeOnAwake) return;
+
+        RandomTranslate();
+        RandomRotate();
+        RandomScale();
         //mirror();
     }
 
-    void Position()
+    // ============================================================================
+
+    [ContextMenu("Record Defaults")]
+    public void RecordDefaults()
     {
+        defaultPos = transform.localPosition;
+        defaultRot = transform.localEulerAngles;
+        defaultScale = transform.localScale;
+    }
+
+    [ContextMenu("Reset Defaults")]
+    public void ResetDefaults()
+    {
+        transform.localPosition = defaultPos;
+        transform.localEulerAngles = defaultRot;
+        transform.localScale = defaultScale;
+    }
+
+    // ============================================================================
+
+    [ContextMenu("Random Translate")]
+    public void RandomTranslate()
+    {
+        Vector3 pos = defaultPos;
+
         if(randomTranslateX)
-            transform.localPosition = new Vector3(transform.localPosition.x+Random.Range(minTranslate,maxTranslate), transform.localPosition.y, transform.localPosition.z);
+        pos.x += Random.Range(minTranslate, maxTranslate);
 
         if(randomTranslateY)
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y+Random.Range(minTranslate,maxTranslate), transform.localPosition.z);
-            
+        pos.y += Random.Range(minTranslate, maxTranslate);
+        
         if(randomTranslateZ)
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z+Random.Range(minTranslate,maxTranslate));
+        pos.z += Random.Range(minTranslate, maxTranslate);
+
+        transform.localPosition = pos;
     }
 
-    void Rotation()
+    [ContextMenu("Random Rotate")]
+    public void RandomRotate()
     {
+        Vector3 rot = defaultRot;
+
         if(randomRotateX)
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x+Random.Range(minRotate,maxRotate), transform.localEulerAngles.y, transform.localEulerAngles.z);
-            
+        rot.x += Random.Range(minRotate, maxRotate);
+
         if(randomRotateY)
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y+Random.Range(minRotate,maxRotate), transform.localEulerAngles.z);
-            
+        rot.y += Random.Range(minRotate, maxRotate);
+        
         if(randomRotateZ)
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, transform.localEulerAngles.z+Random.Range(minRotate,maxRotate));
+        rot.z += Random.Range(minRotate, maxRotate);
+
+        transform.localEulerAngles = rot;
     }
     
-    void Scale()
+    [ContextMenu("Random Scale")]
+    public void RandomScale()
     {  
-        float uniformScale = Random.Range(minScale,maxScale);
+        Vector3 scale = defaultScale;
+
+        float uniform_scale = Random.Range(minScale, maxScale);
 
         if(randomScaleX)
-            transform.localScale = new Vector3(transform.localScale.x*uniformScale, transform.localScale.y, transform.localScale.z);
+        scale.x *= uniform_scale;
 
         if(randomScaleY)
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y*uniformScale, transform.localScale.z);
-            
+        scale.y *= uniform_scale;
+        
         if(randomScaleZ)
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z*uniformScale);
+        scale.z *= uniform_scale;
+
+        transform.localScale = scale;
     }
+
+    // ============================================================================
     
     // colliders dont support negative scale
     

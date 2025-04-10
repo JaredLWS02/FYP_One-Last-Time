@@ -37,7 +37,7 @@ public class RandomPicker : RandomUpdate
     }
 
     [ContextMenu("Randomize")]
-    void RandomizeOption()
+    public void RandomizeOption()
     {
         if(options.Count<=0) return;
 

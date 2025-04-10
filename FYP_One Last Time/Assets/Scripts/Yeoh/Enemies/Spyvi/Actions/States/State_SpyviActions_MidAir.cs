@@ -36,5 +36,6 @@ public class State_SpyviActions_MidAir : BaseState
         action.AllowParry = toggle;
         action.AllowHurt = toggle;
         action.AllowStun = toggle;
+        action.AllowPhase = toggle;
     }
 }

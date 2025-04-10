@@ -29,6 +29,8 @@ public class StateMachine_SpyviBehaviour : MonoBehaviour
         State_SpyviBehaviour_Idle idle = new(this);
         State_SpyviBehaviour_Rush rush = new(this);
         State_SpyviBehaviour_Laser laser = new(this);
+        State_SpyviBehaviour_ShootTyre tyre = new(this);
+        State_SpyviBehaviour_RevUp revUp = new(this);
 
         // HUB TRANSITIONS ================================================================================
 
@@ -52,6 +54,26 @@ public class StateMachine_SpyviBehaviour : MonoBehaviour
             return false;
         });
         
+        idle.AddTransition(tyre, (timeInState) =>
+        {
+            if(
+                behaviour.CurrentBehaviour() == behaviour.shootTyreKeyword //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+        
+        idle.AddTransition(revUp, (timeInState) =>
+        {
+            if(
+                behaviour.CurrentBehaviour() == behaviour.revUpKeyword //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+        
         // RETURN TRANSITIONS ================================================================================
 
         rush.AddTransition(idle, (timeInState) =>
@@ -68,6 +90,26 @@ public class StateMachine_SpyviBehaviour : MonoBehaviour
         {
             if(
                 behaviour.CurrentBehaviour() != behaviour.laserKeyword //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        tyre.AddTransition(idle, (timeInState) =>
+        {
+            if(
+                behaviour.CurrentBehaviour() != behaviour.shootTyreKeyword //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        revUp.AddTransition(idle, (timeInState) =>
+        {
+            if(
+                behaviour.CurrentBehaviour() != behaviour.revUpKeyword //||
             ){
                 return true;
             }

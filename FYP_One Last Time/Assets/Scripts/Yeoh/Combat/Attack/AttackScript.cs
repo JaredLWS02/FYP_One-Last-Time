@@ -144,6 +144,8 @@ public class AttackScript : BaseAction
 
     public void SpawnHurtbox()
     {
+        if(!attackPreset.hurtboxPrefab.HasPrefabs()) return;
+        
         hurtbox = attackPreset.hurtboxPrefab.Spawn();
 
         TryAssignHurtboxOwner(hurtbox);
