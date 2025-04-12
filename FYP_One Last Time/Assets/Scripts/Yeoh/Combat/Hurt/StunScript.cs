@@ -17,11 +17,13 @@ public class StunScript : BaseAction
         EventM = EventManager.Current;
 
         EventM.StunEvent += OnStun;
+        EventM.StunAnimEvent += OnStunAnim;
         EventM.CancelStunEvent += OnCancelStun;
     }
     void OnDisable()
     {
         EventM.StunEvent -= OnStun;
+        EventM.StunAnimEvent += OnStunAnim;
         EventM.CancelStunEvent -= OnCancelStun;
     }
 
@@ -29,9 +31,19 @@ public class StunScript : BaseAction
     
     void OnStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
-        if(victim!=owner) return;
+        if(victim != owner) return;
         if(!hurtbox.canStun) return;
         if(IsCooling() && !hurtbox.ignoreStunCooldown) return;
+
+        EventM.OnStunAnim(owner, attacker, hurtbox.customStunAnim, contactPoint);
+        
+        EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
+    }
+
+    void OnStunAnim(GameObject victim, GameObject attacker, AnimSO customStunAnim, Vector3 contactPoint)
+    {
+        if(victim != owner) return;
+
         DoCooldown();
 
         // action cancelling
@@ -43,10 +55,8 @@ public class StunScript : BaseAction
 
         //actionCounter++;
 
-        AnimSO stunAnim = hurtbox.customStunAnim ? hurtbox.customStunAnim : defaultStunAnim;
+        AnimSO stunAnim = customStunAnim ? customStunAnim : defaultStunAnim;
         Perform(stunAnim);
-
-        EventM.OnStunned(owner, attacker, hurtbox, contactPoint);
     }
 
     // ============================================================================

@@ -1714,6 +1714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 6995670659757724566}
+  knockback: 1
   cancelAttack: 1
   parryStun: 1
   optionalParryStunAnim: {fileID: 11400000, guid: 4aa1c625ff13eb54c9a05d1799897022,
@@ -3185,6 +3186,7 @@ GameObject:
   - component: {fileID: 780967974793306540}
   - component: {fileID: 1894536892237456442}
   - component: {fileID: 8205563423093595248}
+  - component: {fileID: 4646077142039661513}
   m_Layer: 6
   m_Name: Small Tikus
   m_TagString: Enemy
@@ -3351,6 +3353,30 @@ MonoBehaviour:
     localPosition: {x: 0, y: 0, z: 1}
     localEulerAngles: {x: 0, y: 0, z: 0}
     localScale: {x: 0, y: 0, z: 0}
+--- !u!114 &4646077142039661513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995670659757724566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44caa1ace9ba0c94b804c34c929d32af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 6995670659757724566}
+  rb: {fileID: 1401727047894497609}
+  forceMult: 1
+  customPullStunAnim: {fileID: 0}
+  customPushStunAnim: {fileID: 0}
+  events:
+    OnPulled:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPushed:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7021269989712493573
 GameObject:
   m_ObjectHideFlags: 0
