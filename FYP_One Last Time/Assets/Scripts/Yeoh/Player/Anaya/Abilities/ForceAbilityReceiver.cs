@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ForceReceiver : MonoBehaviour
+public class ForceAbilityReceiver : MonoBehaviour
 {
     public GameObject owner;
     public Rigidbody rb;
