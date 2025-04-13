@@ -428,6 +428,7 @@ public class EventManager : MonoBehaviour
 
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> TryStunEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> StunEvent;
+    public event Action<GameObject, GameObject, AnimSO, Vector3> StunAnimEvent;
     public event Action<GameObject, GameObject, HurtboxSO, Vector3> StunnedEvent;
     public event Action<GameObject> CancelStunEvent;
     
@@ -438,6 +439,10 @@ public class EventManager : MonoBehaviour
     public void OnStun(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         StunEvent?.Invoke(victim, attacker, hurtbox, contactPoint);
+    }
+    public void OnStunAnim(GameObject victim, GameObject attacker, AnimSO stunAnim, Vector3 contactPoint)
+    {
+        StunAnimEvent?.Invoke(victim, attacker, stunAnim, contactPoint);
     }
     public void OnStunned(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -480,6 +485,15 @@ public class EventManager : MonoBehaviour
         PhaseChangedEvent?.Invoke(who, phaseName);
     }
     
+    // Force Ability ==================================================================================================================
+
+    public event Action<GameObject, GameObject, float, Vector3, bool> ForceReceivedEvent;
+
+    public void OnForceReceived(GameObject victim, GameObject attacker, float force, Vector3 direction, bool pull)
+    {
+        ForceReceivedEvent?.Invoke(victim, attacker, force, direction, pull);
+    }
+
     // UI ==================================================================================================================
 
     public event Action<GameObject, float, float> UIBarUpdateEvent;

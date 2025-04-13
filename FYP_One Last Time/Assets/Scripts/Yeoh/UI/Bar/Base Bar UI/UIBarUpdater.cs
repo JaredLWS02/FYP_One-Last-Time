@@ -40,7 +40,7 @@ public class UIBarUpdater : MonoBehaviour
     {
         if(who!=owner) return;
 
-        if(maxValue==0) { Debug.LogError($"UI Bar Updater: maxValue can't be 0!!!"); return; }
+        if(maxValue==0) { Debug.Log($"{who.name}: UI Bar Updater: maxValue is 0, ignoring"); return; }
 
         float value01 = Mathf.Clamp01(value/maxValue);
         
