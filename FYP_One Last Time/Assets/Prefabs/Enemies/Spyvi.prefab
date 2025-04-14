@@ -2245,19 +2245,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   phases:
-  - phaseName: Phase1
-    loop:
-      options:
-      - Melee
-      index: 0
-    hpPercent: 100
-    phaseAnim: {fileID: 11400000, guid: 620738f1e1283734da74afb896145d23, type: 2}
   - phaseName: Phase2
     loop:
       options:
       - Rush
       index: 0
-    hpPercent: 90
+    hpPercent: 100
     phaseAnim: {fileID: 11400000, guid: 620738f1e1283734da74afb896145d23, type: 2}
   - phaseName: Phase3
     loop:
@@ -4268,7 +4261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableSlowUpdate: 1
-  checkInterval: 0.2
+  checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
