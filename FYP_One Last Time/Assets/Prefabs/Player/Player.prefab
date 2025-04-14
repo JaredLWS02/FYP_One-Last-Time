@@ -512,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 8987163089559660572}
+  knockback: 1
   cancelAttack: 1
   parryStun: 1
   optionalParryStunAnim: {fileID: 0}
@@ -732,6 +733,250 @@ MonoBehaviour:
   regenHp: 0.2
   regenInterval: 0.1
   regenPercent: 50
+--- !u!1 &1037966570680418331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6066437966864782437}
+  - component: {fileID: 1375647745075717589}
+  - component: {fileID: 8822668468524497357}
+  - component: {fileID: 8327975750242051056}
+  - component: {fileID: 4894874830282982341}
+  - component: {fileID: 1616874587964353468}
+  m_Layer: 3
+  m_Name: Force
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6066437966864782437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037966570680418331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3490713519321487817}
+  m_Father: {fileID: 98971669180264664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1375647745075717589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037966570680418331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9462ebb9d63fae49a0456033af26ac7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  overlap: {fileID: 6574606301575055981}
+--- !u!114 &8822668468524497357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037966570680418331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d58b8ce08787f4a84328d3f3851415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1475748435622140236}
+  currentState: 0
+  anim: {fileID: 0}
+  uEvents:
+    WindUp:
+      m_PersistentCalls:
+        m_Calls: []
+    ReleaseStart:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4894874830282982341}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave Pull
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1616874587964353468}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave Pull
+            m_BoolArgument: 0
+          m_CallState: 2
+    ReleaseEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    Recover:
+      m_PersistentCalls:
+        m_Calls: []
+    Cancel:
+      m_PersistentCalls:
+        m_Calls: []
+  caster: {fileID: 1410335126641825925}
+  abilitySO: {fileID: 11400000, guid: 67dcf62b48eb20b4986474141ff216e1, type: 2}
+  abilitySlot:
+    ability: {fileID: 0}
+  mpM: {fileID: 7058722310484815464}
+  force: {fileID: 1375647745075717589}
+--- !u!114 &8327975750242051056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037966570680418331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8cf93810259de4c91e6b225ca88c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1475748435622140236}
+  currentState: 0
+  anim: {fileID: 0}
+  uEvents:
+    WindUp:
+      m_PersistentCalls:
+        m_Calls: []
+    ReleaseStart:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4894874830282982341}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave Push
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1616874587964353468}
+          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Shockwave Push
+            m_BoolArgument: 0
+          m_CallState: 2
+    ReleaseEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    Recover:
+      m_PersistentCalls:
+        m_Calls: []
+    Cancel:
+      m_PersistentCalls:
+        m_Calls: []
+  caster: {fileID: 1410335126641825925}
+  abilitySO: {fileID: 11400000, guid: 4724d2a4b0ad72347abf4a066a9cea14, type: 2}
+  abilitySlot:
+    ability: {fileID: 0}
+  mpM: {fileID: 7058722310484815464}
+  force: {fileID: 1375647745075717589}
+--- !u!114 &4894874830282982341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037966570680418331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Shockwave Pull
+    randomPrefabs:
+    - {fileID: 419085589674771820, guid: a5a5db9437680634a9b19020a1aa49ce, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 3490713519321487817}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  - prefabName: Shockwave Push
+    randomPrefabs:
+    - {fileID: 419085589674771820, guid: e41803e1375f37b4cbb64811ab6fdf89, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 3490713519321487817}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &1616874587964353468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037966570680418331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitud: 2
+  frequency: 2
+  tweenFovTime: 0.5
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1383415900315419332
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,14 +1201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 98971669180264664}
   - component: {fileID: 1410335126641825925}
-  - component: {fileID: 7975362184149562795}
-  - component: {fileID: 3596767571345983897}
-  - component: {fileID: 3796256092420723281}
   - component: {fileID: 2859457414168349167}
-  - component: {fileID: 5402544422226357994}
-  - component: {fileID: 3265152939051952596}
-  - component: {fileID: 7706037653307297120}
-  - component: {fileID: 4122467532049000028}
   m_Layer: 3
   m_Name: Abilities
   m_TagString: Untagged
@@ -983,7 +1221,9 @@ Transform:
   m_LocalPosition: {x: 0.7, y: -2.02, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1330065048982527327}
+  - {fileID: 6066437966864782437}
   m_Father: {fileID: 8301732391662301721}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1410335126641825925
@@ -1051,197 +1291,6 @@ MonoBehaviour:
             m_StringArgument: Anaya Casting
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &7975362184149562795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756698445312053699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 343ddc7facad07d4b95723ef1a151f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 1475748435622140236}
-  currentState: 0
-  anim: {fileID: 0}
-  uEvents:
-    WindUp:
-      m_PersistentCalls:
-        m_Calls: []
-    ReleaseStart:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3596767571345983897}
-          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
-          m_MethodName: GetRgbOffsetCfg
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0.1
-            m_StringArgument: Green
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3596767571345983897}
-          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
-          m_MethodName: FlashColors
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0.1
-            m_StringArgument: Anaya Heal
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2859457414168349167}
-          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
-          m_MethodName: PlayName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Anaya Heal
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3796256092420723281}
-          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
-          m_MethodName: SpawnName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0.1
-            m_StringArgument: Impact
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3796256092420723281}
-          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
-          m_MethodName: SpawnName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0.1
-            m_StringArgument: Shockwave
-            m_BoolArgument: 0
-          m_CallState: 2
-    ReleaseEnd:
-      m_PersistentCalls:
-        m_Calls: []
-    Recover:
-      m_PersistentCalls:
-        m_Calls: []
-    Cancel:
-      m_PersistentCalls:
-        m_Calls: []
-  caster: {fileID: 1410335126641825925}
-  abilitySO: {fileID: 11400000, guid: 289d739c06a77ac4f91862671cfa2768, type: 2}
-  abilitySlot:
-    ability: {fileID: 0}
-  mpM: {fileID: 7058722310484815464}
-  player: {fileID: 8987163089559660572}
-  hpM: {fileID: 1861734953551003033}
---- !u!114 &3596767571345983897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756698445312053699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
-  srs:
-  - {fileID: 4466723156777370603}
-  - {fileID: 3256731903790810545}
-  rgbOffsetCfgs:
-  - color_name: Green
-    rgb_offset: {x: -1, y: 1, z: -1}
-  colorFlickerInterval: 0.05
-  randomStartColor: 0
-  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
-  randomStartFlip: 0
-  randomFlipY: 0
-  randomFlipX: 0
---- !u!114 &3796256092420723281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756698445312053699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs:
-  - prefabName: Impact
-    randomPrefabs:
-    - {fileID: 5367450259600531064, guid: 3d0121f66cdc1fd459d956fc9062aa6a, type: 3}
-    hideInHierarchy: 0
-    spawnpoint: {fileID: 123463650881099154}
-    posOffset: {x: 0, y: 0, z: 0}
-    angleOffset: {x: 0, y: 0, z: 0}
-    scaleMult: 1
-    parented: 1
-    followRotation: 0
-    spawnPos: {x: 0, y: 0, z: 0}
-    spawnRot: {x: 0, y: 0, z: 0, w: 1}
-  - prefabName: Shockwave
-    randomPrefabs:
-    - {fileID: 8725716151169460468, guid: 7a080ea5473398e4fa98100efd91c902, type: 3}
-    hideInHierarchy: 0
-    spawnpoint: {fileID: 123463650881099154}
-    posOffset: {x: 0, y: 0, z: 0}
-    angleOffset: {x: 0, y: 0, z: 0}
-    scaleMult: 1
-    parented: 1
-    followRotation: 0
-    spawnPos: {x: 0, y: 0, z: 0}
-    spawnRot: {x: 0, y: 0, z: 0, w: 1}
-  - prefabName: Shockwave Pull
-    randomPrefabs:
-    - {fileID: 419085589674771820, guid: a5a5db9437680634a9b19020a1aa49ce, type: 3}
-    hideInHierarchy: 0
-    spawnpoint: {fileID: 123463650881099154}
-    posOffset: {x: 0, y: 0, z: 0}
-    angleOffset: {x: 0, y: 0, z: 0}
-    scaleMult: 1
-    parented: 1
-    followRotation: 0
-    spawnPos: {x: 0, y: 0, z: 0}
-    spawnRot: {x: 0, y: 0, z: 0, w: 1}
-  - prefabName: Shockwave Push
-    randomPrefabs:
-    - {fileID: 419085589674771820, guid: e41803e1375f37b4cbb64811ab6fdf89, type: 3}
-    hideInHierarchy: 0
-    spawnpoint: {fileID: 123463650881099154}
-    posOffset: {x: 0, y: 0, z: 0}
-    angleOffset: {x: 0, y: 0, z: 0}
-    scaleMult: 1
-    parented: 1
-    followRotation: 0
-    spawnPos: {x: 0, y: 0, z: 0}
-    spawnRot: {x: 0, y: 0, z: 0, w: 1}
-  spawnEvents:
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!114 &2859457414168349167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1268,195 +1317,12 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: 5acf4d6b9b75d3c48a64318797c028e2, type: 2}
-  - prefabName: Anaya Heal
-    randomPrefabs:
-    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
-    hideInHierarchy: 0
-    spawnpoint: {fileID: 8437002372998797620}
-    posOffset: {x: 0, y: 0, z: 0}
-    angleOffset: {x: 0, y: 0, z: 0}
-    scaleMult: 1
-    parented: 0
-    followRotation: 0
-    spawnPos: {x: 0, y: 0, z: 0}
-    spawnRot: {x: 0, y: 0, z: 0, w: 0}
-    audioSO: {fileID: 11400000, guid: 00abb9bdee24b954c8aef1d4a95d3a01, type: 2}
   loopGroups: []
   audioEvents:
     EnableEvent:
       m_PersistentCalls:
         m_Calls: []
     DisableEvent:
-      m_PersistentCalls:
-        m_Calls: []
---- !u!114 &5402544422226357994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756698445312053699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48d58b8ce08787f4a84328d3f3851415, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 1475748435622140236}
-  currentState: 0
-  anim: {fileID: 0}
-  uEvents:
-    WindUp:
-      m_PersistentCalls:
-        m_Calls: []
-    ReleaseStart:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4122467532049000028}
-          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-          m_MethodName: Shake
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shockwave Pull
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3796256092420723281}
-          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
-          m_MethodName: SpawnName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shockwave Pull
-            m_BoolArgument: 0
-          m_CallState: 2
-    ReleaseEnd:
-      m_PersistentCalls:
-        m_Calls: []
-    Recover:
-      m_PersistentCalls:
-        m_Calls: []
-    Cancel:
-      m_PersistentCalls:
-        m_Calls: []
-  caster: {fileID: 1410335126641825925}
-  abilitySO: {fileID: 11400000, guid: 67dcf62b48eb20b4986474141ff216e1, type: 2}
-  abilitySlot:
-    ability: {fileID: 0}
-  mpM: {fileID: 7058722310484815464}
-  player: {fileID: 8987163089559660572}
-  forcer: {fileID: 7706037653307297120}
---- !u!114 &3265152939051952596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756698445312053699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a8cf93810259de4c91e6b225ca88c1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 1475748435622140236}
-  currentState: 0
-  anim: {fileID: 0}
-  uEvents:
-    WindUp:
-      m_PersistentCalls:
-        m_Calls: []
-    ReleaseStart:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4122467532049000028}
-          m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
-          m_MethodName: Shake
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shockwave Push
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3796256092420723281}
-          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
-          m_MethodName: SpawnName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Shockwave Push
-            m_BoolArgument: 0
-          m_CallState: 2
-    ReleaseEnd:
-      m_PersistentCalls:
-        m_Calls: []
-    Recover:
-      m_PersistentCalls:
-        m_Calls: []
-    Cancel:
-      m_PersistentCalls:
-        m_Calls: []
-  caster: {fileID: 1410335126641825925}
-  abilitySO: {fileID: 11400000, guid: 4724d2a4b0ad72347abf4a066a9cea14, type: 2}
-  abilitySlot:
-    ability: {fileID: 0}
-  mpM: {fileID: 7058722310484815464}
-  player: {fileID: 8987163089559660572}
-  forcer: {fileID: 7706037653307297120}
---- !u!114 &7706037653307297120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756698445312053699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 972852d9a073e39409fc12ad33510dea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 8987163089559660572}
-  pull: 0
-  strength: 100
-  range: 20
-  radius: 10
-  targetColls: []
-  stunboxSO: {fileID: 11400000, guid: 000be396255b6b040bb500464e2ff26a, type: 2}
---- !u!114 &4122467532049000028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756698445312053699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedCam: {fileID: 0}
-  shakeTime: 0.2
-  amplitud: 2
-  frequency: 2
-  tweenFovTime: 0.5
-  angle: 2
-  dutchIn: 0.025
-  dutchOut: 0.1
-  events:
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-    OnDisable:
       m_PersistentCalls:
         m_Calls: []
 --- !u!1 &2941172494308309934
@@ -1853,6 +1719,242 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6705404227923167189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3917471913388256574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1330065048982527327}
+  - component: {fileID: 4060219905777830866}
+  - component: {fileID: 6339398303075294492}
+  - component: {fileID: 3701938840416087373}
+  - component: {fileID: 8254585036942994034}
+  m_Layer: 3
+  m_Name: Heal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1330065048982527327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3917471913388256574}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 98971669180264664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4060219905777830866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3917471913388256574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343ddc7facad07d4b95723ef1a151f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1475748435622140236}
+  currentState: 0
+  anim: {fileID: 0}
+  uEvents:
+    WindUp:
+      m_PersistentCalls:
+        m_Calls: []
+    ReleaseStart:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6339398303075294492}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: GetRgbOffsetCfg
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: Green
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6339398303075294492}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: FlashColors
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: Anaya Heal
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3701938840416087373}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3701938840416087373}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: Shockwave Heal
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8254585036942994034}
+          m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+          m_MethodName: PlayName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Anaya Heal
+            m_BoolArgument: 0
+          m_CallState: 2
+    ReleaseEnd:
+      m_PersistentCalls:
+        m_Calls: []
+    Recover:
+      m_PersistentCalls:
+        m_Calls: []
+    Cancel:
+      m_PersistentCalls:
+        m_Calls: []
+  caster: {fileID: 1410335126641825925}
+  abilitySO: {fileID: 11400000, guid: 289d739c06a77ac4f91862671cfa2768, type: 2}
+  abilitySlot:
+    ability: {fileID: 0}
+  mpM: {fileID: 7058722310484815464}
+  player: {fileID: 8987163089559660572}
+  hpM: {fileID: 1861734953551003033}
+--- !u!114 &6339398303075294492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3917471913388256574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  srs:
+  - {fileID: 4466723156777370603}
+  - {fileID: 3256731903790810545}
+  rgbOffsetCfgs:
+  - color_name: Green
+    rgb_offset: {x: -1, y: 1, z: -1}
+  colorFlickerInterval: 0.05
+  randomStartColor: 0
+  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
+  randomStartFlip: 0
+  randomFlipY: 0
+  randomFlipX: 0
+--- !u!114 &3701938840416087373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3917471913388256574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Impact
+    randomPrefabs:
+    - {fileID: 5367450259600531064, guid: 3d0121f66cdc1fd459d956fc9062aa6a, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 123463650881099154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  - prefabName: Shockwave Heal
+    randomPrefabs:
+    - {fileID: 8725716151169460468, guid: 7a080ea5473398e4fa98100efd91c902, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 123463650881099154}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 1
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &8254585036942994034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3917471913388256574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Anaya Heal
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 8437002372998797620}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    parented: 0
+    followRotation: 0
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+    audioSO: {fileID: 11400000, guid: 00abb9bdee24b954c8aef1d4a95d3a01, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &5202724025315521356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,7 +2339,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7975362184149562795}
+        - m_Target: {fileID: 4060219905777830866}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim1_WindUp
           m_Mode: 1
@@ -2253,7 +2355,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7975362184149562795}
+        - m_Target: {fileID: 4060219905777830866}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim2_ReleaseStart
           m_Mode: 1
@@ -2269,7 +2371,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7975362184149562795}
+        - m_Target: {fileID: 4060219905777830866}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim4_Recover
           m_Mode: 1
@@ -2285,7 +2387,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 5402544422226357994}
+        - m_Target: {fileID: 8822668468524497357}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim1_WindUp
           m_Mode: 1
@@ -2301,7 +2403,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 5402544422226357994}
+        - m_Target: {fileID: 8822668468524497357}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim2_ReleaseStart
           m_Mode: 1
@@ -2317,7 +2419,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 5402544422226357994}
+        - m_Target: {fileID: 8822668468524497357}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim4_Recover
           m_Mode: 1
@@ -2333,7 +2435,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3265152939051952596}
+        - m_Target: {fileID: 8327975750242051056}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim1_WindUp
           m_Mode: 1
@@ -2349,7 +2451,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3265152939051952596}
+        - m_Target: {fileID: 8327975750242051056}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim2_ReleaseStart
           m_Mode: 1
@@ -2365,7 +2467,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3265152939051952596}
+        - m_Target: {fileID: 8327975750242051056}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim4_Recover
           m_Mode: 1
@@ -2821,6 +2923,83 @@ MonoBehaviour:
     OnDisable:
       m_PersistentCalls:
         m_Calls: []
+--- !u!1 &6269542844706635026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3490713519321487817}
+  - component: {fileID: 6574606301575055981}
+  m_Layer: 3
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3490713519321487817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269542844706635026}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6066437966864782437}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6574606301575055981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269542844706635026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9237f58a1607d84a97ebe5ab02dadbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSlowUpdate: 0
+  checkInterval: 1
+  fixedUpdate: 1
+  uEvents_su:
+    SlowUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+  origin: {fileID: 3490713519321487817}
+  posOffset: {x: 0, y: 0, z: 0}
+  layers:
+    serializedVersion: 2
+    m_Bits: 8256
+  ignoreTriggers: 1
+  onlyRigidbodies: 1
+  overlapEvents:
+    FirstEnter:
+      m_PersistentCalls:
+        m_Calls: []
+    Enter:
+      m_PersistentCalls:
+        m_Calls: []
+    Stay:
+      m_PersistentCalls:
+        m_Calls: []
+    Exit:
+      m_PersistentCalls:
+        m_Calls: []
+    LastExit:
+      m_PersistentCalls:
+        m_Calls: []
+  range: 15
+  showGizmos: 0
+  gizmoColor: {r: 0.5235849, g: 0.9819028, b: 1, a: 0.5}
 --- !u!1 &6585861224708232795
 GameObject:
   m_ObjectHideFlags: 0
@@ -3417,9 +3596,9 @@ MonoBehaviour:
   owner: {fileID: 1475748435622140236}
   AllowAbility: 0
   caster: {fileID: 1410335126641825925}
-  heal: {fileID: 7975362184149562795}
-  pull: {fileID: 5402544422226357994}
-  push: {fileID: 3265152939051952596}
+  heal: {fileID: 4060219905777830866}
+  pull: {fileID: 8822668468524497357}
+  push: {fileID: 8327975750242051056}
   pakyaActions: {fileID: 4583146008036901521}
 --- !u!114 &6210519420762547229
 MonoBehaviour:
@@ -3826,7 +4005,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7975362184149562795}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim1_WindUp
           m_Mode: 1
@@ -3842,7 +4021,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7975362184149562795}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim2_ReleaseStart
           m_Mode: 1
@@ -3858,7 +4037,7 @@ MonoBehaviour:
     OnAnimationEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7975362184149562795}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: BaseAction, Assembly-CSharp
           m_MethodName: Anim4_Recover
           m_Mode: 1
