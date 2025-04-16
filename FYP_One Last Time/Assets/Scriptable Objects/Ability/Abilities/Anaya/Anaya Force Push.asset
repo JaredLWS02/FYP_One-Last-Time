@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db603f0e4e14c554d9b03f3b745dfb95, type: 3}
+  m_Name: Anaya Force Push
+  m_EditorClassIdentifier: 
+  iconAnimOV: {fileID: 0}
+  Name: Anaya Force Push
+  description: Pushes objects
+  castingTime: 0
+  magnitude: 100
+  mpCost: 10
+  cooldownTime: 1
+  castingAnim: {fileID: 11400000, guid: 7e7bdcc24534a34458a9255c51e4d00c, type: 2}
+  castAnim: {fileID: 11400000, guid: f6a9c77b4ef12fe48b4e06047054c9b4, type: 2}

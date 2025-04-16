@@ -5,16 +5,14 @@ using UnityEngine;
 public class ForcePushAbility : BaseAbility
 {
     [Header("Force Push Ability")]
-    public GameObject player;
-
-    public ForceController forcer;
+    public ForceAbility force;
     
     // ============================================================================
     
     // Anim Event
     public override void OnBaseAbilityReleaseStart()
     {
-        forcer.Force(false);
+        force.Force(false, abilitySO);
 
         EventM.OnCastReleased(owner, abilitySO);
     }

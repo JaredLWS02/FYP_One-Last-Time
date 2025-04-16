@@ -1148,6 +1148,7 @@ GameObject:
   - component: {fileID: 6860132319409249873}
   - component: {fileID: 209351871818756352}
   - component: {fileID: 8049486178688822457}
+  - component: {fileID: 2199486705421525104}
   m_Layer: 6
   m_Name: Spyvi
   m_TagString: Enemy
@@ -1315,6 +1316,31 @@ MonoBehaviour:
     localPosition: {x: 0, y: 0, z: 1}
     localEulerAngles: {x: 0, y: 0, z: 0}
     localScale: {x: 0, y: 0, z: 0}
+--- !u!114 &2199486705421525104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2034736583873020547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44caa1ace9ba0c94b804c34c929d32af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 2034736583873020547}
+  rb: {fileID: 7315561354744783907}
+  forceMult: 0.25
+  stun: 0
+  customPullStunAnim: {fileID: 0}
+  customPushStunAnim: {fileID: 0}
+  events:
+    OnPulled:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPushed:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &2129395857190085641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,19 +2245,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   phases:
-  - phaseName: Phase1
-    loop:
-      options:
-      - Melee
-      index: 0
-    hpPercent: 100
-    phaseAnim: {fileID: 11400000, guid: 620738f1e1283734da74afb896145d23, type: 2}
   - phaseName: Phase2
     loop:
       options:
       - Rush
       index: 0
-    hpPercent: 90
+    hpPercent: 100
     phaseAnim: {fileID: 11400000, guid: 620738f1e1283734da74afb896145d23, type: 2}
   - phaseName: Phase3
     loop:
@@ -4242,7 +4261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableSlowUpdate: 1
-  checkInterval: 0.2
+  checkInterval: 0.5
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
