@@ -10,12 +10,16 @@ public class SpyviActions : EnemyActions
 
     // ============================================================================
     
-    protected override void OnEnable2()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         EventM.TryRaiseParryEvent += OnTryRaiseParry;
     }
-    protected override void OnDisable2()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         EventM.TryRaiseParryEvent -= OnTryRaiseParry;
     }
 
@@ -42,6 +46,7 @@ public class SpyviActions : EnemyActions
 
     // ============================================================================
 
+    // called by OnSlowUpdate Event
     public void CheckPhase()
     {
         if(AllowPhase)

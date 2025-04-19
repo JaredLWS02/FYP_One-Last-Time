@@ -23,7 +23,7 @@ public class EnemyActions : MonoBehaviour
 
     protected EventManager EventM;
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         EventM = EventManager.Current;
         
@@ -36,10 +36,8 @@ public class EnemyActions : MonoBehaviour
         EventM.TryComboEvent += OnTryCombo;
         EventM.TryHurtEvent += OnTryHurt;
         EventM.TryStunEvent += OnTryStun;
-        
-        OnEnable2();
     }
-    void OnDisable()
+    protected virtual void OnDisable()
     {
         EventM.TryMoveEvent -= OnTryMove;
         EventM.TryFlipEvent -= OnTryFlip;
@@ -50,13 +48,8 @@ public class EnemyActions : MonoBehaviour
         EventM.TryComboEvent -= OnTryCombo;
         EventM.TryHurtEvent -= OnTryHurt;
         EventM.TryStunEvent -= OnTryStun;
-
-        OnDisable2();
     }
-    
-    protected virtual void OnEnable2() {}
-    protected virtual void OnDisable2() {}
-    
+        
     // ============================================================================
 
     void OnTryMove(GameObject who, Vector2 input)
