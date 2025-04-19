@@ -4623,7 +4623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableSlowUpdate: 1
-  checkInterval: 0.25
+  checkInterval: 0.1
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
@@ -4631,16 +4631,17 @@ MonoBehaviour:
         m_Calls: []
   owner: {fileID: 2034736583873020547}
   vehicle: {fileID: 5316793955414932418}
+  sideMove: {fileID: 6946549235541127326}
   checkHeight: 2
   checkRange: 100
-  debug:
+  gizmos:
     showGizmos: 0
     rangeGizmo:
-      show: 1
+      show: 0
       color: {r: 1, g: 1, b: 1, a: 1}
     heightGizmo:
-      show: 0
-      color: {r: 0, g: 1, b: 0.00427413, a: 1}
+      show: 1
+      color: {r: 0, g: 1, b: 0.27395368, a: 1}
 --- !u!1 &8822806667255692092
 GameObject:
   m_ObjectHideFlags: 0

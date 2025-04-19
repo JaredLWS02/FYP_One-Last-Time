@@ -2808,7 +2808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableSlowUpdate: 1
-  checkInterval: 0.25
+  checkInterval: 0.1
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
@@ -2816,16 +2816,17 @@ MonoBehaviour:
         m_Calls: []
   owner: {fileID: 6995670659757724566}
   vehicle: {fileID: 7884391056595946062}
+  sideMove: {fileID: 1540304312175946697}
   checkHeight: 1.64
   checkRange: 100
-  debug:
+  gizmos:
     showGizmos: 0
     rangeGizmo:
       show: 0
-      color: {r: 1, g: 1, b: 1, a: 1}
+      color: {r: 0, g: 0, b: 0, a: 0}
     heightGizmo:
-      show: 1
-      color: {r: 1, g: 1, b: 1, a: 1}
+      show: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6014220146863786974
 GameObject:
   m_ObjectHideFlags: 0
@@ -3368,6 +3369,7 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   rb: {fileID: 1401727047894497609}
   forceMult: 1
+  stun: 1
   customPullStunAnim: {fileID: 0}
   customPushStunAnim: {fileID: 0}
   events:

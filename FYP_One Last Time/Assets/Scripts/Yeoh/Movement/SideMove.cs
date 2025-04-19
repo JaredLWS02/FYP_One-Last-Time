@@ -19,13 +19,13 @@ public class SideMove : MoveScript
 
     // ============================================================================
 
-    float dirX;
+    float inputX;
 
     void OnMove(GameObject who, Vector2 input)
     {
         if(who!=owner) return;
 
-        dirX = input.x;
+        inputX = input.x;
     }
     
     // ============================================================================
@@ -34,8 +34,8 @@ public class SideMove : MoveScript
     {
         base.FixedUpdate();
 
-        dirX = Round(dirX, 1);
+        inputX = Round(inputX, 1);
 
-        UpdateMoveMult(dirX, Vector3.right);
+        UpdateMoveMult(inputX, Vector3.right);
     }
 }
