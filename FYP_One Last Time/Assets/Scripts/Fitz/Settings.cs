@@ -10,32 +10,34 @@ using Unity.VisualScripting;
 public class Settings : MonoBehaviour
 {
     public AudioMixer mixer;
-    public TMP_Dropdown resolutionDropdown;
-    Resolution[] resolutions;
+    //public TMP_Dropdown resolutionDropdown;
+    //Resolution[] resolutions;
+    int[] resoWidth = { 1920, 1600, 1280 };
+    int[] resoHeight = { 1280, 900, 720 };
     private void Start()
     {
-        resolutions = Screen.resolutions;
+        //resolutions = Screen.resolutions;
 
-        resolutionDropdown.ClearOptions();
+        //resolutionDropdown.ClearOptions();
 
-        List<string> options = new List<string>();
+        //List<string> options = new List<string>();
 
-        int currentResoID = 0;
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+        //int currentResoID = 0;
+        //for (int i = 0; i < resolutions.Length; i++)
+        //{
+        //    string option = resolutions[i].width + " x " + resolutions[i].height;
+        //    options.Add(option);
 
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResoID = i;
-            }
-        }
+        //    if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+        //    {
+        //        currentResoID = i;
+        //    }
+        //}
         
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResoID;
-        resolutionDropdown.RefreshShownValue();
-        DropdownAutoscroll autoScroll = resolutionDropdown.transform.Find("Template").AddComponent<DropdownAutoscroll>();
+        //resolutionDropdown.AddOptions(options);
+        //resolutionDropdown.value = currentResoID;
+        //resolutionDropdown.RefreshShownValue();
+        //DropdownAutoscroll autoScroll = resolutionDropdown.transform.Find("Template").AddComponent<DropdownAutoscroll>();
     }
 
     // ==================== Graphics Quality ========================
@@ -47,14 +49,16 @@ public class Settings : MonoBehaviour
     // ==================== Screen Resolution ========================
     public void SetResolution (int resolutionID)
     {
-        Resolution resolution = resolutions[resolutionID];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        //Resolution resolution = resolutions[resolutionID];
+        Screen.SetResolution(resoWidth[resolutionID], resoHeight[resolutionID], Screen.fullScreen);
+        Debug.Log("Changed resolution to " + resoWidth[resolutionID] + " x " + resoHeight[resolutionID]);
     }
 
     // ==================== Set Fullscreen ========================
     public void SetFullScreen (bool fullScreen)
     {
         Screen.fullScreen = fullScreen;
+        Debug.Log("Changed fullscreen to " + fullScreen);
     }
 
     // ==================== Audio Stuff ========================
