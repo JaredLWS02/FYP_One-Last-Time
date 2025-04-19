@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class SpyviActionInputs : EnemyActionInputs
 {
-    protected override void OnEnable2()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         EventM.AgentTryParryEvent += OnAgentTryParry;
     }
-    protected override void OnDisable2()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+        
         EventM.AgentTryParryEvent -= OnAgentTryParry;
     }
 

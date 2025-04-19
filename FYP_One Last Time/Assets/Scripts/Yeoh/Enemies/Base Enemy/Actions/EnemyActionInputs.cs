@@ -11,7 +11,7 @@ public class EnemyActionInputs : MonoBehaviour
 
     protected EventManager EventM;
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         EventM = EventManager.Current;
         
@@ -21,10 +21,8 @@ public class EnemyActionInputs : MonoBehaviour
         EventM.AgentTryJumpCutEvent += OnAgentTryJumpCut;
         EventM.AgentTryAutoJumpEvent += OnAgentTryAutoJump;
         EventM.AgentTryAttackEvent += OnAgentTryAttack;
-
-        OnEnable2();
     }
-    void OnDisable()
+    protected virtual void OnDisable()
     {
         EventM.AgentTryMoveEvent -= OnAgentTryMove;
         EventM.AgentTryFlipEvent -= OnAgentTryFlip;
@@ -32,30 +30,25 @@ public class EnemyActionInputs : MonoBehaviour
         EventM.AgentTryJumpCutEvent -= OnAgentTryJumpCut;
         EventM.AgentTryAutoJumpEvent -= OnAgentTryAutoJump;
         EventM.AgentTryAttackEvent -= OnAgentTryAttack;
-
-        OnDisable2();
     }
-
-    protected virtual void OnEnable2() {}
-    protected virtual void OnDisable2() {}
 
     // Move ============================================================================
 
     Vector2 moveInput;
 
-    void Update()
+    protected virtual void Update()
     {
         if(pilot.IsNone()) moveInput = Vector2.zero;
 
         EventM.OnTryMove(owner, moveInput);
     }
 
-    void OnAgentTryMove(GameObject who, Vector2 input_dir)
+    void OnAgentTryMove(GameObject who, Vector2 input)
     {
         if(who!=owner) return;
         if(!pilot.IsAI()) return;
 
-        moveInput = input_dir;
+        moveInput = input;
     } 
 
     void OnAgentTryFlip(GameObject who, float dir_x)
