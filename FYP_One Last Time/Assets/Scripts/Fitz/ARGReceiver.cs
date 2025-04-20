@@ -7,24 +7,26 @@ public class ARGReceiver : MonoBehaviour
     public float fadeSpeed;
     public float riseSpeed;
     public int ID;
+    bool isFading = false;
     ARGScript signal;
     private void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.transform.root.CompareTag("Player"))
         {
-            FadeOut(col.gameObject); // Object fades out
-            // Object rises upwards
-            if (col.gameObject.transform.root.GetComponent<ARGScript>() != null)
-            {
-                signal = col.gameObject.transform.root.GetComponent<ARGScript>(); // Get ARGScript component
-                signal.ID = ID; // Initialize ID
-                signal.CopyPngFile(); // Run copy function
-            }
+            StartCoroutine(FadeOut(this.gameObject)); // Object fades out and rises upwards
+            //if (col.gameObject.transform.root.GetComponent<ARGScript>() != null)
+            //{
+            //    signal = col.gameObject.transform.root.GetComponent<ARGScript>(); // Get ARGScript component
+            //    signal.ID = ID; // Initialize ID
+            //    signal.CopyPngFile(); // Run copy function
+            //}
         }
     }
 
     IEnumerator FadeOut(GameObject obj)
     {
+        if (!isFading)
+            isFading = true;
         while (this.GetComponent<Renderer>().material.color.a > 0)
         {
             // Fade out stuff
