@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableSlowUpdate: 1
-  checkInterval: 0.25
+  checkInterval: 0.1
   fixedUpdate: 1
   uEvents_su:
     SlowUpdate:
@@ -1055,9 +1055,10 @@ MonoBehaviour:
         m_Calls: []
   owner: {fileID: 5261146206814944013}
   vehicle: {fileID: 293840219241273385}
+  sideMove: {fileID: 5446114617604419300}
   checkHeight: 2
   checkRange: 100
-  debug:
+  gizmos:
     showGizmos: 0
     rangeGizmo:
       show: 0

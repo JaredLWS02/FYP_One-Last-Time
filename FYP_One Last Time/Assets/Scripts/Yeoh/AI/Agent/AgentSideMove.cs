@@ -18,14 +18,17 @@ public class AgentSideMove : MonoBehaviour
 
     // ============================================================================
 
+    public float? yInputOverride = null;
+
     void FixedUpdate()
     {
-        float dot_x = Vector3.Dot(Vector3.right, vehicle.velocity);
-        float dot_y = Vector3.Dot(Vector3.up, vehicle.velocity);
+        Vector2 input = vehicle.velocity == Vector3.zero ? 
+                        Vector2.zero : vehicle.velocity.normalized;
 
-        Vector2 moveInput = new(dot_x, dot_y);
+        if(yInputOverride.HasValue)
+            input.y = yInputOverride.Value;
 
-        EventM.OnAgentTryMove(owner, moveInput);
+        EventM.OnAgentTryMove(owner, input);
     }
 
     // Facing ============================================================================

@@ -7,6 +7,7 @@ public class AgentVerticalMove : SlowUpdate
     [Header("Vertical")]
     public GameObject owner;
     public AgentVehicle vehicle;
+    public AgentSideMove sideMove;
 
     // ============================================================================
 
@@ -18,81 +19,83 @@ public class AgentVerticalMove : SlowUpdate
     }
 
     // ============================================================================
-    
-    [Header("Check")]
-    public float checkHeight=2.5f;
 
     protected override void OnSlowUpdate()
     {
-        if(vehicle.goal)
-        CheckHeight(vehicle.goal.position);
-    }
+        if(!ShouldDoVerticalMovement(vehicle.goal))
+        {
+            sideMove.yInputOverride = null;
+            return;
+        }
 
-    void CheckHeight(Vector3 target_pos)
-    {
-        if(!vehicle.goal) return;
-        if(!InRange(target_pos)) return;
+        bool is_above = vehicle.goal.position.y > owner.transform.position.y;
 
-        float y_dist = Mathf.Abs(target_pos.y - owner.transform.position.y);
-        if(y_dist < checkHeight) return;
-
-        bool isAbove = target_pos.y > owner.transform.position.y;
-
-        if(isAbove)
+        if(is_above)
         {
             EventM.OnAgentTryJump(owner); // jump duh
-            EventM.OnAgentTryMove(owner, Vector2.up); // press up
+
+            sideMove.yInputOverride = 1; // press up to climb
         }
         else
         {
             EventM.OnAgentTryJumpCut(owner); // jumpcut
-            EventM.OnAgentTryMove(owner, Vector2.down); // press down
+
+            sideMove.yInputOverride = -1; // press down to descend platforms
         }
     }
     
     // ============================================================================
     
-    public float checkRange=100;
+    [Header("Check")]
+    public float checkRange = 10;
+    public float checkHeight = 2.5f;
 
-    bool InRange(Vector3 pos)
+    bool ShouldDoVerticalMovement(Transform target)
     {
-        float distance = Vector3.Distance(pos, owner.transform.position);
-        return distance <= checkRange;
+        if(!target) return false;
+
+        Vector3 vector = target.position - owner.transform.position;
+
+        float distance = vector.magnitude;
+        if(distance > checkRange) return false;
+
+        bool has_height_difference = Mathf.Abs(vector.y) >= checkHeight;
+        return has_height_difference;
     }
 
     // ============================================================================
 
     [System.Serializable]
-    public struct Debug
+    public struct GizmoGroup
     {
         public bool showGizmos;
-        public Gizmo rangeGizmo;
-        public Gizmo heightGizmo;
+        public GizmoOptions rangeGizmo;
+        public GizmoOptions heightGizmo;
     }
 
     [System.Serializable]
-    public struct Gizmo
+    public struct GizmoOptions
     {
         public bool show;
         public Color color;
     }
 
     [Space]
-    public Debug debug;
+    public GizmoGroup gizmos;
 
     void OnDrawGizmosSelected()
     {
-        if(!debug.showGizmos) return;
+        if(!gizmos.showGizmos) return;
 
-        if(debug.rangeGizmo.show)
+        if(gizmos.rangeGizmo.show)
         {
-            Gizmos.color = debug.rangeGizmo.color;
+            Gizmos.color = gizmos.rangeGizmo.color;
             Gizmos.DrawWireSphere(owner.transform.position, checkRange);
         }
             
-        if(debug.heightGizmo.show)
+        if(gizmos.heightGizmo.show)
         {
-            Gizmos.color = debug.heightGizmo.color;
+            Gizmos.color = gizmos.heightGizmo.color;
             Gizmos.DrawLine(owner.transform.position, owner.transform.position + Vector3.up * checkHeight);
             Gizmos.DrawLine(owner.transform.position, owner.transform.position + Vector3.down * checkHeight);
         }

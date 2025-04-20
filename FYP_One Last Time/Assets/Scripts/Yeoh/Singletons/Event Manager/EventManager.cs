@@ -97,10 +97,16 @@ public class EventManager : MonoBehaviour
     public void OnTryMove(GameObject mover, Vector2 input)
     {
         TryMoveEvent?.Invoke(mover, input);
+
+        // if(input != Vector2.zero)
+        // Debug.Log($"{mover.name} OnTryMove: {input}");
     }  
     public void OnMove(GameObject mover, Vector2 input)
     {
         MoveEvent?.Invoke(mover, input);
+
+        // if(input != Vector2.zero)
+        //Debug.Log($"{mover.name} OnMove: {input}");
     } 
 
     public event Action<GameObject, float> TryFlipEvent;
