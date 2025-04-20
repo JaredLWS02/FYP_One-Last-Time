@@ -443,6 +443,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
+--- !u!1 &980844506319579249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4255001750882607918}
+  m_Layer: 6
+  m_Name: Stomp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4255001750882607918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 980844506319579249}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5305734572648614028}
+  m_Father: {fileID: 7682083124440677918}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1078659623682606192
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +546,7 @@ Transform:
   - {fileID: 8597400466676245292}
   - {fileID: 3029613186451366184}
   - {fileID: 1867098784552257303}
+  - {fileID: 4255001750882607918}
   m_Father: {fileID: 8499522341882242809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4842645491667626223
@@ -2426,7 +2459,7 @@ MonoBehaviour:
     StepUpUpdateEvent:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 7211635101082679679}
           m_TargetAssemblyTypeName: EnemyActions, Assembly-CSharp
           m_MethodName: TryJump
           m_Mode: 1
@@ -3740,7 +3773,19 @@ MonoBehaviour:
   fallEvents:
     ToggleFastFall:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 980844506319579249}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   y_velocity: 0
 --- !u!1 &7327163681254989884
 GameObject:
@@ -5752,4 +5797,83 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4297190724695733346, guid: b30fe149685d5654999d87850dfbf1a4,
     type: 3}
   m_PrefabInstance: {fileID: 5559919209202897025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9084997939215503677
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4255001750882607918}
+    m_Modifications:
+    - target: {fileID: 1242880141507026177, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_Name
+      value: Spyvi Stomp Hurtbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4609305043628110655, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 2034736583873020547}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c15e03c6efbe28044a8dfc76b1a88db2, type: 3}
+--- !u!4 &5305734572648614028 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4014294989942184369, guid: c15e03c6efbe28044a8dfc76b1a88db2,
+    type: 3}
+  m_PrefabInstance: {fileID: 9084997939215503677}
   m_PrefabAsset: {fileID: 0}
