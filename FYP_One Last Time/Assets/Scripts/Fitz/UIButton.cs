@@ -15,11 +15,13 @@ public class UIButton : MonoBehaviour
 
     public void OnHover()
     {
-        if (buttonComp.interactable)
-        {
-            buttonEvents.hoverEvent?.Invoke();
-            buttonComp.Select();
-        }
+        buttonEvents.onHoverEvent?.Invoke();
+        buttonComp.Select();
+    }
+
+    public void OffHover()
+    {
+        buttonEvents.offHoverEvent?.Invoke();
     }
 
     public void OnQuit()
@@ -42,7 +44,8 @@ public class UIButton : MonoBehaviour
     [System.Serializable]
     public struct ButtonEvents
     {
-        public UnityEvent hoverEvent;
+        public UnityEvent onHoverEvent;
+        public UnityEvent offHoverEvent;
     }
     [Space]
     public ButtonEvents buttonEvents;

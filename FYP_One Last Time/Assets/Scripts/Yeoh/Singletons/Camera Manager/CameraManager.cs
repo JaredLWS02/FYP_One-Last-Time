@@ -58,16 +58,14 @@ public class CameraManager : MonoBehaviour
 
     // ==================================================================================================================
 
-    #region Pan Camera
-
-    public void PanCameraOnContact(float panDistance, float panTime, PanDirection panDirection, bool panToStartingPos)
+    public void PanCameraOnContact(float panDistance, float panTime, cameraPan.PanDirection panDirection, bool panToStartingPos)
     {
         if (_panCamCoroutine != null) StopCoroutine(_panCamCoroutine);
         _panCamCoroutine = StartCoroutine(PanCamera(panDistance, panTime, panDirection, panToStartingPos));
     }
 
 
-    private IEnumerator PanCamera(float panDistance, float panTime, PanDirection panDirection, bool panToStartingPos)
+    private IEnumerator PanCamera(float panDistance, float panTime, cameraPan.PanDirection panDirection, bool panToStartingPos)
     {
         Vector2 endPos = Vector2.zero;
         Vector2 startingPos = Vector2.zero;
@@ -76,16 +74,16 @@ public class CameraManager : MonoBehaviour
         {
             switch (panDirection)
             {
-                case PanDirection.Up:
+                case cameraPan.PanDirection.Up:
                     endPos = Vector2.up;
                     break;
-                case PanDirection.Down:
+                case cameraPan.PanDirection.Down:
                     endPos = Vector2.down;
                     break;
-                case PanDirection.Left:
+                case cameraPan.PanDirection.Left:
                     endPos = Vector2.right;
                     break;
-                case PanDirection.Right:
+                case cameraPan.PanDirection.Right:
                     endPos = Vector2.left;
                     break;
                 default:
@@ -111,8 +109,6 @@ public class CameraManager : MonoBehaviour
             yield return null;
         }
     }
-
-    #endregion
 
     // ==================================================================================================================
 

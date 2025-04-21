@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 2251689530015196553}
   - component: {fileID: 7708350571298883521}
   - component: {fileID: 7310167612202366588}
-  m_Layer: 0
+  - component: {fileID: 8850666690424477366}
+  m_Layer: 14
   m_Name: Breakable Prop
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,8 +118,8 @@ Rigidbody:
   m_GameObject: {fileID: 4127061889060694014}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -192,3 +193,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles: {fileID: 2448607188385149042, guid: 059e161fe55999e4ea7f9b83e5e1c91b,
     type: 3}
+--- !u!114 &8850666690424477366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127061889060694014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44caa1ace9ba0c94b804c34c929d32af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 4127061889060694014}
+  rb: {fileID: 2251689530015196553}
+  forceMult: 1
+  stun: 0
+  customPullStunAnim: {fileID: 0}
+  customPushStunAnim: {fileID: 0}
+  events:
+    OnPulled:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7310167612202366588}
+          m_TargetAssemblyTypeName: ParticleSpawn, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4127061889060694014}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnPushed:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7310167612202366588}
+          m_TargetAssemblyTypeName: ParticleSpawn, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4127061889060694014}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
