@@ -14,25 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shaderToUse: {fileID: 7200000, guid: beffbbb77390d2849b6cb4b672225106, type: 3}
   materialToUse: {fileID: 2100000, guid: 11a17ddb3d222864cad4f7db211ec3ba, type: 2}
-  grassRandomHeightMin: 0
-  grassRandomHeightMax: 5
-  bladeRadius: 0.985
-  bladeForwardAmount: 0.675
-  bladeCurveAmount: 5
-  bottomWidth: 0.3
-  MinWidth: 0.01
-  MinHeight: 0.01
-  MaxWidth: 0.245
-  MaxHeight: 0.893
-  windSpeed: 10
-  windStrength: 0.05
-  allowedBladesPerVertex: 8
+  grassRandomHeightMin: 0.4946239
+  grassRandomHeightMax: 3.494624
+  bladeRadius: 0.947
+  bladeForwardAmount: 0.514
+  bladeCurveAmount: 2
+  bottomWidth: 0.223
+  MinWidth: 0.12585106
+  MinHeight: 0.116999984
+  MaxWidth: 0.360851
+  MaxHeight: 1
+  windSpeed: 0.17
+  windStrength: 0.34
+  allowedBladesPerVertex: 10
   allowedSegmentsPerBlade: 4
   affectStrength: 1
-  topTint: {r: 0.41217256, g: 1, b: 0, a: 0}
-  bottomTint: {r: 0.06725504, g: 0.3679245, b: 0, a: 1}
+  topTint: {r: 0.090367414, g: 0.122641504, b: 0, a: 0}
+  bottomTint: {r: 0.015888765, g: 0.01886791, b: 0, a: 1}
   drawBounds: 0
-  minFadeDistance: 40
-  maxDrawDistance: 125
+  minFadeDistance: 0
+  maxDrawDistance: 20000000
   cullingTreeDepth: 4
-  castShadow: 0
+  castShadow: 2
