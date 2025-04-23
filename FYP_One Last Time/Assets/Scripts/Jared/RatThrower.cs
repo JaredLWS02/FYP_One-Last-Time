@@ -44,7 +44,7 @@ public class RatThrower : MonoBehaviour
     private IEnumerator throwing()
     {
         yield return new WaitForSeconds(3);
-        Instantiate(spear, new Vector3(spawnLocation.x,  spawnLocation.y, spawnLocation.z),Quaternion.identity);
+        Instantiate(spear, new Vector3(spawnLocation.x + 3,  spawnLocation.y, spawnLocation.z),Quaternion.identity);
         yield return new WaitForSeconds(1.5f);
         col.enabled = true;
     }
