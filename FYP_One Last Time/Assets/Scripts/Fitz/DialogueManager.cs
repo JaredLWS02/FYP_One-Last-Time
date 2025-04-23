@@ -13,11 +13,14 @@ public class DialogueManager : MonoBehaviour
 
     public Animator animator;
 
+    public Pilot playerPilot, ratPilot;
+    public GameObject background;
+
     //private Queue<string> sentences;
     private Queue<Dialogue.DialogueLine> sentences;
     private List<Dialogue.DialogueCharacter> characters;
 
-    bool isFirstSentence = false;
+    bool isFirstSentence = false, inDialogue = false;
 
     // Use this for initialization
     void Start()
@@ -26,9 +29,26 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<Dialogue.DialogueLine>();
     }
 
+    void Update()
+    {
+        if (InputManager.Current.dashKeyDown)
+        {
+            StopAllCoroutines();
+            EndDialogue();
+        }
+        if (InputManager.Current.jumpKeyDown && inDialogue)
+        {
+            DisplayNextSentence();
+        }
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
+        inDialogue = true;
         animator.SetBool("IsOpen", true);
+        playerPilot.currentPilot = PilotType.None;
+        ratPilot.currentPilot = PilotType.None;
+        background.SetActive(true);
 
         //nameText.text = dialogue.name;
 
@@ -93,14 +113,18 @@ public class DialogueManager : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(5.0f);
-        DisplayNextSentence();
+        //yield return new WaitForSeconds(3.0f);
+        //DisplayNextSentence();
     }
 
     void EndDialogue()
     {
+        inDialogue = false;
         animator.SetBool("IsOpen", false);
         SpriteAlphaZero(characterImage);
+        playerPilot.currentPilot = PilotType.Player;
+        ratPilot.currentPilot = PilotType.AI;
+        background.SetActive(false);
     }
 
     void SpriteAlphaOne(Image image)

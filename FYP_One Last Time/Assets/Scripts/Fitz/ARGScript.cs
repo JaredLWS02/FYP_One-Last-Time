@@ -34,6 +34,11 @@ public class ARGScript : MonoBehaviour
             // Copy the existing PNG file to the GameLogs folder
             File.Copy(sourcePath, destinationPath);
             Debug.Log("PNG file copied to: " + destinationPath);
+
+            // Encrypt contents using Atbash
+            string content = File.ReadAllText(destinationPath);
+            string encryptedContent = AtbashEncrypt(content);
+            File.WriteAllText(destinationPath, encryptedContent);
         }
         else if (File.Exists(destinationPath))
         {
@@ -44,4 +49,27 @@ public class ARGScript : MonoBehaviour
             Debug.LogError("Source file does not exist at: " + sourcePath);
         }
     }
+
+    private string AtbashEncrypt(string input)
+    {
+        char[] buffer = input.ToCharArray();
+
+        for (int i = 0; i < buffer.Length; i++)
+        {
+            char letter = buffer[i];
+
+            if (char.IsUpper(letter))
+            {
+                buffer[i] = (char)('Z' - (letter - 'A')); // Uppercase Atbash
+            }
+            else if (char.IsLower(letter))
+            {
+                buffer[i] = (char)('z' - (letter - 'a')); // Lowercase Atbash
+            }
+            // else leave punctuation, numbers, and whitespace untouched
+        }
+
+        return new string(buffer);
+    }
+
 }
