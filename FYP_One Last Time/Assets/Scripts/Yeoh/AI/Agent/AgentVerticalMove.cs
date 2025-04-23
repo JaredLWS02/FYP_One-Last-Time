@@ -19,18 +19,32 @@ public class AgentVerticalMove : SlowUpdate
     }
 
     // ============================================================================
+    
+    [Header("Check")]
+    public float checkHeight=2.5f;
 
     protected override void OnSlowUpdate()
     {
-        if(!ShouldDoVerticalMovement(vehicle.goal))
+        if(vehicle.goal)
+        CheckHeight(vehicle.goal.position);
+    }
+
+    void CheckHeight(Vector3 target_pos)
+    {
+        if(!vehicle.goal) return;
+        if(!InRange(target_pos)) return;
+
+        float y_dist = Mathf.Abs(target_pos.y - owner.transform.position.y);
+
+        if(y_dist < checkHeight)
         {
             sideMove.yInputOverride = null;
             return;
         }
 
-        bool is_above = vehicle.goal.position.y > owner.transform.position.y;
+        bool isAbove = target_pos.y > owner.transform.position.y;
 
-        if(is_above)
+        if(isAbove)
         {
             EventM.OnAgentTryJump(owner); // jump duh
 
@@ -46,21 +60,12 @@ public class AgentVerticalMove : SlowUpdate
     
     // ============================================================================
     
-    [Header("Check")]
-    public float checkRange = 10;
-    public float checkHeight = 2.5f;
+    public float checkRange=100;
 
-    bool ShouldDoVerticalMovement(Transform target)
+    bool InRange(Vector3 pos)
     {
-        if(!target) return false;
-
-        Vector3 vector = target.position - owner.transform.position;
-
-        float distance = vector.magnitude;
-        if(distance > checkRange) return false;
-
-        bool has_height_difference = Mathf.Abs(vector.y) >= checkHeight;
-        return has_height_difference;
+        float distance = Vector3.Distance(pos, owner.transform.position);
+        return distance <= checkRange;
     }
 
     // ============================================================================

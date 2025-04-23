@@ -98,14 +98,13 @@ public class EventManager : MonoBehaviour
     {
         TryMoveEvent?.Invoke(mover, input);
 
-        // if(input != Vector2.zero)
-        // Debug.Log($"{mover.name} OnTryMove: {input}");
+        if(input != Vector2.zero)
+        Debug.Log($"{mover.name} OnTryMove: {input}");
     }  
     public void OnMove(GameObject mover, Vector2 input)
     {
         MoveEvent?.Invoke(mover, input);
 
-        // if(input != Vector2.zero)
         //Debug.Log($"{mover.name} OnMove: {input}");
     } 
 
