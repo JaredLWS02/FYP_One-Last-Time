@@ -154,8 +154,12 @@ public class EnemyActions : MonoBehaviour
     public StunScript stun;
     public bool IsStunned() => stun?.IsPerforming() ?? false;
 
+    public HPManager hpM;
+    public bool IsDead() => hpM?.IsDead() ?? false;
+
     // ============================================================================
 
+    // called by unity event
     public void TryJump()
     {
         EventM.OnAgentTryJump(owner);

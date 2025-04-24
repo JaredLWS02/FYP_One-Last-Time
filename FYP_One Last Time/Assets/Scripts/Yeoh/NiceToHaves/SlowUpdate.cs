@@ -9,7 +9,7 @@ public class SlowUpdate : MonoBehaviour
     public bool enableSlowUpdate=true;
     [Min(0)]
     public float checkInterval=.5f;
-    public bool fixedUpdate=true;
+    public bool fixedUpdate;
 
     // ============================================================================
 

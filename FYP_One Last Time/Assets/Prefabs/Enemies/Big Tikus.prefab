@@ -527,8 +527,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableSlowUpdate: 1
-  checkInterval: 0.2
-  fixedUpdate: 1
+  checkInterval: 0.5
+  fixedUpdate: 0
   uEvents_su:
     SlowUpdate:
       m_PersistentCalls:
@@ -928,7 +928,7 @@ MonoBehaviour:
   owner: {fileID: 5261146206814944013}
   rb: {fileID: 8915720888079556032}
   ground: {fileID: 4037544487675790279}
-  jumpForce: 20
+  jumpForce: 25
   jumpAnim: {fileID: 0}
   jumpCutMult: 0.5
   coyoteTime: 0.2
@@ -1056,8 +1056,8 @@ MonoBehaviour:
   owner: {fileID: 5261146206814944013}
   vehicle: {fileID: 293840219241273385}
   sideMove: {fileID: 5446114617604419300}
-  checkHeight: 2
   checkRange: 100
+  checkHeight: 2
   gizmos:
     showGizmos: 0
     rangeGizmo:
@@ -1376,6 +1376,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventName: Dismount
+    OnAnimationEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8251438184508841506}
+          m_TargetAssemblyTypeName: ProjectileShooter, Assembly-CSharp
+          m_MethodName: Shoot
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Rat Ball
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2964226836538534864}
+          m_TargetAssemblyTypeName: DestroyAfter, Assembly-CSharp
+          m_MethodName: DestroyNoAnim
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &418708997891478844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,8 +1530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60717865382c15e43a9c331af53c04b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 500
-  hpMax: 500
+  hp: 350
+  hpMax: 350
   regen: 1
   regenWhenEmpty: 0
   regenHp: 0.2
@@ -1977,7 +2005,7 @@ MonoBehaviour:
           m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 6924317339209216897}
-  comboResetTime: 0.5
+  comboResetTime: 2
   cooldown: {fileID: 8165834065421918735}
   comboCooldownTime: 2
 --- !u!114 &6924317339209216897
@@ -2064,6 +2092,7 @@ Transform:
   - {fileID: 2623606231955308900}
   - {fileID: 8449358400114368154}
   - {fileID: 5442243828401948624}
+  - {fileID: 1729587463558625017}
   m_Father: {fileID: 6415192565362938597}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2035220173655765757
@@ -2104,6 +2133,7 @@ MonoBehaviour:
   autoJump: {fileID: 4300309323571415192}
   attack: {fileID: 6861530176262365675}
   stun: {fileID: 5138522953899574682}
+  hpM: {fileID: 704049436961937626}
 --- !u!114 &3422312068734313863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2132,6 +2162,7 @@ GameObject:
   - component: {fileID: 7277930541610100674}
   - component: {fileID: -8662943547169052909}
   - component: {fileID: 8693053629859616321}
+  - component: {fileID: 2964226836538534864}
   m_Layer: 6
   m_Name: Big Tikus
   m_TagString: Enemy
@@ -2323,6 +2354,25 @@ MonoBehaviour:
     OnPushed:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &2964226836538534864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5261146206814944013}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26fb29979e03b5408c372e0f76f81d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDestroyDelayOnEnable: 0
+  destroyDelay: {x: 0, y: 0}
+  shrinkObjects:
+  - {fileID: 5261146206814944013}
+  shrinkTo: {x: 0, y: 0, z: 0}
+  shrinkTime: 0
+  ignoreTimescale: 0
 --- !u!1 &5482698256862998460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,7 +2400,7 @@ Transform:
   m_GameObject: {fileID: 5482698256862998460}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.08, z: 8.39}
+  m_LocalPosition: {x: 0, y: 1.39, z: 3.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2369,8 +2419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableSlowUpdate: 1
-  checkInterval: 0.2
-  fixedUpdate: 1
+  checkInterval: 0.25
+  fixedUpdate: 0
   uEvents_su:
     SlowUpdate:
       m_PersistentCalls:
@@ -2378,7 +2428,7 @@ MonoBehaviour:
   origin: {fileID: 9023839693716445782}
   lookAt: {fileID: 0}
   lookAtOffset: {x: 0, y: 0, z: 0}
-  range: 0.02
+  range: 8
   hitLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -2412,7 +2462,7 @@ MonoBehaviour:
   showGizmos: 0
   gizmoColor: {r: 1, g: 1, b: 1, a: 0.5}
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
-  radius: 1.5
+  radius: 1
   height: 0
 --- !u!114 &1872747046712567687
 MonoBehaviour:
@@ -2745,6 +2795,94 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &6850215066110750191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 174917949089907467}
+  m_Layer: 6
+  m_Name: Rat Ball Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &174917949089907467
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850215066110750191}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.13, z: 2.923}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1729587463558625017}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7007108027463417510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1729587463558625017}
+  - component: {fileID: 8251438184508841506}
+  m_Layer: 6
+  m_Name: Dismount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1729587463558625017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7007108027463417510}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 174917949089907467}
+  m_Father: {fileID: 2961089990564272037}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8251438184508841506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7007108027463417510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b9937fbcb16984caef12f0190c7b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 901884847126862728, guid: 1c679a0f80ea23c4b8c9be080050373a, type: 3}
+  firepoint: {fileID: 174917949089907467}
+  followRotation: 1
+  force: 15
+  events:
+    OnPreShot:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPostShot:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7244821877251971682
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,7 +3286,6 @@ GameObject:
   - component: {fileID: 3349807304327463440}
   - component: {fileID: 4679031899667845874}
   - component: {fileID: 7022474044783880227}
-  - component: {fileID: 5015490617387641940}
   - component: {fileID: 7879907748191033039}
   m_Layer: 6
   m_Name: Hurt
@@ -3188,7 +3325,8 @@ MonoBehaviour:
   hpM: {fileID: 704049436961937626}
   iframe: {fileID: 1841199395382213548}
   poise: {fileID: 1247600797718360058}
-  destroyOnDeath: 1
+  destroyOnDeath: 0
+  deathAnim: {fileID: 11400000, guid: a50697612880fb942bbbe82be3b49fa1, type: 2}
   hurtEvents:
     OnHurted:
       m_PersistentCalls:
@@ -3524,22 +3662,6 @@ MonoBehaviour:
     DisableEvent:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &5015490617387641940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8460407787441312423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 246fd0db064dc7d40b63f018d5c0c4d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 5261146206814944013}
-  gibs:
-  - {fileID: 283657642964731862, guid: 31e40b0a0c54f9645944ec29721fc632, type: 3}
-  gibsKnockback: 1
 --- !u!114 &7879907748191033039
 MonoBehaviour:
   m_ObjectHideFlags: 0
