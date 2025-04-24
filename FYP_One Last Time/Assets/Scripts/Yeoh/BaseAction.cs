@@ -117,7 +117,8 @@ public class BaseAction : MonoBehaviour
         Anim3_ReleaseEnd();
         Anim4_Recover();
 
-        anim?.Cancel(owner);
+        if(anim)
+        anim.Cancel(owner);
 
         OnActionCancel();
         CancelEvent?.Invoke();

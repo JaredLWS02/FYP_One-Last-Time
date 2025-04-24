@@ -128,9 +128,11 @@ public class AgentAutoJump : MonoBehaviour
 
         isReversed = IsJumpReversed();
 
-        jumpAnim?.Play(owner);
+        if(jumpAnim)
+        jumpAnim.Play(owner);
 
-        toggler?.ToggleIgnoreLayers(true);
+        if(toggler)
+        toggler.ToggleIgnoreLayers(true);
 
         EventM.OnJumped(owner);
         EventM.OnAutoJumped(owner, GetJumpDir());
@@ -196,9 +198,11 @@ public class AgentAutoJump : MonoBehaviour
 
         agent.CompleteOffMeshLink();
 
-        landAnim?.Play(owner);
+        if(landAnim)
+        landAnim.Play(owner);
 
-        toggler?.ToggleIgnoreLayers(false);
+        if(toggler)
+        toggler.ToggleIgnoreLayers(false);
         
         EventM.OnLandGround(owner);
 

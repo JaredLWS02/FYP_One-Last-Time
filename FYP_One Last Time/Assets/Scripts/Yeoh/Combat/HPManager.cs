@@ -113,4 +113,6 @@ public class HPManager : MonoBehaviour
         
         return hp/hpMax*100;
     }
+    
+    public bool IsDead() => GetHPPercent() <= 0;
 }

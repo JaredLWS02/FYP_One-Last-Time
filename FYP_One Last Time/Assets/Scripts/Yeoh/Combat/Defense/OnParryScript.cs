@@ -32,8 +32,11 @@ public class OnParryScript : BaseAction
     {
         if(defender!=owner) return;
 
-        Perform(parryAnim);
-        Anim3_ReleaseEnd();
+        if(parryAnim)
+        {
+            Perform(parryAnim);
+            Anim3_ReleaseEnd();
+        }
 
         parryEvents.OnParry?.Invoke(contact_point);
 

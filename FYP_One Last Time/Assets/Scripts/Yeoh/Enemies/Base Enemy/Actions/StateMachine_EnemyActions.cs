@@ -33,6 +33,7 @@ public class StateMachine_EnemyActions : MonoBehaviour
         State_EnemyActions_AttackWindingUp attackWindingUp = new(this);
         State_EnemyActions_AttackReleasing attackReleasing = new(this);
         State_EnemyActions_Stunned stunned = new(this);
+        State_EnemyActions_Death death = new(this);
 
         // HUB TRANSITIONS ================================================================================
 
@@ -43,7 +44,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 !action.IsAutoJumping() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
-                !action.IsStunned() //&&
+                !action.IsStunned() &&
+                !action.IsDead() //&&
             ){
                 return true;
             }
@@ -57,7 +59,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 !action.IsAutoJumping() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
-                !action.IsStunned() //&&
+                !action.IsStunned() &&
+                !action.IsDead() //&&
             ){
                 return true;
             }
@@ -70,7 +73,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 action.IsAutoJumping() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
-                !action.IsStunned() //&&
+                !action.IsStunned() &&
+                !action.IsDead() //&&
             ){
                 return true;
             }
@@ -83,7 +87,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 !action.IsAutoJumping() &&
                 action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
-                !action.IsStunned() //&&
+                !action.IsStunned() &&
+                !action.IsDead() //&&
             ){
                 return true;
             }
@@ -96,7 +101,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 !action.IsAutoJumping() &&
                 !action.IsWindingUpAttack() &&
                 action.IsReleasingAttack() &&
-                !action.IsStunned() //&&
+                !action.IsStunned() &&
+                !action.IsDead() //&&
             ){
                 return true;
             }
@@ -109,7 +115,22 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 !action.IsAutoJumping() &&
                 !action.IsWindingUpAttack() &&
                 !action.IsReleasingAttack() &&
-                action.IsStunned() //&&
+                action.IsStunned() &&
+                !action.IsDead() //&&
+            ){
+                return true;
+            }
+            return false;
+        });
+                
+        hub.AddTransition(death, (timeInState) =>
+        {
+            if(
+                !action.IsAutoJumping() &&
+                !action.IsWindingUpAttack() &&
+                !action.IsReleasingAttack() &&
+                !action.IsStunned() &&
+                action.IsDead() //&&
             ){
                 return true;
             }
@@ -125,7 +146,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 action.IsAutoJumping() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
-                action.IsStunned() //||
+                action.IsStunned() ||
+                action.IsDead() //||
             ){
                 return true;
             }
@@ -139,7 +161,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 action.IsAutoJumping() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
-                action.IsStunned() //||
+                action.IsStunned() ||
+                action.IsDead() //||
             ){
                 return true;
             }
@@ -152,7 +175,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 !action.IsAutoJumping() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
-                action.IsStunned() //||
+                action.IsStunned() ||
+                action.IsDead() //||
             ){
                 return true;
             }
@@ -165,7 +189,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 action.IsAutoJumping() ||
                 !action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
-                action.IsStunned() //||
+                action.IsStunned() ||
+                action.IsDead() //||
             ){
                 return true;
             }
@@ -178,7 +203,8 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 action.IsAutoJumping() ||
                 action.IsWindingUpAttack() ||
                 !action.IsReleasingAttack() ||
-                action.IsStunned() //||
+                action.IsStunned() ||
+                action.IsDead() //||
             ){
                 return true;
             }
@@ -191,7 +217,22 @@ public class StateMachine_EnemyActions : MonoBehaviour
                 action.IsAutoJumping() ||
                 action.IsWindingUpAttack() ||
                 action.IsReleasingAttack() ||
-                !action.IsStunned() //||
+                !action.IsStunned() ||
+                action.IsDead() //||
+            ){
+                return true;
+            }
+            return false;
+        });
+
+        death.AddTransition(hub, (timeInState) =>
+        {
+            if(
+                action.IsAutoJumping() ||
+                action.IsWindingUpAttack() ||
+                action.IsReleasingAttack() ||
+                action.IsStunned() ||
+                !action.IsDead() //||
             ){
                 return true;
             }

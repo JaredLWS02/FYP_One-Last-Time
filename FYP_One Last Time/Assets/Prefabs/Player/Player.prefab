@@ -62,6 +62,7 @@ MonoBehaviour:
   iframe: {fileID: 1192961784150752979}
   poise: {fileID: 1065384539507284376}
   destroyOnDeath: 1
+  deathAnim: {fileID: 0}
   hurtEvents:
     OnHurted:
       m_PersistentCalls:
@@ -3281,7 +3282,7 @@ MonoBehaviour:
     Cancel:
       m_PersistentCalls:
         m_Calls: []
-  parryAnim: {fileID: 11400000, guid: e0f653934f89a0d488ef3b1dafebaa6d, type: 2}
+  parryAnim: {fileID: 0}
   parryIFrame: 1
   iframeSeconds: 0.5
   selfKnockback: 1
