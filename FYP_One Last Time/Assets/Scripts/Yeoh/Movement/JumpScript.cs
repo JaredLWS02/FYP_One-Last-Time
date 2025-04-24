@@ -41,7 +41,9 @@ public class JumpScript : MonoBehaviour
         if(HasCoyoteTime())
         {
             Jump();
-            jumpAnim?.Play(owner);
+
+            if(jumpAnim)
+            jumpAnim.Play(owner);
             
             jumpEvents.Jump?.Invoke();
         }
@@ -137,7 +139,9 @@ public class JumpScript : MonoBehaviour
 
         extraJumpsLeft--;
         Jump();
-        extraJumpAnim?.Play(owner);
+
+        if(extraJumpAnim)
+        extraJumpAnim.Play(owner);
 
         jumpEvents.ExtraJump?.Invoke();
     }

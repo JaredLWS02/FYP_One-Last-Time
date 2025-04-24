@@ -117,7 +117,8 @@ public class WallCling : MonoBehaviour
 
     void SetAnimator()
     {
-        anim?.SetBool(clingingBoolName, isClinging && allowWallCling);
+        if(anim)
+        anim.SetBool(clingingBoolName, isClinging && allowWallCling);
     }
 
     // ============================================================================
