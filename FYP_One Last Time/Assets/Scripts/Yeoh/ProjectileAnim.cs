@@ -33,6 +33,7 @@ public class ProjectileAnim : MonoBehaviour
 
     void Spin()
     {
+        if(!spinnerTr) return;
         if(rb.velocity == Vector3.zero) return;
 
         float speed = rb.velocity.magnitude;
