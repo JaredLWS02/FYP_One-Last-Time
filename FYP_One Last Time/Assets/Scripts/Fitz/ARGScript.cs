@@ -37,8 +37,8 @@ public class ARGScript : MonoBehaviour
 
             // Encrypt contents using Atbash
             string content = File.ReadAllText(destinationPath);
-            string encryptedContent = AtbashEncrypt(content);
-            File.WriteAllText(destinationPath, encryptedContent);
+            string decryptedContent = VigenereDecrypt(content, "anaya");
+            File.WriteAllText(destinationPath, decryptedContent);
         }
         else if (File.Exists(destinationPath))
         {
@@ -50,26 +50,30 @@ public class ARGScript : MonoBehaviour
         }
     }
 
-    private string AtbashEncrypt(string input)
+    private string VigenereDecrypt(string input, string key)
     {
-        char[] buffer = input.ToCharArray();
+        List<char> decrypted = new List<char>();
+        int keyIndex = 0;
 
-        for (int i = 0; i < buffer.Length; i++)
+        foreach (char c in input)
         {
-            char letter = buffer[i];
-
-            if (char.IsUpper(letter))
+            if (char.IsLetter(c))
             {
-                buffer[i] = (char)('Z' - (letter - 'A')); // Uppercase Atbash
+                bool isUpper = char.IsUpper(c);
+                char offset = isUpper ? 'A' : 'a';
+                int k = char.ToLower(key[keyIndex % key.Length]) - 'a';
+                char decryptedChar = (char)((((c - offset) - k + 26) % 26) + offset);
+                decrypted.Add(decryptedChar);
+                keyIndex++;
             }
-            else if (char.IsLower(letter))
+            else
             {
-                buffer[i] = (char)('z' - (letter - 'a')); // Lowercase Atbash
+                decrypted.Add(c); // Keep non-letter characters unchanged
             }
-            // else leave punctuation, numbers, and whitespace untouched
         }
 
-        return new string(buffer);
+        return new string(decrypted.ToArray());
     }
+
 
 }
