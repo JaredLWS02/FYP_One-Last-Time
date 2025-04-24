@@ -240,11 +240,11 @@ MonoBehaviour:
       - {fileID: 1242880141507026177, guid: c5c0261915e183d40b40f3bcbe09d457, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 6955758431937353321}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 8390285650855487920}
@@ -1131,7 +1131,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2719329177920231827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000022291978, y: -0.7071068, z: 0.000000022291978, w: 0.7071068}
+  m_LocalRotation: {x: -0.00000002229198, y: 0.7071068, z: -0.00000002229198, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1392,6 +1392,18 @@ MonoBehaviour:
             m_StringArgument: Rat Ball
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2247593777287913098}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Rider Tikus
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 2964226836538534864}
           m_TargetAssemblyTypeName: DestroyAfter, Assembly-CSharp
           m_MethodName: DestroyNoAnim
@@ -1418,6 +1430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBillboard: 1
   fixedUpdate: 0
+  editorUpdate: 1
   rotateAxis: {x: 1, y: 1, z: 0}
 --- !u!114 &412968695723508853
 MonoBehaviour:
@@ -1767,11 +1780,11 @@ MonoBehaviour:
       randomPrefabs: []
       hideInHierarchy: 0
       spawnpoint: {fileID: 0}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -1869,11 +1882,11 @@ MonoBehaviour:
     - {fileID: 5311859234721833831, guid: ab80bba881f7b2547a282652beb60fde, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 2454786662058533154}
+    parented: 1
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   - prefabName: Rush Wind Up
@@ -1881,11 +1894,11 @@ MonoBehaviour:
     - {fileID: 5311859234721833831, guid: acc794604cada3c47a930c50e77dba71, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 2454786662058533154}
+    parented: 1
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   spawnEvents:
@@ -1955,11 +1968,11 @@ MonoBehaviour:
       - {fileID: 1242880141507026177, guid: 1da4b7ddafe91f74ba8aa6179a6461b4, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 2567464264937109001}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -2836,6 +2849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1729587463558625017}
   - component: {fileID: 8251438184508841506}
+  - component: {fileID: 2247593777287913098}
   m_Layer: 6
   m_Name: Dismount
   m_TagString: Untagged
@@ -2857,6 +2871,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 174917949089907467}
+  - {fileID: 401433740324613532}
   m_Father: {fileID: 2961089990564272037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8251438184508841506
@@ -2881,6 +2896,38 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     OnPostShot:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &2247593777287913098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7007108027463417510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Rider Tikus
+    randomPrefabs:
+    - {fileID: 5616756661444552083, guid: 1c7b5575763c99e4aa61144c30e1e894, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 401433740324613532}
+    parented: 0
+    followRotation: 1
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
       m_PersistentCalls:
         m_Calls: []
 --- !u!1 &7244821877251971682
@@ -3021,6 +3068,37 @@ MonoBehaviour:
   gizmoHitColor: {r: 0, g: 1, b: 0, a: 0.5}
   radius: 0.7
   height: 0
+--- !u!1 &7360285913911778998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 401433740324613532}
+  m_Layer: 6
+  m_Name: Rider Tikus Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &401433740324613532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7360285913911778998}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.04, z: -0.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1729587463558625017}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7372970645232360581
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,11 +3666,11 @@ MonoBehaviour:
     - {fileID: 5800512631994957167, guid: 007b20aff061a2946a21d4513a1be031, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
   spawnEvents:
@@ -3620,11 +3698,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 231061859104957208}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 13df9d88431bfe24c81a3edd6b202eb9, type: 2}
@@ -3633,11 +3711,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 231061859104957208}
+    parented: 0
+    followRotation: 1
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 5a76af51fa4b7174a8237bb3e9559c87, type: 2}
@@ -3646,11 +3724,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 5796840095932782193}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 3b5453853e403b449a05a046e19ad267, type: 2}
@@ -3984,22 +4062,22 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000022291978
-      objectReference: {fileID: 0}
-    - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
-        type: 3}
-      propertyPath: m_LocalRotation.y
       value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000002229198
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
+        type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000022291978
+      value: -0.00000002229198
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}

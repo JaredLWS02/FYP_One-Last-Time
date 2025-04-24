@@ -61,8 +61,6 @@ public class DestroyAfter : MonoBehaviour
 
     // ==================================================================================================================
     
-    public void DestroyNoAnim()
-    {
-        Destroy(gameObject);
-    }
+    public void DestroyNoAnim(float delay) => Destroy(gameObject, delay);
+    public void DestroyNoAnim() => DestroyNoAnim(0);
 }

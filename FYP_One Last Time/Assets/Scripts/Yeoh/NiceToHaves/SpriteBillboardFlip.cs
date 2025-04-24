@@ -25,6 +25,7 @@ public class SpriteBillboardFlip : MonoBehaviour
 
     void EditorUpdate()
     {
+        if(!editorUpdate) return;
         if(Application.isPlaying) return;
         
         Flip();
@@ -35,6 +36,7 @@ public class SpriteBillboardFlip : MonoBehaviour
     // ============================================================================
 
     public bool fixedUpdate;
+    public bool editorUpdate = true;
 
     void Update()
     {

@@ -1,0 +1,459 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1242880141507026177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4014294989942184369}
+  - component: {fileID: 1732461069026195315}
+  - component: {fileID: 243087061737523062}
+  - component: {fileID: 4609305043628110655}
+  - component: {fileID: 489435474446966603}
+  - component: {fileID: 8782049835207013567}
+  - component: {fileID: 4365022768294008364}
+  - component: {fileID: 3175553579312796580}
+  m_Layer: 8
+  m_Name: Fork Hurtbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4014294989942184369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2559481880657418514}
+  - {fileID: 3973731762187139556}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &1732461069026195315
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 1
+--- !u!136 &243087061737523062
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Material: {fileID: 13400000, guid: edae1f7d20673ce43a4ab1d96238699b, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.16
+  m_Height: 0.7
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.73}
+--- !u!114 &4609305043628110655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0e50ac4e5d4d947af6c03178394b6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1242880141507026177}
+  hurtboxSO: {fileID: 11400000, guid: cebd6467c8798884aaaa6623ee7df8f1, type: 2}
+  hurtboxEvents:
+    OnTryHit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 489435474446966603}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SpawnName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Fork Ragdoll
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8782049835207013567}
+          m_TargetAssemblyTypeName: DestroyAfter, Assembly-CSharp
+          m_MethodName: DestroyNoAnim
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.1
+            m_StringArgument: Fork Ragdoll
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnHitSuccess:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 489435474446966603}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: GetPrefab
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 489435474446966603}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: SetSpawnPos
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 489435474446966603}
+          m_TargetAssemblyTypeName: PrefabSpawner, Assembly-CSharp
+          m_MethodName: Spawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Impact
+            m_BoolArgument: 0
+          m_CallState: 2
+  destroyOnHit: 0
+  destroyOnHurt: 0
+  myColl: {fileID: 243087061737523062}
+  enabledOnAwake: 1
+  hitMethod: 0
+  triggerTimer: {fileID: 0}
+  triggerStayInterval: 0.1
+  hurtboxOrigin: {fileID: 3973731762187139556}
+  ignoreTriggers: 1
+  onlyRigidbodies: 0
+--- !u!114 &489435474446966603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3d9f3fa5bf0f84cbfce5608ff3b15a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefabName: Shockwave
+    randomPrefabs:
+    - {fileID: 419085589674771820, guid: a2baa7846a5c50f42b6f2f1308c72994, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4014294989942184369}
+    parented: 0
+    followRotation: 0
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  - prefabName: Impact
+    randomPrefabs:
+    - {fileID: 5367450259600531064, guid: 172a7347461ce994aa8326b1fe0c5484, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 0}
+    parented: 0
+    followRotation: 0
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  - prefabName: Fork Ragdoll
+    randomPrefabs:
+    - {fileID: 5199816217728958345, guid: f20942dbb8a90b94ba81f6091cc796a8, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 4014294989942184369}
+    parented: 0
+    followRotation: 1
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 0}
+  spawnEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &8782049835207013567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26fb29979e03b5408c372e0f76f81d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDestroyDelayOnEnable: 1
+  destroyDelay: {x: 10, y: 10}
+  shrinkObjects:
+  - {fileID: 1242880141507026177}
+  shrinkTo: {x: 0, y: 0, z: 0}
+  shrinkTime: 0.5
+  ignoreTimescale: 0
+--- !u!114 &4365022768294008364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a6fd7452f887e43918cce3fcebd2ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1732461069026195315}
+  turn: {fileID: 3175553579312796580}
+  spinnerTr: {fileID: 0}
+  spinAxisMult: {x: 40, y: 0, z: 0}
+--- !u!114 &3175553579312796580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242880141507026177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08f7221b95ed9a4a8a133bc263bd2d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1242880141507026177}
+  turnSpeed: 99999
+  baseTurnSpeed: 0
+  turnAxis: {x: 1, y: 1, z: 1}
+  linearTurn: 0
+--- !u!1 &3321845459215446752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3973731762187139556}
+  m_Layer: 8
+  m_Name: Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3973731762187139556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321845459215446752}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: -0.984}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4014294989942184369}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8498924956571094748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2559481880657418514}
+  - component: {fileID: 6182804439269598762}
+  - component: {fileID: 2668537155487345437}
+  - component: {fileID: 4497858630146639174}
+  - component: {fileID: 781946208478055530}
+  m_Layer: 8
+  m_Name: Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2559481880657418514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498924956571094748}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000017739168, y: -0.69187367, z: -0.0000184665, w: -0.72201866}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4014294989942184369}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!212 &6182804439269598762
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498924956571094748}
+  m_Enabled: 1
+  m_CastShadows: 2
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 97fb4a06d9620e24ea7ce6544c375693, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ed5290799b026574086b9b2502033c27, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.862857, y: 3.28}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &2668537155487345437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498924956571094748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6933c4d5018d04eacca24fc8496053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipXPropertyName: _FlipX
+  flipYPropertyName: _FlipY
+--- !u!114 &4497858630146639174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498924956571094748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbbf2327ec550b64593b75cce4d23a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableBillboard: 1
+  fixedUpdate: 1
+  editorUpdate: 1
+  rotateAxis: {x: 1, y: 1, z: 0}
+--- !u!114 &781946208478055530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498924956571094748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59fb711ae537fd409074611d738058c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixedUpdate: 1
+  editorUpdate: 1
+  orientation: {fileID: 4014294989942184369}
+  sr: {fileID: 6182804439269598762}
+  flipX: 1
+  axisFacingAwayCam: {x: -1, y: 0, z: 0}
+  flipY: 0
+  axisUpWithCam: {x: 0, y: 1, z: 0}
