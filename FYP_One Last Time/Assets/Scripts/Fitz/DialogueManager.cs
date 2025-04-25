@@ -69,6 +69,11 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueText.text = "";
 
+        if (characterImage != null)
+        {
+            SpriteAlphaZero(characterImage);
+        }
+
         if (sentences.Count == 0)
         {
             EndDialogue();
@@ -83,7 +88,7 @@ public class DialogueManager : MonoBehaviour
         if (speaker != null)
         {
             nameText.text = speaker.name;
-            characterImage.sprite = speaker.charSprite;
+            characterImage = speaker.charImg;
             //characterImage.color = SpriteAlphaOne(characterImage);
             SpriteAlphaOne(characterImage);
         }

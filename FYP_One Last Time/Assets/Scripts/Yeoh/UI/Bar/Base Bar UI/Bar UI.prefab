@@ -59,6 +59,16 @@ MonoBehaviour:
   ignoreTime: 1
   slider: {fileID: 4863281412348005639}
   filledImage: {fileID: 0}
+  events:
+    OnFull:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPartial:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEmpty:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &8493445696568569565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,8 +500,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Label
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0698ed28c862df2458ba2b805bd85e58, type: 2}
+  m_sharedMaterial: {fileID: 8239086725385061116, guid: 0698ed28c862df2458ba2b805bd85e58,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -515,7 +526,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.25
+  m_fontSize: 39.65
   m_fontSizeBase: 92
   m_fontWeight: 400
   m_enableAutoSizing: 1
