@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5520362695841467220}
   - component: {fileID: 5573769648951545532}
   - component: {fileID: 6848379284933348466}
+  - component: {fileID: 6905681095131146250}
   m_Layer: 0
   m_Name: Pit Trigger
   m_TagString: Untagged
@@ -87,7 +88,7 @@ MonoBehaviour:
     LastExit:
       m_PersistentCalls:
         m_Calls: []
-  boxSize: {x: 5, y: 5, z: 5}
+  boxSize: {x: 10, y: 5, z: 20}
   showGizmos: 1
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!114 &6848379284933348466
@@ -102,3 +103,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4858f51b983d110408106e32f7dd7740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6905681095131146250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539524490348778717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db21480ded08df458afc9ded56ce0f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  box: {fileID: 5573769648951545532}
+  gizmoColor: {r: 1, g: 0, b: 0, a: 0.25}

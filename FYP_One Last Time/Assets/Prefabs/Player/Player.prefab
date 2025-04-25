@@ -465,7 +465,9 @@ MonoBehaviour:
   owner: {fileID: 8987163089559660572}
   gibs:
   - {fileID: 4950790189361472255, guid: 2bd1b88e60499e84c8483021da0aeceb, type: 3}
+  followRotation: 1
   gibsKnockback: 1
+  simpleContactPoint: {fileID: 0}
 --- !u!114 &3067970854123155927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5318,7 +5320,7 @@ MonoBehaviour:
         m_Calls: []
   owner: {fileID: 8987163089559660572}
   ground: {fileID: 773448853722404963}
-  minY: -20
+  minY: -25
   showGizmos: 0
   gizmoColor: {r: 1, g: 0, b: 0, a: 0.5}
 --- !u!114 &3393573027621743275
