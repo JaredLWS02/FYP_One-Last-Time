@@ -124,7 +124,8 @@ public class TryParryScript : BaseAction
     {
         if(defender!=owner) return;
 
-        Anim4_Recover();
+        //Anim4_Recover();
+        CancelAnim();
 
         CancelCooldown();
     }
@@ -134,7 +135,6 @@ public class TryParryScript : BaseAction
     void OnCancelParry(GameObject who)
     {
         if(who!=owner) return;
-
         if(!IsPerforming()) return;
 
         CancelAnim();

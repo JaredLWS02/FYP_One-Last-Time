@@ -23,15 +23,13 @@ public class PrefabPreset
     public bool hideInHierarchy;
     [Space]
     public Transform spawnpoint;
+    public bool parented;
+    public bool followRotation=true;
 
     [Header("Offsets")]
     public Vector3 posOffset;
     public Vector3 angleOffset;
     public float scaleMult=1;
-
-    [Header("Parent")]
-    public bool parented;
-    public bool followRotation=true;
 
     // optional
     [HideInInspector]

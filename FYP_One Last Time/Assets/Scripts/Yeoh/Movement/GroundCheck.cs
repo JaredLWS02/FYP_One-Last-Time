@@ -38,7 +38,8 @@ public class GroundCheck : MonoBehaviour
         //if(rb.velocity.y <= minLandVelocity)
         if(rb.velocity.y <= 0)
         {
-            landAnim?.Play(owner);
+            if(landAnim)
+            landAnim.Play(owner);
 
             EventM.OnLandGround(owner);
             events.OnLandGround?.Invoke();
@@ -72,7 +73,8 @@ public class GroundCheck : MonoBehaviour
 
     void FixedUpdate()
     {
-        anim?.SetBool(groundedBoolName, IsGrounded());
+        if(anim)
+        anim.SetBool(groundedBoolName, IsGrounded());
     }
 
     // ============================================================================

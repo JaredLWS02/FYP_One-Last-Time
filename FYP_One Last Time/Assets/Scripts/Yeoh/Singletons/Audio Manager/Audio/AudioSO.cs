@@ -43,8 +43,8 @@ public class AudioSO : ScriptableObject
     [Header("3D")]
     [Range(0,1)]
     public float spatialBlend=1;
-    public float minDistance=9;
-    public float maxDistance=18;
+    public float minRange=15;
+    public float maxRange=30;
 
     // ============================================================================
     
@@ -58,8 +58,8 @@ public class AudioSO : ScriptableObject
         source.panStereo = stereoPan.GetRandom();
         // 3D
         source.spatialBlend = spatialBlend;
-        source.minDistance = minDistance;
-        source.maxDistance = maxDistance;
+        source.minDistance = minRange;
+        source.maxDistance = maxRange;
     }
 
     public void Play(AudioSource source)

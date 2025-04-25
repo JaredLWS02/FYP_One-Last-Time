@@ -59,6 +59,7 @@ public class HurtScript : MonoBehaviour
 
     [Header("Die")]
     public bool destroyOnDeath;
+    public AnimSO deathAnim;
 
     void OnDeath(GameObject victim, GameObject killer, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -70,8 +71,9 @@ public class HurtScript : MonoBehaviour
 
         hurtEvents.OnDeath?.Invoke(contactPoint);
 
-        if(destroyOnDeath)
-        Destroy(owner);
+        if(destroyOnDeath) Destroy(owner);
+
+        if(deathAnim) deathAnim.Play(owner);
     }
 
     // ============================================================================
