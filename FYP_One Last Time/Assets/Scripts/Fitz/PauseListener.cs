@@ -14,8 +14,7 @@ public class PauseListener : MonoBehaviour
         {
             if(ScenesManager.Current.isTransitioning) return;
 
-            if (isPaused) isPaused = false;
-            else isPaused = true;
+            isPaused = !isPaused;
 
             onPause?.Invoke(isPaused);
         }
