@@ -217,7 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 244165916913360235}
   - component: {fileID: 1345102546260247183}
-  - component: {fileID: 6104097124085986397}
+  - component: {fileID: 6749658641593039777}
   m_Layer: 0
   m_Name: Pause Listener
   m_TagString: Untagged
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934585364345623904}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69aab1406e44f1b419c838e1e035b83d, type: 3}
   m_Name: 
@@ -269,7 +269,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6104097124085986397
+      - m_Target: {fileID: 6749658641593039777}
+        m_TargetAssemblyTypeName: TimescaleController, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6749658641593039777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,24 +290,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 934585364345623904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1687042aaba2a3147b43223bb5a5713b, type: 3}
+  m_Script: {fileID: 11500000, guid: 71763e629d88b7145ada7a9441ef8a31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnBack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4498162128207913193}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+  fadeTime: 0.2
+  hitstopIn_: 0.1
+  hitstopWait_: 0.01
+  hitstopOut: 0.25
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1413847548789434436
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +629,7 @@ MonoBehaviour:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
-              m_FloatArgument: 55
+              m_FloatArgument: 70
               m_StringArgument: Combat
               m_BoolArgument: 0
             m_CallState: 2
@@ -1450,11 +1458,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 9022356603536336957}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -1463,11 +1471,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 9022356603536336957}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -1789,11 +1797,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 1915193504652805889}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -1802,11 +1810,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 1915193504652805889}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -1846,7 +1854,6 @@ GameObject:
   - component: {fileID: 8216997909659047757}
   - component: {fileID: 3714660803025401028}
   - component: {fileID: 1043269256209834465}
-  - component: {fileID: 4011594251472050898}
   - component: {fileID: 8693078946129266146}
   - component: {fileID: 5055985946045426580}
   m_Layer: 5
@@ -1954,79 +1961,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: fbf0ac9f190fb3e448002736bcdca631, type: 2}
---- !u!114 &4011594251472050898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4498162128207913193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57bcd03b4140ce4d86cff57112fa9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uEvents:
-    Awake:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 8693078946129266146}
-          m_TargetAssemblyTypeName: FirstSelectButton, Assembly-CSharp
-          m_MethodName: SelectButton
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 5823210027345374567}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1043269256209834465}
-          m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-          m_MethodName: TogglePause
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1043269256209834465}
-          m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-          m_MethodName: TogglePause
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    Start:
-      m_PersistentCalls:
-        m_Calls: []
-    Update:
-      m_PersistentCalls:
-        m_Calls: []
-    FixedUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    LateUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    Destroy:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!114 &8693078946129266146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2042,7 +1976,19 @@ MonoBehaviour:
   selectEvents:
     OnEnable:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8693078946129266146}
+          m_TargetAssemblyTypeName: FirstSelectButton, Assembly-CSharp
+          m_MethodName: SelectButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 5823210027345374567}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDisable:
       m_PersistentCalls:
         m_Calls: []
@@ -2547,11 +2493,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 8695556871603881575}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -2560,11 +2506,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 8695556871603881575}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}

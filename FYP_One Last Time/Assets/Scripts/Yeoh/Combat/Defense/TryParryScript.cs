@@ -124,8 +124,7 @@ public class TryParryScript : BaseAction
     {
         if(defender!=owner) return;
 
-        //Anim4_Recover();
-        CancelAnim();
+        Anim4_Recover();
 
         CancelCooldown();
     }
