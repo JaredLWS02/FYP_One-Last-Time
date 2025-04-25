@@ -12,7 +12,7 @@ public class ratSpear : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody>();
-        force = 10.0f;
+        force = 15.0f;
         StartCoroutine(selfDestruct());
 
         if (target != null)
@@ -27,16 +27,14 @@ public class ratSpear : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.transform.root.CompareTag("Player"))
-        {
-            //deal dmg
-            Destroy(gameObject);
-        }
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+        gameObject.transform.SetParent(col.gameObject.transform);
     }
 
     private IEnumerator selfDestruct()
     {
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(3.0f);
         Destroy(gameObject);
     }
 }
