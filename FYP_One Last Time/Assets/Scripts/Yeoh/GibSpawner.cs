@@ -34,13 +34,17 @@ public class GibSpawner : MonoBehaviour
 
     public List<GameObject> gibs = new();
 
+    public bool followRotation=true;
+
     public bool gibsKnockback=true;
 
     void Spawn(float force, Vector3 contactPoint)
     {
         foreach(var gib in gibs)
         {
-            GameObject spawned = Instantiate(gib, owner.transform.position, Quaternion.identity);
+            var rotation = followRotation ? owner.transform.rotation : Quaternion.identity;
+
+            GameObject spawned = Instantiate(gib, owner.transform.position, rotation);
 
             if(!gibsKnockback) return;
 
@@ -52,4 +56,11 @@ public class GibSpawner : MonoBehaviour
             }
         }
     }
+
+    // ============================================================================
+
+    [Header("Optional")]
+    public Transform simpleContactPoint;
+
+    public void SpawnSimple(float force) => Spawn(force, simpleContactPoint.position);
 }

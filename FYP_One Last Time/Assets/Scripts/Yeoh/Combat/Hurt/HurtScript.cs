@@ -35,8 +35,7 @@ public class HurtScript : MonoBehaviour
     void OnHurt(GameObject victim, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
         if(victim!=owner) return;
-
-        if(iframe.isActive && !hurtbox.ignoreIFrame) return;
+        if(iframe && iframe.isActive && !hurtbox.ignoreIFrame) return;
 
         hpM.Deplete(hurtbox.damage);
 
@@ -46,13 +45,32 @@ public class HurtScript : MonoBehaviour
         if(hpM.hp>0) // if still alive
         {
             EventM.OnTryIFrame(owner, iframe.seconds);
-
+            
+            if(poise)
             poise.TryHurtPoise(attacker, hurtbox, contactPoint);
         }
         else
         {
             EventM.OnDeath(owner, attacker, hurtbox, contactPoint);
         }
+    }    
+
+    // ============================================================================
+
+    public void HurtSimple(float damage=1)
+    {
+        if(iframe && iframe.isActive) return;
+
+        hpM.Deplete(damage);
+
+        Vector3 contact_point = owner.transform.position;
+
+        hurtEvents.OnHurted?.Invoke(contact_point);
+
+        if(hpM.hp>0) // if still alive
+            EventM.OnTryIFrame(owner, iframe.seconds);
+        else
+            DeathSimple();
     }    
 
     // ============================================================================
@@ -70,6 +88,21 @@ public class HurtScript : MonoBehaviour
         EventM.OnTryKnockback(owner, hurtbox.knockback, contactPoint, hurtbox.killsMomentum);
 
         hurtEvents.OnDeath?.Invoke(contactPoint);
+
+        if(destroyOnDeath) Destroy(owner);
+
+        if(deathAnim) deathAnim.Play(owner);
+    }
+
+    // ============================================================================
+
+    public void DeathSimple()
+    {
+        StopAllCoroutines();
+
+        Vector3 contact_point = owner.transform.position;
+
+        hurtEvents.OnDeath?.Invoke(contact_point);
 
         if(destroyOnDeath) Destroy(owner);
 

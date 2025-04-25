@@ -39,6 +39,10 @@ public class TimescaleController : MonoBehaviour
     
     // ============================================================================
 
+    public void Pause(bool toggle) => TimeM.Pause(toggle);
+
+    // ============================================================================
+
     [System.Serializable]
     public struct Events
     {
