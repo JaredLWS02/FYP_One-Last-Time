@@ -500,6 +500,15 @@ public class EventManager : MonoBehaviour
         ForceReceivedEvent?.Invoke(victim, attacker, force, direction, pull);
     }
 
+    // Pit ==================================================================================================================
+
+    public event Action<GameObject> PitTeleportEvent;
+
+    public void OnPitTeleport(GameObject who)
+    {
+        PitTeleportEvent?.Invoke(who);
+    }
+
     // UI ==================================================================================================================
 
     public event Action<GameObject, float, float> UIBarUpdateEvent;

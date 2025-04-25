@@ -11,10 +11,29 @@ public class PitTeleporter : SlowUpdate
 
     Vector3 lastGroundedPos;
 
+    // ============================================================================
+
+    EventManager EventM;
+
+    void OnEnable()
+    {
+        EventM = EventManager.Current;
+        
+        EventM.PitTeleportEvent += OnPitTeleport;
+    }
+    protected override void OnDisable()
+    {
+        EventM.PitTeleportEvent -= OnPitTeleport;
+    }
+
+    // ============================================================================
+
     void Awake()
     {
         Record();
     }
+
+    // ============================================================================
 
     protected override void OnSlowUpdate()
     {
@@ -22,7 +41,7 @@ public class PitTeleporter : SlowUpdate
             Record();
 
         if(owner.transform.position.y < minY)
-            Teleport();
+            EventM.OnPitTeleport(owner);
     }
 
     void Record() => lastGroundedPos = owner.transform.position;
@@ -32,8 +51,10 @@ public class PitTeleporter : SlowUpdate
     [Header("Pit")]
     public float minY = -20;
 
-    void Teleport()
+    public void OnPitTeleport(GameObject who)
     {
+        if(who != owner) return;
+        
         lastGroundedPos = SnapToNavMesh(lastGroundedPos);
         owner.transform.position = lastGroundedPos;
     }
