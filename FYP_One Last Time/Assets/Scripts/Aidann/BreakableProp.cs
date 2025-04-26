@@ -126,6 +126,7 @@ public class BreakableProp : MonoBehaviour
 
     private Renderer GetRendererFromRigidbody(Rigidbody rb)
     {
+        if (!rb) return null;
         return rb.GetComponent<Renderer>();
     }
 

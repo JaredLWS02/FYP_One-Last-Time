@@ -457,6 +457,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1457b4be9dc733469675a24a3b5daff,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1195089056048206249}
     - targetCorrespondingSourceObject: {fileID: -2532087194042899745, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
       insertIndex: -1
@@ -4735,6 +4739,31 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6641822850430008864, guid: e1457b4be9dc733469675a24a3b5daff, type: 3}
+--- !u!1 &8121721846794479489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e1457b4be9dc733469675a24a3b5daff,
+    type: 3}
+  m_PrefabInstance: {fileID: 8968724236797205200}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1195089056048206249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8121721846794479489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a26fb29979e03b5408c372e0f76f81d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startDestroyDelayOnEnable: 1
+  destroyDelay: {x: 5, y: 8}
+  shrinkObjects:
+  - {fileID: 8121721846794479489}
+  shrinkTo: {x: 0, y: 0, z: 0}
+  shrinkTime: 0.5
+  ignoreTimescale: 0
 --- !u!1 &8190981979773611341 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 998525446011484061, guid: e1457b4be9dc733469675a24a3b5daff,
