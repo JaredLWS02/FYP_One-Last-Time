@@ -543,6 +543,7 @@ MonoBehaviour:
   playerHurtboxLayer:
     serializedVersion: 2
     m_Bits: 128
+  audioSpawner: {fileID: 6822239983992672874}
   BrokenPrefab: {fileID: 8121721846794479489, guid: 47144eefdc4fb7f49a2a5bb351dfb92b,
     type: 3}
   ExplosiveForce: 1000
@@ -550,7 +551,7 @@ MonoBehaviour:
   PieceFadeSpeed: 0.25
   PieceDestroyDelay: 5
   PieceSleepCheckDelay: 0.5
-  health: 1
+  health: 3
   Hit:
     m_PersistentCalls:
       m_Calls:
@@ -604,6 +605,19 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: f1e7bed4e2660c1408e422456dd7389a, type: 2}
+  - prefabName: WoodenHit
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 1
+    spawnpoint: {fileID: 6388146762035842008}
+    parented: 0
+    followRotation: 1
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: a417dc47fa22df84a8a5e2cf1228a8c6, type: 2}
   loopGroups: []
   audioEvents:
     EnableEvent:
