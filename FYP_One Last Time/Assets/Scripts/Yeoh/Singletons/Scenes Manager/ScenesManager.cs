@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public enum Scenes // must be in the same order as in the build settings, and case sensitive
 {
-    Intro,
+    GlenmarieGamesIntro,
+    WalkingFishStudiosIntro,
     MainMenu,
     IntroText,
     TestArea,
+    Credits,
 }
 
 public class ScenesManager : MonoBehaviour
