@@ -15,12 +15,13 @@ MonoBehaviour:
   Name: Rush Hurtbox
   description: 
   damage: 25
-  knockback: 200
   blockDamage: 25
-  blockKnockback: 150
   pierceCount: 1
   ignoreIFrame: 0
-  isParryable: 1
+  knockback: 200
+  blockKnockback: 150
+  killsMomentum: 1
+  isParryable: 0
   parryStunsOwner: 0
   canStun: 1
   customStunAnim: {fileID: 0}
