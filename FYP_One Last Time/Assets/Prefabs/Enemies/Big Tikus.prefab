@@ -253,7 +253,19 @@ MonoBehaviour:
     events:
       WindUp:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 1462071564817671206}
+            m_TargetAssemblyTypeName: Voicebox, Assembly-CSharp
+            m_MethodName: PlayName
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Attack
+              m_BoolArgument: 0
+            m_CallState: 2
       ReleaseStart:
         m_PersistentCalls:
           m_Calls:
@@ -1886,19 +1898,7 @@ MonoBehaviour:
   uEvents:
     WindUp:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1462071564817671206}
-          m_TargetAssemblyTypeName: Voicebox, Assembly-CSharp
-          m_MethodName: PlayName
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: Attack
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     ReleaseStart:
       m_PersistentCalls:
         m_Calls: []
@@ -2118,7 +2118,19 @@ MonoBehaviour:
     events:
       WindUp:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 1462071564817671206}
+            m_TargetAssemblyTypeName: Voicebox, Assembly-CSharp
+            m_MethodName: PlayName
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Rush Wind Up
+              m_BoolArgument: 0
+            m_CallState: 2
       ReleaseStart:
         m_PersistentCalls:
           m_Calls:
@@ -4367,7 +4379,7 @@ PrefabInstance:
     - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
         type: 3}
       propertyPath: voices.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
         type: 3}
@@ -4389,6 +4401,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
         type: 3}
+      propertyPath: voices.Array.data[3].audioSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d6e6b7330893d345bef8a960e18490d,
+        type: 2}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
       propertyPath: voices.Array.data[0].voiceName
       value: Idle
       objectReference: {fileID: 0}
@@ -4401,6 +4419,11 @@ PrefabInstance:
         type: 3}
       propertyPath: voices.Array.data[2].voiceName
       value: Hurt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067987542540663273, guid: 276b51b766018c74cb214da150dba723,
+        type: 3}
+      propertyPath: voices.Array.data[3].voiceName
+      value: Rush Wind Up
       objectReference: {fileID: 0}
     - target: {fileID: 7703407753706943717, guid: 276b51b766018c74cb214da150dba723,
         type: 3}
