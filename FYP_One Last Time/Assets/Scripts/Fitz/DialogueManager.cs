@@ -36,7 +36,7 @@ public class DialogueManager : MonoBehaviour
             StopAllCoroutines();
             EndDialogue();
         }
-        if (InputManager.Current.jumpKeyDown && inDialogue)
+        if (InputManager.Current.jumpKeyDown && inDialogue && Time.timeScale > 0f)
         {
             DisplayNextSentence();
         }
