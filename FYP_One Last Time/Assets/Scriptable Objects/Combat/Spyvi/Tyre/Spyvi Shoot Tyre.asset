@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Spyvi Shoot Tyre
   description: 
-  anim: {fileID: 11400000, guid: 9d5f29d95e5d6a749ae172cebcfdb5d4, type: 2}
+  anim: {fileID: 11400000, guid: cf3baf331abc11f478eda49951fd10cc, type: 2}
   dashOnWindUp: 0
   dashOnWindUpForce: 0
   dashOnWindUpDir: {x: 0, y: 0, z: 1}
   dashOnRelease: 1
   dashOnReleaseForce: 20
-  dashOnReleaseDir: {x: 0, y: 0, z: 1}
+  dashOnReleaseDir: {x: 0, y: 0, z: -1}
   localDir: 1
   rangeAssistCfg:
     moveSeconds: 0.3

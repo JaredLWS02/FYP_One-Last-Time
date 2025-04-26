@@ -97,6 +97,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 8228705557313899546}
     m_Position: {x: 470, y: 270, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 922213552347891378}
+    m_Position: {x: 470, y: 320, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -197,6 +200,21 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-6988752156107750399
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: AttackReleaseEnd
+  triggerTime: 0.727
+  triggerOnExit: 1
 --- !u!114 &-6675866354179616730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -773,6 +791,37 @@ MonoBehaviour:
   eventName: TryParryLowered
   triggerTime: 0.9
   triggerOnExit: 1
+--- !u!1102 &922213552347891378
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shoot Tyre
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 4580381290531149219}
+  m_StateMachineBehaviours:
+  - {fileID: 2484403898897447115}
+  - {fileID: 7406556849839065674}
+  - {fileID: -6988752156107750399}
+  - {fileID: 8208629975393013858}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: ee03f5c59869bd74d8c813e49d693e88, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &977801690367760250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -888,6 +937,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: AttackReleaseStart
   triggerTime: 0.34
+  triggerOnExit: 0
+--- !u!114 &2484403898897447115
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: AttackWindUp
+  triggerTime: 0
   triggerOnExit: 0
 --- !u!1101 &2675123326981807218
 AnimatorStateTransition:
@@ -1063,6 +1127,28 @@ MonoBehaviour:
   eventName: ParryRecover
   triggerTime: 0.9
   triggerOnExit: 1
+--- !u!1101 &4580381290531149219
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 6068251396975631885}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &5222441903115280520
 AnimatorState:
   serializedVersion: 6
@@ -1265,6 +1351,21 @@ MonoBehaviour:
   eventName: AttackReleaseEnd
   triggerTime: 0.727
   triggerOnExit: 1
+--- !u!114 &7406556849839065674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: AttackReleaseStart
+  triggerTime: 0.577
+  triggerOnExit: 0
 --- !u!1101 &7881254886119170317
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1287,6 +1388,21 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &8208629975393013858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ae7ffbd33b42658b02ec41fecc0797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: AttackRecover
+  triggerTime: 0.9
+  triggerOnExit: 1
 --- !u!1102 &8228705557313899546
 AnimatorState:
   serializedVersion: 6
