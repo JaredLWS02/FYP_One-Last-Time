@@ -6,6 +6,10 @@ public class CameraPanSettings : ScriptableObject
 {
     public bool swapCameras = false;
     public bool panCameraOnContact = false;
+    public bool enableZoom = false;
+    public float zoomFOV = 50f;
+    public float zoomDuration = 0.5f;
+
 
     public CinemachineVirtualCamera cameraOnLeft;
     public CinemachineVirtualCamera cameraOnRight;

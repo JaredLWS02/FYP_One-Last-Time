@@ -110,6 +110,17 @@ public class CameraManager : MonoBehaviour
         }
     }
 
+    public void ZoomCameraOnContact(float targetFOV, float duration)
+    {
+        if (currentCamera == null)
+        {
+            Debug.LogWarning("CameraManager: Current virtual camera is not assigned!");
+            return;
+        }
+
+        TweenFOV(currentCamera, targetFOV, duration);
+    }
+
     // ==================================================================================================================
 
     public List<CinemachineVirtualCamera> allCameras = new();
