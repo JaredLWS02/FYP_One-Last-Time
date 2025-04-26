@@ -1,5 +1,4 @@
 using UnityEngine;
-using Cinemachine;
 
 public class cameraPan : MonoBehaviour
 {
@@ -23,13 +22,19 @@ public class cameraPan : MonoBehaviour
 
         if (other_rb.CompareTag("Player") && settings.panCameraOnContact)
         {
-            Debug.Log("Pan triggered");
+            Debug.Log("Pan + Zoom triggered");
+
             CameraManager.Current.PanCameraOnContact(
                 settings.panDistance,
                 settings.panTime,
                 settings.panDirection,
                 false
             );
+
+            if (settings.enableZoom)
+            {
+                CameraManager.Current.ZoomCameraOnContact(settings.zoomFOV, settings.zoomDuration);
+            }
         }
     }
 
@@ -40,12 +45,19 @@ public class cameraPan : MonoBehaviour
 
         if (other_rb.CompareTag("Player") && settings.panCameraOnContact)
         {
+            Debug.Log("Pan + Zoom Reset");
+
             CameraManager.Current.PanCameraOnContact(
                 settings.panDistance,
                 settings.panTime,
                 settings.panDirection,
                 true
             );
+
+            if (settings.enableZoom)
+            {
+                CameraManager.Current.TweenDefaultFOV(settings.zoomDuration);
+            }
         }
     }
 
