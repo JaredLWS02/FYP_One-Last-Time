@@ -333,6 +333,8 @@ GameObject:
   - component: {fileID: 2668537155487345437}
   - component: {fileID: 4497858630146639174}
   - component: {fileID: 781946208478055530}
+  - component: {fileID: 1969554001179171183}
+  - component: {fileID: 1713932783565338607}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -348,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8498924956571094748}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000017739168, y: -0.69187367, z: -0.0000184665, w: -0.72201866}
+  m_LocalRotation: {x: -0.00000002229198, y: 0.7071068, z: -0.00000002229198, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -375,7 +377,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 97fb4a06d9620e24ea7ce6544c375693, type: 2}
+  - {fileID: 2100000, guid: a86130cfd7c7ab84783220862a57e933, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -398,7 +400,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed5290799b026574086b9b2502033c27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2.862857, y: 3.28}
@@ -457,3 +459,91 @@ MonoBehaviour:
   axisFacingAwayCam: {x: -1, y: 0, z: 0}
   flipY: 0
   axisUpWithCam: {x: 0, y: 1, z: 0}
+--- !u!114 &1969554001179171183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498924956571094748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1242880141507026177}
+  srs:
+  - {fileID: 6182804439269598762}
+  rgbOffsetCfgs:
+  - color_name: Red
+    rgb_offset: {x: 1, y: -1, z: -1}
+  affectEmissionColor: 1
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 5
+  colorFlickerInterval: 0.05
+  randomStartColor: 0
+  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
+  randomStartFlip: 0
+  randomFlipY: 0
+  randomFlipX: 0
+--- !u!114 &1713932783565338607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8498924956571094748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57bcd03b4140ce4d86cff57112fa9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uEvents:
+    Awake:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+    Start:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1969554001179171183}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: GetRgbOffsetCfg
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Red
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1969554001179171183}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: ToggleColorFlicker
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Red
+            m_BoolArgument: 1
+          m_CallState: 2
+    Update:
+      m_PersistentCalls:
+        m_Calls: []
+    FixedUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+    LateUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+    Destroy:
+      m_PersistentCalls:
+        m_Calls: []
