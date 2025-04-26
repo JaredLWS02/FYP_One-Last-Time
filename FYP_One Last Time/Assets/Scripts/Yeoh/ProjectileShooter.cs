@@ -36,6 +36,16 @@ public class ProjectileShooter : MonoBehaviour
 
     // ============================================================================
 
+    public void ShootMultiple(int num)
+    {
+        for(int i=0; i<num; i++)
+        {
+            Shoot();
+        }
+    }
+
+    // ============================================================================
+
     public float force = 10;
 
     void Push(GameObject projectile)

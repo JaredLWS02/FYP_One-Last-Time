@@ -27,10 +27,13 @@ public class SpritesManager : MonoBehaviour
         RandomOffsetColor();
 
         RecordColors();
+        RecordEmissionColors();
 
         if(randomStartFlip)
         RandomFlip();
     }
+
+    // ============================================================================
 
     Dictionary<SpriteRenderer, Color> originalColors = new();
 
@@ -39,10 +42,33 @@ public class SpritesManager : MonoBehaviour
         foreach(var sr in srs)
         {
             // Only record if not already recorded
-            if(!originalColors.ContainsKey(sr))
-            {
-                originalColors[sr] = sr.color;
-            }
+            if(originalColors.ContainsKey(sr)) continue;
+
+            originalColors[sr] = sr.color;
+        }
+    }
+
+    // ============================================================================
+
+    Dictionary<Material, Color> originalEmissionColors = new();
+
+    public void RecordEmissionColors()
+    {
+        foreach(var sr in srs)
+        {
+            Material mat = sr.material;
+
+            if(!mat.HasProperty(emissionColorPropertyName)) continue;
+
+            if(originalEmissionColors.ContainsKey(mat)) continue;
+
+            Color e_color = mat.GetColor(emissionColorPropertyName);
+
+            ColorMutator mutator = new(e_color);
+
+            mutator.exposureValue = emissionIntensity;
+
+            originalEmissionColors[mat] = mutator.exposureAdjustedColor;
         }
     }
 
@@ -79,11 +105,11 @@ public class SpritesManager : MonoBehaviour
     {
         RevertColors();
 
-        Color colorOffset = new(rgb_offset.x, rgb_offset.y, rgb_offset.z);
+        Color color_offset = new(rgb_offset.x, rgb_offset.y, rgb_offset.z);
 
         foreach(var sr in srs)
         {
-            sr.color += colorOffset;
+            sr.color += color_offset;
         }
     }
 
@@ -104,6 +130,64 @@ public class SpritesManager : MonoBehaviour
 
     // ============================================================================
 
+    [Header("Emission")]
+    public bool affectEmissionColor;
+    public string emissionColorPropertyName = "_EmissionColor";
+    public float emissionIntensity = 3;
+
+    // ============================================================================
+
+    public void OffsetEmissionColors(Vector3 rgb_offset)
+    {
+        if(!affectEmissionColor) return;
+
+        RevertEmissionColors();
+
+        Color color_offset = new(rgb_offset.x, rgb_offset.y, rgb_offset.z);
+
+        foreach(var sr in srs)
+        {
+            Material mat = sr.material; // sr.sharedMaterial is for global
+
+            if(!mat.HasProperty(emissionColorPropertyName)) continue;
+
+            Color current_e_color = mat.GetColor(emissionColorPropertyName);
+
+            ColorMutator mutator = new(current_e_color + color_offset);
+
+            mutator.exposureValue = emissionIntensity;
+
+            mat.SetColor(emissionColorPropertyName, mutator.exposureAdjustedColor);
+        }
+    }
+
+    public void OffsetEmissionColors() => OffsetEmissionColors(currentRgbOffsetCfg.rgb_offset);
+
+    // ============================================================================
+
+    public void RevertEmissionColors()
+    {
+        if(!affectEmissionColor) return;
+
+        foreach(var sr in srs)
+        {
+            Material mat = sr.material;
+
+            if(!mat.HasProperty(emissionColorPropertyName)) continue;
+
+            if(!originalEmissionColors.ContainsKey(mat)) continue;
+
+            mat.SetColor(emissionColorPropertyName, originalEmissionColors[mat]);
+        }
+    }
+
+    // ============================================================================
+
+    [Header("Flicker")]
+    public float colorFlickerInterval=.05f;
+
+    // ============================================================================
+
     public void FlashColors(Vector3 rgb_offset, float seconds)
     {
         if(flashing_crt!=null) StopCoroutine(flashing_crt);
@@ -112,29 +196,41 @@ public class SpritesManager : MonoBehaviour
 
     public void FlashColors(float seconds) => FlashColors(currentRgbOffsetCfg.rgb_offset, seconds);
 
+    // ============================================================================
+
     Coroutine flashing_crt;
 
     IEnumerator FlashingColors(Vector3 rgb_offset, float seconds)
     {
         OffsetColors(rgb_offset);
+        OffsetEmissionColors(rgb_offset);
+
         yield return new WaitForSeconds(seconds);
+
         RevertColors();
+        RevertEmissionColors();
     }
 
     // ============================================================================
-
-    [Header("Flicker")]
-    public float colorFlickerInterval=.05f;
 
     public void ToggleColorFlicker(bool toggle, float interval)
     {
         if(colorFlickering_crt!=null) StopCoroutine(colorFlickering_crt);
 
-        if(toggle) colorFlickering_crt = StartCoroutine(ColorFlickering(interval));
-        else RevertColors();
+        if(toggle)
+        {
+            colorFlickering_crt = StartCoroutine(ColorFlickering(interval));
+        }
+        else
+        {
+            RevertColors();
+            RevertEmissionColors();
+        }
     }
 
     public void ToggleColorFlicker(bool toggle) => ToggleColorFlicker(toggle, colorFlickerInterval);
+
+    // ============================================================================
 
     Coroutine colorFlickering_crt;
 
@@ -143,8 +239,13 @@ public class SpritesManager : MonoBehaviour
         while(true)
         {
             OffsetColors();
+            OffsetEmissionColors();
+
             yield return new WaitForSeconds(interval);
+
             RevertColors();
+            RevertEmissionColors();
+
             yield return new WaitForSeconds(interval);
         }
     }
@@ -164,6 +265,7 @@ public class SpritesManager : MonoBehaviour
         );
 
         OffsetColors(rgb_offset);
+        OffsetEmissionColors(rgb_offset);
     }
 
     public void RandomOffsetColor() => RandomOffsetColor(randomRgbOffset);
