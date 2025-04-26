@@ -916,6 +916,7 @@ GameObject:
   - component: {fileID: 5039039371324129960}
   - component: {fileID: 8621582880931202597}
   - component: {fileID: 8673286697984538169}
+  - component: {fileID: 3298023749235053765}
   m_Layer: 6
   m_Name: Rush
   m_TagString: Untagged
@@ -1002,6 +1003,18 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 1
             m_CallState: 2
+          - m_Target: {fileID: 3298023749235053765}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: Shake
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
       ReleaseEnd:
         m_PersistentCalls:
           m_Calls:
@@ -1074,6 +1087,33 @@ MonoBehaviour:
   layerNamesToToggle:
   - Player
   - PlayerStopbox
+--- !u!114 &3298023749235053765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806096316584528784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitude4: 4
+  frequency2: 2
+  tweenFovTime: 0.5
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &1906808242825841302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,6 +1795,7 @@ GameObject:
   - component: {fileID: 7720956622550147065}
   - component: {fileID: 8086653970862224508}
   - component: {fileID: 4031275271306419621}
+  - component: {fileID: 1828960852982576548}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -2216,6 +2257,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 1061523320127218345}
   speedPropertyName: Attack Speed
+--- !u!114 &1828960852982576548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265591776346835760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Step
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 1
+    spawnpoint: {fileID: 8163150010487878427}
+    parented: 0
+    followRotation: 0
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 5368fdcbfa864bd438ba711751e1b4a2, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &3444000887945973403
 GameObject:
   m_ObjectHideFlags: 0
@@ -5560,8 +5635,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCam: {fileID: 0}
   shakeTime: 0.2
-  amplitud: 2
-  frequency: 2
+  amplitude4: 4
+  frequency2: 2
   tweenFovTime: 0.5
   angle: 2
   dutchIn: 0.025

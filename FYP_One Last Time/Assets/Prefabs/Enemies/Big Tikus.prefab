@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 3962663419828832351}
   - component: {fileID: 7246694524904160894}
   - component: {fileID: 747716922801805443}
+  - component: {fileID: 519827221223096972}
   m_Layer: 6
   m_Name: Slam
   m_TagString: Untagged
@@ -254,7 +255,19 @@ MonoBehaviour:
           m_Calls: []
       ReleaseStart:
         m_PersistentCalls:
-          m_Calls: []
+          m_Calls:
+          - m_Target: {fileID: 519827221223096972}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: Shake
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
       ReleaseEnd:
         m_PersistentCalls:
           m_Calls: []
@@ -297,6 +310,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &519827221223096972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507965927288791515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitude: 3
+  frequenci: 3
+  tweenFovTime: 0.5
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &976320020075826602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1116,6 +1156,7 @@ GameObject:
   - component: {fileID: 418708997891478844}
   - component: {fileID: 412968695723508853}
   - component: {fileID: 4405043119144846678}
+  - component: {fileID: 7888080403627281855}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -1493,12 +1534,49 @@ MonoBehaviour:
   srs:
   - {fileID: 3716319433280079349}
   rgbOffsetCfgs: []
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
   colorFlickerInterval: 0.05
   randomStartColor: 1
   randomRgbOffset: {x: 0.1, y: 0.1, z: 0.1}
   randomStartFlip: 0
   randomFlipY: 0
   randomFlipX: 0
+--- !u!114 &7888080403627281855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719329177920231827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Step
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 1
+    spawnpoint: {fileID: 5197452418422829730}
+    parented: 0
+    followRotation: 0
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 1d9710d9020df6d4c998443127338d00, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &3273843157058653885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,6 +1999,7 @@ GameObject:
   - component: {fileID: 6924317339209216897}
   - component: {fileID: 8165834065421918735}
   - component: {fileID: 275230207156901}
+  - component: {fileID: 5691980410007389699}
   m_Layer: 6
   m_Name: Rush
   m_TagString: Untagged
@@ -1987,6 +2066,18 @@ MonoBehaviour:
             m_TargetAssemblyTypeName: CollisionToggler, Assembly-CSharp
             m_MethodName: ToggleIgnoreLayers
             m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
+          - m_Target: {fileID: 5691980410007389699}
+            m_TargetAssemblyTypeName: CameraController, Assembly-CSharp
+            m_MethodName: Shake
+            m_Mode: 1
             m_Arguments:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2067,6 +2158,33 @@ MonoBehaviour:
   layerNamesToToggle:
   - Player
   - PlayerStopbox
+--- !u!114 &5691980410007389699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4725129758288447381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea9f4a79e609f9b4a99db346a6509e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCam: {fileID: 0}
+  shakeTime: 0.2
+  amplitude: 3
+  frequenci: 3
+  tweenFovTime: 0.5
+  angle: 2
+  dutchIn: 0.025
+  dutchOut: 0.1
+  events:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &4955684307425597312
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,6 +3760,9 @@ MonoBehaviour:
   rgbOffsetCfgs:
   - color_name: Red
     rgb_offset: {x: 0.75, y: -0.75, z: -0.75}
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
   colorFlickerInterval: 0.05
   randomStartColor: 0
   randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
