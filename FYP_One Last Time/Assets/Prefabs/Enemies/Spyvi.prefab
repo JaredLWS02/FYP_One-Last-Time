@@ -899,7 +899,7 @@ MonoBehaviour:
   posOffset: {x: 0, y: 0, z: 0}
   layers:
     serializedVersion: 2
-    m_Bits: 4097
+    m_Bits: 20481
   ignoreTriggers: 1
   onlyRigidbodies: 0
   overlapEvents:
@@ -1094,9 +1094,9 @@ MonoBehaviour:
           m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 5039039371324129960}
-  comboResetTime: 4
+  comboResetTime: 3
   cooldown: {fileID: 8621582880931202597}
-  comboCooldownTime: 4
+  comboCooldownTime: 3
 --- !u!114 &5039039371324129960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2557,6 +2557,7 @@ MonoBehaviour:
       - Shoot Tyre
       - Shoot Tyre
       - Shoot Tyre
+      - Shoot Tyre
       - Laser
       - Rush
       index: 0
@@ -3200,7 +3201,7 @@ MonoBehaviour:
   rayLength: 2
   layers:
     serializedVersion: 2
-    m_Bits: 4097
+    m_Bits: 20481
   maxSlopeAngle: 45
   climbCounterForce: 500
   slideCounterForce: 60
@@ -4327,9 +4328,9 @@ MonoBehaviour:
           m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 4463298175127723272}
-  comboResetTime: 2
+  comboResetTime: 1
   cooldown: {fileID: 182227809987460929}
-  comboCooldownTime: 2
+  comboCooldownTime: 1
 --- !u!114 &4463298175127723272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4719,7 +4720,7 @@ MonoBehaviour:
               m_ObjectArgument: {fileID: 0}
               m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
               m_IntArgument: 0
-              m_FloatArgument: 1.25
+              m_FloatArgument: 1.5
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
@@ -5101,7 +5102,7 @@ MonoBehaviour:
   minHeightSpaceAboveStep: 2.22
   hitLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 16385
   doStepUpMove: 1
   upSpeed: 5
   slope: {fileID: 8062320998286886328}

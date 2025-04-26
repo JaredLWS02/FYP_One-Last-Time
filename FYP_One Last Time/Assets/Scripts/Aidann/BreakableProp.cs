@@ -109,6 +109,8 @@ public class BreakableProp : MonoBehaviour
             float step = Time.deltaTime * PieceFadeSpeed;
             foreach(Renderer renderer in renderers)
             {
+                if(!renderer) continue;
+
                 renderer.transform.Translate(Vector3.down * (step / renderer.bounds.size.y), Space.World);
             }
 
@@ -118,6 +120,8 @@ public class BreakableProp : MonoBehaviour
 
         foreach(Renderer renderer in renderers)
         {
+            if(!renderer) continue;
+
             Destroy(renderer.gameObject);
         }
 
@@ -126,6 +130,8 @@ public class BreakableProp : MonoBehaviour
 
     private Renderer GetRendererFromRigidbody(Rigidbody rb)
     {
+        if(!rb) return null;
+        
         return rb.GetComponent<Renderer>();
     }
 
