@@ -490,11 +490,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -503,11 +503,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -1474,11 +1474,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -1487,11 +1487,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -2048,6 +2048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6548282755935985298}
   - component: {fileID: 8554633742086864746}
+  - component: {fileID: 6232646023103195399}
   m_Layer: 5
   m_Name: Resolution Options
   m_TagString: Untagged
@@ -2141,6 +2142,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &6232646023103195399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2636518579482782052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6232646023103195399}
+          m_TargetAssemblyTypeName: FirstSelectButton, Assembly-CSharp
+          m_MethodName: SelectButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 7698735293931947748}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &3036676881195208059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2777,6 +2809,7 @@ GameObject:
   - component: {fileID: 7364925820348815205}
   - component: {fileID: 321772818502273967}
   - component: {fileID: 4360849946703160417}
+  - component: {fileID: 3579895290050065933}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -2940,6 +2973,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &3579895290050065933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4466799980007874953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3579895290050065933}
+          m_TargetAssemblyTypeName: FirstSelectButton, Assembly-CSharp
+          m_MethodName: SelectButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 5750522101550988742}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &4571184871175307481
 GameObject:
   m_ObjectHideFlags: 0
@@ -3430,11 +3494,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -3443,11 +3507,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -3655,8 +3719,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4411495784193653037}
-  - component: {fileID: 1251263970526804036}
-  - component: {fileID: 6412365803103314202}
   m_Layer: 5
   m_Name: Display Menu
   m_TagString: Untagged
@@ -3688,62 +3750,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1251263970526804036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5523295086915611206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectEvents:
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
---- !u!114 &6412365803103314202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5523295086915611206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57bcd03b4140ce4d86cff57112fa9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uEvents:
-    Awake:
-      m_PersistentCalls:
-        m_Calls: []
-    OnEnable:
-      m_PersistentCalls:
-        m_Calls: []
-    OnDisable:
-      m_PersistentCalls:
-        m_Calls: []
-    Start:
-      m_PersistentCalls:
-        m_Calls: []
-    Update:
-      m_PersistentCalls:
-        m_Calls: []
-    FixedUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    LateUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    Destroy:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &5623174504483339012
 GameObject:
   m_ObjectHideFlags: 0
@@ -4099,11 +4105,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -4112,11 +4118,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -4153,6 +4159,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6533691452547116488}
   - component: {fileID: 1569258163488512224}
+  - component: {fileID: 3163582140124297552}
   m_Layer: 5
   m_Name: Options Menu
   m_TagString: Untagged
@@ -4208,18 +4215,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+--- !u!114 &3163582140124297552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5724634478484333037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3163582140124297552}
+          m_TargetAssemblyTypeName: FirstSelectButton, Assembly-CSharp
+          m_MethodName: SelectButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 5965474686519234877}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &5750522101550988742
 GameObject:
   m_ObjectHideFlags: 0
@@ -4551,11 +4577,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -4564,11 +4590,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -5109,6 +5135,7 @@ GameObject:
   - component: {fileID: 6988391383185764875}
   - component: {fileID: 7407814263652482945}
   - component: {fileID: 3301624186567030383}
+  - component: {fileID: 1806902379398001538}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -5233,6 +5260,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1806902379398001538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736320308490780564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1806902379398001538}
+          m_TargetAssemblyTypeName: FirstSelectButton, Assembly-CSharp
+          m_MethodName: SelectButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3132285672677867368}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &6898268141993193184
 GameObject:
   m_ObjectHideFlags: 0
@@ -5678,11 +5736,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -5691,11 +5749,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -5764,6 +5822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2046841083198599027}
   - component: {fileID: 6843868893473486086}
+  - component: {fileID: 406596068182976159}
   m_Layer: 5
   m_Name: Fullscreen Options
   m_TagString: Untagged
@@ -5856,6 +5915,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &406596068182976159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051696183154886075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7fc71979c5b084e91b08a677466667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectEvents:
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 406596068182976159}
+          m_TargetAssemblyTypeName: FirstSelectButton, Assembly-CSharp
+          m_MethodName: SelectButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 234239773566610353}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &8279105262667487064
 GameObject:
   m_ObjectHideFlags: 0
@@ -6322,11 +6412,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ae17777a2a8b088438fc1adfaf3dff03, type: 2}
@@ -6335,11 +6425,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3192011152004041339}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
     audioSO: {fileID: 11400000, guid: ccd9b371d0bcf534ba254923588c6910, type: 2}
@@ -7488,6 +7578,12 @@ PrefabInstance:
 --- !u!224 &3192011152004041339 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 719605945246405656, guid: ffa35da1b548f9b4480275a7cd210a30,
+    type: 3}
+  m_PrefabInstance: {fileID: 2715882714390765155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5965474686519234877 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8609017091102789470, guid: ffa35da1b548f9b4480275a7cd210a30,
     type: 3}
   m_PrefabInstance: {fileID: 2715882714390765155}
   m_PrefabAsset: {fileID: 0}
@@ -8944,7 +9040,19 @@ MonoBehaviour:
   selectEvents:
     OnEnable:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 2100212467748846082}
+          m_TargetAssemblyTypeName: FirstSelectButton, Assembly-CSharp
+          m_MethodName: SelectButton
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3158477875876121772}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDisable:
       m_PersistentCalls:
         m_Calls: []
@@ -9024,6 +9132,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!1 &3158477875876121772 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8348389613743640213, guid: 55eece12de482c44aabe8a11b63e908a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6345108963176399417}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8213431323923333338 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3023501662628250339, guid: 55eece12de482c44aabe8a11b63e908a,

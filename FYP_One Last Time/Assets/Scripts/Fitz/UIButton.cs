@@ -2,21 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIButton : MonoBehaviour
+public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    Button buttonComp;
-
-    private void Start()
-    {
-        buttonComp = GetComponent<Button>();
-    }
-
     public void OnHover()
     {
         buttonEvents.onHoverEvent?.Invoke();
-        buttonComp.Select();
+        //buttonComp.Select();
     }
 
     public void OffHover()
@@ -37,6 +31,21 @@ public class UIButton : MonoBehaviour
     public void GoMainMenu()
     {
         ScenesManager.Current.LoadMainMenu();
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        OnHover();
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        OffHover();
+    }
+
+    void OnDisable()
+    {
+        OffHover();
     }
 
     // ============================================================================
