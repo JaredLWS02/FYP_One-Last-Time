@@ -80,6 +80,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7945033291689682620, guid: db02c1a70b56efd4dbb16ee33a84b98b,
         type: 3}
+      propertyPath: audioSpawner
+      value: 
+      objectReference: {fileID: 2011759567751637757}
+    - target: {fileID: 7945033291689682620, guid: db02c1a70b56efd4dbb16ee33a84b98b,
+        type: 3}
       propertyPath: Hit.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -179,6 +184,19 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: f1e7bed4e2660c1408e422456dd7389a, type: 2}
+  - prefabName: WoodenHit
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 0
+    spawnpoint: {fileID: 2906998114398632074}
+    parented: 0
+    followRotation: 1
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: a417dc47fa22df84a8a5e2cf1228a8c6, type: 2}
   loopGroups: []
   audioEvents:
     EnableEvent:
@@ -286,6 +304,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 1079799931101597807, guid: 770378c659029564ebc1a5f99f5e595f,
         type: 3}
+      propertyPath: audioSpawner
+      value: 
+      objectReference: {fileID: 3685274731256928713}
+    - target: {fileID: 1079799931101597807, guid: 770378c659029564ebc1a5f99f5e595f,
+        type: 3}
       propertyPath: Hit.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -390,6 +413,19 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: f1e7bed4e2660c1408e422456dd7389a, type: 2}
+  - prefabName: WoodenHit
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 1
+    spawnpoint: {fileID: 5545182395185784382}
+    parented: 0
+    followRotation: 1
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: a417dc47fa22df84a8a5e2cf1228a8c6, type: 2}
   loopGroups: []
   audioEvents:
     EnableEvent:
@@ -442,17 +478,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: db58eca7ffcebce479f3f1359dc3ac89,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.43
+      value: -156.94939
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db58eca7ffcebce479f3f1359dc3ac89,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.28
+      value: -15.506092
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db58eca7ffcebce479f3f1359dc3ac89,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13.7
+      value: 18.272984
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: db58eca7ffcebce479f3f1359dc3ac89,
         type: 3}
