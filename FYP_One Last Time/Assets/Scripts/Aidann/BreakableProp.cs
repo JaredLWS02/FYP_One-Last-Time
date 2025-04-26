@@ -11,6 +11,9 @@ public class BreakableProp : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField]
+    private AudioSpawner audioSpawner;
+
+    [SerializeField]
     private GameObject BrokenPrefab;
 
     [SerializeField]
@@ -132,6 +135,7 @@ public class BreakableProp : MonoBehaviour
 
         if (playerHit)
         {
+            audioSpawner.PlayName("WoodenHit");
             health--;
 
             if (health <= 0)
