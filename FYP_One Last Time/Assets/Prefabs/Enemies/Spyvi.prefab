@@ -988,6 +988,18 @@ MonoBehaviour:
               m_StringArgument: Rush
               m_BoolArgument: 0
             m_CallState: 2
+          - m_Target: {fileID: 1828960852982576548}
+            m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+            m_MethodName: PlayName
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Swing
+              m_BoolArgument: 0
+            m_CallState: 2
       ReleaseStart:
         m_PersistentCalls:
           m_Calls:
@@ -2283,6 +2295,19 @@ MonoBehaviour:
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 5368fdcbfa864bd438ba711751e1b4a2, type: 2}
+  - prefabName: Swing
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 1
+    spawnpoint: {fileID: 783041444188238968}
+    parented: 0
+    followRotation: 0
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 0f14c3fc4b24b514c996c8e9ed951a5b, type: 2}
   loopGroups: []
   audioEvents:
     EnableEvent:
