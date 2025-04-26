@@ -80,7 +80,7 @@ public class AudioSpawner : MonoBehaviour
 
     public void Stop() => StopAudio(currentAudioPrefab);
     
-    public void Stop(string audio_name)
+    public void StopName(string audio_name)
     {
         GetAudioPrefab(audio_name);
         Stop();
@@ -155,8 +155,8 @@ public class AudioSpawner : MonoBehaviour
 
     public void StopLoop(string loop_in_name, string loop_name, string loop_out_name)
     {
-        Stop(loop_in_name);
-        Stop(loop_name);
+        StopName(loop_in_name);
+        StopName(loop_name);
         PlayName(loop_out_name);
     }
 

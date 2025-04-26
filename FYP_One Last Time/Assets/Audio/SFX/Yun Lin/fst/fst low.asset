@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e94da9a5c25f394794684b2f92dacb5, type: 3}
+  m_Name: fst low
+  m_EditorClassIdentifier: 
+  randomClips:
+  - {fileID: 8300000, guid: 611d15622e0fc9541885f39f360d5738, type: 3}
+  - {fileID: 8300000, guid: 1b262e2b3c30c5e4f89156a4c3914b43, type: 3}
+  - {fileID: 8300000, guid: 3bf4cad05072be24fac72bac37848a61, type: 3}
+  - {fileID: 8300000, guid: dc0d3afaf3d24944b83d39d27e7fa41f, type: 3}
+  - {fileID: 8300000, guid: b62030acd87e32145a8c81a751811c4b, type: 3}
+  - {fileID: 8300000, guid: e446ad96ae71a0c4e87f4d2c2fb61def, type: 3}
+  output: {fileID: -1775126937349135684, guid: fbf0ac9f190fb3e448002736bcdca631, type: 2}
+  loop: 0
+  randomVolume: {x: 0.3, y: 0.4}
+  randomPitch: {x: 0.3, y: 0.5}
+  stereoPan:
+    min: 0
+    max: 0
+  spatialBlend: 1
+  minRange: 15
+  maxRange: 30

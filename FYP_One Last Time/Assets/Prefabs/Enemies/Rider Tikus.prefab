@@ -1427,6 +1427,7 @@ GameObject:
   - component: {fileID: 5959334076088705368}
   - component: {fileID: 7225752272075574995}
   - component: {fileID: 2918448525474750993}
+  - component: {fileID: 5166631992501023964}
   m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
@@ -1773,6 +1774,40 @@ MonoBehaviour:
   randomStartFlip: 0
   randomFlipY: 0
   randomFlipX: 0
+--- !u!114 &5166631992501023964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4964901865575942711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Step
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 1
+    spawnpoint: {fileID: 2427552702897513781}
+    parented: 0
+    followRotation: 0
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 428607c225a08f44ca15bdb8efc4b6b3, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &4982870497007486692
 GameObject:
   m_ObjectHideFlags: 0
