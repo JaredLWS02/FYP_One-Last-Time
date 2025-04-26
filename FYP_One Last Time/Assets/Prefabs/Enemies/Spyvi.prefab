@@ -587,11 +587,11 @@ MonoBehaviour:
       randomPrefabs: []
       hideInHierarchy: 0
       spawnpoint: {fileID: 0}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -689,11 +689,11 @@ MonoBehaviour:
     - {fileID: 5311859234721833831, guid: ab80bba881f7b2547a282652beb60fde, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 1867098784552257303}
+    parented: 1
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   - prefabName: Rush Wind Up
@@ -701,11 +701,11 @@ MonoBehaviour:
     - {fileID: 5311859234721833831, guid: acc794604cada3c47a930c50e77dba71, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 1867098784552257303}
+    parented: 1
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   spawnEvents:
@@ -963,11 +963,11 @@ MonoBehaviour:
       - {fileID: 1242880141507026177, guid: 4c3dcb8f5ebffce47a01c9b6b4602d67, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 6632768740813418721}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -1770,7 +1770,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3265591776346835760}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000022291978, y: -0.7071068, z: 0.000000022291978, w: 0.7071068}
+  m_LocalRotation: {x: -0.00000002229198, y: 0.7071068, z: -0.00000002229198, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2126,6 +2126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBillboard: 1
   fixedUpdate: 0
+  editorUpdate: 1
   rotateAxis: {x: 1, y: 1, z: 0}
 --- !u!114 &7720956622550147065
 MonoBehaviour:
@@ -2192,6 +2193,9 @@ MonoBehaviour:
     rgb_offset: {x: 0.75, y: -0.75, z: -0.75}
   - color_name: Green
     rgb_offset: {x: -1, y: 1, z: -1}
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
   colorFlickerInterval: 0.05
   randomStartColor: 1
   randomRgbOffset: {x: 0.1, y: 0.1, z: 0.1}
@@ -2562,6 +2566,66 @@ MonoBehaviour:
   - name: Flee (disabled)
     weight: 1
   currentOption: Seek
+--- !u!1 &4340176293988498566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137096126741207457}
+  - component: {fileID: 8216674458538084968}
+  m_Layer: 6
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1137096126741207457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340176293988498566}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 1.22, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1846262113497191322}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &8216674458538084968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4340176293988498566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d46432b3937b3d4c920956d1d859351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizeOnAwake: 0
+  randomTranslateX: 0
+  randomTranslateY: 0
+  randomTranslateZ: 0
+  minTranslate: -0.1
+  maxTranslate: 0.1
+  randomRotateX: 1
+  randomRotateY: 0
+  randomRotateZ: 0
+  minRotate: -45
+  maxRotate: 45
+  randomScaleX: 0
+  randomScaleY: 0
+  randomScaleZ: 0
+  minScale: 0.9
+  maxScale: 1.1
 --- !u!1 &4410145881050648360
 GameObject:
   m_ObjectHideFlags: 0
@@ -3471,11 +3535,11 @@ MonoBehaviour:
       - {fileID: 1242880141507026177, guid: ae74496a753e908499ab6567b8db3cf0, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 1556450414790447576}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -3847,11 +3911,11 @@ MonoBehaviour:
       - {fileID: 1242880141507026177, guid: c9b7afd8e410aa44e8483072ff955177, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 5389558983434697101}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -4011,11 +4075,11 @@ MonoBehaviour:
       randomPrefabs: []
       hideInHierarchy: 0
       spawnpoint: {fileID: 1687152699598202001}
+      parented: 1
+      followRotation: 0
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 0
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -4092,6 +4156,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!1 &7572656749888510645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1846262113497191322}
+  - component: {fileID: 8025179173312578204}
+  m_Layer: 6
+  m_Name: Mana Drops
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1846262113497191322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572656749888510645}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.000000119209275, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1137096126741207457}
+  m_Father: {fileID: 9096317667290568828}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8025179173312578204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7572656749888510645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b9937fbcb16984caef12f0190c7b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 723126087593272658, guid: 423fa36bc6a854a48b9907c152ef25d9, type: 3}
+  firepoint: {fileID: 1137096126741207457}
+  followRotation: 1
+  force: 15
+  events:
+    OnPreShot:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8216674458538084968}
+          m_TargetAssemblyTypeName: RandomTransform, Assembly-CSharp
+          m_MethodName: RandomRotate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnPostShot:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &7600868851066893388
 GameObject:
   m_ObjectHideFlags: 0
@@ -4149,11 +4282,11 @@ MonoBehaviour:
       randomPrefabs: []
       hideInHierarchy: 0
       spawnpoint: {fileID: 0}
+      parented: 0
+      followRotation: 0
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 0
-      followRotation: 0
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -4727,7 +4860,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1846262113497191322}
   m_Father: {fileID: 8499522341882242809}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2829425456779267193
@@ -4747,6 +4881,7 @@ MonoBehaviour:
   iframe: {fileID: 6846888896087461768}
   poise: {fileID: 3820694150514291339}
   destroyOnDeath: 1
+  deathAnim: {fileID: 0}
   hurtEvents:
     OnHurted:
       m_PersistentCalls:
@@ -4834,6 +4969,18 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Death
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8025179173312578204}
+          m_TargetAssemblyTypeName: ProjectileShooter, Assembly-CSharp
+          m_MethodName: ShootMultiple
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 20
             m_FloatArgument: 0
             m_StringArgument: Death
             m_BoolArgument: 0
@@ -4986,6 +5133,9 @@ MonoBehaviour:
     rgb_offset: {x: 0.75, y: -0.75, z: -0.75}
   - color_name: Green
     rgb_offset: {x: -1, y: 1, z: -1}
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
   colorFlickerInterval: 0.05
   randomStartColor: 0
   randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
@@ -5010,11 +5160,11 @@ MonoBehaviour:
     - {fileID: 5800512631994957167, guid: 007b20aff061a2946a21d4513a1be031, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
   spawnEvents:
@@ -5042,11 +5192,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 783041444188238968}
+    parented: 0
+    followRotation: 1
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 13df9d88431bfe24c81a3edd6b202eb9, type: 2}
@@ -5055,11 +5205,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 783041444188238968}
+    parented: 0
+    followRotation: 1
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 5a76af51fa4b7174a8237bb3e9559c87, type: 2}
@@ -5068,11 +5218,11 @@ MonoBehaviour:
     - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 2216111076625525763}
+    parented: 0
+    followRotation: 1
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 1
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 97b3bb0294073f54d81114dc77633614, type: 2}
@@ -5099,7 +5249,9 @@ MonoBehaviour:
   owner: {fileID: 2034736583873020547}
   gibs:
   - {fileID: 283657642964731862, guid: 31e40b0a0c54f9645944ec29721fc632, type: 3}
+  followRotation: 1
   gibsKnockback: 1
+  simpleContactPoint: {fileID: 0}
 --- !u!114 &6313629022070340172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5255,11 +5407,11 @@ MonoBehaviour:
     - {fileID: 1242880141507026177, guid: f300dbfc9ff9a2f4a86c5094c911ca26, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   parryEvents:
@@ -5368,11 +5520,11 @@ MonoBehaviour:
     - {fileID: 1847320368029984545, guid: 5664121a1e74d754fa32553e09e386ab, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
   - prefabName: Shockwave
@@ -5380,11 +5532,11 @@ MonoBehaviour:
     - {fileID: 419085589674771820, guid: a2baa7846a5c50f42b6f2f1308c72994, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 7742683584217053974}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   spawnEvents:

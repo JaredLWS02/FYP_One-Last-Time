@@ -469,6 +469,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8141618935150733807}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e1457b4be9dc733469675a24a3b5daff,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6822239983992672874}
   m_SourcePrefab: {fileID: 100100000, guid: e1457b4be9dc733469675a24a3b5daff, type: 3}
 --- !u!1 &6047367892297912674 stripped
 GameObject:
@@ -550,6 +554,18 @@ MonoBehaviour:
   Hit:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 6822239983992672874}
+        m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+        m_MethodName: PlayName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Box Break
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 8141618935150733807}
         m_TargetAssemblyTypeName: BreakableProp, Assembly-CSharp
         m_MethodName: Explode
@@ -562,3 +578,43 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6822239983992672874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047367892297912674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Box Break
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 1
+    spawnpoint: {fileID: 6388146762035842008}
+    parented: 0
+    followRotation: 1
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: f1e7bed4e2660c1408e422456dd7389a, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!4 &6388146762035842008 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
+    type: 3}
+  m_PrefabInstance: {fileID: 6858411444795878451}
+  m_PrefabAsset: {fileID: 0}

@@ -793,11 +793,11 @@ MonoBehaviour:
       randomPrefabs: []
       hideInHierarchy: 0
       spawnpoint: {fileID: 0}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -883,11 +883,11 @@ MonoBehaviour:
     - {fileID: 5311859234721833831, guid: ab80bba881f7b2547a282652beb60fde, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 1312465984930785050}
+    parented: 1
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 1
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
   spawnEvents:
@@ -956,11 +956,11 @@ MonoBehaviour:
       - {fileID: 1242880141507026177, guid: e0c2b35ca4c02b84b96dc63714a3a6f2, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 4332652203663591339}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 4023819593685926287}
@@ -1330,7 +1330,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7017559784828112317}
   m_Father: {fileID: 8016398935337583029}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5126354924728155001
@@ -1350,6 +1351,7 @@ MonoBehaviour:
   iframe: {fileID: 2211101070558187119}
   poise: {fileID: 2317455873715353602}
   destroyOnDeath: 1
+  deathAnim: {fileID: 0}
   hurtEvents:
     OnHurted:
       m_PersistentCalls:
@@ -1437,6 +1439,18 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: FleshKill
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4071175807343005797}
+          m_TargetAssemblyTypeName: ProjectileShooter, Assembly-CSharp
+          m_MethodName: ShootMultiple
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
             m_FloatArgument: 0
             m_StringArgument: FleshKill
             m_BoolArgument: 0
@@ -1587,6 +1601,9 @@ MonoBehaviour:
   rgbOffsetCfgs:
   - color_name: Red
     rgb_offset: {x: 0.75, y: -0.75, z: -0.75}
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
   colorFlickerInterval: 0.05
   randomStartColor: 0
   randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
@@ -1611,11 +1628,11 @@ MonoBehaviour:
     - {fileID: 5800512631994957167, guid: 007b20aff061a2946a21d4513a1be031, type: 3}
     hideInHierarchy: 0
     spawnpoint: {fileID: 0}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 0}
   spawnEvents:
@@ -1640,7 +1657,9 @@ MonoBehaviour:
   owner: {fileID: 6995670659757724566}
   gibs:
   - {fileID: 4638265214066637242, guid: a0e8c029a72545e4db78fe82ffd1cde4, type: 3}
+  followRotation: 1
   gibsKnockback: 1
+  simpleContactPoint: {fileID: 0}
 --- !u!114 &1179357645765174067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,11 +1678,11 @@ MonoBehaviour:
     - {fileID: 210126101633627548}
     hideInHierarchy: 0
     spawnpoint: {fileID: 8033383801588582437}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 2dc6442c120ea0c479bec7c4ba3f1133, type: 2}
@@ -1672,11 +1691,11 @@ MonoBehaviour:
     - {fileID: 210126101633627548}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3253881593481494743}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 13df9d88431bfe24c81a3edd6b202eb9, type: 2}
@@ -1685,11 +1704,11 @@ MonoBehaviour:
     - {fileID: 210126101633627548}
     hideInHierarchy: 0
     spawnpoint: {fileID: 3253881593481494743}
+    parented: 0
+    followRotation: 0
     posOffset: {x: 0, y: 0, z: 0}
     angleOffset: {x: 0, y: 0, z: 0}
     scaleMult: 1
-    parented: 0
-    followRotation: 0
     spawnPos: {x: 0, y: 0, z: 0}
     spawnRot: {x: 0, y: 0, z: 0, w: 1}
     audioSO: {fileID: 11400000, guid: 5a76af51fa4b7174a8237bb3e9559c87, type: 2}
@@ -1861,6 +1880,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3568686223296638044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3862731160834437016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7149461226080128533}
+  - component: {fileID: 518122147752041614}
+  m_Layer: 6
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7149461226080128533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3862731160834437016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: -0.7071068}
+  m_LocalPosition: {x: 0, y: 1.22, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7017559784828112317}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &518122147752041614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3862731160834437016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d46432b3937b3d4c920956d1d859351, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomizeOnAwake: 0
+  randomTranslateX: 0
+  randomTranslateY: 0
+  randomTranslateZ: 0
+  minTranslate: -0.1
+  maxTranslate: 0.1
+  randomRotateX: 1
+  randomRotateY: 0
+  randomRotateZ: 0
+  minRotate: -45
+  maxRotate: 45
+  randomScaleX: 0
+  randomScaleY: 0
+  randomScaleZ: 0
+  minScale: 0.9
+  maxScale: 1.1
 --- !u!1 &4476762177989154266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1893,6 +1972,75 @@ Transform:
   - {fileID: 2030353326355047043}
   m_Father: {fileID: 2472299377499092817}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4520403062000959545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7017559784828112317}
+  - component: {fileID: 4071175807343005797}
+  m_Layer: 6
+  m_Name: Mana Drops
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7017559784828112317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4520403062000959545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7149461226080128533}
+  m_Father: {fileID: 510932770829757082}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4071175807343005797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4520403062000959545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b9937fbcb16984caef12f0190c7b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 723126087593272658, guid: 423fa36bc6a854a48b9907c152ef25d9, type: 3}
+  firepoint: {fileID: 7149461226080128533}
+  followRotation: 1
+  force: 10
+  events:
+    OnPreShot:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 518122147752041614}
+          m_TargetAssemblyTypeName: RandomTransform, Assembly-CSharp
+          m_MethodName: RandomRotate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnPostShot:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &4716715478963886114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5081407622737716327}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000022579767, y: -0.7071068, z: 0.000000022004189, w: 0.7071068}
+  m_LocalRotation: {x: -0.00000002229198, y: 0.7071068, z: -0.00000002229198, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2541,6 +2689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enableBillboard: 1
   fixedUpdate: 0
+  editorUpdate: 1
   rotateAxis: {x: 1, y: 1, z: 0}
 --- !u!114 &1633406689114087826
 MonoBehaviour:
@@ -2603,6 +2752,9 @@ MonoBehaviour:
   srs:
   - {fileID: 5575052531342034989}
   rgbOffsetCfgs: []
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
   colorFlickerInterval: 0.05
   randomStartColor: 1
   randomRgbOffset: {x: 0.1, y: 0.1, z: 0.1}
@@ -2917,11 +3069,11 @@ MonoBehaviour:
       - {fileID: 1242880141507026177, guid: 9cf432e1e684f7a47934455c5c0df832, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 5056193132602644811}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 4023819593685926287}
@@ -3438,11 +3590,11 @@ MonoBehaviour:
       - {fileID: 1242880141507026177, guid: 9b30a8b05c8e9fb46b67430ed14945a3, type: 3}
       hideInHierarchy: 0
       spawnpoint: {fileID: 896823592600123119}
+      parented: 1
+      followRotation: 1
       posOffset: {x: 0, y: 0, z: 0}
       angleOffset: {x: 0, y: 0, z: 0}
       scaleMult: 1
-      parented: 1
-      followRotation: 1
       spawnPos: {x: 0, y: 0, z: 0}
       spawnRot: {x: 0, y: 0, z: 0, w: 1}
     rangeAssist: {fileID: 0}
@@ -4098,22 +4250,22 @@ PrefabInstance:
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.000000022579767
-      objectReference: {fileID: 0}
-    - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
-        type: 3}
-      propertyPath: m_LocalRotation.y
       value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00000002229198
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
+        type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000022004189
+      value: -0.00000002229198
       objectReference: {fileID: 0}
     - target: {fileID: 4668998062429845214, guid: d119cb62d002a1746a1e43a91218f354,
         type: 3}

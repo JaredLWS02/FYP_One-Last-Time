@@ -24,7 +24,6 @@ public class Radar : MonoBehaviour
     void OnOverlapEnter(GameObject obj, Collider coll)
     {
         if(!obj) return;
-        
         if(targets.Contains(obj)) return;
 
         targets.Add(obj);
@@ -33,7 +32,6 @@ public class Radar : MonoBehaviour
     void OnOverlapExit(GameObject obj, Collider coll)
     {
         if(!obj) return;
-
         if(!targets.Contains(obj)) return;
 
         targets.Remove(obj);
@@ -65,6 +63,8 @@ public class Radar : MonoBehaviour
         }
         return closest;
     }
+
+    public GameObject GetClosestTarget() => GetClosest(targets);
 
     // ============================================================================
 
