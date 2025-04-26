@@ -8,7 +8,15 @@ public class FirstSelectButton : MonoBehaviour
 {
     public void SelectButton(GameObject button)
     {
-        EventSystem.current.SetSelectedGameObject(button);
+        StartCoroutine(SelectFirstButtonNextFrame(button));
+    }
+
+    IEnumerator SelectFirstButtonNextFrame(GameObject obj)
+    {
+        yield return null;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(obj);
     }
 
     // ============================================================================
