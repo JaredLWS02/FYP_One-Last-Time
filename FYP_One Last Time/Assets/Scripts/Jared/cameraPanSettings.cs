@@ -10,7 +10,6 @@ public class CameraPanSettings : ScriptableObject
     public float zoomFOV = 50f;
     public float zoomDuration = 0.5f;
 
-
     public CinemachineVirtualCamera cameraOnLeft;
     public CinemachineVirtualCamera cameraOnRight;
 
