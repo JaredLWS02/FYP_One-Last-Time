@@ -1376,9 +1376,44 @@ PrefabInstance:
       objectReference: {fileID: 541225912}
     - target: {fileID: 1569258163488512224, guid: bf082c75ce23cce4db75c30e68f7d392,
         type: 3}
+      propertyPath: OnBack.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569258163488512224, guid: bf082c75ce23cce4db75c30e68f7d392,
+        type: 3}
+      propertyPath: OnBack.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569258163488512224, guid: bf082c75ce23cce4db75c30e68f7d392,
+        type: 3}
       propertyPath: OnBack.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 85611040}
+    - target: {fileID: 1569258163488512224, guid: bf082c75ce23cce4db75c30e68f7d392,
+        type: 3}
+      propertyPath: OnBack.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569258163488512224, guid: bf082c75ce23cce4db75c30e68f7d392,
+        type: 3}
+      propertyPath: OnBack.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569258163488512224, guid: bf082c75ce23cce4db75c30e68f7d392,
+        type: 3}
+      propertyPath: OnBack.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569258163488512224, guid: bf082c75ce23cce4db75c30e68f7d392,
+        type: 3}
+      propertyPath: OnBack.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569258163488512224, guid: bf082c75ce23cce4db75c30e68f7d392,
+        type: 3}
+      propertyPath: OnBack.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3192011152004041339, guid: bf082c75ce23cce4db75c30e68f7d392,
         type: 3}
       propertyPath: m_AnchorMax.y
