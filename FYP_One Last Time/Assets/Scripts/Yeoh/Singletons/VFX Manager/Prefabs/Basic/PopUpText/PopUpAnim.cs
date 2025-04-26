@@ -13,7 +13,7 @@ public class PopUpAnim : MonoBehaviour
     public float waitTime=.5f;
     public float outTime=.5f;
 
-    public bool ignoreTime=true;
+    public bool ignoreTime;
 
     public bool destroyOnFinish=false;
 
@@ -75,9 +75,9 @@ public class PopUpAnim : MonoBehaviour
     public void Push(Vector3 force)
     {
         Vector3 randForce = new(
-            Random.Range(-force.x, force.x),
-            Random.Range(force.y*.5f, force.y),
-            Random.Range(-force.z, force.z)
+            Random.Range(-force.x*.5f, force.x*.5f),
+            Random.Range(force.y, force.y),
+            Random.Range(-force.z*.5f, force.z*.5f)
         );
 
         rb.AddForce(randForce, ForceMode.Impulse);

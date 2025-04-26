@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LootInfo
 {
@@ -11,54 +12,45 @@ public class LootInfo
 
 // ============================================================================
 
-public class Loot2D : MonoBehaviour
+public class Loot : MonoBehaviour
 {
-    Rigidbody2D rb;
-    public Animator anim;
-
-    void Awake()
-    {
-        rb=GetComponent<Rigidbody2D>();
-    }
-
-    // ============================================================================
-
     EventManager EventM;
 
     void OnEnable()
     {
         EventM = EventManager.Current;
         
-        Push();
-
         Invoke(nameof(EnableLoot), lootDelay);
     }
 
-    // Sprite/Anim ============================================================================
+    // ============================================================================
 
     public ItemSO item;
     public int quantity=1;
 
-    void Update()
-    {
-        if(anim) anim.Play($"{item}", 0);
-    }
-
-    // Loot Delay ============================================================================
-
     public float lootDelay=1;
     bool canLoot;
 
-    void EnableLoot()
-    {
-        canLoot=true;
-    }
+    void EnableLoot() => canLoot=true;
 
     // Touch Trigger ============================================================================
 
-    [HideInInspector] public Vector3 contactPoint;
+    void OnCollisionStay(Collision other)
+    {
+        OnStay(other.collider);
+    }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerStay(Collider other)
+    {
+        OnStay(other);
+    }
+
+    // ============================================================================
+
+    [HideInInspector]
+    public Vector3 contactPoint;
+
+    void OnStay(Collider other)
     {
         if(!canLoot) return;
         if(other.isTrigger) return;
@@ -66,7 +58,7 @@ public class Loot2D : MonoBehaviour
 
         contactPoint = other.ClosestPoint(transform.position);
 
-        Pickup(other.attachedRigidbody.gameObject);
+        PickedUp(other.attachedRigidbody.gameObject);
     }
 
     // ============================================================================
@@ -74,16 +66,20 @@ public class Loot2D : MonoBehaviour
     public bool destroyOnLoot=true;
     bool picked;
 
-    void Pickup(GameObject looter)
+    void PickedUp(GameObject looter)
     {
         if(picked) return;
-        picked=true;
+        picked = true;
+
+        events.OnLoot?.Invoke(contactPoint);
 
         EventM.OnLoot(looter, gameObject, CopyLootInfo());
 
         if(destroyOnLoot) Destroy(gameObject);
         else gameObject.SetActive(false);
     }
+
+    // ============================================================================
 
     LootInfo CopyLootInfo()
     {
@@ -96,16 +92,13 @@ public class Loot2D : MonoBehaviour
         return info;
     }
 
-    // Physics ============================================================================
+    // ============================================================================
 
-    public void Push(float force=1.5f)
+    [System.Serializable]
+    public struct Events
     {
-        Vector2 randVector = new Vector2
-        (
-            Random.Range(-force, force),
-            Random.Range(-force, force)
-        );
-
-        rb.AddForce(randVector, ForceMode2D.Impulse);
+        public UnityEvent<Vector3> OnLoot;
     }
+    [Space]
+    public Events events;
 }

@@ -339,6 +339,9 @@ MonoBehaviour:
     rgb_offset: {x: 0.75, y: -0.75, z: -0.75}
   - color_name: Green
     rgb_offset: {x: -1, y: 1, z: -1}
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
   colorFlickerInterval: 0.05
   randomStartColor: 0
   randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
@@ -1594,6 +1597,128 @@ Transform:
   - {fileID: 2989466503137643258}
   m_Father: {fileID: 6708884801155206727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3003328020245309409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6279111818541931177}
+  - component: {fileID: 8545144074948948037}
+  - component: {fileID: 355445292848727317}
+  m_Layer: 3
+  m_Name: Loot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6279111818541931177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003328020245309409}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.009999933, y: 2.02, z: -0.70000017}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5863439786357119243}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8545144074948948037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003328020245309409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2536da841e6f1814b9d037a0c8d04f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  itemWhitelist:
+  - {fileID: 11400000, guid: f95c8b6f26463da4faeff28ce9582554, type: 2}
+  events:
+    OnLootItem:
+      m_PersistentCalls:
+        m_Calls: []
+    OnLootQuantity:
+      m_PersistentCalls:
+        m_Calls: []
+    OnLootQuantityF:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 355445292848727317}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: GetRgbOffsetCfg
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Blue
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 355445292848727317}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: FlashColors
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0.15
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7058722310484815464}
+          m_TargetAssemblyTypeName: HPManager, Assembly-CSharp
+          m_MethodName: Add
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &355445292848727317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3003328020245309409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 8987163089559660572}
+  srs:
+  - {fileID: 4466723156777370603}
+  - {fileID: 3256731903790810545}
+  rgbOffsetCfgs:
+  - color_name: Blue
+    rgb_offset: {x: -0.5, y: -0.5, z: 1}
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
+  colorFlickerInterval: 0.05
+  randomStartColor: 0
+  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
+  randomStartFlip: 0
+  randomFlipY: 0
+  randomFlipX: 0
 --- !u!1 &3083115642010952764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,6 +1999,9 @@ MonoBehaviour:
   rgbOffsetCfgs:
   - color_name: Green
     rgb_offset: {x: -1, y: 1, z: -1}
+  affectEmissionColor: 0
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 3
   colorFlickerInterval: 0.05
   randomStartColor: 0
   randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
@@ -2218,7 +2346,7 @@ Transform:
   m_GameObject: {fileID: 5630794860410328865}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.098, y: -0.062, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4926,7 +5054,8 @@ Transform:
   m_LocalPosition: {x: 0.7, y: -2.02, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6279111818541931177}
   m_Father: {fileID: 4923564269494430759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7058722310484815464
@@ -5682,6 +5811,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PakYa HP Bar
       objectReference: {fileID: 0}
+    - target: {fileID: 8594997273340636038, guid: 8ef94233704e37640980eed157952cbd,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 63.15
+      objectReference: {fileID: 0}
     - target: {fileID: 9051359002885501278, guid: 8ef94233704e37640980eed157952cbd,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -5964,6 +6098,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9090162441206281748, guid: 165752fd2026f7f498cd1462bdc11f4f,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 63.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
