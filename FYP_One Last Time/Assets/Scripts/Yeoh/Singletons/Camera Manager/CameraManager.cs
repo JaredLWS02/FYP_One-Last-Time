@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
 
     void Awake()
     {
-        if(!Current) Current=this;
+        if (!Current) Current = this;
 
         AwakeCurCam();
     }
@@ -21,16 +21,33 @@ public class CameraManager : MonoBehaviour
     CinemachineVirtualCamera _curCam;
     CinemachineFramingTransposer _framingTransposer;
 
+    [SerializeField] private Transform _camFollowTarget;
+    private Vector3 _defaultFollowTargetPosition;
+
     Coroutine _panCamCoroutine;
     Vector2 _startingTrackedObjectOffset;
 
     void AwakeCurCam()
     {
         _curCam = Camera.main?.GetComponentInParent<CinemachineVirtualCamera>();
-        if(!_curCam) { Debug.LogWarning("No CinemachineVirtualCamera found on the main camera."); return; }
+        if (!_curCam)
+        {
+            Debug.LogWarning("No CinemachineVirtualCamera found on the main camera.");
+            return;
+        }
 
         _framingTransposer = _curCam.GetCinemachineComponent<CinemachineFramingTransposer>();
         _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
+
+        if (_curCam.Follow != null)
+        {
+            _camFollowTarget = _curCam.Follow;
+            _defaultFollowTargetPosition = _camFollowTarget.localPosition;
+        }
+        else
+        {
+            Debug.LogWarning("CameraManager: VirtualCamera has no Follow target assigned!");
+        }
     }
 
     // ==================================================================================================================
@@ -48,7 +65,6 @@ public class CameraManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //CamPanSfx=false;
         RefreshAllCameras();
         RefreshAllNoises();
         RecordDefaultNoises();
@@ -58,57 +74,54 @@ public class CameraManager : MonoBehaviour
 
     // ==================================================================================================================
 
-    public void PanCameraOnContact(float panDistance, float panTime, cameraPan.PanDirection panDirection, bool panToStartingPos)
+    public void PanCameraOnContact(float distance, float time, cameraPan.PanDirection direction, bool isReset)
     {
-        if (_panCamCoroutine != null) StopCoroutine(_panCamCoroutine);
-        _panCamCoroutine = StartCoroutine(PanCamera(panDistance, panTime, panDirection, panToStartingPos));
+        if (_framingTransposer == null)
+        {
+            Debug.LogWarning("No FramingTransposer found.");
+            return;
+        }
+
+        Vector3 targetOffset = _startingTrackedObjectOffset;
+        Vector3 directionVector = Vector3.zero;
+
+        switch (direction)
+        {
+            case cameraPan.PanDirection.Up:
+                directionVector = Vector3.up;  
+                break;
+            case cameraPan.PanDirection.Down:
+                directionVector = Vector3.down;
+                break;
+            case cameraPan.PanDirection.Forward:
+                directionVector = Vector3.left; 
+                break;
+            case cameraPan.PanDirection.Backward:
+                directionVector = Vector3.right; 
+                break;
+            case cameraPan.PanDirection.Left:
+                directionVector = Vector3.forward; 
+                break;
+            case cameraPan.PanDirection.Right:
+                directionVector = Vector3.back; 
+                break;
+        }
+
+        if (!isReset)
+        {
+            directionVector = _curCam.transform.TransformDirection(directionVector);
+            targetOffset += directionVector * distance;
+        }
+
+        Tween.Custom(
+            _framingTransposer.m_TrackedObjectOffset,
+            targetOffset,
+            time,
+            onValueChange: val => _framingTransposer.m_TrackedObjectOffset = val,
+            Ease.InOutSine
+        );
     }
 
-
-    private IEnumerator PanCamera(float panDistance, float panTime, cameraPan.PanDirection panDirection, bool panToStartingPos)
-    {
-        Vector2 endPos = Vector2.zero;
-        Vector2 startingPos = Vector2.zero;
-
-        if (!panToStartingPos)
-        {
-            switch (panDirection)
-            {
-                case cameraPan.PanDirection.Up:
-                    endPos = Vector2.up;
-                    break;
-                case cameraPan.PanDirection.Down:
-                    endPos = Vector2.down;
-                    break;
-                case cameraPan.PanDirection.Left:
-                    endPos = Vector2.right;
-                    break;
-                case cameraPan.PanDirection.Right:
-                    endPos = Vector2.left;
-                    break;
-                default:
-                    break;
-            }
-            endPos *= panDistance;
-            startingPos = _startingTrackedObjectOffset;
-            endPos += startingPos;
-        }
-        else
-        {
-            startingPos = _framingTransposer.m_TrackedObjectOffset;
-            endPos = _startingTrackedObjectOffset;
-        }
-
-        float elapsedTime = 0f;
-        while (elapsedTime < panTime)
-        {
-            elapsedTime += Time.deltaTime;
-            Vector3 panLerp = Vector3.Lerp(startingPos, endPos, (elapsedTime / panTime));
-            _framingTransposer.m_TrackedObjectOffset = panLerp;
-
-            yield return null;
-        }
-    }
 
     public void ZoomCameraOnContact(float targetFOV, float duration)
     {
@@ -131,42 +144,42 @@ public class CameraManager : MonoBehaviour
 
     public CinemachineVirtualCamera GetCameraByName(string cam_name)
     {
-        if(string.IsNullOrEmpty(cam_name))
+        if (string.IsNullOrEmpty(cam_name))
         {
             Debug.LogWarning("Camera name is null or empty.");
             return null;
         }
-        
+
         var cam = allCameras.Find(item => item.gameObject.name == cam_name);
-        
-        if(cam==null) Debug.LogWarning($"Camera with name '{cam_name}' not found.");
+
+        if (cam == null) Debug.LogWarning($"Camera with name '{cam_name}' not found.");
         return cam;
     }
-    
+
     // ==================================================================================================================
-    
+
     public CinemachineVirtualCamera defaultCamera = null;
 
-    public void SetDefaultCamera(CinemachineVirtualCamera cam) => defaultCamera=cam;
+    public void SetDefaultCamera(CinemachineVirtualCamera cam) => defaultCamera = cam;
 
     public void SetDefaultCamera()
     {
         Camera cam = Camera.main;
-        if(!cam) return;
+        if (!cam) return;
         Transform cam_parent = cam.transform.parent;
-        if(!cam_parent) return;
+        if (!cam_parent) return;
 
         var virtualCamera = cam_parent.GetComponent<CinemachineVirtualCamera>();
-        
-        if(virtualCamera)
+
+        if (virtualCamera)
         {
             defaultCamera = virtualCamera;
         }
-        else // if Camera.main is in a freelook camera instead
+        else
         {
             var freelook = cam_parent.GetComponent<CinemachineFreeLook>();
-            if(!freelook) return;
-            
+            if (!freelook) return;
+
             defaultCamera = freelook.GetRig(1);
         }
 
@@ -175,10 +188,10 @@ public class CameraManager : MonoBehaviour
 
     public void ChangeCameraToDefault() => ChangeCamera(defaultCamera);
 
-    public bool IsDefaultCamera(CinemachineVirtualCamera camera) => defaultCamera==camera;
+    public bool IsDefaultCamera(CinemachineVirtualCamera camera) => defaultCamera == camera;
 
     // ==================================================================================================================
-    
+
     public CinemachineVirtualCamera currentCamera;
 
     public void ChangeCamera(CinemachineVirtualCamera camera)
@@ -186,44 +199,32 @@ public class CameraManager : MonoBehaviour
         camera.Priority = 10;
 
         var freelook = GetFreeLookCamera(camera);
-        if(freelook) freelook.Priority = 10;
+        if (freelook) freelook.Priority = 10;
 
         StopAllAnimations();
-        
+
         currentCamera = camera;
 
-        foreach(var cam in allCameras)
+        foreach (var cam in allCameras)
         {
-            if(cam != camera)
+            if (cam != camera)
             {
                 cam.Priority = 0;
             }
         }
-
-        // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
-        // else Invoke("EnableCamPanSfx", 1);
     }
 
-    public bool IsCurrentCamera(CinemachineVirtualCamera camera) => currentCamera==camera;
-
-    // bool CamPanSfx;
-
-    // void EnableCamPanSfx() // Invoked
-    // {
-    //     CamPanSfx=true;
-    // }
+    public bool IsCurrentCamera(CinemachineVirtualCamera camera) => currentCamera == camera;
 
     // ==================================================================================================================
-    
+
     public CinemachineFreeLook GetFreeLookCamera(CinemachineVirtualCamera camera) => camera.ParentCamera as CinemachineFreeLook;
 
     // ==================================================================================================================
 
     public List<CinemachineBasicMultiChannelPerlin> allNoises = new();
 
-    // Dictionary to store defAmp and defFreq values with CinemachineBasicMultiChannelPerlin as key
     Dictionary<CinemachineBasicMultiChannelPerlin, Vector2> defaultAmpFreqDict = new();
-    // amp will be x, freq will be y
 
     public void RefreshAllNoises() => allNoises = GetAllNoises();
 
@@ -231,7 +232,7 @@ public class CameraManager : MonoBehaviour
 
     public void RecordDefaultNoises()
     {
-        foreach(var noise in allNoises)
+        foreach (var noise in allNoises)
         {
             defaultAmpFreqDict[noise] = new Vector2(noise.m_AmplitudeGain, noise.m_FrequencyGain);
         }
@@ -248,13 +249,13 @@ public class CameraManager : MonoBehaviour
             || freq < currentShake.z;
     }
 
-    public void Shake(float time=.2f, float amp=2, float freq=2)
+    public void Shake(float time = .2f, float amp = 2, float freq = 2)
     {
-        if(IsCurrentShakeWeaker(time, amp, freq)) return;
+        if (IsCurrentShakeWeaker(time, amp, freq)) return;
 
-        if(haptics) Vibrator.Vibrate();
+        if (haptics) Vibrator.Vibrate();
 
-        if(shaking_crt!=null) StopCoroutine(shaking_crt);
+        if (shaking_crt != null) StopCoroutine(shaking_crt);
         shaking_crt = StartCoroutine(Shaking(time, amp, freq));
     }
 
@@ -271,9 +272,9 @@ public class CameraManager : MonoBehaviour
         currentShake = Vector3.zero;
     }
 
-    public void EnableShake(float amp=0, float freq=0)
+    public void EnableShake(float amp = 0, float freq = 0)
     {
-        foreach(var noise in allNoises)
+        foreach (var noise in allNoises)
         {
             noise.m_AmplitudeGain = amp;
             noise.m_FrequencyGain = freq;
@@ -281,9 +282,9 @@ public class CameraManager : MonoBehaviour
     }
     public void DisableShake()
     {
-        foreach(var noise in allNoises)
+        foreach (var noise in allNoises)
         {
-            if(defaultAmpFreqDict.ContainsKey(noise))
+            if (defaultAmpFreqDict.ContainsKey(noise))
             {
                 noise.m_AmplitudeGain = defaultAmpFreqDict[noise].x;
                 noise.m_FrequencyGain = defaultAmpFreqDict[noise].y;
@@ -293,7 +294,7 @@ public class CameraManager : MonoBehaviour
 
     public void CancelShake()
     {
-        if(shaking_crt!=null) StopCoroutine(shaking_crt);
+        if (shaking_crt != null) StopCoroutine(shaking_crt);
         DisableShake();
         currentShake = Vector3.zero;
     }
@@ -304,7 +305,7 @@ public class CameraManager : MonoBehaviour
 
     public void RecordDefaultFovs()
     {
-        foreach(var cam in allCameras)
+        foreach (var cam in allCameras)
         {
             defaultFovs[cam] = cam.m_Lens.FieldOfView;
         }
@@ -315,11 +316,8 @@ public class CameraManager : MonoBehaviour
     public void TweenFOV(CinemachineVirtualCamera cam, float to, float time)
     {
         fovTween.Stop();
-        if(time>0) fovTween = Tween.Custom(cam.m_Lens.FieldOfView, to, time, onValueChange: newVal => cam.m_Lens.FieldOfView=newVal, Ease.InOutSine);
+        if (time > 0) fovTween = Tween.Custom(cam.m_Lens.FieldOfView, to, time, onValueChange: newVal => cam.m_Lens.FieldOfView = newVal, Ease.InOutSine);
         else cam.m_Lens.FieldOfView = to;
-
-        // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
-        // else Invoke("EnableCamPanSfx", 1);
     }
 
     public void TweenFOV(float to, float time) => TweenFOV(currentCamera, to, time);
@@ -329,7 +327,7 @@ public class CameraManager : MonoBehaviour
     public void TweenDefaultFOV(float time) => TweenFOV(currentCamera, defaultFovs[currentCamera], time);
 
     public void CancelFOVTween() => fovTween.Complete();
-    
+
     // ==================================================================================================================
 
     Tween orthoTween;
@@ -337,15 +335,12 @@ public class CameraManager : MonoBehaviour
     public void TweenOrthoSize(float to, float time)
     {
         orthoTween.Stop();
-        if(time>0) orthoTween = Tween.Custom(currentCamera.m_Lens.OrthographicSize, to, time, onValueChange: newVal => currentCamera.m_Lens.OrthographicSize=newVal, Ease.InOutSine);
+        if (time > 0) orthoTween = Tween.Custom(currentCamera.m_Lens.OrthographicSize, to, time, onValueChange: newVal => currentCamera.m_Lens.OrthographicSize = newVal, Ease.InOutSine);
         else currentCamera.m_Lens.OrthographicSize = to;
-
-        // if(CamPanSfx) AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICameraPan, transform.position, false);
-        // else Invoke("EnableCamPanSfx", 1);
     }
 
     public void CancelOrthoTween() => orthoTween.Complete();
-        
+
     // ==================================================================================================================
 
     Tween dutchTween;
@@ -353,15 +348,15 @@ public class CameraManager : MonoBehaviour
     public void TweenDutch(float angle, float time)
     {
         dutchTween.Stop();
-        if(time>0) dutchTween = Tween.Custom(currentCamera.m_Lens.Dutch, angle, time, onValueChange: newVal => currentCamera.m_Lens.Dutch=newVal, Ease.InOutSine);
+        if (time > 0) dutchTween = Tween.Custom(currentCamera.m_Lens.Dutch, angle, time, onValueChange: newVal => currentCamera.m_Lens.Dutch = newVal, Ease.InOutSine);
         else currentCamera.m_Lens.Dutch = angle;
     }
 
     public void CancelDutchTween() => dutchTween.Complete();
 
-    public void ValveDutch(float angle=2, float dutch_in=.025f, float dutch_out=.1f)
+    public void ValveDutch(float angle = 2, float dutch_in = .025f, float dutch_out = .1f)
     {
-        if(valveDutching_crt!=null) StopCoroutine(valveDutching_crt);
+        if (valveDutching_crt != null) StopCoroutine(valveDutching_crt);
         valveDutching_crt = StartCoroutine(ValveDutching(angle, dutch_in, dutch_out));
     }
 
@@ -369,7 +364,7 @@ public class CameraManager : MonoBehaviour
 
     IEnumerator ValveDutching(float angle, float tweenIn, float tweenOut)
     {
-        angle = Random.Range(0, 2)==0 ? angle : -angle;
+        angle = Random.Range(0, 2) == 0 ? angle : -angle;
         TweenDutch(angle, tweenIn);
         yield return new WaitForSeconds(tweenIn);
         TweenDutch(0, tweenOut);
@@ -377,12 +372,12 @@ public class CameraManager : MonoBehaviour
 
     public void CancelValveDutch()
     {
-        if(!currentCamera) return;
+        if (!currentCamera) return;
 
-        if(valveDutching_crt!=null) StopCoroutine(valveDutching_crt);
+        if (valveDutching_crt != null) StopCoroutine(valveDutching_crt);
         dutchTween.Stop();
-        currentCamera.m_Lens.Dutch=0;
-    }    
+        currentCamera.m_Lens.Dutch = 0;
+    }
 
     // ==================================================================================================================
 
@@ -397,7 +392,7 @@ public class CameraManager : MonoBehaviour
 
     // ==================================================================================================================
 
-    public bool haptics=true;
+    public bool haptics = true;
 
-    void OnToggleHaptics(bool toggle) => haptics=toggle;
-}   
+    void OnToggleHaptics(bool toggle) => haptics = toggle;
+}

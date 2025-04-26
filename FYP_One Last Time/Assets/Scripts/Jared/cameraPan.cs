@@ -28,7 +28,7 @@ public class cameraPan : MonoBehaviour
                 settings.panDistance,
                 settings.panTime,
                 settings.panDirection,
-                false
+                false 
             );
 
             if (settings.enableZoom)
@@ -51,7 +51,7 @@ public class cameraPan : MonoBehaviour
                 settings.panDistance,
                 settings.panTime,
                 settings.panDirection,
-                true
+                true 
             );
 
             if (settings.enableZoom)
@@ -66,6 +66,8 @@ public class cameraPan : MonoBehaviour
         Up,
         Down,
         Left,
-        Right
+        Right,
+        Forward,   
+        Backward   
     }
 }
