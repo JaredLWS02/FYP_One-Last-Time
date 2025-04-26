@@ -46,37 +46,37 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -72.74999
+      value: -56.519993
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.525
+      value: 0.015295267
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0051721334
+      value: -19.344828
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7066558
+      value: 0.70665586
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7066558
+      value: -0.70665586
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.025249505
+      value: -0.025249507
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.025249505
+      value: 0.025249507
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1457b4be9dc733469675a24a3b5daff,
         type: 3}
@@ -906,7 +906,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6047367892297912674}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d602901d17306534fb2b415712564f35, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -929,8 +929,8 @@ Rigidbody:
   m_GameObject: {fileID: 6047367892297912674}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -945,8 +945,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Constraints: 8
+  m_CollisionDetection: 1
 --- !u!114 &8141618935150733807
 MonoBehaviour:
   m_ObjectHideFlags: 0
