@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 7246694524904160894}
   - component: {fileID: 747716922801805443}
   - component: {fileID: 519827221223096972}
+  - component: {fileID: 8780858488720793713}
   m_Layer: 6
   m_Name: Slam
   m_TagString: Untagged
@@ -268,6 +269,18 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
+          - m_Target: {fileID: 8780858488720793713}
+            m_TargetAssemblyTypeName: AudioSpawner, Assembly-CSharp
+            m_MethodName: PlayName
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: Slam
+              m_BoolArgument: 0
+            m_CallState: 2
       ReleaseEnd:
         m_PersistentCalls:
           m_Calls: []
@@ -324,8 +337,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCam: {fileID: 0}
   shakeTime: 0.2
-  amplitude: 3
-  frequenci: 3
+  amplitude4: 4
+  frequency2: 2
   tweenFovTime: 0.5
   angle: 2
   dutchIn: 0.025
@@ -335,6 +348,40 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+--- !u!114 &8780858488720793713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507965927288791515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a625ebad141d964fbf5e408c5572271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabs:
+  - prefabName: Slam
+    randomPrefabs:
+    - {fileID: 6184763554184768887, guid: 0fd39e6196c787f429af7a3664f9f95f, type: 3}
+    hideInHierarchy: 1
+    spawnpoint: {fileID: 6955758431937353321}
+    parented: 0
+    followRotation: 0
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+    scaleMult: 1
+    spawnPos: {x: 0, y: 0, z: 0}
+    spawnRot: {x: 0, y: 0, z: 0, w: 1}
+    audioSO: {fileID: 11400000, guid: 8fe59f0c387d1f44d89158f4ab2df899, type: 2}
+  loopGroups: []
+  audioEvents:
+    EnableEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    DisableEvent:
       m_PersistentCalls:
         m_Calls: []
 --- !u!1 &976320020075826602
@@ -2172,8 +2219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedCam: {fileID: 0}
   shakeTime: 0.2
-  amplitude: 3
-  frequenci: 3
+  amplitude4: 4
+  frequency2: 2
   tweenFovTime: 0.5
   angle: 2
   dutchIn: 0.025
