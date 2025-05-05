@@ -106,7 +106,7 @@ public class EventManager : MonoBehaviour
         MoveEvent?.Invoke(mover, input);
 
         // if(input != Vector2.zero)
-        //Debug.Log($"{mover.name} OnMove: {input}");
+        // Debug.Log($"{mover.name}: Move Pressed: {input}");
     } 
 
     public event Action<GameObject, float> TryFlipEvent;
@@ -143,6 +143,8 @@ public class EventManager : MonoBehaviour
     public void OnJumped(GameObject jumper)
     {
         JumpedEvent?.Invoke(jumper);
+
+        Debug.Log($"{jumper.name}: Jump Pressed");
     }    
 
     public event Action<GameObject> TryJumpCutEvent;
@@ -220,6 +222,8 @@ public class EventManager : MonoBehaviour
     public void OnDeplatform(GameObject who, Collider platform, bool toggle)
     {
         DeplatformEvent?.Invoke(who, platform, toggle);
+
+        Debug.Log($"{who.name}: Descend Pressed");
     }
 
     // Dash ==================================================================================================================
@@ -241,6 +245,8 @@ public class EventManager : MonoBehaviour
     public void OnDashed(GameObject who)
     {
         DashedEvent?.Invoke(who);
+
+        Debug.Log($"{who.name}: Dash Pressed");
     }    
     public void OnCancelDash(GameObject who)
     {
@@ -285,6 +291,8 @@ public class EventManager : MonoBehaviour
     public void OnAttackWindedUp(GameObject attacker, AttackSO attackSO)
     {
         AttackWindedUpEvent?.Invoke(attacker, attackSO);
+
+        Debug.Log($"{attacker.name}: {attackSO.Name} Attack Pressed");
     }  
     public void OnAttackReleased(GameObject attacker, AttackSO attackSO)
     {
@@ -326,6 +334,8 @@ public class EventManager : MonoBehaviour
     public void OnRaisedParry(GameObject defender)
     {
         RaisedParryEvent?.Invoke(defender);
+
+        Debug.Log($"{defender.name}: Parry Pressed");
     }
     public void OnTryParry(GameObject defender, GameObject attacker, HurtboxSO hurtbox, Vector3 contactPoint)
     {
@@ -369,6 +379,8 @@ public class EventManager : MonoBehaviour
     public void OnAbility(GameObject caster, string ability_name)
     {
         AbilityEvent?.Invoke(caster, ability_name);
+
+        Debug.Log($"{caster.name}: {ability_name} Ability Pressed");
     }
     public void OnCasting(GameObject caster, AbilitySO abilitySO)
     {
