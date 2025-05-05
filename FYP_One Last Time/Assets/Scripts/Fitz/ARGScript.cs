@@ -23,6 +23,9 @@ public class ARGScript : MonoBehaviour
         if (!Directory.Exists(dir))
         {
             Directory.CreateDirectory(dir);
+
+            string mainFile = Path.Combine(dir, "The Story");
+            File.WriteAllText(mainFile, "Five fragments of the story, scattered in the world.\n\nWill you find them all?");
         }
 
         string sourcePath = Path.Combine(Application.dataPath, "New folder", srcFilename[ID]); // Path to the existing PNG

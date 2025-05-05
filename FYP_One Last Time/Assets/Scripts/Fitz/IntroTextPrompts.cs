@@ -75,7 +75,7 @@ public class IntroTextPrompts : MonoBehaviour
     [SerializeField] Image[] imageSet; // Array for images corresponding to the text prompts
     float deltaTime;
     int counter = 1;
-    float transitionDuration = 3f;
+    float transitionDuration = 1f;
     bool textEnd = false, textAppear = true;
 
     private void Update()
