@@ -304,9 +304,9 @@ MonoBehaviour:
           m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 7246694524904160894}
-  comboResetTime: 0.5
+  comboResetTime: 1.5
   cooldown: {fileID: 747716922801805443}
-  comboCooldownTime: 0.5
+  comboCooldownTime: 1.5
 --- !u!114 &7246694524904160894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2181,9 +2181,9 @@ MonoBehaviour:
           m_Calls: []
   randomCombo: 0
   comboResetTimer: {fileID: 6924317339209216897}
-  comboResetTime: 2
+  comboResetTime: 2.5
   cooldown: {fileID: 8165834065421918735}
-  comboCooldownTime: 2
+  comboCooldownTime: 2.5
 --- !u!114 &6924317339209216897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3405,7 +3405,7 @@ MonoBehaviour:
   minHeightSpaceAboveStep: 2.22
   hitLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 16385
   doStepUpMove: 1
   upSpeed: 5
   slope: {fileID: 3056104320120214010}
@@ -3469,7 +3469,7 @@ MonoBehaviour:
   rayLength: 2
   layers:
     serializedVersion: 2
-    m_Bits: 4097
+    m_Bits: 20481
   maxSlopeAngle: 45
   climbCounterForce: 500
   slideCounterForce: 60
@@ -4038,7 +4038,7 @@ MonoBehaviour:
   posOffset: {x: 0, y: 0, z: 0}
   layers:
     serializedVersion: 2
-    m_Bits: 4097
+    m_Bits: 20481
   ignoreTriggers: 1
   onlyRigidbodies: 0
   overlapEvents:

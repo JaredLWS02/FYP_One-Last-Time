@@ -639,6 +639,8 @@ GameObject:
   - component: {fileID: 5974042461855050737}
   - component: {fileID: 359370814247684534}
   - component: {fileID: 7295142193826091832}
+  - component: {fileID: 2760407902753540382}
+  - component: {fileID: 4824425393247117490}
   m_Layer: 13
   m_Name: Sprite
   m_TagString: Untagged
@@ -681,7 +683,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 80cdcb9554de84e44aaec15fcd39c9b2, type: 2}
+  - {fileID: 2100000, guid: 40c5be840faf0104cb83df6e15136aea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -763,6 +765,94 @@ MonoBehaviour:
   axisFacingAwayCam: {x: -1, y: 0, z: 0}
   flipY: 0
   axisUpWithCam: {x: 0, y: 1, z: 0}
+--- !u!114 &2760407902753540382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363957452077090427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4433ca8795491c14b8d129ae185e0712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1242880141507026177}
+  srs:
+  - {fileID: 1003714464355550628}
+  rgbOffsetCfgs:
+  - color_name: Red
+    rgb_offset: {x: 1, y: -1, z: -1}
+  affectEmissionColor: 1
+  emissionColorPropertyName: _EmissionColor
+  emissionIntensity: 5
+  colorFlickerInterval: 0.05
+  randomStartColor: 0
+  randomRgbOffset: {x: 0.15, y: 0.15, z: 0.15}
+  randomStartFlip: 0
+  randomFlipY: 0
+  randomFlipX: 0
+--- !u!114 &4824425393247117490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6363957452077090427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57bcd03b4140ce4d86cff57112fa9af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uEvents:
+    Awake:
+      m_PersistentCalls:
+        m_Calls: []
+    OnEnable:
+      m_PersistentCalls:
+        m_Calls: []
+    OnDisable:
+      m_PersistentCalls:
+        m_Calls: []
+    Start:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2760407902753540382}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: GetRgbOffsetCfg
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Red
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2760407902753540382}
+          m_TargetAssemblyTypeName: SpritesManager, Assembly-CSharp
+          m_MethodName: ToggleColorFlicker
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Red
+            m_BoolArgument: 1
+          m_CallState: 2
+    Update:
+      m_PersistentCalls:
+        m_Calls: []
+    FixedUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+    LateUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+    Destroy:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &6796693519429083331
 GameObject:
   m_ObjectHideFlags: 0
