@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6097368571222285649}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 2Way_Platform_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,11 +99,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f356a79f28aa2bd4d8506b6aebc99687, type: 2}
+      objectReference: {fileID: 2100000, guid: 1d8e0830634cd5f43a64ff7af9fc7754, type: 2}
     - target: {fileID: 919132149155446097, guid: 6121e42f8e17d474dbb70e50c9fd1b92,
         type: 3}
       propertyPath: m_Name
       value: 2Way_Platform_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6121e42f8e17d474dbb70e50c9fd1b92,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6121e42f8e17d474dbb70e50c9fd1b92,
         type: 3}
@@ -171,7 +176,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6474278031857559706}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d626fb1a29584d1438a851e6499b3cc7, type: 3}
   m_Name: 
@@ -199,8 +204,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6474278031857559706}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00796c9cb54beba43b664790f54560ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deplatformSeconds: 0.5

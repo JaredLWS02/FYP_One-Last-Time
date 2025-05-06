@@ -17,7 +17,7 @@ MonoBehaviour:
   damage: 10
   blockDamage: 10
   pierceCount: 9999
-  ignoreIFrame: 0
+  ignoreIFrame: 1
   knockback: 50
   blockKnockback: 25
   killsMomentum: 1
@@ -25,5 +25,5 @@ MonoBehaviour:
   parryStunsOwner: 0
   canStun: 1
   customStunAnim: {fileID: 0}
-  ignorePoise: 0
-  ignoreStunCooldown: 0
+  ignorePoise: 1
+  ignoreStunCooldown: 1
