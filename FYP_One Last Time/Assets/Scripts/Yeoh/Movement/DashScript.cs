@@ -35,9 +35,7 @@ public class DashScript : BaseAction
     void OnDash(GameObject who)
     {
         if(who!=owner) return;
-        
         if(IsDashing()) return;
-
         if(ground && dashesLeft<=0) return;
 
         Dash();
@@ -129,6 +127,10 @@ public class DashScript : BaseAction
     }
 
     // ============================================================================
+    
+    void StopDashing() => TweenDashSpeed(0, 0);
+
+    // ============================================================================
 
     Tween dashSpeedTween;
 
@@ -163,6 +165,7 @@ public class DashScript : BaseAction
 
         CancelDashing();
         OnDashingFinished();
+        StopDashing();
 
         CancelAnim();
 
