@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4512609715404838233}
   - component: {fileID: 6586732446638418565}
   - component: {fileID: 7168310237536803192}
-  - component: {fileID: 1891959111593687769}
   - component: {fileID: 933848693516131343}
   - component: {fileID: 8402865090709100863}
+  - component: {fileID: 2305189290317262906}
   m_Layer: 12
   m_Name: Thorns
   m_TagString: Untagged
@@ -138,27 +138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!65 &1891959111593687769
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4182961038804085859}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 2.417648, y: 0.7065288, z: 2.1724215}
-  m_Center: {x: 0.011546489, y: 0.18024781, z: 0.9773629}
 --- !u!114 &933848693516131343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,12 +158,24 @@ MonoBehaviour:
         m_Calls: []
     OnHitSuccess:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 2305189290317262906}
+          m_TargetAssemblyTypeName: MyDebug, Assembly-CSharp
+          m_MethodName: Log
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Ouch!
+            m_BoolArgument: 0
+          m_CallState: 2
   destroyOnHit: 0
   destroyOnHurt: 0
   myColl: {fileID: 676824671664994685}
   enabledOnAwake: 1
-  hitMethod: 1
+  hitMethod: 0
   triggerTimer: {fileID: 8402865090709100863}
   triggerStayInterval: 0.1
   hurtboxOrigin: {fileID: 3507609203847316560}
@@ -204,3 +195,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canTick: 1
   ignoreTimescale: 0
+--- !u!114 &2305189290317262906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182961038804085859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b47e615d72a2f945be7a19b13425422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefix: 
+  suffix: 
