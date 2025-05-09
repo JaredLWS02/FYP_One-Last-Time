@@ -28,7 +28,7 @@ public class ARGScript : MonoBehaviour
             File.WriteAllText(mainFile, "Five fragments of the story, scattered in the world.\n\nWill you find them all?");
         }
 
-        string sourcePath = Path.Combine(Application.dataPath, "New folder", srcFilename[ID]); // Path to the existing PNG
+        string sourcePath = Path.Combine(Application.dataPath, "Delta", srcFilename[ID]); // Path to the existing PNG
         //string destinationPath = dir + "ExistingImage1.png"; // Destination path
         string destinationPath = Path.Combine(dir, destFilename[ID]); // Destination path
 
