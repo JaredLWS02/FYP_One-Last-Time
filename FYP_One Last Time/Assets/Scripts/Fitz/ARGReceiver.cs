@@ -44,5 +44,7 @@ public class ARGReceiver : MonoBehaviour
 
             yield return null;
         }
+
+        Destroy(obj);
     }
 }
