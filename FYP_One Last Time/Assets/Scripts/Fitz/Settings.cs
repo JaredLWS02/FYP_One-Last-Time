@@ -16,34 +16,7 @@ public class Settings : MonoBehaviour
     int[] resoHeight = { 1280, 900, 720 };
     private void Start()
     {
-        //resolutions = Screen.resolutions;
-
-        //resolutionDropdown.ClearOptions();
-
-        //List<string> options = new List<string>();
-
-        //int currentResoID = 0;
-        //for (int i = 0; i < resolutions.Length; i++)
-        //{
-        //    string option = resolutions[i].width + " x " + resolutions[i].height;
-        //    options.Add(option);
-
-        //    if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-        //    {
-        //        currentResoID = i;
-        //    }
-        //}
         
-        //resolutionDropdown.AddOptions(options);
-        //resolutionDropdown.value = currentResoID;
-        //resolutionDropdown.RefreshShownValue();
-        //DropdownAutoscroll autoScroll = resolutionDropdown.transform.Find("Template").AddComponent<DropdownAutoscroll>();
-    }
-
-    // ==================== Graphics Quality ========================
-    public void SetQuality (int qualityID)
-    {
-        QualitySettings.SetQualityLevel(qualityID);
     }
 
     // ==================== Screen Resolution ========================

@@ -18,13 +18,13 @@ public class ARGScript : MonoBehaviour
     public void CopyPngFile()
     {
         //string dir = GetExeDir() + "/GameLogs/";
-        string dir = Path.Combine(GetExeDir(), "GameLogs");
+        string dir = Path.Combine(GetExeDir(), "The Lost Records");
 
         if (!Directory.Exists(dir))
         {
             Directory.CreateDirectory(dir);
 
-            string mainFile = Path.Combine(dir, "The Story");
+            string mainFile = Path.Combine(dir, "The Story.txt");
             File.WriteAllText(mainFile, "Five fragments of the story, scattered in the world.\n\nWill you find them all?");
         }
 

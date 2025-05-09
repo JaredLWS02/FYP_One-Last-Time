@@ -23,7 +23,7 @@ public class UIButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         ScenesManager.Current.Quit();
     }
 
-    public void PlayGame()
+    public void LoadNext()
     {
         ScenesManager.Current.LoadNextScene();
     }
